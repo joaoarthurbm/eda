@@ -6,7 +6,7 @@
        <description>Recent content on Estrutura de Dados</description>
        <generator>Hugo -- gohugo.io</generator>
        <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
-       <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate>
+       <lastBuildDate>Tue, 29 Oct 2019 00:00:00 -0300</lastBuildDate>
        
            <atom:link href="https://joaoarthurbm.github.io/eda-ufcg-material/index.xml" rel="self" type="application/rss+xml" />
        
@@ -24,7 +24,7 @@
        <item>
          <title>Posts</title>
          <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/</link>
-         <pubDate>Tue, 01 Oct 2019 00:00:00 -0300</pubDate>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 -0300</pubDate>
          
          <guid>https://joaoarthurbm.github.io/eda-ufcg-material/posts/</guid>
          <description></description>
