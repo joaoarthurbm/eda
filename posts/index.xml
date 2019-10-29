@@ -1,0 +1,148 @@
+
+   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+     <channel>
+       <title>Posts on Estrutura de Dados</title>
+       <link>https://joaoarthurbm.github.io/eda-ufcg/posts/</link>
+       <description>Recent content in Posts on Estrutura de Dados</description>
+       <generator>Hugo -- gohugo.io</generator>
+       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
+       <lastBuildDate>Tue, 01 Oct 2019 00:00:00 -0300</lastBuildDate>
+       
+           <atom:link href="https://joaoarthurbm.github.io/eda-ufcg/posts/index.xml" rel="self" type="application/rss+xml" />
+       
+       
+       <item>
+         <title>Introdução à Análise de Algoritmos</title>
+         <link>https://joaoarthurbm.github.io/eda-ufcg/posts/introducao-a-analise/</link>
+         <pubDate>Tue, 01 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda-ufcg/posts/introducao-a-analise/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h2&gt;
+
+&lt;p&gt;A análise de eficiência é uma etapa fundamental na concepção de um algoritmo. Embora aspectos como legibilidade, simplicidade e modularidade de uma solução sejam importantes para a sua manutenabilidade, a eficiência de uma solução desempenha um papel muito relevante para a sua adoção.&lt;/p&gt;
+
+&lt;p&gt;Diante de um problema computacional, diversas soluções podem ser propostas. Por exemplo, para ordenar um sequência de números, o desenvolvedor pode utilizar algoritmos como o BubbleSort, MergeSort, QuickSort entre outros. Entender como esses algoritmos se comportam à medida que aumentamos o tamanho da entrada a ser ordenada é primordial para decidirmos qual solução adotar em um determinado contexto.&lt;/p&gt;
+
+&lt;p&gt;Analisar um algoritmo significa prever a quantidade de recursos que tal algoritmo consome ao ser executado. A análise pode apontar diversos candidatos e, tipicamente, exclui diversas soluções não eficientes. Diversas variáveis podem ser objetos de estudo da análise de um algoritmo, por exemplo, consumo de memória, largura de banda de comunicação entre outros. No entanto, com frequência, desejamos medir o tempo execução. E é essa variável que estamos interessados em discutir neste documento.&lt;/p&gt;
+
+&lt;p&gt;Uma abordagem direta para analisar o desempenho de um algoritmo é a abordagem empírica. Neste caso, configura-se um ambiente em que as variáveis são controladas e executa-se os algoritmos com o intuito de medir o tempo de computação e comparar as diferentes soluções.
+O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação, isto é, como o algoritmo se comporta com um array já ordenado? Como se comporta com arrays parcialmente ordenados?&lt;/p&gt;
+
+&lt;p&gt;Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo, por exemplo, apresenta os tempos de computação de diferentes algoritmos à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;comparacao-ordenacao.jpeg&#34; alt=&#34;comp-ordenacao&#34; title=&#34;Comparação de Algoritmos de Ordenação&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A abordagem empírica para análise de algoritmos é útil, pois, se conduzida de maneira metodologicamente apropriada, fornece valores precisos sobre o tempo de execução de um algoritmo. No entanto, essa abordagem apresenta algumas desvantagens. Primeiro, existe um alto custo relacionado à implementação de todos os algoritmos, além da configuração, execução e análise do experimento. Além disso, note que as conclusões são limitadas ao espaço de entrada do experimento. Por fim, os resultados são dependentes do hardware utilizado.&lt;/p&gt;
+
+&lt;p&gt;Diante do cenário exposto acima, surge a necessidade de uma análise que:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;seja independente de hardware&lt;/li&gt;
+&lt;li&gt;permita analisar os algoritmos em um espectro maior de entradas&lt;/li&gt;
+&lt;li&gt;seja simples&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note que, em diversas situações, o interesse está em comparar algoritmos, ao invés de determinar o seu tempo exato de execução. Em particular, &lt;strong&gt;estamos interessados nas funções no comportamento dos algoritmos para grandes tamanhos de entrada &amp;ndash; análise assintótica.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;análise-de-algoritmos&#34;&gt;Análise de Algoritmos&lt;/h2&gt;
+
+&lt;p&gt;Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise se baseia:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;Hipótese: O custo de operações primitivas é constante.&lt;/p&gt;
+
+&lt;p&gt;Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos / funções, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como&lt;/p&gt;
+
+&lt;p&gt;$O(1)$ ou $O(C)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.&lt;/p&gt;
+
+&lt;pre&gt;
+Operações Primitivas
+
+* Avaliação de expressões booleanas (i &gt;= 2; i == 2, etc);
+* Operações matemáticas (*, -, +, %, etc);
+* Retorno de métodos (return x;);
+* Atribuição (i = 2);
+* Acesso à variáveis e posições arbitrárias de um array (v[i]).
+
+&lt;/pre&gt;
+
+&lt;p&gt;Nesse contexto, o tempo de execução de um algoritmo é a soma do custo das operações primitivas. Por exemplo, considere o algoritmo que multiplica o resto da divisão de dois inteiros pela parte inteira da mesma divisão:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;multiplicaRestoPorParteInteira&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resto&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; j;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pInteira&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; j;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;resultado&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; resto &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; pInteira;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; resultado;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Passo 1: Identificar primitivas.&lt;/strong&gt; O primeiro passo para determinar de modo analítico o tempo de execução de qualquer algoritmo é identificar todas as operações primitivas. Cada uma, como discutido anteriormente, tem um custo constante. Para o algoritmo acima temos:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;atribuição (resto = ) -&amp;gt; $c1$&lt;/li&gt;
+&lt;li&gt;operação aritmética (i % j) -&amp;gt; $c2$&lt;/li&gt;
+&lt;li&gt;atribuição (pInteira = ) -&amp;gt; $c3$&lt;/li&gt;
+&lt;li&gt;operação aritmética (i % j) -&amp;gt; $c4$&lt;/li&gt;
+&lt;li&gt;atribuição (resultado = ) -&amp;gt; $c5$&lt;/li&gt;
+&lt;li&gt;operação aritmética (resto * pInteira) -&amp;gt; $c6$&lt;/li&gt;
+&lt;li&gt;retorno de método (return resultado) -&amp;gt; $c7$&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.&lt;/strong&gt; Para o algoritmo acima, todas as primitivas são executadas apenas uma vez.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Passo 3: Somar o custo total.&lt;/strong&gt; O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:&lt;/p&gt;
+
+&lt;p&gt;$f(n) = c1+c2+c3+c4+c5+c6+c7$&lt;/p&gt;
+
+&lt;p&gt;Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente os números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem &lt;strong&gt;custo constante&lt;/strong&gt;, ou seja, independe do tamanho da entrada.&lt;/p&gt;
+
+&lt;p&gt;Outro fator de destaque é que podemos considerar que todas as constantes possuem o mesmo valor $c$. Assim, podemos simplificar a função para $f(n)= 7c$.&lt;/p&gt;
+
+&lt;h3 id=&#34;e-quando-houver-condicionais&#34;&gt;E quando houver condicionais?&lt;/h3&gt;
+
+&lt;p&gt;O uso de comandos condicionais é muito comum em nossos algoritmos e nos impõe uma dificuldade na análise do tempo de execução. Essa dificuldade está relacionada ao fato de que, dependendo do caso, apenas uma parte do código é executada. Como decidir como fazer a análise? Que caminho devemos computar?&lt;/p&gt;
+
+&lt;p&gt;Nesse caso, escolhemos &lt;strong&gt;o pior caso&lt;/strong&gt;. Neste curso estamos interessados em saber como os algoritmos se comportam no seu pior caso. A análise do pior caso é útil para eliminarmos soluções ruins. Além disso, o melhor caso raramente acontece, ao contrário dos outros casos que podem ser bem mais comuns. Por último, o caso médio, além de demandar análise estatística, muitas vezes é muito semelhante ao pior caso.&lt;/p&gt;
+
+&lt;p&gt;Por ora, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media &amp;gt;= 7.0$) ou reprovado sem direito a final ($media &amp;lt; 4$), o método deve retornar $0$.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;precisaNaFinal&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota1&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota2&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota3&lt;/span&gt;) {
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (nota1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nota2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nota3) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 3;
+        
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (media &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 7 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; media &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; 4) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 0;
+        
+    } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mediaFinal&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 5;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pesoFinal&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0.&lt;span style=&#34;color:#a6e22e&#34;&gt;4&lt;/span&gt;;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pesoMedia&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0.&lt;span style=&#34;color:#a6e22e&#34;&gt;6&lt;/span&gt;;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;precisa&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (mediaFinal &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; pesoMedia &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; media) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; pesoFinal;
+            
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; precisa;
+    }
+
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Passo 1. Identificar primitivas.&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;atribuição (media = ) -&amp;gt; $c1$&lt;/li&gt;
+&lt;li&gt;operação aritmética (nota1 + nota2 + nota3) -&amp;gt; $c2$&lt;/li&gt;
+&lt;li&gt;operação aritmética (&amp;hellip; / 3) -&amp;gt; $c3$&lt;/li&gt;
+&lt;li&gt;avaliação de expressão booleana (media &amp;gt;=7 || media &amp;lt; 4) -&amp;gt; $c4$&lt;/li&gt;
+&lt;li&gt;retorno de método (return 0) -&amp;gt; $c5$&lt;/li&gt;
+&lt;li&gt;atribuição (mediaFinal = ) -&amp;gt; $c6$&lt;/li&gt;
+&lt;li&gt;atribuição (pesoFinal = ) -&amp;gt; $c7$&lt;/li&gt;
+&lt;li&gt;atribuição (pesoMedia = ) -&amp;gt; $c8$&lt;/li&gt;
+&lt;li&gt;atribuição (precisa = ) -&amp;gt; $c9$&lt;/li&gt;
+&lt;li&gt;operação aritmética (pesoMedia * media) -&amp;gt; $c10$&lt;/li&gt;
+&lt;li&gt;operação aritmética (mediaFinal -  &amp;hellip;) -&amp;gt; $c11$&lt;/li&gt;
+&lt;li&gt;operação aritmética (&amp;hellip; / pesoFinal) -&amp;gt; $c12$&lt;/li&gt;
+&lt;li&gt;retorno de método (return precisa) -&amp;gt; $c13$&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+       </item>
+       
+     </channel>
+   </rss>

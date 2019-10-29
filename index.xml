@@ -1,0 +1,34 @@
+
+   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+     <channel>
+       <title>Estrutura de Dados</title>
+       <link>https://joaoarthurbm.github.io/eda-ufcg/</link>
+       <description>Recent content on Estrutura de Dados</description>
+       <generator>Hugo -- gohugo.io</generator>
+       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
+       <lastBuildDate>Tue, 29 Oct 2019 00:00:00 +0000</lastBuildDate>
+       
+           <atom:link href="https://joaoarthurbm.github.io/eda-ufcg/index.xml" rel="self" type="application/rss+xml" />
+       
+       
+       <item>
+         <title>Conteúdo</title>
+         <link>https://joaoarthurbm.github.io/eda-ufcg/about/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda-ufcg/about/</guid>
+         <description>&lt;p&gt;Learn more and contribute on &lt;a href=&#34;https://github.com/gohugoio&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Posts</title>
+         <link>https://joaoarthurbm.github.io/eda-ufcg/posts/</link>
+         <pubDate>Tue, 01 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda-ufcg/posts/</guid>
+         <description></description>
+       </item>
+       
+     </channel>
+   </rss>
