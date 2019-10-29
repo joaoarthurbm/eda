@@ -6,24 +6,10 @@
        <description>Recent content in Posts on Estrutura de Dados</description>
        <generator>Hugo -- gohugo.io</generator>
        <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
-       <lastBuildDate>Tue, 29 Oct 2019 00:00:00 -0300</lastBuildDate>
+       <lastBuildDate>Tue, 01 Oct 2019 00:00:00 -0300</lastBuildDate>
        
            <atom:link href="https://joaoarthurbm.github.io/eda-ufcg-material/posts/index.xml" rel="self" type="application/rss+xml" />
        
-       
-       <item>
-         <title>Inálise Assintótica</title>
-         <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</link>
-         <pubDate>Tue, 29 Oct 2019 00:00:00 -0300</pubDate>
-         
-         <guid>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</guid>
-         <description>
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h2&gt;
-</description>
-       </item>
        
        <item>
          <title>Introdução à Análise de Algoritmos</title>
@@ -330,6 +316,20 @@ Operações Primitivas
 
 &lt;li&gt;&lt;p&gt;É preciso estar atento para o fato de que estamos falando de análise do pior caso e, por isso, descartamos os fluxos alternativos de menor custo.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Análise Assintótica</title>
+         <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</link>
+         <pubDate>Sun, 29 Sep 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h2&gt;
 </description>
        </item>
        
