@@ -18,10 +18,19 @@
          
          <guid>https://joaoarthurbm.github.io/eda/about/</guid>
          <description>&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Análise de Algoritmos&lt;/p&gt;
+
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;Introdução à análise&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.gihub.io/eda/posts/analise-assintotica/&#34;&gt;Análise assintótica&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos&#34;&gt;Análise de Algoritmos recursivos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Ordenação&lt;/p&gt;
+
+&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/ordenacao-linear&#34;&gt;Ordenação Linear (Counting Sort)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
        </item>
