@@ -2,21 +2,21 @@
    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
      <channel>
        <title>Posts on Estrutura de Dados</title>
-       <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/</link>
+       <link>https://joaoarthurbm.github.io/eda/posts/</link>
        <description>Recent content in Posts on Estrutura de Dados</description>
        <generator>Hugo -- gohugo.io</generator>
        <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
        <lastBuildDate>Tue, 01 Oct 2019 00:00:00 -0300</lastBuildDate>
        
-           <atom:link href="https://joaoarthurbm.github.io/eda-ufcg-material/posts/index.xml" rel="self" type="application/rss+xml" />
+           <atom:link href="https://joaoarthurbm.github.io/eda/posts/index.xml" rel="self" type="application/rss+xml" />
        
        
        <item>
          <title>Introdução à Análise de Algoritmos</title>
-         <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/introducao-a-analise/</link>
+         <link>https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/</link>
          <pubDate>Tue, 01 Oct 2019 00:00:00 -0300</pubDate>
          
-         <guid>https://joaoarthurbm.github.io/eda-ufcg-material/posts/introducao-a-analise/</guid>
+         <guid>https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/</guid>
          <description>
 
 &lt;hr /&gt;
@@ -297,7 +297,7 @@ Operações Primitivas
 
 &lt;p&gt;É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.&lt;/p&gt;
 
-&lt;p&gt;No material sobre &lt;a href=&#34;http://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
+&lt;p&gt;No material sobre &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
 
 &lt;h2 id=&#34;resumo&#34;&gt;Resumo&lt;/h2&gt;
 
@@ -321,10 +321,10 @@ Operações Primitivas
        
        <item>
          <title>Análise Assintótica</title>
-         <link>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</link>
+         <link>https://joaoarthurbm.github.io/eda/posts/analise-assintotica/</link>
          <pubDate>Sun, 29 Sep 2019 00:00:00 -0300</pubDate>
          
-         <guid>https://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica/</guid>
+         <guid>https://joaoarthurbm.github.io/eda/posts/analise-assintotica/</guid>
          <description>
 
 &lt;hr /&gt;
@@ -333,7 +333,7 @@ Operações Primitivas
 
 &lt;p&gt;Quando observamos tamanhos de entrada grande o suficiente para tornar relevante apenas a ordem de crescimento do tempo de execução, estamos estudando a eficiência assintótica.&lt;/p&gt;
 
-&lt;p&gt;No &lt;a href=&#34;https://joaoarthurbm.github.io/eda-ufcg-material/posts/introducao-a-analise/&#34;&gt;material introdutório&lt;/a&gt; sobre análise de algoritmos, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.&lt;/p&gt;
+&lt;p&gt;No &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório&lt;/a&gt; sobre análise de algoritmos, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.&lt;/p&gt;
 
 &lt;p&gt;Primeiro, preciso deixar claro que cometi alguns abusos matemáticos para fins didáticos. Vamos relembrar esses abusos e explicá-los um a um.&lt;/p&gt;
 
