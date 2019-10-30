@@ -1,4 +1,4 @@
-baseurl = "https://joaoarthurbm.github.io/eda-ufcg-material"
+baseurl = "https://joaoarthurbm.github.io/eda"
 title = "Estrutura de Dados"
 copyright = "Copyright &copy; 2019 - João Arthur Brunet"
 canonifyurls = true
@@ -13,7 +13,7 @@ pygmentsCodeFences = true
 
 [author]
     name = "João Arthur Brunet"
-    github = "joaoarthurbm/eda-ufcg"
+    github = "joaoarthurbm/eda"
     gitlab = ""
     linkedin = ""
     facebook = ""
