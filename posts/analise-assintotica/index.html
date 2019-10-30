@@ -96,7 +96,7 @@
 
         
 
-        <li>5 minutes read</li>
+        <li>6 minutes read</li>
     </ul>
 </aside>
 
@@ -177,23 +177,25 @@ f(n) é igual ao de g(n).
 
 <p>Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n^2)$.</p>
 
-<p align="center"> $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ <p>
+<p align="center"> $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ </p>
 
-Em resumo, para demonstrar formalmente precisamos dos seguintes passos:
+<p>Em resumo, para demonstrar formalmente precisamos dos seguintes passos:</p>
 
-1. Aplicar as abstrações simplificadores em $f(n)$ para termos uma proposta para $g(n)$.
+<ol>
+<li><p>Aplicar as abstrações simplificadores em $f(n)$ para termos uma proposta para $g(n)$.</p></li>
 
-2. Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0<=c1*g(n)<= f(n)<= c2*g(n)$ é verdadeira. 
+<li><p>Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0&lt;=c1*g(n)&lt;= f(n)&lt;= c2*g(n)$ é verdadeira.</p></li>
+</ol>
 
-Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.
+<p>Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.</p>
 
-*** 
+<hr />
 
-# Notação O (Big O notation)
+<h1 id="notação-o-big-o-notation">Notação O (Big O notation)</h1>
 
-Enquanto a notação $\Theta$ define os limites inferior e superior de uma função, a notação $O$ define apenas o limite superior. Ou seja, define um teto para uma determinada função. 
+<p>Enquanto a notação $\Theta$ define os limites inferior e superior de uma função, a notação $O$ define apenas o limite superior. Ou seja, define um teto para uma determinada função.</p>
 
-Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se: 
+<p>Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se:</p>
 
 <p align="center"> $0<=f(n)<= c*g(n), \forall n>=n0$ </p>
 
@@ -221,6 +223,8 @@ Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se:
 Em termos mais simplistas estamos dizendo que o crescimento de 
 f(n) é menor ou igual ao crescimento de g(n).
 </pre>
+
+<hr />
 
 <h1 id="notação-omega-omega">Notação Omega ($\Omega$)</h1>
 
