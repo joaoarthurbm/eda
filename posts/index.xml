@@ -21,8 +21,6 @@
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h2&gt;
-
 &lt;p&gt;A análise de eficiência é uma etapa fundamental na concepção de um algoritmo. Embora aspectos como legibilidade, simplicidade e modularidade de uma solução sejam importantes para a sua manutenabilidade, a eficiência de uma solução desempenha um papel muito relevante para a sua adoção.&lt;/p&gt;
 
 &lt;p&gt;Diante de um problema computacional, diversas soluções podem ser propostas. Por exemplo, para ordenar um sequência de números, o desenvolvedor pode utilizar algoritmos como o BubbleSort, MergeSort, QuickSort entre outros. Entender como esses algoritmos se comportam à medida que aumentamos o tamanho da entrada a ser ordenada é primordial para decidirmos qual solução adotar em um determinado contexto.&lt;/p&gt;
@@ -335,8 +333,6 @@ Operações Primitivas
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
-
 &lt;p&gt;Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos alguns algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:Importante-lembr&#34;&gt;&lt;a href=&#34;#fn:Importante-lembr&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 
 &lt;p&gt;Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.&lt;/p&gt;
@@ -594,8 +590,6 @@ $T(n) = (n + k)$.&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;ordem-de-crescimento&#34;&gt;Ordem de Crescimento&lt;/h1&gt;
-
 &lt;p&gt;&lt;strong&gt;O Problema.&lt;/strong&gt; No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório de análise de algoritmos&lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ &lt;/p&gt;
@@ -840,8 +834,6 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
          <description>
 
 &lt;hr /&gt;
-
-&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
 
 &lt;p&gt;Até aqui vimos como &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34;&gt;analisar algoritmos iterativos&lt;/a&gt;, lembra? Esse processo pode ser resumido pelos seguintes passos:&lt;/p&gt;
 
