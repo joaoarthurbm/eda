@@ -326,6 +326,265 @@ Operações Primitivas
        </item>
        
        <item>
+         <title>Ordenação Linear</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</link>
+         <pubDate>Tue, 01 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
+
+&lt;p&gt;Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos alguns algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:Importante-lembr&#34;&gt;&lt;a href=&#34;#fn:Importante-lembr&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.&lt;/p&gt;
+
+&lt;h1 id=&#34;ordenação-por-contagem&#34;&gt;Ordenação por Contagem&lt;/h1&gt;
+
+&lt;p&gt;Algo que chama a atenção em um primeiro momento é:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;&lt;b&gt;Como é possível ordenar elementos sem utilizar comparação?&lt;/b&gt;&lt;/p&gt;
+
+&lt;p&gt;Em geral, a ideia é valer-se do fato de que estamos ordenando números inteiros e que os índices dos arrays também são inteiros. Dessa maneira, podemos mapear o valor presente em uma sequência para a posição de mesmo valor em um array auxiliar (&lt;code&gt;array[i] = i&lt;/code&gt;). Essa é a estratégia geral dos algoritmos de ordenação linear que se baseiam na contagem dos elementos da sequência a ser ordenada.&lt;/p&gt;
+
+&lt;p&gt;Antes de analisarmos os algoritmos de contagem em detalhes, vamos abordar um exemplo bem simples para entender esse conceito. Para isso, vamos entrar em um mundo em que:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;todos os elementos do array que vamos ordenar são inteiros positivos (1, 2, 3…k);&lt;/li&gt;
+&lt;li&gt;não há repetição de elementos no array que vamos ordenar;&lt;/li&gt;
+&lt;li&gt;sabemos o maior valor desse array, o qual chamamos de k.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:O-ideal-nomear-v&#34;&gt;&lt;a href=&#34;#fn:O-ideal-nomear-v&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução &lt;code&gt;C[A[i] - 1] = true&lt;/code&gt;. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;[k];
+
+&lt;span style=&#34;color:#75715e&#34;&gt;// registrando a presença de A[i] na sequência
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+    C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Se $A = [7, 2, 1, 4]$, com $k = 7$, temos $C$ preenchido da seguinte maneira:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;C = [&lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Agora, se criarmos um array $B$ do tamanho de $A$ e iterarmos sobre o array $C$ preenchendo $B$ com o valor do índice $i + 1$ em que &lt;code&gt;C[i] == true&lt;/code&gt;, temos que $B$ é a versão ordenada de $A$.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;B&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+
+&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; C.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (C[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;) {
+        B[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+        j &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+    }
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Assim, para $A = [7, 2, 1, 4]$, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;C = [&lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;]&lt;/li&gt;
+&lt;li&gt;B = [1, 2, 4, 7], representando a sequência de valores de $A$, porém ordenada.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Viu como foi fácil? Note que $B$ foi preenchido com os valores de $i+1$ em que C[i] ==  true. Ou seja, $B[0] = 1$, pois C[0] ==  true. $B[1] = 2$, pois C[1] ==  true. $B[2] = 4$, pois C[3] ==  true. Por fim, $B[3] = 7$, pois C[6] ==  true.&lt;/p&gt;
+
+&lt;p&gt;Vamos unir os trechos de código mostrados acima em um método que recebe $A$ e $k$ e retorna um array $B$ que representa a ordenação dos elementos de $A$.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;sort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt;) {
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;[k];
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;// registrando a presença de A[i] na sequência
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+        C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;;
+    }
+   
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;B&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; C.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (C[i] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;true&lt;/span&gt;) {
+            B[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+            j &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+        }
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; B;   
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;mais-um-exemplo-a-9-1-3-4-6-7&#34;&gt;Mais um exemplo: A = [9, 1, 3, 4, 6, 7]&lt;/h3&gt;
+
+&lt;p&gt;Sempre lembrando que sabemos o valor de $k$ e que não há repetição dos elementos a serem ordenados.&lt;/p&gt;
+
+&lt;p&gt;Para $A = [9, 1, 3, 4, 6, 7]$, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;C = [&lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false, &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;,  &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;, false,  &lt;span style=&#34;color:blue&#34;&gt;true&lt;/span&gt;]&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;B = [1, 3, 4, 6, 7, 9], representando a sequência de valores de $A$, porém ordenada.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;counting-sort-e-se-houver-repetição-no-array&#34;&gt;Counting Sort: E se houver repetição no array?&lt;/h2&gt;
+
+&lt;p&gt;Repetição de valores em um array a ser ordenado não é um cenário incomum, certo? O fato de não haver repetição nos permitiu criar um array C de booleanos e registrar a presença ou não de um elemento.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;O que faríamos se houvesse repetição?&lt;/p&gt;
+
+&lt;p&gt;Daí surge ordenação por contagem (&lt;em&gt;Counting Sort&lt;/em&gt;). A ideia geral é registrar a frequência dos elementos ao invés da simples presença. Isso faz com que o array $C$ passe a ser um array de inteiros, não de booleanos. O algoritmo do &lt;em&gt;Counting Sort&lt;/em&gt; é baseado na ideia que vimos, mas possui algumas modificações substanciais para permitir elementos repetidos e para manter a estabilidade. Em linhas gerais, o &lt;em&gt;Counting Sort&lt;/em&gt; possui os seguintes passos:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;registrar a frequência dos elementos de $A$ no array $C$;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Calcular a soma cumulativa de $C$. Esse passo registra, para cada elemento $x$ da entrada, o número de elementos menores ou iguais a $x$;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;iterar sobre $A$ do fim ao início registrando em $B$ o valor de $A$ com a seguinte instrução &lt;code&gt;B[C[A[i] - 1] -1] = A[i]&lt;/code&gt;. Não se assuste. Essa sequência de decrementos em 1 é devido ao fato de começarmos os índices de um array a partir de zero em Java.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Antes de entrarmos nos detalhes de código do algoritmo, vamos simular a execução de um exemplo.&lt;/p&gt;
+
+&lt;h3 id=&#34;exemplo-a-1-9-1-3-4-7-6-7&#34;&gt;Exemplo: A = [1, 9, 1, 3, 4, 7, 6, 7]&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;Passo 1: Contagem de frequência em C.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[k];
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// frequência
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+        }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para  $A = [1, 9, 1, 3, 4, 7, 6, 7]$ e $k = 9$, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;C = [2, 0, 1, 1, 0, 1, 2, 0, 1], isto é, no array a ser ordenado há dois elementos de valor 1, nenhum elemento de valor 2, um elemento de valor 3 e assim por diante.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Passo 2: Soma cumulativa em C.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+        &lt;span style=&#34;color:#75715e&#34;&gt;// cumulativa
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; C.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            C[i] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; C[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1];
+        }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para $C = [2, 0, 1, 1, 0, 1, 2, 0, 1]$, após a execução do cálculo da cumulativa, temos $C = [2, 2, 3, 4, 4, 5, 7, 7, 8]$, isto é, no array a ser ordenado há:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2 elementos menores ou igual a 1&lt;/li&gt;
+&lt;li&gt;2 elementos menores ou iguais a 2&lt;/li&gt;
+&lt;li&gt;3 elementos menores ou iguais a 3&lt;/li&gt;
+&lt;li&gt;4 elementos menores ou iguais a 4&lt;/li&gt;
+&lt;li&gt;4 elementos menores ou iguais a 5&lt;/li&gt;
+&lt;li&gt;5 elementos menores ou iguais a 6&lt;/li&gt;
+&lt;li&gt;7 elementos menores ou iguais a 7&lt;/li&gt;
+&lt;li&gt;7 elementos menores ou iguais a 8&lt;/li&gt;
+&lt;li&gt;8 elementos menores ou iguais a 9.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;Passo 3: Iterar do fim ao início de $A$ registrando em $B$ os elementos.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;B&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 0; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;) {
+            B[C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[i];
+            C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1;
+        }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Essa parte pode ser confusa e acredito que para entendê-la precisamos de recursos visuais melhores do que o texto. Por isso, fiz o vídeo abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=3bm7NgKJpj4&amp;feature=youtu.be&#34;&gt;
+    &lt;img src=&#34;video.jpg&#34;&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;implementação-do-counting-sort&#34;&gt;Implementação do Counting Sort&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;countingSort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt;) {
+    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[k];
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// frequência
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+        }
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// cumulativa
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; C.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            C[i] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; C[i&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1];
+        }
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;B&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 0; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;) {
+            B[C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; A[i];
+            C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1;
+        }
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; B;
+    
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;análise-do-counting-sort&#34;&gt;Análise do Counting Sort&lt;/h2&gt;
+
+&lt;p&gt;O Counting Sort tem em sua implementação 3 laços principais. O primeiro percorre o array $A$ (tamanho $n$), o segundo percorre o array $C$ (tamanho $k$) e o terceiro percorre novamente o array $A$. Assim, temos:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = 2n + k$. Aplicando as diretrizes para análise assintótica, temos:
+$T(n) = (n + k)$.&lt;/p&gt;
+
+&lt;p&gt;O importante aqui é entender que o algoritmo tem seu tempo de execução linear em função do tamanho de $n$ e $k$, não somente do tamanho de $n$. Esse tempo de execução é substancialmente mais eficiente do que os outros algoritmos que vimos. Contudo, esse algoritmo também tem um custo associado ao uso de memória, pois precisa criar um array de contagem $C$ de tamanho igual a $k$ e o array $B$ a ser retornado de tamanho igual ao do array original. Ou seja, do ponto de vista de memória, também que o consumo é dado por $T(n) = (n + k)$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;O que acontece se k for muito maior que n?&lt;/strong&gt; Vejamos um exemplo:&lt;/p&gt;
+
+&lt;p&gt;$A = [1, 3, 2, 1, 9874392]$&lt;/p&gt;
+
+&lt;p&gt;Veja que teríamos que criar o array de contagem $C$ de tamanho 9874392 mesmo tendo que ordenar apenas 5 elementos, o que seria muito ruim.&lt;/p&gt;
+
+&lt;p&gt;Por outro lado, o que acontece se $k$ for muito menor que $n$? Vejamos um exemplo:&lt;/p&gt;
+
+&lt;p&gt;A = [1, 3, 2, 1, 1, 5, 3, 2, 5, 4, 2, 1, 2, 1, 1, 2, 1, 4, 5, 2, 2, 3, 2]&lt;/p&gt;
+
+&lt;p&gt;Veja que teríamos que criar o array de contagem C de tamanho 5 para ordenar um array com 23 elementos.  Isso pode ser ainda mais vantajoso se imaginarmos um cenário em que teremos, por exemplo, que ordenar todas as pessoas do mundo de acordo com sua idade. Nesse caso, temos um conjunto muito grande de dados (~7.7 bilhões), mas com um $k$ bem menor, pois a pessoa mais velha do mundo não ultrapassaria, nos dias de hoje, 125 anos. Isto é, $k$ é muito menor do que $n$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;E se eu quiser usar o Counting Sort para ordenar sequências contendo valores iguais a zero e valores negativos?&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;O Counting Sort baseia-se na ideia de que um valor inteiro pode ser mapeado para o índice de mesmo valor em um array auxiliar. Essa estratégia nos impede, em um primeiro momento, de ordenar uma sequência com números negativos, pois o menor índice em um array é 0. Além disso, na nossa implementação inicial excluímos também elementos iguais a zero. Contudo, é possível fazer algumas mudanças simples no Counting Sort para que o mesmo passe a também ordenar sequências com esses valores.&lt;/p&gt;
+
+&lt;p&gt;A ideia é simples: basta identificarmos o menor elemento do array (menor) e usar esse valor como um &amp;ldquo;salto&amp;rdquo; para adicionar os elementos. É uma ideia similar a fazer um shift para a direita em todos os elementos. O menor elemento array tem sua frequência registrada na posição zero. Vamos ver um exemplo:&lt;/p&gt;
+
+&lt;p&gt;$A = [1,-3, 2, 1, 7]$, com k = 7 e menor = -3.&lt;/p&gt;
+
+&lt;p&gt;Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 0 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;C&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[maior &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; menor &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1];
+
+    &lt;span style=&#34;color:#75715e&#34;&gt;// frequência
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; A.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+        C[A[i] &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; menor] &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para A = [1,-3, 2, 1, 7], temos C = [1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1]. Note que o primeiro índice é reservado para a frequência do menor elemento (-3) e não mais para 1. Além disso, como estamos também contando com a presença de elementos de valor 0 no array, trocamos a instrução &lt;code&gt;C[A[i] - 1] += 1&lt;/code&gt; por &lt;code&gt;C[A[i] - menor] += 1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A mesma mudança é considerada no restante da implementação, sempre aplicando &lt;code&gt;array[i]- menor&lt;/code&gt; para considerar o salto.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Este material não é tão completo quanto o livro texto da disciplina. Sugiro também a leitura do Capítulo 8 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
+
+&lt;p&gt;No curso de Estrutura de Dados da UFCG há ainda a discussão de outros algoritmos de ordenação linear, como o Radix Sort e o Bucket Sort.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:Importante-lembr&#34;&gt;Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática. &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:Importante-lembr&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:O-ideal-nomear-v&#34;&gt; O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas. &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:O-ideal-nomear-v&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Análise Assintótica</title>
          <link>https://joaoarthurbm.github.io/eda/posts/analise-assintotica/</link>
          <pubDate>Sun, 29 Sep 2019 00:00:00 -0300</pubDate>
