@@ -572,5 +572,301 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 </description>
        </item>
        
+       <item>
+         <title>Análise de Algoritmos Recursivos</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/</link>
+         <pubDate>Sun, 29 Sep 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
+
+&lt;p&gt;Até aqui vimos como &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34;&gt;analisar algoritmos iterativos&lt;/a&gt;, lembra? Esse processo pode ser resumido pelos seguintes passos:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;identificar operações primitivas;&lt;/li&gt;
+&lt;li&gt;identificar a quantidade de vezes que cada uma dessas primitivas é executada;&lt;/li&gt;
+&lt;li&gt;Somar essas execuções.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;pre&gt;
+Você lembra quais são as operações primitivas?
+    
+    - Avaliação de expressões booleanas;
+    - Operações matemáticas;
+    - Retorno de métodos;
+    - Atribuição;
+    - Acesso à variáveis e posições arbitrárias de um array
+&lt;/pre&gt;
+
+&lt;p&gt;Seguindo esses passos sempre chegamos a uma função que descreve o tempo de execução do algoritmo. Vimos também que estamos interessados na ordem de crescimento dessa função, mais do que nos seus termos detalhados. Isto é, como se comporta a função para grandes valores de $n$. Assim, podemos aplicar as seguintes diretrizes para identificar a classe de complexidade das funções:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Eliminar constantes;&lt;/li&gt;
+&lt;li&gt;Eliminar expoentes de menor magnitude.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Desse modo, a função $f(n) = 70n + 32n + 231$ tem ordem de crescimento linear. Isto é, $f(n) \in \Theta(n)$. Lembrando sempre que a maneira formal de demonstrar que $f(n) \in \Theta(n)$ é encontrar $c1$, $c2$ e $n0$, tal que:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $0 &lt;= c1*n  &lt;= 70n + 32n + 231 &lt;= c2*n, \forall n &gt;=n0 $ &lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;o-problema&#34;&gt;O Problema&lt;/h1&gt;
+
+&lt;p&gt;Acontece que, para algoritmos recursivos, a aplicação dos passos acima não é direta, pois um algoritmo recursivo é definido em termos dele mesmo. Vamos começar com uma função bem simples: fatorial.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; fatorial(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n&lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt;0 &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; 1)
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1;
+   &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+       &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; n &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; fatorial(n&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1);
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Vamos tentar aplicar os passos que aprendemos para a análise de algoritmos.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Identificando as primitivas.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;if (n==0 || n == 1)&lt;/code&gt; -&amp;gt; avaliação de expressão booleana.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;return 1&lt;/code&gt; -&amp;gt; retorno de método.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;return n&lt;/code&gt; -&amp;gt; retorno de método.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;*&lt;/code&gt; -&amp;gt; operação aritmética.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;fatorial(n-1)&lt;/code&gt; -&amp;gt; ?&lt;/p&gt;
+
+&lt;p&gt;Como vimos, para o caso em que as execuções não são em função de $n$ (caso acima) podemos simplificar as operações primitivas e suas execuções para (1).&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;O problema aqui é calcular o custo de fatorial(n-1).&lt;/p&gt;
+
+&lt;p&gt;Qual o custo dessa operação e quantas vezes ela será executada? Não conseguimos responder essa questão de maneira direta como fizemos para os algoritmos iterativos porque trata-se de uma função definida em termos dela mesma. No nosso contexto, funções dessa natureza são chamadas de &lt;strong&gt;relações de recorrência&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;relação-de-recorrência&#34;&gt;Relação de Recorrência&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Relação de recorrência é uma equação ou inequação que descreve uma função em termos dela mesma considerando entradas menores.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;A função que descreve o tempo de execução de um algoritmo recursivo é dada por sua relação de recorrência. Vejamos a relação de recorrência que descreve o algoritmo de cálculo do fatorial:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(n-1) + \Theta(1)$,&lt;/p&gt;
+
+&lt;p&gt;simplificando temos: $T(n) = T(n-1) + 1$&lt;/p&gt;
+
+&lt;p&gt;Ou seja, o custo de calcular fatorial(n) é o custo de calcular fatorial(n-1) somado às primitivas que são executadas a cada passo da recursão que, nesse caso, representam 1.&lt;/p&gt;
+
+&lt;p&gt;Nosso desafio então é resolver essa relação de recorrência para determinarmos o tempo de execução do algoritmo para cálculo do fatorial. Para isso, vamos utilizar o método da árvore de recursão.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;método-da-árvore-de-recursão&#34;&gt;Método da árvore de recursão&lt;/h1&gt;
+
+&lt;p&gt;A ideia para resolver uma relação de recorrência é simular a sua execução através de uma árvore, onde os nós representam a entrada e as arestas representam a chamada recursiva.&lt;/p&gt;
+
+&lt;h2 id=&#34;exemplo-fatorial&#34;&gt;Exemplo: Fatorial&lt;/h2&gt;
+
+&lt;p&gt;Vamos entender como funciona esse recurso através de exemplos. Veja a árvore de recursão para o cálculo do fatorial de 5.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;fatorial.png&#34; alt=&#34;fatorial&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note que a raiz da árvore inicia com o valor 5, que é o tamanho da entrada. Note também que o custo do nível da entrada 5 é 1 (as primitivas). Este custo deve ser somado ao custo para a entrada 4 (chamada recursiva) que, por sua vez é 1. O cálculo da entrada 4 deve ser somado ao custo para a entrada 3 (chamada recursiva) e assim por diante. Veja que isso nada mais é do que a reprodução da relação de recorrência $T(n) = T(n-1) + 1$.&lt;/p&gt;
+
+&lt;p&gt;Por fim, não é difícil compreender que o custo total é a soma dos custos de cada nível, ou seja, a soma dos custos de cada passo da recursão.&lt;/p&gt;
+
+&lt;p&gt;Contudo, nosso trabalho aqui é definir o tempo de execução do algoritmo em função de uma entrada de tamanho n qualquer. Vamos, novamente, ilustrar a árvore de recursão para esse cenário:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;fatorialn.png&#34; alt=&#34;fatorialn&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Novamente, para calcular a função que define o tempo de execução desse algoritmo, precisamos somar os custos de cada nível. Isto é, somaremos o valor 1 uma quantidade de vezes representada por $h + 1$, onde $h$ é a altura da árvore e o +1 é o custo da última execução (&lt;code&gt;if n == 0 || n == 1&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar que $h = n - 1$. Assim, temos que $f(n) = 1 * (n-1) + 1$, isto é, $f(n) = n$. Portanto, podemos dizer que $f(n) \in \Theta(n)$.&lt;/p&gt;
+
+&lt;p&gt;Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Estabelecer a relação de recorrência&lt;/li&gt;
+&lt;li&gt;Expandir a árvore de execução baseado na relação de recorrência&lt;/li&gt;
+&lt;li&gt;Determinar a altura h máxima da árvore&lt;/li&gt;
+&lt;li&gt;Somar o custo de cada nível de execução&lt;/li&gt;
+&lt;li&gt;Somar o custo total (soma do custo de todos os níveis)&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&#34;exemplo-mergesort&#34;&gt;Exemplo: MergeSort&lt;/h2&gt;
+
+&lt;p&gt;Vamos analisar um exemplo um pouco mais complexo. O Merge Sort é um algoritmo de ordenação que, a cada execução parcial, efetua duas chamadas recursivas diminuindo pela metade o tamanho da entrada e um rotina (merge) cujo tempo de execução é dado por $\Theta(n)$.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; mergeSort(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ini&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fim&lt;/span&gt;) {
+	If (ini &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; fim) {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;meio&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ini &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; fim) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 2;
+		mergeSort(v, ini, meio);
+		mergeSort(v, meio &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1, fim);
+		merge(v, ini, meio, fim);
+	}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Relação de recorrência.&lt;/strong&gt; A primeira etapa para identificar a classe de complexidade do &lt;em&gt;Merge Sort&lt;/em&gt; é identificar a sua relação de recorrência:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(n/2) + T(n/2) + (n)$, simplificando&lt;/p&gt;
+
+&lt;p&gt;$T(n) = 2 * T(n/2) + n$, onde n = v.length - 1&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$2 * T(n/2)$ representa as duas chamadas recursivas em que a entrada é divida pela metade em cada uma delas.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$+ n$ representa o custo da função que une duas sequências já ordenadas em uma sequência ordenada. Não precisamos saber como isso é feito nesse momento, apenas precisamos saber que essa parte do algoritmo tem custo linear.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;pre&gt;
+Para fixar! Muitas relações de recorrência podem ser descritas 
+na seguinte forma:
+
+T(n) = a*T(n/b) + f(n)  , com a&gt;=1, b&gt;1 e f(n) não negativa. 
+
+É importante que a gente saiba em português o que significa essa 
+equação acima. Você lembra que ela é referente a um algoritmo 
+recursivo, certo? Em português, dizemos que há a chamadas 
+recursivas e que cada chamada recursiva divide a entrada em b 
+partes. Além disso, a cada chamada recursiva, um custo f(n) é 
+adicionado.
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Árvore de Recursão.&lt;/strong&gt; Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = 2 T(n/2) + n$.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;merge.png&#34; alt=&#34;merge&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Podemos notar que a árvore é um pouco diferente da que ilustramos para o fatorial. Em primeiro lugar, a árvore é binária. Sendo assim, o custo de um nível agora é calculado somando-se os custos de cada nó desse nível. Novamente, as arestas representam as duas chamadas recursivas de cada passo. Outra mudança é que cada nó filho diminui na metade o tamanho da entrada do nó pai. Essas duas últimas sentenças são resumidas por $2 * T (n/2)$. Por fim, cada nó tem o seu tempo de execução definido em função linear do tamanho da entrada. Essa última sentença é resumida pela parte final da relação de recorrência &amp;hellip;. $+n$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Função do tempo de execução.&lt;/strong&gt; Agora precisamos somar os custos de todos os níveis. Para isso, assim como no caso do fatorial, precisamos determinar a altura dessa árvore.&lt;/p&gt;
+
+&lt;p&gt;Para o cálculo da altura podemos notar que a árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada ini &amp;gt;= fim.&lt;/p&gt;
+
+&lt;p&gt;Assim, temos que $2^h = n$. Aplicando $\log_{2}2$ nos dois lados da equação, temos:&lt;/p&gt;
+
+&lt;p&gt;$h * \log_{2}2 = \log n$&lt;/p&gt;
+
+&lt;p&gt;Simplificando, temos: $h = \log_{2}n$&lt;/p&gt;
+
+&lt;p&gt;Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo $n$ (ex: $2 * n/2$, $4 * n/4$, $8 * n/8$&amp;hellip;). Se somarmos $n$ por 10 vezes, teremos $10*n$. Se somarmos $n$ por 100 vezes, teremos $100*n$. Como vamos somar $n$ por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = n * \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo n.&lt;/p&gt;
+
+&lt;p&gt;Então, temos que $T(n) =(n * \log n)$.&lt;/p&gt;
+
+&lt;h2 id=&#34;exemplo-busca-binária&#34;&gt;Exemplo: Busca Binária&lt;/h2&gt;
+
+&lt;p&gt;O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &amp;ldquo;palpitar&amp;rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; indexOf(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ini&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;fim&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ini &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; fim) {    
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;meio&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ini &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; fim;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (v[meio] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; n) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; meio;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (n &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v[meio])
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; indexOf(v, n, ini, meio &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1);
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; indexOf(v, n, meio &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1, fim);
+	} &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1;
+	}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Relação de recorrência.&lt;/strong&gt; Como aprendemos anteriormente, a primeira etapa para identificar o custo de execução do algoritimo de Busca Binária é identificar a sua relação de recorrência:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(n/2) + \Theta(1)$.&lt;/p&gt;
+
+&lt;p&gt;Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;binaria.png&#34; alt=&#34;binaria&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Cada nó da árvore possui apenas uma aresta, porque há apenas uma chamada recursiva. Cada nível tem o seu custo constante (1), uma vez que a cada passo da recursão apenas algumas primitivas são executadas, como as avaliações das expressões booleanas e o cálculo da variável &lt;code&gt;meio&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Função do tempo de execução.&lt;/strong&gt; Agora precisamos somar os custos de todos os níveis. Para isso, assim como nos casos anteriores, precisamos determinar a altura dessa árvore.&lt;/p&gt;
+
+&lt;p&gt;O cálculo da altura é exatamente o mesmo do realizado para o exemplo do Merge Sort. A árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada &lt;code&gt;ini &amp;gt;= fim&lt;/code&gt;. Aplicando os mesmos passos do exemplo anterior, temos que a $h = \log n$&lt;/p&gt;
+
+&lt;p&gt;Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo 1. Se somarmos 1 por 10 vezes, teremos $10*1$. Se somarmos 1 por 100 vezes, teremos $100*1$. Como vamos somar 1 por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = 1 * \log n$, ou seja, $f(n) = \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo 1.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;método-mestre&#34;&gt;Método Mestre&lt;/h1&gt;
+
+&lt;p&gt;O método iterativo utilizando a árvore de recursão é, de fato, uma boa alternativa para identificar a classe de complexidade de algoritmos recursivos. Além de ser um método analítico, ele tem propriedades didáticas importantes. Isto é, o exercício de ilustrar a árvore de recursão (execução) e, a partir dela, identificar o custo total do algoritmo é importante não somente para esse fim, mas para exercitar a capacidade de abstração e raciocínio do aluno. Contudo, muitas vezes, trata-se de um mecanismo laborioso. Nesse contexto, surge o &lt;strong&gt;Teorema Mestre&lt;/strong&gt; que nos permite identificar a classe de complexidade de um algoritmo aplicando apenas algumas operações matemáticas e comparando ordem de complexidade de funções.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;E como o teorema funciona?&lt;/strong&gt; Primeiramente, é preciso que a relação de recorrência tenha determinadas propriedades. Vamos analisar concretamente essas propriedades:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$T(n) = a*T(n/b) + f(n)$&lt;/p&gt;
+
+&lt;p&gt;Sendo $a&amp;gt;=1$, $b&amp;gt;1$ e $f(n)$ não negativa.&lt;/p&gt;
+
+&lt;p&gt;Como vimos anteriormente, $a$ representa a quantidade de chamadas recursivas (quantidade de subproblemas), $b$ representa em quanto a entrada é diminuída a cada chamada recursiva e $f(n)$ representa o custo parcial de cada etapa da recursão. Para aplicar o Teorema Mestre, sua relação de recorrência deve ser na forma acima com $a &amp;gt;= 1$, $b &amp;gt; 1$ e $f(n)$ não negativa.&lt;/p&gt;
+
+&lt;p&gt;Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Se f(n) &amp;lt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = theta(n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Se f(n) = n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = theta(f(n) * log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;n&lt;/sup&gt;).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Se f(n) &amp;gt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = theta(f(n)).&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Desse modo, se a relação de recorrência obedecer às restrições $a&amp;gt;=1$, $b&amp;gt;1$ e $f(n)$ não negativa, basta aplicarmos o teorema.&lt;/p&gt;
+
+&lt;h3 id=&#34;exemplo&#34;&gt;Exemplo&lt;/h3&gt;
+
+&lt;p&gt;Para a relação de recorrência $T(n) = 8 * T(n/2) + 1000 * n^2$, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$a = 8$&lt;/li&gt;
+&lt;li&gt;$b = 2$&lt;/li&gt;
+&lt;li&gt;$f(n) = 1000 * n^2$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comparando $1000 * n^2$  com  n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, temos que $1000 * n^2$ &amp;lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = theta(n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;) e, portanto, $T(n) = (n^3)$.&lt;/p&gt;
+
+&lt;h3 id=&#34;exemplo-1&#34;&gt;Exemplo&lt;/h3&gt;
+
+&lt;p&gt;$T(n) = 2 * T(n/2) + 10*n$&lt;/p&gt;
+
+&lt;p&gt;Para a relação acima, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$a = 2$&lt;/li&gt;
+&lt;li&gt;$b = 2$&lt;/li&gt;
+&lt;li&gt;$f(n) = 10 * n$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comparando $10 * n$ com n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt; temos que $10 * n  =  n$, pois comparamos a ordem de grandeza das funções e, quando fazemos isso, as constantes não importam. Portanto, aplicando a segunda regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(n * \log_{2}n)$.&lt;/p&gt;
+
+&lt;h3 id=&#34;exemplo-2&#34;&gt;Exemplo&lt;/h3&gt;
+
+&lt;p&gt;Para $T(n) = 2 * T(n/2) + n^2$, temos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$a = 2$&lt;/li&gt;
+&lt;li&gt;$b = 2$&lt;/li&gt;
+&lt;li&gt;$f(n) = n^2$&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Comparando $n^2$  com n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt; temos que $n^2 &amp;gt; n$. Portanto, aplicando a terceira regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(f(n))$ e, portanto, $T(n) = \Theta(n^2)$.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Este material é um resumo superficial do Capítulo 4 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
+
+&lt;p&gt;Há outras implementações de fatorial. Por exemplo, ao invés de checar se n == 0 ou n == 1, bastaria apenas checar se n == 0, 1 * 1 == 1. Dessa forma, a altura da árvore gerada teria uma unidade a mais. Contudo, isso não impacta na ordem de grandeza do algoritmo.&lt;/p&gt;
+</description>
+       </item>
+       
      </channel>
    </rss>
