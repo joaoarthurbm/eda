@@ -6,5 +6,5 @@ weight = "20"
 meta = "false"
 +++
 
-* [Introdução à análise](http://joaoarthurbm.github.io/eda-ufcg-material/posts/introducao-a-analise/)
-* [Análise assintótica](http://joaoarthurbm.gihub.io/eda-ufcg-material/posts/analise-assintotica/)
+* [Introdução à análise](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/)
+* [Análise assintótica](http://joaoarthurbm.gihub.io/eda/posts/analise-assintotica/)
