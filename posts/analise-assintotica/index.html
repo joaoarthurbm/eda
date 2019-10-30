@@ -96,7 +96,7 @@
 
         
 
-        <li>8 minutes read</li>
+        <li>11 minutes read</li>
     </ul>
 </aside>
 
@@ -106,17 +106,80 @@
 
 <hr />
 
-<h1 id="contextualização">Contextualização</h1>
+<h1 id="ordem-de-crescimento">Ordem de Crescimento</h1>
+
+<p><strong>O Problema.</strong> No <a href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/">material introdutório de análise de algoritmos</a> aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:</p>
+
+<p align="center"> $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ </p>
+
+<p>Você há de convir que não é simples olhar para essa função e ter uma ideia clara do crescimento dela, certo? Lembra que nossa motivação para estabelecer essa função é simplificar nossa vida. É olhar para a função e ter uma ideia de como ela se comporta à medida que o tamanho da entrada cresce. Então, temos um problema aqui. Essa função não está ajudando nossa vida. Precisamos simplificá-la.</p>
+
+<p><strong>A Solução.</strong> Simplificar. Na verdade, nós já utilizamos algumas simplificações para facilitar a análise de algoritmos. A principal delas é ignorar o custo real das operações primitivas, utilizando a constante C ou 1. Agora, faremos mais uma abstração simplificadora, chamada <strong>ordem de crescimento</strong>.</p>
+
+<p>A ideia é determinar como o algoritmo se comporta para valores muito grandes de entrada. Neste caso, ignoramos as constantes e os valores de menor magnitude por entender que eles não são significativos diante dos valores de maior magnitude.</p>
+
+<p>Na prática, isso significa dizer que podemos:</p>
+
+<ul>
+<li>ignorar as constantes;</li>
+<li>ignorar os expoentes de menor magnitude.</li>
+</ul>
+
+<p>No exemplo fictício da função acima, podemos então fazer as seguintes simplificações.</p>
+
+<p>f(n) = <del>1.1</del> * n ** 2 <del>+ (10 + sin(n+15)*n**1.5) + 9000</del></p>
+
+<p>Ou seja, do ponto de vista da ordem de crescimento, para grandes valores de $n$, as constantes e os expoentes de maior magnitude são insignificantes, nos permitindo simplificar a expressão do tempo de execução para $\Theta(n^2)$. A notação theta será discutida com mais detalhes na próxima seção.</p>
+
+<p>Agora sim, é muito mais direto olhar para $n^2$ ter uma ideia clara do crescimento do tempo de execução do algoritmo, porque $n^2$ é uma função que já conhecemos bastante.</p>
+
+<p>O interesse está na ordem de crescimento das funções, que facilita a análise e comparação de diferentes soluções. Por exemplo, na escolha entre uma solução $\Theta(\log n)$ e uma solução $\Theta(n)$, é preferível a primeira, pois à medida que o tamanho da entrada cresce, o tempo de execução cresce mais lentamente que $\Theta(n)$.</p>
+
+<p>&ldquo;Ainda não entendi. Você está querendo dizer que $f(n) = 1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ e $g(n) = n^2$ são iguais?&rdquo;</p>
+
+<p>Não. Eu estou dizendo que elas pertencem à mesma classe de funções, as funções quadráticas. Eu estou querendo dizer que essas duas funções possuem a mesma ordem de crescimento para grandes entradas e que se aproximam muito uma da outra para grandes valores de $n$.</p>
+
+<p>Vou te mostrar. Os gráficos da sequência abaixo ilustra essas duas funções. $f(n)$ está destacada em azul e $g(n)$ em vermelho. A única diferença é que a entrada (eixo x) vai aumentando de um gráfico para outro.</p>
+
+<p><img src="passo1.png" alt="passo1" />
+<img src="passo2.png" alt="passo2" />
+<img src="passo3.png" alt="passo3" /></p>
+
+<p>Note que no primeiro gráfico, para entradas de 0 a 200, $f(x)$ tem uma curva semelhante à $g(x)$, mas estão distantes uma da outra. Depois, na segunda figura, a entrada passa a variar de 0 a 300 e já conseguimos notar uma aproximação dessas duas curvas. Por fim,  no último gráfico, com entradas variando de 0 a 400, as duas curvas já estão muito próximas uma da outra.</p>
+
+<p><strong>Outro exemplo.</strong> Através da identificação das operações primitivas e da quantidade de vezes que são executadas no algoritmo de busca linear chegamos à seguinte função:</p>
+
+<p align="center">$f(n) = 3*c*n + 3*c$</p>
+
+<p>Aplicando as diretrizes simplificação, temos:</p>
+
+<p>f(n) = <del>3 * c *</del> n <del>+ 3 * c</del></p>
+
+<p>Isto é, $f(n) = 3*c*n+3*c$ é $\Theta(n)$. Isso significa dizer que f(n) tem a mesma ordem de crescimento que uma função linear.</p>
+
+<blockquote>
+<p>Dizer que um algoritmo é linear significa que o tempo de execução do algoritmo cresce linearmente em função do tamanho da entrada.</p>
+</blockquote>
+
+<p><strong>Mais um exemplo.</strong> Através da identificação das operações primitivas e da quantidade de vezes que são executadas no algoritmo de identificação de elementos duplicados em um array chegamos à seguinte função:</p>
+
+<p align="center"> $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ </p>
+
+<p>Aplicando as diretrizes simplificação, temos que $f(n) = \Theta(n^2)$. Isso significa dizer que $f(n)$ tem a mesma ordem de crescimento que uma quadrática.</p>
+
+<hr />
+
+<h1 id="análise-assintótica">Análise Assintótica</h1>
 
 <p>Quando observamos tamanhos de entrada grande o suficiente para tornar relevante apenas a ordem de crescimento do tempo de execução, estamos estudando a eficiência assintótica.</p>
 
-<p>No <a href="https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/">material introdutório</a> sobre análise de algoritmos, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.</p>
+<p>Há pouco, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.</p>
 
 <p>Primeiro, preciso deixar claro que cometi alguns abusos matemáticos para fins didáticos. Vamos relembrar esses abusos e explicá-los um a um.</p>
 
 <p align="center">$2*n + 1 = \Theta(n)$</p>
 
-<p>Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2*n + 1$ é $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ <strong>pertence</strong> a $\Theta(n)$.</p>
+<p>Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2*n + 1$ <strong>é</strong> $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ <strong>pertence</strong> à $\Theta(n)$.</p>
 
 <p>Além disso, poderíamos ter escolhido qualquer função linear para dizer que $2 * n + 1$ tem a mesma ordem de crescimento. Nós escolhemos $n$ porque é a mais simples.</p>
 
@@ -130,7 +193,7 @@
 
 <p>Vamos entender o que essa inequação complicada quer nos dizer. Em um resumo bem simplista ela está dizendo que se a gente &ldquo;imprensar&rdquo; $f(n)$ com $g(n)$ multiplicada por duas constantes diferentes, dizemos que $f(n)$ é $\Theta(g(n))$.</p>
 
-<p>Vamos ao exemplo. Lembra da função que descreve o tempo de execução da busca linear? Vamos tentar mostrar que essa função é $\Theta(n)$.</p>
+<p>Vamos ao exemplo. Lembra da função que descreve o tempo de execução da busca linear? Vamos tentar demonstrar que essa função é $\Theta(n)$.</p>
 
 <p align="center">$f(n) = 3*c*n+3*c$</p>
 
@@ -138,7 +201,7 @@
 
 <p align="center">$f(n) = 3n+3$</p> 
 
-<p>Agora vamos voltar a inequação. Como &ldquo;desconfiamos&rdquo; que $f(n) = 3n+3$ é $\Theta(n), escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:</p>
+<p>Agora vamos voltar a inequação. Como &ldquo;desconfiamos&rdquo; que $f(n) = 3n+3$ é $\Theta(n)$, escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:</p>
 
 <p align="center">$0<=c1*n<= 3n+3<= c2*n, \forall n>=n0$</p>  
 
@@ -152,7 +215,7 @@
 
 <p>Não é difícil também notar que $\forall n &gt; 1$ ela sempre será verdadeira. Conseguimos, então, demonstrar que $f(n) \in \Theta(n)$, pois $g(n)=n$ limita inferior e superiomente $f(n)$.</p>
 
-<p>Na verdade, todas as funções lineares são limitadas inferior e superiormente por $n$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n)$.</p>
+<p>Na verdade, todas as funções lineares são limitadas inferior e superiormente por $n$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n)$.</p>
 
 <p align="center">$7*n, 827643*n, 5n+21, 54n +1...$</p>  
 
@@ -162,10 +225,9 @@
 
 <p>Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)&lt;= f(n)&lt;= c2*g(n)$.</p>
 
-<pre>
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é igual ao de g(n).
-</pre>
+<blockquote>
+<p>Em termos simplistas, $f(n) \in \Theta(g(n))$ significa dizer que o crescimento de f(n) é igual ao de g(n).</p>
+</blockquote>
 
 <p><strong>Outro exemplo.</strong> Suponha que a função $7 * n^4 + 5 * n^2 +10$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.</p>
 
@@ -175,7 +237,7 @@ f(n) é igual ao de g(n).
 
 <p align="center"> $ 0 <=7 <= 22 <= 22 $</p>
 
-<p>Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n^2)$.</p>
+<p>Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n^2)$.</p>
 
 <p align="center"> $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ </p>
 
@@ -213,16 +275,15 @@ f(n) é igual ao de g(n).
 
 <p align="center"> $1 <= 1$ </p>
 
-<p>Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a $O(n^2)$, porque $\Theta$ limita também superiormente como $O$.Contudo, nem toda função que pertence a $O(n^2)$, por exemplo, também pertence a $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$, portanto é $O(n^2)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para n suficientemente grande faça com que $c1 * n^2$ seja menor do que $7n$.</p>
+<p>Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.</p>
 
 <p>Simples, não é? A notação $O$ é bastante utilizada em Computação para discutir a eficiência de algoritmos. E há aqui uma curiosidade. Como discutido no parágrafo anterior, basta escolhermos uma função com $n$ elevado a um expoente maior do que o da função sob análise que conseguimos definir um limite superior para ele. Por exemplo, a função $f(n) = n^2$ é $O(n^2)$, $O(n^3)$, $O(n^4)$, e assim por diante.  Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $O(n^2)$.</p>
 
 <p>Por fim, outra particularidade dessa notação é que usamos com muita frequência nas discussões do a dia a notação $O$ ao invés da notação $\Theta$. Talvez porque seja mais fácil de falar $O$ do que theta e, como somos preguiçosos, tendemos a economizar energia até na fala. Mas é relevante destacar que, tipicamente, a semântica que queremos empregar nas discussões com o uso da notação $O$ é a mesma de $\Theta$.</p>
 
-<pre>
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é menor ou igual ao crescimento de g(n).
-</pre>
+<blockquote>
+<p>Em termos simplistas, $f(n) \in O(g(n))$ significa dizer que o crescimento de f(n) é menor ou igual ao crescimento de g(n).</p>
+</blockquote>
 
 <hr />
 
@@ -248,25 +309,25 @@ f(n) é menor ou igual ao crescimento de g(n).
 
 <p>Não é difícil perceber que essa inequação é verdadeira para todo $n0$ maior do que 1.</p>
 
-<p>Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a
-$\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contudo, nem toda função que pertence a $\Omega(n^2)$ também pertence $\Theta(n^2)$, pois $\Omega(n^2)$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7 * n$ é limitada inferiormente por $n$, portanto é $\Omega(n)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para $n$ suficientemente grande faça com que $c1 * n$ seja maior do que $7 * n^2$.</p>
+<p>Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à
+$\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contudo, nem toda função que pertence à $\Omega(n^2)$ também pertence à $\Theta(n^2)$, pois $\Omega(n^2)$ estabelece apenas o limite inferior. Por exemplo, a função $f(n) = 7 * n$ é limitada inferiormente por $n$, portanto é $\Omega(n)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para $n$ suficientemente grande faça com que $c1 * n$ seja maior do que $7 * n^2$.</p>
 
 <p>É simples definir um limite inferior para qualquer função. Basta utilizar o expoente 0. Ou seja, todas as funções são $\Omega(1)$. Mais do que isso, podemos escolher expoentes menores. Por exemplo, a função $f(n) = n^2$ é $\Omega(n)$, $\Omega(log n)$ e $\Omega(1)$. Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $\Omega(n^2)$.</p>
 
-<pre>
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é maior ou igual ao crescimento de g(n).
-</pre>
+<blockquote>
+<p>Em termos simplistas, $f(n) \in \Omega(g(n))$ significa dizer que o crescimento de
+f(n) é maior ou igual ao crescimento de g(n).</p>
+</blockquote>
 
 <p>As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada.</p>
 
-<p><strong>o (o minúsculo).</strong> Apenas deixo aqui registrado que $o$ (o minúsculo) é muito semelhante à $O$,removendo apenas o sinal de igualdade da inequação:</p>
+<p>** Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:</p>
 
-<p align="center"> $0<=f(n)< c*g(n)$, \foralln>=n0$ </p>
+<p align="center"> $0<=f(n)< c*g(n), \forall n>=n0$ </p>
 
 <p>Ou seja, <strong>não</strong> podemos dizer, por exemplo, que $f(n) = n^2 + 3$ é $o(n^2)$. $f(n) = n^2 + 3$ é $o(n^3)$, $o(n^4)$, $o(n^5)$ etc.</p>
 
-<p>Por outro lado $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:</p>
+<p>Por outro lado, $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:</p>
 
 <p align="center"> $0 <= c*g(n) < f(n), n>=n0$ </p>
 
@@ -277,6 +338,8 @@ f(n) é maior ou igual ao crescimento de g(n).
 <h1 id="notas">Notas</h1>
 
 <p>Este material foi inspirado nos Capítulos 3 e 4 do livro &ldquo;Algoritmos: Teoria e Prática&rdquo; de Cormen et. al.</p>
+
+<p>Para entender este material é muito importante ler a <a href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise">introdução à análise de algoritmos</a>.</p>
 
 
 </article>

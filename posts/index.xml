@@ -30,9 +30,9 @@
 &lt;p&gt;Analisar um algoritmo significa prever a quantidade de recursos que tal algoritmo consome ao ser executado. A análise pode apontar diversos candidatos e, tipicamente, exclui diversas soluções não eficientes. Diversas variáveis podem ser objetos de estudo da análise de um algoritmo, por exemplo, consumo de memória, largura de banda de comunicação entre outros. No entanto, com frequência, desejamos medir o tempo execução. E é essa variável que estamos interessados em discutir neste documento.&lt;/p&gt;
 
 &lt;p&gt;Uma abordagem direta para analisar o desempenho de um algoritmo é a abordagem empírica. Neste caso, configura-se um ambiente em que as variáveis são controladas e executa-se os algoritmos com o intuito de medir o tempo de computação e comparar as diferentes soluções.
-O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação, isto é, como o algoritmo se comporta com um array já ordenado? Como se comporta com arrays parcialmente ordenados?&lt;/p&gt;
+O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação para entender, por exemplo, como o algoritmo se comporta com um array já ordenado ou como se comporta com arrays parcialmente ordenados.&lt;/p&gt;
 
-&lt;p&gt;Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo, por exemplo, apresenta os tempos de computação de diferentes algoritmos à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.&lt;/p&gt;
+&lt;p&gt;Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo apresenta os tempos de computação de diferentes algoritmos de ordenação à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;comparacao-ordenacao.jpeg&#34; alt=&#34;comp-ordenacao&#34; title=&#34;Comparação de Algoritmos de Ordenação&#34; /&gt;&lt;/p&gt;
 
@@ -41,9 +41,9 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 &lt;p&gt;Diante do cenário exposto acima, surge a necessidade de uma análise que:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;seja independente de hardware&lt;/li&gt;
-&lt;li&gt;permita analisar os algoritmos em um espectro maior de entradas&lt;/li&gt;
-&lt;li&gt;seja simples&lt;/li&gt;
+&lt;li&gt;seja independente de hardware;&lt;/li&gt;
+&lt;li&gt;permita analisar os algoritmos em um espectro maior de entradas;&lt;/li&gt;
+&lt;li&gt;seja simples.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Note que, em diversas situações, o interesse está em comparar algoritmos, ao invés de determinar o seu tempo exato de execução. Em particular, &lt;strong&gt;estamos interessados nas funções no comportamento dos algoritmos para grandes tamanhos de entrada &amp;ndash; análise assintótica.&lt;/strong&gt;&lt;/p&gt;
@@ -52,13 +52,11 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 
 &lt;h2 id=&#34;análise-de-algoritmos&#34;&gt;Análise de Algoritmos&lt;/h2&gt;
 
-&lt;p&gt;Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise se baseia:&lt;/p&gt;
+&lt;p&gt;Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise de algoritmos se baseia:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;Hipótese: O custo de operações primitivas é constante.&lt;/p&gt;
 
-&lt;p&gt;Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos / funções, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como&lt;/p&gt;
-
-&lt;p&gt;$O(1)$ ou $O(C)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.&lt;/p&gt;
+&lt;p&gt;Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como $O(1)$ ou $O(C)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.&lt;/p&gt;
 
 &lt;pre&gt;
 Operações Primitivas
@@ -104,9 +102,13 @@ Operações Primitivas
 
 &lt;p&gt;&lt;strong&gt;Passo 3: Somar o custo total.&lt;/strong&gt; O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:&lt;/p&gt;
 
-&lt;p&gt;$f(n) = c1+c2+c3+c4+c5+c6+c7$&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;$f(n) = c1+c2+c3+c4+c5+c6+c7$&lt;/p&gt;
 
-&lt;p&gt;Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente os números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem &lt;strong&gt;custo constante&lt;/strong&gt;, ou seja, independe do tamanho da entrada.&lt;/p&gt;
+&lt;p&gt;Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente dos números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem &lt;strong&gt;custo constante&lt;/strong&gt;, ou seja, independe do tamanho da entrada.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Dizer que um algoritmo tem custo constante significa dizer que o seu tempo de execução independe do tamanho da entrada.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;Outro fator de destaque é que podemos considerar que todas as constantes possuem o mesmo valor $c$. Assim, podemos simplificar a função para $f(n)= 7c$.&lt;/p&gt;
 
@@ -116,7 +118,7 @@ Operações Primitivas
 
 &lt;p&gt;Nesse caso, escolhemos &lt;strong&gt;o pior caso&lt;/strong&gt;. Neste curso estamos interessados em saber como os algoritmos se comportam no seu pior caso. A análise do pior caso é útil para eliminarmos soluções ruins. Além disso, o melhor caso raramente acontece, ao contrário dos outros casos que podem ser bem mais comuns. Por último, o caso médio, além de demandar análise estatística, muitas vezes é muito semelhante ao pior caso.&lt;/p&gt;
 
-&lt;p&gt;Por ora, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media &amp;gt;= 7.0$) ou reprovado sem direito a final ($media &amp;lt; 4$), o método deve retornar $0$.&lt;/p&gt;
+&lt;p&gt;Para demonstrar a análise de pior caso, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media &amp;gt;= 7.0$) ou reprovado sem direito a final ($media &amp;lt; 4$), o método deve retornar $0$.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;precisaNaFinal&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota1&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota2&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;nota3&lt;/span&gt;) {
 
     &lt;span style=&#34;color:#66d9ef&#34;&gt;double&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;media&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (nota1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nota2 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; nota3) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 3;
@@ -164,11 +166,11 @@ Operações Primitivas
 &lt;li&gt;&lt;p&gt;retorno de método (return precisa) -&amp;gt; $c13$&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;strong&gt;Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.&lt;/strong&gt; Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante c5 pois, no pior caso, o bloco do else será executado, pois é mais custosa que o bloco do if. As outras primitivas são executadas apenas uma vez.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.&lt;/strong&gt; Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c5$, pois, no pior caso, o bloco do &lt;code&gt;else&lt;/code&gt; será executado, uma vez que é mais custoso que o bloco do &lt;code&gt;if&lt;/code&gt;. As outras primitivas são executadas apenas uma vez.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Passo 3: Somar o custo total.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;$f(n) = c1+c2+c3+c4+c6+c7+c8+c9+c10+c11+c12+c13$&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $f(n) = c1+c2+c3+c4+c6+c7+c8+c9+c10+c11+c12+c13$ &lt;/p&gt;
 
 &lt;h3 id=&#34;e-quando-houver-iteração&#34;&gt;E quando houver iteração?&lt;/h3&gt;
 
@@ -197,9 +199,9 @@ Operações Primitivas
 
 &lt;p&gt;&lt;strong&gt;Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar false no final. Veja que se o número estiver dentro do array, a execução pode terminar bem antes do fim da iteração no array. Isso significa que, na nossa análise, vamos descartar a primitiva $c5$, pois no pior caso ela nunca é executada.&lt;/p&gt;
+&lt;p&gt;Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar &lt;code&gt;false&lt;/code&gt; no final. Veja que se o número procurado estiver presente, a execução pode terminar bem antes do fim da iteração no array. Isso significa que na nossa análise vamos descartar a primitiva $c5$, pois no pior caso ela nunca é executada.&lt;/p&gt;
 
-&lt;p&gt;Dado que o tamanho do vetor (v.length) é $n$, temos:&lt;/p&gt;
+&lt;p&gt;Dado que o tamanho do vetor (&lt;code&gt;v.length&lt;/code&gt;) é $n$, temos:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;$c1$ é executada apenas uma vez.&lt;/p&gt;&lt;/li&gt;
@@ -219,11 +221,13 @@ Operações Primitivas
 
 &lt;p&gt;O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:&lt;/p&gt;
 
-&lt;p&gt;$f(n) = c1+c2*(n+1)+c3*n+c4*n+c6$, considerando todas as primitivas com custo $c$ e simplificando a função, temos:&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $f(n) = c1+c2*(n+1)+c3*n+c4*n+c6$ &lt;/p&gt;
 
-&lt;p&gt;$f(n) = 3*c*n+3*c$&lt;/p&gt;
+&lt;p&gt;Considerando todas as primitivas com custo $c$ e simplificando a função, temos:&lt;/p&gt;
 
-&lt;p&gt;Veja que essa função é diretamente relacionada ao tamanho do array ($n$). A medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $f(n) = 3*c*n+3*c$ &lt;/p&gt;
+
+&lt;p&gt;Veja que essa função é diretamente relacionada ao tamanho do array ($n$). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições. Não é por acaso que o nome desse algoritmo é busca linear. O termo refere-se a ambos: i) a estratégia de procurar o elemento de modo sequencial em uma coleção e ii) o tempo de execução do algoritmo.&lt;/p&gt;
 
 &lt;p&gt;Vamos ver mais um exemplo.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boolean&lt;/span&gt; contemDuplicacao(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;) {
@@ -287,17 +291,19 @@ Operações Primitivas
 
 &lt;p&gt;O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:&lt;/p&gt;
 
-&lt;p&gt;$f(n) = c1 + c2*(n+1) + c3*n + c4 * {n^2}/2 + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$,&lt;/p&gt;
+&lt;p&gt;$f(n) = c1 + c2*(n+1) + c3*n + c4 * {n^2}/2 + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$&lt;/p&gt;
 
-&lt;p&gt;considerando todas as primitivas com custo c e simplificando a função, temos:&lt;/p&gt;
+&lt;p&gt;Considerando todas as primitivas com custo c e simplificando a função, temos:&lt;/p&gt;
 
-&lt;p&gt;$f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ &lt;/p&gt;
 
-&lt;p&gt;Veja que essa função é diretamente relacionada ao tamanho do array (n). A medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.&lt;/p&gt;
+&lt;p&gt;Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.&lt;/p&gt;
 
 &lt;p&gt;É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.&lt;/p&gt;
 
 &lt;p&gt;No material sobre &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&#34;resumo&#34;&gt;Resumo&lt;/h2&gt;
 
@@ -329,17 +335,80 @@ Operações Primitivas
 
 &lt;hr /&gt;
 
-&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
+&lt;h1 id=&#34;ordem-de-crescimento&#34;&gt;Ordem de Crescimento&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;O Problema.&lt;/strong&gt; No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório de análise de algoritmos&lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ &lt;/p&gt;
+
+&lt;p&gt;Você há de convir que não é simples olhar para essa função e ter uma ideia clara do crescimento dela, certo? Lembra que nossa motivação para estabelecer essa função é simplificar nossa vida. É olhar para a função e ter uma ideia de como ela se comporta à medida que o tamanho da entrada cresce. Então, temos um problema aqui. Essa função não está ajudando nossa vida. Precisamos simplificá-la.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A Solução.&lt;/strong&gt; Simplificar. Na verdade, nós já utilizamos algumas simplificações para facilitar a análise de algoritmos. A principal delas é ignorar o custo real das operações primitivas, utilizando a constante C ou 1. Agora, faremos mais uma abstração simplificadora, chamada &lt;strong&gt;ordem de crescimento&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A ideia é determinar como o algoritmo se comporta para valores muito grandes de entrada. Neste caso, ignoramos as constantes e os valores de menor magnitude por entender que eles não são significativos diante dos valores de maior magnitude.&lt;/p&gt;
+
+&lt;p&gt;Na prática, isso significa dizer que podemos:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;ignorar as constantes;&lt;/li&gt;
+&lt;li&gt;ignorar os expoentes de menor magnitude.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;No exemplo fictício da função acima, podemos então fazer as seguintes simplificações.&lt;/p&gt;
+
+&lt;p&gt;f(n) = &lt;del&gt;1.1&lt;/del&gt; * n ** 2 &lt;del&gt;+ (10 + sin(n+15)*n**1.5) + 9000&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;Ou seja, do ponto de vista da ordem de crescimento, para grandes valores de $n$, as constantes e os expoentes de maior magnitude são insignificantes, nos permitindo simplificar a expressão do tempo de execução para $\Theta(n^2)$. A notação theta será discutida com mais detalhes na próxima seção.&lt;/p&gt;
+
+&lt;p&gt;Agora sim, é muito mais direto olhar para $n^2$ ter uma ideia clara do crescimento do tempo de execução do algoritmo, porque $n^2$ é uma função que já conhecemos bastante.&lt;/p&gt;
+
+&lt;p&gt;O interesse está na ordem de crescimento das funções, que facilita a análise e comparação de diferentes soluções. Por exemplo, na escolha entre uma solução $\Theta(\log n)$ e uma solução $\Theta(n)$, é preferível a primeira, pois à medida que o tamanho da entrada cresce, o tempo de execução cresce mais lentamente que $\Theta(n)$.&lt;/p&gt;
+
+&lt;p&gt;&amp;ldquo;Ainda não entendi. Você está querendo dizer que $f(n) = 1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ e $g(n) = n^2$ são iguais?&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;Não. Eu estou dizendo que elas pertencem à mesma classe de funções, as funções quadráticas. Eu estou querendo dizer que essas duas funções possuem a mesma ordem de crescimento para grandes entradas e que se aproximam muito uma da outra para grandes valores de $n$.&lt;/p&gt;
+
+&lt;p&gt;Vou te mostrar. Os gráficos da sequência abaixo ilustra essas duas funções. $f(n)$ está destacada em azul e $g(n)$ em vermelho. A única diferença é que a entrada (eixo x) vai aumentando de um gráfico para outro.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;passo1.png&#34; alt=&#34;passo1&#34; /&gt;
+&lt;img src=&#34;passo2.png&#34; alt=&#34;passo2&#34; /&gt;
+&lt;img src=&#34;passo3.png&#34; alt=&#34;passo3&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note que no primeiro gráfico, para entradas de 0 a 200, $f(x)$ tem uma curva semelhante à $g(x)$, mas estão distantes uma da outra. Depois, na segunda figura, a entrada passa a variar de 0 a 300 e já conseguimos notar uma aproximação dessas duas curvas. Por fim,  no último gráfico, com entradas variando de 0 a 400, as duas curvas já estão muito próximas uma da outra.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Outro exemplo.&lt;/strong&gt; Através da identificação das operações primitivas e da quantidade de vezes que são executadas no algoritmo de busca linear chegamos à seguinte função:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$f(n) = 3*c*n + 3*c$&lt;/p&gt;
+
+&lt;p&gt;Aplicando as diretrizes simplificação, temos:&lt;/p&gt;
+
+&lt;p&gt;f(n) = &lt;del&gt;3 * c *&lt;/del&gt; n &lt;del&gt;+ 3 * c&lt;/del&gt;&lt;/p&gt;
+
+&lt;p&gt;Isto é, $f(n) = 3*c*n+3*c$ é $\Theta(n)$. Isso significa dizer que f(n) tem a mesma ordem de crescimento que uma função linear.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Dizer que um algoritmo é linear significa que o tempo de execução do algoritmo cresce linearmente em função do tamanho da entrada.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Mais um exemplo.&lt;/strong&gt; Através da identificação das operações primitivas e da quantidade de vezes que são executadas no algoritmo de identificação de elementos duplicados em um array chegamos à seguinte função:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ &lt;/p&gt;
+
+&lt;p&gt;Aplicando as diretrizes simplificação, temos que $f(n) = \Theta(n^2)$. Isso significa dizer que $f(n)$ tem a mesma ordem de crescimento que uma quadrática.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;análise-assintótica&#34;&gt;Análise Assintótica&lt;/h1&gt;
 
 &lt;p&gt;Quando observamos tamanhos de entrada grande o suficiente para tornar relevante apenas a ordem de crescimento do tempo de execução, estamos estudando a eficiência assintótica.&lt;/p&gt;
 
-&lt;p&gt;No &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório&lt;/a&gt; sobre análise de algoritmos, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.&lt;/p&gt;
+&lt;p&gt;Há pouco, aplicando as diretrizes de simplificação, aprendemos que funções complexas podem ser mapeadas para classes de funções sobre as quais conhecemos o crescimento ($n$, $\log n$, $n^2$ etc). Para ilustrar esse mapeamento utilizamos a notação $\Theta$. Chegou a hora de entendermos o que essa notação significa.&lt;/p&gt;
 
 &lt;p&gt;Primeiro, preciso deixar claro que cometi alguns abusos matemáticos para fins didáticos. Vamos relembrar esses abusos e explicá-los um a um.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;$2*n + 1 = \Theta(n)$&lt;/p&gt;
 
-&lt;p&gt;Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2*n + 1$ é $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ &lt;strong&gt;pertence&lt;/strong&gt; a $\Theta(n)$.&lt;/p&gt;
+&lt;p&gt;Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2*n + 1$ &lt;strong&gt;é&lt;/strong&gt; $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ &lt;strong&gt;pertence&lt;/strong&gt; à $\Theta(n)$.&lt;/p&gt;
 
 &lt;p&gt;Além disso, poderíamos ter escolhido qualquer função linear para dizer que $2 * n + 1$ tem a mesma ordem de crescimento. Nós escolhemos $n$ porque é a mais simples.&lt;/p&gt;
 
@@ -353,7 +422,7 @@ Operações Primitivas
 
 &lt;p&gt;Vamos entender o que essa inequação complicada quer nos dizer. Em um resumo bem simplista ela está dizendo que se a gente &amp;ldquo;imprensar&amp;rdquo; $f(n)$ com $g(n)$ multiplicada por duas constantes diferentes, dizemos que $f(n)$ é $\Theta(g(n))$.&lt;/p&gt;
 
-&lt;p&gt;Vamos ao exemplo. Lembra da função que descreve o tempo de execução da busca linear? Vamos tentar mostrar que essa função é $\Theta(n)$.&lt;/p&gt;
+&lt;p&gt;Vamos ao exemplo. Lembra da função que descreve o tempo de execução da busca linear? Vamos tentar demonstrar que essa função é $\Theta(n)$.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;$f(n) = 3*c*n+3*c$&lt;/p&gt;
 
@@ -361,7 +430,7 @@ Operações Primitivas
 
 &lt;p align=&#34;center&#34;&gt;$f(n) = 3n+3$&lt;/p&gt; 
 
-&lt;p&gt;Agora vamos voltar a inequação. Como &amp;ldquo;desconfiamos&amp;rdquo; que $f(n) = 3n+3$ é $\Theta(n), escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:&lt;/p&gt;
+&lt;p&gt;Agora vamos voltar a inequação. Como &amp;ldquo;desconfiamos&amp;rdquo; que $f(n) = 3n+3$ é $\Theta(n)$, escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;$0&lt;=c1*n&lt;= 3n+3&lt;= c2*n, \forall n&gt;=n0$&lt;/p&gt;  
 
@@ -375,7 +444,7 @@ Operações Primitivas
 
 &lt;p&gt;Não é difícil também notar que $\forall n &amp;gt; 1$ ela sempre será verdadeira. Conseguimos, então, demonstrar que $f(n) \in \Theta(n)$, pois $g(n)=n$ limita inferior e superiomente $f(n)$.&lt;/p&gt;
 
-&lt;p&gt;Na verdade, todas as funções lineares são limitadas inferior e superiormente por $n$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n)$.&lt;/p&gt;
+&lt;p&gt;Na verdade, todas as funções lineares são limitadas inferior e superiormente por $n$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n)$.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;$7*n, 827643*n, 5n+21, 54n +1...$&lt;/p&gt;  
 
@@ -385,10 +454,9 @@ Operações Primitivas
 
 &lt;p&gt;Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)&amp;lt;= f(n)&amp;lt;= c2*g(n)$.&lt;/p&gt;
 
-&lt;pre&gt;
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é igual ao de g(n).
-&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Em termos simplistas, $f(n) \in \Theta(g(n))$ significa dizer que o crescimento de f(n) é igual ao de g(n).&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;&lt;strong&gt;Outro exemplo.&lt;/strong&gt; Suponha que a função $7 * n^4 + 5 * n^2 +10$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
@@ -398,7 +466,7 @@ f(n) é igual ao de g(n).
 
 &lt;p align=&#34;center&#34;&gt; $ 0 &lt;=7 &lt;= 22 &lt;= 22 $&lt;/p&gt;
 
-&lt;p&gt;Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n^2)$.&lt;/p&gt;
+&lt;p&gt;Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n^2)$.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ &lt;/p&gt;
 
@@ -436,16 +504,15 @@ f(n) é igual ao de g(n).
 
 &lt;p align=&#34;center&#34;&gt; $1 &lt;= 1$ &lt;/p&gt;
 
-&lt;p&gt;Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a $O(n^2)$, porque $\Theta$ limita também superiormente como $O$.Contudo, nem toda função que pertence a $O(n^2)$, por exemplo, também pertence a $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$, portanto é $O(n^2)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para n suficientemente grande faça com que $c1 * n^2$ seja menor do que $7n$.&lt;/p&gt;
+&lt;p&gt;Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.&lt;/p&gt;
 
 &lt;p&gt;Simples, não é? A notação $O$ é bastante utilizada em Computação para discutir a eficiência de algoritmos. E há aqui uma curiosidade. Como discutido no parágrafo anterior, basta escolhermos uma função com $n$ elevado a um expoente maior do que o da função sob análise que conseguimos definir um limite superior para ele. Por exemplo, a função $f(n) = n^2$ é $O(n^2)$, $O(n^3)$, $O(n^4)$, e assim por diante.  Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $O(n^2)$.&lt;/p&gt;
 
 &lt;p&gt;Por fim, outra particularidade dessa notação é que usamos com muita frequência nas discussões do a dia a notação $O$ ao invés da notação $\Theta$. Talvez porque seja mais fácil de falar $O$ do que theta e, como somos preguiçosos, tendemos a economizar energia até na fala. Mas é relevante destacar que, tipicamente, a semântica que queremos empregar nas discussões com o uso da notação $O$ é a mesma de $\Theta$.&lt;/p&gt;
 
-&lt;pre&gt;
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é menor ou igual ao crescimento de g(n).
-&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Em termos simplistas, $f(n) \in O(g(n))$ significa dizer que o crescimento de f(n) é menor ou igual ao crescimento de g(n).&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;hr /&gt;
 
@@ -471,25 +538,25 @@ f(n) é menor ou igual ao crescimento de g(n).
 
 &lt;p&gt;Não é difícil perceber que essa inequação é verdadeira para todo $n0$ maior do que 1.&lt;/p&gt;
 
-&lt;p&gt;Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a
-$\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contudo, nem toda função que pertence a $\Omega(n^2)$ também pertence $\Theta(n^2)$, pois $\Omega(n^2)$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7 * n$ é limitada inferiormente por $n$, portanto é $\Omega(n)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para $n$ suficientemente grande faça com que $c1 * n$ seja maior do que $7 * n^2$.&lt;/p&gt;
+&lt;p&gt;Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à
+$\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contudo, nem toda função que pertence à $\Omega(n^2)$ também pertence à $\Theta(n^2)$, pois $\Omega(n^2)$ estabelece apenas o limite inferior. Por exemplo, a função $f(n) = 7 * n$ é limitada inferiormente por $n$, portanto é $\Omega(n)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para $n$ suficientemente grande faça com que $c1 * n$ seja maior do que $7 * n^2$.&lt;/p&gt;
 
 &lt;p&gt;É simples definir um limite inferior para qualquer função. Basta utilizar o expoente 0. Ou seja, todas as funções são $\Omega(1)$. Mais do que isso, podemos escolher expoentes menores. Por exemplo, a função $f(n) = n^2$ é $\Omega(n)$, $\Omega(log n)$ e $\Omega(1)$. Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $\Omega(n^2)$.&lt;/p&gt;
 
-&lt;pre&gt;
-Em termos mais simplistas estamos dizendo que o crescimento de 
-f(n) é maior ou igual ao crescimento de g(n).
-&lt;/pre&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Em termos simplistas, $f(n) \in \Omega(g(n))$ significa dizer que o crescimento de
+f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;o (o minúsculo).&lt;/strong&gt; Apenas deixo aqui registrado que $o$ (o minúsculo) é muito semelhante à $O$,removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
+&lt;p&gt;** Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $0&lt;=f(n)&lt; c*g(n)$, \foralln&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $0&lt;=f(n)&lt; c*g(n), \forall n&gt;=n0$ &lt;/p&gt;
 
 &lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^2 + 3$ é $o(n^2)$. $f(n) = n^2 + 3$ é $o(n^3)$, $o(n^4)$, $o(n^5)$ etc.&lt;/p&gt;
 
-&lt;p&gt;Por outro lado $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
+&lt;p&gt;Por outro lado, $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $0 &lt;= c*g(n) &lt; f(n), n&gt;=n0$ &lt;/p&gt;
 
@@ -500,6 +567,8 @@ f(n) é maior ou igual ao crescimento de g(n).
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 
 &lt;p&gt;Este material foi inspirado nos Capítulos 3 e 4 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
+
+&lt;p&gt;Para entender este material é muito importante ler a &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34;&gt;introdução à análise de algoritmos&lt;/a&gt;.&lt;/p&gt;
 </description>
        </item>
        
