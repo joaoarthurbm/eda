@@ -7,8 +7,6 @@ categories = []
 
 ***
 
-# Contextualização
-
 Até aqui vimos como [analisar algoritmos iterativos](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise), lembra? Esse processo pode ser resumido pelos seguintes passos:
 
 1. identificar operações primitivas;

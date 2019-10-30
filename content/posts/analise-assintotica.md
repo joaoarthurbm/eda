@@ -7,8 +7,6 @@ categories = []
 
 ***
 
-# Ordem de Crescimento
-
 **O Problema.** No [material introdutório de análise de algoritmos](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/) aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:
 
 <p align="center"> $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ </p>
