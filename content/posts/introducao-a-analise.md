@@ -16,9 +16,9 @@ Diante de um problema computacional, diversas soluções podem ser propostas. Po
 Analisar um algoritmo significa prever a quantidade de recursos que tal algoritmo consome ao ser executado. A análise pode apontar diversos candidatos e, tipicamente, exclui diversas soluções não eficientes. Diversas variáveis podem ser objetos de estudo da análise de um algoritmo, por exemplo, consumo de memória, largura de banda de comunicação entre outros. No entanto, com frequência, desejamos medir o tempo execução. E é essa variável que estamos interessados em discutir neste documento.
 
 Uma abordagem direta para analisar o desempenho de um algoritmo é a abordagem empírica. Neste caso, configura-se um ambiente em que as variáveis são controladas e executa-se os algoritmos com o intuito de medir o tempo de computação e comparar as diferentes soluções. 
-O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação, isto é, como o algoritmo se comporta com um array já ordenado? Como se comporta com arrays parcialmente ordenados? 
+O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação para entender, por exemplo, como o algoritmo se comporta com um array já ordenado ou como se comporta com arrays parcialmente ordenados.
 
-Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo, por exemplo, apresenta os tempos de computação de diferentes algoritmos à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.
+Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo apresenta os tempos de computação de diferentes algoritmos de ordenação à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.
 
 ![comp-ordenacao](comparacao-ordenacao.jpeg "Comparação de Algoritmos de Ordenação")
 
@@ -26,9 +26,9 @@ A abordagem empírica para análise de algoritmos é útil, pois, se conduzida d
 
 Diante do cenário exposto acima, surge a necessidade de uma análise que:
 
-* seja independente de hardware
-* permita analisar os algoritmos em um espectro maior de entradas
-* seja simples
+* seja independente de hardware;
+* permita analisar os algoritmos em um espectro maior de entradas;
+* seja simples.
 
 Note que, em diversas situações, o interesse está em comparar algoritmos, ao invés de determinar o seu tempo exato de execução. Em particular, **estamos interessados nas funções no comportamento dos algoritmos para grandes tamanhos de entrada -- análise assintótica.**
 
@@ -37,14 +37,11 @@ Note que, em diversas situações, o interesse está em comparar algoritmos, ao 
 
 ## Análise de Algoritmos
 
-Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise se baseia:
+Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise de algoritmos se baseia:
 
 <p align="center">Hipótese: O custo de operações primitivas é constante.</p>
 
-Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos / funções, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como 
-
-
- $O(1)$ ou $O\(C\)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.
+Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como $O(1)$ ou $O\(C\)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.
 
 <pre>
 Operações Primitivas
@@ -92,9 +89,12 @@ int multiplicaRestoPorParteInteira(int i, int j) {
 
 **Passo 3: Somar o custo total.** O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c1+c2+c3+c4+c5+c6+c7$
+<p align="center">$f(n) = c1+c2+c3+c4+c5+c6+c7$</p>
 
-Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente os números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem **custo constante**, ou seja, independe do tamanho da entrada.
+Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente dos números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem **custo constante**, ou seja, independe do tamanho da entrada.
+
+
+> Dizer que um algoritmo tem custo constante significa dizer que o seu tempo de execução independe do tamanho da entrada.
 
 Outro fator de destaque é que podemos considerar que todas as constantes possuem o mesmo valor $c$. Assim, podemos simplificar a função para $f(n)= 7c$.
 
@@ -104,7 +104,7 @@ O uso de comandos condicionais é muito comum em nossos algoritmos e nos impõe 
 
 Nesse caso, escolhemos **o pior caso**. Neste curso estamos interessados em saber como os algoritmos se comportam no seu pior caso. A análise do pior caso é útil para eliminarmos soluções ruins. Além disso, o melhor caso raramente acontece, ao contrário dos outros casos que podem ser bem mais comuns. Por último, o caso médio, além de demandar análise estatística, muitas vezes é muito semelhante ao pior caso.
 
-Por ora, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media >= 7.0$) ou reprovado sem direito a final ($media < 4$), o método deve retornar $0$.
+Para demonstrar a análise de pior caso, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media >= 7.0$) ou reprovado sem direito a final ($media < 4$), o método deve retornar $0$.
 
 ```java
 double precisaNaFinal(double nota1, double nota2, double nota3) {
@@ -154,11 +154,13 @@ double precisaNaFinal(double nota1, double nota2, double nota3) {
 
 13. retorno de método (return precisa) -> $c13$
 
-**Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante c5 pois, no pior caso, o bloco do else será executado, pois é mais custosa que o bloco do if. As outras primitivas são executadas apenas uma vez.
+**Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c5$, pois, no pior caso, o bloco do `else` será executado, uma vez que é mais custoso que o bloco do `if`. As outras primitivas são executadas apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
-$f(n) = c1+c2+c3+c4+c6+c7+c8+c9+c10+c11+c12+c13$
+
+<p align="center"> $f(n) = c1+c2+c3+c4+c6+c7+c8+c9+c10+c11+c12+c13$ </p>
+
 
 ### E quando houver iteração? 
 
@@ -189,9 +191,9 @@ public static boolean contains(int[] v, int n) {
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.**
 
-Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar false no final. Veja que se o número estiver dentro do array, a execução pode terminar bem antes do fim da iteração no array. Isso significa que, na nossa análise, vamos descartar a primitiva $c5$, pois no pior caso ela nunca é executada.
+Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar `false` no final. Veja que se o número procurado estiver presente, a execução pode terminar bem antes do fim da iteração no array. Isso significa que na nossa análise vamos descartar a primitiva $c5$, pois no pior caso ela nunca é executada.
 
-Dado que o tamanho do vetor (v.length) é $n$, temos:
+Dado que o tamanho do vetor (`v.length`) é $n$, temos:
 
 * $c1$ é executada apenas uma vez.
 
@@ -209,11 +211,13 @@ Dado que o tamanho do vetor (v.length) é $n$, temos:
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c1+c2*(n+1)+c3*n+c4*n+c6$, considerando todas as primitivas com custo $c$ e simplificando a função, temos:
+<p align="center"> $f(n) = c1+c2*(n+1)+c3*n+c4*n+c6$ </p>
 
-$f(n) = 3*c*n+3*c$
+Considerando todas as primitivas com custo $c$ e simplificando a função, temos:
 
-Veja que essa função é diretamente relacionada ao tamanho do array ($n$). A medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições.
+<p align="center"> $f(n) = 3*c*n+3*c$ </p>
+
+Veja que essa função é diretamente relacionada ao tamanho do array ($n$). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições. Não é por acaso que o nome desse algoritmo é busca linear. O termo refere-se a ambos: i) a estratégia de procurar o elemento de modo sequencial em uma coleção e ii) o tempo de execução do algoritmo.
 
 Vamos ver mais um exemplo. 
 
@@ -276,20 +280,19 @@ Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c1 + c2*(n+1) + c3*n + c4 * {n^2}/2 + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$,
+$f(n) = c1 + c2*(n+1) + c3*n + c4 * {n^2}/2 + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$
 
+Considerando todas as primitivas com custo c e simplificando a função, temos:
 
-considerando todas as primitivas com custo c e simplificando a função, temos:
+<p align="center"> $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ </p>
 
-
-$f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$
-
-
-Veja que essa função é diretamente relacionada ao tamanho do array (n). A medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
+Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
 É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.
 
 No material sobre [Análise Assintótica](http://joaoarthurbm.github.io/eda/posts/analise-assintotica) vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário. 
+
+***
 
 ## Resumo
 
