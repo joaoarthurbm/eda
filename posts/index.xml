@@ -476,7 +476,10 @@ $\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contu
 
 &lt;p&gt;É simples definir um limite inferior para qualquer função. Basta utilizar o expoente 0. Ou seja, todas as funções são $\Omega(1)$. Mais do que isso, podemos escolher expoentes menores. Por exemplo, a função $f(n) = n^2$ é $\Omega(n)$, $\Omega(log n)$ e $\Omega(1)$. Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $\Omega(n^2)$.&lt;/p&gt;
 
-&lt;p&gt;Em termos mais simplistas estamos dizendo que o crescimento de $f(n)$ é maior ou igual ao crescimento de $g(n)$.&lt;/p&gt;
+&lt;pre&gt;
+Em termos mais simplistas estamos dizendo que o crescimento de 
+f(n) é maior ou igual ao crescimento de g(n).
+&lt;/pre&gt;
 
 &lt;p&gt;As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada.&lt;/p&gt;
 
