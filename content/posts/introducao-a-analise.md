@@ -289,7 +289,7 @@ Veja que essa função é diretamente relacionada ao tamanho do array (n). A med
 
 É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.
 
-No material sobre [Análise Assintótica](http://joaoarthurbm.github.io/eda-ufcg-material/posts/analise-assintotica) vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário. 
+No material sobre [Análise Assintótica](http://joaoarthurbm.github.io/eda/posts/analise-assintotica) vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário. 
 
 ## Resumo
 
