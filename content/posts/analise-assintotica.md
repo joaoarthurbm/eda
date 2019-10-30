@@ -79,7 +79,7 @@ Se escolhermos $c1=7$, $c2=22$ e $n0=1$, temos:
 
 Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem a $\Theta(n^2)$.
 
-<p align="center"> $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ <p>
+<p align="center"> $ 43 * n^2 + 7n + 1, 5 * n^2 + 21, 7 * n^2...$ </p>
 
 Em resumo, para demonstrar formalmente precisamos dos seguintes passos:
 
@@ -89,7 +89,7 @@ Em resumo, para demonstrar formalmente precisamos dos seguintes passos:
 
 Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.
 
-*** 
+* * *
 
 # Notação O (Big O notation)
 
@@ -124,5 +124,7 @@ Por fim, outra particularidade dessa notação é que usamos com muita frequênc
 Em termos mais simplistas estamos dizendo que o crescimento de 
 f(n) é menor ou igual ao crescimento de g(n).
 </pre>
+
+***
 
 # Notação Omega ($\Omega$)
