@@ -390,7 +390,7 @@ Em termos mais simplistas estamos dizendo que o crescimento de
 f(n) é igual ao de g(n).
 &lt;/pre&gt;
 
-&lt;p&gt;&lt;strong&gt;Outro exemplo.&lt;/strong&gt; Suponha a função $7 * n^4 + 5 * n^2 +10$ que descreve o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Outro exemplo.&lt;/strong&gt; Suponha que a função $7 * n^4 + 5 * n^2 +10$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt;$0 &lt;= c1 * n^4 &lt;= 7 * n^4 + 5 * n^2 + 10 &lt;= c2*n4, \forall n &gt;= n0$&lt;/p&gt;  
 
@@ -428,7 +428,7 @@ f(n) é igual ao de g(n).
 
 &lt;p&gt;O processo para demonstrar que $f(n)$ é $O(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Suponha que a função $n^2 + 1$ descreve o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in O(n^2)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in O(n^2)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $0 &lt;= n^2 + 1 &lt;= c * n^2, \forall n&gt;=n0$ &lt;/p&gt;
 
@@ -436,7 +436,7 @@ f(n) é igual ao de g(n).
 
 &lt;p align=&#34;center&#34;&gt; $1 &lt;= 1$ &lt;/p&gt;
 
-&lt;p&gt;Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a $O(n^2)$, porque limita também superiormente como $O$.Contudo, nem toda função que pertence a $O(n^2)$, por exemplo, também pertence a $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$, portanto é $O(n^2)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para n suficientemente grande faça com que $c1 * n^2$ seja menor do que $7n$.&lt;/p&gt;
+&lt;p&gt;Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a $O(n^2)$, porque $\Theta$ limita também superiormente como $O$.Contudo, nem toda função que pertence a $O(n^2)$, por exemplo, também pertence a $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$, portanto é $O(n^2)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para n suficientemente grande faça com que $c1 * n^2$ seja menor do que $7n$.&lt;/p&gt;
 
 &lt;p&gt;Simples, não é? A notação $O$ é bastante utilizada em Computação para discutir a eficiência de algoritmos. E há aqui uma curiosidade. Como discutido no parágrafo anterior, basta escolhermos uma função com $n$ elevado a um expoente maior do que o da função sob análise que conseguimos definir um limite superior para ele. Por exemplo, a função $f(n) = n^2$ é $O(n^2)$, $O(n^3)$, $O(n^4)$, e assim por diante.  Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $O(n^2)$.&lt;/p&gt;
 
@@ -450,6 +450,53 @@ f(n) é menor ou igual ao crescimento de g(n).
 &lt;hr /&gt;
 
 &lt;h1 id=&#34;notação-omega-omega&#34;&gt;Notação Omega ($\Omega$)&lt;/h1&gt;
+
+&lt;p&gt;A notação $\Theta$ define o limite inferior e superior. $O$ define apenas o limite superior. E $\Omega$? Acertou. Apenas o limite inferior. Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $\Omega(g(n))$ se:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $ 0 &lt;= c * g(n) &lt;= f(n), \forall n&gt;=n0$ &lt;/p&gt;
+
+&lt;p&gt;A figura abaixo ilustra essa relação.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;omega.png&#34; alt=&#34;omega&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Omega(n^2)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $ 0 &lt;= c * n^2 &lt;= n^2 + 1, \forall n &gt;= n0$ &lt;/p&gt;
+
+&lt;p&gt;Se escolhermos $c1=1$ e $n0=1$, temos:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $ 1 &lt;= 2$ &lt;/p&gt;
+
+&lt;p&gt;Não é difícil perceber que essa inequação é verdadeira para todo $n0$ maior do que 1.&lt;/p&gt;
+
+&lt;p&gt;Como você pode perceber, toda função que pertence a $\Theta(n^2)$ também pertence a
+$\Omega(n^2)$, porque $\Theta$ limita também inferiormente como $\Omega$. Contudo, nem toda função que pertence a $\Omega(n^2)$ também pertence $\Theta(n^2)$, pois $\Omega(n^2)$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7 * n$ é limitada inferiormente por $n$, portanto é $\Omega(n)$. Contudo, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que para $n$ suficientemente grande faça com que $c1 * n$ seja maior do que $7 * n^2$.&lt;/p&gt;
+
+&lt;p&gt;É simples definir um limite inferior para qualquer função. Basta utilizar o expoente 0. Ou seja, todas as funções são $\Omega(1)$. Mais do que isso, podemos escolher expoentes menores. Por exemplo, a função $f(n) = n^2$ é $\Omega(n)$, $\Omega(log n)$ e $\Omega(1)$. Todavia, faz mais sentido escolhermos uma função com o mesmo expoente, porque a informação é mais precisa. Ou seja, se uma função é quadrática, dizemos que ela é $\Omega(n^2)$.&lt;/p&gt;
+
+&lt;p&gt;Em termos mais simplistas estamos dizendo que o crescimento de $f(n)$ é maior ou igual ao crescimento de $g(n)$.&lt;/p&gt;
+
+&lt;p&gt;As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;o (o minúsculo).&lt;/strong&gt; Apenas deixo aqui registrado que $o$ (o minúsculo) é muito semelhante à $O$,removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $0&lt;=f(n)&lt; c*g(n)$, \foralln&gt;=n0$ &lt;/p&gt;
+
+&lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^2 + 3$ é $o(n^2)$. $f(n) = n^2 + 3$ é $o(n^3)$, $o(n^4)$, $o(n^5)$ etc.&lt;/p&gt;
+
+&lt;p&gt;Por outro lado $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; $0 &lt;= c*g(n) &lt; f(n), n&gt;=n0$ &lt;/p&gt;
+
+&lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(log n)$ etc.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Este material foi inspirado nos Capítulos 3 e 4 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
 </description>
        </item>
        
