@@ -1,0 +1,24 @@
+baseurl = "https://joaoarthurbm.github.io/eda-ufcg-material"
+title = "Estrutura de Dados"
+copyright = "Copyright &copy; 2019 - João Arthur Brunet"
+canonifyurls = true
+theme = "kiera"
+themesDir = "themes"
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
+[author]
+    name = "João Arthur Brunet"
+    github = "joaoarthurbm/eda-ufcg"
+    gitlab = ""
+    linkedin = ""
+    facebook = ""
+    twitter = "joaobrunet"
+    instagram = "joaoarthurbm"
+
+[params]
+    tagline = "João Arthur Brunet - Computação @ UFCG"
