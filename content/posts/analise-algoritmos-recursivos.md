@@ -1,6 +1,6 @@
 +++
 title = "Análise de Algoritmos Recursivos"
-date = 2019-09-29
+date = 2019-10-28
 tags = []
 categories = []
 +++

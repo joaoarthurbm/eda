@@ -1,6 +1,6 @@
 +++
 title = "Introdução à Análise de Algoritmos"
-date = 2019-10-01
+date = 2019-10-30
 tags = []
 categories = []
 +++

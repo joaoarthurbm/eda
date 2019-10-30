@@ -1,6 +1,6 @@
 +++
 title = "Ordenação Linear"
-date = 2019-10-01
+date = 2019-10-27
 tags = []
 categories = []
 +++
