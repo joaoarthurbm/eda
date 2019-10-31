@@ -1,0 +1,370 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estrutura de Dados</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.59.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estrutura de Dados</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="https://github.com/joaoarthurbm/eda"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet - Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/about/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+
+    <main>
+
+
+
+
+<article>
+
+    <h1>Listas Baseadas em Arrays (ArrayList)</h1>
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-26T00:00:00-03:00">Oct 26, 2019</time>
+        </li>
+        
+
+        
+
+        <li>10 minutes read</li>
+    </ul>
+</aside>
+
+    
+
+    
+
+<hr />
+
+<p>Array é a primeira estrutura de dados que abordamos na disciplina. Há razões para essa escolha. Em primeiro lugar, arrays estão presentes na biblioteca padrão de grande parte das linguagens de programação. Além disso, também são estruturas simples e eficientes. Por último, outras estruturas mais complexas baseiam sua implementação em arrays, como é o caso de ArrayList, assunto deste material.</p>
+
+<p>Antes de partirmos para os detalhes de ArrayList, vamos destacar algumas desvantagens na manipulação de arrays que nos motivam a construir ArrayList. Todas essas desvantagens compartilham um incômodo comum: o programador deve ser responsável por diversas verificações e operações adicionais para manter a consistência do array. Vejamos:</p>
+
+<p><strong>O array possui tamanho fixo.</strong> Caso seja preciso armazenar mais elementos, é preciso criar um outro e transferir os elementos do array original para esse novo array. Isso não é algo que o programador queira se preocupar sempre. Por isso é preciso que isso seja feito de forma transparente para quem deseja usar uma estrutura de dados que cresce &ldquo;dinamicamente&rdquo;. O tamanho fixo também implica dizer que nem sempre a quantidade de elementos presentes no array é igual a sua capacidade. Por isso, o programador também tem que controlar quantas posições estão, de fato, sendo utilizadas.</p>
+
+<p><strong>Não é possível remover uma posição do array.</strong> O que fazemos, normalmente, é atribuir aquela posição para null. Contudo, isso cria um &ldquo;buraco&rdquo; no array. O programador deve decidir se afasta todos os outros objetos para a esquerda ou se convive com aquele &ldquo;buraco&rdquo;. Conviver nesse contexto significa espalhar pelo código verificações como <code>if alunos[i] != null</code>. Novamente, idealmente o programador não precisaria se preocupar com isso. Isso deveria ser transparente para quem está usando uma estrutura de dados.</p>
+
+<p>Então, em resumo, como já vimos no passado, array é uma estrutura eficiente da qual queremos tirar proveito, mas muitas das preocupações que estão incluídas no seu uso podem ser transparentes para o programador. Essa é a proposta da classe ArrayList: fornecer uma API com operações de uma lista, mas esconder detalhes como remanejamento de elementos na remoção, aumento da capacidade da estrutura na adição de elementos, entre outras tarefas.</p>
+
+<hr />
+
+<h1 id="arraylist">ArrayList</h1>
+
+<p>Para fins didáticos, neste material vamos construir uma lista baseada em arrays que armazena objetos do tipo Aluno. O objeto do tipo Aluno possui dois atributos: matrícula e nome. A partir de agora, instâncias desse tipo serão representadas pela notação (matrícula, nome), por exemplo, (123, &ldquo;Cartola&rdquo;).</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">class</span> Aluno {
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Integer</span> matricula;
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">String</span> nome;
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Integer</span> getMatricula() {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">matricula</span>;
+    }
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">String</span> getNome() {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">nome</span>;
+    }
+...
+}</code></pre></div>
+<h2 id="organização-interna-atributos-constantes-e-construtores">Organização interna: atributos, constantes e construtores</h2>
+
+<p>Vamos lá.  Em primeiro lugar, vamos dar uma olhada na definição da classe, seus atributos e construtores:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">class</span> ArrayList {
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span>[] lista;
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">static</span> <span style="color:#66d9ef">final</span> <span style="color:#a6e22e">int</span> CAPACIDADE_DEFAULT <span style="color:#f92672">=</span> 20;
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> tamanho;
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ArrayList</span>() {
+        <span style="color:#66d9ef">this</span>(CAPACIDADE_DEFAULT);
+    }
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ArrayList</span>(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">capacidade</span>) {
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span>[capacidade];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">=</span> 0;
+    }
+
+           ...
+
+}</code></pre></div>
+<p>Um objeto do tipo ArrayList possui dois atributos: o array <strong><em>lista</em></strong>, que armazena os objetos e o inteiro <em>tamanho</em>, que representa a quantidade de elementos presente na lista. A classe ArrayList possui também uma constante <strong><em>CAPACIDADE_DEFAULT</em></strong> que define em 20 a capacidade inicial da lista, caso o programador não queira redefini-la. Por fim, dois construtores são definidos: um padrão, caso o programador não queira redefinir o tamanho inicial da lista e um recebendo como parâmetro a capacidade desejada.</p>
+
+<h2 id="operações-básicas-inserção-remoção-e-busca">Operações básicas: inserção, remoção e busca.</h2>
+
+<h3 id="inserção">Inserção</h3>
+
+<p>Há três formas de se inserir um elemento em uma ArrayList:</p>
+
+<ol>
+<li><code>boolean add(Aluno aluno)</code></li>
+<li><code>void add(int index, Aluno aluno)</code></li>
+<li><code>void set(int index, Aluno aluno)</code></li>
+</ol>
+
+<p>Todas, naturalmente, recebem como parâmetro o elemento a ser adicionado. A primeira não requer um índice específico e, por isso, assume que a inserção do novo elemento deve ser feita no fim da lista, isto é, na próxima posição livre do array. As outras duas formas requerem o índice <strong><em>index</em></strong> em que a operação deve ser realizada. A diferença entre essas duas últimas é que uma inclui o novo elemento na posição <strong><em>index</em></strong> e desloca os elementos à frente uma posição para a direita, enquanto a outra altera o valor da posição <strong><em>index</em></strong>.</p>
+
+<p>Há uma preocupação interna para os métodos 1 e 2. Para ambos, é preciso checar se o array já não está completamente preenchido. Caso isso seja verdade, precisamos criar um novo array, adicionar todos os elementos do array original nesse novo array e aí sim inserir o novo elemento. Estamos chamando essa rotina de <strong><em>resize</em></strong>.</p>
+
+<p>Para o método 2 precisamos também deslocar os elementos a frente da posição <strong><em>index</em></strong> para a direita (<strong><em>shiftParaDireita()</em></strong>) para então incluir o elemento na posição <strong><em>index</em></strong>.</p>
+
+<p>Por fim, as estratégias 2 e 3 precisam verificar se o índice a ser alterado é válido ou não, isto é, se está dentro dos limites da lista.</p>
+
+<p>Vamos ao código.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> add(Aluno <span style="color:#a6e22e">aluno</span>) {
+        assegureCapacidade(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">+</span> 1);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span><span style="color:#f92672">++</span>] <span style="color:#f92672">=</span> aluno;
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+    }
+    
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> add(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>, Aluno <span style="color:#a6e22e">aluno</span>) {
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>)
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+        
+        assegureCapacidade(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">+</span> 1);
+        
+        shiftParaDireita(index);
+        
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[index] <span style="color:#f92672">=</span> aluno;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">+=</span> 1;
+        
+    }
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> set(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>, Aluno <span style="color:#a6e22e">aluno</span>) {
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>)
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[index] <span style="color:#f92672">=</span> aluno;
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">void</span> shiftParaDireita(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1) 
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+        
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>; i <span style="color:#f92672">&gt;</span> index; i<span style="color:#f92672">--</span>) {
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i<span style="color:#f92672">-</span>1];
+        }
+    }
+...</code></pre></div>
+<p>Estamos tentando seguir o padrão da API de Java para a assinatura dos métodos. Por isso o primeiro método retorna um booleano para indicar se a adição foi feita ou não. Pode parecer estranho porque o retorno é sempre <strong><em>true</em></strong>, mas isso faz sentido porque essa assinatura é herdada do contrato da interface <strong><em>List</em></strong>.</p>
+
+<p>É importante discutir a chamada ao método <strong><em>assegureCapacidade(int capacidadePretendida)</em></strong>. Por ser baseada em array, uma <strong><em>ArrayList</em></strong> é limitada ao tamanho do array definido inicialmente. Caso queira crescer dinamicamente, é preciso checar se há a capacidade pretendida e, se não houver, realizar o resize. Isto é, criar um novo array e transferir os elementos do array inicial para o novo. Ambos os métodos são privados, pois a ideia é que essas preocupações sejam internas e transparentes ao usuário de uma <strong><em>ArrayList</em></strong>. Vamos ver como isso é feito:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">void</span> assegureCapacidade(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">capacidadePretendida</span>) {    
+        <span style="color:#66d9ef">if</span> (capacidadePretendida <span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>.<span style="color:#a6e22e">length</span>)
+            resize(Math.<span style="color:#a6e22e">max</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">*</span> 2, capacidadePretendida));
+    }
+        
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">void</span> resize(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">novaCapacidade</span>) {
+        Aluno[] <span style="color:#a6e22e">novaLista</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Aluno[novaCapacidade];
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>.<span style="color:#a6e22e">length</span>; i<span style="color:#f92672">++</span>)
+            novaLista[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span> <span style="color:#f92672">=</span> novaLista;
+    }
+...</code></pre></div>
+<p><strong>assegureCapacidade.</strong> Este método verifica se a nova capacidade pretendida é atendida pelo tamanho atual da lista. Caso não seja, o método invoca <strong><em>resize</em></strong> para criar uma nova lista cujo tamanho o máximo entre o dobro da lista original ou a capacidade nova pretendida. Esse cálculo do máximo entre os dois é feito porque queremos evitar realizar muitos <strong><em>resize</em></strong> e, por isso, fazemos um <strong><em>resize</em></strong> de no mínimo o dobro do tamanho original.</p>
+
+<p><strong>resize.</strong> Este método cria um novo array e transfere os elementos do array original para ele.</p>
+
+<p>A <strong>análise de desempenho</strong> dessas operações precisa levar em consideração dois fatores: o <strong><em>resize</em></strong> e o <strong><em>shiftParaADireita()</em></strong>.</p>
+
+<p>Não podemos afirmar que o método <strong><em>add(Aluno aluno)</em></strong> é executado em tempo constante, mesmo que grande parte das vezes isso seja verdade. Por exemplo, para uma lista de tamanho original 20, as 20 primeiras adições são executadas em tempo constante, mas a 21 primeira precisa executar o <strong><em>resize</em></strong>, que é realizado em $O(n)$, pois envolve iterar por todo o array antigo e transferir os elementos para o novo array. Contudo, também não podemos dizer que o método <strong><em>add(Aluno aluno)</em></strong> é $O(n)$, pois o <strong><em>resize</em></strong> é executado apenas quando o limite é alcançado. Nesse caso, dizemos a operação é $O(1)$ amortizado, ou seja, o custo para adicionar $n$ elementos na lista é $O(n)$.</p>
+
+<p>Para a análise do método <strong><em>add(int index, Aluno aluno)</em></strong> temos que levar em consideração que o <strong><em>shiftParaADireita</em></strong> no pior caso é $O(n)$. Esse pior caso se manifesta quando queremos adicionar um elemento no índice 0 da lista. Assim, teríamos que iterar sobre todo o array deslocando os elementos para frente.</p>
+
+<h3 id="remoção">Remoção</h3>
+
+<p>Há duas formas de se remover um elemento em uma <strong><em>ArrayList</em></strong>: pelo índice e pelo valor.</p>
+
+<ol>
+<li>remove(int index)</li>
+<li>remove(Aluno aluno)</li>
+</ol>
+
+<p>Ambos precisam rearranjar os elementos para não deixar &ldquo;buracos&rdquo; na lista. Chamamos essa rotina de <strong><em>shiftParaEsquerda</em></strong>. A diferença é que o método 2 precisa procurar o elemento antes de realizar o <em>shift</em>. Veja o exemplo abaixo para entender o porquê de termos que afastar para a esquerda todos os elementos à frente do removido.</p>
+
+<p>$lista = [9, 2, 1, 8, 24, 3, -7]$, com tamanho = 7.</p>
+
+<p>Se quisermos remover o elemento no índice 2, precisamos afastar para a esquerda os elementos à frente e atualizar, naturalmente, a variável <strong><em>tamanho</em></strong>. Após a execução do método <strong><em>remove(2)</em></strong>, temos a lista nas seguintes condições:</p>
+
+<p>$lista = [9, 2, 8, 24, 3, -7, -7]$, com $tamanho = 6$, isto é, a última posição (6) passa a estar livre para uma nova adição, caso seja preciso. Perceba que os índices 0 e 1 ficaram inalterados e, a partir disso, o índice $i$ passou a receber o valor em $i+1$. Note também que o último índice fica com o valor anterior, mas ele não faz parte da lista, pois os limites são 0 e $tamanho - 1$. Vamos ao código.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...           
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> remove(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>)
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
+        
+        Aluno <span style="color:#a6e22e">aluno</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">get</span>(index);
+        
+        shiftParaEsquerda(index);
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">-=</span> 1;
+        <span style="color:#66d9ef">return</span> aluno;
+    }
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> remove(Aluno <span style="color:#a6e22e">aluno</span>) {
+        <span style="color:#66d9ef">if</span> (aluno <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+        
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>; i<span style="color:#f92672">++</span>) {
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i].<span style="color:#a6e22e">equals</span>(aluno)) {
+                <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">remove</span>(i);
+                <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
+            }
+        }
+        
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+    }
+
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">void</span> shiftParaEsquerda(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> index; i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">-</span> 1; i<span style="color:#f92672">++</span>) {
+            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i<span style="color:#f92672">+</span>1];
+        }
+    }
+...</code></pre></div>
+<p>Novamente, a preocupação em rearranjar os elementos é exclusiva de quem desenvolveu a lista, não de quem está usando-a.</p>
+
+<p>Como a remoção envolve realocar todos os elementos à frente do removido para a esquerda, a operação, no pior caso, é $O(n)$. Esse pior caso se manifesta quando queremos remover o primeiro elemento da lista.</p>
+
+<h3 id="busca">Busca</h3>
+
+<p>De um modo geral, podemos dizer que há 3 cenários de busca: i) quando queremos acessar o elemento em um determinado índice; ii) quando queremos encontrar o índice em que um elemento está e iii) quando queremos verificar a presença de um elemento na lista. Essas aspirações podem ser satisfeitas pelos seguintes métodos:</p>
+
+<p>Aluno get(int index)
+int indexOf(Aluno aluno)
+boolean contains(Aluno aluno)</p>
+
+<p>O método 1 é executado em tempo constante O(1), pois o índice é fornecido como parâmetro. A única preocupação é verificar se o índice é válido ou não.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> get(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
+        <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tamanho</span>)
+            <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[index];
+    }
+...</code></pre></div>
+<p>Os outros dois métodos são instâncias de busca linear $(O(n))$, pois devem iterar sobre a lista procurando pelo objeto passado como parâmetro.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...            
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">int</span> indexOf(Aluno <span style="color:#a6e22e">aluno</span>) {
+        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> tamanho; i<span style="color:#f92672">++</span>)
+            <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">lista</span>[i].<span style="color:#a6e22e">equals</span>(aluno))
+                <span style="color:#66d9ef">return</span> i;
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+    }
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> contains(Aluno <span style="color:#a6e22e">aluno</span>) {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">indexOf</span>(aluno) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1;
+    }
+...</code></pre></div>
+<p>O método <strong><em>indexOf</em></strong> itera sobre a lista procurando um elemento igual ao passado como parâmetro. Se encontrar, retorna o índice desse elemento. Ou seja, se houver mais de uma ocorrência do valor procurado, o índice da primeira ocorrência é retornado. Caso contrário, retorna -1.</p>
+
+<p>O método <strong><em>contains</em></strong> utiliza a rotina efetuada pelo método <strong><em>indexOf</em></strong>. Caso o índice retornado seja igual a -1, retorna <em>false</em>. Caso contrário, retorna <em>true</em>.</p>
+
+<hr />
+
+<h1 id="notas">Notas</h1>
+
+<p>Por motivos de simplificação, a classe <strong><em>ArrayList</em></strong> que implementamos neste material implementa uma lista baseada em arrays para manipular objetos do tipo <strong><em>Aluno</em></strong>. Naturalmente, por ser de propósito geral, a implementação de Java de <strong><em>ArrayList</em></strong> permite o armazenamento e manipulação de qualquer objeto.</p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/linkedlist/"><i class="fa fa-chevron-circle-left"></i> Listas Ligadas (LinkedList)</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Ordenação Linear <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+        <h6>Copyright &copy; 2019 - João Arthur Brunet |
+            Rendered by <a href="https://gohugo.io" title="Hugo">Hugo</a> |
+            <a href="https://joaoarthurbm.github.io/edaindex.xml">Subscribe</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
