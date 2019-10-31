@@ -6,14 +6,15 @@ weight = "20"
 meta = "false"
 +++
 
-* Análise de Algoritmos
-    * [Introdução à análise](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/)
-    * [Análise assintótica](http://joaoarthurbm.gihub.io/eda/posts/analise-assintotica/)
-    * [Análise de Algoritmos recursivos](http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos)
+### Análise de Algoritmos
 
-* Ordenação
-    * [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear)
+* [Introdução à análise](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/)
+* [Análise assintótica](http://joaoarthurbm.gihub.io/eda/posts/analise-assintotica/)
+* [Análise de Algoritmos recursivos](http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos)
 
-* Estruturas de Dados Lineares
-    * [Listas baseadas em Arrays (ArrayList)](http://joaoarthurbm.github.io/eda/posts/arraylist)
-    * [Listas Ligadas (LinkedList)](http://joaoarthurbm.github.io/eda/posts/linkedlist)
+### Ordenação
+* [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear)
+
+### Estruturas de Dados Lineares
+* [Listas baseadas em Arrays (ArrayList)](http://joaoarthurbm.github.io/eda/posts/arraylist)
+* [Listas Ligadas (LinkedList)](http://joaoarthurbm.github.io/eda/posts/linkedlist)
