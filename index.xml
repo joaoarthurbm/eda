@@ -17,27 +17,27 @@
          <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
          
          <guid>https://joaoarthurbm.github.io/eda/about/</guid>
-         <description>&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Análise de Algoritmos&lt;/p&gt;
+         <description>
+
+&lt;h3 id=&#34;análise-de-algoritmos&#34;&gt;Análise de Algoritmos&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;Introdução à análise&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.gihub.io/eda/posts/analise-assintotica/&#34;&gt;Análise assintótica&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos&#34;&gt;Análise de Algoritmos recursivos&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;li&gt;&lt;p&gt;Ordenação&lt;/p&gt;
+&lt;h3 id=&#34;ordenação&#34;&gt;Ordenação&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/ordenacao-linear&#34;&gt;Ordenação Linear (Counting Sort)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;li&gt;&lt;p&gt;Estruturas de Dados Lineares&lt;/p&gt;
+&lt;h3 id=&#34;estruturas-de-dados-lineares&#34;&gt;Estruturas de Dados Lineares&lt;/h3&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/arraylist&#34;&gt;Listas baseadas em Arrays (ArrayList)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/linkedlist&#34;&gt;Listas Ligadas (LinkedList)&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
        </item>
