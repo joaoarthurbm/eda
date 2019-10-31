@@ -13,3 +13,7 @@ meta = "false"
 
 * Ordenação
     * [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear)
+
+* Estruturas de Dados Lineares
+    * [Listas baseadas em Arrays (ArrayList)](http://joaoarthurbm.github.io/eda/posts/arraylist)
+    * [Listas Ligadas (LinkedList)](http://joaoarthurbm.github.io/eda/posts/linkedlist)
