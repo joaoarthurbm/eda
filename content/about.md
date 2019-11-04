@@ -18,3 +18,4 @@ meta = "false"
 ### Estruturas de Dados Lineares
 * [Listas baseadas em Arrays (ArrayList)](http://joaoarthurbm.github.io/eda/posts/arraylist)
 * [Listas Ligadas (LinkedList)](http://joaoarthurbm.github.io/eda/posts/linkedlist)
+* [Tabelas Hash](http://joaoarthurbm.github.io/eda/posts/hashtable)
