@@ -27,7 +27,7 @@
         {{ end }} {{ if .Site.Author.linkedin }}
         <li><a href="https://www.linkedin.com/in/{{ .Site.Author.linkedin }}"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
         {{ end }} {{ if .Site.Author.github }}
-        <li><a href="https://github.com/{{ .Site.Author.github }}"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+        <li><a href="{{ .Site.Author.github }}"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
         {{ end }} {{ if .Site.Author.gitlab }}
         <li><a href="https://gitlab.com/{{ .Site.Author.gitlab }}"><i class="fab fa-gitlab fa-lg" aria-hidden="true"></i></a></li>
         {{ end }} {{ if .Site.Author.facebook }}
@@ -37,7 +37,7 @@
         {{ end }}
       </ul>
       {{ with .Site.Params.tagline }}
-      <p><em><a href="http://joaoarthurbm.github.io"> {{ . | markdownify }}  </a> </em></p>
+      <p><em>{{ . | markdownify }}</em></p>
       {{ end }}
     </header>
 
