@@ -1,0 +1,24 @@
+baseurl = "https://www.example.org/"
+title = "Kiera"
+copyright = "Copyright &copy; 2019 - Author Name"
+canonifyurls = true
+theme = "hugo-kiera"
+themesDir = "../.."
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
+[author]
+    name = ""
+    github = "funkydan2"
+    gitlab = ""
+    linkedin = ""
+    facebook = ""
+    twitter = "ds_says"
+    instagram = ""
+
+[params]
+    tagline = "A Hugo theme for creative and technical writing"
