@@ -362,6 +362,25 @@ public Node predecessor(Node node) {
 }
 ```
 
+### Altura
+
+Como dito anteriormente, a altura é o maior caminho entre a raiz e todas as folhas.
+A implementação é bem simples. Basta somar 1 cada vez que um novo nó é visitado e calcular
+de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da sub-árvore à direita. Lembrando que a altura de uma árvore cuja raiz é nula é -1.
+
+```java
+...
+    public int height() {
+        return height(this.root);
+    }
+    
+    private int height(Node node) {
+        if(node == null) return -1;
+        else return 1 + Math.max(height(node.left), height(node.right));
+    }
+...
+```
+
 ### Remoção
 
 A remoção em uma árvore binária de pesquisa possui três casos a serem analisados. 
