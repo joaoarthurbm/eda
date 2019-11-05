@@ -96,7 +96,7 @@
 
         
 
-        <li>22 minutes read</li>
+        <li>23 minutes read</li>
     </ul>
 </aside>
 
@@ -433,6 +433,21 @@ Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa s
         <span style="color:#66d9ef">return</span> aux;
     }
 }</code></pre></div>
+<h3 id="altura-1">Altura</h3>
+
+<p>Como dito anteriormente, a altura é o maior caminho entre a raiz e todas as folhas.
+A implementação é bem simples. Basta somar 1 cada vez que um novo nó é visitado e calcular
+de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da sub-árvore à direita. Lembrando que a altura de uma árvore cuja raiz é nula é -1.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">int</span> height() {
+        <span style="color:#66d9ef">return</span> height(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">root</span>);
+    }
+    
+    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> height(Node <span style="color:#a6e22e">node</span>) {
+        <span style="color:#66d9ef">if</span>(node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
+        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> Math.<span style="color:#a6e22e">max</span>(height(node.<span style="color:#a6e22e">left</span>), height(node.<span style="color:#a6e22e">right</span>));
+    }
+...</code></pre></div>
 <h3 id="remoção">Remoção</h3>
 
 <p>A remoção em uma árvore binária de pesquisa possui três casos a serem analisados.</p>

@@ -2603,6 +2603,21 @@ Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa s
         &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; aux;
     }
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;altura-1&#34;&gt;Altura&lt;/h3&gt;
+
+&lt;p&gt;Como dito anteriormente, a altura é o maior caminho entre a raiz e todas as folhas.
+A implementação é bem simples. Basta somar 1 cada vez que um novo nó é visitado e calcular
+de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da sub-árvore à direita. Lembrando que a altura de uma árvore cuja raiz é nula é -1.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; height() {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; height(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;root&lt;/span&gt;);
+    }
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; height(Node &lt;span style=&#34;color:#a6e22e&#34;&gt;node&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt;(node &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; Math.&lt;span style=&#34;color:#a6e22e&#34;&gt;max&lt;/span&gt;(height(node.&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;), height(node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;));
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3 id=&#34;remoção&#34;&gt;Remoção&lt;/h3&gt;
 
 &lt;p&gt;A remoção em uma árvore binária de pesquisa possui três casos a serem analisados.&lt;/p&gt;
