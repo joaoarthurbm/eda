@@ -3,6 +3,7 @@ title = "Árvores Binárias de Pesquisa"
 date = 2019-10-23
 tags = []
 categories = []
+github = "https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/bst"
 +++
 
 ***
@@ -518,7 +519,7 @@ private void inOrder(Node node) {
 
 ![percorrendo](percorrendo.png)
 
-Para a árvore acima, temos como resultado o seguinte percurso: 11 -> 8 -> 26 -> 43 -> 22 -> 74 -> 69 -> 81 -> 96 -> 85 -> 52. Note que o resultado do caminho em-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.
+Para a árvore acima, temos como resultado o seguinte percurso: 11 -> 8 -> 26 -> 43 -> 22 -> 74 -> 69 -> 81 -> 96 -> 85 -> 52. Note que o resultado do caminho pós-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.
 
 Como isso foi feito? Aplicando o mantra "esquerda, direita, nó" para cada nó visitado. Inicialmente escolhemos a raíz. Note que só vamos imprimir a raiz depois de visitar todos os nós à sua esquerda e todos os nós à sua direita. Isso é verdade para cada nó visitado. Por isso, caminhamos o máximo à esquerda e depois o máximo à direita. O primeiro elemento a ser impresso é 11. Depois disso 8, 26, 43, 22...
 

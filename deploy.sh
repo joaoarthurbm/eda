@@ -1,3 +1,4 @@
+rm -rf public/*
 hugo -t kiera
 cd public
 git add --all
