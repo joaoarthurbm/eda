@@ -2280,8 +2280,6 @@ A biblioteca padrão de Java utiliza 0.75 como fator de carga. Esse número foi 
          <guid>https://joaoarthurbm.github.io/eda/posts/bst/</guid>
          <description>
 
-&lt;p&gt;&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/bst&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Código utilizado neste material&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;&lt;/p&gt;
-
 &lt;hr /&gt;
 
 &lt;h1 id=&#34;definições-e-propriedades&#34;&gt;Definições e Propriedades&lt;/h1&gt;
