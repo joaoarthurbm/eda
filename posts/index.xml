@@ -1127,6 +1127,8 @@ $T(n) = (n + k)$.&lt;/p&gt;
          <guid>https://joaoarthurbm.github.io/eda/posts/arraylist/</guid>
          <description>
 
+&lt;p&gt;&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/arraylist&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Código utilizado nesta aula&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;&lt;/p&gt;
+
 &lt;hr /&gt;
 
 &lt;p&gt;Array é a primeira estrutura de dados que abordamos na disciplina. Há razões para essa escolha. Em primeiro lugar, arrays estão presentes na biblioteca padrão de grande parte das linguagens de programação. Além disso, também são estruturas simples e eficientes. Por último, outras estruturas mais complexas baseiam sua implementação em arrays, como é o caso de ArrayList, assunto deste material.&lt;/p&gt;
@@ -1364,6 +1366,8 @@ boolean contains(Aluno aluno)&lt;/p&gt;
          
          <guid>https://joaoarthurbm.github.io/eda/posts/linkedlist/</guid>
          <description>
+
+&lt;p&gt;&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/linkedlist&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Código utilizado neste material&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -1779,6 +1783,8 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
          
          <guid>https://joaoarthurbm.github.io/eda/posts/hashtable/</guid>
          <description>
+
+&lt;p&gt;&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Código utilizado neste material&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2273,6 +2279,8 @@ A biblioteca padrão de Java utiliza 0.75 como fator de carga. Esse número foi 
          
          <guid>https://joaoarthurbm.github.io/eda/posts/bst/</guid>
          <description>
+
+&lt;p&gt;&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/bst&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Código utilizado neste material&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;&lt;/p&gt;
 
 &lt;hr /&gt;
 
