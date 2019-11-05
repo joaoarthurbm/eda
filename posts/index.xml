@@ -333,7 +333,7 @@ Operações Primitivas
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;strong&gt;O Problema.&lt;/strong&gt; No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório de análise de algoritmos&lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
+&lt;p&gt;No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório de análise de algoritmos&lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ &lt;/p&gt;
 
@@ -2736,7 +2736,7 @@ de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da su
 
 &lt;p&gt;&lt;img src=&#34;percorrendo.png&#34; alt=&#34;percorrendo&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Para a árvore acima, temos como resultado o seguinte percurso: 11 -&amp;gt; 8 -&amp;gt; 26 -&amp;gt; 43 -&amp;gt; 22 -&amp;gt; 74 -&amp;gt; 69 -&amp;gt; 81 -&amp;gt; 96 -&amp;gt; 85 -&amp;gt; 52. Note que o resultado do caminho em-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.&lt;/p&gt;
+&lt;p&gt;Para a árvore acima, temos como resultado o seguinte percurso: 11 -&amp;gt; 8 -&amp;gt; 26 -&amp;gt; 43 -&amp;gt; 22 -&amp;gt; 74 -&amp;gt; 69 -&amp;gt; 81 -&amp;gt; 96 -&amp;gt; 85 -&amp;gt; 52. Note que o resultado do caminho pós-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.&lt;/p&gt;
 
 &lt;p&gt;Como isso foi feito? Aplicando o mantra &amp;ldquo;esquerda, direita, nó&amp;rdquo; para cada nó visitado. Inicialmente escolhemos a raíz. Note que só vamos imprimir a raiz depois de visitar todos os nós à sua esquerda e todos os nós à sua direita. Isso é verdade para cada nó visitado. Por isso, caminhamos o máximo à esquerda e depois o máximo à direita. O primeiro elemento a ser impresso é 11. Depois disso 8, 26, 43, 22&amp;hellip;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...

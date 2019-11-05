@@ -76,7 +76,6 @@
         
     </ul>
 </nav>
-
     <main>
 
 
@@ -97,10 +96,18 @@
         
 
         <li>23 minutes read</li>
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/bst"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
     </ul>
 </aside>
 
     
+
 
     
 
@@ -566,7 +573,7 @@ de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da su
 
 <p><img src="percorrendo.png" alt="percorrendo" /></p>
 
-<p>Para a árvore acima, temos como resultado o seguinte percurso: 11 -&gt; 8 -&gt; 26 -&gt; 43 -&gt; 22 -&gt; 74 -&gt; 69 -&gt; 81 -&gt; 96 -&gt; 85 -&gt; 52. Note que o resultado do caminho em-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.</p>
+<p>Para a árvore acima, temos como resultado o seguinte percurso: 11 -&gt; 8 -&gt; 26 -&gt; 43 -&gt; 22 -&gt; 74 -&gt; 69 -&gt; 81 -&gt; 96 -&gt; 85 -&gt; 52. Note que o resultado do caminho pós-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.</p>
 
 <p>Como isso foi feito? Aplicando o mantra &ldquo;esquerda, direita, nó&rdquo; para cada nó visitado. Inicialmente escolhemos a raíz. Note que só vamos imprimir a raiz depois de visitar todos os nós à sua esquerda e todos os nós à sua direita. Isso é verdade para cada nó visitado. Por isso, caminhamos o máximo à esquerda e depois o máximo à direita. O primeiro elemento a ser impresso é 11. Depois disso 8, 26, 43, 22&hellip;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
