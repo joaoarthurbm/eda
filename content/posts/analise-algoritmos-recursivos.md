@@ -183,7 +183,7 @@ O algoritmo de busca binária é um algoritmo clássico de identificação da po
 ```java
 public int indexOf(int[] v, int n, int ini, int fim) {
     if (ini < fim) {    
-        int meio = ini + fim;
+        int meio = (ini + fim) / 2;
 
         if (v[meio] == n) return meio;
 
