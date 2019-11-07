@@ -54,6 +54,38 @@
        </item>
        
        <item>
+         <title>Contribua</title>
+         <link>https://joaoarthurbm.github.io/eda/contribua/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/contribua/</guid>
+         <description>
+
+&lt;h2 id=&#34;melhoria-no-conteúdo-do-material&#34;&gt;Melhoria no conteúdo do material&lt;/h2&gt;
+
+&lt;p&gt;Se você encontrou um erro no material escrito ou algum parágrafo difícil de entender,
+basta fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
+
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório dos materiais.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;melhoria-nas-implementações&#34;&gt;Melhoria nas implementações&lt;/h2&gt;
+
+&lt;p&gt;Melhorias esperadas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bugfix no código das estruturas;&lt;/li&gt;
+&lt;li&gt;Melhoria no código das estruturas;&lt;/li&gt;
+&lt;li&gt;Adição de testes;&lt;/li&gt;
+&lt;li&gt;Documentação do código.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Posts</title>
          <link>https://joaoarthurbm.github.io/eda/posts/</link>
          <pubDate>Wed, 30 Oct 2019 00:00:00 -0300</pubDate>
