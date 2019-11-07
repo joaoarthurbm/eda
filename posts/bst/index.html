@@ -150,7 +150,7 @@ BST é definida recursivamente da seguinte forma:</p>
 }</code></pre></div>
 <p>Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar.</p>
 
-<p>Depois, as referências <strong><em>left</em></strong> e <strong><em>right</em></strong> são muito parecidas com as referências de um <strong><em>Node</em></strong> em <a href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência <strong><em>left</em></strong> aponta é <strong><em>null</em></strong> ou  armazena um <strong>valor menor</strong> do que <strong><em>value</em></strong>, enquanto o nó para o qual a referência <strong><em>right</em></strong> aponta é <strong><em>null</em></strong> ou armazena um <strong>valor maior</strong> do que <strong><em>value</em></strong>. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.</p>
+<p>Depois, as referências <strong><em>left</em></strong> e <strong><em>right</em></strong> são muito parecidas com as referências de um <strong><em>Node</em></strong> em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência <strong><em>left</em></strong> aponta é <strong><em>null</em></strong> ou  armazena um <strong>valor menor</strong> do que <strong><em>value</em></strong>, enquanto o nó para o qual a referência <strong><em>right</em></strong> aponta é <strong><em>null</em></strong> ou armazena um <strong>valor maior</strong> do que <strong><em>value</em></strong>. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.</p>
 
 <p>Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência <strong><em>parent</em></strong> que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos.</p>
 
@@ -206,7 +206,7 @@ BST é definida recursivamente da seguinte forma:</p>
 
 <h1 id="implementação">Implementação</h1>
 
-<p>Assim como <a href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList</a>, a classe <strong><em>BST</em></strong> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
+<p>Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList<a/>, a classe <strong><em>BST</em></strong> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">class</span> BST {
 
     <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Node</span> root;
@@ -716,6 +716,10 @@ Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74</strike>}
 
 <section class="post-nav">
     <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/heap/"><i class="fa fa-chevron-circle-left"></i> Heap</a>
+        </li>
         
         
         <li>

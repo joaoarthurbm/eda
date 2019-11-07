@@ -299,7 +299,7 @@ Operações Primitivas
 
 &lt;p&gt;É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.&lt;/p&gt;
 
-&lt;p&gt;No material sobre &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
+&lt;p&gt;No material sobre &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -333,7 +333,7 @@ Operações Primitivas
 
 &lt;hr /&gt;
 
-&lt;p&gt;No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório de análise de algoritmos&lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
+&lt;p&gt;No &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt; material introdutório de análise de algoritmos &lt;/a&gt; aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:&lt;/p&gt;
 
 &lt;p align=&#34;center&#34;&gt; $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ &lt;/p&gt;
 
@@ -564,7 +564,7 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 
 &lt;p&gt;Este material foi inspirado nos Capítulos 3 e 4 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
 
-&lt;p&gt;Para entender este material é muito importante ler a &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34;&gt;introdução à análise de algoritmos&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Para entender este material é muito importante ler a &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt; introdução à análise de algoritmos &lt;/a&gt;.&lt;/p&gt;
 </description>
        </item>
        
@@ -578,7 +578,7 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;Até aqui vimos como &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34;&gt;analisar algoritmos iterativos&lt;/a&gt;, lembra? Esse processo pode ser resumido pelos seguintes passos:&lt;/p&gt;
+&lt;p&gt;Até aqui vimos como &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise&#34; class=&#34;external&#34;&gt; analisar algoritmos iterativos&lt;/a&gt;, lembra? Esse processo pode ser resumido pelos seguintes passos:&lt;/p&gt;
 
 &lt;ol&gt;
 &lt;li&gt;identificar operações primitivas;&lt;/li&gt;
@@ -1369,7 +1369,7 @@ boolean contains(Aluno aluno)&lt;/p&gt;
 
 &lt;h1 id=&#34;problemas&#34;&gt;Problemas&lt;/h1&gt;
 
-&lt;p&gt;No &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/arraylist&#34;&gt;material sobre ArrayLists&lt;/a&gt; discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.&lt;/p&gt;
+&lt;p&gt;No &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/arraylist&#34;&gt;material sobre ArrayLists&lt;/a&gt; discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.&lt;/p&gt;
 
 &lt;p&gt;O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (&lt;strong&gt;&lt;em&gt;shiftParaADireita&lt;/em&gt;&lt;/strong&gt;) e durante a remoção de um elemento (&lt;strong&gt;&lt;em&gt;shiftParaAEsquerda&lt;/em&gt;&lt;/strong&gt;), ambas com tempo de execução $O(n)$.&lt;/p&gt;
 
@@ -1650,8 +1650,8 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; indexOf(aluno) &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1;
 }
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;strong&gt;Aluno get(int index).&lt;/strong&gt; Este método recupera o aluno presente na posição &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt;. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção
-&lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html&#34;&gt;IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Aluno get(int index).&lt;/strong&gt; Este método recupera o aluno presente na posição &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt;. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção &lt;a class=&#34;external&#34; href=&#34;https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html&#34;&gt;
+IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando &lt;strong&gt;&lt;em&gt;for&lt;/em&gt;&lt;/strong&gt; por se tratar de uma iteração definida. Ao final dessa iteração &lt;strong&gt;&lt;em&gt;aux&lt;/em&gt;&lt;/strong&gt; aponta para o nó na posição &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt;. Assim, retornamos &lt;code&gt;aux.aluno&lt;/code&gt;, que é o objeto desejado.&lt;/p&gt;
 
@@ -1768,7 +1768,7 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
 
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 
-&lt;p&gt;Por motivos de simplificação, a classe &lt;strong&gt;&lt;em&gt;LinkedList&lt;/em&gt;&lt;/strong&gt; que implementamos neste material manipula objetos do tipo &lt;strong&gt;&lt;em&gt;Node&lt;/em&gt;&lt;/strong&gt; que armazenam objetos do tipo &lt;strong&gt;&lt;em&gt;Aluno&lt;/em&gt;&lt;/strong&gt;. Naturalmente, por ser de propósito geral, a implementação de &lt;a href=&#34;https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html&#34;&gt;LinkedList&lt;/a&gt; de Java permite o armazenamento e manipulação de qualquer objeto.&lt;/p&gt;
+&lt;p&gt;Por motivos de simplificação, a classe &lt;strong&gt;&lt;em&gt;LinkedList&lt;/em&gt;&lt;/strong&gt; que implementamos neste material manipula objetos do tipo &lt;strong&gt;&lt;em&gt;Node&lt;/em&gt;&lt;/strong&gt; que armazenam objetos do tipo &lt;strong&gt;&lt;em&gt;Aluno&lt;/em&gt;&lt;/strong&gt;. Naturalmente, por ser de propósito geral, a implementação de &lt;a class=&#34;external&#34; href=&#34;https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html&#34;&gt;LinkedList&lt;/a&gt; de Java permite o armazenamento e manipulação de qualquer objeto.&lt;/p&gt;
 </description>
        </item>
        
@@ -1819,7 +1819,7 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Note que, como há uma correspondência direta entre a matrícula e o índice em que o elemento está, as operações são muito eficientes.&lt;/p&gt;
 
-&lt;p&gt;Chamamos de &lt;strong&gt;Tabela de Acesso Direto&lt;/strong&gt; o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;, lembra?&lt;/p&gt;
+&lt;p&gt;Chamamos de &lt;strong&gt;Tabela de Acesso Direto&lt;/strong&gt; o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt; Counting Sort&lt;/a&gt;, lembra?&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -2132,7 +2132,7 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
 
 &lt;p align=&#34;center&#34;&gt;&lt;b&gt;Por que?&lt;/b&gt;&lt;/p&gt;
 
-&lt;p&gt;Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução &lt;code&gt;tabela[hash] = null&lt;/code&gt;, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &amp;ldquo;flag&amp;rdquo;. No nosso caso, escolhemos um objeto do tipo &lt;strong&gt;&lt;em&gt;Aluno&lt;/em&gt;&lt;/strong&gt; com matrícula &lt;strong&gt;&lt;em&gt;Integer.MIN_VALUE&lt;/em&gt;&lt;/strong&gt; e nome &amp;ldquo;APAGADO&amp;rdquo;. Veja a implementação dessa estratégia no &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash&#34;&gt;código disponível no github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução &lt;code&gt;tabela[hash] = null&lt;/code&gt;, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &amp;ldquo;flag&amp;rdquo;. No nosso caso, escolhemos um objeto do tipo &lt;strong&gt;&lt;em&gt;Aluno&lt;/em&gt;&lt;/strong&gt; com matrícula &lt;strong&gt;&lt;em&gt;Integer.MIN_VALUE&lt;/em&gt;&lt;/strong&gt; e nome &amp;ldquo;APAGADO&amp;rdquo;. Veja a implementação dessa estratégia no &lt;a class=&#34;external&#34; href=&#34;código disponível no github&#34;&gt;código disponível no github&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;Assim, na adição, se o conteúdo do índice for &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou for APAGADO, o índice está livre para ser preenchido.&lt;/p&gt;
 
@@ -2192,7 +2192,7 @@ newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;prev&lt;/span&gt; &lt;span sty
     resize()
 }
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (&lt;strong&gt;&lt;em&gt;rehash&lt;/em&gt;&lt;/strong&gt;). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash&#34;&gt;O código disponibilizado no github&lt;/a&gt; implementa essa rotina.&lt;/p&gt;
+&lt;p&gt;Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (&lt;strong&gt;&lt;em&gt;rehash&lt;/em&gt;&lt;/strong&gt;). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash&#34;&gt;O código disponibilizado no github&lt;/a&gt; implementa essa rotina.&lt;/p&gt;
 
 &lt;p&gt;Como vamos iterar sobre os elementos da tabela, esse é um bom momento para que você conheça os métodos: &lt;strong&gt;&lt;em&gt;keySet()&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;values()&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;entrySet()&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
 
@@ -2542,7 +2542,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar.&lt;/p&gt;
 
-&lt;p&gt;Depois, as referências &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; são muito parecidas com as referências de um &lt;strong&gt;&lt;em&gt;Node&lt;/em&gt;&lt;/strong&gt; em &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/linkedlist/&#34;&gt;Listas Duplamente Encadeadas&lt;/a&gt;, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; aponta é &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou  armazena um &lt;strong&gt;valor menor&lt;/strong&gt; do que &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt;, enquanto o nó para o qual a referência &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; aponta é &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou armazena um &lt;strong&gt;valor maior&lt;/strong&gt; do que &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt;. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.&lt;/p&gt;
+&lt;p&gt;Depois, as referências &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; são muito parecidas com as referências de um &lt;strong&gt;&lt;em&gt;Node&lt;/em&gt;&lt;/strong&gt; em &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/linkedlist/&#34;&gt;Listas Duplamente Encadeadas&lt;/a&gt;, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; aponta é &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou  armazena um &lt;strong&gt;valor menor&lt;/strong&gt; do que &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt;, enquanto o nó para o qual a referência &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; aponta é &lt;strong&gt;&lt;em&gt;null&lt;/em&gt;&lt;/strong&gt; ou armazena um &lt;strong&gt;valor maior&lt;/strong&gt; do que &lt;strong&gt;&lt;em&gt;value&lt;/em&gt;&lt;/strong&gt;. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.&lt;/p&gt;
 
 &lt;p&gt;Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência &lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt; que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos.&lt;/p&gt;
 
@@ -2598,7 +2598,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;h1 id=&#34;implementação&#34;&gt;Implementação&lt;/h1&gt;
 
-&lt;p&gt;Assim como &lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/linkedlist&#34;&gt;LinkedList&lt;/a&gt;, a classe &lt;strong&gt;&lt;em&gt;BST&lt;/em&gt;&lt;/strong&gt; é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:&lt;/p&gt;
+&lt;p&gt;Assim como &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/linkedlist&#34;&gt;LinkedList&lt;a/&gt;, a classe &lt;strong&gt;&lt;em&gt;BST&lt;/em&gt;&lt;/strong&gt; é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt; BST {
 
     &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; root;
@@ -3101,6 +3101,24 @@ Q = {&lt;strike&gt;52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74&lt;/strike&gt;}
 &lt;li id=&#34;fn:As-figuras-desse&#34;&gt; As figuras desse material foram feitas no visualgo.net  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:As-figuras-desse&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Heap</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/heap/</link>
+         <pubDate>Tue, 22 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/heap/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;p&gt;(ainda sob construção)&lt;/p&gt;
+
+&lt;h1 id=&#34;definições-e-propriedades&#34;&gt;Definições e Propriedades&lt;/h1&gt;
+
+&lt;p&gt;Heap são árvores binárias. Importante desde já deixar claro que são ávores binárias, mas não são árvores binárias de pesquisa.&lt;/p&gt;
 </description>
        </item>
        

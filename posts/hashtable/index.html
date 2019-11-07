@@ -155,7 +155,7 @@
 ...</code></pre></div>
 <p>Note que, como há uma correspondência direta entre a matrícula e o índice em que o elemento está, as operações são muito eficientes.</p>
 
-<p>Chamamos de <strong>Tabela de Acesso Direto</strong> o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o <a href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>, lembra?</p>
+<p>Chamamos de <strong>Tabela de Acesso Direto</strong> o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/"> Counting Sort</a>, lembra?</p>
 
 <hr />
 
@@ -468,7 +468,7 @@
 
 <p align="center"><b>Por que?</b></p>
 
-<p>Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato <strong><em>null</em></strong> ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução <code>tabela[hash] = null</code>, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &ldquo;flag&rdquo;. No nosso caso, escolhemos um objeto do tipo <strong><em>Aluno</em></strong> com matrícula <strong><em>Integer.MIN_VALUE</em></strong> e nome &ldquo;APAGADO&rdquo;. Veja a implementação dessa estratégia no <a href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash">código disponível no github</a>.</p>
+<p>Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato <strong><em>null</em></strong> ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução <code>tabela[hash] = null</code>, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &ldquo;flag&rdquo;. No nosso caso, escolhemos um objeto do tipo <strong><em>Aluno</em></strong> com matrícula <strong><em>Integer.MIN_VALUE</em></strong> e nome &ldquo;APAGADO&rdquo;. Veja a implementação dessa estratégia no <a class="external" href="código disponível no github">código disponível no github</a>.</p>
 
 <p>Assim, na adição, se o conteúdo do índice for <strong><em>null</em></strong> ou for APAGADO, o índice está livre para ser preenchido.</p>
 
@@ -528,7 +528,7 @@
     resize()
 }
 ...</code></pre></div>
-<p>Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (<strong><em>rehash</em></strong>). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. <a href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash">O código disponibilizado no github</a> implementa essa rotina.</p>
+<p>Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (<strong><em>rehash</em></strong>). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. <a class="external" href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash">O código disponibilizado no github</a> implementa essa rotina.</p>
 
 <p>Como vamos iterar sobre os elementos da tabela, esse é um bom momento para que você conheça os métodos: <strong><em>keySet()</em></strong>, <strong><em>values()</em></strong> e <strong><em>entrySet()</em></strong>.</p>
 

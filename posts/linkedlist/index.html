@@ -120,7 +120,7 @@
 
 <h1 id="problemas">Problemas</h1>
 
-<p>No <a href="http://joaoarthurbm.github.io/eda/posts/arraylist">material sobre ArrayLists</a> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
+<p>No <a class="external" href="http://joaoarthurbm.github.io/eda/posts/arraylist">material sobre ArrayLists</a> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
 
 <p>O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (<strong><em>shiftParaADireita</em></strong>) e durante a remoção de um elemento (<strong><em>shiftParaAEsquerda</em></strong>), ambas com tempo de execução $O(n)$.</p>
 
@@ -401,8 +401,8 @@ newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</s
     <span style="color:#66d9ef">return</span> indexOf(aluno) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1;
 }
 ...</code></pre></div>
-<p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <strong><em>index</em></strong>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção
-<a href="https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html">IndexOutOfBounds</a>.</p>
+<p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <strong><em>index</em></strong>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html">
+IndexOutOfBounds</a>.</p>
 
 <p>Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando <strong><em>for</em></strong> por se tratar de uma iteração definida. Ao final dessa iteração <strong><em>aux</em></strong> aponta para o nó na posição <strong><em>index</em></strong>. Assim, retornamos <code>aux.aluno</code>, que é o objeto desejado.</p>
 
@@ -519,7 +519,7 @@ newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</s
 
 <h1 id="notas">Notas</h1>
 
-<p>Por motivos de simplificação, a classe <strong><em>LinkedList</em></strong> que implementamos neste material manipula objetos do tipo <strong><em>Node</em></strong> que armazenam objetos do tipo <strong><em>Aluno</em></strong>. Naturalmente, por ser de propósito geral, a implementação de <a href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">LinkedList</a> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
+<p>Por motivos de simplificação, a classe <strong><em>LinkedList</em></strong> que implementamos neste material manipula objetos do tipo <strong><em>Node</em></strong> que armazenam objetos do tipo <strong><em>Aluno</em></strong>. Naturalmente, por ser de propósito geral, a implementação de <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">LinkedList</a> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
 
 
 </article>
