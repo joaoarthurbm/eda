@@ -10,7 +10,7 @@ meta = "false"
 
 Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
 por terceiros porque acredito que os materiais representam a minha narrativa sobre
-o assunto. No entanto, revisões e correções são muito bem vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender, basta fazer um *Pull Request* no markdown do material.
+o assunto. No entanto, revisões e correções são muito bem-vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender, basta fazer um *Pull Request* no markdown do material.
 
 <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda/tree/master/content/posts"> <font color="#1980e6"> <b>Repositório dos materiais.</b></font></a></aside>
 
