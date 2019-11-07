@@ -63,8 +63,9 @@
 
 &lt;h2 id=&#34;melhoria-no-conteúdo-do-material&#34;&gt;Melhoria no conteúdo do material&lt;/h2&gt;
 
-&lt;p&gt;Se você encontrou um erro no material escrito ou algum parágrafo difícil de entender,
-basta fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
+&lt;p&gt;Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
+por terceiros porque acredito que os materiais representam a minha narrativa sobre
+o assunto. No entanto, revisões e correções são muito bem vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender, basta fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
 
 &lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório dos materiais.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
 
@@ -81,7 +82,7 @@ basta fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&
 &lt;li&gt;Documentação do código.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-ufcg/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-implementacoes/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
 </description>
        </item>
        
