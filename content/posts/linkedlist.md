@@ -3,7 +3,7 @@ title = "Listas Ligadas (LinkedList)"
 date = 2019-10-25
 tags = []
 categories = []
-github = "https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/linkedlist"
+github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/linkedlist"
 +++
 
 ***

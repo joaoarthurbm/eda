@@ -8,8 +8,9 @@ meta = "false"
 
 ## Melhoria no conteúdo do material
 
-Se você encontrou um erro no material escrito ou algum parágrafo difícil de entender, 
-basta fazer um *Pull Request* no markdown do material.
+Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
+por terceiros porque acredito que os materiais representam a minha narrativa sobre
+o assunto. No entanto, revisões e correções são muito bem vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender, basta fazer um *Pull Request* no markdown do material.
 
 <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda/tree/master/content/posts"> <font color="#1980e6"> <b>Repositório dos materiais.</b></font></a></aside>
 
@@ -24,4 +25,4 @@ Melhorias esperadas:
 * Adição de testes;
 * Documentação do código.
 
-<aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-ufcg/"> <font color="#1980e6"> <b>Repositório das estruturas implementadas.</b></font></a></aside>
+<aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/"> <font color="#1980e6"> <b>Repositório das estruturas implementadas.</b></font></a></aside>

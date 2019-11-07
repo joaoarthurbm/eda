@@ -3,7 +3,7 @@ title = "Árvores Binárias de Pesquisa"
 date = 2019-10-23
 tags = []
 categories = []
-github = "https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/bst"
+github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/bst"
 +++
 
 ***

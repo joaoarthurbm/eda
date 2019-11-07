@@ -3,7 +3,7 @@ title = "Ordenação Linear"
 date = 2019-10-27
 tags = []
 categories = []
-github = "https://github.com/joaoarthurbm/eda-ufcg/blob/master/java/src/sorting/CountingSort.java"
+github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/CountingSort.java"
 +++
 
 ***
