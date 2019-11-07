@@ -7,7 +7,7 @@ categories = []
 
 ***
 
-Até aqui vimos como [analisar algoritmos iterativos](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise), lembra? Esse processo pode ser resumido pelos seguintes passos:
+Até aqui vimos como <a href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise" class="external"> analisar algoritmos iterativos</a>, lembra? Esse processo pode ser resumido pelos seguintes passos:
 
 1. identificar operações primitivas;
 2. identificar a quantidade de vezes que cada uma dessas primitivas é executada;

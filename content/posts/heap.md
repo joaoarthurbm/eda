@@ -1,6 +1,6 @@
 +++
-title = "Árvores Binárias de Pesquisa"
-date = 2019-10-23
+title = "Heap"
+date = 2019-10-22
 tags = []
 categories = []
 github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/bst"
@@ -10,12 +10,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 # Definições e Propriedades
 
-Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (BST)^[Outras denominações utilizadas são: Árvore de Pesquisa Binária, Árvore Binária de Busca (ABB) e Binary Search Tree (BST). Neste material vou usar a sigla BST devido à sua popularidade.] é uma estrutura de dados de árvore binária baseada em nós, onde a subárvore à esquerda de cada nó possui valores numéricos inferiores ao nó e a subárvore à direita de cada nó possui valores numéricos superiores ao nó. Formalmente, uma 
-BST é definida recursivamente da seguinte forma:
-
-1. $A$ é uma árvore nula;
-
-1. $A$ é uma tripla $(Esq, raiz, Dir)$, onde ***Esq*** e ***Dir*** são árvores binárias de pesquisa e ***Esq*** contém apenas valores menores do que o armazenado na raiz, enquanto ***Dir*** contém apenas valores maiores do que o armazenado na raiz.
+Heap são árvores binárias. Importante desde já deixar claro que são ávores binárias, mas não são árvores binárias de pesquisa.
 
 A Figura abaixo^[ As figuras desse material foram feitas no visualgo.net
 ] ilustra uma árvore com raiz 63.
@@ -43,7 +38,7 @@ class Node {
 
 Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar. 
 
-Depois, as referências ***left*** e ***right*** são muito parecidas com as referências de um ***Node*** em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência ***left*** aponta é ***null*** ou  armazena um **valor menor** do que ***value***, enquanto o nó para o qual a referência ***right*** aponta é ***null*** ou armazena um **valor maior** do que ***value***. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.
+Depois, as referências ***left*** e ***right*** são muito parecidas com as referências de um ***Node*** em [Listas Duplamente Encadeadas](https://joaoarthurbm.github.io/eda/posts/linkedlist/), lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência ***left*** aponta é ***null*** ou  armazena um **valor menor** do que ***value***, enquanto o nó para o qual a referência ***right*** aponta é ***null*** ou armazena um **valor maior** do que ***value***. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.
 
 Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência ***parent*** que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos.
 
@@ -97,7 +92,7 @@ O predecessor de um elemento na árvore é o maior valor menor do que ele. Compl
 
 # Implementação
 
-Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList<a/>, a classe ***BST*** é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:
+Assim como [LinkedList](http://joaoarthurbm.github.io/eda/posts/linkedlist), a classe ***BST*** é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:
 
 ```java
 public class BST {

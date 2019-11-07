@@ -215,6 +215,12 @@ a {
   text-decoration: none;
 }
 
+a.external {
+  color: #1980e6;
+  text-decoration: none;
+
+}
+
 .image, figure img, img {
   width: 100%;
   box-shadow: 0 3px 3px #bbbbbb;

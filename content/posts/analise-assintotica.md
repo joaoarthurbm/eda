@@ -7,7 +7,7 @@ categories = []
 
 ***
 
-No [material introdutório de análise de algoritmos](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/) aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:
+No <a class="external" href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/"> material introdutório de análise de algoritmos </a> aprendemos a definir a função que descreve o custo de execução de algoritmos. Vimos exemplos simples cujas funções são também simples. Contudo, vamos supor que a função que descreve o tempo de execução de um algoritmo é dada por:
 
 <p align="center"> $1.1 * n^2 + (10 + \sin(n + 15) * n^{1.5}) + 9000$ </p>
 
@@ -230,4 +230,4 @@ Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^
 
 Este material foi inspirado nos Capítulos 3 e 4 do livro "Algoritmos: Teoria e Prática" de Cormen et. al.
 
-Para entender este material é muito importante ler a [introdução à análise de algoritmos](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise).
+Para entender este material é muito importante ler a <a class="external" href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/"> introdução à análise de algoritmos </a>.

@@ -10,7 +10,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 # Problemas
 
-No [material sobre ArrayLists](http://joaoarthurbm.github.io/eda/posts/arraylist) discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.
+No <a class="external" href="http://joaoarthurbm.github.io/eda/posts/arraylist">material sobre ArrayLists</a> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.
 
 O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (***shiftParaADireita***) e durante a remoção de um elemento (***shiftParaAEsquerda***), ambas com tempo de execução $O(n)$.
 
@@ -315,8 +315,8 @@ public boolean contains(Aluno aluno) {
 ...
 ```
 
-**Aluno get(int index).** Este método recupera o aluno presente na posição ***index***. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção 
-[IndexOutOfBounds](https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html).
+**Aluno get(int index).** Este método recupera o aluno presente na posição ***index***. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html">
+IndexOutOfBounds</a>.
 
 Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando ***for*** por se tratar de uma iteração definida. Ao final dessa iteração ***aux*** aponta para o nó na posição ***index***. Assim, retornamos `aux.aluno`, que é o objeto desejado.
 
@@ -444,4 +444,4 @@ public boolean remove(Aluno aluno) {
 
 # Notas
 
-Por motivos de simplificação, a classe ***LinkedList*** que implementamos neste material manipula objetos do tipo ***Node*** que armazenam objetos do tipo ***Aluno***. Naturalmente, por ser de propósito geral, a implementação de [LinkedList](https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html) de Java permite o armazenamento e manipulação de qualquer objeto.
+Por motivos de simplificação, a classe ***LinkedList*** que implementamos neste material manipula objetos do tipo ***Node*** que armazenam objetos do tipo ***Aluno***. Naturalmente, por ser de propósito geral, a implementação de <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">LinkedList</a> de Java permite o armazenamento e manipulação de qualquer objeto.

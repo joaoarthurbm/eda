@@ -55,7 +55,7 @@ public static void main(String[] args) {
 ```
 Note que, como há uma correspondência direta entre a matrícula e o índice em que o elemento está, as operações são muito eficientes.
 
-Chamamos de **Tabela de Acesso Direto** o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o [Counting Sort](https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/), lembra?
+Chamamos de **Tabela de Acesso Direto** o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/"> Counting Sort</a>, lembra?
 
 ***
 
@@ -377,7 +377,7 @@ O método ***get*** e o método ***remove*** também precisam usar a sondagem, p
 
 <p align="center"><b>Por que?</b></p>
 
-Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato ***null*** ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução `tabela[hash] = null`, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto "flag". No nosso caso, escolhemos um objeto do tipo ***Aluno*** com matrícula ***Integer.MIN_VALUE*** e nome "APAGADO". Veja a implementação dessa estratégia no [código disponível no github](https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash).
+Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato ***null*** ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução `tabela[hash] = null`, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto "flag". No nosso caso, escolhemos um objeto do tipo ***Aluno*** com matrícula ***Integer.MIN_VALUE*** e nome "APAGADO". Veja a implementação dessa estratégia no <a class="external" href="código disponível no github">código disponível no github</a>.
 
 Assim, na adição, se o conteúdo do índice for ***null*** ou for APAGADO, o índice está livre para ser preenchido. 
 
@@ -436,7 +436,7 @@ if ( (this.size / this.tabela.length) >= this.fatorDeCarga) {
 }
 ...
 ```
-Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (***rehash***). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. [O código disponibilizado no github](https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash) implementa essa rotina.
+Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (***rehash***). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. <a class="external" href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash">O código disponibilizado no github</a> implementa essa rotina.
 
 Como vamos iterar sobre os elementos da tabela, esse é um bom momento para que você conheça os métodos: ***keySet()***, ***values()*** e ***entrySet()***.
 
