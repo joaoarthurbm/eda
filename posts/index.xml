@@ -3104,23 +3104,5 @@ Q = {&lt;strike&gt;52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74&lt;/strike&gt;}
 </description>
        </item>
        
-       <item>
-         <title>Heap</title>
-         <link>https://joaoarthurbm.github.io/eda/posts/heap/</link>
-         <pubDate>Tue, 22 Oct 2019 00:00:00 -0300</pubDate>
-         
-         <guid>https://joaoarthurbm.github.io/eda/posts/heap/</guid>
-         <description>
-
-&lt;hr /&gt;
-
-&lt;p&gt;(ainda sob construção)&lt;/p&gt;
-
-&lt;h1 id=&#34;definições-e-propriedades&#34;&gt;Definições e Propriedades&lt;/h1&gt;
-
-&lt;p&gt;Heap são árvores binárias. Importante desde já deixar claro que são ávores binárias, mas não são árvores binárias de pesquisa.&lt;/p&gt;
-</description>
-       </item>
-       
      </channel>
    </rss>

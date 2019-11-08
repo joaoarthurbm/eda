@@ -65,7 +65,8 @@
 
 &lt;p&gt;Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
 por terceiros porque acredito que os materiais representam a minha narrativa sobre
-o assunto abordado. No entanto, revisões e correções são muito bem-vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender, basta fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
+o assunto abordado. No entanto, revisões e correções são muito bem-vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender,
+basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/eda/issues&#34;&gt;abrir uma issue&lt;/a&gt; ou fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
 
 &lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório dos materiais.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
 
@@ -73,10 +74,11 @@ o assunto abordado. No entanto, revisões e correções são muito bem-vindas. P
 
 &lt;h2 id=&#34;melhoria-nas-implementações&#34;&gt;Melhoria nas implementações&lt;/h2&gt;
 
-&lt;p&gt;Melhorias esperadas:&lt;/p&gt;
+&lt;p&gt;Contribuições esperadas:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Bugfix no código das estruturas;&lt;/li&gt;
+&lt;li&gt;Cadastro de &lt;em&gt;issues&lt;/em&gt; no repositório;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Bugfix&lt;/em&gt; no código das estruturas;&lt;/li&gt;
 &lt;li&gt;Melhoria no código das estruturas;&lt;/li&gt;
 &lt;li&gt;Adição de testes;&lt;/li&gt;
 &lt;li&gt;Documentação do código.&lt;/li&gt;
