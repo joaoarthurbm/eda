@@ -3104,5 +3104,372 @@ Q = {&lt;strike&gt;52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74&lt;/strike&gt;}
 </description>
        </item>
        
+       <item>
+         <title>Heap</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/heap/</link>
+         <pubDate>Tue, 22 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/heap/</guid>
+         <description>
+
+&lt;p&gt;(ainda sob construção&amp;hellip;)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Nem toda fila segue a política de acesso &lt;em&gt;First In First Out&lt;/em&gt; (FIFO). Na verdade, em vários cenários do dia a dia, as filas que entramos possuem uma política diferente: são filas de prioridade. Por exemplo, mesmo que um adolescente chegue antes de um idoso na fila do banco, é provável que o idoso seja atendido primeiro porque ele tem, por lei (e deveria ter por civilidade também), &lt;strong&gt;prioridade&lt;/strong&gt; no atendimento.&lt;/p&gt;
+
+&lt;p&gt;No contexto de estrutura de dados, precisamos pensar em como manter a estrutura ordenada tendo como critério essa prioridade. Então, vamos primeiro analisar alternativas para implementar filas de prioridade usando estruturas de dados lineares, como &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/linkedlist/&#34;&gt;LinkedList&lt;/a&gt; ou &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/arraylist/&#34;&gt;ArrayList&lt;/a&gt;.
+Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada por um atributo inteiro. No nosso exemplo, quanto maior esse número, maior a prioridade. Nesse caso, para implementarmos uma fila de prioridade, temos que tomar uma decisão:  manter a fila ordenada ou não?&lt;/p&gt;
+
+&lt;p&gt;Se decidirmos manter a fila sempre ordenada tendo como critério a prioridade, precisamos utilizar o algoritmo de inserção ordenada, cujo custo é $O(n)$. Contudo, a extração do maior elemento é ${O(1)}$, pois ele sempre está no início da fila.&lt;/p&gt;
+
+&lt;p&gt;Se optarmos por não mater a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.&lt;/p&gt;
+
+&lt;p&gt;Em resumo, temos de um lado adição $O(n)$ e remoção $O(1)$ e do outro lado temos adição $O(1)$ e remoção $O(n)$.&lt;/p&gt;
+
+&lt;p&gt;A estrutura que veremos neste material, &lt;em&gt;Heap&lt;/em&gt;, resolve essa questão permitindo que a adição e extração do máximo sejam ambas realizadas em $O(\log n)$, o que é muito desejável do ponto de vista de eficiência. Além disso, o máximo fica sempre na raiz dessa estrutura, o que permite sua inspeção em $O(1)$.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;definições-e-propriedades&#34;&gt;Definições e Propriedades&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;Heaps&lt;/em&gt; são árvores binárias. É importante deixar claro desde já que são árvores binárias, mas não são árvores binárias de pesquisa. Mais especificamente, duas propriedades definem o Heap:&lt;/p&gt;
+
+&lt;pre&gt;
+1. O valor de um nó é maior ou igual ao valor de seus filhos;
+
+2. O Heap é uma árvore binária completa ou quase-completa 
+da esquerda para a direita.
+&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Propriedade 1.&lt;/strong&gt; A primeira propriedade é a que difere um Heap de uma árvore binária de pesquisa (BST). Na BST, os valores à esquerda de um nó são menores do que ele e os valores à direita são maiores. No Heap, ambos são menores ou iguais. Heaps que seguem essa propriedade são Heaps Máximos porque o maior valor sempre está na raiz. Há também Heaps Mínimos, onde o nó tem valor sempre menor ou igual ao seus filhos. Neste caso, o menor valor sempre está na raiz. Neste material, vamos utilizar o termo Heap como sinônimo de Heap Máximo.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Propriedade 2.&lt;/strong&gt; Se você leu o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;material de árvores binárias de pesquisa&lt;/a&gt;, você já sabe o que quer dizer uma árvore completa, certo? Mas,&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;o que quer dizer &lt;i&gt;quase-completa da esquerda para a direita?&lt;/i&gt;&lt;/p&gt;
+
+&lt;p&gt;Quer dizer que, se ela não for completa, todos os níveis estão preenchidos, exceto o último, que deve estar preenchido da esquerda para a direita até um certo ponto. Vamos ver exemplos de Heaps e Não-Heaps para esclarecer esse conceito.&lt;/p&gt;
+
+&lt;p&gt;Para exemplos de Heaps, vamos analisar a figura abaixo. Perceba que, além de satisfazerem a propriedade 1, todas as estruturas são completas ou quase-completas da esquerda para a direita e, portanto, são Heaps.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heaps.png&#34; alt=&#34;heaps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A primeira estrutura possui 3 níveis:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nível 0: 92&lt;/li&gt;
+&lt;li&gt;Nível 1: 92 e 6&lt;/li&gt;
+&lt;li&gt;Nível 2: 48 e 70&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;O nível 0 e o nível 1 estão completamente preenchidos. O único nível que não está preenchido é o último, mas ele está parcialmente preenchido da esquerda para a direita (46 e 70). Note que não há &amp;ldquo;salto&amp;rdquo; ao percorrer a estrutura em largura. Por isso, essa estrutura é um Heap.&lt;/p&gt;
+
+&lt;p&gt;A segunda estrutura é um Heap porque respeita a primeira propriedade e é uma árvore binária completa.&lt;/p&gt;
+
+&lt;p&gt;A terceira estrutura é um Heap porque respeita a primeira propriedade e é quase-completa da esquerda para a direita. Novamente, todos os níveis exceto o último estão completamente preenchidos e o último nível está parcialmente preenchido da esquerda para a direita:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nível 0: 93&lt;/li&gt;
+&lt;li&gt;Nível 1: 74 e 67&lt;/li&gt;
+&lt;li&gt;Nível 2: 63, 53, 16 e 41&lt;/li&gt;
+&lt;li&gt;Nível 3: 5, 3, 25 e 10 (parcialmente preenchido da esquerda para a direita)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note que, se removessemos o 25 dessa estrutura, ela não seria mais um Heap, pois o último nível não estaria preenchido da esquerda para a direita. Haveria um salto entre 3 e 10.&lt;/p&gt;
+
+&lt;p&gt;Agora, para fixar bem, vamos ver exemplos de estruturas que não são completas ou quase-completas da esquerda para a direita e, portanto, não são Heaps.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;nao-heaps.png&#34; alt=&#34;nao-heaps&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Em primeiro lugar, nenhuma das estruturas acima é completa. Agora precisamos checar se são quase-completas da esquerda para a direita.&lt;/p&gt;
+
+&lt;p&gt;A primeira estrutura não é quase-completa da esquerda para a direita. Veja:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nível 0: 92. Ok. Está todo preenchido.&lt;/li&gt;
+&lt;li&gt;Nível 1: 92. Não está todo preenchido. Por isso não é quase-completa da esquerda para a direita.&lt;/li&gt;
+&lt;li&gt;Nível 2: 48 e 70. Está preenchido da esquerda para a direita, mas o nível anterior não. Por isso não está ok.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;A segunda estrutura também não é. Veja:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nível 0: 42. Ok. Está todo preenchido.&lt;/li&gt;
+&lt;li&gt;Nível 1: 28. Não está preenchido da esquerda para a direita.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Por último, a terceira estrutura também não é quase-coompleta da esquerda para a direita.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Nível 0: 93. Ok. Está todo preenchido.&lt;/li&gt;
+&lt;li&gt;Nível 1: 74 e 67. Ok. Está todo preenchido.&lt;/li&gt;
+&lt;li&gt;Nível 2: Não está todo preenchido da esquerda para a direita. Falta um nó à direita de 74. Por isso não é quase-completa da esquerda para a direita.&lt;/li&gt;
+&lt;li&gt;Nível 3: Está preenchido da esquerda para a direita, mas o nível anterior não. Por isso não está ok.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;e-por-que-ser-completa-ou-quase-completa-é-importante&#34;&gt;E por que ser completa ou quase-completa é importante?&lt;/h3&gt;
+
+&lt;p&gt;Você há de lembrar que boa parte das operações básicas fundamentais em árvores binárias são $\Theta(h)$, onde $h$ é a altura da árvore. Por isso, é preciso manter a altura próxima da altura mínima possível. Em uma árvore binária a altura mínima é $\Theta(\log n)$, certo?&lt;/p&gt;
+
+&lt;p&gt;Por isso a segunda propriedade de Heap é tão importante. Porque uma árvore completa ou quase-completa possui a altura $\Theta(\log n)$.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Por construção, a altura de um Heap é $\Theta(\log n)$, pois é uma estrutura completa ou quase completa da esquerda para a direita. Essa propriedade permite que as operações de inserção e remoção sejam eficientes.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Além disso, você pode estar se perguntando: e por que tem que ser quase-completa da esquerda para a direita? Porque isso facilita a implementação dessa estrutura de dados usando um array.&lt;/p&gt;
+
+&lt;h1 id=&#34;implementação&#34;&gt;Implementação&lt;/h1&gt;
+
+&lt;p&gt;Array? Nós havíamos implementado &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;árvores binárias&lt;/a&gt; utilizando nós, não? Sim, mas quem foi que disse que só tem uma maneira de fazer as coisas? Devido ao fato do Heap ser uma árvore completa ou quase-completa, somos capazes de utilizar um array para representá-lo.&lt;/p&gt;
+
+&lt;h2 id=&#34;como-um-array-pode-representar-um-heap&#34;&gt;Como um array pode representar um Heap?&lt;/h2&gt;
+
+&lt;p&gt;Nós vamos utilizar um array para implementar o Heap. Então, antes precisamos entender como os elementos dispostos em um array podem representar um Heap. Veja o exemplo abaixo:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo-menor.png&#34; alt=&#34;heap-exemplo-menor&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;O array que representa esse Heap é $heap = [48, 24, 45, 14]$. Como? Basta percorrer o Heap em largura e preencher o array. Ou seja, o índice 0 do array sempre será preenchido com a raiz, neste caso o valor 48. Depois, no índice 1, o array é preenchido com o valor 24. O índice 2 recebe o valor 45 e, por último, o índice 3 recebe o valor 14.&lt;/p&gt;
+
+&lt;p&gt;Mais um exemplo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;O array que representa esse Heap é $heap = [88, 87, 73, 47, 54, 6, 0, 43]$. Como? Basta percorrer o Heap em largura e preencher o array. Ou seja, o índice 0 do array será preenchido com o valor 88. Depois, no índice 1, o array é preenchido com o valor 87. O índice 2 recebe o valor 73. Os índices 3 e 4 são preenchidos com os valores 47 e 54, respectivamente. Por último, os índices 5, 6 e 7 são preenchidos com os valores 6, 0 e 43, respectivamente.&lt;/p&gt;
+
+&lt;h2 id=&#34;organização-interna-atributos-e-construtor&#34;&gt;Organização Interna: atributos e construtor&lt;/h2&gt;
+
+&lt;p&gt;Em primeiro lugar, já dissemos que a representação do Heap será através de um array. Como temos que definir o tamanho do array de antemão e não sabemos quantos elementos o Heap irá conter, precisamos também ter um atributo (&lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt;) que controla o índice do último elemento do array. Vejamos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt; Heap {
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt;[] heap;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; tail;
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Heap&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;capacidade&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[capacidade];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1;
+    }
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boolean&lt;/span&gt; isEmpty() {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1;
+    }
+    ...
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Veja que o que define a ocupação do array é o valor do atributo &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt;. O método isEmpty, por exemplo, compara esse valor com -1 para determinar se o Heap possui elementos ou não.&lt;/p&gt;
+
+&lt;h2 id=&#34;left-right-e-parent&#34;&gt;left, right e parent&lt;/h2&gt;
+
+&lt;p&gt;Para caminhar em uma árvore precisamos, a partir de um nó, acessar o nó à esquerda, o nó à direita e o nó pai. Na &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;implementação de árvores binárias de pesquisa&lt;/a&gt; nós utilizamos as referências &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt;. Contudo, como estamos utilizando um array para armazenar os elementos, precisamos implementar métodos que retornem a esquerda, a direita e o pai de um nó, baseado no seu índice.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;. A esquerda de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7&lt;/p&gt;
+
+&lt;p&gt;A raiz está no índice 0 do array. Portanto, o nó à sua esquerda está no índice 1, pois $2*0 + 1 = 1$.&lt;/p&gt;
+
+&lt;p&gt;O nó 87 está no índice 1 do array. Portanto, o nó à sua esquerda está no índice 3, pois $2*1 + 1 = 3$.&lt;/p&gt;
+
+&lt;p&gt;O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 3$.&lt;/p&gt;
+
+&lt;p&gt;O nó 47 está no índice 3 do array. Portanto, o nó à sua esquerda está no índice 7, pois $2*3 + 1 = 7$.&lt;/p&gt;
+
+&lt;p&gt;Os nós 54 (índice 4), 6 (índice 5), 0 (índice 6) e 43 (índice 7) não possuem esquerda, pois se aplicarmos a fórmula $2*index+1$ os valores gerados são índices maiores do que &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt; e, portanto, não fazem parte do Heap.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;. A direita de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7&lt;/p&gt;
+
+&lt;p&gt;A raiz está no índice 0 do array. Portanto, o nó à sua direita está no índice 2, pois $2*(0 + 1) = 2$.&lt;/p&gt;
+
+&lt;p&gt;O nó 87 está no índice 1 do array. Portanto, o nó à sua direita está no índice 4, pois $2*(1 + 1) = 4$.&lt;/p&gt;
+
+&lt;p&gt;O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 6, pois $2*(2 + 1) = 3$.&lt;/p&gt;
+
+&lt;p&gt;O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt; e, portanto, não fazem parte do Heap.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt;. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7&lt;/p&gt;
+
+&lt;p&gt;A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $int((0-1)/2)) = -1$, que é um índice inexistente.&lt;/p&gt;
+
+&lt;p&gt;Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $int((1-1)/2)) = 0$ e $int((2-1)/2)) = 0$.&lt;/p&gt;
+
+&lt;p&gt;Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 0$ e $int((4-1)/2)) = 1$.&lt;/p&gt;
+
+&lt;p&gt;Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $int((5-1)/2)) = 2$ e $int((5-1)/2)) = 2$.&lt;/p&gt;
+
+&lt;p&gt;Por fim, o nó 43 no índice 7 do array. O nó pai está no índice 2, pois $int((7-1)/2)) = 3$.&lt;/p&gt;
+
+&lt;p&gt;Abaixo estão os métodos left, right e parent da classe Heap.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt; Heap {    
+...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; left(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; right(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 2 &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; (index &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1);
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; parent(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (index&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1)&lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt;2;
+    }
+...
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;inserção&#34;&gt;Inserção&lt;/h2&gt;
+
+&lt;p&gt;Primeiro vamos entender o conceito visualmente, depois passamos para o código, ok?
+Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazenado nesse array é o da figura abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43, 0, 0]$ e tail = 7&lt;/p&gt;
+
+&lt;p&gt;Note que os elementos que compõe o Heap estão entre os índices 0 e &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt;. Os índices 8 e 9 estão preenchidos com 0 porque é o valor default de Java. Nós tratamos essas posições como livres para serem adicionados novos elementos. Para reforçar: quem define os limites dos elementos presentes no Heap são 0 e &lt;code&gt;tail&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Agora, atenção:&lt;/p&gt;
+
+&lt;pre&gt;
+    A adição de um novo elemento sempre é feita na próxima 
+    posição livre do array, isto é, tail + 1. Essa estratégia
+    garante que o Heap sempre será completo ou quase completo
+    da esquerda para a direita.
+&lt;/pre&gt;
+
+&lt;p&gt;Então vamos adicionar o valor 100 ao Heap. Como dissemos, a adição é feita em tail + 1. Neste momento, o Heap e o array assumem os seguintes estados.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao1.png&#34; alt=&#34;animacao1&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43, 100, 0]$ e tail = 8&lt;/p&gt;
+
+&lt;p&gt;Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dpois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.&lt;/p&gt;
+
+&lt;p&gt;Vamos ver como isso é feito passo a passo. Na primeira comparação, como 100 é maior que 47, há a troca desses valores, como ilustrado na figura abaixo. Perceba também que o array é modificado.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao2.png&#34; alt=&#34;animacao2&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 100, 54, 6, 0, 43, 47, 0]$ e tail = 8&lt;/p&gt;
+
+&lt;p&gt;O problema ainda persiste, pois 100, quando comparado com o nó pai (87) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao3.png&#34; alt=&#34;animacao3&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [88, 100, 73, 87, 54, 6, 0, 43, 47, 0]$ e tail = 8&lt;/p&gt;
+
+&lt;p&gt;O problema ainda persiste, pois 100, quando comparado com o nó pai (88) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao4.png&#34; alt=&#34;animacao4&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [100, 88, 73, 87, 54, 6, 0, 43, 47, 0]$ e tail = 8&lt;/p&gt;
+
+&lt;p&gt;Feito! Como 100 passou a ser a raiz, a inserção é finalizada.&lt;/p&gt;
+
+&lt;p&gt;Mais um exemplo? Vamos adicionar o elemento 90. Lembrando, a inserção sempre é feita em tail + 1. Então temos o Heap e seu array com o seguinte estado.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao5.png&#34; alt=&#34;animacao5&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [100, 88, 73, 87, 54, 6, 0, 43, 47, 90]$ e tail = 9&lt;/p&gt;
+
+&lt;p&gt;Comparando 90 com o nó pai, temos que 90 &amp;gt; 54 e, portanto, precisamos trocar esse valor. Feito isso, temos o seguinte cenário.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao6.png&#34; alt=&#34;animacao6&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [100, 88, 73, 87, 90, 6, 0, 43, 47, 54]$ e tail = 9&lt;/p&gt;
+
+&lt;p&gt;O problema ainda persiste, pois 90, quando comparado com o nó pai (88) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao7.png&#34; alt=&#34;animacao7&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [100, 90, 73, 87, 88, 6, 0, 43, 47, 54]$ e tail = 9&lt;/p&gt;
+
+&lt;p&gt;Feito! Como 90 é menor do que o nó pai (100), a inserção é finalizada.&lt;/p&gt;
+
+&lt;p&gt;Agora que já entendemos como o algoritmo funciona, vamos ao código.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; add(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (tail &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; (heap.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1))
+        resize();
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+        tail &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[tail] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; n;
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tail;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i]) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i];
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)];
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+            i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parent(i);
+        }
+    }
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;O primeiro if (&lt;code&gt;tail &amp;gt;= heap.length - 1&lt;/code&gt;) verifica se ainda há espaço no array para adicionar um novo elemento. Se não houver, o método &lt;strong&gt;&lt;em&gt;resize&lt;/em&gt;&lt;/strong&gt; é invocado. Ele apenas cria um array maior e copia os elementos para esse novo array.&lt;/p&gt;
+
+&lt;p&gt;Caso haja espaço (&lt;code&gt;else&lt;/code&gt;), incrementamos tail (&lt;code&gt;tail += 1&lt;/code&gt;) e adicionamos o novo elemento no array (&lt;code&gt;this.heap[tail] = n&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas codições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (&lt;code&gt;i = parent(i)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;eficiência-do-método-de-inserção&#34;&gt;Eficiência do método de inserção&lt;/h3&gt;
+
+&lt;p&gt;No pior caso, o elemento adicionado é o maior elemento do Heap e, por isso, temos que subir até a raiz. Nesse pior caso, o caminho percorrido é igual ao tamanho da altura, que sempre é $O(\log n)$ porque o Heap é completo ou quase-completo da esquerda para a direita.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A inserção de um elemento no Heap é $O(\log n)$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;remoção-e-heapify&#34;&gt;Remoção e Heapify&lt;/h2&gt;
+
+&lt;p&gt;A remoção em um Heap não é parametrizada. O elemento removido sempre é o maior, ou seja, sempre a raiz.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A remoção em um heap é sempre feita na raiz.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Para manter a propriedade de ser completo ou quase-completo da esquerda para a direita, trocamos o valor da raiz com a última folha e removemos essa última folha. Note que, por ser um array, não removemos de fato a posição, apenas atualizamos tail (&lt;code&gt;tail = tail - 1&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Vamos visualizar esse processo para o Heap abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;remocao1.png&#34; alt=&#34;remocao1&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [100, 90, 73, 87, 88, 6, 0, 43, 47, 54]$ e tail = 9&lt;/p&gt;
+
+&lt;p&gt;O primeiro passo então, é trocar a raíz (&lt;code&gt;this.heap[0]&lt;/code&gt;) pela última folha (&lt;code&gt;this.heap[tail]&lt;/code&gt;). No nosso exemplo, isso significa que 54 passa a ser a raiz.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;remocao2.png&#34; alt=&#34;remocao2&#34; /&gt;&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$heap = [54, 90, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 9&lt;/p&gt;
+
+&lt;p&gt;Agora decrementamos o valor de tail &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt; (&lt;code&gt;tail -= 1&lt;/code&gt;). O Heap fica nesse estado:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;remocao3.png&#34; alt=&#34;remocao3&#34; /&gt;
+&lt;p align=&#34;center&#34;&gt;$heap = [54, 90, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 8&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;Temos um problema, certo? 54 é menor que o valor à sua esquerda e que o valor à sua direita. O que vamos fazer a partir de agora é resolver esse problema. E isso tem nome: &lt;strong&gt;heapify&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;A ideia geral é comparar 54 com o filho à esquerda e o filho à direita. O maior dos três assume a posição de 54. Se o maior dos 3 for 54, o algoritmo não precisa seguir adiante. Vamos lá.&lt;/p&gt;
+
+&lt;p&gt;Comparando 54, 90 e 73, o maior valor é 90. Portanto, trocamos 90 com 54.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;remocao4.png&#34; alt=&#34;remocao4&#34; /&gt;
+&lt;p align=&#34;center&#34;&gt;$heap = [90, 54, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 8&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;Novamente, comparamos 54 com o filho à esquerda e o filho à direita. O maior dos três assume a posição de 54. Ou seja, trocamos 54 por 88.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;remocao5.png&#34; alt=&#34;remocao5&#34; /&gt;
+&lt;p align=&#34;center&#34;&gt;$heap = [90, 88, 73, 87, 54, 6, 0, 43, 47, 100]$ e tail = 8&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;Feito! 54 não possui mais filhos e, portanto, o algoritmo para.&lt;/p&gt;
+
+&lt;p&gt;Agora que já entendemos como o algoritmo funciona, vamos ao código.&lt;/p&gt;
+</description>
+       </item>
+       
      </channel>
    </rss>
