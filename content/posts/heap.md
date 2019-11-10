@@ -494,7 +494,7 @@ Em resumo, para construir um Heap a partir de um array qualquer basta aplicar **
 
 # Notas
 
-O que facilita muito o aprendizado deste tipo de estrutura é utilizar uma ferramenta de visualização. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também acho o <a class="external" href="visualgo.net">VisualAlgo</a> uma excelente ferramenta para visualizar as estruturas que estudamos.
+Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também recomendo o <a class="external" href="visualgo.net">VisualAlgo</a>.
 
 
 
