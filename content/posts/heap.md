@@ -148,7 +148,7 @@ Veja que o que define a ocupação do array é o valor do atributo ***tail***. O
 
 Para caminhar em uma árvore precisamos, a partir de um nó, acessar o nó à esquerda, o nó à direita e o nó pai. Na <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst">implementação de árvores binárias de pesquisa</a> nós utilizamos as referências ***left***, ***right*** e ***parent***. Contudo, como estamos utilizando um array para armazenar os elementos, precisamos implementar métodos que retornem a esquerda, a direita e o pai de um nó, baseado no seu índice. 
 
-***left***. A esquerda de um nó no índice ***index*** sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a esta conclusão. 
+***left***. A esquerda de um nó no índice ***index*** sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
 
 ![heap-exemplo](heap-exemplo.png)
 
@@ -165,7 +165,7 @@ O nó 47 está no índice 3 do array. Portanto, o nó à sua esquerda está no �
 Os nós 54 (índice 4), 6 (índice 5), 0 (índice 6) e 43 (índice 7) não possuem esquerda, pois se aplicarmos a fórmula $2*index+1$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.
 
 
-***right***. A direita de um nó no índice ***index*** sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a esta conclusão. 
+***right***. A direita de um nó no índice ***index*** sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
 
 ![heap-exemplo](heap-exemplo.png)
 
@@ -179,7 +179,7 @@ O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no �
 
 O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.
 
-***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a esta conclusão. 
+***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
 
 ![heap-exemplo](heap-exemplo.png)
 
@@ -241,7 +241,7 @@ Então vamos adicionar o valor 100 ao Heap. Como dissemos, a adição é feita e
 
 <p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43, 100, 0]$ e tail = 8</p>
 
-Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dpois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.
+Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.
 
 Vamos ver como isso é feito passo a passo. Na primeira comparação, como 100 é maior que 47, há a troca desses valores, como ilustrado na figura abaixo. Perceba também que o array é modificado.
 
@@ -360,14 +360,141 @@ Novamente, comparamos 54 com o filho à esquerda e o filho à direita. O maior d
 
 Feito! 54 não possui mais filhos e, portanto, o algoritmo para.
 
+Agora que já entendemos como o algoritmo funciona, vamos às particularidades do código aos poucos. Primeiro, a ideia geral do método ***remove()***, que outros autores também chamam de ***extractMax()***.
 
 
+```java
+...
+    public int remove() {
+        if (isEmpty()) throw new RuntimeException("Empty");
+        int element = this.heap[0];
+        this.heap[0] = this.heap[tail];
+        this.tail -= 1;
 
+        this.heapify(0);
+        
+        return element;
+    }
+...
+```
 
+Esse código implementa o que discutimos. Primeiro, armazena a raiz em uma variável temporária para poder retornar (`element = this.heap[0]`). Depois, coloca na raiz o valor presente na última folha (`this.heap[0] = this.heap[tail]`) e diminui o tamanho do heap (`this.tail -= 1`) para poder iniciar o ***heapify*** a partir dela (`heapify(0)`).
 
+E o ***heapify***?
 
+```java
+...
+    private void heapify(int index) {
+        if (isLeaf(index) || !isValidIndex(index)) 
+            return;
+        
+        // compares index, left and right to find max
+        int index_max = max_index(index, left(index), right(index));
+        
+        // if current index is not greater than its children, 
+        // swap and keep heapifying.
+        if (index_max != index) {
+                swap(index, index_max);
+                heapify(index_max);
+        }
+    }  
+...
+```
+O primeiro passo é verificar as condições de parada. Isso significa checar se o índice passado como parâmetro é uma folha ou está fora dos limites do Heap. Nesses dois casos não há a necessidade de efetuar o heapify. 
 
+Se houver a necessidade, comparamos index com left e right para determinar qual é o máximo entre eles. Isso é feito pelo método ***max_index***. 
 
+Se o máximo entre eles for o próprio index, o algoritmo para. Caso contrário, trocamos index pelo máximo (`swap(index, index_max)`) e continuamos a efetuar o heapify a partir do índice que armazenava o máximo (`heapify(index_max)`).
+
+Abaixo estão as implementações dos métodos auxiliares ***max_index, isValidIndex, isLeaf*** e ***swap***. Como dito anteriormente, o método max_index compara os valores em index, left e right para identificar o maior deles. Você vai notar que há algumas verificações relacionadas à validade dos índices, uma vez que o índice deve estar dentro do intervalo $[0, tail]$.
+
+```java
+...
+    private int max_index(int index, int left, int right) {
+        if (this.heap[index] > this.heap[left]) {
+            if (isValidIndex(right)) {
+                if (this.heap[index] < this.heap[right])
+                    return right;
+            }
+           
+            return index;
+        
+        } else {
+            if (isValidIndex(right)) {
+                if (this.heap[left] < this.heap[right])
+                    return right;
+            } 
+            
+            return left;
+        }
+    }
+
+    private boolean isValidIndex(int index) {
+        return index >= 0 && index <= tail;
+    }
+    
+    private boolean isLeaf(int index) {
+        returnn index > parent(tail) && index <= tail;
+    } 
+    
+    private void swap(int i, int j) {
+        int aux = this.heap[i];
+        this.heap[i] = this.heap[j];
+        this.heap[j] = aux;
+    }
+...
+```
+
+### Eficiência do método de inserção
+
+No pior caso o heapify é executado até o nível das folhas. Nesse pior caso, o caminho percorrido é igual ao tamanho da altura, que sempre é $O(\log n)$ porque o Heap é completo ou quase-completo da esquerda para a direita. 
+
+> A remoção de um elemento no Heap é $O(\log n)$
+
+## Build Heap
+
+Nem todo array representa um Heap, certo? Por exemplo, o array $a = [40, 87, 2, 90, 1, 100, 30, 20]$ não representa um Heap porque nem todo nó é maior do que os nós à esquerda e à direita, como ilustrado na figura abaixo.
+
+![build-heap1](build-heap1.png)
+
+O nosso desafio agora é transformar essa estrutura em um Heap. A ideia é aplicar sucessivas vezes o algoritmo ***heapify***, discutido na seção anterior. 
+
+Nós começamos pelo pai da última folha. Por que? Porque a aplicação do heapify nas folhas é inútil, já que uma folha já respeita as propriedade de Heap.
+
+Então, para o exemplo acima, vamos aplicar primeiro heapify no índice 3, que armazena o valor 90. Depois, vamos aplicar em todos os índices menores que 3 até a raiz, ou seja, heapify(2), heapify(1) e heapify(0). Ao final desse processo o array representará um Heap.
+
+Vamos acompanhar passo a passo esse algoritmo. A primeira execução do heapify é no índice 3, que armazena 90. Como 90 é maior que o seu único filho, nada é feito. Depois aplicamos o heapify no índice 2, que armazena o valor 2. O heapify então compara 2, 100 e 30. Como 100 é maior, há a troca de valores entre 100 e 2. O resultado parcial até agora é o seguinte.
+
+![build-heap2](build-heap2.png)
+
+Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 2. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.
+
+![build-heap3](build-heap3.png)
+
+Por fim, falta apenas a última aplicação de heapify. Isso é feito no índice 0, ou seja, na raiz.O resultado final é ilustrado abaixo.
+
+![build-heap4](build-heap4.png)
+
+Em resumo, para construir um Heap a partir de um array qualquer basta aplicar ***heapify*** partindo do índice do pai da última folha até a raiz. O código abaixo implementa essa rotina.
+
+```java
+...
+    public Heap(int[] heap) {
+        this.heap = heap;
+        this.buildHeap();
+    }
+    
+    private void buildHeap() {
+        for (int i = parent(this.tail); i >= 0; i--)
+            heapify(i); 
+    }
+...
+```
+***
+
+# Notas
+
+O que facilita muito o aprendizado deste tipo de estrutura é utilizar uma ferramenta de visualização. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também acho o <a class="external" href="visualgo.net">VisualAlgo</a> uma excelente ferramenta para visualizar as estruturas que estudamos.
 
 
 
