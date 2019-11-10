@@ -15,7 +15,7 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 
 Se decidirmos manter a fila sempre ordenada tendo como critério a prioridade, precisamos utilizar o algoritmo de inserção ordenada, cujo custo é $O(n)$. Contudo, a extração do maior elemento é ${O(1)}$, pois ele sempre está no início da fila.
 
-Se optarmos por não mater a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.
+Se optarmos por não manter a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.
 
 Em resumo, temos de um lado adição $O(n)$ e remoção $O(1)$ e do outro lado temos adição $O(1)$ e remoção $O(n)$.
 
@@ -64,7 +64,7 @@ A terceira estrutura é um Heap porque respeita a primeira propriedade e é quas
 * Nível 2: 63, 53, 16 e 41
 * Nível 3: 5, 3, 25 e 10 (parcialmente preenchido da esquerda para a direita)
 
-Note que, se removessemos o 25 dessa estrutura, ela não seria mais um Heap, pois o último nível não estaria preenchido da esquerda para a direita. Haveria um salto entre 3 e 10.
+Note que, se removêssemos o 25 dessa estrutura, ela não seria mais um Heap, pois o último nível não estaria preenchido da esquerda para a direita. Haveria um salto entre 3 e 10.
 
 Agora, para fixar bem, vamos ver exemplos de estruturas que não são completas ou quase-completas da esquerda para a direita e, portanto, não são Heaps.
 
@@ -83,7 +83,7 @@ A segunda estrutura também não é. Veja:
 * Nível 0: 42. Ok. Está todo preenchido.
 * Nível 1: 28. Não está preenchido da esquerda para a direita.
 
-Por último, a terceira estrutura também não é quase-coompleta da esquerda para a direita.
+Por último, a terceira estrutura também não é quase-completa da esquerda para a direita.
 
 * Nível 0: 93. Ok. Está todo preenchido.
 * Nível 1: 74 e 67. Ok. Está todo preenchido.
@@ -308,7 +308,7 @@ O primeiro if (`tail >= heap.length - 1`) verifica se ainda há espaço no array
 
 Caso haja espaço (`else`), incrementamos tail (`tail += 1`) e adicionamos o novo elemento no array (`this.heap[tail] = n`).
 
-Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas codições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (`i = parent(i)`).
+Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas condições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (`i = parent(i)`).
 
 ### Eficiência do método de inserção
 
@@ -432,7 +432,7 @@ Abaixo estão as implementações dos métodos auxiliares ***max_index, isValidI
     }
     
     private boolean isLeaf(int index) {
-        returnn index > parent(tail) && index <= tail;
+        return index > parent(tail) && index <= tail;
     } 
     
     private void swap(int i, int j) {
