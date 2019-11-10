@@ -3112,8 +3112,6 @@ Q = {&lt;strike&gt;52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74&lt;/strike&gt;}
          <guid>https://joaoarthurbm.github.io/eda/posts/heap/</guid>
          <description>
 
-&lt;p&gt;(ainda sob construção&amp;hellip;)&lt;/p&gt;
-
 &lt;hr /&gt;
 
 &lt;p&gt;Nem toda fila segue a política de acesso &lt;em&gt;First In First Out&lt;/em&gt; (FIFO). Na verdade, em vários cenários do dia a dia, as filas que entramos possuem uma política diferente: são filas de prioridade. Por exemplo, mesmo que um adolescente chegue antes de um idoso na fila do banco, é provável que o idoso seja atendido primeiro porque ele tem, por lei (e deveria ter por civilidade também), &lt;strong&gt;prioridade&lt;/strong&gt; no atendimento.&lt;/p&gt;
