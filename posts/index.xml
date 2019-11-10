@@ -3261,7 +3261,7 @@ da esquerda para a direita.
 
 &lt;p&gt;Para caminhar em uma árvore precisamos, a partir de um nó, acessar o nó à esquerda, o nó à direita e o nó pai. Na &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;implementação de árvores binárias de pesquisa&lt;/a&gt; nós utilizamos as referências &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt;. Contudo, como estamos utilizando um array para armazenar os elementos, precisamos implementar métodos que retornem a esquerda, a direita e o pai de um nó, baseado no seu índice.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;. A esquerda de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;. A esquerda de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
 
@@ -3277,7 +3277,7 @@ da esquerda para a direita.
 
 &lt;p&gt;Os nós 54 (índice 4), 6 (índice 5), 0 (índice 6) e 43 (índice 7) não possuem esquerda, pois se aplicarmos a fórmula $2*index+1$ os valores gerados são índices maiores do que &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt; e, portanto, não fazem parte do Heap.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;. A direita de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;. A direita de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
 
@@ -3291,7 +3291,7 @@ da esquerda para a direita.
 
 &lt;p&gt;O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que &lt;strong&gt;&lt;em&gt;tail&lt;/em&gt;&lt;/strong&gt; e, portanto, não fazem parte do Heap.&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt;. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a esta conclusão.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;parent&lt;/em&gt;&lt;/strong&gt;. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;index&lt;/em&gt;&lt;/strong&gt; sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;heap-exemplo.png&#34; alt=&#34;heap-exemplo&#34; /&gt;&lt;/p&gt;
 
@@ -3349,7 +3349,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43, 100, 0]$ e tail = 8&lt;/p&gt;
 
-&lt;p&gt;Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dpois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.&lt;/p&gt;
+&lt;p&gt;Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.&lt;/p&gt;
 
 &lt;p&gt;Vamos ver como isso é feito passo a passo. Na primeira comparação, como 100 é maior que 47, há a troca desses valores, como ilustrado na figura abaixo. Perceba também que o array é modificado.&lt;/p&gt;
 
@@ -3467,7 +3467,128 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;p&gt;Feito! 54 não possui mais filhos e, portanto, o algoritmo para.&lt;/p&gt;
 
-&lt;p&gt;Agora que já entendemos como o algoritmo funciona, vamos ao código.&lt;/p&gt;
+&lt;p&gt;Agora que já entendemos como o algoritmo funciona, vamos às particularidades do código aos poucos. Primeiro, a ideia geral do método &lt;strong&gt;&lt;em&gt;remove()&lt;/em&gt;&lt;/strong&gt;, que outros autores também chamam de &lt;strong&gt;&lt;em&gt;extractMax()&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; remove() {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (isEmpty()) &lt;span style=&#34;color:#66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; RuntimeException(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Empty&amp;#34;&lt;/span&gt;);
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;element&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[0];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[0] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[tail];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heapify&lt;/span&gt;(0);
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; element;
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Esse código implementa o que discutimos. Primeiro, armazena a raiz em uma variável temporária para poder retornar (&lt;code&gt;element = this.heap[0]&lt;/code&gt;). Depois, coloca na raiz o valor presente na última folha (&lt;code&gt;this.heap[0] = this.heap[tail]&lt;/code&gt;) e diminui o tamanho do heap (&lt;code&gt;this.tail -= 1&lt;/code&gt;) para poder iniciar o &lt;strong&gt;&lt;em&gt;heapify&lt;/em&gt;&lt;/strong&gt; a partir dela (&lt;code&gt;heapify(0)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;E o &lt;strong&gt;&lt;em&gt;heapify&lt;/em&gt;&lt;/strong&gt;?&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; heapify(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (isLeaf(index) &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;isValidIndex(index)) 
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// compares index, left and right to find max
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index_max&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; max_index(index, left(index), right(index));
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// if current index is not greater than its children, 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// swap and keep heapifying.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (index_max &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; index) {
+                swap(index, index_max);
+                heapify(index_max);
+        }
+    }  
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;O primeiro passo é verificar as condições de parada. Isso significa checar se o índice passado como parâmetro é uma folha ou está fora dos limites do Heap. Nesses dois casos não há a necessidade de efetuar o heapify.&lt;/p&gt;
+
+&lt;p&gt;Se houver a necessidade, comparamos index com left e right para determinar qual é o máximo entre eles. Isso é feito pelo método &lt;strong&gt;&lt;em&gt;max_index&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Se o máximo entre eles for o próprio index, o algoritmo para. Caso contrário, trocamos index pelo máximo (&lt;code&gt;swap(index, index_max)&lt;/code&gt;) e continuamos a efetuar o heapify a partir do índice que armazenava o máximo (&lt;code&gt;heapify(index_max)&lt;/code&gt;).&lt;/p&gt;
+
+&lt;p&gt;Abaixo estão as implementações dos métodos auxiliares &lt;strong&gt;&lt;em&gt;max_index, isValidIndex, isLeaf&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;swap&lt;/em&gt;&lt;/strong&gt;. Como dito anteriormente, o método max_index compara os valores em index, left e right para identificar o maior deles. Você vai notar que há algumas verificações relacionadas à validade dos índices, uma vez que o índice deve estar dentro do intervalo $[0, tail]$.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; max_index(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[index] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[left]) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (isValidIndex(right)) {
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[index] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[right])
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; right;
+            }
+           
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; index;
+        
+        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (isValidIndex(right)) {
+                &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[left] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[right])
+                    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; right;
+            } 
+            
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; left;
+        }
+    }
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boolean&lt;/span&gt; isValidIndex(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; tail;
+    }
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boolean&lt;/span&gt; isLeaf(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
+        returnn &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; parent(tail) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; tail;
+    } 
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; swap(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[j];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;eficiência-do-método-de-inserção-1&#34;&gt;Eficiência do método de inserção&lt;/h3&gt;
+
+&lt;p&gt;No pior caso o heapify é executado até o nível das folhas. Nesse pior caso, o caminho percorrido é igual ao tamanho da altura, que sempre é $O(\log n)$ porque o Heap é completo ou quase-completo da esquerda para a direita.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A remoção de um elemento no Heap é $O(\log n)$&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;build-heap&#34;&gt;Build Heap&lt;/h2&gt;
+
+&lt;p&gt;Nem todo array representa um Heap, certo? Por exemplo, o array $a = [40, 87, 2, 90, 1, 100, 30, 20]$ não representa um Heap porque nem todo nó é maior do que os nós à esquerda e à direita, como ilustrado na figura abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;build-heap1.png&#34; alt=&#34;build-heap1&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;O nosso desafio agora é transformar essa estrutura em um Heap. A ideia é aplicar sucessivas vezes o algoritmo &lt;strong&gt;&lt;em&gt;heapify&lt;/em&gt;&lt;/strong&gt;, discutido na seção anterior.&lt;/p&gt;
+
+&lt;p&gt;Nós começamos pelo pai da última folha. Por que? Porque a aplicação do heapify nas folhas é inútil, já que uma folha já respeita as propriedade de Heap.&lt;/p&gt;
+
+&lt;p&gt;Então, para o exemplo acima, vamos aplicar primeiro heapify no índice 3, que armazena o valor 90. Depois, vamos aplicar em todos os índices menores que 3 até a raiz, ou seja, heapify(2), heapify(1) e heapify(0). Ao final desse processo o array representará um Heap.&lt;/p&gt;
+
+&lt;p&gt;Vamos acompanhar passo a passo esse algoritmo. A primeira execução do heapify é no índice 3, que armazena 90. Como 90 é maior que o seu único filho, nada é feito. Depois aplicamos o heapify no índice 2, que armazena o valor 2. O heapify então compara 2, 100 e 30. Como 100 é maior, há a troca de valores entre 100 e 2. O resultado parcial até agora é o seguinte.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;build-heap2.png&#34; alt=&#34;build-heap2&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 2. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;build-heap3.png&#34; alt=&#34;build-heap3&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Por fim, falta apenas a última aplicação de heapify. Isso é feito no índice 0, ou seja, na raiz.O resultado final é ilustrado abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;build-heap4.png&#34; alt=&#34;build-heap4&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Em resumo, para construir um Heap a partir de um array qualquer basta aplicar &lt;strong&gt;&lt;em&gt;heapify&lt;/em&gt;&lt;/strong&gt; partindo do índice do pai da última folha até a raiz. O código abaixo implementa essa rotina.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Heap&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heap;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;buildHeap&lt;/span&gt;();
+    }
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; buildHeap() {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parent(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt;); i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; 0; i&lt;span style=&#34;color:#f92672&#34;&gt;--&lt;/span&gt;)
+            heapify(i); 
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;O que facilita muito o aprendizado deste tipo de estrutura é utilizar uma ferramenta de visualização. Para fazer as figuras deste material eu utilizei &lt;a class=&#34;external&#34; href=&#34;http://btv.melezinek.cz/binary-heap.html&#34;&gt;esta ferramenta.&lt;/a&gt; Também acho o &lt;a class=&#34;external&#34; href=&#34;visualgo.net&#34;&gt;VisualAlgo&lt;/a&gt; uma excelente ferramenta para visualizar as estruturas que estudamos.&lt;/p&gt;
 </description>
        </item>
        
