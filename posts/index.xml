@@ -3121,7 +3121,7 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 
 &lt;p&gt;Se decidirmos manter a fila sempre ordenada tendo como critério a prioridade, precisamos utilizar o algoritmo de inserção ordenada, cujo custo é $O(n)$. Contudo, a extração do maior elemento é ${O(1)}$, pois ele sempre está no início da fila.&lt;/p&gt;
 
-&lt;p&gt;Se optarmos por não mater a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.&lt;/p&gt;
+&lt;p&gt;Se optarmos por não manter a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.&lt;/p&gt;
 
 &lt;p&gt;Em resumo, temos de um lado adição $O(n)$ e remoção $O(1)$ e do outro lado temos adição $O(1)$ e remoção $O(n)$.&lt;/p&gt;
 
@@ -3173,7 +3173,7 @@ da esquerda para a direita.
 &lt;li&gt;Nível 3: 5, 3, 25 e 10 (parcialmente preenchido da esquerda para a direita)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Note que, se removessemos o 25 dessa estrutura, ela não seria mais um Heap, pois o último nível não estaria preenchido da esquerda para a direita. Haveria um salto entre 3 e 10.&lt;/p&gt;
+&lt;p&gt;Note que, se removêssemos o 25 dessa estrutura, ela não seria mais um Heap, pois o último nível não estaria preenchido da esquerda para a direita. Haveria um salto entre 3 e 10.&lt;/p&gt;
 
 &lt;p&gt;Agora, para fixar bem, vamos ver exemplos de estruturas que não são completas ou quase-completas da esquerda para a direita e, portanto, não são Heaps.&lt;/p&gt;
 
@@ -3196,7 +3196,7 @@ da esquerda para a direita.
 &lt;li&gt;Nível 1: 28. Não está preenchido da esquerda para a direita.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Por último, a terceira estrutura também não é quase-coompleta da esquerda para a direita.&lt;/p&gt;
+&lt;p&gt;Por último, a terceira estrutura também não é quase-completa da esquerda para a direita.&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Nível 0: 93. Ok. Está todo preenchido.&lt;/li&gt;
@@ -3412,7 +3412,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;p&gt;Caso haja espaço (&lt;code&gt;else&lt;/code&gt;), incrementamos tail (&lt;code&gt;tail += 1&lt;/code&gt;) e adicionamos o novo elemento no array (&lt;code&gt;this.heap[tail] = n&lt;/code&gt;).&lt;/p&gt;
 
-&lt;p&gt;Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas codições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (&lt;code&gt;i = parent(i)&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas condições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (&lt;code&gt;i = parent(i)&lt;/code&gt;).&lt;/p&gt;
 
 &lt;h3 id=&#34;eficiência-do-método-de-inserção&#34;&gt;Eficiência do método de inserção&lt;/h3&gt;
 
@@ -3529,7 +3529,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
     }
     
     &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;boolean&lt;/span&gt; isLeaf(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt;) {
-        returnn &lt;span style=&#34;color:#a6e22e&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; parent(tail) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; tail;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; parent(tail) &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; index &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; tail;
     } 
     
     &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; swap(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt;) {
