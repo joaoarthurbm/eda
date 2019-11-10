@@ -6,8 +6,6 @@ categories = []
 github = ""
 +++
 
-(ainda sob construção...)
-
 ***
 
 Nem toda fila segue a política de acesso *First In First Out* (FIFO). Na verdade, em vários cenários do dia a dia, as filas que entramos possuem uma política diferente: são filas de prioridade. Por exemplo, mesmo que um adolescente chegue antes de um idoso na fila do banco, é provável que o idoso seja atendido primeiro porque ele tem, por lei (e deveria ter por civilidade também), **prioridade** no atendimento.
