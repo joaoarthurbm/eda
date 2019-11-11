@@ -112,7 +112,7 @@
 
         
 
-        <li>20 minutes read</li>
+        <li>21 minutes read</li>
 
         
 
@@ -597,6 +597,36 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
             heapify(i); 
     }
 ...</code></pre></div>
+<hr />
+
+<h1 id="resumo">Resumo</h1>
+
+<ul>
+<li><p>Heap é uma árvore binária.</p></li>
+
+<li><p>Todos os nós presentes no Heap são maiores que os seus nós à esquerda e à direita. Isso quer dizer que o maior valor sempre está na raiz.</p></li>
+
+<li><p>Heap é uma árvore completa ou quase-completa da esquerda para a direita. Esta propriedade garante que a altura da árvore é sempre a mínima possível, ou seja, $O(\log n)$.</p></li>
+
+<li><p>Esta última propriedade garante inserção e remoção em $O(\log n)$.</p></li>
+
+<li><p>Heap é uma excelente alternativa para implementação de filas de prioridade.</p></li>
+
+<li><p>Por ser completo ou quase-completo da esquerda para a direita, podemos implementar Heaps em arrays, ao invés de nós ligados.</p></li>
+
+<li><p>A array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.</p></li>
+
+<li><p>Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice *<strong>i</strong> é dada por $2*i+1$. A direita de um nó no índice *<strong>i</strong> é dada por $2*(i+1)$. O pai de um nó no índice <strong><em>i</em></strong> é dados por $int((index - 1) / 2)$.</p></li>
+
+<li><p>A adição de um elemento é sempre feita na próxima posição livre do array. Depois de adicionado, deve-se comparar o elemento com o pai. Se o seu valor foi maior, troca-se os elementos. Esse processo é feito enquanto o valor for maior ou não chegar na raiz.</p></li>
+
+<li><p>O elemento removido sempre é o maior, isto é, a raiz. Antes disso, colocamos o valor da última folha na raiz e executamos o heapify.</p></li>
+
+<li><p>Heapify é uma rotina que compara um nó, a sua esquerda e a sua direita. O maior dos três deve ser a raiz dessa sub-arvore. Caso o maior dos três seja o próprio nó, o algoritmo para. Caso contrário, segue a comparação árvore abaixo.</p></li>
+
+<li><p>Para construir um Heap a partir de um array qualquer, basta executar o heapify seguidas vezes. Partindo o pai da última folha até a raiz. Esse método se chama <strong><em>Build Heap</em></strong>.</p></li>
+</ul>
+
 <hr />
 
 <h1 id="notas">Notas</h1>
