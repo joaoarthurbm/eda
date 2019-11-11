@@ -863,6 +863,149 @@ adicionado.
        </item>
        
        <item>
+         <title>Ordenação por Comparação: Insertion Sort</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/insertion-sort/</link>
+         <pubDate>Sun, 27 Oct 2019 01:01:01 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/insertion-sort/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;direto-ao-ponto&#34;&gt;Direto ao ponto&lt;/h1&gt;
+
+&lt;p&gt;O &lt;em&gt;Insertion Sort&lt;/em&gt; tem como rotina base a inserção ordenada. A ideia é executar várias vezes essa rotina para ordenar um array. Para ser exato, se executarmos $N - 1$ vezes a rotina de inserção ordenada em um array o resultado é a ordenação completa do mesmo. Por isso, vamos antes entender como funciona inserção ordenada.&lt;/p&gt;
+
+&lt;h1 id=&#34;inserção-ordenada&#34;&gt;Inserção ordenada&lt;/h1&gt;
+
+&lt;p&gt;Vamos analisar o caso de um array com $N$ elementos no qual os $N - 1$ primeiros elementos estão ordenados, mas o último elemento não está no seu lugar. Isto é, precisamos encaixar o último elemento de forma que a sequência fique ordenada. No exemplo abaixo, estamos falando em inserir de forma ordenada o valor 12.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values =[9, 13, 16, 21, 32, &lt;font color=&#34;red&#34;&gt;12&lt;/font&gt;]&lt;/p&gt;
+
+&lt;p&gt;Como a sequência está ordenada até o penúltimo índice, a ideia é comparar 12 com o valor anterior e, se 12 for menor, trocar esses valores. Essas comparações e trocas só devem parar quando 12 for maior que o elemento à esquerda ou quando 12 estiver na primeira posição do array. Para visualizar o Insertion Sort, alguns autores utilizam a metáfora de uma mão de cartas. Nesse contexto, o objetivo seria encaixar a carta 12 na mão já ordenada. Veja o passo a passo:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [9, 13, 16, 21, &lt;font color=&#34;red&#34;&gt;12&lt;/font&gt;, 32]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [9, 13, 16, &lt;font color=&#34;red&#34;&gt;12&lt;/font&gt;, 21, 32]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [9, 13, &lt;font color=&#34;red&#34;&gt;12&lt;/font&gt;, 16, 21, 32]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [9, &lt;font color=&#34;red&#34;&gt;12&lt;/font&gt;, 13, 16, 21, 32]&lt;/p&gt;
+
+&lt;p&gt;O código que implementa essa rotina está descrito abaixo. O índice &lt;code&gt;j&lt;/code&gt; assume o valor inicial &lt;code&gt;values.length - 1&lt;/code&gt; (última posição) e a condição de parada do laço é satisfeita quando esse índice alcançar 0 ou quando o valor que queremos inserir de forma ordenada já está na sua posição (&lt;code&gt;values[j] &amp;gt;= values[j-1]&lt;/code&gt;). Se &lt;code&gt;j&lt;/code&gt; alcançar 0, todo o array foi avaliado e o algoritmo deve parar. Da mesma forma, se &lt;code&gt;values[j] &amp;gt;= values[j-1]&lt;/code&gt; o algoritmo deve parar porque o elemento que estamos querendo encaixar já está em seu lugar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; values[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; values[j&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1]) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[j];
+            values[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[j&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1];
+            values[j&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+            j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1;
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h1 id=&#34;insertion-sort&#34;&gt;Insertion Sort&lt;/h1&gt;
+
+&lt;p&gt;A parte complexa desse algoritmo de ordenação nós já entendemos &amp;ndash; a inserção ordenada.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Insertion Sort aplica várias vezes a inserção ordenada para ordenar uma sequência.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Vamos ver como isso é feito.&lt;/p&gt;
+
+&lt;p&gt;Queremos ordenar $values = [7, 1, 2, 3, 9, 5, 1]$. Se pensarmos bem, podemos ver os dois primeiros elementos desse array como sendo o cenário apresentado na seção anterior, isto é, temos que $[7, 1]$ está ordenado, exceto pela última posição. Se aplicarmos inserção ordenada em $[7, 1]$, temos como resultado $[1, 7]$.&lt;/p&gt;
+
+&lt;p&gt;Agora, vamos adotar a mesma postura com os três primeiros elementos: $[1, 7, 2]$. Novamente, podemos ver os 3 primeiros elementos como sendo o cenário para a inserção ordenada. Isto é $[1, 7, 2]$ está ordenado, exceto pelo último elemento. Se aplicarmos inserção ordenada em $[1, 7, 2]$, temos como resultado $[1, 2, 7]$.&lt;/p&gt;
+
+&lt;p&gt;Depois, vamos adotar a mesma postura com os quatro primeiros elementos: $[1, 2, 7, 3]$. Isto é, está ordenado, exceto pelo último elemento. Então basta aplicarmos inserção ordenada de 3. O resultado é $[1, 2, 3, 7]$.&lt;/p&gt;
+
+&lt;p&gt;Esse processo segue até o array ficar ordenado. Você percebeu que aplicamos inserção ordenada partindo do segundo elemento do array até o final? Isso significa que basta colocarmos um &lt;strong&gt;&lt;em&gt;loop&lt;/em&gt;&lt;/strong&gt; externo ao código de inserção ordenada, fazendo &lt;code&gt;j&lt;/code&gt; variar de 1 até o último elemento. Vamos ao código:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;insertionSort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;values&lt;/span&gt;) {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; values.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) { 
+		
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i;
+	
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; values[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; values[j&lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1]) {
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[j];
+			values[j] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1];
+			values[j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+			j &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1;
+		}
+	
+	}	
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A única mudança que fizemos foi adicionar o comando &lt;strong&gt;&lt;em&gt;for&lt;/em&gt;&lt;/strong&gt; com &lt;code&gt;i&lt;/code&gt; variando de 1 até o final e &lt;code&gt;j&lt;/code&gt; variando de acordo com &lt;code&gt;i&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para fixar bem, veja a animação abaixo copiada &lt;a class=&#34;external&#34; href=&#34;https://medium.com/yay-its-erica/algorithms-for-beginners-bubble-sort-insertion-sort-merge-sort-29bd5506cc48&#34;&gt; deste material.&lt;/a&gt; Note que a ideia é sempre inserir um elemento em uma sequência já ordenada.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;animacao.gif&#34; alt=&#34;animacao&#34; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;propriedades-e-análise-de-eficiência&#34;&gt;Propriedades e Análise de eficiência&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Insertion Sort é estável, in-place e $O(n^2)$.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Estabilidade é uma propriedade relacionada à ordem relativa de valores iguais no array original. Por exemplo, se houver dois valores 97 no array antes da ordenação, após a execução do algoritmo, esses dois valores devem seguir a ordem relativa inicial. Ou seja, ao término da execução do algoritmo, a primeira ocorrência do 97 deve vir antes da segunda ocorrência do 97.&lt;/p&gt;
+
+&lt;p&gt;O Insertion Sort é estável porque mantém a ordem relativa dos valores iguais. Isso ocorre porque as trocas são feitas sempre com vizinhos. Os valores vão sendo &amp;ldquo;afastados&amp;rdquo; um a um, e não dando saltos. Por isso, um elemento qualquer nunca trocará de posição com elementos de mesmo valor.&lt;/p&gt;
+
+&lt;p&gt;O Insertion Sort é &lt;em&gt;in-place&lt;/em&gt; porque a ordenação é feita rearranjando os elementos no próprio array, ao invés de usar arrays ou outras estruturas auxiliares.&lt;/p&gt;
+
+&lt;p&gt;O pior caso do Insertion Sort é um array ordenado em ordem reversa, pois toda tentativa de inserção ordenada deve percorrer o array todo à esquerda trocando os elementos até encaixar o atual na primeira posição. Veja o exemplo:&lt;/p&gt;
+
+&lt;p&gt;Inserção ordenada de 20:
+&lt;p align=&#34;center&#34;&gt;values = [90, &lt;font color=&#34;red&#34;&gt;20&lt;/font&gt;, 16, 5, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;20&lt;/font&gt;, 90, 16, 5, 1]&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;Inserção ordenada de 16:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [20, 90, &lt;font color=&#34;red&#34;&gt;16&lt;/font&gt;, 5, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [20, &lt;font color=&#34;red&#34;&gt;16&lt;/font&gt;, 90, 5, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;16&lt;/font&gt;, 20, 90, 5, 1]&lt;/p&gt;
+
+&lt;p&gt;Inserção ordenada de 5:
+&lt;p align=&#34;center&#34;&gt;values = [16, 20, 90, &lt;font color=&#34;red&#34;&gt;5&lt;/font&gt;, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [16, 20, &lt;font color=&#34;red&#34;&gt;5&lt;/font&gt;, 90, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [16, &lt;font color=&#34;red&#34;&gt;5&lt;/font&gt;, 20, 90, 1]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;5&lt;/font&gt;, 15, 20, 90, 1]&lt;/p&gt;&lt;/p&gt;
+
+&lt;p&gt;Inserção ordenada de 1:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [5, 15, 20, 90, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [5, 15, 20, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 90]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [5, 15, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 20, 90]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [5, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 15, 20, 90]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 5, 15, 20, 90]&lt;/p&gt;
+
+&lt;p&gt;Feito. Array ordenado.&lt;/p&gt;
+
+&lt;p&gt;Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + &amp;hellip; (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.&lt;/p&gt;
+
+&lt;p&gt;É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;resumo&#34;&gt;Resumo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;O Insertion Sort nada mais é do que a execução do algoritmo de inserção ordenada repetidas vezes.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O Insertion Sort é in-place, estável e $O(n^2)$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Capítulos 2 do livro “Algoritmos: Teoria e Prática” de Cormen et. al. aborda este mesmo assunto com profundidade. Em particular, a análise de eficiência é discutida com mais detalhes.&lt;/p&gt;
+
+&lt;p&gt;Vale a pena utilizar o &lt;a class=&#34;external&#34; href=&#34;https://visualgo.net/en/sorting&#34;&gt;VisuAlgo&lt;/a&gt; para visualizar a execução do Insertion Sort e de outros algoritmos de ordenação.&lt;/p&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Ordenação Linear</title>
          <link>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</link>
          <pubDate>Sun, 27 Oct 2019 00:00:00 -0300</pubDate>
