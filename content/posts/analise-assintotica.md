@@ -118,7 +118,9 @@ Na verdade, todas as funções lineares são limitadas inferior e superiormente 
 
 Formalmente dizemos que $g(n)=n$ é um limite assintótico restrito para $f(n)$. A figura abaixo descreve essa relação entre uma função quadrática e as funções $3n$ e $n^2$.
 
-<img src="theta.png" alt="theta" width="1px" height="320px"/>
+<figure style="align: center; margin-left:10%; width: 80%">
+	<img src="theta.png">
+</figure>
 
 Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)<= f(n)<= c2*g(n)$.
 
@@ -156,7 +158,9 @@ Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se:
 
 Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.
 
-![bigo](bigo.png)
+<figure style="align: center; margin-left:10%; width: 80%">
+	<img src="bigo.png">
+</figure>
 
 O processo para demonstrar que $f(n)$ é $O(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.
 
@@ -188,7 +192,10 @@ A notação $\Theta$ define o limite inferior e superior. $O$ define apenas o li
 
 A figura abaixo ilustra essa relação.
 
-![omega](omega.png)
+<figure style="align: center; margin-left:10%; width: 80%">
+	<img src="omega.png">
+</figure>
+
 
 O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.
 

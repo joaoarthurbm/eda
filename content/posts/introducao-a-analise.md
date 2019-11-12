@@ -18,7 +18,13 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 
 Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo apresenta os tempos de computação de diferentes algoritmos de ordenação à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.
 
-![comp-ordenacao](comparacao-ordenacao.jpeg "Comparação de Algoritmos de Ordenação")
+
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="comparacao-ordenacao.jpeg">
+    <figcaption align="center">
+        Comparação de algoritmos de ordenação
+    </figcaption>
+</figure>
 
 A abordagem empírica para análise de algoritmos é útil, pois, se conduzida de maneira metodologicamente apropriada, fornece valores precisos sobre o tempo de execução de um algoritmo. No entanto, essa abordagem apresenta algumas desvantagens. Primeiro, existe um alto custo relacionado à implementação de todos os algoritmos, além da configuração, execução e análise do experimento. Além disso, note que as conclusões são limitadas ao espaço de entrada do experimento. Por fim, os resultados são dependentes do hardware utilizado.
 

@@ -108,7 +108,9 @@ Array? Nós havíamos implementado <a class="external" href="https://joaoarthurb
 
 Nós vamos utilizar um array para implementar o Heap. Então, antes precisamos entender como os elementos dispostos em um array podem representar um Heap. Veja o exemplo abaixo:
 
-![heap-exemplo-menor](heap-exemplo-menor.png)
+<figure style="align: center; margin-left:15%; width: 70%">
+    <img src="heap-exemplo-menor.png">
+</figure>
 
 O array que representa esse Heap é $heap = [48, 24, 45, 14]$. Como? Basta percorrer o Heap em largura e preencher o array. Ou seja, o índice 0 do array sempre será preenchido com a raiz, neste caso o valor 48. Depois, no índice 1, o array é preenchido com o valor 24. O índice 2 recebe o valor 45 e, por último, o índice 3 recebe o valor 14.
 

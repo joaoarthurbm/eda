@@ -77,7 +77,10 @@ A única mudança que fizemos foi adicionar o comando ***for*** com `i` variando
 
 Para fixar bem, veja a animação abaixo copiada <a class="external" href="https://medium.com/yay-its-erica/algorithms-for-beginners-bubble-sort-insertion-sort-merge-sort-29bd5506cc48"> deste material.</a> Note que a ideia é sempre inserir um elemento em uma sequência já ordenada.
 
-![animacao](animacao.gif)
+<figure style="align: center; margin-left:20%; width: 60%">
+	<img src="animacao.gif">
+</figure>
+
 
 ## Propriedades e Análise de eficiência
 
