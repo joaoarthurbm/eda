@@ -53,6 +53,18 @@
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;Árvores Binárias de Pesquisa&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;//joaoarthurbm.github.io/eda/posts/heap&#34;&gt;Heap&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda-book,
+  title     = {Estrutura de Dados},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
        </item>
        
@@ -88,6 +100,18 @@ basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/e
 &lt;/ul&gt;
 
 &lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-implementacoes/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda-book,
+  title     = {Estrutura de Dados},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+}
+&lt;/code&gt;&lt;/pre&gt;
 </description>
        </item>
        
