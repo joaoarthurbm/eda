@@ -13,7 +13,7 @@ meta = "false"
 * [Análise de Algoritmos recursivos](http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos)
 
 ### Ordenação
-* [Selectio Sort](http://joaoarthurbm.github.io/eda/posts/selection-sort)
+* [Selection Sort](http://joaoarthurbm.github.io/eda/posts/selection-sort)
 * [Insertion Sort](http://joaoarthurbm.github.io/eda/posts/insertion-sort)
 * [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear)
 

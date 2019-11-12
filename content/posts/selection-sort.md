@@ -37,8 +37,7 @@ Este algoritmo é elementar. Basta percorrer o array comparando os elementos par
 
 Ao fim da execução deste algoritmo temos uma certeza: o menor elemento está no índice 0 do array.
 
-
-<p align="center"> Como usar esta rotina para ordenar um array?</p>
+## Como usar esta rotina para ordenar um array?
 
 Ora, basta repetir esse mesmo processo para o restante do array. Vamos ver a execução para o $values = [70, 90, 1, 3, 0, 100, 2]$
 
