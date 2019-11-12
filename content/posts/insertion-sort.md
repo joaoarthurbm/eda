@@ -122,7 +122,16 @@ Feito. Array ordenado.
 
 Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + ... (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.
 
+No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Deste maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$
+
 É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>.
+
+É também importante traçar o paralelo entre o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/selection-sort/">Selection Sort</a> e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado. 
+
+Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.
+
+Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta melhor desempenho do que o Selection Sort.
+
 
 ***
 
@@ -133,11 +142,10 @@ Note que o tempo de execução é dado pela soma dos passos de cada iteração. 
 * O Insertion Sort é in-place, estável e $O(n^2)$.
 
 * O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.
+	* No melhor caso o Insertion Sort é $O(n)$. Isso ocorre quando o array já está ordenado.
 
 ***
 
 # Notas
 
-Capítulos 2 do livro “Algoritmos: Teoria e Prática” de Cormen et. al. aborda este mesmo assunto com profundidade. Em particular, a análise de eficiência é discutida com mais detalhes.
-
-Vale a pena utilizar o <a class="external" href="https://visualgo.net/en/sorting">VisuAlgo</a> para visualizar a execução do Insertion Sort e de outros algoritmos de ordenação.
+Vale a pena utilizar o <a class="external" href="https://visualgo.net/en/sorting">VisuAlgo</a> para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.
