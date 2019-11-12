@@ -908,7 +908,7 @@ adicionado.
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Ao fim da execução deste algoritmo temos uma certeza: o menor elemento está no índice 0 do array.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; Como usar esta rotina para ordenar um array?&lt;/p&gt;
+&lt;h2 id=&#34;como-usar-esta-rotina-para-ordenar-um-array&#34;&gt;Como usar esta rotina para ordenar um array?&lt;/h2&gt;
 
 &lt;p&gt;Ora, basta repetir esse mesmo processo para o restante do array. Vamos ver a execução para o $values = [70, 90, 1, 3, 0, 100, 2]$&lt;/p&gt;
 
