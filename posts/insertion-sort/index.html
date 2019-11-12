@@ -112,7 +112,7 @@
 
         
 
-        <li>6 minutes read</li>
+        <li>7 minutes read</li>
 
         
 
@@ -191,7 +191,9 @@
 
 <p>Para fixar bem, veja a animação abaixo copiada <a class="external" href="https://medium.com/yay-its-erica/algorithms-for-beginners-bubble-sort-insertion-sort-merge-sort-29bd5506cc48"> deste material.</a> Note que a ideia é sempre inserir um elemento em uma sequência já ordenada.</p>
 
-<p><img src="animacao.gif" alt="animacao" /></p>
+<figure style="align: center; margin-left:20%; width: 60%">
+    <img src="animacao.gif">
+</figure>
 
 <h2 id="propriedades-e-análise-de-eficiência">Propriedades e Análise de eficiência</h2>
 
@@ -235,7 +237,15 @@
 
 <p>Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + &hellip; (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.</p>
 
+<p>No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Deste maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$</p>
+
 <p>É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>.</p>
+
+<p>É também importante traçar o paralelo entre o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/selection-sort/">Selection Sort</a> e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado.</p>
+
+<p>Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.</p>
+
+<p>Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta melhor desempenho do que o Selection Sort.</p>
 
 <hr />
 
@@ -246,16 +256,18 @@
 
 <li><p>O Insertion Sort é in-place, estável e $O(n^2)$.</p></li>
 
-<li><p>O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.</p></li>
+<li><p>O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.</p>
+
+<ul>
+<li>No melhor caso o Insertion Sort é $O(n)$. Isso ocorre quando o array já está ordenado.</li>
+</ul></li>
 </ul>
 
 <hr />
 
 <h1 id="notas">Notas</h1>
 
-<p>Capítulos 2 do livro “Algoritmos: Teoria e Prática” de Cormen et. al. aborda este mesmo assunto com profundidade. Em particular, a análise de eficiência é discutida com mais detalhes.</p>
-
-<p>Vale a pena utilizar o <a class="external" href="https://visualgo.net/en/sorting">VisuAlgo</a> para visualizar a execução do Insertion Sort e de outros algoritmos de ordenação.</p>
+<p>Vale a pena utilizar o <a class="external" href="https://visualgo.net/en/sorting">VisuAlgo</a> para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.</p>
 
 
 </article>
@@ -270,7 +282,7 @@
         
         
         <li>
-            <a href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">Análise de Algoritmos Recursivos <i class="fa fa-chevron-circle-right"></i> </a>
+            <a href="https://joaoarthurbm.github.io/eda/posts/selection-sort/">Ordenação por Comparação: Selection Sort <i class="fa fa-chevron-circle-right"></i> </a>
         </li>
         
     </ul>

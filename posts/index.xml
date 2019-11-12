@@ -32,7 +32,12 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 
 &lt;p&gt;Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo apresenta os tempos de computação de diferentes algoritmos de ordenação à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;comparacao-ordenacao.jpeg&#34; alt=&#34;comp-ordenacao&#34; title=&#34;Comparação de Algoritmos de Ordenação&#34; /&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;comparacao-ordenacao.jpeg&#34;&gt;
+    &lt;figcaption align=&#34;center&#34;&gt;
+        Comparação de algoritmos de ordenação
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;A abordagem empírica para análise de algoritmos é útil, pois, se conduzida de maneira metodologicamente apropriada, fornece valores precisos sobre o tempo de execução de um algoritmo. No entanto, essa abordagem apresenta algumas desvantagens. Primeiro, existe um alto custo relacionado à implementação de todos os algoritmos, além da configuração, execução e análise do experimento. Além disso, note que as conclusões são limitadas ao espaço de entrada do experimento. Por fim, os resultados são dependentes do hardware utilizado.&lt;/p&gt;
 
@@ -446,7 +451,9 @@ Operações Primitivas
 
 &lt;p&gt;Formalmente dizemos que $g(n)=n$ é um limite assintótico restrito para $f(n)$. A figura abaixo descreve essa relação entre uma função quadrática e as funções $3n$ e $n^2$.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;theta.png&#34; alt=&#34;theta&#34; width=&#34;1px&#34; height=&#34;320px&#34;/&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:10%; width: 80%&#34;&gt;
+    &lt;img src=&#34;theta.png&#34;&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)&amp;lt;= f(n)&amp;lt;= c2*g(n)$.&lt;/p&gt;
 
@@ -488,7 +495,9 @@ Operações Primitivas
 
 &lt;p&gt;Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;bigo.png&#34; alt=&#34;bigo&#34; /&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:10%; width: 80%&#34;&gt;
+    &lt;img src=&#34;bigo.png&#34;&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;O processo para demonstrar que $f(n)$ é $O(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.&lt;/p&gt;
 
@@ -520,7 +529,9 @@ Operações Primitivas
 
 &lt;p&gt;A figura abaixo ilustra essa relação.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;omega.png&#34; alt=&#34;omega&#34; /&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:10%; width: 80%&#34;&gt;
+    &lt;img src=&#34;omega.png&#34;&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.&lt;/p&gt;
 
@@ -863,6 +874,149 @@ adicionado.
        </item>
        
        <item>
+         <title>Ordenação por Comparação: Selection Sort</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/selection-sort/</link>
+         <pubDate>Sun, 27 Oct 2019 02:01:01 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/selection-sort/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;direto-ao-ponto&#34;&gt;Direto ao ponto&lt;/h1&gt;
+
+&lt;p&gt;Se você pedir para alguém que não é familiarizado com algoritmos para que ordene uma sequência de números, há uma probabilidade alta dessa pessoa aplicar o Selection Sort. Isso porque esse algoritmo tem uma rotina básica muito simples e direta: selecionar (daí o nome Selection Sort) o menor elemento da sequência e colocar esse elemento na primeira posição do array. A ideia é executar várias vezes esses dois passos para ordenar um array. Para ser exato, se executarmos $N$ vezes esses dois passos em um array, controlando os índices em que os passos são executados, o resultado é a ordenação completa do mesmo.&lt;/p&gt;
+
+&lt;h1 id=&#34;selection-sort&#34;&gt;Selection Sort&lt;/h1&gt;
+
+&lt;h2 id=&#34;selecionando-o-menor&#34;&gt;Selecionando o menor&lt;/h2&gt;
+
+&lt;p&gt;Este algoritmo é elementar. Basta percorrer o array comparando os elementos para determinar qual é o menor. No início, assumimos que o menor elemento está no índice 0 (&lt;code&gt;indice_menor = 0&lt;/code&gt;) e iteramos a partir do segundo índice comparando os elementos.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+	&lt;span style=&#34;color:#75715e&#34;&gt;// encontra o índice do menor elemento
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;indice_menor&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 1; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (v[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v[indice_menor])
+			indice_menor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i;
+	}
+
+	&lt;span style=&#34;color:#75715e&#34;&gt;// coloca o menor na primeira posição
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[0];
+	v[0] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[indice_menor];
+	v[indice_menor] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ao fim da execução deste algoritmo temos uma certeza: o menor elemento está no índice 0 do array.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt; Como usar esta rotina para ordenar um array?&lt;/p&gt;
+
+&lt;p&gt;Ora, basta repetir esse mesmo processo para o restante do array. Vamos ver a execução para o $values = [70, 90, 1, 3, 0, 100, 2]$&lt;/p&gt;
+
+&lt;p&gt;Na primeira execução, 0 é o menor valor. Encontramos esse valor e trocamos com a primeira posição (70).&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;[&lt;font color=&#34;blue&#34;&gt;70&lt;/font&gt;, 90, 1, 3, &lt;font color=&#34;red&#34;&gt;0&lt;/font&gt;, 100, 2]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;[&lt;font color=&#34;red&#34;&gt;0&lt;/font&gt;, 90, 1, 3, &lt;font color=&#34;blue&#34;&gt;70&lt;/font&gt;, 100, 2]&lt;/p&gt;
+
+&lt;p&gt;Agora, aplicamos a mesma ideia para o restante do array, ou seja, no intervalo de índices $[1, values.length - 1]$.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;[0, &lt;font color=&#34;blue&#34;&gt;90&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 3, 70, 100, 2]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;[0, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;90&lt;/font&gt;, 3, 70, 100, 2]&lt;/p&gt;
+
+&lt;p&gt;Depois, aplicamos a mesma ideia para o restante do array, ou seja, no intervalo de índices $[2, values.length - 1]$.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;[0, 1, &lt;font color=&#34;blue&#34;&gt;90&lt;/font&gt;, 3, 70, 100, &lt;font color=&#34;red&#34;&gt;2&lt;/font&gt;]&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;[0, 1, &lt;font color=&#34;red&#34;&gt;2&lt;/font&gt;, 3, 70, 100, &lt;font color=&#34;blue&#34;&gt;90&lt;/font&gt;]&lt;/p&gt;
+
+&lt;p&gt;Continuamos aplicando a mesma ideia para o restante do array, ou seja, no intervalo de índices $[3, values.length - 1]$. Como 3 já está no seu lugar, ele será trocado por ele mesmo. O mesmo acontece com o intervalo de índices $[4, values.length - 1]$, onde 70 já está em sua posição.&lt;/p&gt;
+
+&lt;p&gt;Aplicando, então, para o intervalo de índices $[5, values.length - 1]$, temos:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;[0, 1, 2, 3, 70, &lt;font color=&#34;blue&#34;&gt;100&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;90&lt;/font&gt;]&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;[0, 1, 2, 3, 70, &lt;font color=&#34;red&#34;&gt;90&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;100&lt;/font&gt;]&lt;/p&gt;
+
+&lt;p&gt;Por fim, aplicado para o intervalo $[6, values.length - 1]$, temos que 100 já está em sua posição.&lt;/p&gt;
+
+&lt;p&gt;Feito! O array está ordenado. Note que apenas executamos a rotina de encontrar o menor e colocar na primeira posição várias vezes. Para ser exato, executamos $N$ vezes, variando a faixa de valores que o algoritmo deve avaliar.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;selectionSort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;) {	
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+		
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i_menor&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i;
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;)
+			&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (v[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; v[i_menor])
+				i_menor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; j;
+		
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[i];
+		v[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[i_menor];
+		v[i_menor] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+	
+	}		
+}
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Abaixo podemos ver uma animação produzida pelo &lt;a class=&#34;external&#34; href=&#34;https://algorithms.tutorialhorizon.com/selection-sort-java-implementation/selection-sort-gif/&#34;&gt;TutorialHorizon&lt;/a&gt;.&lt;/p&gt;
+
+&lt;figure style=&#34;align: center; margin-left:20%; width: 60%&#34;&gt;
+    &lt;img src=&#34;selection.gif&#34;&gt;
+&lt;/figure&gt;
+
+&lt;h2 id=&#34;propriedades-e-análise-de-eficiência&#34;&gt;Propriedades e Análise de eficiência&lt;/h2&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Selection Sort é in-place e $O(n^2)$, mas não é estável.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Lembrando que estabilidade é uma propriedade relacionada à ordem relativa de valores iguais no array original. Por exemplo, se houver dois valores 97 no array antes da ordenação, após a execução do algoritmo, esses dois valores devem seguir a ordem relativa inicial. Ou seja, ao término da execução do algoritmo, a primeira ocorrência do 97 deve vir antes da segunda ocorrência do 97.&lt;/p&gt;
+
+&lt;p&gt;O Selection Sort não é estável porque dependendo das trocas, ele não mantém a ordem relativa dos valores iguais. Vamos analisar um exemplo em que isso acontece. Para diferenciar valores iguais, vou colocar os subscritos $a$ e $b$, ok?&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$values = [1, 7_a, 7_b, 2] $&lt;/p&gt;
+
+&lt;p&gt;Na primeira iteração, o menor valor é 1 e, por isso, fica na posição em que está. Depois, na segunda iteração o menor valor é 2 e deve trocar de lugar com $7_a$. O resultado parcial é:&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;$values = [1, 2, 7_b, 7_a] $&lt;/p&gt;
+
+&lt;p&gt;Na terceira iteração $7_b$ é o menor e fica no lugar em que está. Na última iteração $7_a$ já o menor do array restante e fica no lugar em que está.&lt;/p&gt;
+
+&lt;p&gt;Como resultado, temos que $7_a$ vinha antes de $7_b$ no array original, mas essa ordem relativa foi trocada depois da ordenação. Portanto, o algoritmo não é estável.&lt;/p&gt;
+
+&lt;p&gt;O Selection Sort é &lt;em&gt;in-place&lt;/em&gt; porque a ordenação é feita rearranjando os elementos no próprio array, ao invés de usar arrays ou outras estruturas auxiliares.&lt;/p&gt;
+
+&lt;p&gt;O Selection Sort é $O(n^2)$. A busca pelo menor elemento custa $n - 1$ passos na primeira iteração, $n - 2$ passos na segunda, $n - 3$ passos na terceira e assim por diante. Assim como no caso do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/insertion-sort/&#34;&gt;Insertion Sort&lt;/a&gt;, o custo é dado pela soma dos termos da Progressão Aritmética $1 + 2 + 3 + &amp;hellip; (n - 1)$, com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Selection Sort é $\Theta(n^2)$.&lt;/p&gt;
+
+&lt;p&gt;É importante traçar o paralelo entre o Selection Sort e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado.&lt;/p&gt;
+
+&lt;p&gt;Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.&lt;/p&gt;
+
+&lt;p&gt;Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta melhor desempenho do que o Selection Sort.&lt;/p&gt;
+
+&lt;p&gt;Por fim, O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;resumo&#34;&gt;Resumo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;O Selection Sort segue uma rotina bem simples e direta: encontrar o menor elemento e colocá-lo na primeira posição. A ordenação nada mais é do que aplicar essa rotina repetidas vezes para o restante do array.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O Selection sort é in-place e $O(n^2)$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;A implementação clássica do Selection Sort não é estável.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Embora sejam da mesma classe de complexidade, o Selection Sort, na prática, é mais lento do que o Insertion Sort.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Vale a pena utilizar o &lt;a class=&#34;external&#34; href=&#34;https://visualgo.net/en/sorting&#34;&gt;VisuAlgo&lt;/a&gt; para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.&lt;/p&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Ordenação por Comparação: Insertion Sort</title>
          <link>https://joaoarthurbm.github.io/eda/posts/insertion-sort/</link>
          <pubDate>Sun, 27 Oct 2019 01:01:01 -0300</pubDate>
@@ -937,7 +1091,9 @@ adicionado.
 
 &lt;p&gt;Para fixar bem, veja a animação abaixo copiada &lt;a class=&#34;external&#34; href=&#34;https://medium.com/yay-its-erica/algorithms-for-beginners-bubble-sort-insertion-sort-merge-sort-29bd5506cc48&#34;&gt; deste material.&lt;/a&gt; Note que a ideia é sempre inserir um elemento em uma sequência já ordenada.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;animacao.gif&#34; alt=&#34;animacao&#34; /&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:20%; width: 60%&#34;&gt;
+    &lt;img src=&#34;animacao.gif&#34;&gt;
+&lt;/figure&gt;
 
 &lt;h2 id=&#34;propriedades-e-análise-de-eficiência&#34;&gt;Propriedades e Análise de eficiência&lt;/h2&gt;
 
@@ -981,7 +1137,15 @@ adicionado.
 
 &lt;p&gt;Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + &amp;hellip; (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.&lt;/p&gt;
 
+&lt;p&gt;No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Deste maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$&lt;/p&gt;
+
 &lt;p&gt;É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;É também importante traçar o paralelo entre o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/selection-sort/&#34;&gt;Selection Sort&lt;/a&gt; e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado.&lt;/p&gt;
+
+&lt;p&gt;Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.&lt;/p&gt;
+
+&lt;p&gt;Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta melhor desempenho do que o Selection Sort.&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -992,16 +1156,18 @@ adicionado.
 
 &lt;li&gt;&lt;p&gt;O Insertion Sort é in-place, estável e $O(n^2)$.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;No melhor caso o Insertion Sort é $O(n)$. Isso ocorre quando o array já está ordenado.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
 
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 
-&lt;p&gt;Capítulos 2 do livro “Algoritmos: Teoria e Prática” de Cormen et. al. aborda este mesmo assunto com profundidade. Em particular, a análise de eficiência é discutida com mais detalhes.&lt;/p&gt;
-
-&lt;p&gt;Vale a pena utilizar o &lt;a class=&#34;external&#34; href=&#34;https://visualgo.net/en/sorting&#34;&gt;VisuAlgo&lt;/a&gt; para visualizar a execução do Insertion Sort e de outros algoritmos de ordenação.&lt;/p&gt;
+&lt;p&gt;Vale a pena utilizar o &lt;a class=&#34;external&#34; href=&#34;https://visualgo.net/en/sorting&#34;&gt;VisuAlgo&lt;/a&gt; para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.&lt;/p&gt;
 </description>
        </item>
        
@@ -3368,7 +3534,9 @@ da esquerda para a direita.
 
 &lt;p&gt;Nós vamos utilizar um array para implementar o Heap. Então, antes precisamos entender como os elementos dispostos em um array podem representar um Heap. Veja o exemplo abaixo:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&#34;heap-exemplo-menor.png&#34; alt=&#34;heap-exemplo-menor&#34; /&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:15%; width: 70%&#34;&gt;
+    &lt;img src=&#34;heap-exemplo-menor.png&#34;&gt;
+&lt;/figure&gt;
 
 &lt;p&gt;O array que representa esse Heap é $heap = [48, 24, 45, 14]$. Como? Basta percorrer o Heap em largura e preencher o array. Ou seja, o índice 0 do array sempre será preenchido com a raiz, neste caso o valor 48. Depois, no índice 1, o array é preenchido com o valor 24. O índice 2 recebe o valor 45 e, por último, o índice 3 recebe o valor 14.&lt;/p&gt;
 
