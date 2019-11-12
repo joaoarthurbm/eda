@@ -26,3 +26,16 @@ meta = "false"
 ### Árvores
 * [Árvores Binárias de Pesquisa](http://joaoarthurbm.github.io/eda/posts/bst)
 * [Heap](//joaoarthurbm.github.io/eda/posts/heap)
+
+***
+
+### Cite este material
+
+```
+@book{eda-book,
+  title     = {Estrutura de Dados},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+}
+```

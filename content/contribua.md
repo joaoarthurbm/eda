@@ -28,3 +28,16 @@ Contribuições esperadas:
 * Documentação do código.
 
 <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/"> <font color="#1980e6"> <b>Repositório das estruturas implementadas.</b></font></a></aside>
+
+***
+
+## Cite este material
+
+```
+@book{eda-book,
+  title     = {Estrutura de Dados},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+}
+```
