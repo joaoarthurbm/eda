@@ -58,11 +58,16 @@
 
 &lt;h3 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h3&gt;
 
-&lt;pre&gt;&lt;code&gt;@book{eda-book,
-  title     = {Estrutura de Dados},
+&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
+Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
   author    = {João Arthur Brunet}, 
   publisher = {Computação @ UFCG},
   year      = 2019,
+  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
 }
 &lt;/code&gt;&lt;/pre&gt;
 </description>
@@ -105,11 +110,16 @@ basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/e
 
 &lt;h2 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;@book{eda-book,
-  title     = {Estrutura de Dados},
+&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
+Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
   author    = {João Arthur Brunet}, 
   publisher = {Computação @ UFCG},
   year      = 2019,
+  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
 }
 &lt;/code&gt;&lt;/pre&gt;
 </description>
