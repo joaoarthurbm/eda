@@ -481,6 +481,7 @@ Em resumo, para construir um Heap a partir de um array qualquer basta aplicar **
 ...
     public Heap(int[] heap) {
         this.heap = heap;
+        this.tail = this.heap.length - 1;
         this.buildHeap();
     }
     
