@@ -359,7 +359,7 @@ Operações Primitivas
 
 &lt;p&gt;f(n) = &lt;del&gt;1.1&lt;/del&gt; * n ** 2 &lt;del&gt;+ (10 + sin(n+15)*n**1.5) + 9000&lt;/del&gt;&lt;/p&gt;
 
-&lt;p&gt;Ou seja, do ponto de vista da ordem de crescimento, para grandes valores de $n$, as constantes e os expoentes de maior magnitude são insignificantes, nos permitindo simplificar a expressão do tempo de execução para $\Theta(n^2)$. A notação theta será discutida com mais detalhes na próxima seção.&lt;/p&gt;
+&lt;p&gt;Ou seja, do ponto de vista da ordem de crescimento, para grandes valores de $n$, as constantes e os expoentes de menor magnitude são insignificantes, nos permitindo simplificar a expressão do tempo de execução para $\Theta(n^2)$. A notação theta será discutida com mais detalhes na próxima seção.&lt;/p&gt;
 
 &lt;p&gt;Agora sim, é muito mais direto olhar para $n^2$ ter uma ideia clara do crescimento do tempo de execução do algoritmo, porque $n^2$ é uma função que já conhecemos bastante.&lt;/p&gt;
 
@@ -3885,6 +3885,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Heap&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;) {
         &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; heap;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;buildHeap&lt;/span&gt;();
     }
     

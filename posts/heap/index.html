@@ -591,6 +591,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
     <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Heap</span>(<span style="color:#66d9ef">int</span>[] <span style="color:#a6e22e">heap</span>) {
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span> <span style="color:#f92672">=</span> heap;
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1;
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">buildHeap</span>();
     }
     
