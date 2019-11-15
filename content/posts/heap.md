@@ -466,7 +466,7 @@ Vamos acompanhar passo a passo esse algoritmo. A primeira execução do heapify 
 
 ![build-heap2](build-heap2.png)
 
-Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 2. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.
+Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 20. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.
 
 ![build-heap3](build-heap3.png)
 
@@ -506,7 +506,7 @@ Em resumo, para construir um Heap a partir de um array qualquer basta aplicar **
 
 * Por ser completo ou quase-completo da esquerda para a direita, podemos implementar Heaps em arrays, ao invés de nós ligados. 
 
-* A array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.
+* O array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.
 
 * Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice ***i** é dada por $2*i+1$. A direita de um nó no índice ***i** é dada por $2*(i+1)$. O pai de um nó no índice ***i*** é dados por $int((index - 1) / 2)$.
 
