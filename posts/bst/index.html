@@ -167,7 +167,7 @@ BST é definida recursivamente da seguinte forma:</p>
 
 <h2 id="raiz">Raiz</h2>
 
-<p>Raiz é um nó especial da árvore. Através dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.</p>
+<p>Raiz é um nó especial da árvore. Por meio dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.</p>
 
 <h2 id="grau-de-um-nó">Grau de um nó</h2>
 
@@ -203,7 +203,7 @@ BST é definida recursivamente da seguinte forma:</p>
 
 <p>Importante aqui notar que a árvore contém 15 nós e altura 3. De maneira geral, não é difícil perceber que o número máximo de nós em uma árvore binária de altura $h$ é $2^{h+1} - 1$.</p>
 
-<p>Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejamO(log n), pois são dependentes da altura.</p>
+<p>Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejam O(log n), pois são dependentes da altura.</p>
 
 <h2 id="sucessor">Sucessor</h2>
 
@@ -311,13 +311,17 @@ BST é definida recursivamente da seguinte forma:</p>
         
     <span style="color:#66d9ef">if</span> (element <span style="color:#f92672">&lt;</span> node.<span style="color:#a6e22e">value</span>) {
         <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
-            node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(element);
+            Node <span style="color:#a6e22e">newNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(element);
+            node.<span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> newNode;
+            newNode.<span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> node;
             <span style="color:#66d9ef">return</span>;
         }
         recursiveAdd(node.<span style="color:#a6e22e">left</span>, element);
     } <span style="color:#66d9ef">else</span> {
         <span style="color:#66d9ef">if</span> (node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
-            node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(element);
+            Node <span style="color:#a6e22e">newNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(element);
+            node.<span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> newNode;
+            newNode.<span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> node;
             <span style="color:#66d9ef">return</span>;
         }
         recursiveAdd(node.<span style="color:#a6e22e">right</span>, element);
@@ -332,9 +336,9 @@ BST é definida recursivamente da seguinte forma:</p>
 <p>As verificações e condições de parada são as mesmas da versão iterativa:</p>
 
 <ul>
-<li><p>se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;</p></li>
+<li><p>se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual e faz-se a ligação para o nó pai. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;</p></li>
 
-<li><p>se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.</p></li>
+<li><p>se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual e faz-se a ligação para o nó pai. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.</p></li>
 </ul>
 
 <p>Em ambas as estratégias o novo elemento é adicionado como folha. Portanto, no pior caso, a adição tem tempo de execução dado por $O(h)$, pois $h$ é o maior caminho entre a raiz e todas as folhas.</p>
@@ -372,7 +376,7 @@ BST é definida recursivamente da seguinte forma:</p>
     <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> recursiveSearch(node.<span style="color:#a6e22e">right</span>, element);
 }
 ...</code></pre></div>
-<p>A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (<strong><em>recursiveSearch(node.left, element)</em></strong>). Se for menor, há uma chamada recursiva para a direita (<strong><em>recursiveSearch(node.right, element)</em></strong>). O algoritmo pára o nó sob análise for nulo.</p>
+<p>A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (<strong><em>recursiveSearch(node.left, element)</em></strong>). Se for maior, há uma chamada recursiva para a direita (<strong><em>recursiveSearch(node.right, element)</em></strong>). O algoritmo pára o nó sob análise for nulo.</p>
 
 <p>A busca binária tem seu tempo de execução dependente da altura da árvore, pois no pior caso o algoritmo percorre um ramo da árvore até o final e esse ramo tem altura $h$. Assim, a busca binária é $O(h)$.</p>
 
@@ -409,7 +413,7 @@ BST é definida recursivamente da seguinte forma:</p>
 
 <p>Qual é o sucessor de 20? Se há sub-árvore à direita, basta retornamos o mínimo dessa sub-árvore. Ou seja, 27.</p>
 
-<p>E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.</p>
+<p>E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65, sendo 65 maior que 55, a busca é finalizada. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.</p>
 
 <p>Você não precisa decorar isso, certo? Faz todo sentido procurar pelo mínimo da sub-árvore à direita, pois é lá que estão os valores maiores que o nó. O mínimo deles é o sucessor. E se não houver sub-árvore à direita, é natural que o sucessor esteja árvore acima, pois à esquerda todos os valores são menores. Então o algoritmo verifica árvore acima o primeiro elemento maior que o nó sob análise.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Node</span> sucessor(Node <span style="color:#a6e22e">node</span>) {
@@ -439,7 +443,7 @@ Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa s
 
 <p>Qual é o predecessor de 20? Se há sub-árvore à esquerda, basta retornamos o máximo dessa sub-árvore. Ou seja, 15.</p>
 
-<p>E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.</p>
+<p>E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20, sendo 20 menor que 27, a busca é finalizada. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.</p>
 
 <p>Você não precisa decorar isso, certo? Faz todo sentido procurar pelo máximo da sub-árvore à esquerda, pois é lá que estão os valores menores que o nó. O máximo deles é o predecessor. E se não houver sub-árvore à esquerda, é natural que o predecessor esteja árvore acima, pois à direita todos os valores são maiores. Então o algoritmo verifica árvore acima o primeiro elemento menor que o nó sob análise.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Node</span> predecessor(Node <span style="color:#a6e22e">node</span>) {

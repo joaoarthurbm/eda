@@ -1172,6 +1172,196 @@ adicionado.
        </item>
        
        <item>
+         <title>Ordenação por Comparação: Quick Sort</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/quick-sort/</link>
+         <pubDate>Sun, 27 Oct 2019 00:01:01 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/quick-sort/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação. Seu funcionamento baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;particionamento&lt;/em&gt;&lt;/strong&gt;. Particionar significa escolher um número qualquer presente no array, chamado de &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos da direita são maiores.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;particionamento&#34;&gt;Particionamento&lt;/h1&gt;
+
+&lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Vamos particionar o array $[3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$. Saiba, não vou entrar em detalhes sobre como é feito o particionamento agora. Neste momento minha preocupação é que você saiba o que é particionar, não como. Então, vamos ver o estado do array antes e depois de particionar. Como disse, precisamos escolher um &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;. Por ora, vamos sempre escolher o primeiro elemento do array. Ou seja, nosso &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; é o valor 3.&lt;/p&gt;
+
+&lt;p&gt;Antes do particionamento: [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 7, 10, 0, 23, 2, 1, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Depois do particionamento: [1, 0, 2, &lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 23, 7, 10, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Note que todos os elementos à esquerda do pivot são menores ou iguais ao pivot e todos os elementos à direita do pivot são maiores. Isso não significa que os elementos à esquerda e à direita devem necessariamente estar ordenados. Apenas significa que o &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; está em sua posição e o problema de ordenar agora resume-se a resolver a esquerda dele e a direita dele, concorda?&lt;/p&gt;
+
+&lt;p&gt;Antes disso, já que entendemos o que é particionamento, vamos agora ver como este algoritmo funciona. Há duas estratégias populares de particionamento: Lomuto e Hoare. Neste material nós vamos abordar a estratégia de Lomuto, que é mais simples. O particionamento Hoare é discutido em detalhes &lt;a class=&#34;external&#34; href=&#34;link&#34;&gt;neste outro material&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A ideia do particionamento de Lomuto é identificar os elementos menores ou iguais ao pivot e colocá-los imediatamente à frente dele. Depois, no final, coloca-se o pivot à frente deles todos. Vamos ver um exemplo concreto para ver como funciona essa ideia.&lt;/p&gt;
+
+&lt;p&gt;Para o array $values = [3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$, temos que $pivot = 3$. Vamos iterar no array identificando os elementos menores ou iguais a ele. O primeiro identificado é o valor 0.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 7, 10, &lt;font color=&#34;blue&#34;&gt;0&lt;/font&gt;, 23, 2, 1, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Nosso trabalho agora é colocar o valor 0 à frente do pivot. Então, trocamos esse valor com o valor 8 (imediatamente à frente de 3). Note, no estado parcial, que 0 ficou à frente de 3 e 8 assumiu o índice de 0.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;0&lt;/font&gt;, 7, 10, 8, 23, 2, 1, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Acabou? Não. O próximo elemento menor ou igual ao pivot (3) é 2.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;0&lt;/font&gt;, 7, 10, 8, 23, &lt;font color=&#34;blue&#34;&gt;2&lt;/font&gt;, 1, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Temos que trazer 2 para a frente de 3. Vamos fazer isso trocando este valor com o valor 7. Veja, no estado parcial, que agora os valores 0 e 2 estão à frente de 3.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;0, 2&lt;/font&gt;, 10, 8, 23, 7, 1, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Acabou? Não. O próximo elemento menor ou igual ao pivot (3) é 1.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;0, 2&lt;/font&gt;, 10, 8, 23, 7, &lt;font color=&#34;blue&#34;&gt;1&lt;/font&gt;, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Temos que trazer 1 para a frente de 3. Vamos fazer isso trocando este valor com o valor 10. Veja, no estado parcial, que agora os valores 0, 2 e 1 estão à frente de 3.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, &lt;font color=&#34;blue&#34;&gt;0, 2, 1&lt;/font&gt;, 8, 23, 7, 10, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;E agora? Agora não há mais elementos menores ou iguais ao pivot para serem identificados. Todos os elementos menores ou iguais (0, 2 e 1) estão imediatamente à frente dele. Então, basta trocarmos o pivot (3) com o último deles (1).&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;1, 0, 2&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 23, 7, 10, 77, 7]&lt;/p&gt;
+
+&lt;p&gt;Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à sua esquerda e os elementos maiores à direita.&lt;/p&gt;
+
+&lt;p&gt;Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.&lt;/p&gt;
+
+&lt;h2 id=&#34;implementação-do-particionamento-de-lomuto&#34;&gt;Implementação do Particionamento de Lomuto&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partition&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;values&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pivot&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[left];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (values[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot) {
+                i&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;1;
+                swap(values, i, j);
+            }
+        }
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// troca pivot (values[left]) com i.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        swap(values, left, i);
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; i; 
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Em primeiro lugar, vamos entender a assinatura do método &lt;strong&gt;&lt;em&gt;particiona&lt;/em&gt;&lt;/strong&gt;. Naturalmente, ele recebe como parâmetro o array a ser particionado. Recebe também dois índices válidos do array (&lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;) que determinam os limites em que o algoritmo deve agir. Como o particionamento será usado dentro do contexto do Quick Sort, que é recursivo, precisamos controlar a faixa de valores em que o particiona será executado através destes índices. Claro, na primeira chamada, &lt;code&gt;left = 0&lt;/code&gt; e &lt;code&gt;right = values.length - 1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;A primeira linha do método é a escolha do pivot. Estamos sempre escolhendo o elemento no primeiro índice como o pivot, por isso temos &lt;code&gt;pivot = values[left]&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Depois, lembre-se, precisamos iterar sobre o array procurando os elementos menores ou iguais e trocando-os com as posições à frente do pivot. Quem irá controlar a iteração é a variável &lt;strong&gt;&lt;em&gt;j&lt;/em&gt;&lt;/strong&gt;, enquanto &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; controla as trocas. Então, &lt;strong&gt;&lt;em&gt;j&lt;/em&gt;&lt;/strong&gt; varia sempre da segunda posição (&lt;code&gt;left + 1&lt;/code&gt;), pois não precisamos comparar o &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; com ele mesmo, até a última posição do array (&lt;code&gt;right&lt;/code&gt;). Enquanto isso, &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; começa na posição à frente do pivot &lt;code&gt;j+1&lt;/code&gt; e só é incrementado se um novo valor menor ou igual for encontrado.&lt;/p&gt;
+
+&lt;p&gt;Quando um valor menor ou igual ao &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; for encontrado (&lt;code&gt;if values[j] &amp;lt;= pivot&lt;/code&gt;), efetuamos dois passos:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Incrementar &lt;code&gt;i&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;Trocar $values[i]$ por $values[j]$.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Repete comigo. Sempre que encontrarmos um valor menor ou igual ao &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, incrementamos &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; e trocamos $values[i]$ por $values[i]$.&lt;/p&gt;
+
+&lt;p&gt;Quando encerrar a iteração, basta agora trocar $values[i]$ pela posição do &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;. Ou seja, trocamos $values[i]$ por $values[left]$.&lt;/p&gt;
+
+&lt;p&gt;Por fim, retornamos &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt;, que é a posição final do &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Para fixar bem, vamos ver um outro exemplo com figuras demonstrando o passo a passo.&lt;/p&gt;
+
+&lt;p align=&#34;center&#34;&gt;Início da iteração: j = left + 1 e i = left&lt;/p&gt;
+![quick1](quick1.png)
+
+&lt;p align=&#34;center&#34;&gt;Encontrado o primeiro valor menor que o pivot&lt;/p&gt;
+![quick2](quick2.png)
+
+&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
+![quick3](quick3.png)
+
+&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
+![quick4](quick4.png)
+
+&lt;p align=&#34;center&#34;&gt;Encontrado um outro valor menor que o pivot&lt;/p&gt;
+![quick5](quick5.png)
+
+&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
+![quick6](quick6.png)
+
+&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
+![quick7](quick7.png)
+
+&lt;p align=&#34;center&#34;&gt;Fim da iteração (j == right)&lt;/p&gt;
+![quick8](quick8.png)
+
+&lt;p align=&#34;center&#34;&gt;Troca values[i] por values[left]&lt;/p&gt;
+![quick9](quick9.png)
+
+***
+
+# Quick Sort
+
+## Implementação
+
+Você concorda que após uma execução do ***particiona*** o ***pivot*** está em sua posição na sequência? Isto é, se nossa missão for ordenar o array, não precisamos mais nos preocupar com o ***pivot***, pois ele já está na posição correta. Precisamos, sim, nos preocupar com os elementos nos índices anteriores ao ***pivot***, que estão no intervalo [left, i - 1] e com os elementos nos índices à frente do pivot, que estão no intervalo [i + 1, right].
+
+O Quick Sort, então, é a execução de consectivos particionamentos. Efetua-se o primeiro levando em consideração todo o array (`left = 0` e `right = values.length - 1`). Depois, leva-se em consideração a esquerda do pivot, ou seja, `left = 0` e `right = index_pivot - 1` e a direita do pivot (`left = index_pivot + 1` e `right = values.length - 1`). Depois, os mesmo processo é feito com a esquerda e a direita dos novos pivots e assim por diante até que todo o array já tenha sido percorrido (`left &gt;= right`).
+
+```java
+public static void quickSort(int[] values, int left, int right) {
+	if (left &lt; right) {
+		int index_pivot = partition(values, left, right);
+		quickSort(v, left, index_pivot - 1);
+		quickSort(v, index_pivot + 1, right);	
+	}
+}
+```
+
+Vamos acompanhar as figuras abaixo para visualizar a execução do Quick Sort para o mesmo exemplo que estávamos abordando na seção anterior. 
+
+Após a execução do primeiro particionamento temos este estado:
+
+![quick10](quick10.png)
+
+Note que há agora duas chamadas recursivas. Uma para a esquerda do pivot e outra para a direita do pivot. Cada chamada irá operar sobre os novos &#34;lefts&#34; e &#34;rights&#34;. Por isso o particiona recebe os índices em que deve executar a sua rotina. No exemplo acima, uma nova execução do particiona para a esquerda não irá alterar os valores porque eles já estão ordenados, mas a execução para a direita irá colocar o valor 10 em seu lugar e irá gerar uma nova rodada de duas execuções do particiona. De novo, esse processo acaba quando todas as verificações de `left &lt; right` forem avaliadas com `false`.
+
+## Análise do Tempo de Execução
+
+Lembra dos passos para determinar o tempo de execução de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;algoritmos recursivos?&lt;/a&gt;. O primeiro passo é encontrar a relação de recorrência. O Quick Sort possui uma chamada ao método particiona e duas chamadas recursivas. Diferentemente do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort/&#34;&gt;Merge Sort&lt;/a&gt;, as chamadas recursivas podem não dividir o array ao meio sempre, concorda? Isso vai depender de onde o pivot ficar depois do particiona. Se ele ficar ao meio, naturalmente teremos duas chamadas recursivas para $T(n/2)$. Contudo, se ele ficar bem próximo ao início, por exemplo, teremos uma chamada recursiva para uma pequena porção à esquerda e uma chamada recursiva para uma porção bem maior (à direita). Então, por enquanto, vamos descrever a relação de recorrência como sendo o custo de particionar, somado ao custo da chamada para o array da esquerda e o custo da chamada para o array da direita:
+
+$T(n) = T(|left|) + T(|right|) + \Theta(f(n))$
+
+Vamos deixar as coisas mais claras. Sabemos calcular o tempo de execução do particiona. Se aplicarmos o que já aprendemos no &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório sobre análise&lt;/a&gt; é facil descobrir que o particiona é $\Theta(n)$, onde $n$ é o tamanho do array, pois ele itera somente uma vez sobre todo o array. Então, podemos descrever a relação de recorrência do Quick Sort como:
+
+$T(n) = T(|left|) + T(|right|) + \Theta(n)$
+
+Agora precisamos discutir os termos $T(|left|)$ e $T(|right|)$. Você já entende que o tamanho de ***left*** e ***right*** depende doíndice em que o pivot fica após o particionamento. Vamos discutir o pior caso, primeiro.
+
+## Pior caso
+
+A execução do Quick Sort para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ sempre particiona este array em duas porções cujos tamanhos são 0 e n - 1, respectivamente. Isso fica claro porque escolhemos sempre o pivot como sendo o primeiro elemento. Na primeira execução do particionamento ele já está em sua posição, pois o array está ordenado. Assim, chamamos recursivamente para a esquerda (vazio) e para a direita (2, 3, 4...10). Na segunda execução isso também é verificado, pois o 2 já está em seu lugar. Então temos a seguinte relação de recorrência:
+
+
+$T(n) = T(n-1) + T(0) + \Theta(n)$, ou seja &lt;/br&gt;
+$T(n) = T(n-1) + \Theta(n)$
+
+Agora sim podemos aplicar o segundo passo da análise de algoritmos recursivos, que é ilustrar a árvore de recursão. Esta árvore tem altura n - 1 e cada nível custa $n$ (particiona). Portanto, temos que o custo total é dado por $O(n^2)$.
+
+&gt; No pior caso o Quick Sort é $O(n^2)$. Este caso se manifesta quando o pivot ***sempre*** divide o array em duas porções de tamanho 0 e n-1, respectivamente.
+
+## Caso médio e melhor caso
+
+É preciso deixar muito claro. O pior caso do Quick Sort é quando ele executa recorrentemente péssimas partições. Uma péssima partição no nosso contexto é colocar o pivot em um lugar que não há elementos à sua esquerda e que há $n - 1$ elementos à sua direita, por exemplo. Como vimos, um exemplo concreto deste caso ocorre quando o array já está ordenado e sempre escolhemos o pivot como sendo o primeiro elemento ou quando está ordenado em ordem reversa e fazemos essa mesma escolha de pivot.
+
+Portanto, o pior caso é raro, concorda? Ele precisa de duas condições: o array já estar ordenado e nós escolhermos sempre o primeiro elemento como pivot.
+
+&lt;p aling=&#34;center&#34;&gt; Como podemos evitar o pior caso?&lt;/p&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Ordenação Linear</title>
          <link>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</link>
          <pubDate>Sun, 27 Oct 2019 00:00:00 -0300</pubDate>
@@ -2857,7 +3047,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;h2 id=&#34;raiz&#34;&gt;Raiz&lt;/h2&gt;
 
-&lt;p&gt;Raiz é um nó especial da árvore. Através dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.&lt;/p&gt;
+&lt;p&gt;Raiz é um nó especial da árvore. Por meio dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.&lt;/p&gt;
 
 &lt;h2 id=&#34;grau-de-um-nó&#34;&gt;Grau de um nó&lt;/h2&gt;
 
@@ -2893,7 +3083,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;p&gt;Importante aqui notar que a árvore contém 15 nós e altura 3. De maneira geral, não é difícil perceber que o número máximo de nós em uma árvore binária de altura $h$ é $2^{h+1} - 1$.&lt;/p&gt;
 
-&lt;p&gt;Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejamO(log n), pois são dependentes da altura.&lt;/p&gt;
+&lt;p&gt;Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejam O(log n), pois são dependentes da altura.&lt;/p&gt;
 
 &lt;h2 id=&#34;sucessor&#34;&gt;Sucessor&lt;/h2&gt;
 
@@ -3001,13 +3191,17 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
         
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (element &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; node.&lt;span style=&#34;color:#a6e22e&#34;&gt;value&lt;/span&gt;) {
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (node.&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
-            node.&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Node(element);
+            Node &lt;span style=&#34;color:#a6e22e&#34;&gt;newNode&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Node(element);
+            node.&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; newNode;
+            newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
         }
         recursiveAdd(node.&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, element);
     } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;) {
-            node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Node(element);
+            Node &lt;span style=&#34;color:#a6e22e&#34;&gt;newNode&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Node(element);
+            node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; newNode;
+            newNode.&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; node;
             &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
         }
         recursiveAdd(node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;, element);
@@ -3022,9 +3216,9 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 &lt;p&gt;As verificações e condições de parada são as mesmas da versão iterativa:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual e faz-se a ligação para o nó pai. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual e faz-se a ligação para o nó pai. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;Em ambas as estratégias o novo elemento é adicionado como folha. Portanto, no pior caso, a adição tem tempo de execução dado por $O(h)$, pois $h$ é o maior caminho entre a raiz e todas as folhas.&lt;/p&gt;
@@ -3062,7 +3256,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; recursiveSearch(node.&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;, element);
 }
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (&lt;strong&gt;&lt;em&gt;recursiveSearch(node.left, element)&lt;/em&gt;&lt;/strong&gt;). Se for menor, há uma chamada recursiva para a direita (&lt;strong&gt;&lt;em&gt;recursiveSearch(node.right, element)&lt;/em&gt;&lt;/strong&gt;). O algoritmo pára o nó sob análise for nulo.&lt;/p&gt;
+&lt;p&gt;A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (&lt;strong&gt;&lt;em&gt;recursiveSearch(node.left, element)&lt;/em&gt;&lt;/strong&gt;). Se for maior, há uma chamada recursiva para a direita (&lt;strong&gt;&lt;em&gt;recursiveSearch(node.right, element)&lt;/em&gt;&lt;/strong&gt;). O algoritmo pára o nó sob análise for nulo.&lt;/p&gt;
 
 &lt;p&gt;A busca binária tem seu tempo de execução dependente da altura da árvore, pois no pior caso o algoritmo percorre um ramo da árvore até o final e esse ramo tem altura $h$. Assim, a busca binária é $O(h)$.&lt;/p&gt;
 
@@ -3099,7 +3293,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;p&gt;Qual é o sucessor de 20? Se há sub-árvore à direita, basta retornamos o mínimo dessa sub-árvore. Ou seja, 27.&lt;/p&gt;
 
-&lt;p&gt;E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.&lt;/p&gt;
+&lt;p&gt;E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65, sendo 65 maior que 55, a busca é finalizada. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.&lt;/p&gt;
 
 &lt;p&gt;Você não precisa decorar isso, certo? Faz todo sentido procurar pelo mínimo da sub-árvore à direita, pois é lá que estão os valores maiores que o nó. O mínimo deles é o sucessor. E se não houver sub-árvore à direita, é natural que o sucessor esteja árvore acima, pois à esquerda todos os valores são menores. Então o algoritmo verifica árvore acima o primeiro elemento maior que o nó sob análise.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; sucessor(Node &lt;span style=&#34;color:#a6e22e&#34;&gt;node&lt;/span&gt;) {
@@ -3129,7 +3323,7 @@ Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa s
 
 &lt;p&gt;Qual é o predecessor de 20? Se há sub-árvore à esquerda, basta retornamos o máximo dessa sub-árvore. Ou seja, 15.&lt;/p&gt;
 
-&lt;p&gt;E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.&lt;/p&gt;
+&lt;p&gt;E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20, sendo 20 menor que 27, a busca é finalizada. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.&lt;/p&gt;
 
 &lt;p&gt;Você não precisa decorar isso, certo? Faz todo sentido procurar pelo máximo da sub-árvore à esquerda, pois é lá que estão os valores menores que o nó. O máximo deles é o predecessor. E se não houver sub-árvore à esquerda, é natural que o predecessor esteja árvore acima, pois à direita todos os valores são maiores. Então o algoritmo verifica árvore acima o primeiro elemento menor que o nó sob análise.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; predecessor(Node &lt;span style=&#34;color:#a6e22e&#34;&gt;node&lt;/span&gt;) {
