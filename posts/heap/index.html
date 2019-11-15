@@ -411,23 +411,22 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> add(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">n</span>) {
     <span style="color:#66d9ef">if</span> (tail <span style="color:#f92672">&gt;=</span> (heap.<span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1))
         resize();
-    <span style="color:#66d9ef">else</span> {
-        tail <span style="color:#f92672">+=</span> 1;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[tail] <span style="color:#f92672">=</span> n;
-        
-        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> tail;
-        <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)] <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i]) {
-            <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i];
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)];
-            <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)] <span style="color:#f92672">=</span> aux;
-            i <span style="color:#f92672">=</span> parent(i);
-        }
+
+    tail <span style="color:#f92672">+=</span> 1;
+    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[tail] <span style="color:#f92672">=</span> n;
+    
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> tail;
+    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&gt;</span> 0 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)] <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i]) {
+        <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[i] <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)];
+        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">heap</span>[parent(i)] <span style="color:#f92672">=</span> aux;
+        i <span style="color:#f92672">=</span> parent(i);
     }
 }
 ...</code></pre></div>
 <p>O primeiro if (<code>tail &gt;= heap.length - 1</code>) verifica se ainda há espaço no array para adicionar um novo elemento. Se não houver, o método <strong><em>resize</em></strong> é invocado. Ele apenas cria um array maior e copia os elementos para esse novo array.</p>
 
-<p>Caso haja espaço (<code>else</code>), incrementamos tail (<code>tail += 1</code>) e adicionamos o novo elemento no array (<code>this.heap[tail] = n</code>).</p>
+<p>Após a criação de um array maior, se necessário, incrementamos tail (<code>tail += 1</code>) e adicionamos o novo elemento no array (<code>this.heap[tail] = n</code>).</p>
 
 <p>Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas condições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (<code>i = parent(i)</code>).</p>
 

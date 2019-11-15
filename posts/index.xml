@@ -3899,23 +3899,22 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; add(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;n&lt;/span&gt;) {
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (tail &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; (heap.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1))
         resize();
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
-        tail &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[tail] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; n;
-        
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tail;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i]) {
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i];
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)];
-            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
-            i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parent(i);
-        }
+
+    tail &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[tail] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; n;
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; tail;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; 0 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i]) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;aux&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;.&lt;span style=&#34;color:#a6e22e&#34;&gt;heap&lt;/span&gt;[parent(i)] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; aux;
+        i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; parent(i);
     }
 }
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;O primeiro if (&lt;code&gt;tail &amp;gt;= heap.length - 1&lt;/code&gt;) verifica se ainda há espaço no array para adicionar um novo elemento. Se não houver, o método &lt;strong&gt;&lt;em&gt;resize&lt;/em&gt;&lt;/strong&gt; é invocado. Ele apenas cria um array maior e copia os elementos para esse novo array.&lt;/p&gt;
 
-&lt;p&gt;Caso haja espaço (&lt;code&gt;else&lt;/code&gt;), incrementamos tail (&lt;code&gt;tail += 1&lt;/code&gt;) e adicionamos o novo elemento no array (&lt;code&gt;this.heap[tail] = n&lt;/code&gt;).&lt;/p&gt;
+&lt;p&gt;Após a criação de um array maior, se necessário, incrementamos tail (&lt;code&gt;tail += 1&lt;/code&gt;) e adicionamos o novo elemento no array (&lt;code&gt;this.heap[tail] = n&lt;/code&gt;).&lt;/p&gt;
 
 &lt;p&gt;Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas condições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (&lt;code&gt;i = parent(i)&lt;/code&gt;).&lt;/p&gt;
 
