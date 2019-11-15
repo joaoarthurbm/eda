@@ -290,17 +290,16 @@ Agora que já entendemos como o algoritmo funciona, vamos ao código.
 public void add(int n) {
     if (tail >= (heap.length - 1))
         resize();
-    else {
-        tail += 1;
-        this.heap[tail] = n;
-        
-        int i = tail;
-        while (i > 0 && this.heap[parent(i)] < this.heap[i]) {
-            int aux = this.heap[i];
-            this.heap[i] = this.heap[parent(i)];
-            this.heap[parent(i)] = aux;
-            i = parent(i);
-        }
+
+    tail += 1;
+    this.heap[tail] = n;
+    
+    int i = tail;
+    while (i > 0 && this.heap[parent(i)] < this.heap[i]) {
+        int aux = this.heap[i];
+        this.heap[i] = this.heap[parent(i)];
+        this.heap[parent(i)] = aux;
+        i = parent(i);
     }
 }
 ...
@@ -308,7 +307,7 @@ public void add(int n) {
 
 O primeiro if (`tail >= heap.length - 1`) verifica se ainda há espaço no array para adicionar um novo elemento. Se não houver, o método ***resize*** é invocado. Ele apenas cria um array maior e copia os elementos para esse novo array.
 
-Caso haja espaço (`else`), incrementamos tail (`tail += 1`) e adicionamos o novo elemento no array (`this.heap[tail] = n`).
+Após a criação de um array maior, se necessário, incrementamos tail (`tail += 1`) e adicionamos o novo elemento no array (`this.heap[tail] = n`).
 
 Agora vamos à rotina de comparar com o valor do nó pai enquanto for maior ou não atingir a raiz. Isso é feito no bloco do while. Caso essas duas condições forem satisfeitas, troca-se os valores do nó e do pai e atualiza o índice do elemento a ser verificado na próxima iteração (`i = parent(i)`).
 
