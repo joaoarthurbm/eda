@@ -3,7 +3,7 @@ title = "Ordenação por Comparação: Insertion Sort"
 date = 2019-10-27T01:01:01
 tags = []
 categories = []
-github = ""
+github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/Insertion.java"
 +++
 
 ***
