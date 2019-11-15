@@ -49,7 +49,7 @@ Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prátic
 
 ## Raiz
 
-Raiz é um nó especial da árvore. Por meio2 dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
+Raiz é um nó especial da árvore. Por meio dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
 
 ## Grau de um nó
 
