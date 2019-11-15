@@ -49,7 +49,7 @@ Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prátic
 
 ## Raiz
 
-Raiz é um nó especial da árvore. Através dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
+Raiz é um nó especial da árvore. Por meio2 dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
 
 ## Grau de um nó
 
@@ -83,7 +83,7 @@ Uma árvore completa é aquela que todos os nós, exceto folhas, possuem grau 2 
 
 Importante aqui notar que a árvore contém 15 nós e altura 3. De maneira geral, não é difícil perceber que o número máximo de nós em uma árvore binária de altura $h$ é $2^{h+1} - 1$.
 
-Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejamO(log n), pois são dependentes da altura.
+Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejam O(log n), pois são dependentes da altura.
 
 ## Sucessor
 
@@ -200,13 +200,17 @@ private void recursiveAdd(Node node, int element) {
         
     if (element < node.value) {
         if (node.left == null) {
-            node.left = new Node(element);
+            Node newNode = new Node(element);
+            node.left = newNode;
+            newNode.parent = node;
             return;
         }
         recursiveAdd(node.left, element);
     } else {
         if (node.right == null) {
-            node.right = new Node(element);
+            Node newNode = new Node(element);
+            node.right = newNode;
+            newNode.parent = node;
             return;
         }
         recursiveAdd(node.right, element);
@@ -221,9 +225,9 @@ O outro método também recebe como parâmetro o elemento adicionado, além de r
 
 As verificações e condições de parada são as mesmas da versão iterativa:
 
-* se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;
+* se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual e faz-se a ligação para o nó pai. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;
 
-* se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.
+* se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual e faz-se a ligação para o nó pai. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.
 
 Em ambas as estratégias o novo elemento é adicionado como folha. Portanto, no pior caso, a adição tem tempo de execução dado por $O(h)$, pois $h$ é o maior caminho entre a raiz e todas as folhas.
 
@@ -268,7 +272,7 @@ private Node recursiveSearch(Node node, int element) {
 ...
 ```
 
-A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (***recursiveSearch(node.left, element)***). Se for menor, há uma chamada recursiva para a direita (***recursiveSearch(node.right, element)***). O algoritmo pára o nó sob análise for nulo.
+A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (***recursiveSearch(node.left, element)***). Se for maior, há uma chamada recursiva para a direita (***recursiveSearch(node.right, element)***). O algoritmo pára o nó sob análise for nulo.
 
 A busca binária tem seu tempo de execução dependente da altura da árvore, pois no pior caso o algoritmo percorre um ramo da árvore até o final e esse ramo tem altura $h$. Assim, a busca binária é $O(h)$.
 
@@ -309,7 +313,7 @@ Se um nó possui sub-árvore à direita, o seu sucessor é o mínimo dessa sub-�
 
 Qual é o sucessor de 20? Se há sub-árvore à direita, basta retornamos o mínimo dessa sub-árvore. Ou seja, 27. 
 
-E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.
+E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65, sendo 65 maior que 55, a busca é finalizada. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.
 
 Você não precisa decorar isso, certo? Faz todo sentido procurar pelo mínimo da sub-árvore à direita, pois é lá que estão os valores maiores que o nó. O mínimo deles é o sucessor. E se não houver sub-árvore à direita, é natural que o sucessor esteja árvore acima, pois à esquerda todos os valores são menores. Então o algoritmo verifica árvore acima o primeiro elemento maior que o nó sob análise.
 
@@ -342,7 +346,7 @@ Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa s
 
 Qual é o predecessor de 20? Se há sub-árvore à esquerda, basta retornamos o máximo dessa sub-árvore. Ou seja, 15. 
 
-E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.
+E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20, sendo 20 menor que 27, a busca é finalizada. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.
 
 
 Você não precisa decorar isso, certo? Faz todo sentido procurar pelo máximo da sub-árvore à esquerda, pois é lá que estão os valores menores que o nó. O máximo deles é o predecessor. E se não houver sub-árvore à esquerda, é natural que o predecessor esteja árvore acima, pois à direita todos os valores são maiores. Então o algoritmo verifica árvore acima o primeiro elemento menor que o nó sob análise.
