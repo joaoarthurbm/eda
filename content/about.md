@@ -15,6 +15,7 @@ meta = "false"
 ### Ordenação
 * [Selection Sort](http://joaoarthurbm.github.io/eda/posts/selection-sort)
 * [Insertion Sort](http://joaoarthurbm.github.io/eda/posts/insertion-sort)
+* [Quick Sort](http://joaoarthurbm.github.io/eda/posts/quick-sort)
 * [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear)
 
 ### Estruturas de Dados Lineares
