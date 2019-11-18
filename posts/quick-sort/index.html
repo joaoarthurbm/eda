@@ -382,6 +382,18 @@ $T(n) = T(n-1) + \Theta(n)$</p>
 <p>No caso médio o Quick Sort é $O(n * \log n)$. Esse caso tem sempre uma alta probabilidade de se manifestar, mesmo que haja <strong>algumas</strong> péssimas escolhas pivot durante a execução do algoritmo.</p>
 </blockquote>
 
+<h2 id="estabilidade-e-uso-de-memória">Estabilidade e uso de memória</h2>
+
+<blockquote>
+<p>O Quick Sort é in-place, mas não estável.</p>
+</blockquote>
+
+<p>O Quick Sort não é um algoritmo estável. O modo como o particiona é implementado permite que elementos iguais troquem de posições relativas durante a sua execução.</p>
+
+<p>É possível implementar uma versão estável do Quick Sort, mas para isso, ao invés de trocar o pivot diretamente com a primeira posição, o algoritmo deve fazer sucessivas trocas para &ldquo;afastar&rdquo; o pivot até a posição desejada &ndash; um processo semelhante à inserção ordenada. Essa implementação, contudo, piora significativamente o desempenho do Quick Sort.</p>
+
+<p>O Quick Sort é in-place. O uso de memória auxiliar é constante em relação ao tamanho do array.</p>
+
 <hr />
 
 <h1 id="resumo">Resumo</h1>
@@ -411,6 +423,10 @@ $T(n) = T(n-1) + \Theta(n)$</p>
 <li><p>O caso médio é muito mais provável do que o pior e o melhor caso.</p></li>
 
 <li><p>Apesar de estar na mesma classe de complexidade do Merge Sort e do Heap Sort, há experimentos que demonstram que o Quick Sort em seu melhor caso e caso médio é por volta de 3x mais eficiente que o Merge Sort, porque ele contém constantes menores.</p></li>
+
+<li><p>O Quick Sort não é estável.</p></li>
+
+<li><p>O Quick Sort é in-place.</p></li>
 </ul>
 
 <hr />
