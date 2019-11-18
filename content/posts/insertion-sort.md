@@ -144,6 +144,8 @@ Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na 
 * O pior caso da execução deste algoritmo manifesta-se quando a entrada está ordenada em ordem decrescente.
 	* No melhor caso o Insertion Sort é $O(n)$. Isso ocorre quando o array já está ordenado.
 
+* Na teoria, Insertion Sort, <a class="external" href="https://joaoarthurbm.github.io/eda/posts/selection-sort/">Selection Sort</a>  e Bubble Sort estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta o melhor desempenho entre esses 3 algoritmos.
+
 ***
 
 # Notas
