@@ -304,6 +304,10 @@ O Quick Sort é in-place. O uso de memória auxiliar é constante em relação a
 
 * Apesar de estar na mesma classe de complexidade do Merge Sort e do Heap Sort, há experimentos que demonstram que o Quick Sort em seu melhor caso e caso médio é por volta de 3x mais eficiente que o Merge Sort, porque ele contém constantes menores.
 
+* O Quick Sort não é estável.
+
+* O Quick Sort é in-place.
+
 ***
 
 # Notas
