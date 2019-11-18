@@ -1161,6 +1161,8 @@ adicionado.
 &lt;ul&gt;
 &lt;li&gt;No melhor caso o Insertion Sort é $O(n)$. Isso ocorre quando o array já está ordenado.&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Na teoria, Insertion Sort, &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/selection-sort/&#34;&gt;Selection Sort&lt;/a&gt;  e Bubble Sort estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta o melhor desempenho entre esses 3 algoritmos.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;hr /&gt;
@@ -1181,13 +1183,13 @@ adicionado.
 
 &lt;hr /&gt;
 
-&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação. Seu funcionamento baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;particionamento&lt;/em&gt;&lt;/strong&gt;. Particionar significa escolher um número qualquer presente no array, chamado de &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos da direita são maiores.&lt;/p&gt;
+&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação. Apesar de ser da mesma classe de complexidade do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt;, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores.&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;p&gt;O funcionamento do Quick Sort baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;particionamento&lt;/em&gt;&lt;/strong&gt;. Particionar significa escolher um número qualquer presente no array, chamado de &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores.&lt;/p&gt;
 
 &lt;h1 id=&#34;particionamento&#34;&gt;Particionamento&lt;/h1&gt;
 
-&lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Vamos particionar o array $[3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$. Saiba, não vou entrar em detalhes sobre como é feito o particionamento agora. Neste momento minha preocupação é que você saiba o que é particionar, não como. Então, vamos ver o estado do array antes e depois de particionar. Como disse, precisamos escolher um &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;. Por ora, vamos sempre escolher o primeiro elemento do array. Ou seja, nosso &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; é o valor 3.&lt;/p&gt;
+&lt;p&gt;Vamos particionar o array $[3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$. Saiba, não vou entrar em detalhes sobre como é feito o particionamento agora. Isso será feito mais adiante neste material. Neste momento minha preocupação é que você saiba o que é particionar, não como. Então, vamos ver o estado do array antes e depois de particionar. Como disse, precisamos escolher um &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;. Por ora, vamos sempre escolher o primeiro elemento do array. Ou seja, nosso &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; é o valor 3.&lt;/p&gt;
 
 &lt;p&gt;Antes do particionamento: [&lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 7, 10, 0, 23, 2, 1, 77, 7]&lt;/p&gt;
 
@@ -1195,7 +1197,7 @@ adicionado.
 
 &lt;p&gt;Note que todos os elementos à esquerda do pivot são menores ou iguais ao pivot e todos os elementos à direita do pivot são maiores. Isso não significa que os elementos à esquerda e à direita devem necessariamente estar ordenados. Apenas significa que o &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; está em sua posição e o problema de ordenar agora resume-se a resolver a esquerda dele e a direita dele, concorda?&lt;/p&gt;
 
-&lt;p&gt;Antes disso, já que entendemos o que é particionamento, vamos agora ver como este algoritmo funciona. Há duas estratégias populares de particionamento: Lomuto e Hoare. Neste material nós vamos abordar a estratégia de Lomuto, que é mais simples. O particionamento Hoare é discutido em detalhes &lt;a class=&#34;external&#34; href=&#34;link&#34;&gt;neste outro material&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Já que entendemos o que é particionamento, vamos agora ver como este algoritmo funciona. Há duas estratégias populares de particionamento: Lomuto e Hoare. Neste material nós vamos abordar a estratégia de Lomuto, que é mais simples. O particionamento Hoare é discutido em detalhes &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/particionamento-hoare&#34;&gt;neste outro material&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;A ideia do particionamento de Lomuto é identificar os elementos menores ou iguais ao pivot e colocá-los imediatamente à frente dele. Depois, no final, coloca-se o pivot à frente deles todos. Vamos ver um exemplo concreto para ver como funciona essa ideia.&lt;/p&gt;
 
@@ -1272,92 +1274,207 @@ adicionado.
 
 &lt;p&gt;Para fixar bem, vamos ver um outro exemplo com figuras demonstrando o passo a passo.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Início da iteração: j = left + 1 e i = left&lt;/p&gt;
-![quick1](quick1.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Início da iteração: j = left + 1 e i = left&lt;/p&gt;
+&lt;img src=&#34;quick1.png&#34; alt=&#34;quick1&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Encontrado o primeiro valor menor que o pivot&lt;/p&gt;
-![quick2](quick2.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Encontrado o primeiro valor menor que o pivot&lt;/p&gt;
+&lt;img src=&#34;quick2.png&#34; alt=&#34;quick2&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
-![quick3](quick3.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
+&lt;img src=&#34;quick3.png&#34; alt=&#34;quick3&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
-![quick4](quick4.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
+&lt;img src=&#34;quick4.png&#34; alt=&#34;quick4&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Encontrado um outro valor menor que o pivot&lt;/p&gt;
-![quick5](quick5.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Encontrado um outro valor menor que o pivot&lt;/p&gt;
+&lt;img src=&#34;quick5.png&#34; alt=&#34;quick5&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
-![quick6](quick6.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
+&lt;img src=&#34;quick6.png&#34; alt=&#34;quick6&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
-![quick7](quick7.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
+&lt;img src=&#34;quick7.png&#34; alt=&#34;quick7&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Fim da iteração (j == right)&lt;/p&gt;
-![quick8](quick8.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Fim da iteração (j == right)&lt;/p&gt;
+&lt;img src=&#34;quick8.png&#34; alt=&#34;quick8&#34; /&gt;&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;Troca values[i] por values[left]&lt;/p&gt;
-![quick9](quick9.png)
+&lt;p&gt;&lt;p align=&#34;center&#34;&gt;Troca values[i] por values[left]&lt;/p&gt;
+&lt;img src=&#34;quick9.png&#34; alt=&#34;quick9&#34; /&gt;&lt;/p&gt;
 
-***
+&lt;hr /&gt;
 
-# Quick Sort
+&lt;h1 id=&#34;quick-sort&#34;&gt;Quick Sort&lt;/h1&gt;
 
-## Implementação
+&lt;h2 id=&#34;implementação&#34;&gt;Implementação&lt;/h2&gt;
 
-Você concorda que após uma execução do ***particiona*** o ***pivot*** está em sua posição na sequência? Isto é, se nossa missão for ordenar o array, não precisamos mais nos preocupar com o ***pivot***, pois ele já está na posição correta. Precisamos, sim, nos preocupar com os elementos nos índices anteriores ao ***pivot***, que estão no intervalo [left, i - 1] e com os elementos nos índices à frente do pivot, que estão no intervalo [i + 1, right].
+&lt;p&gt;Você concorda que após uma execução do &lt;strong&gt;&lt;em&gt;particiona&lt;/em&gt;&lt;/strong&gt; o &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt; está em sua posição na sequência? Isto é, se nossa missão for ordenar o array, não precisamos mais nos preocupar com o &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, pois ele já está na posição correta. Precisamos, sim, nos preocupar com os elementos nos índices anteriores ao &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, que estão no intervalo [left, i - 1] e com os elementos nos índices à frente do pivot, que estão no intervalo [i + 1, right].&lt;/p&gt;
 
-O Quick Sort, então, é a execução de consectivos particionamentos. Efetua-se o primeiro levando em consideração todo o array (`left = 0` e `right = values.length - 1`). Depois, leva-se em consideração a esquerda do pivot, ou seja, `left = 0` e `right = index_pivot - 1` e a direita do pivot (`left = index_pivot + 1` e `right = values.length - 1`). Depois, os mesmo processo é feito com a esquerda e a direita dos novos pivots e assim por diante até que todo o array já tenha sido percorrido (`left &gt;= right`).
-
-```java
-public static void quickSort(int[] values, int left, int right) {
-	if (left &lt; right) {
-		int index_pivot = partition(values, left, right);
-		quickSort(v, left, index_pivot - 1);
-		quickSort(v, index_pivot + 1, right);	
+&lt;p&gt;O Quick Sort, então, é a execução de consectivos particionamentos. Efetua-se o primeiro levando em consideração todo o array (&lt;code&gt;left = 0&lt;/code&gt; e &lt;code&gt;right = values.length - 1&lt;/code&gt;). Depois, leva-se em consideração a esquerda do pivot, ou seja, &lt;code&gt;left = 0&lt;/code&gt; e &lt;code&gt;right = index_pivot - 1&lt;/code&gt; e a direita do pivot (&lt;code&gt;left = index_pivot + 1&lt;/code&gt; e &lt;code&gt;right = values.length - 1&lt;/code&gt;). Depois, o mesmo processo é feito com a esquerda e a direita dos novos pivots e assim por diante até que todo o array já tenha sido percorrido (&lt;code&gt;left &amp;gt;= right&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;quickSort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;values&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right) {
+		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;index_pivot&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; partition(values, left, right);
+		quickSort(v, left, index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1);
+		quickSort(v, index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1, right);	
 	}
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Vamos analisar a figura abaixo para visualizar a execução do Quick Sort para o mesmo exemplo que estávamos abordando na seção anterior.&lt;/p&gt;
+
+&lt;p&gt;Após a execução do primeiro particionamento temos este estado:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;quick10.png&#34; alt=&#34;quick10&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Note que há agora duas chamadas recursivas. Uma para a esquerda do pivot e outra para a direita do pivot. Cada chamada irá operar sobre os novos &amp;ldquo;lefts&amp;rdquo; e &amp;ldquo;rights&amp;rdquo;. Por isso o particiona recebe os índices em que deve executar a sua rotina. No exemplo acima, uma nova execução do particiona para a esquerda não irá alterar os valores porque eles já estão ordenados, mas a execução para a direita irá colocar o valor 10 em seu lugar e irá gerar uma nova rodada de duas execuções do particiona. De novo, esse processo acaba quando todas as verificações de &lt;code&gt;left &amp;lt; right&lt;/code&gt; forem avaliadas com &lt;code&gt;false&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;análise-do-tempo-de-execução&#34;&gt;Análise do Tempo de Execução&lt;/h2&gt;
+
+&lt;p&gt;Lembra dos passos para determinar o tempo de execução de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;algoritmos recursivos?&lt;/a&gt;. O primeiro passo é encontrar a relação de recorrência. O Quick Sort possui uma chamada ao método particiona e duas chamadas recursivas. Diferentemente do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort/&#34;&gt;Merge Sort&lt;/a&gt;, as chamadas recursivas podem não dividir o array ao meio sempre, concorda? Isso vai depender de onde o pivot ficar depois do particiona. Se ele ficar ao meio, naturalmente teremos duas chamadas recursivas para $T(n/2)$. Contudo, se ele ficar bem próximo ao início, por exemplo, teremos uma chamada recursiva para uma pequena porção à esquerda e uma chamada recursiva para uma porção bem maior (à direita). Então, por enquanto, vamos descrever a relação de recorrência como sendo o custo de particionar, somado ao custo da chamada para o array da esquerda e o custo da chamada para o array da direita:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(|left|) + T(|right|) + \Theta(f(n))$&lt;/p&gt;
+
+&lt;p&gt;Vamos deixar as coisas mais claras, pois sabemos calcular o tempo de execução do particiona. Se aplicarmos o que já aprendemos no &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório sobre análise&lt;/a&gt; é facil descobrir que o particiona é $\Theta(n)$, onde $n$ é o tamanho do array, pois ele itera somente uma vez sobre todo o array. Então, podemos descrever a relação de recorrência do Quick Sort como:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(|left|) + T(|right|) + \Theta(n)$&lt;/p&gt;
+
+&lt;p&gt;Agora precisamos discutir os termos $T(|left|)$ e $T(|right|)$. Você já entende que o tamanho de &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; e &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt; depende do índice em que o pivot fica após o particionamento. Vamos discutir o pior caso, primeiro.&lt;/p&gt;
+
+&lt;h3 id=&#34;pior-caso&#34;&gt;Pior caso&lt;/h3&gt;
+
+&lt;p&gt;A execução do Quick Sort para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ sempre particiona este array em duas porções cujos tamanhos são 0 e n - 1, respectivamente. Isso fica claro porque escolhemos sempre o pivot como sendo o primeiro elemento. Na primeira execução do particionamento ele já está em sua posição, pois o array está ordenado. Assim, chamamos recursivamente para a esquerda (vazio) e para a direita (2, 3, 4&amp;hellip;10). Na segunda execução isso também é verificado, pois o 2 já está em seu lugar. Então temos a seguinte relação de recorrência:&lt;/p&gt;
+
+&lt;p&gt;$T(n) = T(n-1) + T(0) + \Theta(n)$, ou seja &lt;/br&gt;
+$T(n) = T(n-1) + \Theta(n)$&lt;/p&gt;
+
+&lt;p&gt;Agora sim podemos aplicar o segundo passo da análise de algoritmos recursivos, que é analisar a árvore de recursão. Esta árvore tem altura n - 1 e cada nível custa $n$ (particiona). Portanto, temos que o custo total é dado por $O(n^2)$.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;No pior caso o Quick Sort é $O(n^2)$. Esse caso se manifesta quando o pivot &lt;strong&gt;&lt;em&gt;sempre&lt;/em&gt;&lt;/strong&gt; divide o array em duas porções de tamanho 0 e n-1, respectivamente.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&#34;escolhendo-bons-pivots&#34;&gt;Escolhendo bons pivots&lt;/h3&gt;
+
+&lt;p&gt;É preciso deixar muito claro. O pior caso do Quick Sort é quando ele executa recorrentemente péssimas partições. Uma péssima partição no nosso contexto é colocar o pivot em um lugar que não há elementos à sua esquerda e que há $n - 1$ elementos à sua direita, por exemplo. Como vimos, um exemplo concreto deste caso ocorre quando o array já está ordenado e &lt;strong&gt;sempre&lt;/strong&gt; escolhemos o pivot como sendo o primeiro elemento ou quando está ordenado em ordem reversa e fazemos essa mesma escolha de pivot.&lt;/p&gt;
+
+&lt;p&gt;Portanto, o pior caso é raro, concorda? Ele precisa de duas condições: o array já estar ordenado e nós escolhermos sempre o primeiro elemento como pivot.&lt;/p&gt;
+
+&lt;div align=&#34;center&#34;&gt;Como podemos evitar o pior caso?&lt;/div&gt;
+
+&lt;p&gt;Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três.&lt;/p&gt;
+
+&lt;h4 id=&#34;escolhendo-o-pivot-aleatoriamente&#34;&gt;Escolhendo o pivot aleatoriamente&lt;/h4&gt;
+
+&lt;p&gt;Se escolhermos o pivot aleatoriamente, qual a probabilidade dele ser o primeiro e, por consequência, o pior? $p = 1/n$ certo? Para cairmos no pior caso adotando essa estratégia teríamos que escolher sempre o pior pivot, cuja probabilidade seria dada por $p = 1/n * 1/(n-1) * 1/(n-2)&amp;hellip;$. Ou seja, é possível que aconteça, mas teríamos que ser muito azarados :)&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Escolher aleatoriamente o pivot é uma boa estratégia para diminuir significativamente a probabilidade de ocorrência do pior caso.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;O código do particiona que discutimos foi feito para escolher sempre o primeiro elemento. Como seria a modificação? Fácil. Basta escolher aleatoriamente, trocar com a primeira posição do array e então executar o código que vimos anteriormente. Essa mudança foi implementada pelas 3 primeiras linhas do código abaixo. O restante do método continua o mesmo.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partition&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;values&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;range&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;rand_pivot_index&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;)(Math.&lt;span style=&#34;color:#a6e22e&#34;&gt;random&lt;/span&gt;() &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; range) &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; left;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// troca o valor aleatório escolhido com a primeira posição
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        swap(values, left, rand_pivot_index);
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;pivot&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values[left];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right; j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (values[j] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot) {
+                i&lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt;1;
+                swap(values, i, j);
+            }
+        }
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// troca pivot (values[left]) com i.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        swap(values, left, i);
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; i; 
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h4 id=&#34;escolhendo-o-pivot-através-da-mediana-de-três&#34;&gt;Escolhendo o pivot através da mediana de três&lt;/h4&gt;
+
+&lt;p&gt;A mediana é uma medida de tendência central que divide uma sequência de inteiros ao meio. Então a mediana de todos os elementos a array seria o nosso pivot perfeito, não é? O problema é que o custo para calcular a mediana de um array é $O(n)$ e não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação &amp;ldquo;grosseira&amp;rdquo; da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento.&lt;/p&gt;
+
+&lt;p&gt;Essa estratégia evita o caso de escolhermos recorrentemente um péssimo pivot. Por exemplo, para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ temos 1, 5 e 10 como o primeiro, o elemento central o último elemento, respectivamente. A mediana entre esses elementos é o 5. Portanto, essa seria a nossa escolha de pivot. Veja que executar o particionamento com ele é uma escolha bem melhor do que particionar com o primeiro elemento.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Escolher pivot como sendo a mediana entre o primeiro elemento, o elemento central e o último elemento é uma boa estratégia para diminuir significativamente a probabilidade de ocorrência do pior caso.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Novamente, a mudança no código do particiona é somente na escolha do pivot. Implementamos essa escolha através do método &lt;strong&gt;pickMedianOfThreePivot&lt;/strong&gt; que retorna o índice da mediana entre os três. O particiona invoca este método, troca o primeiro elemento pela mediana e executa o algoritmo clássico de Lomuto que já vimos detalhadamente.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;int&lt;/span&gt; pickPivotIndex(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;values&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mid&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 2;
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;sorted&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {values[left], values[mid], values[right]};
+    Arrays.&lt;span style=&#34;color:#a6e22e&#34;&gt;sort&lt;/span&gt;(sorted);
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (sorted[1] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; values[left]) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; left;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (sorted[1] &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; values[mid]) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; mid;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; right;
 }
-```
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3 id=&#34;melhor-caso-e-caso-médio&#34;&gt;Melhor caso e Caso médio&lt;/h3&gt;
 
-Vamos acompanhar as figuras abaixo para visualizar a execução do Quick Sort para o mesmo exemplo que estávamos abordando na seção anterior. 
+&lt;p&gt;Qual seria o melhor caso de particionamento? Seria um que se aproximasse do Merge Sort, em que sempre dividimos o array pela metade. Ou seja, se o pivot sempre ficar no meio do array, teremos uma árvore binária na recursão em que a esquerda tem metade do tamanho do array e a direita também tem a metade do tamanho. Essa árvore, como já vimos, tem a altura mínima, isto é, $O(\log n)$. Então, o custo do melhor caso seria $\log n$ execuções do particiona, que é $O(n)$. Como resultado, o melhor caso do Quick Sort é $O(n * \log n)$.&lt;/p&gt;
 
-Após a execução do primeiro particionamento temos este estado:
+&lt;blockquote&gt;
+&lt;p&gt;No melhor caso o Quick Sort é $O(n * \log n)$. Esse caso se manifesta quando o pivot &lt;strong&gt;&lt;em&gt;sempre&lt;/em&gt;&lt;/strong&gt; divide o array em duas porções iguais.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-![quick10](quick10.png)
+&lt;p&gt;Espera aí. O Melhor caso é bem raro também, não é? Eu teria que ser muito sortudo para o pivot sempre cair no meio do array depois do particionamento.&lt;/p&gt;
 
-Note que há agora duas chamadas recursivas. Uma para a esquerda do pivot e outra para a direita do pivot. Cada chamada irá operar sobre os novos &#34;lefts&#34; e &#34;rights&#34;. Por isso o particiona recebe os índices em que deve executar a sua rotina. No exemplo acima, uma nova execução do particiona para a esquerda não irá alterar os valores porque eles já estão ordenados, mas a execução para a direita irá colocar o valor 10 em seu lugar e irá gerar uma nova rodada de duas execuções do particiona. De novo, esse processo acaba quando todas as verificações de `left &lt; right` forem avaliadas com `false`.
+&lt;p&gt;Sim. É verdade. Contudo, o caso médio do Quick Sort é muito próvavel de acontecer e esse caso médio é também $O (n * \log n)$. A teoria nos diz que mesmo alternando péssimos particionamentos (pivot longe da metade do array) e bons particionamentos (pivot próximo à metade do array), o algoritmo ainda seria $O (n * \log n)$.&lt;/p&gt;
 
-## Análise do Tempo de Execução
+&lt;p&gt;Na verdade, vamos além, se o particiona sempre dividir o array em duas partes de tamanho &lt;sup&gt;9&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt; e &lt;sup&gt;1&lt;/sup&gt;&amp;frasl;&lt;sub&gt;10&lt;/sub&gt;, respectivamente, o que parece ruim, ainda sim a execução do Quick Sort é $O (n * \log n)$. Esse tema é discutido amplamente no Capítulo 7 do livro Algoritmos: Teoria e Prática de Cormen et. al.&lt;/p&gt;
 
-Lembra dos passos para determinar o tempo de execução de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;algoritmos recursivos?&lt;/a&gt;. O primeiro passo é encontrar a relação de recorrência. O Quick Sort possui uma chamada ao método particiona e duas chamadas recursivas. Diferentemente do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort/&#34;&gt;Merge Sort&lt;/a&gt;, as chamadas recursivas podem não dividir o array ao meio sempre, concorda? Isso vai depender de onde o pivot ficar depois do particiona. Se ele ficar ao meio, naturalmente teremos duas chamadas recursivas para $T(n/2)$. Contudo, se ele ficar bem próximo ao início, por exemplo, teremos uma chamada recursiva para uma pequena porção à esquerda e uma chamada recursiva para uma porção bem maior (à direita). Então, por enquanto, vamos descrever a relação de recorrência como sendo o custo de particionar, somado ao custo da chamada para o array da esquerda e o custo da chamada para o array da direita:
+&lt;p&gt;Se aplicarmos as técnicas de escolha do pivot que vimos acima, temos uma alta probabilidade de não escolher recorrentemente péssimos pivots e, por consequência, uma alta probabilidade de cairmos no caso médio, que é $O(n * \log n)$.&lt;/p&gt;
 
-$T(n) = T(|left|) + T(|right|) + \Theta(f(n))$
+&lt;blockquote&gt;
+&lt;p&gt;No caso médio o Quick Sort é $O(n * \log n)$. Esse caso tem sempre uma alta probabilidade de se manifestar, mesmo que haja &lt;strong&gt;algumas&lt;/strong&gt; péssimas escolhas pivot durante a execução do algoritmo.&lt;/p&gt;
+&lt;/blockquote&gt;
 
-Vamos deixar as coisas mais claras. Sabemos calcular o tempo de execução do particiona. Se aplicarmos o que já aprendemos no &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;material introdutório sobre análise&lt;/a&gt; é facil descobrir que o particiona é $\Theta(n)$, onde $n$ é o tamanho do array, pois ele itera somente uma vez sobre todo o array. Então, podemos descrever a relação de recorrência do Quick Sort como:
+&lt;hr /&gt;
 
-$T(n) = T(|left|) + T(|right|) + \Theta(n)$
+&lt;h1 id=&#34;resumo&#34;&gt;Resumo&lt;/h1&gt;
 
-Agora precisamos discutir os termos $T(|left|)$ e $T(|right|)$. Você já entende que o tamanho de ***left*** e ***right*** depende doíndice em que o pivot fica após o particionamento. Vamos discutir o pior caso, primeiro.
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação.&lt;/p&gt;&lt;/li&gt;
 
-## Pior caso
+&lt;li&gt;&lt;p&gt;O algoritmo baseia a ordenação em sucessivas execuções de particionamento, uma rotina que escolhe um pivot e o posiciona no array de uma maneira em que os elementos menores ou iguais ao pivot estão à sua esquerda e os maiores estão à sua direita.&lt;/p&gt;&lt;/li&gt;
 
-A execução do Quick Sort para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ sempre particiona este array em duas porções cujos tamanhos são 0 e n - 1, respectivamente. Isso fica claro porque escolhemos sempre o pivot como sendo o primeiro elemento. Na primeira execução do particionamento ele já está em sua posição, pois o array está ordenado. Assim, chamamos recursivamente para a esquerda (vazio) e para a direita (2, 3, 4...10). Na segunda execução isso também é verificado, pois o 2 já está em seu lugar. Então temos a seguinte relação de recorrência:
+&lt;li&gt;&lt;p&gt;O algoritmo de particionamente é $O(n)$.&lt;/p&gt;&lt;/li&gt;
 
+&lt;li&gt;&lt;p&gt;Há dois algoritmos populares de particionamento: o de Lomuto e o de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/particionamento-hoare&#34;&gt;Hoare&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 
-$T(n) = T(n-1) + T(0) + \Theta(n)$, ou seja &lt;/br&gt;
-$T(n) = T(n-1) + \Theta(n)$
+&lt;li&gt;&lt;p&gt;O particionamento Hoare, embora mais complexo, é na prática mais eficiente que o de Lomuto.&lt;/p&gt;&lt;/li&gt;
 
-Agora sim podemos aplicar o segundo passo da análise de algoritmos recursivos, que é ilustrar a árvore de recursão. Esta árvore tem altura n - 1 e cada nível custa $n$ (particiona). Portanto, temos que o custo total é dado por $O(n^2)$.
+&lt;li&gt;&lt;p&gt;No caso médio e no melhor caso, o Quick Sort é $O(n*\log n)$.&lt;/p&gt;&lt;/li&gt;
 
-&gt; No pior caso o Quick Sort é $O(n^2)$. Este caso se manifesta quando o pivot ***sempre*** divide o array em duas porções de tamanho 0 e n-1, respectivamente.
+&lt;li&gt;&lt;p&gt;No pior caso, o Quick Sort é $O(n^2)$.&lt;/p&gt;&lt;/li&gt;
 
-## Caso médio e melhor caso
+&lt;li&gt;&lt;p&gt;O pior caso do Quick Sort é raro e é causado por sucessivas péssimas escolhas de pivot quando o array já está ordenado. Para remediar este problema, há estratégias para escolher melhor o elemento que será o pivot do particionamento, entre elas:&lt;/p&gt;
 
-É preciso deixar muito claro. O pior caso do Quick Sort é quando ele executa recorrentemente péssimas partições. Uma péssima partição no nosso contexto é colocar o pivot em um lugar que não há elementos à sua esquerda e que há $n - 1$ elementos à sua direita, por exemplo. Como vimos, um exemplo concreto deste caso ocorre quando o array já está ordenado e sempre escolhemos o pivot como sendo o primeiro elemento ou quando está ordenado em ordem reversa e fazemos essa mesma escolha de pivot.
+&lt;ul&gt;
+&lt;li&gt;Escolher o pivot aleatoriamente.&lt;/li&gt;
+&lt;li&gt;Escolher o pivot como sendo a mediana entre o primeiro, o elemento central e o último elemento do array.&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
 
-Portanto, o pior caso é raro, concorda? Ele precisa de duas condições: o array já estar ordenado e nós escolhermos sempre o primeiro elemento como pivot.
+&lt;li&gt;&lt;p&gt;O caso médio é muito mais provável do que o pior e o melhor caso.&lt;/p&gt;&lt;/li&gt;
 
-&lt;p aling=&#34;center&#34;&gt; Como podemos evitar o pior caso?&lt;/p&gt;
+&lt;li&gt;&lt;p&gt;Apesar de estar na mesma classe de complexidade do Merge Sort e do Heap Sort, há experimentos que demonstram que o Quick Sort em seu melhor caso e caso médio é por volta de 3x mais eficiente que o Merge Sort, porque ele contém constantes menores.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+
+&lt;p&gt;Leia o material sobre o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/particionamento-hoare&#34;&gt;método de particionamento criado por Tony Hoare&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;No Capítulo 7 do livro “Algoritmos: Teoria e Prática” de Cormen et. al.
+há uma discussão mais detalhada sobre a análise do Quick Sort.&lt;/p&gt;
 </description>
        </item>
        
@@ -4066,7 +4183,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;p&gt;&lt;img src=&#34;build-heap2.png&#34; alt=&#34;build-heap2&#34; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 2. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.&lt;/p&gt;
+&lt;p&gt;Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 20. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;build-heap3.png&#34; alt=&#34;build-heap3&#34; /&gt;&lt;/p&gt;
 
@@ -4104,7 +4221,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;li&gt;&lt;p&gt;Por ser completo ou quase-completo da esquerda para a direita, podemos implementar Heaps em arrays, ao invés de nós ligados.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;A array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;O array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice *&lt;strong&gt;i&lt;/strong&gt; é dada por $2*i+1$. A direita de um nó no índice *&lt;strong&gt;i&lt;/strong&gt; é dada por $2*(i+1)$. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; é dados por $int((index - 1) / 2)$.&lt;/p&gt;&lt;/li&gt;
 
@@ -4121,7 +4238,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 
-&lt;p&gt;Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei &lt;a class=&#34;external&#34; href=&#34;http://btv.melezinek.cz/binary-heap.html&#34;&gt;esta ferramenta.&lt;/a&gt; Também recomendo o &lt;a class=&#34;external&#34; href=&#34;visualgo.net&#34;&gt;VisualAlgo&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei &lt;a class=&#34;external&#34; href=&#34;http://btv.melezinek.cz/binary-heap.html&#34;&gt;esta ferramenta.&lt;/a&gt; Também recomendo o &lt;a class=&#34;external&#34; href=&#34;https://visualgo.net/en&#34;&gt;VisualAlgo&lt;/a&gt;.&lt;/p&gt;
 </description>
        </item>
        

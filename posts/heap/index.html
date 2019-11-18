@@ -578,7 +578,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 <p><img src="build-heap2.png" alt="build-heap2" /></p>
 
-<p>Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 2. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.</p>
+<p>Agora falta aplicar no índice 1 e 0. Aplicando heapify no índice 1, o algoritmo compara 87 com 90 e 1. Como 90 é maior, há a troca de valores entre 90 e 87. Depois disso, 87 é comparado com 20. Como é maior, o algoritmo para. Até aqui, temos o seguinte cenário.</p>
 
 <p><img src="build-heap3.png" alt="build-heap3" /></p>
 
@@ -616,7 +616,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 <li><p>Por ser completo ou quase-completo da esquerda para a direita, podemos implementar Heaps em arrays, ao invés de nós ligados.</p></li>
 
-<li><p>A array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.</p></li>
+<li><p>O array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.</p></li>
 
 <li><p>Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice *<strong>i</strong> é dada por $2*i+1$. A direita de um nó no índice *<strong>i</strong> é dada por $2*(i+1)$. O pai de um nó no índice <strong><em>i</em></strong> é dados por $int((index - 1) / 2)$.</p></li>
 
@@ -633,7 +633,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 <h1 id="notas">Notas</h1>
 
-<p>Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também recomendo o <a class="external" href="visualgo.net">VisualAlgo</a>.</p>
+<p>Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também recomendo o <a class="external" href="https://visualgo.net/en">VisualAlgo</a>.</p>
 
 
 </article>
