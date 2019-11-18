@@ -267,6 +267,16 @@ Se aplicarmos as técnicas de escolha do pivot que vimos acima, temos uma alta p
 
 > No caso médio o Quick Sort é $O(n * \log n)$. Esse caso tem sempre uma alta probabilidade de se manifestar, mesmo que haja **algumas** péssimas escolhas pivot durante a execução do algoritmo.
 
+## Estabilidade e uso de memória
+
+> O Quick Sort é in-place, mas não estável.
+
+O Quick Sort não é um algoritmo estável. O modo como o particiona é implementado permite que elementos iguais troquem de posições relativas durante a sua execução. 
+
+É possível implementar uma versão estável do Quick Sort, mas para isso, ao invés de trocar o pivot diretamente com a primeira posição, o algoritmo deve fazer sucessivas trocas para "afastar" o pivot até a posição desejada -- um processo semelhante à inserção ordenada. Essa implementação, contudo, piora significativamente o desempenho do Quick Sort.
+
+O Quick Sort é in-place. O uso de memória auxiliar é constante em relação ao tamanho do array.
+
 ***
 
 # Resumo
