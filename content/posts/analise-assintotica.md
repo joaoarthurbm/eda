@@ -85,7 +85,7 @@ Além disso, poderíamos ter escolhido qualquer função linear para dizer que $
 
 Agora vamos definir formalmente o que significa essa notação. Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $\Theta(g(n))$ se 
 
-<p align="center">$0<=c1*g(n)<= f(n)<= c2*g(n), \forall n>=n0$</p>
+<p align="center">$0 \leq c1*g(n) \leq f(n) \leq c2*g(n), \forall n \geq n_0$</p>
 
 Vamos entender o que essa inequação complicada quer nos dizer. Em um resumo bem simplista ela está dizendo que se a gente "imprensar" $f(n)$ com $g(n)$ multiplicada por duas constantes diferentes, dizemos que $f(n)$ é $\Theta(g(n))$. 
 
@@ -99,15 +99,15 @@ O primeiro passo que vamos fazer é trocar as constantes por 1. Isso já foi dit
 
 Agora vamos voltar a inequação. Como "desconfiamos" que $f(n) = 3n+3$ é $\Theta(n)$, escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:
 
-<p align="center">$0<=c1*n<= 3n+3<= c2*n, \forall n>=n0$</p>  
+<p align="center">$0 \leq c1*n \leq 3n+3 \leq c2*n, \forall n \geq n_0$</p>  
 
 Agora precisamos encontrar valores para $c1$ e $c2$ para que essa inequação seja verdadeira. Vamos tentar com c1=1 e c2=6. 
 
-<p align="center">$0<=n<= 3n+3<= 6*n, \forall n>=n0$</p>  
+<p align="center">$0 \leq n \leq 3n+3 \leq 6*n, \forall n>=n0$</p>  
 
 Se verificarmos com $n=1$, vemos que a inequação é verdadeira:
 
-<p align="center">$0<=1<= 6<= 6$</p>  
+<p align="center">$0 \leq 1 \leq 6 \leq 6$</p>  
 
 Não é difícil também notar que $\forall n > 1$ ela sempre será verdadeira. Conseguimos, então, demonstrar que $f(n) \in \Theta(n)$, pois $g(n)=n$ limita inferior e superiomente $f(n)$. 
 
@@ -122,17 +122,17 @@ Formalmente dizemos que $g(n)=n$ é um limite assintótico restrito para $f(n)$.
 	<img src="theta.png">
 </figure>
 
-Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)<= f(n)<= c2*g(n)$.
+Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n) \leq f(n) \leq c2*g(n)$.
 
 > Em termos simplistas, $f(n) \in \Theta(g(n))$ significa dizer que o crescimento de f(n) é igual ao de g(n).
 
 **Outro exemplo.** Suponha que a função $7 * n^4 + 5 * n^2 +10$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.
 
-<p align="center">$0 <= c1 * n^4 <= 7 * n^4 + 5 * n^2 + 10 <= c2*n4, \forall n >= n0$</p>  
+<p align="center">$0 \leq c1 * n^4 \leq 7 * n^4 + 5 * n^2 + 10 \leq c2*n4, \forall n >= n0$</p>  
 
-Se escolhermos $c1=7$, $c2=22$ e $n0=1$, temos:
+Se escolhermos $c1=7$, $c2=22$ e $n_0 = 1$, temos:
 
-<p align="center"> $ 0 <=7 <= 22 <= 22 $</p>
+<p align="center"> $ 0 \leq 7 \leq 22 \leq 22 $</p>
 
 Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n^2)$.
 
@@ -142,7 +142,7 @@ Em resumo, para demonstrar formalmente precisamos dos seguintes passos:
 
 1. Aplicar as abstrações simplificadores em $f(n)$ para termos uma proposta para $g(n)$.
 
-2. Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0<=c1*g(n)<= f(n)<= c2*g(n)$ é verdadeira. 
+2. Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0 \leq c1*g(n) \leq f(n) \leq c2*g(n)$ é verdadeira. 
 
 Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.
 
@@ -154,7 +154,7 @@ Enquanto a notação $\Theta$ define os limites inferior e superior de uma funç
 
 Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se: 
 
-<p align="center"> $0<=f(n)<= c*g(n), \forall n>=n0$ </p>
+<p align="center"> $0 \leq f(n) \leq c*g(n), \forall n \geq n_0$ </p>
 
 Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.
 
@@ -166,11 +166,11 @@ O processo para demonstrar que $f(n)$ é $O(g(n))$ é muito semelhante, mas ness
 
 **Exemplo.** Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in O(n^2)$, certo? Vamos demonstrar formalmente.
 
-<p align="center"> $0 <= n^2 + 1 <= c * n^2, \forall n>=n0$ </p>
+<p align="center"> $0 \leq n^2 + 1 \leq c * n^2, \forall n \geq n_0$ </p>
 
-Se escolhermos c1=1 e n0=1, temos:
+Se escolhermos $c1=1$ e $n_0 = 1$, temos:
 
-<p align="center"> $1 <= 1$ </p>
+<p align="center"> $1 \leq 1$ </p>
 
 Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.
 
@@ -187,7 +187,7 @@ Por fim, outra particularidade dessa notação é que usamos com muita frequênc
 
 A notação $\Theta$ define o limite inferior e superior. $O$ define apenas o limite superior. E $\Omega$? Acertou. Apenas o limite inferior. Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $\Omega(g(n))$ se: 
 
-<p align="center"> $ 0 <= c * g(n) <= f(n), \forall n>=n0$ </p>
+<p align="center"> $ 0 \leq c * g(n) \leq f(n), \forall n \geq n_0$ </p>
 
 
 A figura abaixo ilustra essa relação.
@@ -201,11 +201,11 @@ O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas
 
 **Exemplo.** Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Omega(n^2)$, certo? Vamos demonstrar formalmente.
 
-<p align="center"> $ 0 <= c * n^2 <= n^2 + 1, \forall n >= n0$ </p>
+<p align="center"> $ 0 \leq c * n^2 \leq n^2 + 1, \forall n \geq n_0$ </p>
 
-Se escolhermos $c1=1$ e $n0=1$, temos:
+Se escolhermos $c1=1$ e $n_0 = 1$, temos:
 
-<p align="center"> $ 1 <= 2$ </p>
+<p align="center"> $ 1 \leq 2$ </p>
 
 Não é difícil perceber que essa inequação é verdadeira para todo $n0$ maior do que 1.
 
@@ -219,17 +219,40 @@ f(n) é maior ou igual ao crescimento de g(n).
 
 As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada. 
 
-** Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:
+Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:
 
-<p align="center"> $0<=f(n)< c*g(n), \forall n>=n0$ </p>
+<p align="center"> $0 \leq f(n) < c*g(n), \forall n \geq n_0$ </p>
 
 Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^2 + 3$ é $o(n^2)$. $f(n) = n^2 + 3$ é $o(n^3)$, $o(n^4)$, $o(n^5)$ etc.
 
 Por outro lado, $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:
 
-<p align="center"> $0 <= c*g(n) < f(n), n>=n0$ </p>
+<p align="center"> $0 \leq c*g(n) < f(n), n \geq n_0$ </p>
 
-Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(log n)$ etc.   
+Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(\log n)$ etc.   
+
+***
+
+# Resumo
+
+* Análise assintótica leva em consideração grandes entradas para tornar relevante apenas a ordem de crescimento das funções de tempo de execução.
+
+* Na prática, ignoramos as constantes e os expoentes de menor magnitude. 
+
+* Usamos análise assintótica para simplificar a comparação entre funções. Aplicando as diretrizes conseguimos rapidamente determinar a que classe pertence uma função.
+
+* Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ siginifica que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.
+
+* Em uma simplificação grosseira, podemos dizer que:
+
+	* $O$ -> $\leq$
+	* $\Omega$ -> $\geq$
+	* $\Theta$ -> $=$
+	* $o$ -> $<$
+	* $\omega$ -> $>$
+
+* As principais classes são: $1$ < $\log n$ < $n$ < $n*\log n$ < $n^2$ < $n^3$...$2^n$
+
 
 ***
 
