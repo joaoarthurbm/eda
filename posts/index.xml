@@ -419,7 +419,7 @@ Operações Primitivas
 
 &lt;p&gt;Agora vamos definir formalmente o que significa essa notação. Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $\Theta(g(n))$ se&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;$0&lt;=c1*g(n)&lt;= f(n)&lt;= c2*g(n), \forall n&gt;=n0$&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;$0 \leq c1*g(n) \leq f(n) \leq c2*g(n), \forall n \geq n_0$&lt;/p&gt;
 
 &lt;p&gt;Vamos entender o que essa inequação complicada quer nos dizer. Em um resumo bem simplista ela está dizendo que se a gente &amp;ldquo;imprensar&amp;rdquo; $f(n)$ com $g(n)$ multiplicada por duas constantes diferentes, dizemos que $f(n)$ é $\Theta(g(n))$.&lt;/p&gt;
 
@@ -433,15 +433,15 @@ Operações Primitivas
 
 &lt;p&gt;Agora vamos voltar a inequação. Como &amp;ldquo;desconfiamos&amp;rdquo; que $f(n) = 3n+3$ é $\Theta(n)$, escolhemos $g(n)=n$. Poderíamos escolher qualquer função linear para representar $g(n)$, escolhemos a função linear mais simples para facilitar nossa vida. Assim, a inequação fica:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;$0&lt;=c1*n&lt;= 3n+3&lt;= c2*n, \forall n&gt;=n0$&lt;/p&gt;  
+&lt;p align=&#34;center&#34;&gt;$0 \leq c1*n \leq 3n+3 \leq c2*n, \forall n \geq n_0$&lt;/p&gt;  
 
 &lt;p&gt;Agora precisamos encontrar valores para $c1$ e $c2$ para que essa inequação seja verdadeira. Vamos tentar com c1=1 e c2=6.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;$0&lt;=n&lt;= 3n+3&lt;= 6*n, \forall n&gt;=n0$&lt;/p&gt;  
+&lt;p align=&#34;center&#34;&gt;$0 \leq n \leq 3n+3 \leq 6*n, \forall n&gt;=n0$&lt;/p&gt;  
 
 &lt;p&gt;Se verificarmos com $n=1$, vemos que a inequação é verdadeira:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;$0&lt;=1&lt;= 6&lt;= 6$&lt;/p&gt;  
+&lt;p align=&#34;center&#34;&gt;$0 \leq 1 \leq 6 \leq 6$&lt;/p&gt;  
 
 &lt;p&gt;Não é difícil também notar que $\forall n &amp;gt; 1$ ela sempre será verdadeira. Conseguimos, então, demonstrar que $f(n) \in \Theta(n)$, pois $g(n)=n$ limita inferior e superiomente $f(n)$.&lt;/p&gt;
 
@@ -455,7 +455,7 @@ Operações Primitivas
     &lt;img src=&#34;theta.png&#34;&gt;
 &lt;/figure&gt;
 
-&lt;p&gt;Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n)&amp;lt;= f(n)&amp;lt;= c2*g(n)$.&lt;/p&gt;
+&lt;p&gt;Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n) \leq f(n) \leq c2*g(n)$.&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;Em termos simplistas, $f(n) \in \Theta(g(n))$ significa dizer que o crescimento de f(n) é igual ao de g(n).&lt;/p&gt;
@@ -463,11 +463,11 @@ Operações Primitivas
 
 &lt;p&gt;&lt;strong&gt;Outro exemplo.&lt;/strong&gt; Suponha que a função $7 * n^4 + 5 * n^2 +10$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Theta(n4)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt;$0 &lt;= c1 * n^4 &lt;= 7 * n^4 + 5 * n^2 + 10 &lt;= c2*n4, \forall n &gt;= n0$&lt;/p&gt;  
+&lt;p align=&#34;center&#34;&gt;$0 \leq c1 * n^4 \leq 7 * n^4 + 5 * n^2 + 10 \leq c2*n4, \forall n &gt;= n0$&lt;/p&gt;  
 
-&lt;p&gt;Se escolhermos $c1=7$, $c2=22$ e $n0=1$, temos:&lt;/p&gt;
+&lt;p&gt;Se escolhermos $c1=7$, $c2=22$ e $n_0 = 1$, temos:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $ 0 &lt;=7 &lt;= 22 &lt;= 22 $&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $ 0 \leq 7 \leq 22 \leq 22 $&lt;/p&gt;
 
 &lt;p&gt;Na verdade, todas as funções quadráticas são limitadas inferior e superiormente por $n^2$. No nosso linguajar, podemos dizer que todas as funções abaixo pertencem à $\Theta(n^2)$.&lt;/p&gt;
 
@@ -478,7 +478,7 @@ Operações Primitivas
 &lt;ol&gt;
 &lt;li&gt;&lt;p&gt;Aplicar as abstrações simplificadores em $f(n)$ para termos uma proposta para $g(n)$.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0&amp;lt;=c1*g(n)&amp;lt;= f(n)&amp;lt;= c2*g(n)$ é verdadeira.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0 \leq c1*g(n) \leq f(n) \leq c2*g(n)$ é verdadeira.&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;p&gt;Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.&lt;/p&gt;
@@ -491,7 +491,7 @@ Operações Primitivas
 
 &lt;p&gt;Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $0&lt;=f(n)&lt;= c*g(n), \forall n&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $0 \leq f(n) \leq c*g(n), \forall n \geq n_0$ &lt;/p&gt;
 
 &lt;p&gt;Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.&lt;/p&gt;
 
@@ -503,11 +503,11 @@ Operações Primitivas
 
 &lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in O(n^2)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $0 &lt;= n^2 + 1 &lt;= c * n^2, \forall n&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $0 \leq n^2 + 1 \leq c * n^2, \forall n \geq n_0$ &lt;/p&gt;
 
-&lt;p&gt;Se escolhermos c1=1 e n0=1, temos:&lt;/p&gt;
+&lt;p&gt;Se escolhermos $c1=1$ e $n_0 = 1$, temos:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $1 &lt;= 1$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $1 \leq 1$ &lt;/p&gt;
 
 &lt;p&gt;Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.&lt;/p&gt;
 
@@ -525,7 +525,7 @@ Operações Primitivas
 
 &lt;p&gt;A notação $\Theta$ define o limite inferior e superior. $O$ define apenas o limite superior. E $\Omega$? Acertou. Apenas o limite inferior. Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $\Omega(g(n))$ se:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $ 0 &lt;= c * g(n) &lt;= f(n), \forall n&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $ 0 \leq c * g(n) \leq f(n), \forall n \geq n_0$ &lt;/p&gt;
 
 &lt;p&gt;A figura abaixo ilustra essa relação.&lt;/p&gt;
 
@@ -537,11 +537,11 @@ Operações Primitivas
 
 &lt;p&gt;&lt;strong&gt;Exemplo.&lt;/strong&gt; Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Omega(n^2)$, certo? Vamos demonstrar formalmente.&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $ 0 &lt;= c * n^2 &lt;= n^2 + 1, \forall n &gt;= n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $ 0 \leq c * n^2 \leq n^2 + 1, \forall n \geq n_0$ &lt;/p&gt;
 
-&lt;p&gt;Se escolhermos $c1=1$ e $n0=1$, temos:&lt;/p&gt;
+&lt;p&gt;Se escolhermos $c1=1$ e $n_0 = 1$, temos:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $ 1 &lt;= 2$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $ 1 \leq 2$ &lt;/p&gt;
 
 &lt;p&gt;Não é difícil perceber que essa inequação é verdadeira para todo $n0$ maior do que 1.&lt;/p&gt;
 
@@ -557,17 +557,43 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 
 &lt;p&gt;As duas notações restantes são $o$ (o minúsculo) e $\omega$ (omega minúsculo). Como disse, eu considero essas duas notações menos importantes que as demais e não vou discuti-las de forma aprofundada.&lt;/p&gt;
 
-&lt;p&gt;** Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
+&lt;p&gt;Apenas deixo aqui registrado que $o$ é muito semelhante à $O$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $0&lt;=f(n)&lt; c*g(n), \forall n&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $0 \leq f(n) &lt; c*g(n), \forall n \geq n_0$ &lt;/p&gt;
 
 &lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^2 + 3$ é $o(n^2)$. $f(n) = n^2 + 3$ é $o(n^3)$, $o(n^4)$, $o(n^5)$ etc.&lt;/p&gt;
 
 &lt;p&gt;Por outro lado, $\omega$ é muito semelhante à $\Omega$, removendo apenas o sinal de igualdade da inequação:&lt;/p&gt;
 
-&lt;p align=&#34;center&#34;&gt; $0 &lt;= c*g(n) &lt; f(n), n&gt;=n0$ &lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt; $0 \leq c*g(n) &lt; f(n), n \geq n_0$ &lt;/p&gt;
 
-&lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(log n)$ etc.&lt;/p&gt;
+&lt;p&gt;Ou seja, &lt;strong&gt;não&lt;/strong&gt; podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(\log n)$ etc.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;resumo&#34;&gt;Resumo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Análise assintótica leva em consideração grandes entradas para tornar relevante apenas a ordem de crescimento das funções de tempo de execução.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Na prática, ignoramos as constantes e os expoentes de menor magnitude.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Usamos análise assintótica para simplificar a comparação entre funções. Aplicando as diretrizes conseguimos rapidamente determinar a que classe pertence uma função.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ siginifica que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Em uma simplificação grosseira, podemos dizer que:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;$O$ -&amp;gt; $\leq$&lt;/li&gt;
+&lt;li&gt;$\Omega$ -&amp;gt; $\geq$&lt;/li&gt;
+&lt;li&gt;$\Theta$ -&amp;gt; $=$&lt;/li&gt;
+&lt;li&gt;$o$ -&amp;gt; $&amp;lt;$&lt;/li&gt;
+&lt;li&gt;$\omega$ -&amp;gt; $&amp;gt;$&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;As principais classes são: $1$ &amp;lt; $\log n$ &amp;lt; $n$ &amp;lt; $n*\log n$ &amp;lt; $n^2$ &amp;lt; $n^3$&amp;hellip;$2^n$&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;hr /&gt;
 
@@ -1183,7 +1209,7 @@ adicionado.
 
 &lt;hr /&gt;
 
-&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação. Apesar de ser da mesma classe de complexidade do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt;, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores.&lt;/p&gt;
+&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação por divisão e conquista. Apesar de ser da mesma classe de complexidade do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt;, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores.&lt;/p&gt;
 
 &lt;p&gt;O funcionamento do Quick Sort baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;particionamento&lt;/em&gt;&lt;/strong&gt;. Particionar significa escolher um número qualquer presente no array, chamado de &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores.&lt;/p&gt;
 
