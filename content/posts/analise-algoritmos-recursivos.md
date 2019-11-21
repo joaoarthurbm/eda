@@ -144,13 +144,13 @@ $T(n) = 2 * T(n/2) + n$, onde n = v.length - 1
 Para fixar! Muitas relações de recorrência podem ser descritas 
 na seguinte forma:
 
-$T(n) = a * T(n/b) + f(n)$ , com $a >= 1$, $b > 1$ e $f(n)$ não negativa. 
+T(n) = a * T(n/b) + f(n), com a >= 1, b > 1 e f(n) não negativa. 
 
 É importante que a gente saiba em português o que significa essa 
 equação acima. Você lembra que ela é referente a um algoritmo 
-recursivo, certo? Em português, dizemos que há $a$ chamadas 
-recursivas e que cada chamada recursiva divide a entrada em $b$ 
-partes. Além disso, a cada chamada recursiva, um custo $f(n)$ é 
+recursivo, certo? Em português, dizemos que há *a* chamadas 
+recursivas e que cada chamada recursiva divide a entrada em *b* 
+partes. Além disso, a cada chamada recursiva, um custo *f(n)* é 
 adicionado.
 </pre>
 
