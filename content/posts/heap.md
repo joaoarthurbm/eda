@@ -175,7 +175,7 @@ A raiz está no índice 0 do array. Portanto, o nó à sua direita está no índ
 
 O nó 87 está no índice 1 do array. Portanto, o nó à sua direita está no índice 4, pois $2*(1 + 1) = 4$.
 
-O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 6, pois $2*(2 + 1) = 3$.
+O nó 73 está no índice 2 do array. Portanto, o nó à sua direita está no índice 6, pois $2*(2 + 1) = 6$.
 
 O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.
 
