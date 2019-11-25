@@ -758,9 +758,9 @@ T(n) = a * T(n/b) + f(n), com a &gt;= 1, b &gt; 1 e f(n) não negativa.
 
 É importante que a gente saiba em português o que significa essa 
 equação acima. Você lembra que ela é referente a um algoritmo 
-recursivo, certo? Em português, dizemos que há *a* chamadas 
-recursivas e que cada chamada recursiva divide a entrada em *b* 
-partes. Além disso, a cada chamada recursiva, um custo *f(n)* é 
+recursivo, certo? Em português, dizemos que há &lt;b&gt;a&lt;/b&gt; chamadas 
+recursivas e que cada chamada recursiva divide a entrada em &lt;b&gt;b&lt;/b&gt; 
+partes. Além disso, a cada chamada recursiva, um custo &lt;b&gt;f(n)&lt;/b&gt; é 
 adicionado.
 &lt;/pre&gt;
 
@@ -4265,7 +4265,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 
 &lt;li&gt;&lt;p&gt;O array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice *&lt;strong&gt;i&lt;/strong&gt; é dada por $2*i+1$. A direita de um nó no índice *&lt;strong&gt;i&lt;/strong&gt; é dada por $2*(i+1)$. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; é dados por $int((index - 1) / 2)$.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; é dada por $2*i+1$. A direita de um nó no índice &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; é dada por $2*(i+1)$. O pai de um nó no índice &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; é dados por $int((index - 1) / 2)$.&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;A adição de um elemento é sempre feita na próxima posição livre do array. Depois de adicionado, deve-se comparar o elemento com o pai. Se o seu valor foi maior, troca-se os elementos. Esse processo é feito enquanto o valor for maior ou não chegar na raiz.&lt;/p&gt;&lt;/li&gt;
 
