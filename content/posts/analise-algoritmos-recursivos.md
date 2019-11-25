@@ -148,9 +148,9 @@ T(n) = a * T(n/b) + f(n), com a >= 1, b > 1 e f(n) não negativa.
 
 É importante que a gente saiba em português o que significa essa 
 equação acima. Você lembra que ela é referente a um algoritmo 
-recursivo, certo? Em português, dizemos que há *a* chamadas 
-recursivas e que cada chamada recursiva divide a entrada em *b* 
-partes. Além disso, a cada chamada recursiva, um custo *f(n)* é 
+recursivo, certo? Em português, dizemos que há <b>a</b> chamadas 
+recursivas e que cada chamada recursiva divide a entrada em <b>b</b> 
+partes. Além disso, a cada chamada recursiva, um custo <b>f(n)</b> é 
 adicionado.
 </pre>
 
