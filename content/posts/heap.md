@@ -508,7 +508,7 @@ Em resumo, para construir um Heap a partir de um array qualquer basta aplicar **
 
 * O array que representa um Heap é o resultado do seu percurso em largura. Ou seja, a raiz sempre está no índice 0. Nos índices 1 e 2 estão os elementos do nível 1. Nos índices 3, 4, 5 e 6 estão os elementos do nível 2 e assim por diante.
 
-* Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice ***i** é dada por $2*i+1$. A direita de um nó no índice ***i** é dada por $2*(i+1)$. O pai de um nó no índice ***i*** é dados por $int((index - 1) / 2)$.
+* Os métodos left, right e parent são implementados de acordo com os índices dos elementos no array. A esquerda de um nó no índice ***i*** é dada por $2*i+1$. A direita de um nó no índice ***i*** é dada por $2*(i+1)$. O pai de um nó no índice ***i*** é dados por $int((index - 1) / 2)$.
 
 * A adição de um elemento é sempre feita na próxima posição livre do array. Depois de adicionado, deve-se comparar o elemento com o pai. Se o seu valor foi maior, troca-se os elementos. Esse processo é feito enquanto o valor for maior ou não chegar na raiz.
 
