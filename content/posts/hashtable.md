@@ -344,7 +344,7 @@ Para entender bem a ideia de sondagem, vamos analisar a adição dos seguintes o
 * (736435217, "Lívia")
 * (879995247, "Will")
 * (524109227, "Clara")
-* (736435217, "Talita")
+* (996411117, "Talita")
 
 ![colisao-prob](colisao-prob.png)
 
