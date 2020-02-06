@@ -92,7 +92,7 @@ Operações Primitivas
 
 &lt;li&gt;&lt;p&gt;atribuição (pInteira = ) -&amp;gt; $c3$&lt;/p&gt;&lt;/li&gt;
 
-&lt;li&gt;&lt;p&gt;operação aritmética (i % j) -&amp;gt; $c4$&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;operação aritmética (i / j) -&amp;gt; $c4$&lt;/p&gt;&lt;/li&gt;
 
 &lt;li&gt;&lt;p&gt;atribuição (resultado = ) -&amp;gt; $c5$&lt;/p&gt;&lt;/li&gt;
 
