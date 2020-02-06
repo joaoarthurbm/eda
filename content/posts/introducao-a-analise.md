@@ -81,7 +81,7 @@ int multiplicaRestoPorParteInteira(int i, int j) {
 
 3. atribuição (pInteira = ) -> $c3$
 
-4. operação aritmética (i % j) -> $c4$
+4. operação aritmética (i / j) -> $c4$
 
 5. atribuição (resultado = ) -> $c5$
 
