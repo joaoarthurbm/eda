@@ -93,7 +93,7 @@ Quando um valor menor ou igual ao ***pivot*** for encontrado (`if values[j] <= p
 1. Incrementar `i`;
 2. Trocar $values[i]$ por $values[j]$.
 
-Repete comigo. Sempre que encontrarmos um valor menor ou igual ao ***pivot***, incrementamos ***i*** e trocamos $values[i]$ por $values[i]$.
+Repete comigo. Sempre que encontrarmos um valor menor ou igual ao ***pivot***, incrementamos ***i*** e trocamos $values[i]$ por $values[j]$.
 
 Quando encerrar a iteração, basta agora trocar $values[i]$ pela posição do ***pivot***. Ou seja, trocamos $values[i]$ por $values[left]$.
 
