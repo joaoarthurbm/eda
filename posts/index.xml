@@ -1292,7 +1292,7 @@ adicionado.
 &lt;li&gt;Trocar $values[i]$ por $values[j]$.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Repete comigo. Sempre que encontrarmos um valor menor ou igual ao &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, incrementamos &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; e trocamos $values[i]$ por $values[i]$.&lt;/p&gt;
+&lt;p&gt;Repete comigo. Sempre que encontrarmos um valor menor ou igual ao &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, incrementamos &lt;strong&gt;&lt;em&gt;i&lt;/em&gt;&lt;/strong&gt; e trocamos $values[i]$ por $values[j]$.&lt;/p&gt;
 
 &lt;p&gt;Quando encerrar a iteração, basta agora trocar $values[i]$ pela posição do &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;. Ou seja, trocamos $values[i]$ por $values[left]$.&lt;/p&gt;
 
