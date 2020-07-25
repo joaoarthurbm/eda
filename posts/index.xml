@@ -3294,7 +3294,13 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;p&gt;Note que todo novo nó é adicionado como folha na árvore.&lt;/p&gt;
 
-&lt;p&gt;Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.&lt;/p&gt;
+&lt;p&gt;Complicado? Eu gravei um vídeo para facilitar. Clique na imagem abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://youtu.be/9UXmJKg1mQw&#34;&gt;
+    &lt;img src=&#34;video-insercao.png&#34;&gt;
+&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementação.&lt;/strong&gt; Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; add(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;element&lt;/span&gt;) {
         
     &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (isEmpty())
