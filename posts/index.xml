@@ -1687,9 +1687,7 @@ há uma discussão mais detalhada sobre a análise do Quick Sort.&lt;/p&gt;
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Essa parte pode ser confusa e acredito que para entendê-la precisamos de recursos visuais melhores do que o texto. Por isso, fiz o vídeo abaixo.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=3bm7NgKJpj4&amp;feature=youtu.be&#34;&gt;
-    &lt;img src=&#34;video.jpg&#34;&gt;
-&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=3bm7NgKJpj4&#34;&gt;&lt;img src=&#34;https://img.youtube.com/vi/3bm7NgKJpj4/0.jpg&#34; alt=&#34;Teoria: Couting Sort&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;implementação-do-counting-sort&#34;&gt;Implementação do Counting Sort&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;countingSort&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;A&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt;) {
@@ -3296,9 +3294,7 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 
 &lt;p&gt;Complicado? Eu gravei um vídeo para facilitar. Clique na imagem abaixo.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&#34;https://youtu.be/9UXmJKg1mQw&#34;&gt;
-    &lt;img src=&#34;video-insercao.png&#34;&gt;
-&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9UXmJKg1mQw&#34;&gt;&lt;img src=&#34;https://img.youtube.com/vi/9UXmJKg1mQw/0.jpg&#34; alt=&#34;Teoria: inserção em BST&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Implementação.&lt;/strong&gt; Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; add(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;element&lt;/span&gt;) {
