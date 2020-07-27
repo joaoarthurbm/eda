@@ -1,6 +1,6 @@
 +++
 title = "Cite"
-date = "2019-10-29"
+date = "2019-10-26"
 menu = "main"
 weight = "20"
 meta = "false"
