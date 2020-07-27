@@ -12,6 +12,31 @@
        
        
        <item>
+         <title>Cite</title>
+         <link>https://joaoarthurbm.github.io/eda/cite/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/cite/</guid>
+         <description>
+
+&lt;h1 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h1&gt;
+
+&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
+Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Conteúdo</title>
          <link>https://joaoarthurbm.github.io/eda/about/</link>
          <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
@@ -106,23 +131,6 @@ basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/e
 &lt;/ul&gt;
 
 &lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-implementacoes/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
-
-&lt;hr /&gt;
-
-&lt;h2 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
-Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
-  title     = {Estrutura de Dados e Algoritmos},
-  author    = {João Arthur Brunet}, 
-  publisher = {Computação @ UFCG},
-  year      = 2019,
-  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
-}
-&lt;/code&gt;&lt;/pre&gt;
 </description>
        </item>
        
