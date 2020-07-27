@@ -29,3 +29,21 @@ Contribuições esperadas:
 
 <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/"> <font color="#1980e6"> <b>Repositório das estruturas implementadas.</b></font></a></aside>
 
+***
+
+### Cite este material
+
+```
+João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos,
+Computação @ UFCG, <http://joaoarthurbm.github.io/eda>.
+```
+
+```
+@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
+  author    = {João Arthur Brunet},
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+  howpublished = "\url{http://joaoarthurbm.github.io/eda}",
+}
+```
