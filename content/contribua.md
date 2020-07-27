@@ -34,13 +34,13 @@ Contribuições esperadas:
 ### Cite este material
 
 ```
-João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos,
+João Arthur Brunet, 2019. Estruturas de Dados e Algoritmos,
 Computação @ UFCG, <http://joaoarthurbm.github.io/eda>.
 ```
 
 ```
 @book{eda:joaobrunet:ufcg,
-  title     = {Estrutura de Dados e Algoritmos},
+  title     = {Estruturas de Dados e Algoritmos},
   author    = {João Arthur Brunet},
   publisher = {Computação @ UFCG},
   year      = 2019,
