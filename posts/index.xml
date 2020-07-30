@@ -1,9 +1,9 @@
 
    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
      <channel>
-       <title>Posts on Estrutura de Dados</title>
+       <title>Posts on Estruturas de Dados e Algoritmos</title>
        <link>https://joaoarthurbm.github.io/eda/posts/</link>
-       <description>Recent content in Posts on Estrutura de Dados</description>
+       <description>Recent content in Posts on Estruturas de Dados e Algoritmos</description>
        <generator>Hugo -- gohugo.io</generator>
        <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
        <lastBuildDate>Wed, 30 Oct 2019 00:00:00 -0300</lastBuildDate>
@@ -1256,6 +1256,10 @@ adicionado.
 &lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;1, 0, 2&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;3&lt;/font&gt;, 8, 23, 7, 10, 77, 7]&lt;/p&gt;
 
 &lt;p&gt;Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à sua esquerda e os elementos maiores à direita.&lt;/p&gt;
+
+&lt;p&gt;Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=YnbvpvcmlIM&#34;&gt;&lt;img src=&#34;https://img.youtube.com/vi/YnbvpvcmlIM/0.jpg&#34; alt=&#34;Teoria: Particionamento Lomuto&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.&lt;/p&gt;
 
