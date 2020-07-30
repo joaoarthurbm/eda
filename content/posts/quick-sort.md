@@ -56,6 +56,10 @@ E agora? Agora não há mais elementos menores ou iguais ao pivot para serem ide
 
 Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à sua esquerda e os elementos maiores à direita.
 
+Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.
+
+[![Teoria: Particionamento Lomuto](https://img.youtube.com/vi/YnbvpvcmlIM/0.jpg)](https://www.youtube.com/watch?v=YnbvpvcmlIM)
+
 Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.
 
 ## Implementação do Particionamento de Lomuto
