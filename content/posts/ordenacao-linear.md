@@ -8,7 +8,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 ***
 
-Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos alguns algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort^[Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.]. 
+Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort^[Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.]. 
 
 Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.
 
