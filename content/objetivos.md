@@ -12,7 +12,6 @@ O aluno também será capaz de compreender e implementar as principais estrutura
 
 Abaixo estão detalhados os objetivos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.
 
-
 ## Análise de Algoritmos
 
 *Compreender a importância do estudo de eficiência de algoritmos.*
