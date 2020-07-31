@@ -143,7 +143,6 @@ Complicado? Eu gravei um vídeo para facilitar. Clique na imagem abaixo.
 
 [![Teoria: inserção em BST](https://img.youtube.com/vi/9UXmJKg1mQw/0.jpg)](https://www.youtube.com/watch?v=9UXmJKg1mQw)
 
-
 **Implementação.** Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.
 
 ```java
