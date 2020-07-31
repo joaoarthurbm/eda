@@ -118,7 +118,7 @@ Veja que essa é a solução que foi utilizada na Figura acima. Pois, $807365841
 
 **Por que módulo?** Primeiro porque sempre vai gerar um inteiro dentro do intervalo de índices válidos do array. Segundo porque para uma mesma chave, a função sempre retorna o mesmo hash. 
 
-Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave % tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante. 
+Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave \% tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante. 
 
 Vamos analisar o código abaixo que apresenta algumas operações básicas da classe ***TabelaHash***. Por motivos de simplificação, a classe que usaremos aqui implementa uma tabela hash para manipular objetos do tipo ***Aluno***. Naturalmente, por ser de propósito geral, as implementações de Java de uma Tabela Hash (HashMap e HashTable) permitem o armazenamento e manipulação de qualquer objeto.
 
