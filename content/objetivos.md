@@ -10,7 +10,7 @@ Ao término deste curso o aluno será capaz de compreender, implementar e utiliz
 
 O aluno será capaz também de analisar a eficiência de algoritmos do ponto de vista assintótico. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.
 
-Abaixo estão detalhados os objetivos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.
+Abaixo estão detalhados os objetivos gerais e específicos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.
 
 ## Análise de Algoritmos
 
