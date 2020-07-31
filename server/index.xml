@@ -1,0 +1,139 @@
+
+   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+     <channel>
+       <title>Estrutura de Dados</title>
+       <link>https://joaoarthurbm.github.io/eda/</link>
+       <description>Recent content on Estrutura de Dados</description>
+       <generator>Hugo -- gohugo.io</generator>
+       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
+       <lastBuildDate>Wed, 30 Oct 2019 00:00:00 -0300</lastBuildDate>
+       
+           <atom:link href="https://joaoarthurbm.github.io/eda/index.xml" rel="self" type="application/rss+xml" />
+       
+       
+       <item>
+         <title>Conteúdo</title>
+         <link>https://joaoarthurbm.github.io/eda/about/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/about/</guid>
+         <description>
+
+&lt;h3 id=&#34;análise-de-algoritmos&#34;&gt;Análise de Algoritmos&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;Introdução à análise&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica/&#34;&gt;Análise assintótica&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos&#34;&gt;Análise de Algoritmos recursivos&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;ordenação&#34;&gt;Ordenação&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/selection-sort&#34;&gt;Selection Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/insertion-sort&#34;&gt;Insertion Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/quick-sort&#34;&gt;Quick Sort&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/ordenacao-linear&#34;&gt;Ordenação Linear (Counting Sort)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;estruturas-de-dados-lineares&#34;&gt;Estruturas de Dados Lineares&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/arraylist&#34;&gt;Listas baseadas em Arrays (ArrayList)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/linkedlist&#34;&gt;Listas Ligadas (LinkedList)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/hashtable&#34;&gt;Tabelas Hash&lt;/a&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/enderecamento-aberto-so-perguntas&#34;&gt;Uma aula só com perguntas: endereçamento aberto&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;árvores&#34;&gt;Árvores&lt;/h3&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/bst&#34;&gt;Árvores Binárias de Pesquisa&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;//joaoarthurbm.github.io/eda/posts/heap&#34;&gt;Heap&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
+Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Contribua</title>
+         <link>https://joaoarthurbm.github.io/eda/contribua/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/contribua/</guid>
+         <description>
+
+&lt;h2 id=&#34;melhoria-no-conteúdo-do-material&#34;&gt;Melhoria no conteúdo do material&lt;/h2&gt;
+
+&lt;p&gt;Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
+por terceiros porque acredito que os materiais representam a minha narrativa sobre
+o assunto abordado. No entanto, revisões e correções são muito bem-vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender,
+basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/eda/issues&#34;&gt;abrir uma issue&lt;/a&gt; ou fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
+
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório dos materiais.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;melhoria-nas-implementações&#34;&gt;Melhoria nas implementações&lt;/h2&gt;
+
+&lt;p&gt;Contribuições esperadas:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Cadastro de &lt;em&gt;issues&lt;/em&gt; no repositório;&lt;/li&gt;
+&lt;li&gt;&lt;em&gt;Bugfix&lt;/em&gt; no código das estruturas;&lt;/li&gt;
+&lt;li&gt;Melhoria no código das estruturas;&lt;/li&gt;
+&lt;li&gt;Adição de testes;&lt;/li&gt;
+&lt;li&gt;Documentação do código.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-implementacoes/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estrutura de Dados e Algoritmos, 
+Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;pre&gt;&lt;code&gt;@book{eda:joaobrunet:ufcg,
+  title     = {Estrutura de Dados e Algoritmos},
+  author    = {João Arthur Brunet}, 
+  publisher = {Computação @ UFCG},
+  year      = 2019,
+  howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
+}
+&lt;/code&gt;&lt;/pre&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Posts</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/</link>
+         <pubDate>Wed, 30 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/</guid>
+         <description></description>
+       </item>
+       
+     </channel>
+   </rss>

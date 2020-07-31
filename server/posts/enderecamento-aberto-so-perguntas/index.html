@@ -1,0 +1,384 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estrutura de Dados</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.59.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estrutura de Dados</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>joao.arthur@computacao.ufcg.edu.br</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/about/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Uma aula só com perguntas: Endereçamento Aberto</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-23T00:00:00-03:00">Oct 23, 2019</time>
+        </li>
+        
+
+        
+
+        <li>8 minutes read</li>
+
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    
+
+<hr />
+
+<p>Neste artigo vou descrever um experimento que fiz em sala de aula. Tentei lecionar Resolução de Colisões em Tabelas Hash utilizando apenas perguntas para a turma.</p>
+
+<p>Eu estou no meu segundo ano como professor da UFCG e já me cansei de usar slides em sala de aula. Não que eu queira fazer uma cruzada contra os slides. Sei que eles funcionam para vários cenários. Contudo, eu acho que, no contexto das minhas disciplinas, eles mais atrapalham do que ajudam.</p>
+
+<p>Corta para a RE-03.</p>
+
+<p>Dito isso, na aulas de Estrutura de Dados e Algoritmos, tenho tentado outras alternativas para conduzir as discussões. Desde o semestre passado, por exemplo, utilizo uma variação de DOJO para a implementação dos algoritmos clássicos de ordenação. Em linhas gerais, funciona desta maneira: divido a turma em grupos pequenos e os faço pensar na solução para o problema proposto. Um a um, os grupos são chamados para implementar a solução no meu computador, cuja tela está projetada para a sala. Cada grupo possui apenas 2min para contribuir com a solução. Naturalmente, cada grupo deve continuar a implementação a partir do ponto em que o outro grupo parou. Assim, a solução é construída por N (n &gt; 2) mãos. Para melhorar a discussão e entendimento do assunto, ao final dos 2 minutos, peço para cada grupo explicar o que fez e o que falta para terminar a solução.</p>
+
+<p>Essa primeira experiência foi bem proveitosa para o aprendizado. Contudo, assim como a aula com slides, não é viável aplicá-la sempre. Por isso, e pelo cansaço com slides, procurei outras formas de conduzir minhas aulas. Há um tempo atrás, li um artigo de um professor que conduziu uma aula inteira de programação apenas fazendo perguntas (alguém, por favor, me ajuda a achar esse artigo). O ócio me fez pensar: por que não replicar em Estrutura de Dados? Pois bem, a partir de agora, relato o que aconteceu hoje na RE-03.</p>
+
+<h2 id="preparação">Preparação</h2>
+
+<p>Inicialmente, avisei para os alunos que o meu objetivo era fazer apenas perguntas na sala de aula e perguntei se eles topariam o desafio. Como eu não deixei escolha, todos toparam. :)</p>
+
+<p>Para ser sincero, não me preparei muito para a aula. Eu sabia o que queria passar, mas tinha receio que, se preparasse as questões de antemão, a aula sairia tão mecanizada quanto o passar de slides. Assim, eu fui para a sala de aula com tópicos a serem cobertos:</p>
+
+<ul>
+<li>resolução de colisões com endereçamento aberto</li>
+<li>probing linear e quadrático</li>
+<li>fator de carga</li>
+<li>rehash</li>
+</ul>
+
+<p><strong>Assunto da aula:</strong> <em>Resolução de colisões em tabelas hash utilizando endereçamento aberto.</em></p>
+
+<h2 id="a-aula">A aula</h2>
+
+<p>A partir de agora, vai ser em forma de diálogo e observações, ok? Vamos lá.</p>
+
+<p><strong><em>- O que vimos na aula passada?</em></strong></p>
+
+<p>— Resolução de colisões usando chainning.</p>
+
+<p><strong><em>— Como funciona?</em></strong></p>
+
+<p>Os alunos explicaram o funcionamento.</p>
+
+<p><strong><em>— Qual a complexidade da busca ?</em></strong></p>
+
+<p>Muitos responderam $O(1)$. Aqui houve o primeiro desvio do que tinha em mente. O ideal seria que a resposta fosse $O(1+alpha)$, onde $alpha$ é o tamanho médio das listas. Caso a turma tivesse respondido assim, a aula continuaria como planejada. Contudo, tive que desenhar um exemplo de colisões na tabela que gerou uma lista razoavelmente grande e, para reforçar que as operações não são $O(1)$ e sim $O(1 + alpha)$, fiz a seguinte pergunta:</p>
+
+<p><strong><em>— O(1) mesmo?</em></strong></p>
+
+<p>Nesse momento eles refletiram e responderam corretamente. Com o mesmo exemplo, eu perguntei:</p>
+
+<p><strong><em>— E se não pudéssemos utilizar listas? E se em cada slot só coubesse um par <key,value>?</em></strong></p>
+
+<p>Silêncio. Aqui foi mais um momento em que tive que improvisar.</p>
+
+<p>*<strong>— Vamos lá. Houve colisões. Há espaço para alocar esse novo objeto?</strong></p>
+
+<p>— Sim.</p>
+
+<p><strong><em>— Onde?</em></strong></p>
+
+<p>— Pode ser na próxima posição livre.</p>
+
+<p><strong><em>— Como? Se minha função de hash me joga para aquela posição.</em></strong></p>
+
+<p>Nesse momento houve hesitação da turma. Meu objetivo aqui era que eles sacassem que adicionando +1 no resultado do hash seria uma forma. Assim, voltei para a função de hash e perguntei:</p>
+
+<p><strong><em>— E se eu colocasse hash(x) = (x % n) + 1, funcionaria?</em></strong></p>
+
+<p>— Sim.</p>
+
+<p><strong><em>— E se eu adicionar um elemento que caiu nessa mesma posição?</em></strong></p>
+
+<p>— Usa hash(x) = (x%n) + 2.</p>
+
+<p><strong><em>— E se eu adicionar mais um elemento que caiu nessa mesma posição?</em></strong></p>
+
+<p>— Usa hash(x) = (x%n) + 3.</p>
+
+<p><strong><em>— Ótimo! Então como posso generalizar essa minha função?</em></strong></p>
+
+<p>Mais hesitação. Nesse momento tive que transformar uma afirmação em pergunta:</p>
+
+<p><strong><em>— E se eu colocasse um i ao invés dessas constantes? O i começaria de quanto?</em></strong>
+— 0.</p>
+
+<p><strong><em>— E iria aumentando como?</em></strong></p>
+
+<p>— De um em um.</p>
+
+<p><strong><em>— Qual o nome bonito para isso?</em></strong></p>
+
+<p>— Linearmente.</p>
+
+<p>Aqui tive que introduzir o nome do conceito (linear probing). Aí não teve jeito.</p>
+
+<p><strong><em>— Ok, pessoal. Vocês acabaram de resolver colisões usando endereçamento aberto com probing linear.</em></strong></p>
+
+<p>Contudo, quando se usa endereçamento aberto, os algoritmos de <strong><em>put</em></strong> e <strong><em>get</em></strong> devem ser modificados em relação à estratégia de chainning. Por isso, perguntei:</p>
+
+<p><strong><em>— Como ficaria o algoritmo de busca em uma tabela com essa estratégia?</em></strong></p>
+
+<p>A turma ficou calada novamente. Insisti:</p>
+
+<p><strong><em>— Vamos lá. Se eu pesquisar pela chave X, qual o protocolo?</em></strong></p>
+
+<p>— Calcula o hash dela.</p>
+
+<p><strong><em>— Como sempre?</em></strong></p>
+
+<p>— Não. Começa com zero no lugar de i.</p>
+
+<p><strong><em>— Ok. E agora?</em></strong></p>
+
+<p>— Compara a chave com a que está na tabela.</p>
+
+<p><strong><em>— E se não for a que eu estou procurando?</em></strong></p>
+
+<p>— Aumenta o i para 1.</p>
+
+<p><strong><em>— E se ainda não for a que eu estou procurando?</em></strong></p>
+
+<p>— Aumenta o i para 2.</p>
+
+<p><strong><em>— Vou fazer isso até quando? Como fica o algoritmo? Que comando em programação utilizar?</em></strong></p>
+
+<p>— while. Enquanto não for igual, aumento o probing.</p>
+
+<p><strong><em>— Só isso? E quando o elemento realmente não estiver na tabela?</em></strong></p>
+
+<p>Nesse momento a turma não soube responder. Acabei afirmando que as outras condições do while deveriam ser <code>!= null</code> e &ldquo;não inspecionei toda a tabela&rdquo;.</p>
+
+<p>Usei o mesmo raciocínio para os algoritmos de <strong><em>put</em></strong> e <strong><em>remove</em></strong>.</p>
+
+<p>Até aqui estava bem contente com o andamento da aula. Minha estratégia de apenas fazer perguntas estava funcionando e eu vinha vencendo os objetivos da aula um a um, tal como Rafaela Silva.</p>
+
+<p>Mas aí, precisei explicar o conceito de Probing Quadrático. Para isso, fiz uma relação com com exponential <em>backoff</em>. Expliquei um pouco, fugindo da ideia original de utilizar só perguntas. No entanto, ainda sim, fiz perguntas como:</p>
+
+<p><strong><em>— O que faço para acentuar a distância entre esses dois números?</em></strong></p>
+
+<p>A resposta eu já havia dado antes. Elevar ao quadrado é uma das alternativas. Assim, mostrei que o probing quadrático é melhor que o linear porque evita, com maior eficácia, clusters na tabela.</p>
+
+<p>Depois disso, meu objetivo era abordar rehash. Iniciei perguntando:</p>
+
+<p><strong><em>— Estamos resolvendo colisões. Mas isso é suficiente sempre? Quando a coisa começa a degringolar?</em></strong></p>
+
+<p>— Quando há muitos elementos na tabela.</p>
+
+<p><strong><em>— Quem nos diz se há muitos elementos na tabela?</em></strong></p>
+
+<p>— O alpha.</p>
+
+<p>Massa. Voltei para o jogo de perguntas de novo. Desenhei uma tabela e a preenchi toda. Assim, o problema tornou-se físico. Não haveria mais espaço para o próximo elemento na tabela. Perguntei:</p>
+
+<p><strong><em>— E agora?</em></strong></p>
+
+<p>— Cria outra tabela.</p>
+
+<p><strong><em>— De que tamanho?</em></strong></p>
+
+<p>— O dobro do original.</p>
+
+<p>Criei a tabela e perguntei:</p>
+
+<p><strong><em>— Basta colocar os elementos em sua posição inicial?</em></strong></p>
+
+<p>A turma ficou calada.</p>
+
+<p><strong><em>— O que vou ter que mudar?</em></strong></p>
+
+<p>— A função de hash. Precisa dividir pelo novo tamanho da tabela.</p>
+
+<p><strong><em>— Se eu não fizesse isso. O que aconteceria?</em></strong></p>
+
+<p>— Os elementos da tabela anterior cairiam na mesma posição.</p>
+
+<p><strong><em>— Certo. Então eu vou precisar recalcular o hash de todo mundo, certo?</em></strong></p>
+
+<p>— Sim.</p>
+
+<p>Nesse momento, calculei para 2 elementos e um deles não caiu na posição em que estava na tabela anterior. Para fixar bem esse cenário, perguntei:</p>
+
+<p><strong><em>— O que aconteceu com essa chave?</em></strong></p>
+
+<p>— Caiu em uma outra posição.</p>
+
+<p>Nesse momento usei a afirmação: precisamos fazer isso para cada elemento da tabela.
+Só faltava deixar claro quando realizar o rehash. Assim, perguntei:</p>
+
+<p><strong><em>— Pessoal, quando eu devo fazer rehash?</em></strong></p>
+
+<p>— Quando a tabela estiver cheia.</p>
+
+<p><strong><em>— De novo. Quem me diz isso?</em></strong></p>
+
+<p>— O alpha.</p>
+
+<p><strong><em>— Certo. Preciso esperar ele chegar até 1?</em></strong></p>
+
+<p>— Não.</p>
+
+<p><strong><em>— Até quanto então?</em></strong></p>
+
+<p>— 75%.
+<strong><em>— Por que?</em></strong></p>
+
+<p>— Não está nem muito cheio, nem muito vazio.</p>
+
+<p>Nesse momento discuti um pouco sobre o 75%. O mais importante foram as perguntas:</p>
+
+<p><strong><em>— O que acontece se eu fizer rehash com um alpha pequeno?</em></strong></p>
+
+<p>— Vai fazer vários. Isso custa caro.</p>
+
+<p><strong><em>— O que acontece se eu fizer rehash com um alpha alto?</em></strong></p>
+
+<p>— Tende a ter muitas colisões e o desempenho fica ruim.</p>
+
+<p>A partir daqui fiquei satisfeito com o que discutimos. Discuti apenas alguns detalhes de implementação mostrando que diferentes formas de resolver colisões podem ser vistas como estratégias e que, por isso, podemos utilizar o padrão Strategy para implementá-las.</p>
+
+<h2 id="conclusão">Conclusão</h2>
+
+<p>A aula foi muito dinâmica. Não senti falta dos slides. Farei de novo. Acho que me obriga a pensar como o aluno, ao invés de preparar um discurso e descarregá-lo.</p>
+
+<h2 id="importante">Importante!</h2>
+
+<p>Esse relato é enviesado pela minha percepção da aula. As perguntas e respostas certamente não foram exatamente como descritas aqui, pois, como não gravei, não me lembro exatamente de cada momento. No mais, esse relato é público e meus alunos podem ajudá-los a me desmascarar caso eu tenha mentido :)</p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/bst/"><i class="fa fa-chevron-circle-left"></i> Árvores Binárias de Pesquisa</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/hashtable/">Tabelas Hash <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright &copy; 2019 - João Arthur Brunet</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
