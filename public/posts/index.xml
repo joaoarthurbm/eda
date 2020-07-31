@@ -2537,7 +2537,7 @@ IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;Por que módulo?&lt;/strong&gt; Primeiro porque sempre vai gerar um inteiro dentro do intervalo de índices válidos do array. Segundo porque para uma mesma chave, a função sempre retorna o mesmo hash.&lt;/p&gt;
 
-&lt;p&gt;Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave % tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante.&lt;/p&gt;
+&lt;p&gt;Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave \% tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante.&lt;/p&gt;
 
 &lt;p&gt;Vamos analisar o código abaixo que apresenta algumas operações básicas da classe &lt;strong&gt;&lt;em&gt;TabelaHash&lt;/em&gt;&lt;/strong&gt;. Por motivos de simplificação, a classe que usaremos aqui implementa uma tabela hash para manipular objetos do tipo &lt;strong&gt;&lt;em&gt;Aluno&lt;/em&gt;&lt;/strong&gt;. Naturalmente, por ser de propósito geral, as implementações de Java de uma Tabela Hash (HashMap e HashTable) permitem o armazenamento e manipulação de qualquer objeto.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;class&lt;/span&gt; HashTable {
