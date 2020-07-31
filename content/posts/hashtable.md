@@ -65,7 +65,7 @@ Vamos tentar ser um pouco mais realistas no nosso exemplo. Todos sabemos que as 
 
 Mesmo isso sendo possível, uma grande parte desse array não seria utilizada, pois o padrão usado para criar as matrículas baseia-se no ano, período de entrada e posição de entrada no vestibular e, por isso, exclui uma grande quantidade de números no intervalo [000000000, 999999999]. Além disso, ao longo de toda a história, Computação @ UFCG teve aproximadamente 2000 matrículas, o que significa que o número de matrículas efetivamente usadas é bem menor do que o número de matrículas possíveis. Isto é, teríamos que criar um array de $10^9$ posições para usar aproximadamente apenas os primeiros 2000 índices.
 
-Importante destacar também que para outros cenários, como por exemplo o CPF que possui 11 dígitos, não somente o desperdício de memória é um problema, mas não há como criar arrays de $10^11$ posições em várias linguagens de programação.
+Importante destacar também que para outros cenários, como por exemplo o CPF que possui 11 dígitos, não somente o desperdício de memória é um problema, mas não há como criar arrays de $10^{11}$ posições em várias linguagens de programação.
 
 Em resumo, é inviável utilizar mapeamento direto (tabela de acesso direto) para chaves cujo valor é muito alto. Além disso, não é eficiente do ponto de vista de memória utilizar mapeamento direto em domínios cujo conjunto de chaves efetivamente utilizado é bem menor do que o conjunto de chaves possível.
 
