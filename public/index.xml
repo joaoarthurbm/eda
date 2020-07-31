@@ -1,6 +1,8 @@
 
    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-     <channel>
+  
+
+       <channel>
        <title>Estruturas de Dados e Algoritmos</title>
        <link>https://joaoarthurbm.github.io/eda/</link>
        <description>Recent content on Estruturas de Dados e Algoritmos</description>
