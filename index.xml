@@ -134,9 +134,9 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
          <guid>https://joaoarthurbm.github.io/eda/objetivos/</guid>
          <description>
 
-&lt;p&gt;Ao término deste curso o aluno será capaz de analisar a eficiência de algoritmos. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.&lt;/p&gt;
+&lt;p&gt;Ao término deste curso o aluno será capaz de compreender, implementar e utilizar as principais estuturas de dados e suas diferentes estratégias de organização de informação.&lt;/p&gt;
 
-&lt;p&gt;O aluno também será capaz de compreender e implementar as principais estruturas de dados e suas diferentes estratégias de organização de informação.&lt;/p&gt;
+&lt;p&gt;O aluno será capaz também de analisar a eficiência de algoritmos do ponto de vista assintótico. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.&lt;/p&gt;
 
 &lt;p&gt;Abaixo estão detalhados os objetivos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.&lt;/p&gt;
 
@@ -152,12 +152,14 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;ul&gt;
 &lt;li&gt;Descrever a função de custo detalhada de um algoritmo.&lt;/li&gt;
-&lt;li&gt;Simplicar a função de custo detalhada de um algoritmo, seja ele iterativo ou recursivo.&lt;/li&gt;
+&lt;li&gt;Simplicar a função de custo detalhada de um algoritmo.&lt;/li&gt;
 &lt;li&gt;Determinar a ordem de crescimento da função que descreve o custo de execução de um algoritmo.&lt;/li&gt;
-&lt;li&gt;Demostrar a que conjunto a função pertence: O, omega ou theta.&lt;/li&gt;
-&lt;li&gt;Mapear essa ordem de um função para funções clássicas (n, n^2, n * log n&amp;hellip;).&lt;/li&gt;
+&lt;li&gt;Demonstrar a que conjunto a função pertence: $O$, $Omega$ ou $Theta$.&lt;/li&gt;
+&lt;li&gt;Mapear essa ordem de um função para funções clássicas ($n$, $n^2$, $n * log n$&amp;hellip;).&lt;/li&gt;
 &lt;li&gt;Comparar algoritmos de acordo com a ordem de crescimento de suas funções de custo.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&#34;ordenação&#34;&gt;Ordenação&lt;/h2&gt;
 
@@ -165,17 +167,19 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;ul&gt;
 &lt;li&gt;Explicar de forma clara, concisa e através de exemplos, a importância
-  de ordenar dados.&lt;/li&gt;
+de ordenar dados.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;Compreender as principais estratégias de ordenação e suas aplicações; Comparar algoritmos que implementam essas estratégias;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;*Compreender as principais estratégias de ordenação e suas aplicações e comparar algoritmos que implementam essas estratégias.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Implementar os principais algoritmos de ordenação por comparação e por contagem.&lt;/li&gt;
 &lt;li&gt;Identificar aplicações das técnicas de ordenação em outros contextos. Por exemplo, identificação de quantis em um conjunto de dados.&lt;/li&gt;
+&lt;li&gt;Implementar os principais algoritmos de ordenação por comparação e por contagem.&lt;/li&gt;
 &lt;li&gt;Comparar do ponto de vista assintótico diferentes algoritmos de ordenação.&lt;/li&gt;
 &lt;li&gt;Executar experimentos para comparar o tempo de execução de diferentes algoritmos de ordenação.&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;hr /&gt;
 
 &lt;h2 id=&#34;estruturas-de-dados&#34;&gt;Estruturas de dados&lt;/h2&gt;
 
@@ -199,19 +203,20 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;h3 id=&#34;tabelas-hash&#34;&gt;Tabelas Hash&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;Compreender a importância e aplicação de tabelas hash.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Compreender a importância e aplicação de tabelas de acesso direto e tabelas hash.&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Compreender o conceito de hash e funções de hash.&lt;/li&gt;
+&lt;li&gt;Explicar de forma clara, concisa e através de exemplos, o porquê das tabelas de acesso direto serem tão eficientes em determinadas situações.&lt;/li&gt;
+&lt;li&gt;Implementar as operações básicas de uma tabela de acesso direto.&lt;/li&gt;
+&lt;li&gt;Explicar o porquê do uso do conceito de hash e funções de hash.&lt;/li&gt;
 &lt;li&gt;Implementar diferentes estratégias de funções de hash.&lt;/li&gt;
 &lt;li&gt;Descrever aplicações do conceito de hash.&lt;/li&gt;
-&lt;li&gt;Implementar as operações básicas de uma tabela de acesso direto.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;em&gt;Compreender o conceito de colisão e as estratégias de resolução de colisões.&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Compreender o impacto de colisões nas operações básicas.&lt;/li&gt;
+&lt;li&gt;Avaliar o impacto das colisões hash no desempenho das operações básicas.&lt;/li&gt;
 &lt;li&gt;Implementar as operações básicas de uma tabela hash resolvendo colisões com endereçamento aberto e com encadeamento.&lt;/li&gt;
 &lt;li&gt;Estabelecer vantagens e desvantagens dessas diferentes estratégias de resolução de colisões.&lt;/li&gt;
 &lt;/ul&gt;
@@ -227,8 +232,11 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 &lt;li&gt;Ilustrar a eficiência da busca binária completa e comparar com a busca linear.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;em&gt;Compreender detalhes de implementação de árvores binárias.&lt;/em&gt;
-    * Implementar operações básicas de árvores binárias de pesquisa.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Compreender detalhes de implementação de árvores binárias.&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Implementar operações básicas de árvores binárias de pesquisa.&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&#34;árvores-binárias-balanceadas&#34;&gt;Árvores binárias balanceadas&lt;/h3&gt;
 
@@ -236,18 +244,20 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;ul&gt;
 &lt;li&gt;Descrever o problema da altura de uma árvore ser próxima ao número de nós.&lt;/li&gt;
-&lt;li&gt;Identificar a altura mínima de uma árvore com n nós.&lt;/li&gt;
-&lt;li&gt;Compreender o porquê se se manter a altura de uma árvore próxima do mínimo possível.&lt;/li&gt;
+&lt;li&gt;Identificar a altura mínima de uma árvore com $n$ nós.&lt;/li&gt;
+&lt;li&gt;Explicar a razão pela qual é desejável manter a altura de uma árvore próxima do mínimo possível.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;em&gt;Compreender estratégias de balanceamento.&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;Descrever a aplicação de rotações.&lt;/li&gt;
-&lt;li&gt;implementar rotações.&lt;/li&gt;
-&lt;li&gt;Compreender o conceito de &lt;em&gt;balance&lt;/em&gt; de um nó para a aplicação de rotações.&lt;/li&gt;
-&lt;li&gt;Compreender o conceito de coloração de nós para aplicação de rotações.&lt;/li&gt;
-&lt;li&gt;Compreender o conceito de nós n-ários para, não somente balancear, mas incluir mais informações em um nó.&lt;/li&gt;
+&lt;li&gt;Descrever o problema que as rotações resolvem.&lt;/li&gt;
+&lt;li&gt;Ilustrar em exemplos concretos a aplicação de rotações.&lt;/li&gt;
+&lt;li&gt;Implementar rotações.&lt;/li&gt;
+&lt;li&gt;Explicar com exemplos concretos o conceito de &lt;em&gt;balance&lt;/em&gt; de um nó e como esse conceito é utilizado para a aplicação de rotações.&lt;/li&gt;
+&lt;li&gt;Explicar com exemplos concretos o conceito de coloração de nós e como esse conceito é utilizado para aplicação de rotações.&lt;/li&gt;
+&lt;li&gt;Explicar de forma clara e concisa o conceito de nós n-ários e que problema eles resolvem.&lt;/li&gt;
+&lt;li&gt;Ilustrar a aplicação da estratégia de manter as folhas sempre no mesmo nível para manter o balanceamento de uma árvore.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
        </item>

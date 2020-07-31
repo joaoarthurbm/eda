@@ -112,9 +112,9 @@
 
     
 
-<p>Ao término deste curso o aluno será capaz de analisar a eficiência de algoritmos. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.</p>
+<p>Ao término deste curso o aluno será capaz de compreender, implementar e utilizar as principais estuturas de dados e suas diferentes estratégias de organização de informação.</p>
 
-<p>O aluno também será capaz de compreender e implementar as principais estruturas de dados e suas diferentes estratégias de organização de informação.</p>
+<p>O aluno será capaz também de analisar a eficiência de algoritmos do ponto de vista assintótico. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.</p>
 
 <p>Abaixo estão detalhados os objetivos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.</p>
 
@@ -130,12 +130,14 @@
 
 <ul>
 <li>Descrever a função de custo detalhada de um algoritmo.</li>
-<li>Simplicar a função de custo detalhada de um algoritmo, seja ele iterativo ou recursivo.</li>
+<li>Simplicar a função de custo detalhada de um algoritmo.</li>
 <li>Determinar a ordem de crescimento da função que descreve o custo de execução de um algoritmo.</li>
-<li>Demostrar a que conjunto a função pertence: O, omega ou theta.</li>
-<li>Mapear essa ordem de um função para funções clássicas (n, n^2, n * log n&hellip;).</li>
+<li>Demonstrar a que conjunto a função pertence: $O$, $Omega$ ou $Theta$.</li>
+<li>Mapear essa ordem de um função para funções clássicas ($n$, $n^2$, $n * log n$&hellip;).</li>
 <li>Comparar algoritmos de acordo com a ordem de crescimento de suas funções de custo.</li>
 </ul>
+
+<hr />
 
 <h2 id="ordenação">Ordenação</h2>
 
@@ -143,17 +145,19 @@
 
 <ul>
 <li>Explicar de forma clara, concisa e através de exemplos, a importância
-  de ordenar dados.</li>
+de ordenar dados.</li>
 </ul>
 
-<p><em>Compreender as principais estratégias de ordenação e suas aplicações; Comparar algoritmos que implementam essas estratégias;</em></p>
+<p>*Compreender as principais estratégias de ordenação e suas aplicações e comparar algoritmos que implementam essas estratégias.</p>
 
 <ul>
-<li>Implementar os principais algoritmos de ordenação por comparação e por contagem.</li>
 <li>Identificar aplicações das técnicas de ordenação em outros contextos. Por exemplo, identificação de quantis em um conjunto de dados.</li>
+<li>Implementar os principais algoritmos de ordenação por comparação e por contagem.</li>
 <li>Comparar do ponto de vista assintótico diferentes algoritmos de ordenação.</li>
 <li>Executar experimentos para comparar o tempo de execução de diferentes algoritmos de ordenação.</li>
 </ul>
+
+<hr />
 
 <h2 id="estruturas-de-dados">Estruturas de dados</h2>
 
@@ -177,19 +181,20 @@
 
 <h3 id="tabelas-hash">Tabelas Hash</h3>
 
-<p><em>Compreender a importância e aplicação de tabelas hash.</em></p>
+<p><em>Compreender a importância e aplicação de tabelas de acesso direto e tabelas hash.</em></p>
 
 <ul>
-<li>Compreender o conceito de hash e funções de hash.</li>
+<li>Explicar de forma clara, concisa e através de exemplos, o porquê das tabelas de acesso direto serem tão eficientes em determinadas situações.</li>
+<li>Implementar as operações básicas de uma tabela de acesso direto.</li>
+<li>Explicar o porquê do uso do conceito de hash e funções de hash.</li>
 <li>Implementar diferentes estratégias de funções de hash.</li>
 <li>Descrever aplicações do conceito de hash.</li>
-<li>Implementar as operações básicas de uma tabela de acesso direto.</li>
 </ul>
 
 <p><em>Compreender o conceito de colisão e as estratégias de resolução de colisões.</em></p>
 
 <ul>
-<li>Compreender o impacto de colisões nas operações básicas.</li>
+<li>Avaliar o impacto das colisões hash no desempenho das operações básicas.</li>
 <li>Implementar as operações básicas de uma tabela hash resolvendo colisões com endereçamento aberto e com encadeamento.</li>
 <li>Estabelecer vantagens e desvantagens dessas diferentes estratégias de resolução de colisões.</li>
 </ul>
@@ -205,8 +210,11 @@
 <li>Ilustrar a eficiência da busca binária completa e comparar com a busca linear.</li>
 </ul>
 
-<p><em>Compreender detalhes de implementação de árvores binárias.</em>
-    * Implementar operações básicas de árvores binárias de pesquisa.</p>
+<p><em>Compreender detalhes de implementação de árvores binárias.</em></p>
+
+<ul>
+<li>Implementar operações básicas de árvores binárias de pesquisa.</li>
+</ul>
 
 <h3 id="árvores-binárias-balanceadas">Árvores binárias balanceadas</h3>
 
@@ -214,18 +222,20 @@
 
 <ul>
 <li>Descrever o problema da altura de uma árvore ser próxima ao número de nós.</li>
-<li>Identificar a altura mínima de uma árvore com n nós.</li>
-<li>Compreender o porquê se se manter a altura de uma árvore próxima do mínimo possível.</li>
+<li>Identificar a altura mínima de uma árvore com $n$ nós.</li>
+<li>Explicar a razão pela qual é desejável manter a altura de uma árvore próxima do mínimo possível.</li>
 </ul>
 
 <p><em>Compreender estratégias de balanceamento.</em></p>
 
 <ul>
-<li>Descrever a aplicação de rotações.</li>
-<li>implementar rotações.</li>
-<li>Compreender o conceito de <em>balance</em> de um nó para a aplicação de rotações.</li>
-<li>Compreender o conceito de coloração de nós para aplicação de rotações.</li>
-<li>Compreender o conceito de nós n-ários para, não somente balancear, mas incluir mais informações em um nó.</li>
+<li>Descrever o problema que as rotações resolvem.</li>
+<li>Ilustrar em exemplos concretos a aplicação de rotações.</li>
+<li>Implementar rotações.</li>
+<li>Explicar com exemplos concretos o conceito de <em>balance</em> de um nó e como esse conceito é utilizado para a aplicação de rotações.</li>
+<li>Explicar com exemplos concretos o conceito de coloração de nós e como esse conceito é utilizado para aplicação de rotações.</li>
+<li>Explicar de forma clara e concisa o conceito de nós n-ários e que problema eles resolvem.</li>
+<li>Ilustrar a aplicação da estratégia de manter as folhas sempre no mesmo nível para manter o balanceamento de uma árvore.</li>
 </ul>
 
 
