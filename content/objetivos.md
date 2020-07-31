@@ -6,7 +6,7 @@ weight = "20"
 meta = "false"
 +++
 
-Ao término deste curso o aluno será capaz de analisar a eficiência de algoritmos. Em particular, essa análise tem como plano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados. 
+Ao término deste curso o aluno será capaz de analisar a eficiência de algoritmos. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados. 
 
 O aluno também será capaz de compreender e implementar as principais estruturas de dados e suas diferentes estratégias de organização de informação. 
 
