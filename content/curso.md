@@ -49,7 +49,7 @@ Nesta etapa abordaremos o conceito de árvores binárias de pesquisa e Heaps. In
 
 ---
 
-## Quinta Etapa: Balanceamento
+## Quinta Etapa: Árvores Binárias Balanceadas
 
 Por último, abordaremos estratégias de balancamento de árvores binárias de pesquisa. Em particular, o foco está em rotações e nas estratégias para aplicá-las, como cálculo do balanceamento de nós (AVL) ou coloração dos nós (Árvores Vermelho-Preto). Além disso, abordamos também a estratégia de balanceamento aplicada por Árvores B, além da técnica de agregar mais informação em um nó.
 
