@@ -7,11 +7,11 @@ categories = []
 
 ***
 
-A análise de eficiência é uma etapa fundamental na concepção de um algoritmo. Embora aspectos como legibilidade, simplicidade e modularidade de uma solução sejam importantes para a sua manutenabilidade, a eficiência de uma solução desempenha um papel muito relevante para a sua adoção.
+A análise de desempenho é uma etapa fundamental na concepção de um algoritmo. Embora aspectos como legibilidade, simplicidade e modularidade de uma solução sejam importantes para a sua manutenabilidade, o desempenho de uma solução é muito relevante para a sua adoção.
 
 Diante de um problema computacional, diversas soluções podem ser propostas. Por exemplo, para ordenar um sequência de números, o desenvolvedor pode utilizar algoritmos como o BubbleSort, MergeSort, QuickSort entre outros. Entender como esses algoritmos se comportam à medida que aumentamos o tamanho da entrada a ser ordenada é primordial para decidirmos qual solução adotar em um determinado contexto.
 
-Analisar um algoritmo significa prever a quantidade de recursos que tal algoritmo consome ao ser executado. A análise pode apontar diversos candidatos e, tipicamente, exclui diversas soluções não eficientes. Diversas variáveis podem ser objetos de estudo da análise de um algoritmo, por exemplo, consumo de memória, largura de banda de comunicação entre outros. No entanto, com frequência, desejamos medir o tempo execução. E é essa variável que estamos interessados em discutir neste documento.
+Analisar um algoritmo significa prever a quantidade de recursos que tal algoritmo consome ao ser executado. A análise pode apontar diversos candidatos e, tipicamente, exclui diversas soluções não eficientes. Diversas variáveis podem ser objetos de estudo da análise de um algoritmo, por exemplo, consumo de memória, largura de banda de comunicação, entre outros. No entanto, com frequência, desejamos medir o tempo execução. E é essa variável que estamos interessados em discutir neste documento.
 
 Uma abordagem direta para analisar o desempenho de um algoritmo é a abordagem empírica. Neste caso, configura-se um ambiente em que as variáveis são controladas e executa-se os algoritmos com o intuito de medir o tempo de computação e comparar as diferentes soluções. 
 O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação para entender, por exemplo, como o algoritmo se comporta com um array já ordenado ou como se comporta com arrays parcialmente ordenados.
@@ -106,7 +106,9 @@ Outro fator de destaque é que podemos considerar que todas as constantes possue
 
 O uso de comandos condicionais é muito comum em nossos algoritmos e nos impõe uma dificuldade na análise do tempo de execução. Essa dificuldade está relacionada ao fato de que, dependendo do caso, apenas uma parte do código é executada. Como decidir como fazer a análise? Que caminho devemos computar? 
 
-Nesse caso, escolhemos **o pior caso**. Neste curso estamos interessados em saber como os algoritmos se comportam no seu pior caso. A análise do pior caso é útil para eliminarmos soluções ruins. Além disso, o melhor caso raramente acontece, ao contrário dos outros casos que podem ser bem mais comuns. Por último, o caso médio, além de demandar análise estatística, muitas vezes é muito semelhante ao pior caso.
+Nesse caso, escolhemos **o pior caso**. Neste curso estamos interessados em saber como os algoritmos se comportam no seu pior caso. Essa análise nos dá uma visão muito clara sobre o que posso esperar da execução de um algoritmo. Por exemplo, se você me disser que seu algoritmo de ordenação termina a execução em no máximo 3 segundos para uma determinada entrada, eu tenho uma ideia clara sobre o que posso esperar. No entanto, se você me disser que o algoritmo termina a execução em 3 segundos ou mais, eu não tenho muita certeza sobre o que esse  "mais" significa. Pode significar 5 segundos, 50 segundos, 5 anos...
+
+A análise de pior caso é, portanto, útil para eliminarmos soluções ruins. Além disso, o melhor caso raramente acontece, ao contrário dos outros casos que podem ser bem mais comuns. Por último, o caso médio, além de demandar análise estatística, muitas vezes é muito semelhante ao pior caso.
 
 Para demonstrar a análise de pior caso, vamos analisar um método que recebe as três notas de um aluno e calcula a nota que ele precisa obter na prova final, se esse for o caso. Se o aluno for aprovado ($media >= 7.0$) ou reprovado sem direito a final ($media < 4$), o método deve retornar $0$.
 
