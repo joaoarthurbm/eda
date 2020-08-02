@@ -3,7 +3,7 @@ title = "Objetivos"
 date = "2019-10-29"
 menu = "main"
 weight = "20"
-meta = "false"
+meta = "true"
 +++
 
 Ao término deste curso o aluno será capaz de compreender, implementar e utilizar as principais estuturas de dados e suas diferentes estratégias de organização de informação.
@@ -79,7 +79,7 @@ de ordenar dados.
 * Implementar as operações básicas de uma tabela hash resolvendo colisões com endereçamento aberto e com encadeamento.
 * Estabelecer vantagens e desvantagens dessas diferentes estratégias de resolução de colisões.
 
-### Árvores binárias de Pesquisa
+### Árvores binárias: BST e Heap
 
 *Compreender o conceito árvores binárias de pesquisa e sua importância.*
 
@@ -91,6 +91,11 @@ de ordenar dados.
 *Compreender detalhes de implementação de árvores binárias.*
 
 * Implementar operações básicas de árvores binárias de pesquisa.
+
+*Compreender o conceito de Heap binário e sua aplicação*
+
+* Descrever as propriedades de um heap binário.
+* Implementar operações básicas de um Heap baseado em array.
 
 ### Árvores binárias balanceadas
 
