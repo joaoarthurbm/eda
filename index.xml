@@ -127,6 +127,77 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
        </item>
        
        <item>
+         <title>Curso</title>
+         <link>https://joaoarthurbm.github.io/eda/curso/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/curso/</guid>
+         <description>
+
+&lt;p&gt;Para atingir os nossos &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/objetivos/&#34;&gt;Objetivos de Aprendizagem&lt;/a&gt;, o curso é organizado nas 5 etapas a seguir.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;primeira-etapa-análise-de-algoritmos&#34;&gt;Primeira Etapa: Análise de Algoritmos&lt;/h2&gt;
+
+&lt;p&gt;Inicialmente, é apresentada a motivação para a análise de complexidade de algoritmos. O objetivo é fazer com que o aluno compreenda que o projeto de um algoritmo deve levar em consideração sua eficiência, uma vez que o tamanho da entrada a ser processada pode ser ordens de magnitude maior do que as até então vistas nas disciplinas anteriores. Posteriormente, são abordadas técnicas analíticas para determinar a eficiência assintótica de algoritmos.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Introdução à análise de algoritmos&lt;/li&gt;
+&lt;li&gt;Análise assintótica&lt;/li&gt;
+&lt;li&gt;Análise de algoritmos recursivos&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;segunda-etapa-algoritmos-de-ordenação&#34;&gt;Segunda Etapa: Algoritmos de Ordenação&lt;/h2&gt;
+
+&lt;p&gt;O foco nessa etapa está no projeto, implementação e análise assintótica de algoritmos iterativos e recursivos de ordenação. A ideia é não somente entender as estratégias utilizadas por esses algoritmos, mas também ter uma ideia clara de suas eficiências e classes de complexidade.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bubble sort, insertion sort e selection sort&lt;/li&gt;
+&lt;li&gt;Quick sort e merge sort&lt;/li&gt;
+&lt;li&gt;Counting sort e radix sort&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;terceira-etapa-estruturas-de-dados-lineares-e-tabelas-hash&#34;&gt;Terceira Etapa: Estruturas de dados lineares e Tabelas Hash&lt;/h2&gt;
+
+&lt;p&gt;A partir desta etapa, o objetivo é apresentar o funcionamento interno de diversas estruturas de dados, bem como explorar suas aplicações. Nesta etapa, em particular, serão abordados array, filas, pilhas e Tabelas Hash. Inicialmente, o foco está na implementação utilizando vetores de estruturas com diferentes políticas de acesso. Nesse momento há uma discussão a respeito de 2 pontos negativos relacionados ao uso de vetores: desperdício de memória e complexidade e ineficiência à medida em que é preciso aumentar significativamente a quantidade de elementos a serem armazenados. Diante desse cenário, introduz-se a necessidade de estruturas de dados dinâmicas. Assim, filas e pilhas são novamente abordadas, mas como o foco na implementação utilizando listas encadeadas.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Filas e Pilhas baseadas em arrays&lt;/li&gt;
+&lt;li&gt;Listas encadeadas&lt;/li&gt;
+&lt;li&gt;Tabelas Hash&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;quarta-etapa-árvores-binárias&#34;&gt;Quarta Etapa: Árvores Binárias&lt;/h2&gt;
+
+&lt;p&gt;Nesta etapa abordaremos o conceito de árvores binárias de pesquisa e Heaps. Inicialmente, abordamos as propriedades de árvores binárias de pesquisa e suas operações básicas. Exploramos o uso de nós ligados para a implementação de BSTs. Depois, exploramos uma estratégia de implementação de árvores binárias baseadas em arrays &amp;ndash; Heap. Há uma discussão importante sobre o problema de árvores desbalanceadas e como Heap resolve esse problema por construção.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;BST&lt;/li&gt;
+&lt;li&gt;Heap&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&#34;quinta-etapa-balanceamento&#34;&gt;Quinta Etapa: Balanceamento&lt;/h2&gt;
+
+&lt;p&gt;Por último, abordaremos estratégias de balancamento de árvores binárias de pesquisa. Em particular, o foco está em rotações e nas estratégias para aplicá-las, como cálculo do balanceamento de nós (AVL) ou coloração dos nós (Árvores Vermelho-Preto). Além disso, abordamos também a estratégia de balanceamento aplicada por Árvores B, além da técnica de agregar mais informação em um nó.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;AVL&lt;/li&gt;
+&lt;li&gt;Árvores Vermelho-Preto&lt;/li&gt;
+&lt;li&gt;Árvores B&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Objetivos</title>
          <link>https://joaoarthurbm.github.io/eda/objetivos/</link>
          <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
@@ -138,7 +209,7 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;p&gt;O aluno será capaz também de analisar a eficiência de algoritmos do ponto de vista assintótico. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.&lt;/p&gt;
 
-&lt;p&gt;Abaixo estão detalhados os objetivos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.&lt;/p&gt;
+&lt;p&gt;Abaixo estão detalhados os objetivos gerais e específicos de aprendizagem tendo como norte os seguintes tópicos: análise de algoritmos, ordenação e estruturas de dados.&lt;/p&gt;
 
 &lt;h2 id=&#34;análise-de-algoritmos&#34;&gt;Análise de Algoritmos&lt;/h2&gt;
 
@@ -221,7 +292,7 @@ de ordenar dados.&lt;/li&gt;
 &lt;li&gt;Estabelecer vantagens e desvantagens dessas diferentes estratégias de resolução de colisões.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&#34;árvores-binárias-de-pesquisa&#34;&gt;Árvores binárias de Pesquisa&lt;/h3&gt;
+&lt;h3 id=&#34;árvores-binárias-bst-e-heap&#34;&gt;Árvores binárias: BST e Heap&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;Compreender o conceito árvores binárias de pesquisa e sua importância.&lt;/em&gt;&lt;/p&gt;
 
@@ -236,6 +307,13 @@ de ordenar dados.&lt;/li&gt;
 
 &lt;ul&gt;
 &lt;li&gt;Implementar operações básicas de árvores binárias de pesquisa.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Compreender o conceito de Heap binário e sua aplicação&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Descrever as propriedades de um heap binário.&lt;/li&gt;
+&lt;li&gt;Implementar operações básicas de um Heap baseado em array.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&#34;árvores-binárias-balanceadas&#34;&gt;Árvores binárias balanceadas&lt;/h3&gt;
