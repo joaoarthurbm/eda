@@ -185,7 +185,7 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 
 &lt;hr /&gt;
 
-&lt;h2 id=&#34;quinta-etapa-balanceamento&#34;&gt;Quinta Etapa: Balanceamento&lt;/h2&gt;
+&lt;h2 id=&#34;quinta-etapa-árvores-binárias-balanceadas&#34;&gt;Quinta Etapa: Árvores Binárias Balanceadas&lt;/h2&gt;
 
 &lt;p&gt;Por último, abordaremos estratégias de balancamento de árvores binárias de pesquisa. Em particular, o foco está em rotações e nas estratégias para aplicá-las, como cálculo do balanceamento de nós (AVL) ou coloração dos nós (Árvores Vermelho-Preto). Além disso, abordamos também a estratégia de balanceamento aplicada por Árvores B, além da técnica de agregar mais informação em um nó.&lt;/p&gt;
 
