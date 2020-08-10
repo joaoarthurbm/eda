@@ -6,6 +6,8 @@ weight = "20"
 meta = "false"
 +++
 
+***
+
 Para atingir os nossos <a class="external" href="https://joaoarthurbm.github.io/eda/objetivos/">Objetivos de Aprendizagem</a>, o curso é organizado nas 5 etapas a seguir.
 
 ---

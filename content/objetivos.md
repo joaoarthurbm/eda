@@ -6,6 +6,8 @@ weight = "20"
 meta = "true"
 +++
 
+***
+
 Ao término deste curso o aluno será capaz de compreender, implementar e utilizar as principais estuturas de dados e suas diferentes estratégias de organização de informação.
 
 O aluno será capaz também de analisar a eficiência de algoritmos do ponto de vista assintótico. Em particular, essa análise tem como pano de fundo algoritmos de ordenação e operações básicas de diferentes estruturas de dados.

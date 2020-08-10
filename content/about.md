@@ -6,6 +6,8 @@ weight = "20"
 meta = "false"
 +++
 
+***
+
 ### Análise de Algoritmos
 
 * [Introdução à análise](http://joaoarthurbm.github.io/eda/posts/introducao-a-analise/)
