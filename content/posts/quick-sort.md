@@ -194,7 +194,7 @@ Portanto, o pior caso é raro, concorda? Ele precisa de duas condições: o arra
 
 <div align="center">Como podemos evitar o pior caso?</div>
 
-Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três.
+Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três elementos do array.
 
 #### Escolhendo o pivot aleatoriamente
 
@@ -232,7 +232,9 @@ O código do particiona que discutimos foi feito para escolher sempre o primeiro
 ```
 #### Escolhendo o pivot através da mediana de três
 
-A mediana é uma medida de tendência central que divide uma sequência de inteiros ao meio. Então a mediana de todos os elementos a array seria o nosso pivot perfeito, não é? O problema é que o custo para calcular a mediana de um array é $O(n)$ e não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação "grosseira" da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento. 
+A mediana é o valor central de um conjunto de dados. Por exemplo, a mediana do array $[5, 2, 3, 7, 9]$ é 5, pois metade dos elementos é menor do que 5 e a outra metade é maior[^1]. 
+[^1]: Caso o número de elementos seja par, a mediana é a média entre os dois valores centrais. 
+Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o array ao meio. O problema é que para saber a mediana do array, é preciso ordená-lo antes. Não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação "grosseira" da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento. Como estamos falando de um array, acessar esses elementos é $O(1)$, pois sabemos seus índices de antemão: `0`, `array.length / 2` e `array.length - 1`.
 
 Essa estratégia evita o caso de escolhermos recorrentemente um péssimo pivot. Por exemplo, para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ temos 1, 5 e 10 como o primeiro, o elemento central o último elemento, respectivamente. A mediana entre esses elementos é o 5. Portanto, essa seria a nossa escolha de pivot. Veja que executar o particionamento com ele é uma escolha bem melhor do que particionar com o primeiro elemento.
 
