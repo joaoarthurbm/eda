@@ -139,9 +139,11 @@ Depois disso, 65 é adicionado à direita de 41, pois é um valor maior. 20 é a
 
 Note que todo novo nó é adicionado como folha na árvore.
 
-Complicado? Eu gravei um vídeo para facilitar. Clique na imagem abaixo.
+Complicado? Eu gravei um vídeo para facilitar.
 
-[![Teoria: inserção em BST](https://img.youtube.com/vi/9UXmJKg1mQw/0.jpg)](https://www.youtube.com/watch?v=9UXmJKg1mQw)
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9UXmJKg1mQw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 **Implementação.** Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.
 

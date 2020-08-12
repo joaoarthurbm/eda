@@ -175,7 +175,9 @@ Para $C = [2, 0, 1, 1, 0, 1, 2, 0, 1]$, após a execução do cálculo da cumula
 
 Essa parte pode ser confusa e acredito que para entendê-la precisamos de recursos visuais melhores do que o texto. Por isso, fiz o vídeo abaixo.
 
-[![Teoria: Couting Sort](https://img.youtube.com/vi/3bm7NgKJpj4/0.jpg)](https://www.youtube.com/watch?v=3bm7NgKJpj4)
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3bm7NgKJpj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Implementação do Counting Sort
 

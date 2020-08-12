@@ -58,7 +58,9 @@ Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à s
 
 Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.
 
-[![Teoria: Particionamento Lomuto](https://img.youtube.com/vi/YnbvpvcmlIM/0.jpg)](https://www.youtube.com/watch?v=YnbvpvcmlIM)
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/YnbvpvcmlIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.
 
