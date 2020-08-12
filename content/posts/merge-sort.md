@@ -9,7 +9,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 ***
 
-Draft. Este material ainda está em edição.
+<span style="color:blue">Draft. Este material ainda está em edição.</span>
 
 ***
 
