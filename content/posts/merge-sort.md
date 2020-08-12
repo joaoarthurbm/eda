@@ -155,7 +155,7 @@ Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será con
 Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas "quebras" do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.
 
 <center>
-\<seção ainda em construção\>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ekxvb3Q5hE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
 
