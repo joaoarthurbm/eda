@@ -124,7 +124,7 @@
 
         
 
-        <li>16 minutes read</li>
+        <li>17 minutes read</li>
 
         
 
@@ -141,7 +141,7 @@
 
 <hr />
 
-<p>Quick Sort é um algoritmo eficiente de ordenação por divisão e conquista. Apesar de ser da mesma classe de complexidade do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/merge-sort">Merge Sort</a> e do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/heap-sort">Heap Sort</a>, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores.</p>
+<p>Quick Sort é um algoritmo eficiente de ordenação por divisão e conquista. Apesar de ser da mesma classe de complexidade do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/merge-sort">Merge Sort</a> e do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/heap-sort">Heap Sort</a>, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores. Contudo, é importante destacar de antemão que, em seu pior caso, o Quick Sort é $O(n^2)$, enquanto que o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/merge-sort">Merge Sort</a> e o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/heap-sort">Heap Sort</a> garantem $n * \log n$ para todos os casos. A boa notícia é que há estratégias simples com as quais podemos minimizar as chances de ocorrência do pior caso.</p>
 
 <p>O funcionamento do Quick Sort baseia-se em uma rotina fundamental cujo nome é <strong><em>particionamento</em></strong>. Particionar significa escolher um número qualquer presente no array, chamado de <strong><em>pivot</em></strong>, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores.</p>
 
@@ -322,7 +322,7 @@ $T(n) = T(n-1) + \Theta(n)$</p>
 
 <div align="center">Como podemos evitar o pior caso?</div>
 
-<p>Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três.</p>
+<p>Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três elementos do array.</p>
 
 <h4 id="escolhendo-o-pivot-aleatoriamente">Escolhendo o pivot aleatoriamente</h4>
 
@@ -359,7 +359,8 @@ $T(n) = T(n-1) + \Theta(n)$</p>
 ...</code></pre></div>
 <h4 id="escolhendo-o-pivot-através-da-mediana-de-três">Escolhendo o pivot através da mediana de três</h4>
 
-<p>A mediana é uma medida de tendência central que divide uma sequência de inteiros ao meio. Então a mediana de todos os elementos a array seria o nosso pivot perfeito, não é? O problema é que o custo para calcular a mediana de um array é $O(n)$ e não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação &ldquo;grosseira&rdquo; da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento.</p>
+<p>A mediana é o valor central de um conjunto de dados. Por exemplo, a mediana do array $[5, 2, 3, 7, 9]$ é 5, pois metade dos elementos é menor do que 5 e a outra metade é maior<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.
+Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o array ao meio. O problema é que para saber a mediana do array, é preciso ordená-lo antes. Não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação &ldquo;grosseira&rdquo; da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento. Como estamos falando de um array, acessar esses elementos é $O(1)$, pois sabemos seus índices de antemão: <code>0</code>, <code>array.length / 2</code> e <code>array.length - 1</code>.</p>
 
 <p>Essa estratégia evita o caso de escolhermos recorrentemente um péssimo pivot. Por exemplo, para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ temos 1, 5 e 10 como o primeiro, o elemento central o último elemento, respectivamente. A mediana entre esses elementos é o 5. Portanto, essa seria a nossa escolha de pivot. Veja que executar o particionamento com ele é uma escolha bem melhor do que particionar com o primeiro elemento.</p>
 
@@ -455,6 +456,15 @@ $T(n) = T(n-1) + \Theta(n)$</p>
 
 <p>No Capítulo 7 do livro “Algoritmos: Teoria e Prática” de Cormen et. al.
 há uma discussão mais detalhada sobre a análise do Quick Sort.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Caso o número de elementos seja par, a mediana é a média entre os dois valores centrais. 
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
 
 </article>
@@ -469,7 +479,7 @@ há uma discussão mais detalhada sobre a análise do Quick Sort.</p>
         
         
         <li>
-            <a href="https://joaoarthurbm.github.io/eda/posts/insertion-sort/">Ordenação por Comparação: Insertion Sort <i class="fa fa-chevron-circle-right"></i> </a>
+            <a href="https://joaoarthurbm.github.io/eda/posts/merge-sort/">Ordenação por Comparação: Merge Sort <i class="fa fa-chevron-circle-right"></i> </a>
         </li>
         
     </ul>

@@ -1202,6 +1202,195 @@ adicionado.
        </item>
        
        <item>
+         <title>Ordenação por Comparação: Merge Sort</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/merge-sort/</link>
+         <pubDate>Sun, 27 Oct 2019 00:01:01 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/merge-sort/</guid>
+         <description>
+
+&lt;hr /&gt;
+
+&lt;p&gt;Draft. Este material ainda está em edição.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Merge Sort é um algoritmo eficiente de ordenação por divisão e conquista. Se nossa missão é ordenar um array comparando seus elementos, do ponto de vista assintótico, $n * \log n$ é o nosso limite inferior. Ou seja, nenhum algoritmo de ordenação por comparação é mais veloz do que $n * \log n$. Formalmente, todos são $\Omega(n * \log n)$.&lt;/p&gt;
+
+&lt;p&gt;No caso do Merge Sort, uma característica importante é que sua eficiência é $n * \log n$ para o melhor, pior e para o caso médio. Ou seja, ele não é somente $\Omega(n * \log n)$, mas é $\Theta(n * \log n)$. Isso nos dá uma garantia de que, independente da disposição dos dados em um array, a ordenação será eficiente.&lt;/p&gt;
+
+&lt;p&gt;O funcionamento do Merge Sort baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;merge&lt;/em&gt;&lt;/strong&gt;. Primeiro vamos entender como ele funciona e depois vamos ver como sucessivas execuções de merge ordena um array.&lt;/p&gt;
+
+&lt;h1 id=&#34;merge&#34;&gt;Merge&lt;/h1&gt;
+
+&lt;p&gt;Merge é a rotina que combina dois arrays ordenados em um outro também ordenado. Assim como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/quick-sort/&#34;&gt;Quick Sort&lt;/a&gt; aplica várias vezes o particionamento para ordenar um array, o Merge Sort também aplica o Merge várias para ordenar um array.&lt;/p&gt;
+
+&lt;p&gt;A ideia é simples e é explicada visualmente no vídeo abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/7fb8H-MCQ7c&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Na prática, não queremos ficar criando arrays separados para uni-los. O que fazemos é organizar os dados no array a ser ordenado de forma que uma porção dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/sXddmV3sfjA&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;implementação-do-merge&#34;&gt;Implementação do Merge&lt;/h2&gt;
+
+&lt;p&gt;O código do método &lt;strong&gt;&lt;em&gt;merge&lt;/em&gt;&lt;/strong&gt; está descrito abaixo. Vamos analisar por partes cada detalhe da implementação.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; merge(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;middle&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// transfere os elementos entre left e right para um array auxiliar.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;helper&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[v.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+            helper[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[i];
+        }
+        
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; middle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; middle &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right) {
+            
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (helper[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; helper[j]) {
+                v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[i];
+                i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+            } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+                v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[j];
+                j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+            }
+            k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;    
+            
+        }
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade inicial não foi toda consumida, faz o append.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; middle) {
+            v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[i];
+            i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+            k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        }
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade final não foi toda consumida, faz o append.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right) {
+            v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[j];
+            j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+            k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        }
+
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Em primeiro lugar, vamos entender a assinatura do método &lt;strong&gt;&lt;em&gt;merge&lt;/em&gt;&lt;/strong&gt;. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: &lt;code&gt;left&lt;/code&gt; e &lt;code&gt;middle&lt;/code&gt; e &lt;code&gt;right&lt;/code&gt;, que determinam os limites em que o algoritmo deve agir.&lt;/p&gt;
+
+&lt;p&gt;Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por &lt;code&gt;left&lt;/code&gt; e &lt;code&gt;middle&lt;/code&gt; está ordenada e sabe que a parte do array delimitada por &lt;code&gt;middle + 1&lt;/code&gt; e &lt;code&gt;right&lt;/code&gt; também está ordenada. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.&lt;/p&gt;
+
+&lt;p&gt;Para isso, como fazer manipulações em nosso array original, precisamos de um array auxiliar (&lt;code&gt;helper&lt;/code&gt;) para guardar o estado. Isso é feito nas três primeiras linhas do método.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#75715e&#34;&gt;// transfere os elementos entre left e right para um array auxiliar.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;helper&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[v.&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;];
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; (&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right; i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;) {
+        helper[i] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v[i];
+    }     
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As próximas linhas definem os valores de &lt;code&gt;i&lt;/code&gt;, &lt;code&gt;j&lt;/code&gt; e &lt;code&gt;k&lt;/code&gt; que, como vistos no vídeos, são os índices usados para controle da execução e comparação dos elementos. &lt;code&gt;i&lt;/code&gt; marca o início da primeira porção do array, &lt;code&gt;j&lt;/code&gt; marca o início da segunda porção do array e &lt;code&gt;k&lt;/code&gt; marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;i&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;j&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; middle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;k&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left;    
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, &lt;code&gt;v[k] = helper[i]&lt;/code&gt; e &lt;code&gt;i&lt;/code&gt; e &lt;code&gt;k&lt;/code&gt; são incrementados. Caso contrário, &lt;code&gt;v[k] = helper[j]&lt;/code&gt; e &lt;code&gt;j&lt;/code&gt; e &lt;code&gt;k&lt;/code&gt; são incrementados. Isso é feito até que uma das porções tenha sido completamente percorrida, isto é, se &lt;code&gt;i&lt;/code&gt; atingir &lt;code&gt;middle&lt;/code&gt; ou &lt;code&gt;j&lt;/code&gt; atingir &lt;code&gt;right&lt;/code&gt;.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; middle &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right) {
+            
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (helper[i] &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; helper[j]) {
+            v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[i];
+            i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        } &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+            v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[j];
+            j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        }
+        k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;    
+            
+    }
+...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade primeiro do que a outra. Basta então, fazemos o append de todos os elementos da parte que não foi completamento consumida. Isso é feito pelo código abaixo.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade inicial não foi toda consumida, faz o append.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; middle) {
+        v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[i];
+        i&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+    }
+        
+    &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade final não foi toda consumida, faz o append.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; (j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right) {
+        v[k] &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper[j];
+        j&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+        k&lt;span style=&#34;color:#f92672&#34;&gt;++&lt;/span&gt;;
+    }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2 id=&#34;o-merge-sort&#34;&gt;O Merge Sort&lt;/h2&gt;
+
+&lt;p&gt;Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &amp;ldquo;quebras&amp;rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&amp;lt;seção ainda em construção&amp;gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;h2 id=&#34;análise-do-tempo-de-execução&#34;&gt;Análise do Tempo de Execução&lt;/h2&gt;
+
+&lt;p&gt;Lembra dos passos para determinar o tempo de execução de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;algoritmos recursivos?&lt;/a&gt;. O primeiro passo é encontrar a relação de recorrência. O Merge Sort possui duas chamadas recursivas, cada uma reduzindo o problema (tamanho do array) na metade. Ou seja, $2 * T(n / 2)$. Além disso, há também uma chamada ao método Merge, que sabemos ser $O(n)$. Portanto, a relação de recorrência é:&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;$T(n) = 2 * T(N / 2) + N$&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;análise de algoritmos recursivos.&lt;/a&gt; Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência &lt;center&gt;$T(n) = 2 * T(N / 2) + N$&lt;/center&gt;, quando resolvida, nos fornece um custo total $n * \log n$.&lt;/p&gt;
+
+&lt;p&gt;Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as &amp;ldquo;quebras&amp;rdquo; do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Mege Sort nos garante eficiência $n * \log n$ para todos os casos.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;análise-do-uso-de-memória&#34;&gt;Análise do uso de memória&lt;/h2&gt;
+
+&lt;p&gt;Como vimos, o Merge Sort usa um array auxiliar (&lt;strong&gt;&lt;em&gt;helper&lt;/em&gt;&lt;/strong&gt;) na ordenação. O tamanho de helper é o mesmo do array origina. Ou seja, do ponto de vista de uso de memória, o Merge Sort é $O(n)$.&lt;/p&gt;
+
+&lt;p&gt;Isso é algo novo para a gente, certo? Este é o primeiro algoritmo de ordenação que estamos estudando que usa memória auxiliar proporcional ao tamanho do problema.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Merge Sort &lt;strong&gt;&lt;em&gt;não&lt;/em&gt;&lt;/strong&gt; é in-place.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Importante lembrar também que a ordenação é estável, pois mantém a ordem dos elementos iguais. Isso porque decidimos que, se o elemento mais à esquerda for menor ou IGUAL ao mais à direita, ele deve ser colocado primeiro no array ordenado.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;O Merge Sort é estável.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;hr /&gt;
+
+&lt;h1 id=&#34;resumo&#34;&gt;Resumo&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Merge Sort é um algoritmo eficiente de ordenação.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Independente do caso (melhor, pior ou médio) o Merge Sort sempre será $n * \log n$. Isso ocorre porque a divisão do problema sempre gera dois sub-problemas com a metade do tamanho do problema original ($2 * T (n /2)$).&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O algoritmo baseia a ordenação em sucessivas execuções de merge, uma rotina que une duas partes ordenadas de um array em uma outra também ordenada.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O algoritmo de Merge é $O(n)$.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;Apesar de estar na mesma classe de complexidade do Quick Sort, o Merge Sorte tende a ser, na prática, um pouco menos eficiente do que o Quick Sort, pois suas constantes são maiores. Contudo, a seu favor, o Merge Sort garante $n * \log n$ para qualquer caso, enquanto o Quick Sort pode ter ordenação $n^2$ no pior caso, embora raro.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O Merge Sort não é in-place.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;O Merge Sort é estável.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+       </item>
+       
+       <item>
          <title>Ordenação por Comparação: Quick Sort</title>
          <link>https://joaoarthurbm.github.io/eda/posts/quick-sort/</link>
          <pubDate>Sun, 27 Oct 2019 00:01:01 -0300</pubDate>
@@ -1211,7 +1400,7 @@ adicionado.
 
 &lt;hr /&gt;
 
-&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação por divisão e conquista. Apesar de ser da mesma classe de complexidade do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt;, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores.&lt;/p&gt;
+&lt;p&gt;Quick Sort é um algoritmo eficiente de ordenação por divisão e conquista. Apesar de ser da mesma classe de complexidade do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e do &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt;, o Quick Sort é na prática o mais veloz deles, pois suas constantes são menores. Contudo, é importante destacar de antemão que, em seu pior caso, o Quick Sort é $O(n^2)$, enquanto que o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/merge-sort&#34;&gt;Merge Sort&lt;/a&gt; e o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/heap-sort&#34;&gt;Heap Sort&lt;/a&gt; garantem $n * \log n$ para todos os casos. A boa notícia é que há estratégias simples com as quais podemos minimizar as chances de ocorrência do pior caso.&lt;/p&gt;
 
 &lt;p&gt;O funcionamento do Quick Sort baseia-se em uma rotina fundamental cujo nome é &lt;strong&gt;&lt;em&gt;particionamento&lt;/em&gt;&lt;/strong&gt;. Particionar significa escolher um número qualquer presente no array, chamado de &lt;strong&gt;&lt;em&gt;pivot&lt;/em&gt;&lt;/strong&gt;, e colocá-lo em uma posição tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores.&lt;/p&gt;
 
@@ -1392,7 +1581,7 @@ $T(n) = T(n-1) + \Theta(n)$&lt;/p&gt;
 
 &lt;div align=&#34;center&#34;&gt;Como podemos evitar o pior caso?&lt;/div&gt;
 
-&lt;p&gt;Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três.&lt;/p&gt;
+&lt;p&gt;Escolhendo um pivot melhor. Nossa ruina até aqui foi escolher sempre o primeiro elemento como o pivot e, como o array está ordenado, o pivot acarretava em um sucessão de particionamentos ruins. Vamos discutir duas maneiras de escolher melhores pivots: uma aleatória e a mediana de três elementos do array.&lt;/p&gt;
 
 &lt;h4 id=&#34;escolhendo-o-pivot-aleatoriamente&#34;&gt;Escolhendo o pivot aleatoriamente&lt;/h4&gt;
 
@@ -1429,7 +1618,8 @@ $T(n) = T(n-1) + \Theta(n)$&lt;/p&gt;
 ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h4 id=&#34;escolhendo-o-pivot-através-da-mediana-de-três&#34;&gt;Escolhendo o pivot através da mediana de três&lt;/h4&gt;
 
-&lt;p&gt;A mediana é uma medida de tendência central que divide uma sequência de inteiros ao meio. Então a mediana de todos os elementos a array seria o nosso pivot perfeito, não é? O problema é que o custo para calcular a mediana de um array é $O(n)$ e não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação &amp;ldquo;grosseira&amp;rdquo; da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento.&lt;/p&gt;
+&lt;p&gt;A mediana é o valor central de um conjunto de dados. Por exemplo, a mediana do array $[5, 2, 3, 7, 9]$ é 5, pois metade dos elementos é menor do que 5 e a outra metade é maior&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.
+Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o array ao meio. O problema é que para saber a mediana do array, é preciso ordená-lo antes. Não queremos adicionar essa complexidade para apenas escolher um pivot e depois ter que executar o particionamento. Então o que fazemos é uma aproximação &amp;ldquo;grosseira&amp;rdquo; da mediana. Calculamos a mediana entre três representantes do array: o primeiro elemento, o elemento do meio e o último elemento. Como estamos falando de um array, acessar esses elementos é $O(1)$, pois sabemos seus índices de antemão: &lt;code&gt;0&lt;/code&gt;, &lt;code&gt;array.length / 2&lt;/code&gt; e &lt;code&gt;array.length - 1&lt;/code&gt;.&lt;/p&gt;
 
 &lt;p&gt;Essa estratégia evita o caso de escolhermos recorrentemente um péssimo pivot. Por exemplo, para o array $values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]$ temos 1, 5 e 10 como o primeiro, o elemento central o último elemento, respectivamente. A mediana entre esses elementos é o 5. Portanto, essa seria a nossa escolha de pivot. Veja que executar o particionamento com ele é uma escolha bem melhor do que particionar com o primeiro elemento.&lt;/p&gt;
 
@@ -1525,6 +1715,15 @@ $T(n) = T(n-1) + \Theta(n)$&lt;/p&gt;
 
 &lt;p&gt;No Capítulo 7 do livro “Algoritmos: Teoria e Prática” de Cormen et. al.
 há uma discussão mais detalhada sobre a análise do Quick Sort.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Caso o número de elementos seja par, a mediana é a média entre os dois valores centrais. 
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
        </item>
        
