@@ -3,16 +3,13 @@ title = "Ordenação por Comparação: Merge Sort"
 date = 2019-10-27T00:01:01
 tags = []
 categories = []
-github = ""
-+++
+github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/MergeSort.java"
 
-Draft. Este material ainda está em edição.
++++
 
 ***
 
-TODO
-
-* Escrever código no gh e apontar nas tags.
+Draft. Este material ainda está em edição.
 
 ***
 
@@ -24,7 +21,7 @@ O funcionamento do Merge Sort baseia-se em uma rotina fundamental cujo nome é *
 
 # Merge
 
-Merge é a rotina que combina dois arrays ordenados em um outro também ordenado. Assim como o Quick Sort aplica várias vezes o particionamento para ordenar um array, o Merge Sort também aplica o Merge várias para ordenar um array. 
+Merge é a rotina que combina dois arrays ordenados em um outro também ordenado. Assim como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/quick-sort/">Quick Sort</a> aplica várias vezes o particionamento para ordenar um array, o Merge Sort também aplica o Merge várias para ordenar um array. 
 
 A ideia é simples e é explicada visualmente no vídeo abaixo.
 
@@ -156,6 +153,10 @@ Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será con
 ## O Merge Sort
 
 Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas "quebras" do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.
+
+<center>
+\<seção ainda em construção\>
+</center>
 
 
 ## Análise do Tempo de Execução
