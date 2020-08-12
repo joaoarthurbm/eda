@@ -1211,10 +1211,6 @@ adicionado.
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;span style=&#34;color:blue&#34;&gt;Draft. Este material ainda está em edição.&lt;/span&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-
 &lt;p&gt;Merge Sort é um algoritmo eficiente de ordenação por divisão e conquista. Se nossa missão é ordenar um array comparando seus elementos, do ponto de vista assintótico, $n * \log n$ é o nosso limite inferior. Ou seja, nenhum algoritmo de ordenação por comparação é mais veloz do que $n * \log n$. Formalmente, todos são $\Omega(n * \log n)$.&lt;/p&gt;
 
 &lt;p&gt;No caso do Merge Sort, uma característica importante é que sua eficiência é $n * \log n$ para o melhor, pior e para o caso médio. Ou seja, ele não é somente $\Omega(n * \log n)$, mas é $\Theta(n * \log n)$. Isso nos dá uma garantia de que, independente da disposição dos dados em um array, a ordenação será eficiente.&lt;/p&gt;
@@ -1338,6 +1334,38 @@ adicionado.
 &lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/ekxvb3Q5hE4&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
 &lt;/center&gt;&lt;/p&gt;
 
+&lt;p&gt;Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenada. A parte da divisão, na verdade, é bem simples. Basta &amp;ldquo;dividir&amp;rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito trabalho. O que a gente faz é usar os índices left, middle e right para controlar a porção do array que o algoritmo deve agir. Vamos ver o código:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;void&lt;/span&gt; mergeSort(&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;[] &lt;span style=&#34;color:#a6e22e&#34;&gt;v&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;) {   
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;=&lt;/span&gt; right)
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+        
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; {
+            
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;middle&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 2;
+            mergeSort(v, left, middle);
+            mergeSort(v, middle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1, right);
+    
+            merge(v, left, middle, right);
+        }
+        
+    }&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Em primeiro lugar, vamos analisar a assinatura do método. Os parâmetros são o próprio array a ser ordenado, um índice &lt;code&gt;left&lt;/code&gt; e um índice &lt;code&gt;right&lt;/code&gt;, que delimita a porção do array que o algoritmo deve analisar. Na primeira chamada, naturalmente, temos que &lt;code&gt;left = 0&lt;/code&gt; e &lt;code&gt;right = v.length - 1&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Seguindo. Na primeira linha do método, temos a condição de parada do algoritmo (left &amp;gt;= right). Isto é, quando a porção do algoritmo a ser analisada possui apenas um elemento, não há mais a necessidade de &amp;ldquo;quebrá-lo&amp;rdquo;.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;
+
+&lt;p&gt;Caso ainda seja necessário &amp;ldquo;quebrar&amp;rdquo; o array, temos essas quatro linhas bem importantes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    ...
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;middle&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; right) &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 2;
+    mergeSort(v, left, middle);
+    mergeSort(v, middle &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1, right);
+
+    merge(v, left, middle, right);
+    ...&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;A primeira define &lt;code&gt;middle&lt;/code&gt; como sendo o valor central entre &lt;code&gt;left&lt;/code&gt; e &lt;code&gt;right&lt;/code&gt;. A segunda e a terceira são chamadas recursivas para a metade da esquerda (de &lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt; até &lt;strong&gt;&lt;em&gt;middle&lt;/em&gt;&lt;/strong&gt;) e para a metade da direita (de &lt;strong&gt;&lt;em&gt;middle + 1&lt;/em&gt;&lt;/strong&gt; até &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;).&lt;/p&gt;
+
+&lt;p&gt;Por fim, após cada quebra há uma chamada ao método merge, passando os limites a serem considerados (&lt;strong&gt;&lt;em&gt;left&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;middle&lt;/em&gt;&lt;/strong&gt;, &lt;strong&gt;&lt;em&gt;right&lt;/em&gt;&lt;/strong&gt;).&lt;/p&gt;
+
 &lt;h2 id=&#34;análise-do-tempo-de-execução&#34;&gt;Análise do Tempo de Execução&lt;/h2&gt;
 
 &lt;p&gt;Lembra dos passos para determinar o tempo de execução de &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;algoritmos recursivos?&lt;/a&gt;. O primeiro passo é encontrar a relação de recorrência. O Merge Sort possui duas chamadas recursivas, cada uma reduzindo o problema (tamanho do array) na metade. Ou seja, $2 * T(n / 2)$. Além disso, há também uma chamada ao método Merge, que sabemos ser $O(n)$. Portanto, a relação de recorrência é:&lt;/p&gt;
@@ -1387,6 +1415,15 @@ adicionado.
 
 &lt;li&gt;&lt;p&gt;O Merge Sort é estável.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;Certamente eu poderia ter feito &lt;code&gt;if (left &amp;gt; right)&lt;/code&gt; e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
 </description>
        </item>
        

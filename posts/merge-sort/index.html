@@ -124,7 +124,7 @@
 
         
 
-        <li>7 minutes read</li>
+        <li>9 minutes read</li>
 
         
 
@@ -138,10 +138,6 @@
     
 
     
-
-<hr />
-
-<p><span style="color:blue">Draft. Este material ainda está em edição.</span></p>
 
 <hr />
 
@@ -268,6 +264,38 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ekxvb3Q5hE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center></p>
 
+<p>Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenada. A parte da divisão, na verdade, é bem simples. Basta &ldquo;dividir&rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito trabalho. O que a gente faz é usar os índices left, middle e right para controlar a porção do array que o algoritmo deve agir. Vamos ver o código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> mergeSort(<span style="color:#66d9ef">int</span>[] <span style="color:#a6e22e">v</span>, <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">left</span>, <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">right</span>) {   
+        
+        <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;=</span> right)
+            <span style="color:#66d9ef">return</span>;
+        
+        <span style="color:#66d9ef">else</span> {
+            
+            <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">middle</span> <span style="color:#f92672">=</span> (left <span style="color:#f92672">+</span> right) <span style="color:#f92672">/</span> 2;
+            mergeSort(v, left, middle);
+            mergeSort(v, middle <span style="color:#f92672">+</span> 1, right);
+    
+            merge(v, left, middle, right);
+        }
+        
+    }</code></pre></div>
+<p>Em primeiro lugar, vamos analisar a assinatura do método. Os parâmetros são o próprio array a ser ordenado, um índice <code>left</code> e um índice <code>right</code>, que delimita a porção do array que o algoritmo deve analisar. Na primeira chamada, naturalmente, temos que <code>left = 0</code> e <code>right = v.length - 1</code>.</p>
+
+<p>Seguindo. Na primeira linha do método, temos a condição de parada do algoritmo (left &gt;= right). Isto é, quando a porção do algoritmo a ser analisada possui apenas um elemento, não há mais a necessidade de &ldquo;quebrá-lo&rdquo;.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></p>
+
+<p>Caso ainda seja necessário &ldquo;quebrar&rdquo; o array, temos essas quatro linhas bem importantes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    ...
+    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">middle</span> <span style="color:#f92672">=</span> (left <span style="color:#f92672">+</span> right) <span style="color:#f92672">/</span> 2;
+    mergeSort(v, left, middle);
+    mergeSort(v, middle <span style="color:#f92672">+</span> 1, right);
+
+    merge(v, left, middle, right);
+    ...</code></pre></div>
+<p>A primeira define <code>middle</code> como sendo o valor central entre <code>left</code> e <code>right</code>. A segunda e a terceira são chamadas recursivas para a metade da esquerda (de <strong><em>left</em></strong> até <strong><em>middle</em></strong>) e para a metade da direita (de <strong><em>middle + 1</em></strong> até <strong><em>right</em></strong>).</p>
+
+<p>Por fim, após cada quebra há uma chamada ao método merge, passando os limites a serem considerados (<strong><em>left</em></strong>, <strong><em>middle</em></strong>, <strong><em>right</em></strong>).</p>
+
 <h2 id="análise-do-tempo-de-execução">Análise do Tempo de Execução</h2>
 
 <p>Lembra dos passos para determinar o tempo de execução de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">algoritmos recursivos?</a>. O primeiro passo é encontrar a relação de recorrência. O Merge Sort possui duas chamadas recursivas, cada uma reduzindo o problema (tamanho do array) na metade. Ou seja, $2 * T(n / 2)$. Além disso, há também uma chamada ao método Merge, que sabemos ser $O(n)$. Portanto, a relação de recorrência é:</p>
@@ -317,6 +345,15 @@
 
 <li><p>O Merge Sort é estável.</p></li>
 </ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">Certamente eu poderia ter feito <code>if (left &gt; right)</code> e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos.
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
 
 </article>
