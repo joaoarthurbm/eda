@@ -1335,7 +1335,7 @@ adicionado.
 &lt;p&gt;Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &amp;ldquo;quebras&amp;rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.&lt;/p&gt;
 
 &lt;p&gt;&lt;center&gt;
-&amp;lt;seção ainda em construção&amp;gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/ekxvb3Q5hE4&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
 &lt;/center&gt;&lt;/p&gt;
 
 &lt;h2 id=&#34;análise-do-tempo-de-execução&#34;&gt;Análise do Tempo de Execução&lt;/h2&gt;
