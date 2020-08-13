@@ -231,10 +231,10 @@ de ordenar dados.&lt;/li&gt;
        
        <item>
          <title>Conteúdo</title>
-         <link>https://joaoarthurbm.github.io/eda/about/</link>
+         <link>https://joaoarthurbm.github.io/eda/conteudo/</link>
          <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
          
-         <guid>https://joaoarthurbm.github.io/eda/about/</guid>
+         <guid>https://joaoarthurbm.github.io/eda/conteudo/</guid>
          <description>
 
 &lt;hr /&gt;
@@ -345,6 +345,22 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
   howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
 }
 &lt;/code&gt;&lt;/pre&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Bibliografia</title>
+         <link>https://joaoarthurbm.github.io/eda/bibliografia/</link>
+         <pubDate>Tue, 29 Oct 2019 00:00:00 +0000</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/bibliografia/</guid>
+         <description>&lt;hr /&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;CORMEN, T. H. et.al. Algoritmos: teoria e prática, 3 edição. Ed. Campus, 2002. Site do autor: &lt;a href=&#34;http://mitpress.mit.edu/algorithms/&#34;&gt;http://mitpress.mit.edu/algorithms/&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;WEISS, M. A. Data Structures and Algorithm Analysis in Java.SecondEdition.Addison-Wesley. 2007. Site do autor:&lt;a href=&#34;http://users.cis.fiu.edu/~weiss/#dsaajava2&#34;&gt;http://users.cis.fiu.edu/~weiss/#dsaajava2&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </description>
        </item>
        
