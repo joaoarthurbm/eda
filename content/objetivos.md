@@ -3,7 +3,7 @@ title = "Objetivos"
 date = "2019-10-29"
 menu = "main"
 weight = "20"
-meta = "true"
+meta = "false"
 +++
 
 ***

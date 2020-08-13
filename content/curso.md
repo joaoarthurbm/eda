@@ -2,7 +2,7 @@
 title = "Curso"
 date = "2019-10-29"
 menu = "main"
-weight = "20"
+weight = "10"
 meta = "false"
 +++
 
