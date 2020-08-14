@@ -25,7 +25,7 @@ A ideia é simples e é explicada visualmente no vídeo abaixo.
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7fb8H-MCQ7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-Na prática, não queremos ficar criando arrays separados para uni-los. O que fazemos é organizar os dados no array a ser ordenado de forma que uma porção dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.
+Na prática, não queremos ficar criando arrays separados para uni-los. Isso custa memória e processamento, pois a cada array criado temos que transferir os elementos do array original para ele. O que fazemos então é organizar os dados no array a ser ordenado de forma que uma parte dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.
 
 <center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sXddmV3sfjA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -85,7 +85,9 @@ O código do método ***merge*** está descrito abaixo. Vamos analisar por parte
 
 Em primeiro lugar, vamos entender a assinatura do método ***merge***. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: `left` e `middle` e `right`, que determinam os limites em que o algoritmo deve agir. 
 
-Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por `left` e `middle` está ordenada e sabe que a parte do array delimitada por `middle + 1` e `right` também está ordenada. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.
+Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por `left` e `middle` está ordenada e sabe que a parte do array delimitada por `middle + 1` e `right` também está ordenada. Veja a figura abaixo que ilustra essa situação. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.
+
+![partes](partes.png)
 
 Para isso, como fazer manipulações em nosso array original, precisamos de um array auxiliar (`helper`) para guardar o estado. Isso é feito nas três primeiras linhas do método.
 
@@ -99,7 +101,7 @@ Para isso, como fazer manipulações em nosso array original, precisamos de um a
 ...
 ```
 
-As próximas linhas definem os valores de `i`, `j` e `k` que, como vistos no vídeos, são os índices usados para controle da execução e comparação dos elementos. `i` marca o início da primeira porção do array, `j` marca o início da segunda porção do array e `k` marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.
+As próximas linhas definem os valores de `i`, `j` e `k` que, como visto no vídeo, são os índices usados para controle da execução e comparação dos elementos. `i` marca o início da primeira parte do array, `j` marca o início da segunda parte do array e `k` marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.
 
  ```java
 ...
@@ -109,7 +111,7 @@ As próximas linhas definem os valores de `i`, `j` e `k` que, como vistos no ví
 ...
 ```
 
-Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, `v[k] = helper[i]` e `i` e `k` são incrementados. Caso contrário, `v[k] = helper[j]` e `j` e `k` são incrementados. Isso é feito até que uma das porções tenha sido completamente percorrida, isto é, se `i` atingir `middle` ou `j` atingir `right`.
+Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, `v[k] = helper[i]` e `i` e `k` são incrementados. Caso contrário, `v[k] = helper[j]` e `j` e `k` são incrementados. Isso é feito até que uma das partes tenha sido completamente percorrida, isto é, se `i` atingir `middle` ou `j` atingir `right`.
 
 ```java
 ...
@@ -128,9 +130,10 @@ Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]
 ...
 ```
 
-Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade primeiro do que a outra. Basta então, fazemos o append de todos os elementos da parte que não foi completamento consumida. Isso é feito pelo código abaixo.
+Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o *append* de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.
 
 ```java
+    ...
     // se a metade inicial não foi toda consumida, faz o append.
     while (i <= middle) {
         v[k] = helper[i];
@@ -144,6 +147,7 @@ Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será con
         j++;
         k++;
     }
+    ...
 ```
 
 ## O Merge Sort
@@ -154,7 +158,9 @@ Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ekxvb3Q5hE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
 
-Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenada. A parte da divisão, na verdade, é bem simples. Basta "dividir" o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito trabalho. O que a gente faz é usar os índices left, middle e right para controlar a porção do array que o algoritmo deve agir. Vamos ver o código:
+Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenado. 
+
+A parte da divisão, na verdade, é bem simples. Basta "dividir" o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito custoso. O que a gente faz é usar os índices `left`, `middle` e `right` para controlar as partes do array que o algoritmo deve agir. Vamos ver o código:
 
 ```java
 public void mergeSort(int[] v, int left, int right) {   
@@ -178,7 +184,7 @@ Em primeiro lugar, vamos analisar a assinatura do método. Os parâmetros são o
 
 Seguindo. Na primeira linha do método, temos a condição de parada do algoritmo (left >= right). Isto é, quando a porção do algoritmo a ser analisada possui apenas um elemento, não há mais a necessidade de "quebrá-lo".[^1]
 
-Caso ainda seja necessário "quebrar" o array, temos essas quatro linhas bem importantes:
+Caso ainda seja necessário "quebrar" o array (`if left < right`), temos essas quatro linhas bem importantes:
 
 ```java
     ...
@@ -203,7 +209,7 @@ Lembra dos passos para determinar o tempo de execução de <a class="external" h
 
 <center>$T(n) = 2 * T(N / 2) + N$</center>
 
-Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência <center>$T(n) = 2 * T(N / 2) + N$</center>, quando resolvida, nos fornece um custo total $n * \log n$.
+Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.
 
 Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as "quebras" do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.
 
