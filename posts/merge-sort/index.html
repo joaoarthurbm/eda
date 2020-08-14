@@ -163,7 +163,7 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/7fb8H-MCQ7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center></p>
 
-<p>Na prática, não queremos ficar criando arrays separados para uni-los. O que fazemos é organizar os dados no array a ser ordenado de forma que uma porção dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.</p>
+<p>Na prática, não queremos ficar criando arrays separados para uni-los. Isso custa memória e processamento, pois a cada array criado temos que transferir os elementos do array original para ele. O que fazemos então é organizar os dados no array a ser ordenado de forma que uma parte dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.</p>
 
 <p><center>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/sXddmV3sfjA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -217,7 +217,9 @@
 ...</code></pre></div>
 <p>Em primeiro lugar, vamos entender a assinatura do método <strong><em>merge</em></strong>. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: <code>left</code> e <code>middle</code> e <code>right</code>, que determinam os limites em que o algoritmo deve agir.</p>
 
-<p>Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por <code>left</code> e <code>middle</code> está ordenada e sabe que a parte do array delimitada por <code>middle + 1</code> e <code>right</code> também está ordenada. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.</p>
+<p>Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por <code>left</code> e <code>middle</code> está ordenada e sabe que a parte do array delimitada por <code>middle + 1</code> e <code>right</code> também está ordenada. Veja a figura abaixo que ilustra essa situação. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.</p>
+
+<p><img src="partes.png" alt="partes" /></p>
 
 <p>Para isso, como fazer manipulações em nosso array original, precisamos de um array auxiliar (<code>helper</code>) para guardar o estado. Isso é feito nas três primeiras linhas do método.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
@@ -227,13 +229,13 @@
         helper[i] <span style="color:#f92672">=</span> v[i];
     }     
 ...</code></pre></div>
-<p>As próximas linhas definem os valores de <code>i</code>, <code>j</code> e <code>k</code> que, como vistos no vídeos, são os índices usados para controle da execução e comparação dos elementos. <code>i</code> marca o início da primeira porção do array, <code>j</code> marca o início da segunda porção do array e <code>k</code> marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.</p>
+<p>As próximas linhas definem os valores de <code>i</code>, <code>j</code> e <code>k</code> que, como visto no vídeo, são os índices usados para controle da execução e comparação dos elementos. <code>i</code> marca o início da primeira parte do array, <code>j</code> marca o início da segunda parte do array e <code>k</code> marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
     <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> left;
     <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">j</span> <span style="color:#f92672">=</span> middle <span style="color:#f92672">+</span> 1;
     <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">k</span> <span style="color:#f92672">=</span> left;    
 ...</code></pre></div>
-<p>Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, <code>v[k] = helper[i]</code> e <code>i</code> e <code>k</code> são incrementados. Caso contrário, <code>v[k] = helper[j]</code> e <code>j</code> e <code>k</code> são incrementados. Isso é feito até que uma das porções tenha sido completamente percorrida, isto é, se <code>i</code> atingir <code>middle</code> ou <code>j</code> atingir <code>right</code>.</p>
+<p>Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, <code>v[k] = helper[i]</code> e <code>i</code> e <code>k</code> são incrementados. Caso contrário, <code>v[k] = helper[j]</code> e <code>j</code> e <code>k</code> são incrementados. Isso é feito até que uma das partes tenha sido completamente percorrida, isto é, se <code>i</code> atingir <code>middle</code> ou <code>j</code> atingir <code>right</code>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
     <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;=</span> middle <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;=</span> right) {
             
@@ -248,8 +250,9 @@
             
     }
 ...</code></pre></div>
-<p>Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade primeiro do que a outra. Basta então, fazemos o append de todos os elementos da parte que não foi completamento consumida. Isso é feito pelo código abaixo.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// se a metade inicial não foi toda consumida, faz o append.
+<p>Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o <em>append</em> de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    ...
+    <span style="color:#75715e">// se a metade inicial não foi toda consumida, faz o append.
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;=</span> middle) {
         v[k] <span style="color:#f92672">=</span> helper[i];
         i<span style="color:#f92672">++</span>;
@@ -261,7 +264,8 @@
         v[k] <span style="color:#f92672">=</span> helper[j];
         j<span style="color:#f92672">++</span>;
         k<span style="color:#f92672">++</span>;
-    }</code></pre></div>
+    }
+    ...</code></pre></div>
 <h2 id="o-merge-sort">O Merge Sort</h2>
 
 <p>Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &ldquo;quebras&rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.</p>
@@ -270,7 +274,9 @@
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ekxvb3Q5hE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center></p>
 
-<p>Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenada. A parte da divisão, na verdade, é bem simples. Basta &ldquo;dividir&rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito trabalho. O que a gente faz é usar os índices left, middle e right para controlar a porção do array que o algoritmo deve agir. Vamos ver o código:</p>
+<p>Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenado.</p>
+
+<p>A parte da divisão, na verdade, é bem simples. Basta &ldquo;dividir&rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito custoso. O que a gente faz é usar os índices <code>left</code>, <code>middle</code> e <code>right</code> para controlar as partes do array que o algoritmo deve agir. Vamos ver o código:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> mergeSort(<span style="color:#66d9ef">int</span>[] <span style="color:#a6e22e">v</span>, <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">left</span>, <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">right</span>) {   
         
         <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">&gt;=</span> right)
@@ -290,7 +296,7 @@
 
 <p>Seguindo. Na primeira linha do método, temos a condição de parada do algoritmo (left &gt;= right). Isto é, quando a porção do algoritmo a ser analisada possui apenas um elemento, não há mais a necessidade de &ldquo;quebrá-lo&rdquo;.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup></p>
 
-<p>Caso ainda seja necessário &ldquo;quebrar&rdquo; o array, temos essas quatro linhas bem importantes:</p>
+<p>Caso ainda seja necessário &ldquo;quebrar&rdquo; o array (<code>if left &lt; right</code>), temos essas quatro linhas bem importantes:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    ...
     <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">middle</span> <span style="color:#f92672">=</span> (left <span style="color:#f92672">+</span> right) <span style="color:#f92672">/</span> 2;
     mergeSort(v, left, middle);
@@ -308,7 +314,7 @@
 
 <p><center>$T(n) = 2 * T(N / 2) + N$</center></p>
 
-<p>Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência <center>$T(n) = 2 * T(N / 2) + N$</center>, quando resolvida, nos fornece um custo total $n * \log n$.</p>
+<p>Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.</p>
 
 <p>Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as &ldquo;quebras&rdquo; do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.</p>
 
