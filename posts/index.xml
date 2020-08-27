@@ -599,6 +599,14 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 
 &lt;hr /&gt;
 
+&lt;p&gt;A figura abaixo ilustra um resumo bem bacana sobre a notação Big $O$ e as classes de funções de referência.&lt;/p&gt;
+
+&lt;figure style=&#34;align: center; width: 100%&#34;&gt;
+    &lt;img src=&#34;resumo.jpeg&#34;&gt;
+&lt;/figure&gt;
+
+&lt;hr /&gt;
+
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 
 &lt;p&gt;Este material foi inspirado nos Capítulos 3 e 4 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
