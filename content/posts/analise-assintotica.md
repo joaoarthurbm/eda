@@ -253,6 +253,14 @@ Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^
 
 * As principais classes são: $1$ < $\log n$ < $n$ < $n*\log n$ < $n^2$ < $n^3$...$2^n$
 
+***
+
+A figura abaixo ilustra um resumo bem bacana sobre a notação Big $O$ e as classes de funções de referência.
+
+<figure style="align: center; width: 100%">
+	<img src="resumo.jpeg">
+</figure>
+
 
 ***
 
