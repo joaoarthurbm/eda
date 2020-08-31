@@ -128,6 +128,13 @@ Ao término deste curso, o aluno será capaz de:
 
 ---
 
+# Plano de Aulas
+
+<center>
+<iframe height=400 width=100% src="https://docs.google.com/spreadsheets/d/e/2PACX-1vR8ycVvoi-fLBHYculUaPGTMR8QZYE5pBurRdf_ur5DsUy0tX2z5FIHJ7GxnRYuOgpONIrWwy9Xo5Vf/pubhtml?gid=1103787198&amp;single=true&amp;widget=true&amp;headers=false"></iframe>
+<center>
+
+---
 # Avaliação
 
 5 etapas. Cada etapa com 3 avaliações (uma por semana).
