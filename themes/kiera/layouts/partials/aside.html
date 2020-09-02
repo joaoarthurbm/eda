@@ -28,6 +28,17 @@
 
         <li>{{ T "readingTime" .ReadingTime }}</li>
 
+
+
+
+        {{ if .Params.ppt }}
+
+        <aside><i class="fab fa-lg" aria-hidden="true"> </i> <a href="{{ .Params.ppt }}"> <font color="#1980e6"> <b>download da apresentacao (slides)</b></font></a></aside>
+        {{ end }}
+
+
+
+
         {{ if .Params.github }}
 
         <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="{{ .Params.github }}"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>

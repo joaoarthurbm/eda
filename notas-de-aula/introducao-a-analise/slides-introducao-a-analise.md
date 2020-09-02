@@ -1,9 +1,9 @@
 # Estrutura de dados e Algoritmos 
 <blockquote>Introdução à análise de algoritmos</blockquote>
-<img class="center" style="width: 55%;" src="figures/capa.png"/>
+<img class="center" style="width: 53%;" src="figures/capa.png"/>
 
 <p>joao.arthur@computacao.ufcg.edu.br</p>
-<a style="position: fixed; bottom: 1%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
+<a style="position: fixed; bottom: 2%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
 
 ---
 
@@ -259,10 +259,8 @@ int multiplicaRestoPorParteInteira(int i, int j) {
 
 
 <b>1</b> * c<sub>7</sub> -> retorno de método (return resultado)
-<hr>
 
 --
-
 
 f(n) = c<sub>1</sub> + c<sub>2</sub> + c<sub>3</sub> + c<sub>4</sub> + c<sub>5</sub> + c<sub>6</sub> + c<sub>7</sub>
 
