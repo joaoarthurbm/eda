@@ -262,8 +262,11 @@ int multiplicaRestoPorParteInteira(int i, int j) {
 
 --
 
+<div style="font-size:24px; color:blue; position:fixed; bottom: 40%; right:10%">
+
 f(n) = c<sub>1</sub> + c<sub>2</sub> + c<sub>3</sub> + c<sub>4</sub> + c<sub>5</sub> + c<sub>6</sub> + c<sub>7</sub>
 
+</div>
 ---
 
 # Análise de eficiência
