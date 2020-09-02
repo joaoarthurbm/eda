@@ -3,7 +3,7 @@
 <img class="center" style="width: 55%;" src="figures/capa.png"/>
 
 <p style="font-size=12px">joao.arthur@computacao.ufcg.edu.br</p>
-<a style="position: fixed; bottom: 1%; font-size:12px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
+<a style="position: fixed; bottom: 1%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
 
 ---
 
@@ -97,7 +97,7 @@ As avaliações são *online*. Eu não vou filmar ninguém, nem registrar açõe
 
 # Sobre o curso
 
-<a style="font-size: 14px; " href="http://joaoarthurbm.github.io/eda/curso"> joaoarthurbm.github.io/eda/curso </a>
+<a href="http://joaoarthurbm.github.io/eda/curso"> joaoarthurbm.github.io/eda/curso </a>
 
 
 ### Três grandes temas
@@ -118,7 +118,7 @@ As avaliações são *online*. Eu não vou filmar ninguém, nem registrar açõe
 
 # Objetivos de aprendizagem
 
-<a style="font-size: 14px; " href="http://joaoarthurbm.github.io/eda/objetivos"> joaoarthurbm.github.io/eda/objetivos </a>
+<a href="http://joaoarthurbm.github.io/eda/objetivos"> joaoarthurbm.github.io/eda/objetivos </a>
 
 Ao término deste curso, o aluno será capaz de:
 
@@ -150,7 +150,7 @@ Atividades avaliativas de vários tipos:
 
 # Bibliografia
 
-<a style="font-size: 14px; " href="https://joaoarthurbm.github.io/eda/bibliografia/">joaoarthurbm.github.io/eda/bibliografia/</a>
+<a href="https://joaoarthurbm.github.io/eda/bibliografia/">joaoarthurbm.github.io/eda/bibliografia/</a>
 
 ### Aulas Escritas
 
