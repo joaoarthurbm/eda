@@ -113,7 +113,7 @@ Muitas vezes, não queremos esse nível de precisão. Nesses casos, precisamos d
 # Análise de eficiência: Operações primitivas
 
 
-<blockquote>Hipótese: O custo de operações primitivas é constante.
+<blockquote>O custo de execução das operações primitivas é constante.
 </blockquote>
 
 --
