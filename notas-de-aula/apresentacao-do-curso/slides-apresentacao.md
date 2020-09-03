@@ -161,3 +161,12 @@ Para vários assuntos da disciplina, eu preparei materiais escritos (alguns com 
 * CORMEN, T. H. et.al. Algoritmos: teoria e prática, 3 edição. Ed. Campus, 2002. Site do autor: http://mitpress.mit.edu/algorithms/.
 
 * SEDGEWICK, Robert; WAYNE, Kevin. Algorithms. Addison-wesley professional, 2011.
+
+---
+
+# Estrutura de dados e Algoritmos 
+
+<img class="center" style="width: 55%;" src="figures/capa.png"/>
+
+<p style="position: fixed; bottom: 5%;">joao.arthur@computacao.ufcg.edu.br</p>
+<a style="position: fixed; bottom: 4%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
