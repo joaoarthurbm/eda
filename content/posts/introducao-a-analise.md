@@ -273,11 +273,13 @@ Dado que o tamanho do vetor (v.length) é $n$, temos:
 
 Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
-* A quantidade de vezes que $c4$ é executada depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $(n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a1+an)$, onde $a1$ e $an$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n-1$, temos que $c4$ é executada ${n^2}/{2}$ vezes.
+* $c4$ é executada apenas uma vez para cada _for_, mas como o laço externo executa $n$ vezes, $c4$ é executada $n$ vezes no total.
 
-* Como $c5$ é executada uma vez a mais que $c4$ por causa do último teste para sair do laço, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n$. Assim, temos que $c5$ é executada $({n^2 + n})/{2}$.
+* A quantidade de vezes que $c5$ é executada depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $(n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. Como $c5$ precisa ser executada uma vez a mais do que a quantidade de vezes que $j$ varia - por causa do último teste para sair do laço - a quantidade de vezes que $c5$ é executada é definida por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. A soma de uma PA com essas características é dada por $S = n/2 * (a1+an)$, onde $a1$ e $an$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c5$ é executada $({n^2 + n})/{2}$ vezes.
 
-* $c6$ e $c7$ são executadas a mesma quantidade de vezes que $c4$.
+* Como $c6$ é executada uma vez a menos que $c5$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c6$ é executada ${n^2}/{2}$.
+
+* $c7$ é executada a mesma quantidade de vezes que $c6$.
 
 * $c8$ não é executada nenhuma vez porque estamos falando do pior caso
 
@@ -287,11 +289,11 @@ Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c1 + c2*(n+1) + c3*n + c4 * {n^2}/2 + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$
+$f(n) = c1 + c2*(n+1) + c3 * n + c4 * n + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$
 
 Considerando todas as primitivas com custo c e simplificando a função, temos:
 
-<p align="center"> $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ </p>
+<p align="center"> $f(n) = 3 * c + 3 * c * n + 2 * {n^2}/2 + c * (n^2 + n)/2$ </p>
 
 Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
