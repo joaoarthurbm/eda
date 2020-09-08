@@ -76,25 +76,25 @@ int multiplicaRestoPorParteInteira(int i, int j) {
 
 **Passo 1: Identificar primitivas.** O primeiro passo para determinar de modo analítico o tempo de execução de qualquer algoritmo é identificar todas as operações primitivas. Cada uma, como discutido anteriormente, tem um custo constante. Para o algoritmo acima temos:
 
-1. atribuição (resto = ) -> $c1$
+1. atribuição (resto = ) -> $c_1$
 
-2. operação aritmética (i % j) -> $c2$
+2. operação aritmética (i % j) -> $c_2$
 
-3. atribuição (pInteira = ) -> $c3$
+3. atribuição (pInteira = ) -> $c_3$
 
-4. operação aritmética (i / j) -> $c4$
+4. operação aritmética (i / j) -> $c_4$
 
-5. atribuição (resultado = ) -> $c5$
+5. atribuição (resultado = ) -> $c_5$
 
-6. operação aritmética (resto * pInteira) -> $c6$
+6. operação aritmética (resto * pInteira) -> $c_6$
 
-7. retorno de método (return resultado) -> $c7$
+7. retorno de método (return resultado) -> $c_7$
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Para o algoritmo acima, todas as primitivas são executadas apenas uma vez.
 
 **Passo 3: Somar o custo total.** O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-<p align="center">$f(n) = c1+c2+c3+c4+c5+c6+c7$</p>
+<p align="center">$f(n) = c_1+c_2+c_3+c_4+c_5+c_6+c_7$</p>
 
 Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente dos números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem **custo constante**, ou seja, independe do tamanho da entrada.
 
@@ -102,6 +102,8 @@ Lembrando estamos interessados em uma função que nos diga o tempo de execuçã
 > Dizer que um algoritmo tem custo constante significa dizer que o seu tempo de execução independe do tamanho da entrada.
 
 Outro fator de destaque é que podemos considerar que todas as constantes possuem o mesmo valor $c$. Assim, podemos simplificar a função para $f(n)= 7c$.
+
+---
 
 ### E quando houver condicionais?
 
@@ -135,39 +137,42 @@ double precisaNaFinal(double nota1, double nota2, double nota3) {
 
 **Passo 1. Identificar primitivas.**
 
-1. atribuição (media = ) -> $c1$
+1. atribuição (media = ) -> $c_1$
 
-2. operação aritmética (nota1 + nota2 + nota3) -> $c2$
+2. operação aritmética (nota1 + nota2 + nota3) -> $c_2$
 
-3. operação aritmética (... / 3) -> $c3$
+3. operação aritmética (... / 3) -> $c_3$
 
-4. avaliação de expressão booleana (media >=7 || media < 4) -> $c4$
+4. avaliação de expressão booleana (media >=7 || media < 4) -> $c_4$
 
-5. retorno de método (return 0) -> $c5$
+5. retorno de método (return 0) -> $c_5$
 
-6. atribuição (mediaFinal = ) -> $c6$
+6. atribuição (mediaFinal = ) -> $c_6$
 
-7. atribuição (pesoFinal = ) -> $c7$
+7. atribuição (pesoFinal = ) -> $c_7$
 
-8. atribuição (pesoMedia = ) -> $c8$
+8. atribuição (pesoMedia = ) -> $c_8$
 
-9. atribuição (precisa = ) -> $c9$
+9. atribuição (precisa = ) -> $c_9$
 
-10. operação aritmética (pesoMedia * media) -> $c10$
+10. operação aritmética (pesoMedia * media) -> $c_10$
 
-11. operação aritmética (mediaFinal -  ...) -> $c11$
+11. operação aritmética (mediaFinal -  ...) -> $c_11$
 
-12. operação aritmética (... / pesoFinal) -> $c12$
+12. operação aritmética (... / pesoFinal) -> $c_12$
 
-13. retorno de método (return precisa) -> $c13$
+13. retorno de método (return precisa) -> $c_13$
 
-**Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c5$, pois, no pior caso, o bloco do `else` será executado, uma vez que é mais custoso que o bloco do `if`. As outras primitivas são executadas apenas uma vez.
+**Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c_5$, pois, no pior caso, o bloco do `else` será executado, uma vez que é mais custoso que o bloco do `if`. As outras primitivas são executadas apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
 
-<p align="center"> $f(n) = c1+c2+c3+c4+c6+c7+c8+c9+c10+c11+c12+c13$ </p>
+<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_10+c_11+c_12+c_13$ </p>
 
+Note que $c_5$ é desconsiderada.
+
+---
 
 ### E quando houver iteração? 
 
@@ -184,41 +189,44 @@ public static boolean contains(int[] v, int n) {
 
 **Passo 1: Identificar primitivas.**
 
-1. Atribuição (int i = 0) -> $c1$
+1. Atribuição (int i = 0) -> $c_1$
 
-2. Avaliação de expressão booleana (i < v.length) -> $c2$
+2. Avaliação de expressão booleana (i < v.length) -> $c_2$
 
-3. Operação aritmética (i++) -> $c3$
+3. Operação aritmética (i++) -> $c_3$
 
-4. Avaliação de expressão booleana (v[i] == n) -> $c4$
+4. Avaliação de expressão booleana (v[i] == n) -> $c_4$
 
-5. Retorno de método (return true) -> $c5$
+5. Retorno de método (return true) -> $c_5$
 
-6. Retorno de método (return false) -> $c6$
+6. Retorno de método (return false) -> $c_6$
+
+**Observação Importante.** Se lançarmos um olhar mais detalhista em algumas expressões, na verdade, vamos perceber que estamos passando por cima de algumas primitivas. Por exemplo, nesse exemplo nós consideramos que a expressão booleana `v[i] == n` é uma primitiva (c4), mas ela envolve também o acesso à `v[i]` e o acesso a `n` que, como sabemos, são também primitivas. Então, sendo bem detalhistas, teríamos que identificar 3 primitivas na expressão `v[i] == n`. Da mesma forma, a expressão `i + j` pode ser considerada como sendo 3 primitivas, isto é, o acesso à variável `i`, o acesso à variável `j` e a expressão aritmética. **Eu escolhi não fazer isso por fins didáticos.** Iríamos poluir muito nossa análise. Por isso, quando houver uma expressão booleana, mesmo que ela envolva outras primitivas, vamos considerar como apenas uma, ok? O mesmo será feito para expressões aritméticas.
+
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.**
 
-Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar `false` no final. Veja que se o número procurado estiver presente, a execução pode terminar bem antes do fim da iteração no array. Isso significa que na nossa análise vamos descartar a primitiva $c5$, pois no pior caso ela nunca é executada.
+Aqui mora a grande diferença da análise deste exemplo em relação aos demais. Em primeiro lugar, nem todas as primitivas são executadas apenas uma vez. Depois, temos que voltar a lembrar que estamos tratando do pior caso. Esse cenário é representado por um array que não contém o número procurado, pois o algoritmo irá realizar todas as iterações e retornar `false` no final. Veja que se o número procurado estiver presente, a execução pode terminar bem antes do fim da iteração no array. Isso significa que na nossa análise vamos descartar a primitiva $c_5$, pois no pior caso ela nunca é executada.
 
 Dado que o tamanho do vetor (`v.length`) é $n$, temos:
 
-* $c1$ é executada apenas uma vez.
+* $c_1$ é executada apenas uma vez.
 
-* $c2$ é executada $(n+1)$ vezes. Exemplo: se $n = 5$, temos as seguintes verificações: 0 < 5, 1 < 5; 2 < 5, 3 < 5, 4 < 5 e 5 < 5, quando encerra-se o loop. Ou seja, 6 verificações.
+* $c_2$ é executada $(n+1)$ vezes. Exemplo: se $n = 5$, temos as seguintes verificações: 0 < 5, 1 < 5; 2 < 5, 3 < 5, 4 < 5 e 5 < 5, quando encerra-se o loop. Ou seja, 6 verificações.
 
-* $c3$ é executada $n$ vezes. Exemplo: se $n = 5$, temos os seguintes incrementos em i: 1, 2, 3, 4 e 5, quando encerra-se o loop.
+* $c_3$ é executada $n$ vezes. Exemplo: se $n = 5$, temos os seguintes incrementos em i: 1, 2, 3, 4 e 5, quando encerra-se o loop.
 
-* $c4$ é executada $n$ vezes.
+* $c_4$ é executada $n$ vezes.
 
-* No pior caso, $c5$ não é executada.
+* No pior caso, $c_5$ não é executada.
 
-* $c6$ é executada apenas uma vez.
+* $c_6$ é executada apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-<p align="center"> $f(n) = c1+c2*(n+1)+c3*n+c4*n+c6$ </p>
+<p align="center"> $f(n) = c_1+c_2*(n+1)+c_3*n+c_4*n+c_6$ </p>
 
 Considerando todas as primitivas com custo $c$ e simplificando a função, temos:
 
@@ -226,7 +234,9 @@ Considerando todas as primitivas com custo $c$ e simplificando a função, temos
 
 Veja que essa função é diretamente relacionada ao tamanho do array ($n$). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições. Não é por acaso que o nome desse algoritmo é busca linear. O termo refere-se a ambos: i) a estratégia de procurar o elemento de modo sequencial em uma coleção e ii) o tempo de execução do algoritmo.
 
-Vamos ver mais um exemplo. 
+---
+
+### E quando houver loops aninhados?
 
 ```java
 public boolean contemDuplicacao(int[] v) {
@@ -240,56 +250,56 @@ public boolean contemDuplicacao(int[] v) {
 
 **Passo 1: Identificar primitivas.**
 
-1. Atribuição (int i = 0) -> c1
+1. Atribuição (int i = 0) -> $c_1$
 
-2. Avaliação de expressão booleana (i < v.length) -> c2
+2. Avaliação de expressão booleana (i < v.length) -> $c_2$
 
-3. Operação aritmética (i++) -> c3
+3. Operação aritmética (i++) -> $c_3$
 
-4. Atribuição (int j = i + 1) -> c4
+4. Atribuição (int j = i + 1) -> $c_4$
 
-5. Avaliação de expressão booleana (j < v.length) -> c5
+5. Avaliação de expressão booleana (j < v.length) -> $c_5$
 
-6. Operação aritmética (j++) -> c6
+6. Operação aritmética (j++) -> $c_6$
 
-7. Avaliação de expressão booleana (v[i] == v[j]) -> c7
+7. Avaliação de expressão booleana (v[i] == v[j]) -> $c_7$
 
-8. Retorno de método (return true) -> c8
+8. Retorno de método (return true) -> $c_8$
 
-9. Retorno de método (return false) -> c9
+9. Retorno de método (return false) -> $c_9$
 
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.**
 
-O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c8$, porque no pior caso essa primitiva nunca será executada.
+O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c_8$, porque no pior caso essa primitiva nunca será executada.
 
 Dado que o tamanho do vetor (v.length) é $n$, temos:
 
-* $c1$ é executada apenas uma vez.
+* $c_1$ é executada apenas uma vez.
 
-* $c2$ é executada $(n+1)$ vezes. Exemplo: se $n = 5$, temos as seguintes verificações: 0 < 5, 1 < 5; 2 < 5, 3 < 5, 4 < 5 e 5 < 5, quando encerra-se o loop. Ou seja, 6 verificações.
+* $c_2$ é executada $(n+1)$ vezes. Exemplo: se $n = 5$, temos as seguintes verificações: 0 < 5, 1 < 5; 2 < 5, 3 < 5, 4 < 5 e 5 < 5, quando encerra-se o loop. Ou seja, 6 verificações.
 
-* $c3$ é executada $n$ vezes. Exemplo: se $n = 5$, temos os seguintes incrementos em i: 1, 2, 3, 4 e 5, quando encerra-se o loop.
+* $c_3$ é executada $n$ vezes. Exemplo: se $n = 5$, temos os seguintes incrementos em i: 1, 2, 3, 4 e 5, quando encerra-se o loop.
 
 Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
-* $c4$ é executada apenas uma vez para cada _for_, mas como o laço externo executa $n$ vezes, $c4$ é executada $n$ vezes no total.
+* $c_4$ é executada apenas uma vez para cada _for_, mas como o laço externo executa $n$ vezes, $c_4$ é executada $n$ vezes no total.
 
-* A quantidade de vezes que $c5$ é executada depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $(n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. Como $c5$ precisa ser executada uma vez a mais do que a quantidade de vezes que $j$ varia - por causa do último teste para sair do laço - a quantidade de vezes que $c5$ é executada é definida por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. A soma de uma PA com essas características é dada por $S = n/2 * (a1+an)$, onde $a1$ e $an$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c5$ é executada $({n^2 + n})/{2}$ vezes.
+* A quantidade de vezes que $c_5$ é executada depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $(n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. Como $c_5$ precisa ser executada uma vez a mais do que a quantidade de vezes que $j$ varia - por causa do último teste para sair do laço - a quantidade de vezes que $c_5$ é executada é definida por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. A soma de uma PA com essas características é dada por $S = n/2 * (a1+an)$, onde $a1$ e $an$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_5$ é executada $({n^2 + n})/{2}$ vezes.
 
-* Como $c6$ é executada uma vez a menos que $c5$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c6$ é executada ${n^2}/{2}$.
+* Como $c_6$ é executada uma vez a menos que $c_5$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c_6$ é executada ${n^2}/{2}$.
 
-* $c7$ é executada a mesma quantidade de vezes que $c6$.
+* $c_7$ é executada a mesma quantidade de vezes que $c_6$.
 
-* $c8$ não é executada nenhuma vez porque estamos falando do pior caso
+* $c_8$ não é executada nenhuma vez porque estamos falando do pior caso
 
-* $c9$ é executada apenas uma vez.
+* $c_9$ é executada apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c1 + c2*(n+1) + c3 * n + c4 * n + c5 * (n^2 + n)/2 + c6 * {n^2}/2 + c7 * {n^2}/2 + c9$
+$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + c_5 * (n^2 + n)/2 + c_6 * {n^2}/2 + c_7 * {n^2}/2 + c_9$
 
 Considerando todas as primitivas com custo c e simplificando a função, temos:
 
