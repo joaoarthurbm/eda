@@ -307,7 +307,7 @@
 
 <p align="center"> $0 \leq f(n) \leq c*g(n), \forall n \geq n_0$ </p>
 
-<p>Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.</p>
+<p>Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c * g(n)$. A figura abaixo ilustra essa relação.</p>
 
 <figure style="align: center; margin-left:10%; width: 80%">
     <img src="bigo.png">
@@ -319,9 +319,9 @@
 
 <p align="center"> $0 \leq n^2 + 1 \leq c * n^2, \forall n \geq n_0$ </p>
 
-<p>Se escolhermos $c1=1$ e $n_0 = 1$, temos:</p>
+<p>Se escolhermos $c = 2$ e $n_0 = 1$, temos:</p>
 
-<p align="center"> $1 \leq 1$ </p>
+<p align="center"> $0 \leq 2 \leq 2$ </p>
 
 <p>Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.</p>
 
@@ -347,13 +347,13 @@
     <img src="omega.png">
 </figure>
 
-<p>O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.</p>
+<p>O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n_0$.</p>
 
 <p><strong>Exemplo.</strong> Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Omega(n^2)$, certo? Vamos demonstrar formalmente.</p>
 
 <p align="center"> $ 0 \leq c * n^2 \leq n^2 + 1, \forall n \geq n_0$ </p>
 
-<p>Se escolhermos $c1=1$ e $n_0 = 1$, temos:</p>
+<p>Se escolhermos $c=1$ e $n_0 = 1$, temos:</p>
 
 <p align="center"> $ 1 \leq 2$ </p>
 
@@ -394,7 +394,7 @@ f(n) é maior ou igual ao crescimento de g(n).</p>
 
 <li><p>Usamos análise assintótica para simplificar a comparação entre funções. Aplicando as diretrizes conseguimos rapidamente determinar a que classe pertence uma função.</p></li>
 
-<li><p>Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ siginifica que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.</p></li>
+<li><p>Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ significa que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.</p></li>
 
 <li><p>Em uma simplificação grosseira, podemos dizer que:</p>
 
