@@ -241,7 +241,7 @@ Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^
 
 * Usamos análise assintótica para simplificar a comparação entre funções. Aplicando as diretrizes conseguimos rapidamente determinar a que classe pertence uma função.
 
-* Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ siginifica que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.
+* Usamos notações para descrever as classes de complexidade das funções. Por exemplo, $f(n) \in \Theta(n)$ significa que $f(n)$ é cresce linearmente de acordo com o tamanho da entrada.
 
 * Em uma simplificação grosseira, podemos dizer que:
 
