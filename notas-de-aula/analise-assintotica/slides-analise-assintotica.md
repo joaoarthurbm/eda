@@ -386,7 +386,7 @@ Em uma simplificação grosseira, podemos dizer que:
 
 <blockquote>Todo algoritmo recursivo pode ser representado por uma relação de recorrência.</blockquote>
 
-<blockquote>Resolução de recorrências usando o método iterativo e o teorema mestre.</blockquote>
+<blockquote>Relações de recorrências são resolvidas através do método iterativo, método da substituição e o teorema mestre.</blockquote>
 
 ---
 
