@@ -156,7 +156,7 @@ Para duas funções $f(n)$ e $g(n)$, dizemos que $f(n)$ é $O(g(n))$ se:
 
 <p align="center"> $0 \leq f(n) \leq c*g(n), \forall n \geq n_0$ </p>
 
-Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c1 * g(n)$. A figura abaixo ilustra essa relação.
+Veja que a diferença entre essa inequação e a utilizada para a notação é o fato de que aqui o limite inferior é 0 e não $c * g(n)$. A figura abaixo ilustra essa relação.
 
 <figure style="align: center; margin-left:10%; width: 80%">
 	<img src="bigo.png">
@@ -168,9 +168,9 @@ O processo para demonstrar que $f(n)$ é $O(g(n))$ é muito semelhante, mas ness
 
 <p align="center"> $0 \leq n^2 + 1 \leq c * n^2, \forall n \geq n_0$ </p>
 
-Se escolhermos $c1=1$ e $n_0 = 1$, temos:
+Se escolhermos $c = 2$ e $n_0 = 1$, temos:
 
-<p align="center"> $1 \leq 1$ </p>
+<p align="center"> $0 \leq 2 \leq 2$ </p>
 
 Como você pode perceber, toda função que pertence à $\Theta(n^2)$ também pertence à $O(n^2)$, porque $\Theta$ limita também superiormente como $O$. No entanto, nem toda função que pertence à $O(n^2)$, por exemplo, também pertence à $\Theta(n)$, pois $O$ estabelece apenas o limite superior. Por exemplo, a função $f(n) = 7$ é limitada superiormente por $n^2$ e, portanto, é $O(n^2)$. Todavia, não podemos dizer que ela é $\Theta(n^2)$ porque não há constante multiplicadora que, para n suficientemente grande, faça com que $c1 * n^2$ seja menor do que $7n$.
 
@@ -197,13 +197,13 @@ A figura abaixo ilustra essa relação.
 </figure>
 
 
-O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n0$.
+O processo para demonstrar que $f(n)$ é $\Omega(g(n))$ é muito semelhante, mas nesse caso precisamos achar apenas os valores de $c$ e $n_0$.
 
 **Exemplo.** Suponha que a função $n^2 + 1$ descreva o custo de execução de um algoritmo. Se aplicarmos as abstrações simplificadoras, desconfiamos que $f(n) \in \Omega(n^2)$, certo? Vamos demonstrar formalmente.
 
 <p align="center"> $ 0 \leq c * n^2 \leq n^2 + 1, \forall n \geq n_0$ </p>
 
-Se escolhermos $c1=1$ e $n_0 = 1$, temos:
+Se escolhermos $c=1$ e $n_0 = 1$, temos:
 
 <p align="center"> $ 1 \leq 2$ </p>
 

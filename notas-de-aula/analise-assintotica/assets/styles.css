@@ -1,0 +1,30 @@
+blockquote {
+	margin-left: 0;
+	padding-left: 1em;
+	border-left: 5px solid #f5d018;
+	font-size: 22px;
+}
+
+img.center {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+b {
+	color: #bf2a19
+}
+
+a {
+	color: #90AD81;
+	font-size: 18px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  flex: 33.3%;
+  padding: 5px;
+}
