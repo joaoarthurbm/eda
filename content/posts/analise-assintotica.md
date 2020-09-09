@@ -3,6 +3,7 @@ title = "Análise Assintótica"
 date = 2019-10-29
 tags = []
 categories = []
+ppt = "https://joaoarthurbm.github.io/eda/notas-de-aula/analise-assintotica/slides-analise-assintotica.html"
 +++
 
 ***
