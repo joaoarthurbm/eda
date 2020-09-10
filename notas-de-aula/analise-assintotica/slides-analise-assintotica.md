@@ -151,16 +151,13 @@ Dois algoritmos de busca. Um é <b>&theta;(log(n))</b> e o outro é <b>&theta;(n
 Se encontrarmos c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é &theta;(g(n)).
 
 <p align="center" style="font-size:30px">0 &le; c<sub>1</sub> * g(n) &le; f(n) &le; c<sub>2</sub> * g(n), &forall; n &ge; n<sub>0</sub></p>
-
-<p style="position: fixed; bottom: 2%; font-size:18px">c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> maiores que 0.</p>
-
+<p>c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> maiores que 0.</p>
 --
 <hr>
 <p><b>g(n) = n</b></p>
 <p><b>f(n) = 3 * n + 1</b></p>
 
-- c<sub>1</sub> = 1
-- c<sub>2</sub> = 6
+- c<sub>1</sub> = 1, c<sub>2</sub> = 6
 
 --
 
@@ -169,7 +166,6 @@ Se encontrarmos c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> que satisfaçam a e
 --
 
 - n<sub0</sub> = 1
-
 <p align="center">0 &le; <b>1</b> * <b>1</b> &le; 3 * <b>1</b> + 1 &le; <b>6</b> * <b>1</b></p>  
 
 
@@ -276,16 +272,15 @@ Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é
 
 --
 
-- c = 2
+- c = 2, n<sub0</sub> = 1
 
 <p align="center">0 &le; n<sup>2</sup> + 1 &le; <b>2</b> * n<sup>2</sup></p>  
 
 --
 
-- n<sub0</sub> = 1
-
 <p align="center">0 &le; <b>1</b><sup>2</sup> + 1 &le; 2 * <b>1<sup>2</sup></b></p>  
 --
+
 <p align="center">0 &le; 2 &le; 2</p>  
 
 f(n) = O (g(n)). Ou seja, f(n) é limitada superiormente por g(n).
@@ -320,14 +315,13 @@ Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é
 
 --
 
-- c = 1
+- c = 1, n<sub0</sub> = 1
+
 <p align="center">0 &le; <b>1</b> * n<sup>2</sup> &le; n<sup>2</sup> + 1</p>  
 
 --
 
-- n<sub0</sub> = 1
 <p align="center">0 &le; 1 * <b>1<sup>2</sup></b> &le; <b>1<sup>2</sup></b> + 1</p>  
-
 --
 
 <p align="center">0 &le; 1 &le; 2</p>  
