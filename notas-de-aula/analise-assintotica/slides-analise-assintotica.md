@@ -183,6 +183,19 @@ Se encontrarmos c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> que satisfaçam a e
 
 
 ---
+
+# As constantes e o n<sub>0</sub>
+
+Na análise assintótica, as constantes não importam.
+
+Estamos falando de grandes entradas.
+
+- <p>f(n) = 1000 * n</p>
+- <p>g(n) = n<sup>2</sup></p>
+
+Para pequenas entradas, f(n) cresce mais rápido do que g(n). Qual o n<sub>0</sub> deste caso?
+
+---
 # Aquela função complicada...
 
 <p class="center" ><del>1.1</del> * n<sup>2</sup> + <del>(10 + sin(n + 15) * n<sup>1.5</sup></del>) + <del>9000</del> = <b>&theta;(n<sup>2</sup>)</b></p>
