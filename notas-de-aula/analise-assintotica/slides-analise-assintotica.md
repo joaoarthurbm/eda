@@ -157,19 +157,28 @@ Se encontrarmos c<sub>1</sub>, c<sub>2</sub> e n<sub>0</sub> que satisfaçam a e
 --
 <hr>
 <p><b>g(n) = n</b></p>
-<p><b>f(n) = 3 * n + n</b></p>
+<p><b>f(n) = 3 * n + 1</b></p>
 
 - c<sub>1</sub> = 1
 - c<sub>2</sub> = 6
+
+--
+
+<p align="center">0 &le; <b>1</b> * n &le; 3 * n + 1 &le; <b>6</b> * n</p>  
+
+--
+
 - n<sub0</sub> = 1
 
-<p align="center">0 &le; <b>1</b> * <b>1</b> &le; 3 * <b>1</b> + 3 &le; <b>6</b> * <b>1</b></p>  
+<p align="center">0 &le; <b>1</b> * <b>1</b> &le; 3 * <b>1</b> + 1 &le; <b>6</b> * <b>1</b></p>  
+
+
 --
-<p align="center">0 &le; 1 &le; 6 &le; 6</p>  
+<p align="center">0 &le; 1 &le; 4 &le; 6</p>  
 ---
 
 # Notação assintótica: &theta;
-<p class="center" style="font-size:30px" >3 * n + n = &theta;(n)</p>
+<p class="center" style="font-size:30px" >3 * n + 1 = &theta;(n)</p>
 
 - Formalmente, dizemos que g(n) é um limite assintótico restrito para f(n).
 
@@ -255,7 +264,7 @@ Note que g(n) é apenas o limite superior.
 
 ---
 
-# Exemplo
+# Notação assintótica: Big O
 Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é O(g(n)).
 
 <p align="center" style="font-size:30px">0 &le; f(n) &le; c * g(n), &forall; n &ge; n<sub>0</sub></p>
@@ -265,10 +274,17 @@ Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é
 <p><b>g(n) = n<sup>2</sup></b></p>
 <p><b>f(n) = n<sup>2</sup> + 1</b></p>
 
+--
+
 - c = 2
+
+<p align="center">0 &le; n<sup>2</sup> + 1 &le; <b>2</b> * n<sup>2</sup></p>  
+
+--
+
 - n<sub0</sub> = 1
 
-<p align="center">0 &le; 1<sup>2</sup> + 1 &le; <b>2</b> * 1<sup>2</sup></p>  
+<p align="center">0 &le; <b>1</b><sup>2</sup> + 1 &le; 2 * <b>1<sup>2</sup></b></p>  
 --
 <p align="center">0 &le; 2 &le; 2</p>  
 
@@ -291,7 +307,8 @@ Note que g(n) é apenas o limite inferior.
 
 ---
 
-# Exemplo
+# Notação assintótica: &Omega;
+
 Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é &Omega;(g(n)).
 
 <p align="center" style="font-size:30px">0 &le; c * g(n) &le; f(n), &forall; n &ge; n<sub>0</sub></p>
@@ -301,11 +318,18 @@ Se encontrarmos c e n<sub>0</sub> que satisfaçam a equação, temos que f(n) é
 <p><b>g(n) = n<sup>2</sup></b></p>
 <p><b>f(n) = n<sup>2</sup> + 1</b></p>
 
-- c = 1
-- n<sub0</sub> = 1
-
-<p align="center">0 &le; <b>1</b> * <b>1</b> <sup>2</sup> &le; <b>1<sup>2</sup></b> + 1</p>  
 --
+
+- c = 1
+<p align="center">0 &le; <b>1</b> * n<sup>2</sup> &le; n<sup>2</sup> + 1</p>  
+
+--
+
+- n<sub0</sub> = 1
+<p align="center">0 &le; 1 * <b>1<sup>2</sup></b> &le; <b>1<sup>2</sup></b> + 1</p>  
+
+--
+
 <p align="center">0 &le; 1 &le; 2</p>  
 
 f(n) = O (g(n)). Ou seja, f(n) é limitada inferiormente por g(n).
@@ -359,7 +383,9 @@ Em palavras simples, g(n) é um limite inferior não incluso.
 
 # Classes importantes
 
-
+<br>
+<br>
+<img class="center" style="width:70%;" src="figures/classes.png" />
 
 ---
 
