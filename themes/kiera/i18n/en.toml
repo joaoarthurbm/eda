@@ -2,11 +2,11 @@
 other = "Categories:"
 
 [readingTime]
-one = "One minute read"
-other = "{{.Count}} minutes read"
+one = "Um minuto de leitura"
+other = "{{.Count}} minutos de leitura"
 
 [readMore]
-other = "Read more…"
+other = "Leia mais…"
 
 [draft]
 other = "DRAFT"
