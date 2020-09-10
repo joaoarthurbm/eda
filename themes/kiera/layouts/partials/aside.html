@@ -29,13 +29,16 @@
         <li>{{ T "readingTime" .ReadingTime }}</li>
 
 
-
-
         {{ if .Params.ppt }}
 
-        <aside><i class="fab fa-lg" aria-hidden="true"> </i> <a href="{{ .Params.ppt }}"> <font color="#1980e6"> <b>download da apresentacao (slides)</b></font></a></aside>
+        <aside><i class="fab fa-slideshare fa-lg" aria-hidden="true"> </i> <a href="{{ .Params.ppt }}"> <font color="#1980e6"> <b>download da apresentacao (slides)</b></font></a></aside>
         {{ end }}
 
+
+        {{ if .Params.youtube }}
+
+        <aside><i class="fab fa-youtube fa-lg" aria-hidden="true"> </i> <a href="{{ .Params.youtube }}"> <font color="#1980e6"> <b>vídeo aula</b></font></a></aside>
+        {{ end }}
 
 
 
