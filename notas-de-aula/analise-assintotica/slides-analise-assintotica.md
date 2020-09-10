@@ -1,4 +1,4 @@
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 <blockquote>Análise assintótica</blockquote>
 <img class="center" style="width: 53%;" src="figures/capa.png"/>
 
@@ -400,9 +400,7 @@ Em palavras simples, g(n) é um limite inferior não incluso.
 
 Na análise assintótica, as constantes e os termos de menor magnitude não importam.
 
-Análise assintótica simplifica a comparação entre funções. Aplicando as diretrizes conseguimos rapidamente determinar a que classe pertence uma função.
-
-Usamos notações para descrever as classes de complexidade das funções. Por exemplo, f(n) &in; &Theta;(n) significa que f(n) é cresce linearmente de acordo com o tamanho da entrada.
+Usamos notações para simplificar e descrever as classes de complexidade das funções. Por exemplo, f(n) &in; &Theta;(n) significa que f(n) é cresce linearmente de acordo com o tamanho da entrada.
 
 Em uma simplificação grosseira, podemos dizer que:
 
@@ -423,10 +421,9 @@ Em uma simplificação grosseira, podemos dizer que:
 
 ---
 
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 
 <img class="center" style="width: 55%;" src="figures/capa.png"/>
 
 <p style="position: fixed; bottom: 5%;">joao.arthur@computacao.ufcg.edu.br</p>
 <a style="position: fixed; bottom: 4%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
-

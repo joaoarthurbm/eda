@@ -1,4 +1,4 @@
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 <blockquote>Introdução à análise de algoritmos</blockquote>
 <img class="center" style="width: 53%;" src="figures/capa.png"/>
 
@@ -552,10 +552,9 @@ public boolean contemDuplicacao(int[] v) {
 
 ---
 
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 
 <img class="center" style="width: 55%;" src="figures/capa.png"/>
 
 <p style="position: fixed; bottom: 5%;">joao.arthur@computacao.ufcg.edu.br</p>
 <a style="position: fixed; bottom: 4%; font-size:18px" href="http://joaoarthurbm.github.io/eda">joaoarthurbm.github.io/eda</a>
-

@@ -4,6 +4,7 @@ date = 2019-10-30
 tags = []
 categories = []
 ppt = "https://joaoarthurbm.github.io/eda/notas-de-aula/introducao-a-analise/slides-introducao-a-analise.html"
+youtube="https://youtu.be/YrQqRaivaiA"
 +++
 
 ***

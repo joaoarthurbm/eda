@@ -1,4 +1,4 @@
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 <blockquote> Apresentação do curso </blockquote>
 <img class="center" style="width: 55%;" src="figures/capa.png"/>
 
@@ -164,7 +164,7 @@ Para vários assuntos da disciplina, eu preparei materiais escritos (alguns com 
 
 ---
 
-# Estrutura de dados e Algoritmos 
+# Estruturas de dados e Algoritmos 
 
 <img class="center" style="width: 55%;" src="figures/capa.png"/>
 
