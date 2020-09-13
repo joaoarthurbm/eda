@@ -385,7 +385,7 @@ Em palavras simples, g(n) é um limite inferior não incluso.
 - <p>7 * n <sup>4</sup> + 5 * n<sup>2</sup> + 10 &in; &omega;(n<sup>3</sup>)</p>
 - <p>7 * n + 10 &in; &omega;(log n)</p>
 - <p>89 * n<sup>3</sup> + 10 &in; &omega;(n<sup>2</sup>)</p>
-- <p>3 * n<sup></sup> &in; o(n<sup>2</sup>), o(n<sup>3</sup>), o(n<sup>4</sup>)...</p>
+- <p>3 * n<sup></sup> &in; &omega;(n<sup>2</sup>), &omega;(n<sup>3</sup>), &omega;(n<sup>4</sup>)...</p>
 ---
 
 # Classes importantes
