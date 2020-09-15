@@ -314,6 +314,11 @@ No material sobre <a class="external" href="http://joaoarthurbm.github.io/eda/po
 
 ***
 
+{{% quiz test_quiz%}}
+{{< item question="Qual operação abaixo não pode ser considerada primitiva?" answers="2" choices="int a = 7,Arrays.sort(v),v[7], return saldo" >}}
+{{% /quiz %}}  
+***
+
 ## Resumo
 
 * Calcular o tempo de execução de um algoritmo é muito importante.
