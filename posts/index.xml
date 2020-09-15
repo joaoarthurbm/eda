@@ -322,6 +322,220 @@ Operações Primitivas
 
 &lt;hr /&gt;
 
+
+
+&lt;style type=&#34;text/css&#34; scoped&gt;
+
+.quiz {
+    font-family: &#34;Roboto Slab&#34;, serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type=&#34;radio&#34;] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type=&#34;submit&#34;] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*=&#34;btn&#34;] {text-decoration: none;}
+input[class*=&#34;btn&#34;], 
+button[class*=&#34;btn&#34;] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&#39;#1bbcc2&#39;, endColorstr=&#39;#18a3a8&#39;, GradientType=0);
+}
+
+&lt;/style&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+&lt;button class=&#34;btn-gradient cyan center&#34; onclick=&#34;showQuiz(&amp;#34;test_quiz&amp;#34;)&#34;&gt;Quiz&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src=&#34;https://joaoarthurbm.github.io/eda/js/quiz.js&#34;&gt;&lt;/script&gt;
+&lt;div class=&#34;quiz&#34; style=&#34;display:none&#34; id=&#34;test_quiz&#34;&gt;
+  &lt;script&gt;
+    var choices = &#34;int a = 7,Arrays.sort(v),v[7], return saldo&#34;.split(&#34;,&#34;);
+    var id = &#34;test_quiz&#34;;
+    var question = &#34;Qual operação abaixo não pode ser considerada primitiva?&#34;;
+    var answers = &#34;2&#34;.split(&#34;,&#34;).map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+&lt;/script&gt;
+
+  &lt;script&gt;
+    var quiz = new Quiz(&#34;test_quiz&#34;, questions);
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === &#34;none&#34;){
+    x.style.display = &#34;block&#34;;
+  } else {
+    x.style.display = &#34;none&#34;;
+  }
+}
+&lt;/script&gt;
+
+&lt;hr /&gt;
+
 &lt;h2 id=&#34;resumo&#34;&gt;Resumo&lt;/h2&gt;
 
 &lt;ul&gt;
