@@ -306,46 +306,26 @@ Comparando $n^2$  com n ** log<sub>b</sub><sup>a</sup> temos que $n^2 > n$. Port
 
 ***
 
-{{% quiz altura-bb%}}
+{{% quiz resumo%}}
+
 {{< item question="Qual é a altura da árvore de execução da busca binária?" answers="5" choices="$\Theta(n^3)$,$\Theta(n)$,$\Theta(n * \log{n})$,$\Theta(n^2)$,$\Theta(\log{n})$">}}
-{{% /quiz %}}  
 
-
-***
-
-{{% quiz altura%}}
 {{< item question="Qual é a altura da árvore de execução da busca linear?" answers="2" choices="$\Theta(n^3)$,$\Theta(n)$,$\Theta(n * \log{n})$,$\Theta(n^2)$,$\Theta(2^n)$">}}
-{{% /quiz %}}  
 
-***
-
-{{% quiz theta-1%}}
 {{< item question="A que theta pertence a função $T(n) = 8 * T(n/2) + 1001*n^2$?" answers="1" choices="$\Theta(n^3)$,$\Theta(n)$,$\Theta(n * \log{n})$,$\Theta(n^2)$,$\Theta(2^n)$">}}
-{{% /quiz %}}  
 
-***
-
-{{% quiz theta-2%}}
 {{< item question="A que theta pertence a função $T(n) = 2 * T(n/2) + 15*n$?" answers="3" choices="$\Theta(n^3)$,$\Theta(n)$,$\Theta(n * \log{n})$,$\Theta(n^2)$,$\Theta(2^n)$">}}
-{{% /quiz %}}
 
-***
-
-{{% quiz theta-3%}}
 {{< item question="A que theta pertence a função $T(n) = 2 * T(n/2) + n^2$?" answers="5" choices="$\Theta(n^3)$,$\Theta(n)$,$\Theta(n * \log{n})$,$\Theta(2*n)$,$\Theta(n^2)$">}}
+
+{{< item question="Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n/2) + n^2$" answers="4" choices="Há duas chamadas recursivas.,Cada uma das 3 chamadas recursivas diminui a entrada em duas unidades.,Cada execução parcial tem custo linear., Cada uma das 3 chamadas recursivas diminui a entrada na metade.,Trata-se da relação de recorrência do merge sort.">}}
+
+
+{{< item question="Qual função abaixo não se adequa ao teorema mestre?" answers="3" choices=" $T(n) = 7 * T(n/13) + 1$, $T(n) = 2 * T(n/2) + n^2$, $T(n) = 2^n * T(n/2) + n^n$, $T(n) = T(n/2) + 1$, $T(n) = 2 * T(n/2) + 10n$">}}
+
 {{% /quiz %}}
 
 ***
-
-{{% quiz a_b_e_f_na_relacao%}}
-{{< item question="Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n/2) + n^2$" answers="4" choices="Há duas chamadas recursivas.,Cada uma das 3 chamadas recursivas diminui a entrada em duas unidades,Cada execução parcial tem custo linear., Cada uma das 3 chamadas recursivas diminui a entrada na metade.,Trata-se da relação de recorrência do merge sort.">}}
-{{% /quiz %}}  
-
-***
-
-{{% quiz teorema_mestre%}}
-{{< item question="Qual função abaixo não se adequa ao teorema mestre?" answers="3" choices=" $T(n) = 7 * T(n/13) + 1$, $T(n) = 2 * T(n/2) + n^2$, $T(n) = 2^n * T(n/2) + n^n$, $T(n) = T(n/2) + 1$, $T(n) = 2 * T(n/2) + 10n$">}}
-{{% /quiz %}}  
 
 # Notas
 
