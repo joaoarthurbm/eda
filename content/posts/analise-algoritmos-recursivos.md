@@ -213,10 +213,15 @@ $h * \log_{2}2 = \log n$
 
 Simplificando, temos: $h = \log_{2}n$
 
- 
 Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo $n$ (ex: $2 * n/2$, $4 * n/4$, $8 * n/8$...). Se somarmos $n$ por 10 vezes, teremos $10*n$. Se somarmos $n$ por 100 vezes, teremos $100*n$. Como vamos somar $n$ por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = n * \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo n.
 
 Então, temos que $T(n) =(n * \log n)$.
+
+O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JuXZz-B8dJM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ## Exemplo: Busca Binária
 
