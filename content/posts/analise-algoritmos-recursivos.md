@@ -160,7 +160,13 @@ partes. Além disso, a cada chamada recursiva, um custo <b>f(n)</b> é
 adicionado.
 </pre>
 
-Vamos ver se você entendeu como, a partir de um algoritmo, extrair a relação de recorrência. Responda o quiz abaixo que trata de um exemplo um pouco mais complexo.
+Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/L0GMkFOsQ1A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+Acho que agora é um bom momento para você testar o que aprendeu até aqui.
 
 ***
 
@@ -243,7 +249,6 @@ Caso você não tenha entendido como chegamos a essa relação de recorrência, 
 <center>
     <iframe width="560" height="315" src="https://www.youtube.com/embed/TmUhmKlIxAE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </center>
-
 
 
 Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.
