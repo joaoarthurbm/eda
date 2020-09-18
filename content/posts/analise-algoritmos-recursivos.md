@@ -107,6 +107,12 @@ Novamente, para calcular a função que define o tempo de execução desse algor
 
 Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar que $h = n - 1$. Assim, temos que $f(n) = 1 * (n-1) + 1$, isto é, $f(n) = n$. Portanto, podemos dizer que $f(n) \in \Theta(n)$. 
 
+Veja em detalhes como isso é feito no vídeo abaixo.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iOZMQHW30VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
 Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:
 
 1. Estabelecer a relação de recorrência
@@ -262,6 +268,12 @@ Cada nó da árvore possui apenas uma aresta, porque há apenas uma chamada recu
 O cálculo da altura é exatamente o mesmo do realizado para o exemplo do Merge Sort. A árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada `ini >= fim`. Aplicando os mesmos passos do exemplo anterior, temos que a $h = \log n$
 
 Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo 1. Se somarmos 1 por 10 vezes, teremos $10*1$. Se somarmos 1 por 100 vezes, teremos $100*1$. Como vamos somar 1 por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = 1 * \log n$, ou seja, $f(n) = \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo 1.
+
+Eu fiz um vídeo que segue esse protocolo descrito acima para ilustrar a árvore, calcular sua altura e definir o custo total. Vale a pena você conferir para fixar bem o modo como utilizamos o método da árvore de recursão.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/N4FDi0pLWAc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 
 ***
 
