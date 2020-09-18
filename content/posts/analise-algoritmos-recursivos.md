@@ -238,6 +238,14 @@ Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1
 
 * $+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.
 
+Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.
+
+<center>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/TmUhmKlIxAE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
+
+
 Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.
 
 ![binaria](binaria.png) 
