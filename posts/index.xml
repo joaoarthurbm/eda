@@ -1268,6 +1268,12 @@ function showQuiz(quizId) {
 
 &lt;p&gt;Então, temos que $T(n) =(n * \log n)$.&lt;/p&gt;
 
+&lt;p&gt;O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/JuXZz-B8dJM&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;h2 id=&#34;exemplo-busca-binária&#34;&gt;Exemplo: Busca Binária&lt;/h2&gt;
 
 &lt;p&gt;O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &amp;ldquo;palpitar&amp;rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.&lt;/p&gt;
