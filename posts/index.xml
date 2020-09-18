@@ -1285,6 +1285,12 @@ function showQuiz(quizId) {
 &lt;li&gt;&lt;p&gt;$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;p&gt;Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+    &lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/TmUhmKlIxAE&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
 &lt;p&gt;Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&#34;binaria.png&#34; alt=&#34;binaria&#34; /&gt;&lt;/p&gt;
