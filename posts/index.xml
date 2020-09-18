@@ -1006,7 +1006,13 @@ partes. Além disso, a cada chamada recursiva, um custo &lt;b&gt;f(n)&lt;/b&gt; 
 adicionado.
 &lt;/pre&gt;
 
-&lt;p&gt;Vamos ver se você entendeu como, a partir de um algoritmo, extrair a relação de recorrência. Responda o quiz abaixo que trata de um exemplo um pouco mais complexo.&lt;/p&gt;
+&lt;p&gt;Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.&lt;/p&gt;
+
+&lt;p&gt;&lt;center&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/L0GMkFOsQ1A&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture&#34; allowfullscreen&gt;&lt;/iframe&gt;
+&lt;/center&gt;&lt;/p&gt;
+
+&lt;p&gt;Acho que agora é um bom momento para você testar o que aprendeu até aqui.&lt;/p&gt;
 
 &lt;hr /&gt;
 
