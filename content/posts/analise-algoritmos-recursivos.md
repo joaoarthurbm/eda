@@ -140,6 +140,12 @@ $T(n) = 2 * T(n/2) + n$, onde n = v.length - 1
 
 * $+ n$ representa o custo da função que une duas sequências já ordenadas em uma sequência ordenada. Não precisamos saber como isso é feito nesse momento, apenas precisamos saber que essa parte do algoritmo tem custo linear.
 
+Gravei um vídeo para deixar mais claro. Talvez te ajude a entender como, a partir do algoritmo, extraímos a relação de recorrência do Merge Sort.
+
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/mCzer4M_uBE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+
 <pre>
 Para fixar! Muitas relações de recorrência podem ser descritas 
 na seguinte forma:
