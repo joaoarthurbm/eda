@@ -755,7 +755,11 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 &lt;p&gt;Novamente, para calcular a função que define o tempo de execução desse algoritmo, precisamos somar os custos de cada nível. Isto é, somaremos o valor 1 uma quantidade de vezes representada por $h + 1$, onde $h$ é a altura da árvore e o +1 é o custo da última execução (&lt;code&gt;if n == 0 || n == 1&lt;/code&gt;).&lt;/p&gt;
 &lt;p&gt;Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar que $h = n - 1$. Assim, temos que $f(n) = 1 * (n-1) + 1$, isto é, $f(n) = n$. Portanto, podemos dizer que $f(n) \in \Theta(n)$.&lt;/p&gt;
 &lt;p&gt;Veja em detalhes como isso é feito no vídeo abaixo.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/iOZMQHW30VA&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;Estabelecer a relação de recorrência&lt;/li&gt;
@@ -786,11 +790,19 @@ f(n) é maior ou igual ao crescimento de g(n).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Gravei um vídeo para deixar mais claro. Talvez te ajude a entender como, a partir do algoritmo, extraímos a relação de recorrência do Merge Sort.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/mCzer4M_uBE&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;!-- raw HTML omitted --&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/L0GMkFOsQ1A&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Acho que agora é um bom momento para você testar o que aprendeu até aqui.&lt;/p&gt;
 &lt;hr&gt;
 
@@ -1017,7 +1029,11 @@ function showQuiz(quizId) {
 &lt;p&gt;Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo $n$ (ex: $2 * n/2$, $4 * n/4$, $8 * n/8$&amp;hellip;). Se somarmos $n$ por 10 vezes, teremos $10&lt;em&gt;n$. Se somarmos $n$ por 100 vezes, teremos $100&lt;/em&gt;n$. Como vamos somar $n$ por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = n * \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo n.&lt;/p&gt;
 &lt;p&gt;Então, temos que $T(n) =(n * \log n)$.&lt;/p&gt;
 &lt;p&gt;O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/JuXZz-B8dJM&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&#34;exemplo-busca-binária&#34;&gt;Exemplo: Busca Binária&lt;/h2&gt;
 &lt;p&gt;O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &amp;ldquo;palpitar&amp;rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;indexOf&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ini&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -1046,7 +1062,11 @@ function showQuiz(quizId) {
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/TmUhmKlIxAE&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;binaria.png&#34; alt=&#34;binaria&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Cada nó da árvore possui apenas uma aresta, porque há apenas uma chamada recursiva. Cada nível tem o seu custo constante (1), uma vez que a cada passo da recursão apenas algumas primitivas são executadas, como as avaliações das expressões booleanas e o cálculo da variável &lt;code&gt;meio&lt;/code&gt;.&lt;/p&gt;
@@ -1054,7 +1074,11 @@ function showQuiz(quizId) {
 &lt;p&gt;O cálculo da altura é exatamente o mesmo do realizado para o exemplo do Merge Sort. A árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada &lt;code&gt;ini &amp;gt;= fim&lt;/code&gt;. Aplicando os mesmos passos do exemplo anterior, temos que a $h = \log n$&lt;/p&gt;
 &lt;p&gt;Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo 1. Se somarmos 1 por 10 vezes, teremos $10&lt;em&gt;1$. Se somarmos 1 por 100 vezes, teremos $100&lt;/em&gt;1$. Como vamos somar 1 por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = 1 * \log n$, ou seja, $f(n) = \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo 1.&lt;/p&gt;
 &lt;p&gt;Eu fiz um vídeo que segue esse protocolo descrito acima para ilustrar a árvore, calcular sua altura e definir o custo total. Vale a pena você conferir para fixar bem o modo como utilizamos o método da árvore de recursão.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/N4FDi0pLWAc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;hr&gt;
 &lt;h1 id=&#34;método-mestre&#34;&gt;Método Mestre&lt;/h1&gt;
 &lt;p&gt;O método iterativo utilizando a árvore de recursão é, de fato, uma boa alternativa para identificar a classe de complexidade de algoritmos recursivos. Além de ser um método analítico, ele tem propriedades didáticas importantes. Isto é, o exercício de ilustrar a árvore de recursão (execução) e, a partir dela, identificar o custo total do algoritmo é importante não somente para esse fim, mas para exercitar a capacidade de abstração e raciocínio do aluno. Contudo, muitas vezes, trata-se de um mecanismo laborioso. Nesse contexto, surge o &lt;strong&gt;Teorema Mestre&lt;/strong&gt; que nos permite identificar a classe de complexidade de um algoritmo aplicando apenas algumas operações matemáticas e comparando ordem de complexidade de funções.&lt;/p&gt;
@@ -1538,9 +1562,17 @@ function showQuiz(quizId) {
 &lt;h1 id=&#34;merge&#34;&gt;Merge&lt;/h1&gt;
 &lt;p&gt;Merge é a rotina que combina dois arrays ordenados em um outro também ordenado. Assim como o &lt;!-- raw HTML omitted --&gt;Quick Sort&lt;!-- raw HTML omitted --&gt; aplica várias vezes o particionamento para ordenar um array, o Merge Sort também aplica o Merge várias para ordenar um array.&lt;/p&gt;
 &lt;p&gt;A ideia é simples e é explicada visualmente no vídeo abaixo.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/7fb8H-MCQ7c&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Na prática, não queremos ficar criando arrays separados para uni-los. Isso custa memória e processamento, pois a cada array criado temos que transferir os elementos do array original para ele. O que fazemos então é organizar os dados no array a ser ordenado de forma que uma parte dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/sXddmV3sfjA&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&#34;implementação-do-merge&#34;&gt;Implementação do Merge&lt;/h2&gt;
 &lt;p&gt;O código do método &lt;em&gt;&lt;strong&gt;merge&lt;/strong&gt;&lt;/em&gt; está descrito abaixo. Vamos analisar por partes cada detalhe da implementação.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
@@ -1636,7 +1668,11 @@ function showQuiz(quizId) {
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;o-merge-sort&#34;&gt;O Merge Sort&lt;/h2&gt;
 &lt;p&gt;Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &amp;ldquo;quebras&amp;rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/ekxvb3Q5hE4&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenado.&lt;/p&gt;
 &lt;p&gt;A parte da divisão, na verdade, é bem simples. Basta &amp;ldquo;dividir&amp;rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito custoso. O que a gente faz é usar os índices &lt;code&gt;left&lt;/code&gt;, &lt;code&gt;middle&lt;/code&gt; e &lt;code&gt;right&lt;/code&gt; para controlar as partes do array que o algoritmo deve agir. Vamos ver o código:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;mergeSort&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;   
@@ -1670,7 +1706,11 @@ function showQuiz(quizId) {
 &lt;p&gt;Lembra dos passos para determinar o tempo de execução de &lt;!-- raw HTML omitted --&gt;algoritmos recursivos?&lt;!-- raw HTML omitted --&gt;. O primeiro passo é encontrar a relação de recorrência. O Merge Sort possui duas chamadas recursivas, cada uma reduzindo o problema (tamanho do array) na metade. Ou seja, $2 * T(n / 2)$. Além disso, há também uma chamada ao método Merge, que sabemos ser $O(n)$. Portanto, a relação de recorrência é:&lt;/p&gt;
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Se você ainda não entendeu como chegamos nessa relação de recorrência. Eu gravei um vídeo para ficar mais claro. Veja abaixo:&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/mCzer4M_uBE&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre &lt;!-- raw HTML omitted --&gt;análise de algoritmos recursivos.&lt;!-- raw HTML omitted --&gt; Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.&lt;/p&gt;
 &lt;p&gt;Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as &amp;ldquo;quebras&amp;rdquo; do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.&lt;/p&gt;
 &lt;blockquote&gt;
@@ -1754,7 +1794,11 @@ function showQuiz(quizId) {
 &lt;!-- raw HTML omitted --&gt;
 &lt;p&gt;Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à sua esquerda e os elementos maiores à direita.&lt;/p&gt;
 &lt;p&gt;Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/YnbvpvcmlIM&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.&lt;/p&gt;
 &lt;h2 id=&#34;implementação-do-particionamento-de-lomuto&#34;&gt;Implementação do Particionamento de Lomuto&lt;/h2&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
@@ -3339,7 +3383,11 @@ BST é definida recursivamente da seguinte forma:&lt;/p&gt;
 &lt;p&gt;Depois disso, 65 é adicionado à direita de 41, pois é um valor maior. 20 é adicionado à esquerda de 41, por ser menor do que esse valor. Depois 19 é comparado com 41, por ser menor, a adição deve ser feita à esquerda. Contudo, já há o elemento 20 à esquerda. Então compara-se 19 com 20. Como 19 é menor e não há nenhum nó à esquerda de 20, 19 assume essa posição. A última adição é a do valor 50. Inicialmente é comparado com a raiz e a inserção deve ser feita à direita. Então compara-se 50 com 65. Por ser menor e não haver nó à esquerda de 65, 50 assume essa posição.&lt;/p&gt;
 &lt;p&gt;Note que todo novo nó é adicionado como folha na árvore.&lt;/p&gt;
 &lt;p&gt;Complicado? Eu gravei um vídeo para facilitar.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/9UXmJKg1mQw&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;p&gt;&lt;strong&gt;Implementação.&lt;/strong&gt; Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;add&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; element&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
         

@@ -244,7 +244,11 @@ BST é definida recursivamente da seguinte forma:</p>
 <p>Depois disso, 65 é adicionado à direita de 41, pois é um valor maior. 20 é adicionado à esquerda de 41, por ser menor do que esse valor. Depois 19 é comparado com 41, por ser menor, a adição deve ser feita à esquerda. Contudo, já há o elemento 20 à esquerda. Então compara-se 19 com 20. Como 19 é menor e não há nenhum nó à esquerda de 20, 19 assume essa posição. A última adição é a do valor 50. Inicialmente é comparado com a raiz e a inserção deve ser feita à direita. Então compara-se 50 com 65. Por ser menor e não haver nó à esquerda de 65, 50 assume essa posição.</p>
 <p>Note que todo novo nó é adicionado como folha na árvore.</p>
 <p>Complicado? Eu gravei um vídeo para facilitar.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/9UXmJKg1mQw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <p><strong>Implementação.</strong> Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
         

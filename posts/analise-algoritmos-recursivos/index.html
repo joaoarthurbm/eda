@@ -206,7 +206,11 @@
 <p>Novamente, para calcular a função que define o tempo de execução desse algoritmo, precisamos somar os custos de cada nível. Isto é, somaremos o valor 1 uma quantidade de vezes representada por $h + 1$, onde $h$ é a altura da árvore e o +1 é o custo da última execução (<code>if n == 0 || n == 1</code>).</p>
 <p>Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar que $h = n - 1$. Assim, temos que $f(n) = 1 * (n-1) + 1$, isto é, $f(n) = n$. Portanto, podemos dizer que $f(n) \in \Theta(n)$.</p>
 <p>Veja em detalhes como isso é feito no vídeo abaixo.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/iOZMQHW30VA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <p>Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:</p>
 <ol>
 <li>Estabelecer a relação de recorrência</li>
@@ -237,11 +241,19 @@
 </li>
 </ul>
 <p>Gravei um vídeo para deixar mais claro. Talvez te ajude a entender como, a partir do algoritmo, extraímos a relação de recorrência do Merge Sort.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mCzer4M_uBE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
 <p>Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/L0GMkFOsQ1A" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <p>Acho que agora é um bom momento para você testar o que aprendeu até aqui.</p>
 <hr>
 
@@ -468,7 +480,11 @@ function showQuiz(quizId) {
 <p>Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo $n$ (ex: $2 * n/2$, $4 * n/4$, $8 * n/8$&hellip;). Se somarmos $n$ por 10 vezes, teremos $10<em>n$. Se somarmos $n$ por 100 vezes, teremos $100</em>n$. Como vamos somar $n$ por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = n * \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo n.</p>
 <p>Então, temos que $T(n) =(n * \log n)$.</p>
 <p>O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/JuXZz-B8dJM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <h2 id="exemplo-busca-binária">Exemplo: Busca Binária</h2>
 <p>O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &ldquo;palpitar&rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -497,7 +513,11 @@ function showQuiz(quizId) {
 </li>
 </ul>
 <p>Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/TmUhmKlIxAE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <p>Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.</p>
 <p><img src="binaria.png" alt="binaria"></p>
 <p>Cada nó da árvore possui apenas uma aresta, porque há apenas uma chamada recursiva. Cada nível tem o seu custo constante (1), uma vez que a cada passo da recursão apenas algumas primitivas são executadas, como as avaliações das expressões booleanas e o cálculo da variável <code>meio</code>.</p>
@@ -505,7 +525,11 @@ function showQuiz(quizId) {
 <p>O cálculo da altura é exatamente o mesmo do realizado para o exemplo do Merge Sort. A árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada <code>ini &gt;= fim</code>. Aplicando os mesmos passos do exemplo anterior, temos que a $h = \log n$</p>
 <p>Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo 1. Se somarmos 1 por 10 vezes, teremos $10<em>1$. Se somarmos 1 por 100 vezes, teremos $100</em>1$. Como vamos somar 1 por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = 1 * \log n$, ou seja, $f(n) = \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo 1.</p>
 <p>Eu fiz um vídeo que segue esse protocolo descrito acima para ilustrar a árvore, calcular sua altura e definir o custo total. Vale a pena você conferir para fixar bem o modo como utilizamos o método da árvore de recursão.</p>
-<!-- raw HTML omitted -->
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/N4FDi0pLWAc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
 <hr>
 <h1 id="método-mestre">Método Mestre</h1>
 <p>O método iterativo utilizando a árvore de recursão é, de fato, uma boa alternativa para identificar a classe de complexidade de algoritmos recursivos. Além de ser um método analítico, ele tem propriedades didáticas importantes. Isto é, o exercício de ilustrar a árvore de recursão (execução) e, a partir dela, identificar o custo total do algoritmo é importante não somente para esse fim, mas para exercitar a capacidade de abstração e raciocínio do aluno. Contudo, muitas vezes, trata-se de um mecanismo laborioso. Nesse contexto, surge o <strong>Teorema Mestre</strong> que nos permite identificar a classe de complexidade de um algoritmo aplicando apenas algumas operações matemáticas e comparando ordem de complexidade de funções.</p>
