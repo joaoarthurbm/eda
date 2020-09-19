@@ -22,3 +22,8 @@ pygmentsCodeFences = true
 
 [params]
     tagline = "João Arthur Brunet <br> Computação @ UFCG"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
