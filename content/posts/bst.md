@@ -141,9 +141,7 @@ Note que todo novo nó é adicionado como folha na árvore.
 
 Complicado? Eu gravei um vídeo para facilitar.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9UXmJKg1mQw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube 9UXmJKg1mQw >}}
 
 **Implementação.** Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.
 

@@ -21,16 +21,11 @@ Merge é a rotina que combina dois arrays ordenados em um outro também ordenado
 
 A ideia é simples e é explicada visualmente no vídeo abaixo.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7fb8H-MCQ7c" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube 7fb8H-MCQ7c >}}
 
 Na prática, não queremos ficar criando arrays separados para uni-los. Isso custa memória e processamento, pois a cada array criado temos que transferir os elementos do array original para ele. O que fazemos então é organizar os dados no array a ser ordenado de forma que uma parte dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sXddmV3sfjA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
-
+{{< youtube sXddmV3sfjA >}}
 
 ## Implementação do Merge
 
@@ -154,9 +149,7 @@ Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será con
 
 Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas "quebras" do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ekxvb3Q5hE4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube ekxvb3Q5hE4 >}}
 
 Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenado. 
 
@@ -211,10 +204,7 @@ Lembra dos passos para determinar o tempo de execução de <a class="external" h
 
 Se você ainda não entendeu como chegamos nessa relação de recorrência. Eu gravei um vídeo para ficar mais claro. Veja abaixo:
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mCzer4M_uBE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
-
+{{< youtube mCzer4M_uBE >}}
 
 Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.
 

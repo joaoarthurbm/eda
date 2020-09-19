@@ -109,9 +109,7 @@ Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar q
 
 Veja em detalhes como isso é feito no vídeo abaixo.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iOZMQHW30VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube iOZMQHW30VA >}}
 
 Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:
 
@@ -148,9 +146,7 @@ $T(n) = 2 * T(n/2) + n$, onde n = v.length - 1
 
 Gravei um vídeo para deixar mais claro. Talvez te ajude a entender como, a partir do algoritmo, extraímos a relação de recorrência do Merge Sort.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/mCzer4M_uBE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube mCzer4M_uBE >}}
 
 <pre>
 Para fixar! Muitas relações de recorrência podem ser descritas 
@@ -168,9 +164,7 @@ adicionado.
 
 Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/L0GMkFOsQ1A" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube L0GMkFOsQ1A >}}
 
 Acho que agora é um bom momento para você testar o que aprendeu até aqui.
 
@@ -219,9 +213,7 @@ Então, temos que $T(n) =(n * \log n)$.
 
 O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/JuXZz-B8dJM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube JuXZz-B8dJM >}}
 
 ## Exemplo: Busca Binária
 
@@ -257,10 +249,7 @@ Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1
 
 Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.
 
-<center>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/TmUhmKlIxAE" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
-
+{{< youtube TmUhmKlIxAE >}}
 
 Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.
 
@@ -276,9 +265,7 @@ Agora que já definimos a altura da árvore, precisamos somar os custos parciais
 
 Eu fiz um vídeo que segue esse protocolo descrito acima para ilustrar a árvore, calcular sua altura e definir o custo total. Vale a pena você conferir para fixar bem o modo como utilizamos o método da árvore de recursão.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/N4FDi0pLWAc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube N4FDi0pLWAc >}}
 
 ***
 

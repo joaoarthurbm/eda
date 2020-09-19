@@ -58,9 +58,7 @@ Feito. Agora 3 está em seu lugar, com todos os elementos menores ou iguais à s
 
 Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.
 
-<center>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YnbvpvcmlIM" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</center>
+{{< youtube YnbvpvcmlIM >}}
 
 Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.
 
