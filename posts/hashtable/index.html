@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -130,7 +130,7 @@
 
         
 
-        <li>23 minutos de leitura</li>
+        <li>24 minutos de leitura</li>
 
 
         
@@ -187,7 +187,7 @@
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Note que, como há uma correspondência direta entre a matrícula e o índice em que o elemento está, as operações são muito eficientes.</p>
-<p>Chamamos de <strong>Tabela de Acesso Direto</strong> o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o <!-- raw HTML omitted --> Counting Sort<!-- raw HTML omitted -->, lembra?</p>
+<p>Chamamos de <strong>Tabela de Acesso Direto</strong> o array que é usado dessa maneira, isto é, com os valores sendo mapeados de forma direta para os índices do array. Foi assim que usamos o array para ordenar em tempo linear com o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/"> Counting Sort</a>, lembra?</p>
 <hr>
 <h1 id="os-problemas">Os Problemas</h1>
 <p>Vamos tentar ser um pouco mais realistas no nosso exemplo. Todos sabemos que as matrículas em Computação @ UFCG não variam de 0 a 1999, certo? Nossas matrículas são números inteiros de 9 dígitos (ex: 203198353). Portanto, teoricamente, [000000000, 999999999] é o intervalo de matrículas válidas em Computação @ UFCG. Normalmente, em outros domínios isso também é verdade. Os elementos que nos identificam unicamente são tipicamente números com vários dígitos, por exemplo, CPF, cartão de crédito, identidade etc. Assim, se quiséssemos armazenar os alunos utilizando a matrícula como índices teríamos que criar um array com $10^9$ posições.</p>
@@ -264,7 +264,7 @@
 
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Parece tudo resolvido, não é? Mas&hellip;</p>
-<!-- raw HTML omitted -->
+<p align="center"> <b>E se duas chaves distintas forem mapeadas para a mesma posição na tabela? </b></p>
 <p>Por exemplo, vimos que o objeto $(807365841, &ldquo;Chico Buarque&rdquo;)$ foi mapeado para o índice 1 da tabela porque $807365841 % 10$ é igual a 1. Suponha que agora temos que armazenar o objeto $(478243081, &ldquo;Gilberto Gil&rdquo;)$. Teremos um problema aqui, pois o hash desse objeto também tem valor 1, cujo índice já está ocupado. Na verdade, toda chave que terminar com o dígito 1 será mapeada para a posição 1 na tabela. Esse problema se chama <strong>colisão</strong>. Quando estamos diante desse problema, temos três caminhos a seguir:</p>
 <ol>
 <li>
@@ -287,7 +287,7 @@
 <p><img src="encadeamento.png" alt="encadeamento"></p>
 <p>Os objetos de mesmo hash foram encadeados em uma lista. Esse foi o caso de $(807365841, &ldquo;Chico Buarque&rdquo;)$ e $(478243081, &ldquo;Gilberto Gil&rdquo;)$, que estão em uma lista no índice 1 da tabela, pois os hashes de suas respectivas chaves são o mesmo: 1. O mesmo acontece com $(665422653, &ldquo;Marielle&rdquo;)$ e $(960424613, &ldquo;Amarildo&rdquo;)$, que foram encadeados em uma lista no índice 3.</p>
 <p>Importante aqui destacar que esses objetos não possuem a mesma chave, mas sim o mesmo hash. <strong>Não há elementos com a mesma chave em uma tabela hash</strong>. Eu vou repetir em destaque porque esse é um erro recorrente:</p>
-<!-- raw HTML omitted -->
+<p align="center"> <b>Não há elementos com a mesma chave em uma tabela hash.</b></p>
 <p>Se for realizada a tentativa de adição de um elemento cuja chave já está presente na tabela, o valor (objeto armazenado) deve ser atualizado. Também é importante destacar que devemos guardar a chave junto com o objeto na lista, pois só assim saberemos diferenciar os objetos de mesmo hash.</p>
 <p>Uma vez que estamos utilizando listas na tabela, o código das operações básicas deve ser modificado, concorda? Vamos primeiro analisar o método <em><strong>get</strong></em>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -425,20 +425,20 @@
 </ul>
 <p><img src="colisao-prob.png" alt="colisao-prob"></p>
 <p>Na primeira adição, o objeto $(736435217, &ldquo;Lívia&rdquo;)$ ocupa a posição 7 na tabela, pois esse índice é calculado da seguinte maneira:</p>
-<!-- raw HTML omitted -->
+<p align="center">hash = ((736435217 % 10) + 0) % 10;</p>
 <p>Ou seja, o hash assume valor 7. Explicando: como o valor inicial da sondagem é zero, temos que $7 + 0 = 7$. Calculamos então o resto da divisão desse valor pelo tamanho da tabela $7 % 10 = 7$. Portanto, o índice avaliado é o índice 7. Por não haver nenhum elemento nesse índice, o objeto é adicionado.</p>
 <p>Na segunda adição, isto é, na adição do objeto $(879995247, &ldquo;Will&rdquo;)$, o objeto ocupará a posição 8 da tabela. Isso acontece porque o cálculo</p>
-<!-- raw HTML omitted -->
+<p align="center">hash = ((879995247 % 10) + 0) % 10;</p>
 <p>também tem como resultado o índice 7. Então temos uma colisão nesse índice. O algoritmo então incrementa o valor da sondagem para 1. Assim, temos um novo cálculo,</p>
-<!-- raw HTML omitted -->
+<p align="center">hash = ((879995247 % 10) + 1) % 10; </p>
 <p>que resulta em 8. Como 8 é um índice não ocupado, adicionamos o valor nesse índice.</p>
 <p>Na terceira adição, temos duas colisões: usando $sondagem = 0$ e $sondagem = 1$. Somente quando usamos $sondagem = 2$ é que encontramos um índice livre.</p>
 <p>Na quarta adição, temos três colisões: usando $sondagem = 0$, $sondagem = 1$ e $sondagem = 2$. Somente quando usamos $sondagem = 3$ é que encontramos um índice livre. Note que esse objeto será adicionado no índice 0 da tabela, pois o resultado da expressão abaixo é 0.</p>
-<!-- raw HTML omitted -->
+<p align="center">hash = ((736435217 % 10) + 3) % 10;</p>
 <p>Como estamos incrementando a sondagem sempre em uma unidade para avaliar o próximo índice da tabela, chamamos essa técnica de sondagem linear. Outras estratégias de sondagem também são utilizadas, como por exemplo, a sondagem quadrática em que, ao invés de incrementar a sondagem em uma unidade, usamos uma função quadrática para esse incremento.</p>
 <p>O método <em><strong>get</strong></em> e o método <em><strong>remove</strong></em> também precisam usar a sondagem, pois as colisões também afetam a busca e a remoção. Em particular, é preciso ter um cuidado a mais com o método remove. Quando vamos remover um elemento de uma tabela, não atribuímos <em><strong>null</strong></em> no índice como fazíamos até então.</p>
-<!-- raw HTML omitted -->
-<p>Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato <em><strong>null</strong></em> ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução <code>tabela[hash] = null</code>, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &ldquo;flag&rdquo;. No nosso caso, escolhemos um objeto do tipo <em><strong>Aluno</strong></em> com matrícula <em><strong>Integer.MIN_VALUE</strong></em> e nome &ldquo;APAGADO&rdquo;. Veja a implementação dessa estratégia no <!-- raw HTML omitted -->código disponível no github<!-- raw HTML omitted -->.</p>
+<p align="center"><b>Por que?</b></p>
+<p>Porque na adição e na busca a sondagem precisa diferenciar se o conteúdo do índice é de fato <em><strong>null</strong></em> ou se ele já foi ocupado antes por algum elemento que foi apagado. Por isso, quando apagamos um elemento, ao invés da instrução <code>tabela[hash] = null</code>, incluímos uma guarda naquele índice para estabelecer que ele está vago para uma nova adição. Isso é feito incluindo um objeto &ldquo;flag&rdquo;. No nosso caso, escolhemos um objeto do tipo <em><strong>Aluno</strong></em> com matrícula <em><strong>Integer.MIN_VALUE</strong></em> e nome &ldquo;APAGADO&rdquo;. Veja a implementação dessa estratégia no <a class="external" href="código disponível no github">código disponível no github</a>.</p>
 <p>Assim, na adição, se o conteúdo do índice for <em><strong>null</strong></em> ou for APAGADO, o índice está livre para ser preenchido.</p>
 <p>Na busca, se o conteúdo do índice for APAGADO a sondagem deve continuar a procura, ao invés de parar. Por isso precisamos dessa flag.</p>
 <p>Em resumo, ao apagar um objeto, ao invés de atribuir <em><strong>null</strong></em> ao índice, incluímos uma objeto flag APAGADO para que os algoritmos de sondagem possam saber quando de fato parar.</p>
@@ -459,7 +459,7 @@
 <li>extrair a parte inteira do resultado anterior.</li>
 </ol>
 <p>A função de hash é definida, então, por:</p>
-<!-- raw HTML omitted -->
+<p align="center">hash(chave) = int(((chave * A) % 1) * m),</p>
 <p>onde $A$ é um número constante decimal e $m$ é o tamanho da tabela.</p>
 <p>Vamos analisar exemplo concreto. Suponha que a chave seja 100, o número decimal escolhido seja $A = 0.63274838$ e o tamanho da tabela seja 20.</p>
 <ol>
@@ -476,7 +476,7 @@
     resize<span style="color:#f92672">()</span>
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p>Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (<em><strong>rehash</strong></em>). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. <!-- raw HTML omitted -->O código disponibilizado no github<!-- raw HTML omitted --> implementa essa rotina.</p>
+</code></pre></div><p>Como sabemos, a tabela é um array e, por isso, não é possível aumentar o seu tamanho inicial. O que fazemos é criar uma nova tabela maior do que a original e realocar os elementos nessa nova tabela. Aqui é importante destacar que os elementos não são alocados nas posições originais, pois, ao criar uma nova tabela, teremos também uma nova função de hash, dado que o tamanho da tabela mudou e nossa função baseia-se nesse tamanho para o cálculo do hash (<em><strong>rehash</strong></em>). Nesse caso, temos que iterar sobre todos os elementos da tabela original invocando o método put em todos esses elementos. <a class="external" href="https://github.com/joaoarthurbm/eda-ufcg/tree/master/java/src/tabelahash">O código disponibilizado no github</a> implementa essa rotina.</p>
 <p>Como vamos iterar sobre os elementos da tabela, esse é um bom momento para que você conheça os métodos: <em><strong>keySet()</strong></em>, <em><strong>values()</strong></em> e <em><strong>entrySet()</strong></em>.</p>
 <p><em><strong>keySet()</strong></em> retorna o conjunto de chaves presentes na tabela. No nosso caso seria o conjunto de todas as matrículas armazenadas na tabela.</p>
 <p><em><strong>value()</strong></em> retorna o conjunto de valores presentes na tabela. No nosso caso seria o conjunto de todos os alunos armazenados.</p>
@@ -484,7 +484,7 @@
 <p>Note que independente do método utilizado é importante destacar que não há a noção de ordenação em uma tabela hash, isto é, o elemento no índice 3 da tabela não necessariamente foi adicionado antes do elemento no índice 4.</p>
 <h3 id="quando-executar-o-resize">Quando executar o resize?</h3>
 <p>Uma tabela hash que resolve colisões por endereçamento aberto possui um fator de carga menor do que 1. Vamos relembrar: fator de carga é a ocupação máxima permitida em uma tabela. Se a tabela possui $m$ posições, podemos, por exemplo, estabelecer que a ocupação máxima é 50% (0.5). Assim, quando atingirmos esse limite, o resize é executado. Então, surge a pergunta:</p>
-<!-- raw HTML omitted -->
+<p align="center">Qual fator de carga máximo utilizar? Isto é, quando executar o resize?</p>
 <p>Se utilizarmos um fator de carga muito pequeno, faríamos o <em><strong>resize</strong></em> com muita frequência, o que queremos evitar por se tratar de uma rotina $O(n)$.Contudo, se o fator de carga for alto, digamos 0.95 o número de colisões aumenta bastante e degrada a eficiência das operações. 
 A biblioteca padrão de Java utiliza 0.75 como fator de carga. Esse número foi estabelecido porque, através de experimentos, notou-se que a partir desse fator de carga as colisões passam a ser muito mais frequentes e o desempenho das operações piora substancialmente.</p>
 <hr>

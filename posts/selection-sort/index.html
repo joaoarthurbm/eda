@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -175,15 +175,18 @@
 <h2 id="como-usar-esta-rotina-para-ordenar-um-array">Como usar esta rotina para ordenar um array?</h2>
 <p>Ora, basta repetir esse mesmo processo para o restante do array. Vamos ver a execução para o $values = [70, 90, 1, 3, 0, 100, 2]$</p>
 <p>Na primeira execução, 0 é o menor valor. Encontramos esse valor e trocamos com a primeira posição (70).</p>
-<!-- raw HTML omitted -->
+<p align="center">[<font color="blue">70</font>, 90, 1, 3, <font color="red">0</font>, 100, 2]</p>
+<p align="center">[<font color="red">0</font>, 90, 1, 3, <font color="blue">70</font>, 100, 2]</p>
 <p>Agora, aplicamos a mesma ideia para o restante do array, ou seja, no intervalo de índices $[1, values.length - 1]$.</p>
-<!-- raw HTML omitted -->
+<p align="center">[0, <font color="blue">90</font>, <font color="red">1</font>, 3, 70, 100, 2]</p>
+<p align="center">[0, <font color="red">1</font>, <font color="blue">90</font>, 3, 70, 100, 2]</p>
 <p>Depois, aplicamos a mesma ideia para o restante do array, ou seja, no intervalo de índices $[2, values.length - 1]$.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p align="center">[0, 1, <font color="blue">90</font>, 3, 70, 100, <font color="red">2</font>]</p>
+<p align="center">[0, 1, <font color="red">2</font>, 3, 70, 100, <font color="blue">90</font>]</p>
 <p>Continuamos aplicando a mesma ideia para o restante do array, ou seja, no intervalo de índices $[3, values.length - 1]$. Como 3 já está no seu lugar, ele será trocado por ele mesmo. O mesmo acontece com o intervalo de índices $[4, values.length - 1]$, onde 70 já está em sua posição.</p>
 <p>Aplicando, então, para o intervalo de índices $[5, values.length - 1]$, temos:</p>
-<!-- raw HTML omitted -->
+<p align="center">[0, 1, 2, 3, 70, <font color="blue">100</font>, <font color="red">90</font>]</p>
+<p align="center">[0, 1, 2, 3, 70, <font color="red">90</font>, <font color="blue">100</font>]</p>
 <p>Por fim, aplicado para o intervalo $[6, values.length - 1]$, temos que 100 já está em sua posição.</p>
 <p>Feito! O array está ordenado. Note que apenas executamos a rotina de encontrar o menor e colocar na primeira posição várias vezes. Para ser exato, executamos $N$ vezes, variando a faixa de valores que o algoritmo deve avaliar.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -202,25 +205,27 @@
 	<span style="color:#f92672">}</span>		
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p>Abaixo podemos ver uma animação produzida pelo <!-- raw HTML omitted -->TutorialHorizon<!-- raw HTML omitted -->.</p>
-<!-- raw HTML omitted -->
+</code></pre></div><p>Abaixo podemos ver uma animação produzida pelo <a class="external" href="https://algorithms.tutorialhorizon.com/selection-sort-java-implementation/selection-sort-gif/">TutorialHorizon</a>.</p>
+<figure style="align: center; margin-left:20%; width: 60%">
+	<img src="selection.gif">
+</figure>
 <h2 id="propriedades-e-análise-de-eficiência">Propriedades e Análise de eficiência</h2>
 <blockquote>
 <p>O Selection Sort é in-place e $O(n^2)$, mas não é estável.</p>
 </blockquote>
 <p>Lembrando que estabilidade é uma propriedade relacionada à ordem relativa de valores iguais no array original. Por exemplo, se houver dois valores 97 no array antes da ordenação, após a execução do algoritmo, esses dois valores devem seguir a ordem relativa inicial. Ou seja, ao término da execução do algoritmo, a primeira ocorrência do 97 deve vir antes da segunda ocorrência do 97.</p>
 <p>O Selection Sort não é estável porque dependendo das trocas, ele não mantém a ordem relativa dos valores iguais. Vamos analisar um exemplo em que isso acontece. Para diferenciar valores iguais, vou colocar os subscritos $a$ e $b$, ok?</p>
-<!-- raw HTML omitted -->
+<p align="center">$values = [1, 7_a, 7_b, 2] $</p>
 <p>Na primeira iteração, o menor valor é 1 e, por isso, fica na posição em que está. Depois, na segunda iteração o menor valor é 2 e deve trocar de lugar com $7_a$. O resultado parcial é:</p>
-<!-- raw HTML omitted -->
+<p align="center">$values = [1, 2, 7_b, 7_a] $</p>
 <p>Na terceira iteração $7_b$ é o menor e fica no lugar em que está. Na última iteração $7_a$ já o menor do array restante e fica no lugar em que está.</p>
 <p>Como resultado, temos que $7_a$ vinha antes de $7_b$ no array original, mas essa ordem relativa foi trocada depois da ordenação. Portanto, o algoritmo não é estável.</p>
 <p>O Selection Sort é <em>in-place</em> porque a ordenação é feita rearranjando os elementos no próprio array, ao invés de usar arrays ou outras estruturas auxiliares.</p>
-<p>O Selection Sort é $O(n^2)$. A busca pelo menor elemento custa $n - 1$ passos na primeira iteração, $n - 2$ passos na segunda, $n - 3$ passos na terceira e assim por diante. Assim como no caso do <!-- raw HTML omitted -->Insertion Sort<!-- raw HTML omitted -->, o custo é dado pela soma dos termos da Progressão Aritmética $1 + 2 + 3 + &hellip; (n - 1)$, com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Selection Sort é $\Theta(n^2)$.</p>
+<p>O Selection Sort é $O(n^2)$. A busca pelo menor elemento custa $n - 1$ passos na primeira iteração, $n - 2$ passos na segunda, $n - 3$ passos na terceira e assim por diante. Assim como no caso do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/insertion-sort/">Insertion Sort</a>, o custo é dado pela soma dos termos da Progressão Aritmética $1 + 2 + 3 + &hellip; (n - 1)$, com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Selection Sort é $\Theta(n^2)$.</p>
 <p>É importante traçar o paralelo entre o Selection Sort e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado.</p>
 <p>Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.</p>
 <p>Na teoria, ambos estão na mesma classe de complexidade, qual seja $O(n^2)$. Na prática, o Insertion Sort apresenta melhor desempenho do que o Selection Sort.</p>
-<p>Por fim, O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <!-- raw HTML omitted -->Counting Sort<!-- raw HTML omitted -->.</p>
+<p>Por fim, O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>.</p>
 <hr>
 <h1 id="resumo">Resumo</h1>
 <ul>
@@ -237,12 +242,12 @@
 <p>Embora sejam da mesma classe de complexidade, o Selection Sort, na prática, é mais lento do que o Insertion Sort.</p>
 </li>
 <li>
-<p>O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <!-- raw HTML omitted -->Counting Sort<!-- raw HTML omitted -->.</p>
+<p>O Selection Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>.</p>
 </li>
 </ul>
 <hr>
 <h1 id="notas">Notas</h1>
-<p>Vale a pena utilizar o <!-- raw HTML omitted -->VisuAlgo<!-- raw HTML omitted --> para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.</p>
+<p>Vale a pena utilizar o <a class="external" href="https://visualgo.net/en/sorting">VisuAlgo</a> para visualizar a execução do Selection Sort e de outros algoritmos de ordenação.</p>
 
 
 </article>

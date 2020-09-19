@@ -18,7 +18,7 @@
          
          <guid>https://joaoarthurbm.github.io/eda/curso/</guid>
          <description>&lt;hr&gt;
-&lt;p&gt;Para atingir os nossos &lt;!-- raw HTML omitted --&gt;Objetivos de Aprendizagem&lt;!-- raw HTML omitted --&gt;, o curso é organizado nas 5 etapas a seguir.&lt;/p&gt;
+&lt;p&gt;Para atingir os nossos &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/objetivos/&#34;&gt;Objetivos de Aprendizagem&lt;/a&gt;, o curso é organizado nas 5 etapas a seguir.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;primeira-etapa-análise-de-algoritmos&#34;&gt;Primeira Etapa: Análise de Algoritmos&lt;/h2&gt;
 &lt;p&gt;Inicialmente, é apresentada a motivação para a análise de complexidade de algoritmos. O objetivo é fazer com que o aluno compreenda que o projeto de um algoritmo deve levar em consideração sua eficiência, uma vez que o tamanho da entrada a ser processada pode ser ordens de magnitude maior do que as até então vistas nas disciplinas anteriores. Posteriormente, são abordadas técnicas analíticas para determinar a eficiência assintótica de algoritmos.&lt;/p&gt;
@@ -227,8 +227,8 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
 &lt;p&gt;Por enquanto eu vou me dar o direito de não aceitar materiais feitos totalmente
 por terceiros porque acredito que os materiais representam a minha narrativa sobre
 o assunto abordado. No entanto, revisões e correções são muito bem-vindas. Portanto, se você encontrou um erro ou algum parágrafo difícil de entender,
-basta &lt;!-- raw HTML omitted --&gt;abrir uma issue&lt;!-- raw HTML omitted --&gt; ou fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
+basta &lt;a class=&#34;external&#34; href=&#34;https://github.com/joaoarthurbm/eda/issues&#34;&gt;abrir uma issue&lt;/a&gt; ou fazer um &lt;em&gt;Pull Request&lt;/em&gt; no markdown do material.&lt;/p&gt;
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório dos materiais.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;melhoria-nas-implementações&#34;&gt;Melhoria nas implementações&lt;/h2&gt;
 &lt;p&gt;Contribuições esperadas:&lt;/p&gt;
@@ -239,7 +239,7 @@ basta &lt;!-- raw HTML omitted --&gt;abrir uma issue&lt;!-- raw HTML omitted --&
 &lt;li&gt;Adição de testes;&lt;/li&gt;
 &lt;li&gt;Documentação do código.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;aside&gt;&lt;i class=&#34;fab fa-github fa-lg&#34; aria-hidden=&#34;true&#34;&gt; &lt;/i&gt; &lt;a href=&#34;https://github.com/joaoarthurbm/eda-implementacoes/&#34;&gt; &lt;font color=&#34;#1980e6&#34;&gt; &lt;b&gt;Repositório das estruturas implementadas.&lt;/b&gt;&lt;/font&gt;&lt;/a&gt;&lt;/aside&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;cite-este-material&#34;&gt;Cite este material&lt;/h3&gt;
 &lt;pre&gt;&lt;code&gt;João Arthur Brunet, 2019. Estruturas de Dados e Algoritmos,

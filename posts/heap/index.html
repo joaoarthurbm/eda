@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -130,7 +130,7 @@
 
         
 
-        <li>20 minutos de leitura</li>
+        <li>21 minutos de leitura</li>
 
 
         
@@ -153,7 +153,7 @@
 
     <hr>
 <p>Nem toda fila segue a política de acesso <em>First In First Out</em> (FIFO). Na verdade, em vários cenários do dia a dia, as filas que entramos possuem uma política diferente: são filas de prioridade. Por exemplo, mesmo que um adolescente chegue antes de um idoso na fila do banco, é provável que o idoso seja atendido primeiro porque ele tem, por lei (e deveria ter por civilidade também), <strong>prioridade</strong> no atendimento.</p>
-<p>No contexto de estrutura de dados, precisamos pensar em como manter a estrutura ordenada tendo como critério essa prioridade. Então, vamos primeiro analisar alternativas para implementar filas de prioridade usando estruturas de dados lineares, como <!-- raw HTML omitted -->LinkedList<!-- raw HTML omitted --> ou <!-- raw HTML omitted -->ArrayList<!-- raw HTML omitted -->. 
+<p>No contexto de estrutura de dados, precisamos pensar em como manter a estrutura ordenada tendo como critério essa prioridade. Então, vamos primeiro analisar alternativas para implementar filas de prioridade usando estruturas de dados lineares, como <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">LinkedList</a> ou <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>. 
 Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada por um atributo inteiro. No nosso exemplo, quanto maior esse número, maior a prioridade. Nesse caso, para implementarmos uma fila de prioridade, temos que tomar uma decisão:  manter a fila ordenada ou não?</p>
 <p>Se decidirmos manter a fila sempre ordenada tendo como critério a prioridade, precisamos utilizar o algoritmo de inserção ordenada, cujo custo é $O(n)$. Contudo, a extração do maior elemento é ${O(1)}$, pois ele sempre está no início da fila.</p>
 <p>Se optarmos por não manter a fila ordenada por prioridade, temos o cenário oposto. A adição passa a ser $O(1)$, mas a remoção do maior passa a ser $O(n)$, pois teremos que pesquisar em toda a fila a maior prioridade.</p>
@@ -162,11 +162,15 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 <hr>
 <h1 id="definições-e-propriedades">Definições e Propriedades</h1>
 <p><em>Heaps</em> são árvores binárias. É importante deixar claro desde já que são árvores binárias, mas não são árvores binárias de pesquisa. Mais especificamente, duas propriedades definem o Heap:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+1. O valor de um nó é maior ou igual ao valor de seus filhos;
+
+2. O Heap é uma árvore binária completa ou quase-completa 
+da esquerda para a direita.
+</pre>
 <p><strong>Propriedade 1.</strong> A primeira propriedade é a que difere um Heap de uma árvore binária de pesquisa (BST). Na BST, os valores à esquerda de um nó são menores do que ele e os valores à direita são maiores. No Heap, ambos são menores ou iguais. Heaps que seguem essa propriedade são Heaps Máximos porque o maior valor sempre está na raiz. Há também Heaps Mínimos, onde o nó tem valor sempre menor ou igual ao seus filhos. Neste caso, o menor valor sempre está na raiz. Neste material, vamos utilizar o termo Heap como sinônimo de Heap Máximo.</p>
-<p><strong>Propriedade 2.</strong> Se você leu o <!-- raw HTML omitted -->material de árvores binárias de pesquisa<!-- raw HTML omitted -->, você já sabe o que quer dizer uma árvore completa, certo? Mas,</p>
-<!-- raw HTML omitted -->
+<p><strong>Propriedade 2.</strong> Se você leu o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst">material de árvores binárias de pesquisa</a>, você já sabe o que quer dizer uma árvore completa, certo? Mas,</p>
+<p align="center">o que quer dizer <i>quase-completa da esquerda para a direita?</i></p>
 <p>Quer dizer que, se ela não for completa, todos os níveis estão preenchidos, exceto o último, que deve estar preenchido da esquerda para a direita até um certo ponto. Vamos ver exemplos de Heaps e Não-Heaps para esclarecer esse conceito.</p>
 <p>Para exemplos de Heaps, vamos analisar a figura abaixo. Perceba que, além de satisfazerem a propriedade 1, todas as estruturas são completas ou quase-completas da esquerda para a direita e, portanto, são Heaps.</p>
 <p><img src="heaps.png" alt="heaps"></p>
@@ -215,10 +219,12 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 </blockquote>
 <p>Além disso, você pode estar se perguntando: e por que tem que ser quase-completa da esquerda para a direita? Porque isso facilita a implementação dessa estrutura de dados usando um array.</p>
 <h1 id="implementação">Implementação</h1>
-<p>Array? Nós havíamos implementado <!-- raw HTML omitted -->árvores binárias<!-- raw HTML omitted --> utilizando nós, não? Sim, mas quem foi que disse que só tem uma maneira de fazer as coisas? Devido ao fato do Heap ser uma árvore completa ou quase-completa, somos capazes de utilizar um array para representá-lo.</p>
+<p>Array? Nós havíamos implementado <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst">árvores binárias</a> utilizando nós, não? Sim, mas quem foi que disse que só tem uma maneira de fazer as coisas? Devido ao fato do Heap ser uma árvore completa ou quase-completa, somos capazes de utilizar um array para representá-lo.</p>
 <h2 id="como-um-array-pode-representar-um-heap">Como um array pode representar um Heap?</h2>
 <p>Nós vamos utilizar um array para implementar o Heap. Então, antes precisamos entender como os elementos dispostos em um array podem representar um Heap. Veja o exemplo abaixo:</p>
-<!-- raw HTML omitted -->
+<figure style="align: center; margin-left:15%; width: 70%">
+    <img src="heap-exemplo-menor.png">
+</figure>
 <p>O array que representa esse Heap é $heap = [48, 24, 45, 14]$. Como? Basta percorrer o Heap em largura e preencher o array. Ou seja, o índice 0 do array sempre será preenchido com a raiz, neste caso o valor 48. Depois, no índice 1, o array é preenchido com o valor 24. O índice 2 recebe o valor 45 e, por último, o índice 3 recebe o valor 14.</p>
 <p>Mais um exemplo.</p>
 <p><img src="heap-exemplo.png" alt="heap-exemplo"></p>
@@ -242,10 +248,10 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Veja que o que define a ocupação do array é o valor do atributo <em><strong>tail</strong></em>. O método isEmpty, por exemplo, compara esse valor com -1 para determinar se o Heap possui elementos ou não.</p>
 <h2 id="left-right-e-parent">left, right e parent</h2>
-<p>Para caminhar em uma árvore precisamos, a partir de um nó, acessar o nó à esquerda, o nó à direita e o nó pai. Na <!-- raw HTML omitted -->implementação de árvores binárias de pesquisa<!-- raw HTML omitted --> nós utilizamos as referências <em><strong>left</strong></em>, <em><strong>right</strong></em> e <em><strong>parent</strong></em>. Contudo, como estamos utilizando um array para armazenar os elementos, precisamos implementar métodos que retornem a esquerda, a direita e o pai de um nó, baseado no seu índice.</p>
+<p>Para caminhar em uma árvore precisamos, a partir de um nó, acessar o nó à esquerda, o nó à direita e o nó pai. Na <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst">implementação de árvores binárias de pesquisa</a> nós utilizamos as referências <em><strong>left</strong></em>, <em><strong>right</strong></em> e <em><strong>parent</strong></em>. Contudo, como estamos utilizando um array para armazenar os elementos, precisamos implementar métodos que retornem a esquerda, a direita e o pai de um nó, baseado no seu índice.</p>
 <p><em><strong>left</strong></em>. A esquerda de um nó no índice <em><strong>index</strong></em> sempre segue a fórmula $2*index + 1$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.</p>
 <p><img src="heap-exemplo.png" alt="heap-exemplo"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7</p>
 <p>A raiz está no índice 0 do array. Portanto, o nó à sua esquerda está no índice 1, pois $2*0 + 1 = 1$.</p>
 <p>O nó 87 está no índice 1 do array. Portanto, o nó à sua esquerda está no índice 3, pois $2*1 + 1 = 3$.</p>
 <p>O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 3$.</p>
@@ -253,14 +259,14 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 <p>Os nós 54 (índice 4), 6 (índice 5), 0 (índice 6) e 43 (índice 7) não possuem esquerda, pois se aplicarmos a fórmula $2*index+1$ os valores gerados são índices maiores do que <em><strong>tail</strong></em> e, portanto, não fazem parte do Heap.</p>
 <p><em><strong>right</strong></em>. A direita de um nó no índice <em><strong>index</strong></em> sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.</p>
 <p><img src="heap-exemplo.png" alt="heap-exemplo"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7</p>
 <p>A raiz está no índice 0 do array. Portanto, o nó à sua direita está no índice 2, pois $2*(0 + 1) = 2$.</p>
 <p>O nó 87 está no índice 1 do array. Portanto, o nó à sua direita está no índice 4, pois $2*(1 + 1) = 4$.</p>
 <p>O nó 73 está no índice 2 do array. Portanto, o nó à sua direita está no índice 6, pois $2*(2 + 1) = 6$.</p>
 <p>O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.</p>
 <p><em><strong>parent</strong></em>. O pai de um nó no índice <em><strong>index</strong></em> sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.</p>
 <p><img src="heap-exemplo.png" alt="heap-exemplo"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7</p>
 <p>A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $int((0-1)/2)) = -1$, que é um índice inexistente.</p>
 <p>Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $int((1-1)/2)) = 0$ e $int((2-1)/2)) = 0$.</p>
 <p>Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 0$ e $int((4-1)/2)) = 1$.</p>
@@ -286,34 +292,38 @@ Em primeiro lugar, os objetos passam a ter uma prioridade, que é representada p
 <p>Primeiro vamos entender o conceito visualmente, depois passamos para o código, ok? 
 Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazenado nesse array é o da figura abaixo.</p>
 <p><img src="heap-exemplo.png" alt="heap-exemplo"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43, 0, 0]$ e tail = 7</p>
 <p>Note que os elementos que compõe o Heap estão entre os índices 0 e <em><strong>tail</strong></em>. Os índices 8 e 9 estão preenchidos com 0 porque é o valor default de Java. Nós tratamos essas posições como livres para serem adicionados novos elementos. Para reforçar: quem define os limites dos elementos presentes no Heap são 0 e <code>tail</code>.</p>
 <p>Agora, atenção:</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+    A adição de um novo elemento sempre é feita na próxima 
+    posição livre do array, isto é, tail + 1. Essa estratégia
+    garante que o Heap sempre será completo ou quase completo
+    da esquerda para a direita.
+</pre>
 <p>Então vamos adicionar o valor 100 ao Heap. Como dissemos, a adição é feita em tail + 1. Neste momento, o Heap e o array assumem os seguintes estados.</p>
 <p><img src="animacao1.png" alt="animacao1"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43, 100, 0]$ e tail = 8</p>
 <p>Temos um problema aqui, certo? O fato de adicionarmos sempre na próxima posição livre garante que nunca vamos quebrar a propriedade de ser completa ou quase-completa da esquerda para a direita. No entanto, 100 é um valor maior que o valor do nó pai (47). Isso fere a restrição da Propriedade 1, que estabelece que todo nó deve ser maior que seus filhos. A ideia geral para resolver esse problema é comparar 100 com seu pai e, caso ele seja maior, trocar os dois de posição. Isso deve ser feito enquanto 100 for menor do que o pai ou 100 chegar na raiz.</p>
 <p>Vamos ver como isso é feito passo a passo. Na primeira comparação, como 100 é maior que 47, há a troca desses valores, como ilustrado na figura abaixo. Perceba também que o array é modificado.</p>
 <p><img src="animacao2.png" alt="animacao2"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 87, 73, 100, 54, 6, 0, 43, 47, 0]$ e tail = 8</p>
 <p>O problema ainda persiste, pois 100, quando comparado com o nó pai (87) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.</p>
 <p><img src="animacao3.png" alt="animacao3"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [88, 100, 73, 87, 54, 6, 0, 43, 47, 0]$ e tail = 8</p>
 <p>O problema ainda persiste, pois 100, quando comparado com o nó pai (88) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.</p>
 <p><img src="animacao4.png" alt="animacao4"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [100, 88, 73, 87, 54, 6, 0, 43, 47, 0]$ e tail = 8</p>
 <p>Feito! Como 100 passou a ser a raiz, a inserção é finalizada.</p>
 <p>Mais um exemplo? Vamos adicionar o elemento 90. Lembrando, a inserção sempre é feita em tail + 1. Então temos o Heap e seu array com o seguinte estado.</p>
 <p><img src="animacao5.png" alt="animacao5"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [100, 88, 73, 87, 54, 6, 0, 43, 47, 90]$ e tail = 9</p>
 <p>Comparando 90 com o nó pai, temos que 90 &gt; 54 e, portanto, precisamos trocar esse valor. Feito isso, temos o seguinte cenário.</p>
 <p><img src="animacao6.png" alt="animacao6"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [100, 88, 73, 87, 90, 6, 0, 43, 47, 54]$ e tail = 9</p>
 <p>O problema ainda persiste, pois 90, quando comparado com o nó pai (88) é maior. Novamente, trocamos esses valores, como ilustrado na figura abaixo.</p>
 <p><img src="animacao7.png" alt="animacao7"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [100, 90, 73, 87, 88, 6, 0, 43, 47, 54]$ e tail = 9</p>
 <p>Feito! Como 90 é menor do que o nó pai (100), a inserção é finalizada.</p>
 <p>Agora que já entendemos como o algoritmo funciona, vamos ao código.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -349,21 +359,21 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 <p>Para manter a propriedade de ser completo ou quase-completo da esquerda para a direita, trocamos o valor da raiz com a última folha e removemos essa última folha. Note que, por ser um array, não removemos de fato a posição, apenas atualizamos tail (<code>tail = tail - 1</code>).</p>
 <p>Vamos visualizar esse processo para o Heap abaixo.</p>
 <p><img src="remocao1.png" alt="remocao1"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [100, 90, 73, 87, 88, 6, 0, 43, 47, 54]$ e tail = 9</p>
 <p>O primeiro passo então, é trocar a raíz (<code>this.heap[0]</code>) pela última folha (<code>this.heap[tail]</code>). No nosso exemplo, isso significa que 54 passa a ser a raiz.</p>
 <p><img src="remocao2.png" alt="remocao2"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [54, 90, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 9</p>
 <p>Agora decrementamos o valor de tail <em><strong>tail</strong></em> (<code>tail -= 1</code>). O Heap fica nesse estado:</p>
 <p><img src="remocao3.png" alt="remocao3"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [54, 90, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 8</p>
 <p>Temos um problema, certo? 54 é menor que o valor à sua esquerda e que o valor à sua direita. O que vamos fazer a partir de agora é resolver esse problema. E isso tem nome: <strong>heapify</strong>.</p>
 <p>A ideia geral é comparar 54 com o filho à esquerda e o filho à direita. O maior dos três assume a posição de 54. Se o maior dos 3 for 54, o algoritmo não precisa seguir adiante. Vamos lá.</p>
 <p>Comparando 54, 90 e 73, o maior valor é 90. Portanto, trocamos 90 com 54.</p>
 <p><img src="remocao4.png" alt="remocao4"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [90, 54, 73, 87, 88, 6, 0, 43, 47, 100]$ e tail = 8</p>
 <p>Novamente, comparamos 54 com o filho à esquerda e o filho à direita. O maior dos três assume a posição de 54. Ou seja, trocamos 54 por 88.</p>
 <p><img src="remocao5.png" alt="remocao5"></p>
-<!-- raw HTML omitted -->
+<p align="center">$heap = [90, 88, 73, 87, 54, 6, 0, 43, 47, 100]$ e tail = 8</p>
 <p>Feito! 54 não possui mais filhos e, portanto, o algoritmo para.</p>
 <p>Agora que já entendemos como o algoritmo funciona, vamos às particularidades do código aos poucos. Primeiro, a ideia geral do método <em><strong>remove()</strong></em>, que outros autores também chamam de <em><strong>extractMax()</strong></em>.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -506,7 +516,7 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 </ul>
 <hr>
 <h1 id="notas">Notas</h1>
-<p>Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei <!-- raw HTML omitted -->esta ferramenta.<!-- raw HTML omitted --> Também recomendo o <!-- raw HTML omitted -->VisualAlgo<!-- raw HTML omitted -->.</p>
+<p>Utilizar uma ferramenta de visualização facilita muito o aprendizado das estruturas que estudamos. Para fazer as figuras deste material eu utilizei <a class="external" href="http://btv.melezinek.cz/binary-heap.html">esta ferramenta.</a> Também recomendo o <a class="external" href="https://visualgo.net/en">VisualAlgo</a>.</p>
 
 
 </article>

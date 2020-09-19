@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -153,7 +153,7 @@
 
     <hr>
 <h1 id="problemas">Problemas</h1>
-<p>No <!-- raw HTML omitted -->material sobre ArrayLists<!-- raw HTML omitted --> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
+<p>No <a class="external" href="http://joaoarthurbm.github.io/eda/posts/arraylist">material sobre ArrayLists</a> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
 <p>O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (<em><strong>shiftParaADireita</strong></em>) e durante a remoção de um elemento (<em><strong>shiftParaAEsquerda</strong></em>), ambas com tempo de execução $O(n)$.</p>
 <p>Por último, por definirmos de antemão o tamanho da estrutura, é possível que a quantidade de elementos no array seja menor do que a sua capacidade. Esse pode ser um problema de menor magnitude e importância atualmente porque a memória &ldquo;desperdiçada&rdquo; pode ser considerada irrelevante. Contudo, conceitualmente é importante discutir esse fato porque o uso indiscriminado de memória, quando cumulativo, pode gerar problemas.</p>
 <hr>
@@ -389,8 +389,8 @@ newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</spa
     <span style="color:#66d9ef">return</span> indexOf<span style="color:#f92672">(</span>aluno<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <em><strong>index</strong></em>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <!-- raw HTML omitted -->
-IndexOutOfBounds<!-- raw HTML omitted -->.</p>
+</code></pre></div><p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <em><strong>index</strong></em>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html">
+IndexOutOfBounds</a>.</p>
 <p>Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando <em><strong>for</strong></em> por se tratar de uma iteração definida. Ao final dessa iteração <em><strong>aux</strong></em> aponta para o nó na posição <em><strong>index</strong></em>. Assim, retornamos <code>aux.aluno</code>, que é o objeto desejado.</p>
 <p><strong>int indexOf(Aluno aluno).</strong> Este método retorna o índice da primeira ocorrência do valor passado como parâmetro na lista. Novamente, iteramos sobre a lista, mas dessa vez usamos o comando <em><strong>while</strong></em>, pois a iteração é indefinida. Note que há duas condições de parada. Quando <code>aux == null</code>, ou seja, percorremos toda a lista e não encontramos o aluno procurado e, por isso, retornamos -1. Ou quando encontramos o aluno procurado. Nesse último caso retornamos o valor da variável <em><strong>index</strong></em>, que é incrementada a cada passo da procura.</p>
 <p><strong>boolean contains(Aluno aluno).</strong> Este método apenas verifica se o aluno passado como parâmetro está presente na lista ou não. Para isso, reusamos o método <em><strong>indexOf</strong></em>. Se o resultado da execução for -1, o método <em><strong>contains</strong></em> retorna <em><strong>false</strong></em>. Caso contrário, retorna <em><strong>true</strong></em>.</p>
@@ -496,7 +496,7 @@ IndexOutOfBounds<!-- raw HTML omitted -->.</p>
 </code></pre></div><p><strong>remove(int index) e remove(Aluno aluno).</strong> Quando o elemento é encontrado, há 3 casos possíveis: o elemento está na primeira posição, na última ou entre outros dois. No primeiro caso, reusamos o método <strong>removeFirst()</strong>. No segundo caso, reusamos o método <strong>removeLast()</strong>. Para o terceiro caso, manipulamos as referências para ligar o anterior e o próximo: <code>aux.prev.next = aux.next</code> e <code>aux.next.prev = aux.prev</code>.</p>
 <hr>
 <h1 id="notas">Notas</h1>
-<p>Por motivos de simplificação, a classe <em><strong>LinkedList</strong></em> que implementamos neste material manipula objetos do tipo <em><strong>Node</strong></em> que armazenam objetos do tipo <em><strong>Aluno</strong></em>. Naturalmente, por ser de propósito geral, a implementação de <!-- raw HTML omitted -->LinkedList<!-- raw HTML omitted --> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
+<p>Por motivos de simplificação, a classe <em><strong>LinkedList</strong></em> que implementamos neste material manipula objetos do tipo <em><strong>Node</strong></em> que armazenam objetos do tipo <em><strong>Aluno</strong></em>. Naturalmente, por ser de propósito geral, a implementação de <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">LinkedList</a> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
 
 
 </article>

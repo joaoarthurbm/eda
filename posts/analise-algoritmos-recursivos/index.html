@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -130,7 +130,7 @@
 
         
 
-        <li>16 minutos de leitura</li>
+        <li>18 minutos de leitura</li>
 
 
         
@@ -149,21 +149,28 @@
     
 
     <hr>
-<p>Até aqui vimos como <!-- raw HTML omitted --> analisar algoritmos iterativos<!-- raw HTML omitted -->, lembra? Esse processo pode ser resumido pelos seguintes passos:</p>
+<p>Até aqui vimos como <a href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise" class="external"> analisar algoritmos iterativos</a>, lembra? Esse processo pode ser resumido pelos seguintes passos:</p>
 <ol>
 <li>identificar operações primitivas;</li>
 <li>identificar a quantidade de vezes que cada uma dessas primitivas é executada;</li>
 <li>Somar essas execuções.</li>
 </ol>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Você lembra quais são as operações primitivas?
+    
+    - Avaliação de expressões booleanas;
+    - Operações matemáticas;
+    - Retorno de métodos;
+    - Atribuição;
+    - Acesso à variáveis e posições arbitrárias de um array
+</pre>
 <p>Seguindo esses passos sempre chegamos a uma função que descreve o tempo de execução do algoritmo. Vimos também que estamos interessados na ordem de crescimento dessa função, mais do que nos seus termos detalhados. Isto é, como se comporta a função para grandes valores de $n$. Assim, podemos aplicar as seguintes diretrizes para identificar a classe de complexidade das funções:</p>
 <ol>
 <li>Eliminar constantes;</li>
 <li>Eliminar expoentes de menor magnitude.</li>
 </ol>
 <p>Desse modo, a função $f(n) = 70n + 32n + 231$ tem ordem de crescimento linear. Isto é, $f(n) \in \Theta(n)$. Lembrando sempre que a maneira formal de demonstrar que $f(n) \in \Theta(n)$ é encontrar $c1$, $c2$ e $n0$, tal que:</p>
-<!-- raw HTML omitted -->
+<p align="center"> $0 <= c1*n  <= 70n + 32n + 231 <= c2*n, \forall n >=n0 $ </p>
 <hr>
 <h1 id="o-problema">O Problema</h1>
 <p>Acontece que, para algoritmos recursivos, a aplicação dos passos acima não é direta, pois um algoritmo recursivo é definido em termos dele mesmo. Vamos começar com uma função bem simples: fatorial.</p>
@@ -181,7 +188,7 @@
 <p><code>*</code> -&gt; operação aritmética.</p>
 <p><code>fatorial(n-1)</code> -&gt; ?</p>
 <p>Como vimos, para o caso em que as execuções não são em função de $n$ (caso acima) podemos simplificar as operações primitivas e suas execuções para (1).</p>
-<!-- raw HTML omitted -->
+<p align="center">O problema aqui é calcular o custo de fatorial(n-1).</p>
 <p>Qual o custo dessa operação e quantas vezes ela será executada? Não conseguimos responder essa questão de maneira direta como fizemos para os algoritmos iterativos porque trata-se de uma função definida em termos dela mesma. No nosso contexto, funções dessa natureza são chamadas de <strong>relações de recorrência</strong>.</p>
 <hr>
 <h1 id="relação-de-recorrência">Relação de Recorrência</h1>
@@ -246,8 +253,19 @@
   <iframe src="https://www.youtube.com/embed/mCzer4M_uBE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Para fixar! Muitas relações de recorrência podem ser descritas 
+na seguinte forma:
+
+T(n) = a * T(n/b) + f(n), com a >= 1, b > 1 e f(n) não negativa. 
+
+É importante que a gente saiba em português o que significa essa 
+equação acima. Você lembra que ela é referente a um algoritmo 
+recursivo, certo? Em português, dizemos que há <b>a</b> chamadas 
+recursivas e que cada chamada recursiva divide a entrada em <b>b</b> 
+partes. Além disso, a cada chamada recursiva, um custo <b>f(n)</b> é 
+adicionado.
+</pre>
 <p>Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
@@ -439,8 +457,17 @@ button[class*="btn"] {border: 50;}
 
 <script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
 <div class="quiz" style="display:none" id="relacao_de_recorrencia">
-  <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+  <script>
+    var choices = " $T(n) = 3 * T(n\/2) \u002b n$, $T(n) = 2 * T(n\/2) \u002b n^2$, $T(n) = T(n\/4) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b n$, $T(n) = 2 * T(n\/2) \u002b 2 * n$".split(",");
+    var id = "relacao_de_recorrencia";
+    var question = "Qual a relação de recorrência do algoritmo acima?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
 <pre><code>int metodo(int[] v)
     if (n == 1)
         return v[1];
@@ -534,19 +561,19 @@ function showQuiz(quizId) {
 <h1 id="método-mestre">Método Mestre</h1>
 <p>O método iterativo utilizando a árvore de recursão é, de fato, uma boa alternativa para identificar a classe de complexidade de algoritmos recursivos. Além de ser um método analítico, ele tem propriedades didáticas importantes. Isto é, o exercício de ilustrar a árvore de recursão (execução) e, a partir dela, identificar o custo total do algoritmo é importante não somente para esse fim, mas para exercitar a capacidade de abstração e raciocínio do aluno. Contudo, muitas vezes, trata-se de um mecanismo laborioso. Nesse contexto, surge o <strong>Teorema Mestre</strong> que nos permite identificar a classe de complexidade de um algoritmo aplicando apenas algumas operações matemáticas e comparando ordem de complexidade de funções.</p>
 <p><strong>E como o teorema funciona?</strong> Primeiramente, é preciso que a relação de recorrência tenha determinadas propriedades. Vamos analisar concretamente essas propriedades:</p>
-<!-- raw HTML omitted -->
+<p align="center">$T(n) = a*T(n/b) + f(n)$</p>
 <p>Sendo $a&gt;=1$, $b&gt;1$ e $f(n)$ não negativa.</p>
 <p>Como vimos anteriormente, $a$ representa a quantidade de chamadas recursivas (quantidade de subproblemas), $b$ representa em quanto a entrada é diminuída a cada chamada recursiva e $f(n)$ representa o custo parcial de cada etapa da recursão. Para aplicar o Teorema Mestre, sua relação de recorrência deve ser na forma acima com $a &gt;= 1$, $b &gt; 1$ e $f(n)$ não negativa.</p>
 <p>Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:</p>
 <ul>
 <li>
-<p>Se f(n) &lt; n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->, então T(n) = theta(n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->).</p>
+<p>Se f(n) &lt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(n ** log<sub>b</sub><sup>a</sup>).</p>
 </li>
 <li>
-<p>Se f(n) = n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->, então T(n) = theta(f(n) * log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->n<!-- raw HTML omitted -->).</p>
+<p>Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n) * log<sub>b</sub><sup>n</sup>).</p>
 </li>
 <li>
-<p>Se f(n) &gt; n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->, então T(n) = theta(f(n)).</p>
+<p>Se f(n) &gt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n)).</p>
 </li>
 </ul>
 <p>Desse modo, se a relação de recorrência obedecer às restrições $a&gt;=1$, $b&gt;1$ e $f(n)$ não negativa, basta aplicarmos o teorema.</p>
@@ -557,7 +584,7 @@ function showQuiz(quizId) {
 <li>$b = 2$</li>
 <li>$f(n) = 1000 * n^2$</li>
 </ul>
-<p>Comparando $1000 * n^2$  com  n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->, temos que $1000 * n^2$ &lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = theta(n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted -->) e, portanto, $T(n) = (n^3)$.</p>
+<p>Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ &lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = (n^3)$.</p>
 <h3 id="exemplo-1">Exemplo</h3>
 <p>$T(n) = 2 * T(n/2) + 10*n$</p>
 <p>Para a relação acima, temos:</p>
@@ -566,7 +593,7 @@ function showQuiz(quizId) {
 <li>$b = 2$</li>
 <li>$f(n) = 10 * n$</li>
 </ul>
-<p>Comparando $10 * n$ com n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted --> temos que $10 * n  =  n$, pois comparamos a ordem de grandeza das funções e, quando fazemos isso, as constantes não importam. Portanto, aplicando a segunda regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(n * \log_{2}n)$.</p>
+<p>Comparando $10 * n$ com n ** log<sub>b</sub><sup>a</sup> temos que $10 * n  =  n$, pois comparamos a ordem de grandeza das funções e, quando fazemos isso, as constantes não importam. Portanto, aplicando a segunda regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(n * \log_{2}n)$.</p>
 <h3 id="exemplo-2">Exemplo</h3>
 <p>Para $T(n) = 2 * T(n/2) + n^2$, temos:</p>
 <ul>
@@ -574,7 +601,7 @@ function showQuiz(quizId) {
 <li>$b = 2$</li>
 <li>$f(n) = n^2$</li>
 </ul>
-<p>Comparando $n^2$  com n ** log<!-- raw HTML omitted -->b<!-- raw HTML omitted --><!-- raw HTML omitted -->a<!-- raw HTML omitted --> temos que $n^2 &gt; n$. Portanto, aplicando a terceira regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(f(n))$ e, portanto, $T(n) = \Theta(n^2)$.</p>
+<p>Comparando $n^2$  com n ** log<sub>b</sub><sup>a</sup> temos que $n^2 &gt; n$. Portanto, aplicando a terceira regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(f(n))$ e, portanto, $T(n) = \Theta(n^2)$.</p>
 <hr>
 
 
@@ -759,20 +786,83 @@ button[class*="btn"] {border: 50;}
 
 <script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
 <div class="quiz" style="display:none" id="resumo">
-  <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+  <script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(\\log{n})$".split(",");
+    var id = "resumo";
+    var question = "Qual é a altura da árvore de execução da busca binária?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "Qual é a altura da árvore de execução da busca linear?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 8 * T(n\/2) \u002b 1001*n^2$?";
+    var answers = "1".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \u002b 15*n$?";
+    var answers = "3".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(2*n)$,$\\Theta(n^2)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \u002b n^2$?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "Há duas chamadas recursivas.,Cada uma das 3 chamadas recursivas diminui a entrada em duas unidades.,Cada execução parcial tem custo linear., Cada uma das 3 chamadas recursivas diminui a entrada na metade.,Trata-se da relação de recorrência do merge sort.".split(",");
+    var id = "resumo";
+    var question = "Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n\/2) \u002b n^2$";
+    var answers = "4".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = " $T(n) = 7 * T(n\/13) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b n^2$, $T(n) = 2^n * T(n\/2) \u002b n^n$, $T(n) = T(n\/2) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b 10n$".split(",");
+    var id = "resumo";
+    var question = "Qual função abaixo não se adequa ao teorema mestre?";
+    var answers = "3".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
 
   <script>
     var quiz = new Quiz("resumo", questions);

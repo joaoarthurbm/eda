@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -156,7 +156,7 @@
 <p>Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.</p>
 <h1 id="ordenação-por-contagem">Ordenação por Contagem</h1>
 <p>Algo que chama a atenção em um primeiro momento é:</p>
-<!-- raw HTML omitted -->
+<p align="center"><b>Como é possível ordenar elementos sem utilizar comparação?</b></p>
 <p>Em geral, a ideia é valer-se do fato de que estamos ordenando números inteiros e que os índices dos arrays também são inteiros. Dessa maneira, podemos mapear o valor presente em uma sequência para a posição de mesmo valor em um array auxiliar (<code>array[i] = i</code>). Essa é a estratégia geral dos algoritmos de ordenação linear que se baseiam na contagem dos elementos da sequência a ser ordenada.</p>
 <p>Antes de analisarmos os algoritmos de contagem em detalhes, vamos abordar um exemplo bem simples para entender esse conceito. Para isso, vamos entrar em um mundo em que:</p>
 <ul>
@@ -175,7 +175,7 @@
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Se $A = [7, 2, 1, 4]$, com $k = 7$, temos $C$ preenchido da seguinte maneira:</p>
 <ul>
-<li>C = [<!-- raw HTML omitted -->true<!-- raw HTML omitted -->, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->]</li>
+<li>C = [<span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>, false, false, <span style="color:blue">true</span>]</li>
 </ul>
 <p>Agora, se criarmos um array $B$ do tamanho de $A$ e iterarmos sobre o array $C$ preenchendo $B$ com o valor do índice $i + 1$ em que <code>C[i] == true</code>, temos que $B$ é a versão ordenada de $A$.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -191,7 +191,7 @@
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Assim, para $A = [7, 2, 1, 4]$, temos:</p>
 <ul>
-<li>C = [<!-- raw HTML omitted -->true<!-- raw HTML omitted -->, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->]</li>
+<li>C = [<span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>, false, false, <span style="color:blue">true</span>]</li>
 <li>B = [1, 2, 4, 7], representando a sequência de valores de $A$, porém ordenada.</li>
 </ul>
 <p>Viu como foi fácil? Note que $B$ foi preenchido com os valores de $i+1$ em que C[i] ==  true. Ou seja, $B[0] = 1$, pois C[0] ==  true. $B[1] = 2$, pois C[1] ==  true. $B[2] = 4$, pois C[3] ==  true. Por fim, $B[3] = 7$, pois C[6] ==  true.</p>
@@ -222,7 +222,7 @@
 <p>Para $A = [9, 1, 3, 4, 6, 7]$, temos:</p>
 <ul>
 <li>
-<p>C = [<!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false, <!-- raw HTML omitted -->true<!-- raw HTML omitted -->,  <!-- raw HTML omitted -->true<!-- raw HTML omitted -->, false,  <!-- raw HTML omitted -->true<!-- raw HTML omitted -->]</p>
+<p>C = [<span style="color:blue">true</span>, false, <span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>,  <span style="color:blue">true</span>, false,  <span style="color:blue">true</span>]</p>
 </li>
 <li>
 <p>B = [1, 3, 4, 6, 7, 9], representando a sequência de valores de $A$, porém ordenada.</p>
@@ -230,7 +230,7 @@
 </ul>
 <h2 id="counting-sort-e-se-houver-repetição-no-array">Counting Sort: E se houver repetição no array?</h2>
 <p>Repetição de valores em um array a ser ordenado não é um cenário incomum, certo? O fato de não haver repetição nos permitiu criar um array C de booleanos e registrar a presença ou não de um elemento.</p>
-<!-- raw HTML omitted -->
+<p align="center">O que faríamos se houvesse repetição?</p>
 <p>Daí surge ordenação por contagem (<em>Counting Sort</em>). A ideia geral é registrar a frequência dos elementos ao invés da simples presença. Isso faz com que o array $C$ passe a ser um array de inteiros, não de booleanos. O algoritmo do <em>Counting Sort</em> é baseado na ideia que vimos, mas possui algumas modificações substanciais para permitir elementos repetidos e para manter a estabilidade. Em linhas gerais, o <em>Counting Sort</em> possui os seguintes passos:</p>
 <ol>
 <li>
@@ -287,7 +287,9 @@
         <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Essa parte pode ser confusa e acredito que para entendê-la precisamos de recursos visuais melhores do que o texto. Por isso, fiz o vídeo abaixo.</p>
-<!-- raw HTML omitted -->
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3bm7NgKJpj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
 <h2 id="implementação-do-counting-sort">Implementação do Counting Sort</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">countingSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> A<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     

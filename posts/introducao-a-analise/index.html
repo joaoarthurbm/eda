@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -161,7 +161,12 @@
 <p>Uma abordagem direta para analisar o desempenho de um algoritmo é a abordagem empírica. Neste caso, configura-se um ambiente em que as variáveis são controladas e executa-se os algoritmos com o intuito de medir o tempo de computação e comparar as diferentes soluções. 
 O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo x). Por exemplo, para analisar empiricamente um algoritmo de ordenação medimos o tempo de execução para diferentes tamanhos de arrays. Além disso, podemos querer variar a configuração do array sob ordenação para entender, por exemplo, como o algoritmo se comporta com um array já ordenado ou como se comporta com arrays parcialmente ordenados.</p>
 <p>Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para se ter validade estatística e permitir a construção de um modelo que represente a curva de cada algoritmo. A Figura abaixo apresenta os tempos de computação de diferentes algoritmos de ordenação à medida que aumenta-se o tamanho da entrada. Como podemos notar, o algoritmo SelectionSort apresenta tempo de execução consideravelmente maior em comparação com as outras três alternativas à medida que a quantidade de elementos a serem ordenados cresce.</p>
-<!-- raw HTML omitted -->
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="comparacao-ordenacao.jpeg">
+    <figcaption align="center">
+        Comparação de algoritmos de ordenação
+    </figcaption>
+</figure>
 <p>A abordagem empírica para análise de algoritmos é útil, pois, se conduzida de maneira metodologicamente apropriada, fornece valores precisos sobre o tempo de execução de um algoritmo. No entanto, essa abordagem apresenta algumas desvantagens. Primeiro, existe um alto custo relacionado à implementação de todos os algoritmos, além da configuração, execução e análise do experimento. Além disso, note que as conclusões são limitadas ao espaço de entrada do experimento. Por fim, os resultados são dependentes do hardware utilizado.</p>
 <p>Diante do cenário exposto acima, surge a necessidade de uma análise que:</p>
 <ul>
@@ -173,10 +178,22 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 <hr>
 <h2 id="análise-de-algoritmos">Análise de Algoritmos</h2>
 <p>Antes de apresentar os conceitos de análise assintótica, sua notação e modus operandi, é preciso apresentar a hipótese em que a análise de algoritmos se baseia:</p>
-<!-- raw HTML omitted -->
+<p align="center">Hipótese: O custo de operações primitivas é constante.</p>
 <p>Essa hipótese estabelece que operações aritméticas, indexação de elementos em um vetor, retorno de métodos, atribuição de valores às variáveis, comparação de elementos, entre outros, executam em tempo constante, referenciado como $O(1)$ ou $O(C)$. É importante destacar que, na prática, esse custo varia de acordo com o hardware, linguagem de programação etc. No entanto, essa variação é insignificante do ponto de vista da análise assintótica. O quadro abaixo lista as operações primitivas detalhadamente.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Operações Primitivas
+
+* Avaliação de expressões booleanas (i >= 2; i == 2, etc);
+
+* Operações matemáticas (*, -, +, %, etc);
+
+* Retorno de métodos (return x;);
+
+* Atribuição (i = 2);
+
+* Acesso à variáveis e posições arbitrárias de um array (v[i]).
+
+</pre>
 <p>Nesse contexto, o tempo de execução de um algoritmo é a soma do custo das operações primitivas. Por exemplo, considere o algoritmo que multiplica o resto da divisão de dois inteiros pela parte inteira da mesma divisão:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">multiplicaRestoPorParteInteira</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">int</span> resto <span style="color:#f92672">=</span> i <span style="color:#f92672">%</span> j<span style="color:#f92672">;</span>
@@ -210,7 +227,7 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 </ol>
 <p><strong>Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.</strong> Para o algoritmo acima, todas as primitivas são executadas apenas uma vez.</p>
 <p><strong>Passo 3: Somar o custo total.</strong> O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:</p>
-<!-- raw HTML omitted -->
+<p align="center">$f(n) = c_1+c_2+c_3+c_4+c_5+c_6+c_7$</p>
 <p>Lembrando estamos interessados em uma função que nos diga o tempo de execução em relação ao tamanho da entrada. Nesse caso, escolhemos $n$ para representar o tamanho da entrada. Como pode ser visto na função detalhada, o custo não depende de $n$ de maneira alguma. Independente dos números passados como parâmetro, o custo será sempre o mesmo. Por isso dizemos que essa função, e portanto o algoritmo que é descrito por ela, tem <strong>custo constante</strong>, ou seja, independe do tamanho da entrada.</p>
 <blockquote>
 <p>Dizer que um algoritmo tem custo constante significa dizer que o seu tempo de execução independe do tamanho da entrada.</p>
@@ -283,7 +300,7 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 </ol>
 <p><strong>Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.</strong> Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c_5$, pois, no pior caso, o bloco do <code>else</code> será executado, uma vez que é mais custoso que o bloco do <code>if</code>. As outras primitivas são executadas apenas uma vez.</p>
 <p><strong>Passo 3: Somar o custo total.</strong></p>
-<!-- raw HTML omitted -->
+<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_10+c_11+c_12+c_13$ </p>
 <p>Note que $c_5$ é desconsiderada.</p>
 <hr>
 <h3 id="e-quando-houver-iteração">E quando houver iteração?</h3>
@@ -341,9 +358,9 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 </ul>
 <p><strong>Passo 3: Somar o custo total.</strong></p>
 <p>O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:</p>
-<!-- raw HTML omitted -->
+<p align="center"> $f(n) = c_1+c_2*(n+1)+c_3*n+c_4*n+c_6$ </p>
 <p>Considerando todas as primitivas com custo $c$ e simplificando a função, temos:</p>
-<!-- raw HTML omitted -->
+<p align="center"> $f(n) = 3*c*n+3*c$ </p>
 <p>Veja que essa função é diretamente relacionada ao tamanho do array ($n$). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. Esse crescimento é linear, pois a função é linear. Faz sentido, certo? Iterar em um array com 100 posições é 10 vezes mais lento que iterar em um array de 10 posições. Não é por acaso que o nome desse algoritmo é busca linear. O termo refere-se a ambos: i) a estratégia de procurar o elemento de modo sequencial em uma coleção e ii) o tempo de execução do algoritmo.</p>
 <hr>
 <h3 id="e-quando-houver-loops-aninhados">E quando houver loops aninhados?</h3>
@@ -423,10 +440,10 @@ O tempo de execução (eixo y) é medido em função do tamanho da entrada (eixo
 <p>O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:</p>
 <p>$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + c_5 * (n^2 + n)/2 + c_6 * {n^2}/2 + c_7 * {n^2}/2 + c_9$</p>
 <p>Considerando todas as primitivas com custo c e simplificando a função, temos:</p>
-<!-- raw HTML omitted -->
+<p align="center"> $f(n) = 3 * c + 3 * c * n + 2 * {n^2}/2 + c * (n^2 + n)/2$ </p>
 <p>Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.</p>
 <p>É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.</p>
-<p>No material sobre <!-- raw HTML omitted -->Análise Assintótica<!-- raw HTML omitted --> vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.</p>
+<p>No material sobre <a class="external" href="http://joaoarthurbm.github.io/eda/posts/analise-assintotica">Análise Assintótica</a> vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.</p>
 <hr>
 
 
@@ -611,8 +628,17 @@ button[class*="btn"] {border: 50;}
 
 <script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
 <div class="quiz" style="display:none" id="test_quiz">
-  <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+  <script>
+    var choices = "int a = 7,Arrays.sort(v),v[7], return saldo".split(",");
+    var id = "test_quiz";
+    var question = "Qual operação abaixo não pode ser considerada primitiva?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
 
   <script>
     var quiz = new Quiz("test_quiz", questions);

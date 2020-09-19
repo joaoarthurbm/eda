@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
       
     </header>
 
@@ -130,7 +130,7 @@
 
         
 
-        <li>22 minutos de leitura</li>
+        <li>23 minutos de leitura</li>
 
 
         
@@ -181,7 +181,7 @@ BST é definida recursivamente da seguinte forma:</p>
     
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar.</p>
-<p>Depois, as referências <em><strong>left</strong></em> e <em><strong>right</strong></em> são muito parecidas com as referências de um <em><strong>Node</strong></em> em <!-- raw HTML omitted -->Listas Duplamente Encadeadas<!-- raw HTML omitted -->, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência <em><strong>left</strong></em> aponta é <em><strong>null</strong></em> ou  armazena um <strong>valor menor</strong> do que <em><strong>value</strong></em>, enquanto o nó para o qual a referência <em><strong>right</strong></em> aponta é <em><strong>null</strong></em> ou armazena um <strong>valor maior</strong> do que <em><strong>value</strong></em>. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.</p>
+<p>Depois, as referências <em><strong>left</strong></em> e <em><strong>right</strong></em> são muito parecidas com as referências de um <em><strong>Node</strong></em> em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência <em><strong>left</strong></em> aponta é <em><strong>null</strong></em> ou  armazena um <strong>valor menor</strong> do que <em><strong>value</strong></em>, enquanto o nó para o qual a referência <em><strong>right</strong></em> aponta é <em><strong>null</strong></em> ou armazena um <strong>valor maior</strong> do que <em><strong>value</strong></em>. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.</p>
 <p>Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência <em><strong>parent</strong></em> que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos.</p>
 <h2 id="raiz">Raiz</h2>
 <p>Raiz é um nó especial da árvore. Por meio dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.</p>
@@ -212,7 +212,7 @@ BST é definida recursivamente da seguinte forma:</p>
 <p>O predecessor de um elemento na árvore é o maior valor menor do que ele. Complicado? Imagine se pudéssemos imprimir a sequência dos valores presentes na árvore de forma ordenada. O predecessor de um elemento, seria o elemento imediatamente antes na sequência. Por exemplo, o predecessor de 41 na árvore acima é 32. O predecessor de 15 é 11. O predecessor de 72 é 65. Naturalmente, o menor valor armazenado na árvore (1) não tem predecessor.</p>
 <hr>
 <h1 id="implementação">Implementação</h1>
-<p>Assim como <!-- raw HTML omitted -->LinkedList<!-- raw HTML omitted -->, a classe <em><strong>BST</strong></em> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
+<p>Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList<a/>, a classe <em><strong>BST</strong></em> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BST</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> Node root<span style="color:#f92672">;</span>
@@ -563,43 +563,55 @@ de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da su
 <p>Para essa árvore, o resultado do percurso é 52 -&gt; 22 -&gt; 85 -&gt; 8 -&gt; 43 -&gt; 81 -&gt; 96 -&gt; 11 -&gt; 26 -&gt; 69 -&gt; 74.</p>
 <p>Como isso é feito? Para cada nó visitado, exploramos todos os seus filhos antes de seguir adiante. Começamos em 52 e, portanto visitamos 22 e 85. Depois vamos para 22, visitando 8 e 43. Depois 85, visitando 81 e 96 e assim por diante. Veja que esse percurso visita todo o primeiro nível da árvore, depois todos o segundo nível, depois todo o terceiro e assim por diante.</p>
 <p>E como isso é feito? Usamos uma fila para nos auxiliar. O algoritmo é o seguinte.</p>
-<p>Inicia-se a fila com a raiz: <!-- raw HTML omitted -->Q = {52}<!-- raw HTML omitted --></p>
+<p>Inicia-se a fila com a raiz: <pre>Q = {52}</pre></p>
 <p>Enquanto a fila não estiver vazia, retira-se o primeiro elemento da fila e coloca o seu filho à esquerda e o seu filho à direita na fila. Então retiramos (e imprimimos) 52 da fila e colocamos 22 e 85.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52
+Q = {<strike>52</strike>, 22, 85}</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 22 e colocamos 8 e 43.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22
+Q = {<strike>52, 22</strike>, 85, 8, 43}</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 85 e colocamos 81 e 96.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85
+Q = {<strike>52, 22, 85</strike>, 8, 43, 81, 96}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 8 e colocamos apenas 11, pois 8 não possui sub-árvore à esquerda.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85, 8
+Q = {<strike>52, 22, 85, 8</strike>, 43, 81, 96, 11}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 43 e colocamos apenas 26, pois 43 não possui sub-árvore à direita.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85, 8, 43
+Q = {<strike>52, 22, 85, 8, 43</strike>, 81, 96, 11, 26}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 81 e colocamos apenas a sua esquerda (69), pois a direita é nula.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85, 8, 43, 81
+Q = {<strike>52, 22, 85, 8, 43, 81</strike>, 96, 11, 26, 69}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 96, mas não colocamos elemento algum porque 96 é folha.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85, 8, 43, 81
+Q = {<strike>52, 22, 85, 8, 43, 81, 96</strike>, 11, 26, 69}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 11, mas não colocamos elemento algum porque 11 é folha.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>Impresso: 52, 22, 85, 8, 43, 81, 96, 11
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11</strike>, 26, 69}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 26, mas não colocamos elemento algum porque 26 é folha.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26</strike>, 69}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 69 e colocamos apenas o 74, pois 69 não tem sub-árvore à esquerda.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26, 69</strike>, 74}
+</pre>
 <p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 74 e não colocamos elemento algum porque 74 é folha.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74</strike>}
+</pre>
 <p>A fila está vazia? Está! Finalmente :). Veja que a sequência impressa representa o caminho por níveis na árvore da esquerda para a direita.</p>
 <p><img src="percorrendo.png" alt="percorrendo"></p>
-<!-- raw HTML omitted -->
+<p align="center">Percurso em largura: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74.</p>
 <p>Implementação em Java.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printBFS</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
