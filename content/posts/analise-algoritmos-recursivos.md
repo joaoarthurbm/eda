@@ -207,7 +207,7 @@ Podemos notar que a árvore é um pouco diferente da que ilustramos para o fator
 Para o cálculo da altura podemos notar que a árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada ini >= fim.
 
 
-Assim, temos que $2^h = n$. Aplicando $\log_{2}2$ nos dois lados da equação, temos:
+Assim, temos que $2^h = n$. Aplicando $\log$ nos dois lados da equação, temos:
 
 $h * \log_{2}2 = \log n$
 
