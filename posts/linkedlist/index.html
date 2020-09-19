@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="The HTML5 Herald" />
-  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.59.0" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
   <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
@@ -71,7 +71,7 @@
         
       </ul>
       
-      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      <p><em>João Arthur Brunet <!-- raw HTML omitted --> Computação @ UFCG</em></p>
       
     </header>
 
@@ -151,253 +151,205 @@
 
     
 
-    
-
-<hr />
-
+    <hr>
 <h1 id="problemas">Problemas</h1>
-
-<p>No <a class="external" href="http://joaoarthurbm.github.io/eda/posts/arraylist">material sobre ArrayLists</a> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
-
-<p>O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (<strong><em>shiftParaADireita</em></strong>) e durante a remoção de um elemento (<strong><em>shiftParaAEsquerda</em></strong>), ambas com tempo de execução $O(n)$.</p>
-
+<p>No <!-- raw HTML omitted -->material sobre ArrayLists<!-- raw HTML omitted --> discutimos algumas preocupações oriundas do uso de arrays e que estão todas conceitualmente relacionadas ao fato de que o array é uma estrutura de tamanho fixo. Isso impede o seu crescimento de forma dinâmica. Sempre que for preciso crescer a capacidade de um array é preciso criar um novo e transferir todos os elementos do array original para essa nova instância, o que é uma operação com tempo de execução $O(n)$.</p>
+<p>O fato do array ter tamanho fixo também implica em operações de remanejamento de elementos durante a inserção em uma posição arbitrária (<em><strong>shiftParaADireita</strong></em>) e durante a remoção de um elemento (<em><strong>shiftParaAEsquerda</strong></em>), ambas com tempo de execução $O(n)$.</p>
 <p>Por último, por definirmos de antemão o tamanho da estrutura, é possível que a quantidade de elementos no array seja menor do que a sua capacidade. Esse pode ser um problema de menor magnitude e importância atualmente porque a memória &ldquo;desperdiçada&rdquo; pode ser considerada irrelevante. Contudo, conceitualmente é importante discutir esse fato porque o uso indiscriminado de memória, quando cumulativo, pode gerar problemas.</p>
-
-<hr />
-
+<hr>
 <h1 id="linkedlist">LinkedList</h1>
-
-<p><strong><em>LinkedLists</em></strong> podem ser vistas como contraponto à estruturas baseadas em arrays. <strong><em>LinkedList</em></strong> são listas dinâmicas. Ao contrário de estruturas baseadas em arrays, os objetos de uma <strong><em>LinkedList</em></strong> são criados e removidos sob demanda.</p>
-
+<p><em><strong>LinkedLists</strong></em> podem ser vistas como contraponto à estruturas baseadas em arrays. <em><strong>LinkedList</strong></em> são listas dinâmicas. Ao contrário de estruturas baseadas em arrays, os objetos de uma <em><strong>LinkedList</strong></em> são criados e removidos sob demanda.</p>
 <h3 id="como-isso-é-feito">Como isso é feito?</h3>
-
 <p>Através da criação de objetos que possuem referências para seus vizinhos. Ou seja, encadeando os objetos. Daí o nome de lista encadeada.</p>
-
 <h3 id="e-que-objetos-são-esses">E que objetos são esses?</h3>
-
-<p><strong>Nós.</strong> Criamos nós que guardam a informação que queremos manipular e referências para seus vizinhos, que são do mesmo tipo. No nosso caso, vamos guardar objetos do tipo <strong><em>Aluno</em></strong>, que possuem matrícula e nome. Contudo, para fins didáticos, na visualização vamos identificar apenas com um número inteiro. Vamos ao código:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+<p><strong>Nós.</strong> Criamos nós que guardam a informação que queremos manipular e referências para seus vizinhos, que são do mesmo tipo. No nosso caso, vamos guardar objetos do tipo <em><strong>Aluno</strong></em>, que possuem matrícula e nome. Contudo, para fins didáticos, na visualização vamos identificar apenas com um número inteiro. Vamos ao código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">{</span>
     
-    Aluno <span style="color:#a6e22e">aluno</span>;
-    Node <span style="color:#a6e22e">next</span>;
-    Node <span style="color:#a6e22e">prev</span>;
+    Aluno aluno<span style="color:#f92672">;</span>
+    Node next<span style="color:#f92672">;</span>
+    Node prev<span style="color:#f92672">;</span>
     
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Node</span>(Aluno <span style="color:#a6e22e">aluno</span>) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">aluno</span> <span style="color:#f92672">=</span> aluno;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    }   
-}</code></pre></div>
-<p>Esta é uma classe auxiliar com visibilidade <em>default</em> e criada dentro do mesmo arquivo da classe <strong><em>LinkedList</em></strong>. Tomei essa decisão de projeto para evitar a manipulação verborrágica de referências através de <strong><em>getNext()</em></strong> e <strong><em>setNext()</em></strong>.</p>
-
-<p>Visualmente, objetos do tipo <strong><em>Node</em></strong> podem ser representados da seguinte maneira:</p>
-
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Node</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span> <span style="color:#f92672">=</span> aluno<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>   
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Esta é uma classe auxiliar com visibilidade <em>default</em> e criada dentro do mesmo arquivo da classe <em><strong>LinkedList</strong></em>. Tomei essa decisão de projeto para evitar a manipulação verborrágica de referências através de <em><strong>getNext()</strong></em> e <em><strong>setNext()</strong></em>.</p>
+<p>Visualmente, objetos do tipo <em><strong>Node</strong></em> podem ser representados da seguinte maneira:</p>
 <p><code>Node exemploNode = new Node(new Aluno(8, &quot;João&quot;));</code></p>
-
-<p><img src="node.png" alt="node" /></p>
-
-<p>Vamos descrever bem o que cada coisa significa. Primeiro, estamos chamando de valor o objeto do tipo aluno armazenado no <strong><em>Node</em></strong> (representado apenas por um número inteiro). O valor pode ser um objeto de qualquer tipo, pois a lista é uma estrutura de propósito geral. Escolhemos o tipo <strong><em>Aluno</em></strong> para fins didáticos e escolhemos representá-lo visualmente como um inteiro para simplificar nossa vida.</p>
-
-<p><strong><em>exemploNode</em></strong> é uma referência para um objeto do tipo <strong><em>Node</em></strong>.</p>
-
-<p><strong><em>prev</em></strong> e <strong><em>next</em></strong> são referências para objetos do tipo <strong><em>Node</em></strong>. <strong><em>next</em></strong> aponta para o próximo <strong><em>Node</em></strong>, que no nosso primeiro exemplo é <strong><em>null</em></strong> enquanto <strong><em>prev</em></strong> aponta para o <strong><em>Node</em></strong> anterior, que também é <strong><em>null</em></strong>. Como cada nó tem referências para o anterior e para o próximo, chamamos essa lista de duplamente encadeada.</p>
-
+<p><img src="node.png" alt="node"></p>
+<p>Vamos descrever bem o que cada coisa significa. Primeiro, estamos chamando de valor o objeto do tipo aluno armazenado no <em><strong>Node</strong></em> (representado apenas por um número inteiro). O valor pode ser um objeto de qualquer tipo, pois a lista é uma estrutura de propósito geral. Escolhemos o tipo <em><strong>Aluno</strong></em> para fins didáticos e escolhemos representá-lo visualmente como um inteiro para simplificar nossa vida.</p>
+<p><em><strong>exemploNode</strong></em> é uma referência para um objeto do tipo <em><strong>Node</strong></em>.</p>
+<p><em><strong>prev</strong></em> e <em><strong>next</strong></em> são referências para objetos do tipo <em><strong>Node</strong></em>. <em><strong>next</strong></em> aponta para o próximo <em><strong>Node</strong></em>, que no nosso primeiro exemplo é <em><strong>null</strong></em> enquanto <em><strong>prev</strong></em> aponta para o <em><strong>Node</strong></em> anterior, que também é <em><strong>null</strong></em>. Como cada nó tem referências para o anterior e para o próximo, chamamos essa lista de duplamente encadeada.</p>
 <p><strong>Como usar objetos do tipo Node para criar uma lista?</strong> Em termos simplistas, ligando os nós. Veja:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-Node <span style="color:#a6e22e">a</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#66d9ef">new</span> Aluno(8, <span style="color:#e6db74">&#34;João&#34;</span>));
-Node <span style="color:#a6e22e">b</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(<span style="color:#66d9ef">new</span> Aluno(11, <span style="color:#e6db74">&#34;Marielle&#34;</span>));
-a.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> b;
-b.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> a;
-...</code></pre></div>
-<p><img src="ligando.png" alt="ligando" /></p>
-
-<p>Em primeiro lugar, criamos dois nós: <strong><em>a</em></strong> e <strong><em>b</em></strong>. Depois, fizemos <code>a.next</code> apontar para o nó <strong><em>b</em></strong> (destaque em vermelho) e <code>b.prev</code> apontar para <strong><em>a</em></strong> (destaque em verde). Com essas instruções encadeamos os objetos e temos agora uma lista com dois elementos e podemos, apenas a partir da referência do primeiro, acessar o segundo. Como? <code>a.next</code>.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+Node a <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Aluno<span style="color:#f92672">(</span>8<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;João&#34;</span><span style="color:#f92672">));</span>
+Node b <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span><span style="color:#66d9ef">new</span> Aluno<span style="color:#f92672">(</span>11<span style="color:#f92672">,</span> <span style="color:#e6db74">&#34;Marielle&#34;</span><span style="color:#f92672">));</span>
+a<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> b<span style="color:#f92672">;</span>
+b<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> a<span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p><img src="ligando.png" alt="ligando"></p>
+<p>Em primeiro lugar, criamos dois nós: <em><strong>a</strong></em> e <em><strong>b</strong></em>. Depois, fizemos <code>a.next</code> apontar para o nó <em><strong>b</strong></em> (destaque em vermelho) e <code>b.prev</code> apontar para <em><strong>a</strong></em> (destaque em verde). Com essas instruções encadeamos os objetos e temos agora uma lista com dois elementos e podemos, apenas a partir da referência do primeiro, acessar o segundo. Como? <code>a.next</code>.</p>
 <p>Note que os objetos foram criados em tempo de execução. Ou seja, a lista é criada dinamicamente sem que seja preciso definir o seu tamanho em tempo de compilação.</p>
-
 <p>Vamos analisar a lista abaixo.</p>
+<p><img src="exemplo-lista.png" alt="exempli-lista"></p>
+<p>Não precisamos guardar todas as referências para os nós criados. Nesse caso apenas guardamos uma referência para o início da lista (<em><strong>head</strong></em>) e vamos encadeando os nós para formar a lista. Guardamos também uma referência para o fim da lista (<em><strong>tail</strong></em>) para efetuar adicionar elementos no final da lista de maneira mais eficiente, como vamos discutir adiante.</p>
+<p>Uma <em><strong>LinkedList</strong></em> é nada mais do que um controlador dessas referências. Vamos ver como isso se dá em código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">LinkedList</span> <span style="color:#f92672">{</span>
 
-<p><img src="exemplo-lista.png" alt="exempli-lista" /></p>
-
-<p>Não precisamos guardar todas as referências para os nós criados. Nesse caso apenas guardamos uma referência para o início da lista (<strong><em>head</em></strong>) e vamos encadeando os nós para formar a lista. Guardamos também uma referência para o fim da lista (<strong><em>tail</em></strong>) para efetuar adicionar elementos no final da lista de maneira mais eficiente, como vamos discutir adiante.</p>
-
-<p>Uma <strong><em>LinkedList</em></strong> é nada mais do que um controlador dessas referências. Vamos ver como isso se dá em código:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#a6e22e">class</span> LinkedList {
-
-    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Node</span> head;
-    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">Node</span> tail;
-    <span style="color:#66d9ef">private</span> <span style="color:#a6e22e">int</span> size;
+    <span style="color:#66d9ef">private</span> Node head<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Node tail<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> size<span style="color:#f92672">;</span>
     
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">LinkedList</span>() {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> 0;
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">LinkedList</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> isEmpty() {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>;
-    }
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
     
-...
-}</code></pre></div>
-<h2 id="organização-interna-atributos-construtor-e-isempty">Organização interna: atributos, construtor e isEmpty</h2>
-
-<p>Primeiro, vamos às definições de atributos e do construtor. A classe <strong><em>LinkedList</em></strong> possui três atributos: uma referência para o início da lista, outra para o fim e um inteiro representando a quantidade de elementos na lista. No construtor <em>default</em> esses atributos são iniciados com <strong><em>null</em></strong>, <strong><em>null</em></strong> e 0, respectivamente. Eu sei que não é preciso fazer isso porque os valores <em>default</em> de Java para esses tipos são os mesmos que atribuí no construtor. Contudo, eu prefiro deixar isso explícito para que fique claro para quem está aprendendo e ainda não é fluente com as particularidades da linguagem.</p>
-
+<span style="color:#f92672">...</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="organização-interna-atributos-construtor-e-isempty">Organização interna: atributos, construtor e isEmpty</h2>
+<p>Primeiro, vamos às definições de atributos e do construtor. A classe <em><strong>LinkedList</strong></em> possui três atributos: uma referência para o início da lista, outra para o fim e um inteiro representando a quantidade de elementos na lista. No construtor <em>default</em> esses atributos são iniciados com <em><strong>null</strong></em>, <em><strong>null</strong></em> e 0, respectivamente. Eu sei que não é preciso fazer isso porque os valores <em>default</em> de Java para esses tipos são os mesmos que atribuí no construtor. Contudo, eu prefiro deixar isso explícito para que fique claro para quem está aprendendo e ainda não é fluente com as particularidades da linguagem.</p>
 <h3 id="isempty">isEmpty()</h3>
-
-<p>Este método verifica se a lista está vazia ou não. A verificação é feita comparando <strong><em>head</em></strong> com <strong><em>null</em></strong>. Se essa comparação for verdadeira, significa que não elemento algum na lista, pois <strong><em>head</em></strong> é a referência que controla o início e a partir da qual conseguimos acessar os outros elementos.</p>
-
+<p>Este método verifica se a lista está vazia ou não. A verificação é feita comparando <em><strong>head</strong></em> com <em><strong>null</strong></em>. Se essa comparação for verdadeira, significa que não elemento algum na lista, pois <em><strong>head</strong></em> é a referência que controla o início e a partir da qual conseguimos acessar os outros elementos.</p>
 <h2 id="operações-básicas-inserção-busca-e-remoção">Operações básicas: inserção, busca e remoção.</h2>
-
 <h3 id="inserção">Inserção</h3>
-
 <p>Vamos abordar três tipos de inserção e uma lista encadeada:</p>
-
 <ol>
 <li><code>addLast(Aluno aluno)</code></li>
 <li><code>addFirst(Aluno aluno)</code></li>
 <li><code>add(int index, Aluno aluno)</code></li>
 </ol>
-
-<p><strong>addLast(Aluno aluno).</strong> O primeiro método adiciona um elemento no final da lista. Como mantemos uma referência para o final da lista, a única preocupação aqui é saber se trata-se do primeiro elemento a ser adicionado. Caso seja esse o cenário, ambos, <strong><em>head</em></strong> e <strong><em>tail</em></strong>, passam a apontar para o novo elemento. Caso contrário, precisamos fazer o novo elemento assumir o papel de <strong><em>tail</em></strong>. Vamos ao código:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> addLast(Aluno <span style="color:#a6e22e">aluno</span>) {
-    Node <span style="color:#a6e22e">newNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(aluno);
+<p><strong>addLast(Aluno aluno).</strong> O primeiro método adiciona um elemento no final da lista. Como mantemos uma referência para o final da lista, a única preocupação aqui é saber se trata-se do primeiro elemento a ser adicionado. Caso seja esse o cenário, ambos, <em><strong>head</strong></em> e <em><strong>tail</strong></em>, passam a apontar para o novo elemento. Caso contrário, precisamos fazer o novo elemento assumir o papel de <em><strong>tail</strong></em>. Vamos ao código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>aluno<span style="color:#f92672">);</span>
         
-    <span style="color:#66d9ef">if</span>(isEmpty()) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode;
-    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode;
-        newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> tail;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode;
-    }
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> tail<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
 
-    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">size</span> <span style="color:#f92672">+=</span> 1;
-}
-...</code></pre></div>
-<p>Em um primeiro momento, criamos o nó que será adicionado. Depois, verificamos se a lista está vazia. Se estiver, <strong><em>head</em></strong> e <strong><em>tail</em></strong> apontam para o novo nó. Caso contrário, efetuamos 3 passos:</p>
-
+    <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Em um primeiro momento, criamos o nó que será adicionado. Depois, verificamos se a lista está vazia. Se estiver, <em><strong>head</strong></em> e <em><strong>tail</strong></em> apontam para o novo nó. Caso contrário, efetuamos 3 passos:</p>
 <ol>
-<li><p>adicionamos o novo nó à frente de <strong><em>tail</em></strong> com a instrução
-<code>this.tail.next = newNode</code>;</p></li>
-
-<li><p>fazemos com que o anterior do novo nó seja <strong><em>tail</em></strong> com a instrução <code>newNode.prev = tail</code>;</p></li>
-
-<li><p>o fim da lista passa a ser o novo nó <code>this.tail = newNode</code>.</p></li>
+<li>
+<p>adicionamos o novo nó à frente de <em><strong>tail</strong></em> com a instrução 
+<code>this.tail.next = newNode</code>;</p>
+</li>
+<li>
+<p>fazemos com que o anterior do novo nó seja <em><strong>tail</strong></em> com a instrução <code>newNode.prev = tail</code>;</p>
+</li>
+<li>
+<p>o fim da lista passa a ser o novo nó <code>this.tail = newNode</code>.</p>
+</li>
 </ol>
-
 <p>A adição de um elemento ao final da lista é realizada em tempo constante $O(1)$, pois envolve apenas a verificação de uma expressão booleana e algumas manipulações de referências.</p>
-
-<p>Note que apenas a primeira adição impacta na referência <strong><em>head</em></strong>. No entanto, todas as adições impactam a referência <strong><em>tail</em></strong>, pois todo novo elemento passa a ser considerado o fim da lista.</p>
-
-<p><strong>addFirst(Aluno aluno).</strong> Este método adiciona elementos no início da lista. Nesse cenário também é preciso verificar se a lista está vazia. Caso seja esse o cenário, ambos, <strong><em>head</em></strong> e <strong><em>tail</em></strong>, passam a apontar para o novo elemento. Caso contrário, precisamos fazer o novo elemento assumir o papel de <strong><em>head</em></strong>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> addFirst(Aluno <span style="color:#a6e22e">aluno</span>) {
-    Node <span style="color:#a6e22e">newNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(aluno);
+<p>Note que apenas a primeira adição impacta na referência <em><strong>head</strong></em>. No entanto, todas as adições impactam a referência <em><strong>tail</strong></em>, pois todo novo elemento passa a ser considerado o fim da lista.</p>
+<p><strong>addFirst(Aluno aluno).</strong> Este método adiciona elementos no início da lista. Nesse cenário também é preciso verificar se a lista está vazia. Caso seja esse o cenário, ambos, <em><strong>head</strong></em> e <em><strong>tail</strong></em>, passam a apontar para o novo elemento. Caso contrário, precisamos fazer o novo elemento assumir o papel de <em><strong>head</strong></em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addFirst</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>aluno<span style="color:#f92672">);</span>
         
-    <span style="color:#66d9ef">if</span> (isEmpty()) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode;
-    } <span style="color:#66d9ef">else</span> {
-        newNode.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode;
-    }
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
         
-    size <span style="color:#f92672">+=</span> 1;
-}
-...</code></pre></div>
-<p>Em um primeiro momento, criamos o nó que será adicionado. Depois, verificamos se a lista está vazia. Se estiver, <strong><em>head</em></strong> e <strong><em>tail</em></strong> apontam para o novo nó. Caso contrário, efetuamos 3 passos:</p>
-
+    size <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Em um primeiro momento, criamos o nó que será adicionado. Depois, verificamos se a lista está vazia. Se estiver, <em><strong>head</strong></em> e <em><strong>tail</strong></em> apontam para o novo nó. Caso contrário, efetuamos 3 passos:</p>
 <ol>
-<li><p>adicionamos o novo nó atrás de <strong><em>head</em></strong> com a instrução <code>newNode.next = this.head</code>;</p></li>
-
-<li><p>fazemos com que o anterior de <strong><em>head</em></strong> aponte para o novo nó com a instrução <code>this.head.prev = newNode</code>;</p></li>
-
-<li><p>o início da lista passa a ser o novo nó, ou seja, <code>this.head = newNode</code>.</p></li>
+<li>
+<p>adicionamos o novo nó atrás de <em><strong>head</strong></em> com a instrução <code>newNode.next = this.head</code>;</p>
+</li>
+<li>
+<p>fazemos com que o anterior de <em><strong>head</strong></em> aponte para o novo nó com a instrução <code>this.head.prev = newNode</code>;</p>
+</li>
+<li>
+<p>o início da lista passa a ser o novo nó, ou seja, <code>this.head = newNode</code>.</p>
+</li>
 </ol>
-
 <p>A adição de um elemento no início da lista é realizada em tempo constante $O(1)$, pois envolve apenas a verificação de uma expressão booleana e algumas manipulações de referências.</p>
-
-<p>Note que apenas a primeira adição impacta na referência <strong><em>tail</em></strong>. No entanto, todas as adições impactam a referência <strong><em>head</em></strong>, pois todo novo elemento passa a ser considerado o início da lista.</p>
-
-<p><strong>add(int index, Aluno aluno).</strong> A semântica deste método é: encaixar um novo elemento no índice passado como parâmetro &ldquo;afastando&rdquo; os elementos à frente para a direita. O uso das aspas em afastando é para chamar atenção para o fato de que não precisamos executar a operação de <strong><em>shift</em></strong> $(O(n))$, mas apenas alterar as referências ($O(1)$).</p>
-
+<p>Note que apenas a primeira adição impacta na referência <em><strong>tail</strong></em>. No entanto, todas as adições impactam a referência <em><strong>head</strong></em>, pois todo novo elemento passa a ser considerado o início da lista.</p>
+<p><strong>add(int index, Aluno aluno).</strong> A semântica deste método é: encaixar um novo elemento no índice passado como parâmetro &ldquo;afastando&rdquo; os elementos à frente para a direita. O uso das aspas em afastando é para chamar atenção para o fato de que não precisamos executar a operação de <em><strong>shift</strong></em> $(O(n))$, mas apenas alterar as referências ($O(1)$).</p>
 <p>Vamos supor que o foi efetuada a chamada <code>lista.add(3, new Aluno(5, &quot;Amarildo&quot;))</code>, em que queremos adicionar o objeto com matrícula 5 na posição 3 da lista. Veja a ilustração abaixo:</p>
-
-<p><img src="insert.png" alt="insert" /></p>
-
+<p><img src="insert.png" alt="insert"></p>
 <p>Note que o objeto com matrícula 5 vai assumir a posição 3 da lista. Para isso precisamos alterar as seguintes referências:</p>
-
 <ul>
-<li>O <strong><em>next</em></strong> do novo nó passa a ser o nó com valor 3;</li>
-<li>O <strong><em>prev</em></strong> do novo nó passa a ser o nó com valor -9;</li>
-<li>O <strong><em>next</em></strong> do nó com valor -9 passa a ser o novo nó;</li>
-<li>O <strong><em>prev</em></strong> do nó com valor 3 passa a ser o novo nó.</li>
+<li>O <em><strong>next</strong></em> do novo nó passa a ser o nó com valor 3;</li>
+<li>O <em><strong>prev</strong></em> do novo nó passa a ser o nó com valor -9;</li>
+<li>O <em><strong>next</strong></em> do nó com valor -9 passa a ser o novo nó;</li>
+<li>O <em><strong>prev</strong></em> do nó com valor 3 passa a ser o novo nó.</li>
 </ul>
-
-<p>A essa altura você já deve ter percebido que listas encadeadas não são indexadas como as listas baseadas em arrays. Isto é, não há como acessar em tempo constante a n-ésima posição da lista, pois <strong>não</strong> há como executar a instrução <code>listaEncadeada[index]</code>. É preciso iterar até a posição <strong><em>index</em></strong> para adicionar o novo elemento. Lembrando que temos apenas as referências para o início e o fim da lista. Assim, precisamos partir do início da lista até uma posição <strong><em>index</em></strong> navegando através das referências <strong><em>next</em></strong>.</p>
-
-<p>Vamos analisar detalhadamente o código do método <strong><em>add(int index, int value)</em></strong> para discutirmos essas preocupações.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">void</span> add(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>, Aluno <span style="color:#a6e22e">aluno</span>) {
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;</span> size)
-        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+<p>A essa altura você já deve ter percebido que listas encadeadas não são indexadas como as listas baseadas em arrays. Isto é, não há como acessar em tempo constante a n-ésima posição da lista, pois <strong>não</strong> há como executar a instrução <code>listaEncadeada[index]</code>. É preciso iterar até a posição <em><strong>index</strong></em> para adicionar o novo elemento. Lembrando que temos apenas as referências para o início e o fim da lista. Assim, precisamos partir do início da lista até uma posição <em><strong>index</strong></em> navegando através das referências <em><strong>next</strong></em>.</p>
+<p>Vamos analisar detalhadamente o código do método <em><strong>add(int index, int value)</strong></em> para discutirmos essas preocupações.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">,</span> Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;</span> size<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException<span style="color:#f92672">();</span>
         
-    Node <span style="color:#a6e22e">newNode</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(aluno);
+    Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>aluno<span style="color:#f92672">);</span>
         
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> 0) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addFirst</span>(valor);
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addFirst</span><span style="color:#f92672">(</span>valor<span style="color:#f92672">);</span>
         
-    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">addLast</span>(valor);
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>valor<span style="color:#f92672">);</span>
         
-    } <span style="color:#66d9ef">else</span> {
-        Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
             
-        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> index <span style="color:#f92672">-</span> 1; i<span style="color:#f92672">++</span>)
-            aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> index <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span>
+            aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
             
-        newNode.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-        aux.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode;
-        newNode.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode;
-        newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux;
+        newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+        newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">;</span>
             
-        size <span style="color:#f92672">+=</span> 1;
-    }
+        size <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
             
-}</code></pre></div>
-<p>Em primeiro lugar, verificamos se o índice passado como parâmetro é válido. Caso não seja, lançamos uma exceção.</p>
-
-<p>Caso <strong><em>index</em></strong> seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o <code>index == 0</code>, basta invocarmos o método <strong><em>addFirst</em></strong>, que já implementamos. Se <code>index == size</code>,  basta invocarmos o método <strong><em>addLast</em></strong>, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências.</p>
-
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Em primeiro lugar, verificamos se o índice passado como parâmetro é válido. Caso não seja, lançamos uma exceção.</p>
+<p>Caso <em><strong>index</strong></em> seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o <code>index == 0</code>, basta invocarmos o método <em><strong>addFirst</strong></em>, que já implementamos. Se <code>index == size</code>,  basta invocarmos o método <em><strong>addLast</strong></em>, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências.</p>
 <h3 id="como-iterar-em-uma-lista-encadeada">Como iterar em uma lista encadeada?</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;           
-<span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> index <span style="color:#f92672">-</span> 1; i<span style="color:#f92672">++</span>)
-    aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-...</code></pre></div>
-<p>Inicialmente criamos uma referência auxiliar (<strong><em>aux</em></strong>). Ela inicialmente aponta para <strong><em>head</em></strong> e, a cada passo da iteração, vai sendo atribuída para o próximo da lista (<code>aux = aux.next</code>). Não fazemos isso diretamente com a referência <strong><em>head</em></strong> porque perderíamos a referência para o início da lista. Por isso é preciso criar um auxiliar.</p>
-
-<p>Ao término desse laço, <strong><em>aux</em></strong> estará apontando para o nó que será o anterior do novo nó. Vamos relembrar o cenário:</p>
-
-<p><img src="insert-aux.png" alt="insert-aux" /></p>
-
-<p>Note que <strong><em>aux</em></strong> aponta para o nó com valor -9 após o loop. Apenas com uma referência para esse nó podemos então encaixar o novo nó com as instruções:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-newNode.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-aux.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode;
-newNode.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode;
-newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux;
-...</code></pre></div>
-<p>A adição de um elemento em uma posição arbitrária da <strong><em>LinkedList</em></strong> é $O(n)$, pois envolve iterar sobre a lista e, no pior caso, o índice passado como parâmetro é da ordem do número de elementos presentes.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>           
+<span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> index <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span>
+    aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Inicialmente criamos uma referência auxiliar (<em><strong>aux</strong></em>). Ela inicialmente aponta para <em><strong>head</strong></em> e, a cada passo da iteração, vai sendo atribuída para o próximo da lista (<code>aux = aux.next</code>). Não fazemos isso diretamente com a referência <em><strong>head</strong></em> porque perderíamos a referência para o início da lista. Por isso é preciso criar um auxiliar.</p>
+<p>Ao término desse laço, <em><strong>aux</strong></em> estará apontando para o nó que será o anterior do novo nó. Vamos relembrar o cenário:</p>
+<p><img src="insert-aux.png" alt="insert-aux"></p>
+<p>Note que <em><strong>aux</strong></em> aponta para o nó com valor -9 após o loop. Apenas com uma referência para esse nó podemos então encaixar o novo nó com as instruções:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">;</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>A adição de um elemento em uma posição arbitrária da <em><strong>LinkedList</strong></em> é $O(n)$, pois envolve iterar sobre a lista e, no pior caso, o índice passado como parâmetro é da ordem do número de elementos presentes.</p>
 <h3 id="busca">Busca</h3>
-
 <p>Vamos explorar 5 formas de acesso a elementos de uma LinkedList:</p>
-
 <ol>
 <li><code>Aluno get(int index)</code></li>
 <li><code>int indexOf(Aluno aluno)</code></li>
@@ -405,158 +357,146 @@ newNode.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</s
 <li><code>Aluno getFirst()</code></li>
 <li><code>Aluno getLast()</code></li>
 </ol>
-
 <p>Os três primeiros métodos compartilham de uma aspecto importante: todos envolvem iteração sobre a lista e, por isso, são $O(n)$.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> get(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> size)
-        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> size<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException<span style="color:#f92672">();</span>
         
-    Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
+    Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
         
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
-        aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> index<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span>
+        aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
         
-    <span style="color:#66d9ef">return</span> aux.<span style="color:#a6e22e">aluno</span>;
-}
+    <span style="color:#66d9ef">return</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 
 
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">int</span> indexOf(Aluno <span style="color:#a6e22e">aluno</span>) {
-    Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
-    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">=</span> 0;
-    <span style="color:#66d9ef">while</span> (aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span>) { 
-        <span style="color:#66d9ef">if</span>(aux.<span style="color:#a6e22e">aluno</span>.<span style="color:#a6e22e">getMatricula</span>().<span style="color:#a6e22e">equals</span>(aluno.<span style="color:#a6e22e">getMatricula</span>()))
-            <span style="color:#66d9ef">return</span> index;
-        aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-        index <span style="color:#f92672">+=</span> 1;
-    }
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span> index <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>aux<span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">.</span><span style="color:#a6e22e">getMatricula</span><span style="color:#f92672">().</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>aluno<span style="color:#f92672">.</span><span style="color:#a6e22e">getMatricula</span><span style="color:#f92672">()))</span>
+            <span style="color:#66d9ef">return</span> index<span style="color:#f92672">;</span>
+        aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        index <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
         
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1;
-}
+    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> contains(Aluno <span style="color:#a6e22e">aluno</span>) {
-    <span style="color:#66d9ef">return</span> indexOf(aluno) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1;
-}
-...</code></pre></div>
-<p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <strong><em>index</em></strong>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/lang/IndexOutOfBoundsException.html">
-IndexOutOfBounds</a>.</p>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">contains</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> indexOf<span style="color:#f92672">(</span>aluno<span style="color:#f92672">)</span> <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p><strong>Aluno get(int index).</strong> Este método recupera o aluno presente na posição <em><strong>index</strong></em>. Em primeiro lugar verificamos se a posição é válida. Caso não seja lançamos uma exceção <!-- raw HTML omitted -->
+IndexOutOfBounds<!-- raw HTML omitted -->.</p>
+<p>Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando <em><strong>for</strong></em> por se tratar de uma iteração definida. Ao final dessa iteração <em><strong>aux</strong></em> aponta para o nó na posição <em><strong>index</strong></em>. Assim, retornamos <code>aux.aluno</code>, que é o objeto desejado.</p>
+<p><strong>int indexOf(Aluno aluno).</strong> Este método retorna o índice da primeira ocorrência do valor passado como parâmetro na lista. Novamente, iteramos sobre a lista, mas dessa vez usamos o comando <em><strong>while</strong></em>, pois a iteração é indefinida. Note que há duas condições de parada. Quando <code>aux == null</code>, ou seja, percorremos toda a lista e não encontramos o aluno procurado e, por isso, retornamos -1. Ou quando encontramos o aluno procurado. Nesse último caso retornamos o valor da variável <em><strong>index</strong></em>, que é incrementada a cada passo da procura.</p>
+<p><strong>boolean contains(Aluno aluno).</strong> Este método apenas verifica se o aluno passado como parâmetro está presente na lista ou não. Para isso, reusamos o método <em><strong>indexOf</strong></em>. Se o resultado da execução for -1, o método <em><strong>contains</strong></em> retorna <em><strong>false</strong></em>. Caso contrário, retorna <em><strong>true</strong></em>.</p>
+<p>Os métodos <em><strong>getFirst()</strong></em> e <em><strong>getLast()</strong></em>, por sua vez, são $O(1)$, pois basta retornarmos os alunos armazenados nos nós cujas referências são <em><strong>head</strong></em> e <em><strong>tail</strong></em>, respectivamente.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">getFirst</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">())</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 
-<p>Caso o índice seja válido, precisamos iterar do início da lista até o índice desejado. Usamos o comando <strong><em>for</em></strong> por se tratar de uma iteração definida. Ao final dessa iteração <strong><em>aux</em></strong> aponta para o nó na posição <strong><em>index</em></strong>. Assim, retornamos <code>aux.aluno</code>, que é o objeto desejado.</p>
-
-<p><strong>int indexOf(Aluno aluno).</strong> Este método retorna o índice da primeira ocorrência do valor passado como parâmetro na lista. Novamente, iteramos sobre a lista, mas dessa vez usamos o comando <strong><em>while</em></strong>, pois a iteração é indefinida. Note que há duas condições de parada. Quando <code>aux == null</code>, ou seja, percorremos toda a lista e não encontramos o aluno procurado e, por isso, retornamos -1. Ou quando encontramos o aluno procurado. Nesse último caso retornamos o valor da variável <strong><em>index</em></strong>, que é incrementada a cada passo da procura.</p>
-
-<p><strong>boolean contains(Aluno aluno).</strong> Este método apenas verifica se o aluno passado como parâmetro está presente na lista ou não. Para isso, reusamos o método <strong><em>indexOf</em></strong>. Se o resultado da execução for -1, o método <strong><em>contains</em></strong> retorna <strong><em>false</em></strong>. Caso contrário, retorna <strong><em>true</em></strong>.</p>
-
-<p>Os métodos <strong><em>getFirst()</em></strong> e <strong><em>getLast()</em></strong>, por sua vez, são $O(1)$, pois basta retornarmos os alunos armazenados nos nós cujas referências são <strong><em>head</em></strong> e <strong><em>tail</em></strong>, respectivamente.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> getFirst() {
-    <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isEmpty</span>()) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">aluno</span>;
-}
-
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> getLast() {
-    <span style="color:#66d9ef">if</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">isEmpty</span>()) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span>;
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">aluno</span>;
-}
-...</code></pre></div>
-<h3 id="remoção">Remoção</h3>
-
-<p>Vamos explorar 4 formas remoção em uma <strong><em>LinkedList</em></strong>:</p>
-
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">getLast</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">())</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h3 id="remoção">Remoção</h3>
+<p>Vamos explorar 4 formas remoção em uma <em><strong>LinkedList</strong></em>:</p>
 <ol>
 <li><code>Aluno removeFirst()</code></li>
 <li><code>Aluno removeLast()</code></li>
 <li><code>Aluno remove(int index)</code></li>
 <li><code>boolean remove(Aluno aluno)</code></li>
 </ol>
-
 <p>Os dois primeiros métodos envolvem apenas a manipulação de algumas referências e, por isso, são $O(1)$. Em ambos, precisamos checar se a lista está vazia ou se possui apenas um elemento.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> removeFirst() {
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         
-    <span style="color:#66d9ef">if</span> (isEmpty()) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException();
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
         
-    Aluno <span style="color:#a6e22e">aluno</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">aluno</span>;
+    Aluno aluno <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
         
-    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    }
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
         
-    size <span style="color:#f92672">-=</span> 1;
-    <span style="color:#66d9ef">return</span> aluno;
-}
+    size <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> aluno<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
     
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> removeLast() {
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">removeLast</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         
-    <span style="color:#66d9ef">if</span> (isEmpty()) <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException();
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
         
-    Aluno <span style="color:#a6e22e">aluno</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">aluno</span>;
+    Aluno aluno <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
     
-    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span>) {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    } <span style="color:#66d9ef">else</span> {
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">prev</span>;
-        <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">tail</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    }           
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>           
     
-    size <span style="color:#f92672">-=</span> 1;
-    <span style="color:#66d9ef">return</span> aluno;
+    size <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> aluno<span style="color:#f92672">;</span>
 
-}
-...</code></pre></div>
-<p><strong>removeFirst().</strong> Esse método remove e retorna o primeiro elemento da lista. A primeira verificação que fazermos é se a lista está vazia. Se esse for o caso, lançamos a exceção <strong><em>NoSuchElementException</em></strong>. Depois, precisamos verificar se a lista contém apenas um elemento, pois isso requer que as referências <strong><em>head</em></strong> e <strong><em>tail</em></strong> passem a apontar para <strong><em>null</em></strong>. Caso nenhuma dessas condições sejam verdadeiras (<strong><em>else</em></strong>), temos pelo menos dois elementos na lista. Nesse caso, basta fazer head apontar para o próximo elemento da lista (<code>head = head.next</code>) e <code>head.prev</code> apontar para <strong><em>null</em></strong>.</p>
-
-<p><strong>removeLast().</strong> Esse método remove e retorna o último elemento da lista. A primeira verificação que fazermos é se a lista está vazia. Se esse for o caso, lançamos a exceção <strong><em>NoSuchElementException</em></strong>. Depois, precisamos verificar se a lista contém apenas um elemento, pois isso requer que as referências <strong><em>head</em></strong> e <strong><em>tail</em></strong> passem a apontar para <strong><em>null</em></strong>. Caso nenhuma dessas condições sejam verdadeiras (<strong><em>else</em></strong>), temos pelo menos dois elementos na lista. Nesse caso, basta fazer <strong><em>tail</em></strong> apontar para o seu anterior (<code>tail = tail.prev</code>) e <code>tail.next</code> apontar para <strong><em>null</em></strong>.</p>
-
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p><strong>removeFirst().</strong> Esse método remove e retorna o primeiro elemento da lista. A primeira verificação que fazermos é se a lista está vazia. Se esse for o caso, lançamos a exceção <em><strong>NoSuchElementException</strong></em>. Depois, precisamos verificar se a lista contém apenas um elemento, pois isso requer que as referências <em><strong>head</strong></em> e <em><strong>tail</strong></em> passem a apontar para <em><strong>null</strong></em>. Caso nenhuma dessas condições sejam verdadeiras (<em><strong>else</strong></em>), temos pelo menos dois elementos na lista. Nesse caso, basta fazer head apontar para o próximo elemento da lista (<code>head = head.next</code>) e <code>head.prev</code> apontar para <em><strong>null</strong></em>.</p>
+<p><strong>removeLast().</strong> Esse método remove e retorna o último elemento da lista. A primeira verificação que fazermos é se a lista está vazia. Se esse for o caso, lançamos a exceção <em><strong>NoSuchElementException</strong></em>. Depois, precisamos verificar se a lista contém apenas um elemento, pois isso requer que as referências <em><strong>head</strong></em> e <em><strong>tail</strong></em> passem a apontar para <em><strong>null</strong></em>. Caso nenhuma dessas condições sejam verdadeiras (<em><strong>else</strong></em>), temos pelo menos dois elementos na lista. Nesse caso, basta fazer <em><strong>tail</strong></em> apontar para o seu anterior (<code>tail = tail.prev</code>) e <code>tail.next</code> apontar para <em><strong>null</strong></em>.</p>
 <p>Os outros dois métodos envolvem iterar sobre a lista, seja até o índice passado como parâmetro, seja procurando pelo elemento a ser removido. Por isso, ambos são $O(n)$.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">...
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Aluno</span> remove(<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">index</span>) {
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> size)
-        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException();
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">&lt;</span> 0 <span style="color:#f92672">||</span> index <span style="color:#f92672">&gt;=</span> size<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> IndexOutOfBoundsException<span style="color:#f92672">();</span>
     
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> 0) <span style="color:#66d9ef">return</span> removeFirst();
-    <span style="color:#66d9ef">if</span> (index <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1) <span style="color:#66d9ef">return</span> removeLast();
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> removeFirst<span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>index <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> removeLast<span style="color:#f92672">();</span>
     
-    Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> index; i<span style="color:#f92672">++</span>)
-        aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
+    Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> index<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span>
+        aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
     
-    aux.<span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-    aux.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">prev</span>;
-                   size <span style="color:#f92672">-=</span> 1;       
-    <span style="color:#66d9ef">return</span> aux.<span style="color:#a6e22e">aluno</span>;
-}
+    aux<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span><span style="color:#f92672">;</span>
+                   size <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>       
+    <span style="color:#66d9ef">return</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
     
-<span style="color:#66d9ef">public</span> <span style="color:#a6e22e">boolean</span> remove(Aluno <span style="color:#a6e22e">aluno</span>) {
-    Node <span style="color:#a6e22e">aux</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">head</span>;
-    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> <span style="color:#a6e22e">i</span> <span style="color:#f92672">=</span> 0; i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">size</span>; i<span style="color:#f92672">++</span>) {
-        <span style="color:#66d9ef">if</span> (aux.<span style="color:#a6e22e">aluno</span>.<span style="color:#a6e22e">equals</span>(aluno)) {
-            <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> 0) removeFirst();
-            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1) removeLast();
-            <span style="color:#66d9ef">else</span> {
-                aux.<span style="color:#a6e22e">prev</span>.<span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-                aux.<span style="color:#a6e22e">next</span>.<span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">prev</span>;
-                size <span style="color:#f92672">-=</span> 1;
-            }
-            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span>;
-        }
-        aux <span style="color:#f92672">=</span> aux.<span style="color:#a6e22e">next</span>;
-    }
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">remove</span><span style="color:#f92672">(</span>Aluno aluno<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>aux<span style="color:#f92672">.</span><span style="color:#a6e22e">aluno</span><span style="color:#f92672">.</span><span style="color:#a6e22e">equals</span><span style="color:#f92672">(</span>aluno<span style="color:#f92672">))</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">==</span> 0<span style="color:#f92672">)</span> removeFirst<span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">==</span> size <span style="color:#f92672">-</span> 1<span style="color:#f92672">)</span> removeLast<span style="color:#f92672">();</span>
+            <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                aux<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span><span style="color:#f92672">.</span><span style="color:#a6e22e">next</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+                aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span><span style="color:#f92672">;</span>
+                size <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+            <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">next</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
         
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-}</code></pre></div>
-<p><strong>remove(int index) e remove(Aluno aluno).</strong> Quando o elemento é encontrado, há 3 casos possíveis: o elemento está na primeira posição, na última ou entre outros dois. No primeiro caso, reusamos o método <strong>removeFirst()</strong>. No segundo caso, reusamos o método <strong>removeLast()</strong>. Para o terceiro caso, manipulamos as referências para ligar o anterior e o próximo: <code>aux.prev.next = aux.next</code> e <code>aux.next.prev = aux.prev</code>.</p>
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
 
-<hr />
-
+</code></pre></div><p><strong>remove(int index) e remove(Aluno aluno).</strong> Quando o elemento é encontrado, há 3 casos possíveis: o elemento está na primeira posição, na última ou entre outros dois. No primeiro caso, reusamos o método <strong>removeFirst()</strong>. No segundo caso, reusamos o método <strong>removeLast()</strong>. Para o terceiro caso, manipulamos as referências para ligar o anterior e o próximo: <code>aux.prev.next = aux.next</code> e <code>aux.next.prev = aux.prev</code>.</p>
+<hr>
 <h1 id="notas">Notas</h1>
-
-<p>Por motivos de simplificação, a classe <strong><em>LinkedList</em></strong> que implementamos neste material manipula objetos do tipo <strong><em>Node</em></strong> que armazenam objetos do tipo <strong><em>Aluno</em></strong>. Naturalmente, por ser de propósito geral, a implementação de <a class="external" href="https://docs.oracle.com/javase/7/docs/api/java/util/LinkedList.html">LinkedList</a> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
+<p>Por motivos de simplificação, a classe <em><strong>LinkedList</strong></em> que implementamos neste material manipula objetos do tipo <em><strong>Node</strong></em> que armazenam objetos do tipo <em><strong>Aluno</strong></em>. Naturalmente, por ser de propósito geral, a implementação de <!-- raw HTML omitted -->LinkedList<!-- raw HTML omitted --> de Java permite o armazenamento e manipulação de qualquer objeto.</p>
 
 
 </article>
@@ -584,7 +524,7 @@ IndexOutOfBounds</a>.</p>
 
 </main>
     <footer>
-    <h6><a href="http://joaoarthurbm.github.io">Copyright &copy; 2019 - João Arthur Brunet</a></h6>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet</a></h6>
     </footer>
 </div>
 <script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
