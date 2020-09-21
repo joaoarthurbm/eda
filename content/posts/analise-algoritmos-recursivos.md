@@ -138,7 +138,7 @@ public void mergeSort(int[] v, int ini, int fim) {
 
 $T(n) = T(n/2) + T(n/2) + (n)$, simplificando
 
-$T(n) = 2 * T(n/2) + n$, onde n = v.length - 1
+$T(n) = 2 * T(n/2) + n$, onde n = v.length
 
 * $2 * T(n/2)$ representa as duas chamadas recursivas em que a entrada é divida pela metade em cada uma delas. 
 
@@ -240,7 +240,7 @@ public int indexOf(int[] v, int n, int ini, int fim) {
 
 $T(n) = T(n/2) + \Theta(1)$. 
 
-Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1
+Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length
 
 
 * $T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.
