@@ -238,7 +238,7 @@ Você lembra quais são as operações primitivas?
 <span style="color:#f92672">}</span>
 </code></pre></div><p><strong>Relação de recorrência.</strong> A primeira etapa para identificar a classe de complexidade do <em>Merge Sort</em> é identificar a sua relação de recorrência:</p>
 <p>$T(n) = T(n/2) + T(n/2) + (n)$, simplificando</p>
-<p>$T(n) = 2 * T(n/2) + n$, onde n = v.length - 1</p>
+<p>$T(n) = 2 * T(n/2) + n$, onde n = v.length</p>
 <ul>
 <li>
 <p>$2 * T(n/2)$ representa as duas chamadas recursivas em que a entrada é divida pela metade em cada uma delas.</p>
@@ -530,7 +530,7 @@ function showQuiz(quizId) {
 <span style="color:#f92672">}</span>
 </code></pre></div><p><strong>Relação de recorrência.</strong> Como aprendemos anteriormente, a primeira etapa para identificar o custo de execução do algoritimo de Busca Binária é identificar a sua relação de recorrência:</p>
 <p>$T(n) = T(n/2) + \Theta(1)$.</p>
-<p>Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1</p>
+<p>Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length</p>
 <ul>
 <li>
 <p>$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>

@@ -821,7 +821,7 @@ Você lembra quais são as operações primitivas?
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Relação de recorrência.&lt;/strong&gt; A primeira etapa para identificar a classe de complexidade do &lt;em&gt;Merge Sort&lt;/em&gt; é identificar a sua relação de recorrência:&lt;/p&gt;
 &lt;p&gt;$T(n) = T(n/2) + T(n/2) + (n)$, simplificando&lt;/p&gt;
-&lt;p&gt;$T(n) = 2 * T(n/2) + n$, onde n = v.length - 1&lt;/p&gt;
+&lt;p&gt;$T(n) = 2 * T(n/2) + n$, onde n = v.length&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;$2 * T(n/2)$ representa as duas chamadas recursivas em que a entrada é divida pela metade em cada uma delas.&lt;/p&gt;
@@ -1113,7 +1113,7 @@ function showQuiz(quizId) {
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Relação de recorrência.&lt;/strong&gt; Como aprendemos anteriormente, a primeira etapa para identificar o custo de execução do algoritimo de Busca Binária é identificar a sua relação de recorrência:&lt;/p&gt;
 &lt;p&gt;$T(n) = T(n/2) + \Theta(1)$.&lt;/p&gt;
-&lt;p&gt;Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length - 1&lt;/p&gt;
+&lt;p&gt;Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.&lt;/p&gt;
