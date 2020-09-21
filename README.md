@@ -9,6 +9,8 @@ Os dados estão na branch master e o código do site está na branch gh-pages.
 
 ### Ambiente de "desenvolvimento"
 
+* Este material é feito com o [hugo](https://gohugo.io/) versão v0.75.1/extended darwin/amd64.
+
 * Você, colaborador externo, não deve se preocupar com a branch gh-pages. Tudo que você precisa para produzir conteúdo e colocar o site no ar localmente pode ser feito com
 o conteúdo que está na branch master.
 
