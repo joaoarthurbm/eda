@@ -5,7 +5,7 @@
 
 ### Configurações
 
-Os dados estão na branch master e o código do site está na branch gh-pages.
+Os dados estão na branch *master* e o código do site está na branch gh-pages.
 
 ### Ambiente de "desenvolvimento"
 
