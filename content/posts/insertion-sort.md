@@ -4,6 +4,7 @@ date = 2019-10-27T01:01:01
 tags = []
 categories = []
 github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/Insertion.java"
+youtube="https://youtu.be/cv_NSHQrUZc"
 +++
 
 ***
@@ -81,6 +82,9 @@ Para fixar bem, veja a animação abaixo copiada <a class="external" href="https
 	<img src="animacao.gif">
 </figure>
 
+Eu também gravei um vídeo explicando o Insertion Sort.
+
+{{< youtube cv_NSHQrUZc >}}
 
 ## Propriedades e Análise de eficiência
 

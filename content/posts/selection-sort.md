@@ -3,6 +3,7 @@ title = "Ordenação por Comparação: Selection Sort"
 date = 2019-10-27T02:01:01
 tags = []
 categories = []
+youtube = "https://youtu.be/eErcqHuaUmQ"
 github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/Selection.java"
 +++
 
@@ -94,6 +95,9 @@ Abaixo podemos ver uma animação produzida pelo <a class="external" href="https
 	<img src="selection.gif">
 </figure>
 
+Eu também gravei um vídeo explicando o Selection Sort.
+
+{{< youtube eErcqHuaUmQ >}}
 
 ## Propriedades e Análise de eficiência
 
