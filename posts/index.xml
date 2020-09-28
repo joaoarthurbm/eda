@@ -1989,23 +1989,23 @@ function showQuiz(quizId) {
 &lt;p&gt;Por fim, retornamos &lt;em&gt;&lt;strong&gt;i&lt;/strong&gt;&lt;/em&gt;, que é a posição final do &lt;em&gt;&lt;strong&gt;pivot&lt;/strong&gt;&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Para fixar bem, vamos ver um outro exemplo com figuras demonstrando o passo a passo.&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Início da iteração: j = left + 1 e i = left&lt;/p&gt;
-![quick1](quick1.png)
+&lt;p&gt;&lt;img src=&#34;quick1.png&#34; alt=&#34;quick1&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Encontrado o primeiro valor menor que o pivot&lt;/p&gt;
-![quick2](quick2.png)
+&lt;p&gt;&lt;img src=&#34;quick2.png&#34; alt=&#34;quick2&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
-![quick3](quick3.png)
+&lt;p&gt;&lt;img src=&#34;quick3.png&#34; alt=&#34;quick3&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
-![quick4](quick4.png)
+&lt;p&gt;&lt;img src=&#34;quick4.png&#34; alt=&#34;quick4&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Encontrado um outro valor menor que o pivot&lt;/p&gt;
-![quick5](quick5.png)
+&lt;p&gt;&lt;img src=&#34;quick5.png&#34; alt=&#34;quick5&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Passo 1: Incrementa i&lt;/p&gt;
-![quick6](quick6.png)
+&lt;p&gt;&lt;img src=&#34;quick6.png&#34; alt=&#34;quick6&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Passo 2: Troca values[i] por values[j]&lt;/p&gt;
-![quick7](quick7.png)
+&lt;p&gt;&lt;img src=&#34;quick7.png&#34; alt=&#34;quick7&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Fim da iteração (j == right)&lt;/p&gt;
-![quick8](quick8.png)
+&lt;p&gt;&lt;img src=&#34;quick8.png&#34; alt=&#34;quick8&#34;&gt;&lt;/p&gt;
 &lt;p align=&#34;center&#34;&gt;Troca values[i] por values[left]&lt;/p&gt;
-![quick9](quick9.png)
+&lt;p&gt;&lt;img src=&#34;quick9.png&#34; alt=&#34;quick9&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;quick-sort&#34;&gt;Quick Sort&lt;/h1&gt;
 &lt;h2 id=&#34;implementação&#34;&gt;Implementação&lt;/h2&gt;
