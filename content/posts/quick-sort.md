@@ -106,30 +106,39 @@ Por fim, retornamos ***i***, que é a posição final do ***pivot***.
 Para fixar bem, vamos ver um outro exemplo com figuras demonstrando o passo a passo.
 
 <p align="center">Início da iteração: j = left + 1 e i = left</p>
+
 ![quick1](quick1.png)
 
 <p align="center">Encontrado o primeiro valor menor que o pivot</p>
+
 ![quick2](quick2.png)
 
 <p align="center">Passo 1: Incrementa i</p>
+
 ![quick3](quick3.png)
 
 <p align="center">Passo 2: Troca values[i] por values[j]</p>
+
 ![quick4](quick4.png)
 
 <p align="center">Encontrado um outro valor menor que o pivot</p>
+
 ![quick5](quick5.png)
 
 <p align="center">Passo 1: Incrementa i</p>
+
 ![quick6](quick6.png)
 
 <p align="center">Passo 2: Troca values[i] por values[j]</p>
+
 ![quick7](quick7.png)
 
 <p align="center">Fim da iteração (j == right)</p>
+
 ![quick8](quick8.png)
 
 <p align="center">Troca values[i] por values[left]</p>
+
 ![quick9](quick9.png)
 
 ***
