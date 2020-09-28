@@ -1534,6 +1534,12 @@ function showQuiz(quizId) {
 &lt;figure style=&#34;align: center; margin-left:20%; width: 60%&#34;&gt;
 	&lt;img src=&#34;selection.gif&#34;&gt;
 &lt;/figure&gt;
+&lt;p&gt;Eu também gravei um vídeo explicando o Selection Sort.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/eErcqHuaUmQ&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&#34;propriedades-e-análise-de-eficiência&#34;&gt;Propriedades e Análise de eficiência&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;O Selection Sort é in-place e $O(n^2)$, mas não é estável.&lt;/p&gt;
@@ -1635,6 +1641,12 @@ function showQuiz(quizId) {
 &lt;figure style=&#34;align: center; margin-left:20%; width: 60%&#34;&gt;
 	&lt;img src=&#34;animacao.gif&#34;&gt;
 &lt;/figure&gt;
+&lt;p&gt;Eu também gravei um vídeo explicando o Insertion Sort.&lt;/p&gt;
+
+&lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;
+  &lt;iframe src=&#34;https://www.youtube.com/embed/cv_NSHQrUZc&#34; style=&#34;position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;&#34; allowfullscreen title=&#34;YouTube Video&#34;&gt;&lt;/iframe&gt;
+&lt;/div&gt;
+
 &lt;h2 id=&#34;propriedades-e-análise-de-eficiência&#34;&gt;Propriedades e Análise de eficiência&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;O Insertion Sort é estável, in-place e $O(n^2)$.&lt;/p&gt;
