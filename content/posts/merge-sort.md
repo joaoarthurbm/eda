@@ -210,7 +210,7 @@ Então precisamos apenas resolver essa relação de recorrência. Aprendemos a f
 
 Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as "quebras" do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.
 
-> O Mege Sort nos garante eficiência $n * \log n$ para todos os casos.
+> O Merge Sort nos garante eficiência $n * \log n$ para todos os casos.
 
 ## Análise do uso de memória
 
