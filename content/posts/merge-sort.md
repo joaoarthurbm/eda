@@ -194,7 +194,7 @@ A primeira define `middle` como sendo o valor central entre `left` e `right`. A 
 Por fim, após cada quebra há uma chamada ao método merge, passando os limites a serem considerados (***left***, ***middle***, ***right***).
 
 
-[^1]: Certamente eu poderia ter feito `if (left > right)` e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos.
+[^1]: Certamente eu poderia ter feito `if (left < right)` e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos.
 
 ## Análise do Tempo de Execução
 
