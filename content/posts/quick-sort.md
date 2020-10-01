@@ -90,7 +90,7 @@ Em primeiro lugar, vamos entender a assinatura do método ***particiona***. Natu
 
 A primeira linha do método é a escolha do pivot. Estamos sempre escolhendo o elemento no primeiro índice como o pivot, por isso temos `pivot = values[left]`.
 
-Depois, lembre-se, precisamos iterar sobre o array procurando os elementos menores ou iguais e trocando-os com as posições à frente do pivot. Quem irá controlar a iteração é a variável ***j***, enquanto ***i*** controla as trocas. Então, ***j*** varia sempre da segunda posição (`left + 1`), pois não precisamos comparar o ***pivot*** com ele mesmo, até a última posição do array (`right`). Enquanto isso, ***i*** começa na posição à frente do pivot `j+1` e só é incrementado se um novo valor menor ou igual for encontrado.
+Depois, lembre-se, precisamos iterar sobre o array procurando os elementos menores ou iguais e trocando-os com as posições à frente do pivot. Quem irá controlar a iteração é a variável ***j***, enquanto ***i*** controla as trocas. Então, ***j*** varia sempre da segunda posição (`left + 1`), pois não precisamos comparar o ***pivot*** com ele mesmo, até a última posição do array (`right`). Enquanto isso, ***i*** começa na posição do pivot `left` e só é incrementado se um novo valor menor ou igual for encontrado.
 
 Quando um valor menor ou igual ao ***pivot*** for encontrado (`if values[j] <= pivot`), efetuamos dois passos:
 
