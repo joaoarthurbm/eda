@@ -310,7 +310,7 @@
 <p>Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.</p>
 <p>Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as &ldquo;quebras&rdquo; do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.</p>
 <blockquote>
-<p>O Mege Sort nos garante eficiência $n * \log n$ para todos os casos.</p>
+<p>O Merge Sort nos garante eficiência $n * \log n$ para todos os casos.</p>
 </blockquote>
 <h2 id="análise-do-uso-de-memória">Análise do uso de memória</h2>
 <p>Como vimos, o Merge Sort usa um array auxiliar (<em><strong>helper</strong></em>) na ordenação. O tamanho de helper é o mesmo do array origina. Ou seja, do ponto de vista de uso de memória, o Merge Sort é $O(n)$.</p>
@@ -351,7 +351,7 @@
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Certamente eu poderia ter feito <code>if (left &gt; right)</code> e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Certamente eu poderia ter feito <code>if (left &gt;= right)</code> e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
