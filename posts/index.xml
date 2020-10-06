@@ -2171,13 +2171,13 @@ Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o arra
        </item>
        
        <item>
-         <title>Ordenação Linear</title>
+         <title>Ordenação Linear: Counting sort</title>
          <link>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</link>
          <pubDate>Sun, 27 Oct 2019 00:00:00 -0300</pubDate>
          
          <guid>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</guid>
          <description>&lt;hr&gt;
-&lt;p&gt;Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort^[Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.].&lt;/p&gt;
+&lt;p&gt;Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
 &lt;p&gt;Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.&lt;/p&gt;
 &lt;h1 id=&#34;ordenação-por-contagem&#34;&gt;Ordenação por Contagem&lt;/h1&gt;
 &lt;p&gt;Algo que chama a atenção em um primeiro momento é:&lt;/p&gt;
@@ -2189,7 +2189,7 @@ Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o arra
 &lt;li&gt;não há repetição de elementos no array que vamos ordenar;&lt;/li&gt;
 &lt;li&gt;sabemos o maior valor desse array, o qual chamamos de k.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$^[ O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas.], basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução &lt;code&gt;C[A[i] - 1] = true&lt;/code&gt;. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.&lt;/p&gt;
+&lt;p&gt;Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$&lt;sup id=&#34;fnref:2&#34;&gt;&lt;a href=&#34;#fn:2&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução &lt;code&gt;C[A[i] - 1] = true&lt;/code&gt;. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
 &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; C &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;k&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
 
@@ -2370,6 +2370,17 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 &lt;p&gt;Este material não é tão completo quanto o livro texto da disciplina. Sugiro também a leitura do Capítulo 8 do livro &amp;ldquo;Algoritmos: Teoria e Prática&amp;rdquo; de Cormen et. al.&lt;/p&gt;
 &lt;p&gt;No curso de Estrutura de Dados da UFCG há ainda a discussão de outros algoritmos de ordenação linear, como o Radix Sort e o Bucket Sort.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34; role=&#34;doc-endnotes&#34;&gt;
+&lt;hr&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34; role=&#34;doc-endnote&#34;&gt;
+&lt;p&gt;O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas. &lt;a href=&#34;#fnref:2&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
 </description>
        </item>
        

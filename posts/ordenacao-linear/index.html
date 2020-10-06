@@ -118,7 +118,7 @@
 
 <article>
 
-    <h1>Ordenação Linear</h1>    
+    <h1>Ordenação Linear: Counting sort</h1>    
 
     
         <aside>
@@ -152,7 +152,7 @@
     
 
     <hr>
-<p>Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort^[Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.].</p>
+<p>Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <p>Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.</p>
 <h1 id="ordenação-por-contagem">Ordenação por Contagem</h1>
 <p>Algo que chama a atenção em um primeiro momento é:</p>
@@ -164,7 +164,7 @@
 <li>não há repetição de elementos no array que vamos ordenar;</li>
 <li>sabemos o maior valor desse array, o qual chamamos de k.</li>
 </ul>
-<p>Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$^[ O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas.], basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução <code>C[A[i] - 1] = true</code>. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.</p>
+<p>Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução <code>C[A[i] - 1] = true</code>. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>k<span style="color:#f92672">];</span>
 
@@ -345,6 +345,17 @@ $T(n) = (n + k)$.</p>
 <h1 id="notas">Notas</h1>
 <p>Este material não é tão completo quanto o livro texto da disciplina. Sugiro também a leitura do Capítulo 8 do livro &ldquo;Algoritmos: Teoria e Prática&rdquo; de Cormen et. al.</p>
 <p>No curso de Estrutura de Dados da UFCG há ainda a discussão de outros algoritmos de ordenação linear, como o Radix Sort e o Bucket Sort.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
 
 
 </article>
