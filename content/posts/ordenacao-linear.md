@@ -1,5 +1,5 @@
 +++
-title = "Ordenação Linear"
+title = "Ordenação Linear: Counting sort"
 date = 2019-10-27
 tags = []
 categories = []
@@ -8,7 +8,9 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 ***
 
-Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort^[Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.]. 
+Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort[^1].
+
+[^1]: Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática.
 
 Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.
 
@@ -26,7 +28,9 @@ Antes de analisarmos os algoritmos de contagem em detalhes, vamos abordar um exe
 * não há repetição de elementos no array que vamos ordenar;
 * sabemos o maior valor desse array, o qual chamamos de k.
 
-Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$^[ O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas.], basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução `C[A[i] - 1] = true`. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.
+Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$[^2], basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução `C[A[i] - 1] = true`. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.
+
+[^2]: O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas.
 
 ```java
 ...
