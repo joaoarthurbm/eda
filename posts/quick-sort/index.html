@@ -130,7 +130,7 @@
 
         
 
-        <li>17 minutos de leitura</li>
+        <li>21 minutos de leitura</li>
 
 
         
@@ -182,6 +182,220 @@
   <iframe src="https://www.youtube.com/embed/YnbvpvcmlIM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
 </div>
 
+<hr>
+<p>Acho que agora é um bom momento para você responder o quiz abaixo e verificar se você entendeu de fato a rotina de particionamento que acabamos de ver.</p>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;a&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="a">
+  <script>
+    var choices = " [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 2 - 1 - 7 - 90 - 8 - 32 - 65], [4 - 1 - 2 - 7 - 90 - 8 - 65 - 32]".split(",");
+    var id = "a";
+    var question = "Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento lomuto escolhendo 7 como pivot?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+
+  <script>
+    var quiz = new Quiz("a", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
 <p>Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.</p>
 <h2 id="implementação-do-particionamento-de-lomuto">Implementação do Particionamento de Lomuto</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
@@ -249,6 +463,219 @@
 <p>Após a execução do primeiro particionamento temos este estado:</p>
 <p><img src="quick10.png" alt="quick10"></p>
 <p>Note que há agora duas chamadas recursivas. Uma para a esquerda do pivot e outra para a direita do pivot. Cada chamada irá operar sobre os novos &ldquo;lefts&rdquo; e &ldquo;rights&rdquo;. Por isso o particiona recebe os índices em que deve executar a sua rotina. No exemplo acima, uma nova execução do particiona para a esquerda não irá alterar os valores porque eles já estão ordenados, mas a execução para a direita irá colocar o valor 10 em seu lugar e irá gerar uma nova rodada de duas execuções do particiona. De novo, esse processo acaba quando todas as verificações de <code>left &lt; right</code> forem avaliadas com <code>false</code>.</p>
+<hr>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;b&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="b">
+  <script>
+    var choices = " [7 - 8 - 8 - 10 - 77 - 23], [8 - 8 - 7 - 10 - 77 - 23], [8 - 8 - 7 - 10 - 23 - 77], [8 - 8 - 7 - 77 - 10 - 23], [7 - 8 - 8 - 77 - 12 - 23]".split(",");
+    var id = "b";
+    var question = "Qual o resultado do particionamento para a porção [10, 23, 8, 7, 77, 8] do array?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+
+  <script>
+    var quiz = new Quiz("b", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
 <h2 id="análise-do-tempo-de-execução">Análise do Tempo de Execução</h2>
 <p>Lembra dos passos para determinar o tempo de execução de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">algoritmos recursivos?</a>. O primeiro passo é encontrar a relação de recorrência. O Quick Sort possui uma chamada ao método particiona e duas chamadas recursivas. Diferentemente do <a class="external" href="https://joaoarthurbm.github.io/eda/posts/merge-sort/">Merge Sort</a>, as chamadas recursivas podem não dividir o array ao meio sempre, concorda? Isso vai depender de onde o pivot ficar depois do particiona. Se ele ficar ao meio, naturalmente teremos duas chamadas recursivas para $T(n/2)$. Contudo, se ele ficar bem próximo ao início, por exemplo, teremos uma chamada recursiva para uma pequena porção à esquerda e uma chamada recursiva para uma porção bem maior (à direita). Então, por enquanto, vamos descrever a relação de recorrência como sendo o custo de particionar, somado ao custo da chamada para o array da esquerda e o custo da chamada para o array da direita:</p>
 <p>$T(n) = T(|left|) + T(|right|) + \Theta(f(n))$</p>
