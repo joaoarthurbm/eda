@@ -60,6 +60,19 @@ Complicado? Não muito, né? Mesmo assim, fiz um vídeo para deixar mais claro.
 
 {{< youtube YnbvpvcmlIM >}}
 
+***
+
+Acho que agora é um bom momento para você responder o quiz abaixo e verificar se você entendeu de fato a rotina de particionamento que acabamos de ver.
+
+{{% quiz a%}}
+
+{{< item question="Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento lomuto escolhendo 7 como pivot?" answers="5" choices=" [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 2 - 1 - 7 - 90 - 8 - 32 - 65], [4 - 1 - 2 - 7 - 90 - 8 - 65 - 32]">}}
+
+{{% /quiz %}}
+
+***
+
+
 Então, agora sabemos o que é e como funciona o particionamento. Chegou a hora de analisar o código.
 
 ## Implementação do Particionamento de Lomuto
@@ -168,6 +181,17 @@ Após a execução do primeiro particionamento temos este estado:
 ![quick10](quick10.png)
 
 Note que há agora duas chamadas recursivas. Uma para a esquerda do pivot e outra para a direita do pivot. Cada chamada irá operar sobre os novos "lefts" e "rights". Por isso o particiona recebe os índices em que deve executar a sua rotina. No exemplo acima, uma nova execução do particiona para a esquerda não irá alterar os valores porque eles já estão ordenados, mas a execução para a direita irá colocar o valor 10 em seu lugar e irá gerar uma nova rodada de duas execuções do particiona. De novo, esse processo acaba quando todas as verificações de `left < right` forem avaliadas com `false`.
+
+***
+{{% quiz b%}}
+
+{{< item question="Qual o resultado do particionamento para a porção [10, 23, 8, 7, 77, 8] do array?" answers="2" choices=" [7 - 8 - 8 - 10 - 77 - 23], [8 - 8 - 7 - 10 - 77 - 23], [8 - 8 - 7 - 10 - 23 - 77], [8 - 8 - 7 - 77 - 10 - 23], [7 - 8 - 8 - 77 - 12 - 23]">}}
+
+
+
+
+{{% /quiz %}}
+***
 
 ## Análise do Tempo de Execução
 
