@@ -241,7 +241,7 @@ A ideia é simples: basta identificarmos o menor elemento do array (menor) e usa
 
 $A = [1,-3, 2, 1, 7]$, com k = 7 e menor = -3.
 
-Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 0 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:
+Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 2 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:
 
 ```java
 ...
