@@ -2782,7 +2782,7 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;p&gt;O Counting Sort baseia-se na ideia de que um valor inteiro pode ser mapeado para o índice de mesmo valor em um array auxiliar. Essa estratégia nos impede, em um primeiro momento, de ordenar uma sequência com números negativos, pois o menor índice em um array é 0. Além disso, na nossa implementação inicial excluímos também elementos iguais a zero. Contudo, é possível fazer algumas mudanças simples no Counting Sort para que o mesmo passe a também ordenar sequências com esses valores.&lt;/p&gt;
 &lt;p&gt;A ideia é simples: basta identificarmos o menor elemento do array (menor) e usar esse valor como um &amp;ldquo;salto&amp;rdquo; para adicionar os elementos. É uma ideia similar a fazer um shift para a direita em todos os elementos. O menor elemento array tem sua frequência registrada na posição zero. Vamos ver um exemplo:&lt;/p&gt;
 &lt;p&gt;$A = [1,-3, 2, 1, 7]$, com k = 7 e menor = -3.&lt;/p&gt;
-&lt;p&gt;Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 0 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:&lt;/p&gt;
+&lt;p&gt;Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 2 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; C &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;maior &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; menor &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
 
@@ -2976,9 +2976,11 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;p&gt;Como a remoção envolve realocar todos os elementos à frente do removido para a esquerda, a operação, no pior caso, é $O(n)$. Esse pior caso se manifesta quando queremos remover o primeiro elemento da lista.&lt;/p&gt;
 &lt;h3 id=&#34;busca&#34;&gt;Busca&lt;/h3&gt;
 &lt;p&gt;De um modo geral, podemos dizer que há 3 cenários de busca: i) quando queremos acessar o elemento em um determinado índice; ii) quando queremos encontrar o índice em que um elemento está e iii) quando queremos verificar a presença de um elemento na lista. Essas aspirações podem ser satisfeitas pelos seguintes métodos:&lt;/p&gt;
-&lt;p&gt;Aluno get(int index)
-int indexOf(Aluno aluno)
-boolean contains(Aluno aluno)&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Aluno get(int index)&lt;/li&gt;
+&lt;li&gt;int indexOf(Aluno aluno)&lt;/li&gt;
+&lt;li&gt;boolean contains(Aluno aluno)&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;O método 1 é executado em tempo constante O(1), pois o índice é fornecido como parâmetro. A única preocupação é verificar se o índice é válido ou não.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; Aluno &lt;span style=&#34;color:#a6e22e&#34;&gt;get&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;

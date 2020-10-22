@@ -310,9 +310,11 @@
 <p>Como a remoção envolve realocar todos os elementos à frente do removido para a esquerda, a operação, no pior caso, é $O(n)$. Esse pior caso se manifesta quando queremos remover o primeiro elemento da lista.</p>
 <h3 id="busca">Busca</h3>
 <p>De um modo geral, podemos dizer que há 3 cenários de busca: i) quando queremos acessar o elemento em um determinado índice; ii) quando queremos encontrar o índice em que um elemento está e iii) quando queremos verificar a presença de um elemento na lista. Essas aspirações podem ser satisfeitas pelos seguintes métodos:</p>
-<p>Aluno get(int index)
-int indexOf(Aluno aluno)
-boolean contains(Aluno aluno)</p>
+<ol>
+<li>Aluno get(int index)</li>
+<li>int indexOf(Aluno aluno)</li>
+<li>boolean contains(Aluno aluno)</li>
+</ol>
 <p>O método 1 é executado em tempo constante O(1), pois o índice é fornecido como parâmetro. A única preocupação é verificar se o índice é válido ou não.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
     <span style="color:#66d9ef">public</span> Aluno <span style="color:#a6e22e">get</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
