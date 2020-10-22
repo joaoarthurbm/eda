@@ -213,9 +213,9 @@ Como a remoção envolve realocar todos os elementos à frente do removido para 
 
 De um modo geral, podemos dizer que há 3 cenários de busca: i) quando queremos acessar o elemento em um determinado índice; ii) quando queremos encontrar o índice em que um elemento está e iii) quando queremos verificar a presença de um elemento na lista. Essas aspirações podem ser satisfeitas pelos seguintes métodos:
 
-Aluno get(int index)
-int indexOf(Aluno aluno)
-boolean contains(Aluno aluno)
+1. Aluno get(int index)
+2. int indexOf(Aluno aluno)
+3. boolean contains(Aluno aluno)
 
 O método 1 é executado em tempo constante O(1), pois o índice é fornecido como parâmetro. A única preocupação é verificar se o índice é válido ou não.
 
