@@ -222,7 +222,7 @@
     <span style="color:#66d9ef">return</span> chave<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p>Ou seja, o hash de uma chave é o valor dela própria. Essa é uma função de hash bem simples, mas adequada para diversos contextos. Contudo, isso nos causou problemas para para grandes valores chave e para cenários em que o número de chaves efetivamente usado for bem menor que o número de chaves possível, lembra?</p>
+</code></pre></div><p>Ou seja, o hash de uma chave é o valor dela própria. Essa é uma função de hash bem simples, mas adequada para diversos contextos. Contudo, isso nos causou problemas para grandes valores chave e para cenários em que o número de chaves efetivamente usado for bem menor que o número de chaves possível, lembra?</p>
 <p>Uma alternativa para uma função de hash seria utilizar a operação matemática módulo. Vejamos:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
 <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">hash</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> chave<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -371,12 +371,12 @@
 <li>(736435217, &ldquo;Lívia&rdquo;)</li>
 <li>(879995247, &ldquo;Will&rdquo;)</li>
 <li>(524109227, &ldquo;Clara&rdquo;)</li>
-<li>(736435217, &ldquo;Talita&rdquo;)</li>
+<li>(996411117, &ldquo;Talita&rdquo;)</li>
 </ul>
 <p>Nesse caso, como nossa função de hash mapeia todos os elementos para o índice 7, teríamos a seguinte configuração:</p>
 <p><img src="colisao.png" alt="colisao.png"></p>
 <p>Note que a busca por um elemento presente na tabela não seria mais realizada em tempo constante, pois envolve a iteração na lista que contém todos os elementos. Portanto, no pior caso, as operações teriam custo de execução $O(n)$, o que queremos evitar ao máximo.</p>
-<p>Naturalmente, não queremos que o pior caso seja frequente e, por isso, escolhemos funções de hash que &ldquo;espalham&rdquo; os elementos pela tabela para que as listas não possuam muitos elementos. Portanto, o desempenho médio das operações na tabela hash depende do tamanho médio das listas armazenadas. Lembra da propriedade de uma função de hash que estabelece que todos os índices do array devem ter aproximadamente a mesma chance de serem mapeados pela função de hash. Essa característica é importante para distribuir os elementos uniformemente pela tabela e faz com que as listas tenham tamanho médio semelhante. Então, para uma tabela de tamanho $m$ que armazena nelementos, esperamos que o tamanho médio das listas seja $\alpha = n/m$. A esta medida damos o nome de fator de carga.</p>
+<p>Naturalmente, não queremos que o pior caso seja frequente e, por isso, escolhemos funções de hash que &ldquo;espalham&rdquo; os elementos pela tabela para que as listas não possuam muitos elementos. Portanto, o desempenho médio das operações na tabela hash depende do tamanho médio das listas armazenadas. Lembra da propriedade de uma função de hash que estabelece que todos os índices do array devem ter aproximadamente a mesma chance de serem mapeados pela função de hash. Essa característica é importante para distribuir os elementos uniformemente pela tabela e faz com que as listas tenham tamanho médio semelhante. Então, para uma tabela de tamanho $m$ que armazena $n$ elementos, esperamos que o tamanho médio das listas seja $\alpha = n/m$. A esta medida damos o nome de fator de carga.</p>
 <p>A análise depende então do tempo de execução da função de hash e do tamanho médio das listas. Como vimos, escolhemos funções de hash que executam em $O(1)$.Então, o tempo de execução das operações básicas pode ser dado por:</p>
 <p>$T(n) = 1 + \alpha$, onde $\alpha$ é o tamanho médio das listas armazenadas na tabela.</p>
 <h3 id="resolução-de-colisões-por-endereçamento-aberto">Resolução de colisões por endereçamento aberto.</h3>
