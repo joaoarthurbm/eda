@@ -286,7 +286,7 @@ Como foi possível perceber, a implementação dessas operações básicas inclu
 * (736435217, "Lívia")
 * (879995247, "Will")
 * (524109227, "Clara")
-* (736435217, "Talita")
+* (996411117, "Talita")
 
 Nesse caso, como nossa função de hash mapeia todos os elementos para o índice 7, teríamos a seguinte configuração:
 
