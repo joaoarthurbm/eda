@@ -97,7 +97,7 @@ O predecessor de um elemento na árvore é o maior valor menor do que ele. Compl
 
 # Implementação
 
-Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList<a/>, a classe ***BST*** é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:
+Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList</a>, a classe ***BST*** é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:
 
 ```java
 public class BST {
