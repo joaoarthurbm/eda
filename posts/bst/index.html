@@ -212,7 +212,7 @@ BST é definida recursivamente da seguinte forma:</p>
 <p>O predecessor de um elemento na árvore é o maior valor menor do que ele. Complicado? Imagine se pudéssemos imprimir a sequência dos valores presentes na árvore de forma ordenada. O predecessor de um elemento, seria o elemento imediatamente antes na sequência. Por exemplo, o predecessor de 41 na árvore acima é 32. O predecessor de 15 é 11. O predecessor de 72 é 65. Naturalmente, o menor valor armazenado na árvore (1) não tem predecessor.</p>
 <hr>
 <h1 id="implementação">Implementação</h1>
-<p>Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList<a/>, a classe <em><strong>BST</strong></em> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
+<p>Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList</a>, a classe <em><strong>BST</strong></em> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BST</span> <span style="color:#f92672">{</span>
 
     <span style="color:#66d9ef">private</span> Node root<span style="color:#f92672">;</span>
