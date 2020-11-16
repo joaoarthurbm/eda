@@ -444,7 +444,7 @@ Abaixo estão as implementações dos métodos auxiliares ***max_index, isValidI
 ...
 ```
 
-### Eficiência do método de inserção
+### Eficiência do método de remoção
 
 No pior caso o heapify é executado até o nível das folhas. Nesse pior caso, o caminho percorrido é igual ao tamanho da altura, que sempre é $O(\log n)$ porque o Heap é completo ou quase-completo da esquerda para a direita. 
 
