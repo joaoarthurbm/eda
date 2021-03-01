@@ -257,17 +257,19 @@ public boolean contemDuplicacao(int[] v) {
 
 3. Operação aritmética (i++) -> $c_3$
 
-4. Atribuição (int j = i + 1) -> $c_4$
+4. Atribuição (int j = ...) -> $c_4$
 
-5. Avaliação de expressão booleana (j < v.length) -> $c_5$
+5. Operação aritmética (... = **i + 1**) -> $c_5$
 
-6. Operação aritmética (j++) -> $c_6$
+6. Avaliação de expressão booleana (j < v.length) -> $c_6$
 
-7. Avaliação de expressão booleana (v[i] == v[j]) -> $c_7$
+7. Operação aritmética (j++) -> $c_7$
 
-8. Retorno de método (return true) -> $c_8$
+8. Avaliação de expressão booleana (v[i] == v[j]) -> $c_8$
 
-9. Retorno de método (return false) -> $c_9$
+9. Retorno de método (return true) -> $c_9$
+
+10. Retorno de método (return false) -> $c_{10}$
 
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.**
@@ -284,27 +286,27 @@ Dado que o tamanho do vetor (v.length) é $n$, temos:
 
 Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
-* $c_4$ é executada apenas uma vez para cada _for_, mas como o laço externo executa $n$ vezes, $c_4$ é executada $n$ vezes no total.
+* A quantidade de execuções de $c_4$ e $c_5$ depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a_1+a_n)$, onde $a_1$ e $a_n$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_4$ e $c_5$ são executadas $({n^2 + n})/{2}$ vezes.
 
-* A quantidade de vezes que $c_5$ é executada depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $(n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. Como $c_5$ precisa ser executada uma vez a mais do que a quantidade de vezes que $j$ varia - por causa do último teste para sair do laço - a quantidade de vezes que $c_5$ é executada é definida por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. A soma de uma PA com essas características é dada por $S = n/2 * (a1+an)$, onde $a1$ e $an$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_5$ é executada $({n^2 + n})/{2}$ vezes.
+Como $c_6$ precisa ser executada uma vez a mais do que $c_4$ e $c_5$, por causa do último teste para sair do laço, a quantidade de vezes que $c_6$ é executada é definida por: $({n^2 + n})/{2} + 1$ vezes.
 
-* Como $c_6$ é executada uma vez a menos que $c_5$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c_6$ é executada ${n^2}/{2}$.
+* $c_7$ é executada a mesma quantidade de vezes que $c_4$ e $c_5$.
 
-* $c_7$ é executada a mesma quantidade de vezes que $c_6$.
+* $c_8$ é executada a mesma quantidade de vezes que $c_4$ e $c_5$.
 
-* $c_8$ não é executada nenhuma vez porque estamos falando do pior caso
+* $c_9$ não é executada nenhuma vez porque estamos falando do pior caso
 
-* $c_9$ é executada apenas uma vez.
+* $c_{10}$ é executada apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + c_5 * (n^2 + n)/2 + c_6 * {n^2}/2 + c_7 * {n^2}/2 + c_9$
+$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * (n^2 + n)/{2} + $
 
-Considerando todas as primitivas com custo c e simplificando a função, temos:
+$c_5 * (n^2 + n)/{2} + c_6 * ((n^2 + n)/{2}) + 1 + $
 
-<p align="center"> $f(n) = 3 * c + 3 * c * n + 2 * {n^2}/2 + c * (n^2 + n)/2$ </p>
+$c_7 * {(n^2 + n)}/2 + c_8 * {(n^2 + n)}/2 + c_{10}$
 
 Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
