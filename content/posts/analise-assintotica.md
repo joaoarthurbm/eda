@@ -50,11 +50,11 @@ Note que no primeiro gráfico, para entradas de 0 a 200, $f(x)$ tem uma curva se
 
 <p align="center">$f(n) = 3*c*n + 3*c$</p>
 
-Aplicando as diretrizes simplificação, temos:
+Aplicando as diretrizes de simplificação, temos:
 
 f(n) = ~~3 * c *~~ n ~~+ 3 * c~~
 
-Isto é, $f(n) = 3*c*n+3*c$ é $\Theta(n)$. Isso significa dizer que f(n) tem a mesma ordem de crescimento que uma função linear. 
+Isto é, $f(n) = 3 * c * n + 3 * c$ é $\Theta(n)$. Isso significa dizer que $f(n)$ tem a mesma ordem de crescimento que uma função linear. 
 
 > Dizer que um algoritmo é linear significa que o tempo de execução do algoritmo cresce linearmente em função do tamanho da entrada.
 
@@ -62,7 +62,7 @@ Isto é, $f(n) = 3*c*n+3*c$ é $\Theta(n)$. Isso significa dizer que f(n) tem a 
 
 <p align="center"> $f(n) = 3 * c + 2 * c * n + 3 * {n^2}/2 + c * (n^2 + n)/2$ </p>
 
-Aplicando as diretrizes simplificação, temos que $f(n) = \Theta(n^2)$. Isso significa dizer que $f(n)$ tem a mesma ordem de crescimento que uma quadrática. 
+Aplicando as diretrizes de simplificação, temos que $f(n) = \Theta(n^2)$. Isso significa dizer que $f(n)$ tem a mesma ordem de crescimento que uma quadrática. 
 
 
 ***
@@ -77,7 +77,7 @@ Primeiro, preciso deixar claro que cometi alguns abusos matemáticos para fins d
 
 <p align="center">$2*n + 1 = \Theta(n)$</p>
 
-Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2*n + 1$ **é** $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ **pertence** à $\Theta(n)$. 
+Theta ($\Theta$) é um conjunto de funções. Nesse caso, o conjunto das funções lineares. Por isso, é um abuso dizer que $2 * n + 1$ **é** $\Theta(n)$. A maneira formal de dizer é: $2*n + 1$ **pertence** à $\Theta(n)$. 
 
 Além disso, poderíamos ter escolhido qualquer função linear para dizer que $2 * n + 1$ tem a mesma ordem de crescimento. Nós escolhemos $n$ porque é a mais simples.
 
@@ -118,13 +118,13 @@ Na verdade, todas as funções lineares são limitadas inferior e superiormente 
 <p align="center">$7*n, 827643*n, 5n+21, 54n +1...$</p>  
 
 
-Formalmente dizemos que $g(n)=n$ é um limite assintótico restrito para $f(n)$. A figura abaixo descreve essa relação entre uma função quadrática e as funções $3n$ e $n^2$.
+Formalmente dizemos que $g(n)=n$ é um limite assintótico restrito para $f(n)$. A figura abaixo descreve essa relação entre uma função quadrática e as funções $3n^2$ e $n^2$.
 
 <figure style="align: center; margin-left:10%; width: 80%">
 	<img src="theta.png">
 </figure>
 
-Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1*g(n) \leq f(n) \leq c2*g(n)$.
+Em português estamos dizendo que existe, para grandes valores de $n$ e a partir de um número inteiro positivo $n0$, $c1$ e $c2$ tais que $c1 * g(n) \leq f(n) \leq c2 * g(n)$.
 
 > Em termos simplistas, $f(n) \in \Theta(g(n))$ significa dizer que o crescimento de f(n) é igual ao de g(n).
 
@@ -144,7 +144,7 @@ Em resumo, para demonstrar formalmente precisamos dos seguintes passos:
 
 1. Aplicar as abstrações simplificadores em $f(n)$ para termos uma proposta para $g(n)$.
 
-2. Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0 \leq c1*g(n) \leq f(n) \leq c2*g(n)$ é verdadeira. 
+2. Encontrar valores de $c1$, $c2$ e $n0$ para os quais a inequação $0 \leq c1 * g(n) \leq f(n) \leq c2 * g(n)$ é verdadeira. 
 
 Há mais 4(!) notações para estabelecer a relação entre funções. Neste material vamos ver apenas mais duas porque considero que é suficiente. Independente disso, todas são nada mais do que alterações na inequação que estabelecemos para $\Theta$. Por exemplo, a próxima notação que veremos, provavelmente a mais popular de todas, nada mais é do que retirar o limite inferior da inequação e apenas estabelecer um limite superior.
 
