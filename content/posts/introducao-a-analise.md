@@ -286,15 +286,15 @@ Dado que o tamanho do vetor (v.length) é $n$, temos:
 
 Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
 
-* A quantidade de execuções de $c_4$ e $c_5$ depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a_1+a_n)$, onde $a_1$ e $a_n$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_4$ e $c_5$ são executadas $({n^2 + n})/{2}$ vezes.
+* $c_4$ e $c_5$ são executadas $n$ vezes. Serão executadas uma vez para cada loop interno. Exemplo: se $n = 5$, temos i = 0 e j = 0 + 1 = 1, i = 1 e j = 1 + 1 = 2, i = 2 e j = 2 + 1 = 3, i = 3 e j = 3 + 1 = 4, i = 4 e j = 4 + 1 = 5, quando i = 5 o laço interno não é executado.
+ 
+* A quantidade de execuções de $c_6$ depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a_1+a_n)$, onde $a_1$ e $a_n$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_6$ é executada $({n^2 + n})/{2}$ vezes.
 
-Como $c_6$ precisa ser executada uma vez a mais do que $c_4$ e $c_5$, por causa do último teste para sair do laço, a quantidade de vezes que $c_6$ é executada é definida por: $({n^2 + n})/{2} + 1$ vezes.
+* Como $c_7$ é executada uma vez a menos que $c_6$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c_7$ é executada ${n^2}/{2}$.
 
-* $c_7$ é executada a mesma quantidade de vezes que $c_4$ e $c_5$.
+* $c_8$ é executada a mesma quantidade de vezes que $c_7$.
 
-* $c_8$ é executada a mesma quantidade de vezes que $c_4$ e $c_5$.
-
-* $c_9$ não é executada nenhuma vez porque estamos falando do pior caso
+* $c_9$ não é executada nenhuma vez porque estamos falando do pior caso.
 
 * $c_{10}$ é executada apenas uma vez.
 
@@ -302,11 +302,11 @@ Como $c_6$ precisa ser executada uma vez a mais do que $c_4$ e $c_5$, por causa 
 
 O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:
 
-$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * (n^2 + n)/{2} + $
+$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + $
 
-$c_5 * (n^2 + n)/{2} + c_6 * ((n^2 + n)/{2}) + 1 + $
+$c_5 * n + c_6 * (n^2 + n)/{2} + $
 
-$c_7 * {(n^2 + n)}/2 + c_8 * {(n^2 + n)}/2 + c_{10}$
+$c_7 * {n^2}/{2} + c_8 * {n^2}/{2} + c_{10}$
 
 Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
