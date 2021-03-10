@@ -285,11 +285,11 @@ Como vimos anteriormente, $a$ representa a quantidade de chamadas recursivas (qu
 Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:
 
 
-* Se f(n) < n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(n ** log<sub>b</sub><sup>a</sup>).
+* Se f(n) < n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>).
 
-* Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n) * log<sub>b</sub><sup>n</sup>).
+* Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n) * log<sub>b</sub><sup>n</sup>).
 
-* Se f(n) > n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n)).
+* Se f(n) > n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n)).
 
 
 Desse modo, se a relação de recorrência obedecer às restrições $a>=1$, $b>1$ e $f(n)$ não negativa, basta aplicarmos o teorema. 
@@ -302,7 +302,7 @@ Para a relação de recorrência $T(n) = 8 * T(n/2) + 1000 * n^2$, temos:
 * $b = 2$
 * $f(n) = 1000 * n^2$
 
-Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ < $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = (n^3)$.
+Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ < $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = \Theta(n^3)$.
 
 ### Exemplo
 
