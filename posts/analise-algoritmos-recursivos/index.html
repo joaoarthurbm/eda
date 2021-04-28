@@ -567,13 +567,13 @@ function showQuiz(quizId) {
 <p>Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:</p>
 <ul>
 <li>
-<p>Se f(n) &lt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(n ** log<sub>b</sub><sup>a</sup>).</p>
+<p>Se f(n) &lt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>).</p>
 </li>
 <li>
-<p>Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n) * log<sub>b</sub><sup>n</sup>).</p>
+<p>Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n) * log<sub>b</sub><sup>n</sup>).</p>
 </li>
 <li>
-<p>Se f(n) &gt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = theta(f(n)).</p>
+<p>Se f(n) &gt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n)).</p>
 </li>
 </ul>
 <p>Desse modo, se a relação de recorrência obedecer às restrições $a&gt;=1$, $b&gt;1$ e $f(n)$ não negativa, basta aplicarmos o teorema.</p>
@@ -584,7 +584,7 @@ function showQuiz(quizId) {
 <li>$b = 2$</li>
 <li>$f(n) = 1000 * n^2$</li>
 </ul>
-<p>Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ &lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = (n^3)$.</p>
+<p>Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ &lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = \Theta(n^3)$.</p>
 <h3 id="exemplo-1">Exemplo</h3>
 <p>$T(n) = 2 * T(n/2) + 10*n$</p>
 <p>Para a relação acima, temos:</p>

@@ -229,9 +229,9 @@
     <span style="color:#66d9ef">return</span> chave <span style="color:#f92672">%</span> tabela<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p>Veja que essa é a solução que foi utilizada na Figura acima. Pois, $807365841 % 10 = 1$, $111983749 % 10 = 9$ e $665422653 % 10 = 3$.</p>
+</code></pre></div><p>Veja que essa é a solução que foi utilizada na Figura acima. Pois, $807365841$ % $10 = 1$, $111983749$ % $10 = 9$ e $665422653 $ % $10 = 3$.</p>
 <p><strong>Por que módulo?</strong> Primeiro porque sempre vai gerar um inteiro dentro do intervalo de índices válidos do array. Segundo porque para uma mesma chave, a função sempre retorna o mesmo hash.</p>
-<p>Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave % tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante.</p>
+<p>Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave$ % $tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante.</p>
 <p>Vamos analisar o código abaixo que apresenta algumas operações básicas da classe <em><strong>TabelaHash</strong></em>. Por motivos de simplificação, a classe que usaremos aqui implementa uma tabela hash para manipular objetos do tipo <em><strong>Aluno</strong></em>. Naturalmente, por ser de propósito geral, as implementações de Java de uma Tabela Hash (HashMap e HashTable) permitem o armazenamento e manipulação de qualquer objeto.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HashTable</span> <span style="color:#f92672">{</span>
 
@@ -265,7 +265,7 @@
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Parece tudo resolvido, não é? Mas&hellip;</p>
 <p align="center"> <b>E se duas chaves distintas forem mapeadas para a mesma posição na tabela? </b></p>
-<p>Por exemplo, vimos que o objeto $(807365841, &ldquo;Chico Buarque&rdquo;)$ foi mapeado para o índice 1 da tabela porque $807365841 % 10$ é igual a 1. Suponha que agora temos que armazenar o objeto $(478243081, &ldquo;Gilberto Gil&rdquo;)$. Teremos um problema aqui, pois o hash desse objeto também tem valor 1, cujo índice já está ocupado. Na verdade, toda chave que terminar com o dígito 1 será mapeada para a posição 1 na tabela. Esse problema se chama <strong>colisão</strong>. Quando estamos diante desse problema, temos três caminhos a seguir:</p>
+<p>Por exemplo, vimos que o objeto $(807365841, &ldquo;Chico Buarque&rdquo;)$ foi mapeado para o índice 1 da tabela porque $807365841$ % $10$ é igual a 1. Suponha que agora temos que armazenar o objeto $(478243081, &ldquo;Gilberto Gil&rdquo;)$. Teremos um problema aqui, pois o hash desse objeto também tem valor 1, cujo índice já está ocupado. Na verdade, toda chave que terminar com o dígito 1 será mapeada para a posição 1 na tabela. Esse problema se chama <strong>colisão</strong>. Quando estamos diante desse problema, temos três caminhos a seguir:</p>
 <ol>
 <li>
 <p>Aplicar a técnica do avestruz, isto é, enfiar a cabeça na terra e fingir que o problema não existe;</p>
@@ -426,7 +426,7 @@
 <p><img src="colisao-prob.png" alt="colisao-prob"></p>
 <p>Na primeira adição, o objeto $(736435217, &ldquo;Lívia&rdquo;)$ ocupa a posição 7 na tabela, pois esse índice é calculado da seguinte maneira:</p>
 <p align="center">hash = ((736435217 % 10) + 0) % 10;</p>
-<p>Ou seja, o hash assume valor 7. Explicando: como o valor inicial da sondagem é zero, temos que $7 + 0 = 7$. Calculamos então o resto da divisão desse valor pelo tamanho da tabela $7 % 10 = 7$. Portanto, o índice avaliado é o índice 7. Por não haver nenhum elemento nesse índice, o objeto é adicionado.</p>
+<p>Ou seja, o hash assume valor 7. Explicando: como o valor inicial da sondagem é zero, temos que $7 + 0 = 7$. Calculamos então o resto da divisão desse valor pelo tamanho da tabela $7$ % $10 = 7$. Portanto, o índice avaliado é o índice 7. Por não haver nenhum elemento nesse índice, o objeto é adicionado.</p>
 <p>Na segunda adição, isto é, na adição do objeto $(879995247, &ldquo;Will&rdquo;)$, o objeto ocupará a posição 8 da tabela. Isso acontece porque o cálculo</p>
 <p align="center">hash = ((879995247 % 10) + 0) % 10;</p>
 <p>também tem como resultado o índice 7. Então temos uma colisão nesse índice. O algoritmo então incrementa o valor da sondagem para 1. Assim, temos um novo cálculo,</p>
@@ -463,7 +463,7 @@
 <p>onde $A$ é um número constante decimal e $m$ é o tamanho da tabela.</p>
 <p>Vamos analisar exemplo concreto. Suponha que a chave seja 100, o número decimal escolhido seja $A = 0.63274838$ e o tamanho da tabela seja 20.</p>
 <ol>
-<li>100*0.63274838 = 63.274838</li>
+<li>100 * 0.63274838 = 63.274838</li>
 <li>63.274838 % 1 = 0.274838</li>
 <li>0.274838 * 20 = 5.49676</li>
 <li>int(5.49676) = 5</li>

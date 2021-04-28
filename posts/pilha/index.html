@@ -118,7 +118,7 @@
 
 <article>
 
-    <h1>Ordenação por Comparação: Insertion Sort</h1>    
+    <h1>Pilhas baseadas em arrays</h1>    
 
     
         <aside>
@@ -130,7 +130,7 @@
 
         
 
-        <li>7 minutos de leitura</li>
+        <li>8 minutos de leitura</li>
 
 
         
@@ -138,14 +138,8 @@
 
         
 
-        <aside><i class="fab fa-youtube fa-lg" aria-hidden="true"> </i> <a href="https://youtu.be/cv_NSHQrUZc"> <font color="#1980e6"> <b>vídeo aula</b></font></a></aside>
-        
 
 
-
-        
-
-        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/Insertion.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
         
 
 
@@ -155,7 +149,20 @@
     
 
     <hr>
-<h1 id="direto-ao-ponto">Direto ao ponto</h1>
+<h1 id="o-que-é-pilha">O que é pilha?</h1>
+<p>Pilha é uma estrutura de dados com uma política de acesso bem definida: o último elemento que entrou na pilha é o primeiro a sair. Em inglês, usamos o acrônimo LIFO &ndash; last in, first out.</p>
+<p>De forma visual, podemos pensar em uma pilha de pratos. Sempre que adicionamos um elemento na pilha (<code>push</code>), adicionamos no seu topo. O mesmo ocorre para remoções, sempre retiramos o prato do topo da pilha (<code>pop</code>).</p>
+<p>Podemos implementar uma pilha de várias maneiras. No nosso curso, abordamos a implementação com arrays e a implementação com nós ligados. Este material foca na implementação de pilhas com arrays e nas decisões de projeto que precisamos discutir dado que arrays são estruturas de tamanho fixo.</p>
+<h1 id="operações">Operações</h1>
+<p>Primeiro vamos tratar das duas operações que são fundamentais na definição de uma pilha, ou seja, <code>push</code> e <code>pop</code>.</p>
+<h2 id="push-e-pop">push e pop</h2>
+<p><code>push(int n)</code> é a operação de adicionar um elemento no topo da pilha. Lembrando que todas as adições são realizadas no topo da pilha.</p>
+<p><code>int pop()</code> é a operação de remover e retornar o elemento no topo da pilha. Lembrando que todas as adições são realizadas no topo da pilha.</p>
+<p>Vamos visualizar essa dinâmica de acesso com um exemplo concreto de uma pilha que começa vazia e os elementos vão sendo adicionados e removidos do topo. Como estamos tratando de uma pilha baseada em arrays, vamos ter que criar uma variável <code>top</code> representar o índice do elemento no topo da pilha.</p>
+<p><em>Estado da pilha na sua criação</em></p>
+<ul>
+<li>top = -1</li>
+</ul>
 <p>O <em>Insertion Sort</em> tem como rotina base a inserção ordenada. A ideia é executar várias vezes essa rotina para ordenar um array. Para ser exato, se executarmos $N - 1$ vezes a rotina de inserção ordenada em um array o resultado é a ordenação completa do mesmo. Por isso, vamos antes entender como funciona inserção ordenada.</p>
 <h1 id="inserção-ordenada">Inserção ordenada</h1>
 <p>Vamos analisar o caso de um array com $N$ elementos no qual os $N - 1$ primeiros elementos estão ordenados, mas o último elemento não está no seu lugar. Isto é, precisamos encaixar o último elemento de forma que a sequência fique ordenada. No exemplo abaixo, estamos falando em inserir de forma ordenada o valor 12.</p>
@@ -277,12 +284,12 @@
     <ul>
         
         <li>
-            <a href="https://joaoarthurbm.github.io/eda/posts/pilha/"><i class="fa fa-chevron-circle-left"></i> Pilhas baseadas em arrays</a>
+            <a href="https://joaoarthurbm.github.io/eda/posts/merge-sort/"><i class="fa fa-chevron-circle-left"></i> Ordenação por Comparação: Merge Sort</a>
         </li>
         
         
         <li>
-            <a href="https://joaoarthurbm.github.io/eda/posts/selection-sort/">Ordenação por Comparação: Selection Sort <i class="fa fa-chevron-circle-right"></i> </a>
+            <a href="https://joaoarthurbm.github.io/eda/posts/insertion-sort/">Ordenação por Comparação: Insertion Sort <i class="fa fa-chevron-circle-right"></i> </a>
         </li>
         
     </ul>
