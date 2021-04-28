@@ -114,11 +114,11 @@ private int hash(int chave) {
 ...
 ```
 
-Veja que essa é a solução que foi utilizada na Figura acima. Pois, $807365841 % 10 = 1$, $111983749 % 10 = 9$ e $665422653 % 10 = 3$.
+Veja que essa é a solução que foi utilizada na Figura acima. Pois, $807365841$ % $10 = 1$, $111983749$ % $10 = 9$ e $665422653 $ % $10 = 3$.
 
 **Por que módulo?** Primeiro porque sempre vai gerar um inteiro dentro do intervalo de índices válidos do array. Segundo porque para uma mesma chave, a função sempre retorna o mesmo hash. 
 
-Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave \% tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante. 
+Note que, se a função de hash for executada em tempo constante, o que é o caso da função $chave$ % $tabela.length$, temos que as funções básicas da tabela hash são, em princípio, também executadas em tempo constante. 
 
 Vamos analisar o código abaixo que apresenta algumas operações básicas da classe ***TabelaHash***. Por motivos de simplificação, a classe que usaremos aqui implementa uma tabela hash para manipular objetos do tipo ***Aluno***. Naturalmente, por ser de propósito geral, as implementações de Java de uma Tabela Hash (HashMap e HashTable) permitem o armazenamento e manipulação de qualquer objeto.
 
@@ -159,7 +159,7 @@ Parece tudo resolvido, não é? Mas...
 
 <p align="center"> <b>E se duas chaves distintas forem mapeadas para a mesma posição na tabela? </b></p>
 
-Por exemplo, vimos que o objeto $(807365841, "Chico Buarque")$ foi mapeado para o índice 1 da tabela porque $807365841 % 10$ é igual a 1. Suponha que agora temos que armazenar o objeto $(478243081, "Gilberto Gil")$. Teremos um problema aqui, pois o hash desse objeto também tem valor 1, cujo índice já está ocupado. Na verdade, toda chave que terminar com o dígito 1 será mapeada para a posição 1 na tabela. Esse problema se chama **colisão**. Quando estamos diante desse problema, temos três caminhos a seguir:
+Por exemplo, vimos que o objeto $(807365841, "Chico Buarque")$ foi mapeado para o índice 1 da tabela porque $807365841$ % $10$ é igual a 1. Suponha que agora temos que armazenar o objeto $(478243081, "Gilberto Gil")$. Teremos um problema aqui, pois o hash desse objeto também tem valor 1, cujo índice já está ocupado. Na verdade, toda chave que terminar com o dígito 1 será mapeada para a posição 1 na tabela. Esse problema se chama **colisão**. Quando estamos diante desse problema, temos três caminhos a seguir:
 
 1. Aplicar a técnica do avestruz, isto é, enfiar a cabeça na terra e fingir que o problema não existe;
 
@@ -352,7 +352,7 @@ Na primeira adição, o objeto $(736435217, "Lívia")$ ocupa a posição 7 na ta
 
 <p align="center">hash = ((736435217 % 10) + 0) % 10;</p>
 
-Ou seja, o hash assume valor 7. Explicando: como o valor inicial da sondagem é zero, temos que $7 + 0 = 7$. Calculamos então o resto da divisão desse valor pelo tamanho da tabela $7 % 10 = 7$. Portanto, o índice avaliado é o índice 7. Por não haver nenhum elemento nesse índice, o objeto é adicionado.
+Ou seja, o hash assume valor 7. Explicando: como o valor inicial da sondagem é zero, temos que $7 + 0 = 7$. Calculamos então o resto da divisão desse valor pelo tamanho da tabela $7$ % $10 = 7$. Portanto, o índice avaliado é o índice 7. Por não haver nenhum elemento nesse índice, o objeto é adicionado.
 
 Na segunda adição, isto é, na adição do objeto $(879995247, "Will")$, o objeto ocupará a posição 8 da tabela. Isso acontece porque o cálculo 
 
@@ -418,7 +418,7 @@ onde $A$ é um número constante decimal e $m$ é o tamanho da tabela.
 
 Vamos analisar exemplo concreto. Suponha que a chave seja 100, o número decimal escolhido seja $A = 0.63274838$ e o tamanho da tabela seja 20.
 
-1. 100*0.63274838 = 63.274838
+1. 100 * 0.63274838 = 63.274838
 2. 63.274838 % 1 = 0.274838
 3. 0.274838 * 20 = 5.49676
 4. int(5.49676) = 5
