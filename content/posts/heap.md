@@ -189,7 +189,7 @@ A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $int((0-
 
 Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $int((1-1)/2)) = 0$ e $int((2-1)/2)) = 0$.
 
-Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 0$ e $int((4-1)/2)) = 1$.
+Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 1$ e $int((4-1)/2)) = 1$.
 
 Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $int((5-1)/2)) = 2$ e $int((5-1)/2)) = 2$.
 
