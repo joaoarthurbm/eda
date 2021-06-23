@@ -28,6 +28,13 @@ Tipicamente, executa-se um experimento com o tamanho da amostra suficiente para 
     </figcaption>
 </figure>
 
+***
+
+{{% quiz test_quiz%}}
+{{< item question="De acordo com o gráfico acima, qual algoritmo possuí o melhor desempenho à medida que aumenta o tamanho da entrada ?" answers="2" choices="InsertionSort,MergeSort,QuickSort,SelectionSort" >}}
+{{% /quiz %}}  
+***
+
 A abordagem empírica para análise de algoritmos é útil, pois, se conduzida de maneira metodologicamente apropriada, fornece valores precisos sobre o tempo de execução de um algoritmo. No entanto, essa abordagem apresenta algumas desvantagens. Primeiro, existe um alto custo relacionado à implementação de todos os algoritmos, além da configuração, execução e análise do experimento. Além disso, note que as conclusões são limitadas ao espaço de entrada do experimento. Por fim, os resultados são dependentes do hardware utilizado.
 
 Diante do cenário exposto acima, surge a necessidade de uma análise que:
