@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por leandrosilvagrismino
+{{% quiz test_quiz%}}
+{{< item question="A operação a seguir possui quantas primitivas?  i+j" answers="3" choices="1,2,0,4" >}}
+{{% /quiz %}}
