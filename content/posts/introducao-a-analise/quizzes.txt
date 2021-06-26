@@ -7,3 +7,14 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por Murilo-Gruppi
+{{% quiz test_quiz%}}
+{{< item question="Qual desses não é um passo para determinar o tempo de execução de um algoritmo?" answers="3" choices="Identificar primitivas,Somar custo total,Analisar se o custo é constante,Identificar a quantidade que cada uma das primitivas é executada" >}}
+{{% /quiz %}}
+
+# Quiz elaborado por Murilo-Gruppi
+{{% quiz test_quiz%}}
+{{< item question="Qual dessas opções não define o método analítico?" answers="4" choices="Independente de hardware,Análise em um espectro maior de entradas,Simples,Preciso" >}}
+{{% /quiz %}}
+
