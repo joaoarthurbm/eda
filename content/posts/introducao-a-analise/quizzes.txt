@@ -8,7 +8,6 @@
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
 
-# Quiz elaborado por RobertaFlx
 {{% quiz test_quiz%}}
 {{< item question="Se o tempo de execução é constante, podemos afirmar que:" answers="1" choices="Independe do tamanho da entrada,f(n) não será a soma de constantes,Depende do tamanho da entrada,A função não possui operações primitivas" >}}
 {{% /quiz %}}
