@@ -2,8 +2,10 @@
 {{% quiz test_quiz%}}
 {{< item question="Qual operação abaixo não pode ser considerada primitiva?" answers="2" choices="int a = 7,Arrays.sort(v),v[7], return saldo" >}}
 {{% /quiz %}}
+Rresposta: A operação Arrays.sort(v) não é primitiva.
 
 # Quiz elaborado por juniorjse
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+Resposta: O melhor desempenho é do algoritmo MegaSort.
