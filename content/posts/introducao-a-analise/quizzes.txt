@@ -10,6 +10,6 @@
 
 # Quiz elaborado por rembrandtasafe
 {{% quiz test_quiz%}}
-{{< item question="Qual operação abaixo é mais custosa?" answers="1" choices="i += (j + k++) / v[i] + (j % 10);, a[i] = a[i - 1] + b[i] + j;, x = (a+b+c)/(v[i] + v[j] + v[k]);" >}}
+{{< item question="Qual operação abaixo é mais custosa?" answers="3" choices="i += (j + k++) / v[i] + (j % 10);, a[i] = a[i - 1] + b[i] + j;, x = (a+b+c)/(v[i] + v[j] + v[k]);" >}}
 {{% /quiz %}}
 
