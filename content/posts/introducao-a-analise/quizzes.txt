@@ -3,7 +3,7 @@
 {{< item question="Qual operação abaixo não pode ser considerada primitiva?" answers="2" choices="int a = 7,Arrays.sort(v),v[7], return saldo" >}}
 {{% /quiz %}}
 
-# Quiz elaborado por juniorjse
+# Quiz elaborado por pedrohenrique-ql
 {{% quiz test_quiz%}}
-{{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
+{{< item question="Qual função de custo é mais lenta?" answers="3" choices="f(n) = c1 + c2 + c3 + c4,f(n) = 4c(n + 1),f(n) = 3cn² + 4n + c, f(n) = log n" >}}
 {{% /quiz %}}
