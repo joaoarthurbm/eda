@@ -10,4 +10,4 @@
 
 {{% quiz test_quiz%}}
 {{< item question="Qual afirmativa abaixo está incorreta?" answers="3" choices="O custo de execução das operações primitivas é constante,O método analítico indepente de plataforma,O método analítico não permite generalização para um espectro maior de entradas,O acesso à variáveis e posições arbitrárias de um array é uma operação primitiva" >}} 
-{{% /quiz %}}}
+{{% /quiz %}}
