@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por AbraaoCF
+{{% quiz test_quiz%}}
+{{< item question="Operações primitivas são operações que:" answers="3" choices="Podem ser feitas manualmente,São lentas para serem excutadas,Possuem tempo de execução considerado constante,Podem ser desconsideradas na análise assintótica" >}}
+{{% /quiz %}}
