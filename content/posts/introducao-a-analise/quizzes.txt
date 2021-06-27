@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por huandrey
+{{% quiz test_quiz%}}
+{{< item question="O método analítico se caracteriza por" answers="4" choices="ser extremamente caro em comparação a outros métodos, apresentar simplicidade e requerer um hardware potente, ter precisão maior que a análise empirica, obter resultados de ordem de crescimento a partir de possíveis entradas sem necessariamente executarmos o programa" >}}
+{{% /quiz %}}
