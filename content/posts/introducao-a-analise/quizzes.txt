@@ -10,5 +10,5 @@
 
 # Quiz elaborado por PauloNunes22
 {{% quiz test_quiz%}}
-{{< item question="Qual desses não é um recurso computacional" answers="2" choices="processamento,sistema operacional,memória" >}}
+{{< item question="Qual desses não é um recurso computacional ?" answers="2" choices="processamento,sistema operacional,memória" >}}
 {{% /quiz %}}
