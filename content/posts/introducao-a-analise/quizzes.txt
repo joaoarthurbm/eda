@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
++
++ # Quiz elaborado por edugabriel12
++ {{% quiz test_quiz%}}
++ {{< item question="Qual dessas alternativas NÃO apresenta um dos passos necessários da análise de algoritmos?" answers="3" choices="Identificar primitivas,Identificar a quantidade de vezes que cada uma das primitivas é executada, Identificar o nome do algoritmo, Somar o custo total" >}}
++ {{% quiz test_quiz%}}
