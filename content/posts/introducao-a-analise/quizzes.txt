@@ -7,3 +7,13 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por luizcarlosabrantesxavier
+{{% quiz test_quiz%}}
+{{< item question="Qual desses casos requer mais atenção na análise de algoritmos?" answers="1" choices="Pior caso,Melhor caso" >}}
+{{% /quiz %}}
+
+# Quiz elaborado por luizcarlosabrantesxavier
+{{% quiz test_quiz%}}
+{{< item question="No uso das operações primitivas,qual a relação com o tamanho da entrada? " answers="1" choices="O tempo de execução será constante e independe do tamanho da entrada,total dependência do tamanho da entrada" >}}
+{{% /quiz %}}
