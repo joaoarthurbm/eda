@@ -322,7 +322,7 @@ No material sobre <a class="external" href="http://joaoarthurbm.github.io/eda/po
 ***
 
 {{% quiz test_quiz%}}
-{{< item question="	Qual das alternativas abaixo não é uma vantagem do método analitico em relação a analise empiríca?" answers="2" choices="Preço,Precisão,Simplicidade,Sem necessidade de execução" >}}
+{{< item question="	Qual das alternativas abaixo não é uma vantagem do método analitico em relação a analise empiríca?" answers="2" choices="Preço,Precisão,Simplicidade,Não necessidade de execução" >}}
 {{% /quiz %}} 
 
 ## Resumo
