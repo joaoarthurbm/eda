@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por pedrorneto1
+{{% quiz test_quiz%}}
+{{< item question="Num algoritmo que envolve loops aninhandos, qual a curva que melhor descreve a relação entre o custo e o tamanho da entrada n?" answers="3" choices="Constante,Linear,Quadrática,Logarítmica" >}}
+{{% /quiz %}}
