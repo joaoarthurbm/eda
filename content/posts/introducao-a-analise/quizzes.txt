@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por PauloNunes22
+{{% quiz test_quiz%}}
+{{< item question="Qual desses não é um recurso computacional ?" answers="2" choices="processamento,sistema operacional,memória" >}}
+{{% /quiz %}}
