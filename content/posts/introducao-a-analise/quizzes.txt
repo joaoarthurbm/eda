@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por amauriplima
+{{% quiz test_quiz%}}
+{{< item question="A partir do gráfico Comparação de algoritmos de ordenação, qual algoritmo possui o melhor desempenho entre os tamanhos de input 10 e 15, e entre os tamanhos de input 15 e 20, respectivamente." answers="3" choices="SelectionSort e MergeSort,QuickSort e InsertionSort,QuickSort e MergeSort,QuickSort e SelectionSort" >}}
+{{% /quiz %}}
