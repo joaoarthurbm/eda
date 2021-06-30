@@ -209,7 +209,6 @@ Para pequenas entradas, f(n) cresce mais rápido do que g(n). Qual o n<sub>0</su
 - <p>f(n) = 7 * n <sup>4</sup> + 5 * n<sup>2</sup> + 10</p>
 - <p>f(n) = 8 </p>
 - <p>f(n) = 5 * n<sup>2</sup> + 8</p>
-- <p>f(n) = 7 * n <sup>4</sup> + 5 * n<sup>2</sup> + 10</p>
 - <p>f(n) = 3 * n * log n + 5 * n</p>
 
 
