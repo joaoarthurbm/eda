@@ -10,6 +10,6 @@
 
 #Quiz elaborado por MariaDasGracasSoares
 {{% quiz test_quiz%}}
-{{< item question="Além do desempenho, alguns outros aspectos precisam ser levados em consideração quando analisamos um algoritimo. São eles: " answers="1,3,5" choices="legibilidade, linguagem de programação, modularidade ,tamanho, simplicidade" >}}
+{{< item question="Além do desempenho, alguns outros aspectos precisam ser levados em consideração quando analisamos um algoritimo. Qual deles não se enuqadra na análise?: " answers="2" choices="legibilidade, linguagem de programação, modularidade, simplicidade" >}}
 {{% /quiz %}}
 
