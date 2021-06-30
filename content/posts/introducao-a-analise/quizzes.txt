@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por joaovitorsl
+{{% quiz test_quiz%}}
+{{< item question="Qual a ordem correta dos passos para calcular o tempo de execução de um algoritmo? A - Identificar a quantidade de vezes que cada uma das primitivas é executada. / B - Identificar primitivas. / C - Somar o custo total." answers="3" choices="ABC,ACB,BAC,BCA,CAB,CBA" >}}
+{{% /quiz %}}
