@@ -10,5 +10,5 @@
 
 # Quiz elaborado por mluizamarinho
 {{% quiz test_quiz%}}
-{{< item question="Que caminho devemos optar para fazer análise de um algoritmo?" answers="3" choices="Análise do caso médio,Análise da corretude,Análise do pior caso,Análise do melhor caso" >}}
+{{< item question="Ao fazer a análise de um algoritmo, para encontrar o maior tempo de execução possível que pode acontecer, que tipo de análise fazemos?" answers="3" choices="Análise do caso médio,Análise da corretude,Análise do pior caso,Análise do melhor caso" >}}
 {{% /quiz %}}
