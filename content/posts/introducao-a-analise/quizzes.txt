@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por joseaorufino
+{{% quiz test_quiz%}}
+{{< item question="Qual(is) o(s) recurso(s) computacional(is) são mais importantes para a análise de desempenho?" answers="2" choices="Software, Processamento e Memória, Armazenamento, Processamento" >}}
+{{% /quiz %}}
