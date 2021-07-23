@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por vncxavier
+{{% quiz test_quiz%}}
+{{< item question="Dentre os motivos a seguir, qual é determinante na escolha entre análise empírica e assintótica?" answers="2" choices="O tipo da entrada,Necessidade de precisão dos resultados em um hardware específico,A ausência de operações consideradas constantes no pior caso,A quantidade de operações que dependem do tamanho da entrada" >}}
+{{% /quiz %}}
