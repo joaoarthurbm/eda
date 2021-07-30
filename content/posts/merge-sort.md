@@ -49,7 +49,7 @@ O código do método ***merge*** está descrito abaixo. Vamos analisar por parte
         
         while (i <= middle && j <= right) {
             
-            if (helper[i] < helper[j]) {
+            if (helper[i] <= helper[j]) {
                 v[k] = helper[i];
                 i++;
             } else {
@@ -112,7 +112,7 @@ Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]
 ...
     while (i <= middle && j <= right) {
             
-        if (helper[i] < helper[j]) {
+        if (helper[i] <= helper[j]) {
             v[k] = helper[i];
             i++;
         } else {
