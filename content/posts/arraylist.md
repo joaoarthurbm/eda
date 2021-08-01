@@ -170,7 +170,7 @@ $lista = [9, 2, 1, 8, 24, 3, -7]$, com tamanho = 7.
 
 Se quisermos remover o elemento no índice 2, precisamos afastar para a esquerda os elementos à frente e atualizar, naturalmente, a variável ***tamanho***. Após a execução do método ***remove(2)***, temos a lista nas seguintes condições:
 
-$lista = [9, 2, 8, 24, 3, -7, -7]$, com $tamanho = 6$, isto é, a última posição (6) passa a estar livre para uma nova adição, caso seja preciso. Perceba que os índices 0 e 1 ficaram inalterados e, a partir disso, o índice $i$ passou a receber o valor em $i+1$. Note também que o último índice fica com o valor anterior, mas ele não faz parte da lista, pois os limites são 0 e $tamanho - 1$. Vamos ao código.
+$lista = [9, 2, 8, 24, 3, -7]$, com $tamanho = 6$, isto é, a última posição (6) passa a estar livre para uma nova adição, caso seja preciso. Perceba que os índices 0 e 1 ficaram inalterados e, a partir disso, o índice $i$ passou a receber o valor em $i+1$. Note também que o último índice fica com o valor anterior, mas ele não faz parte da lista, pois os limites são 0 e $tamanho - 1$. Vamos ao código.
 
 ```java
 ...           
