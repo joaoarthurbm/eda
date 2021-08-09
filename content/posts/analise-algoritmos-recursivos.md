@@ -285,11 +285,11 @@ Como vimos anteriormente, $a$ representa a quantidade de chamadas recursivas (qu
 Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:
 
 
-* Se f(n) < n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>).
+* Se f(n) < n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(n ** log<sub>b</sub><sup>a</sup>).
 
-* Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n) * log<sub>b</sub><sup>n</sup>).
+* Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(f(n) * log<sub>b</sub><sup>n</sup>).
 
-* Se f(n) > n ** log<sub>b</sub><sup>a</sup>, então T(n) = \Theta(f(n)).
+* Se f(n) > n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(f(n)).
 
 
 Desse modo, se a relação de recorrência obedecer às restrições $a>=1$, $b>1$ e $f(n)$ não negativa, basta aplicarmos o teorema. 
