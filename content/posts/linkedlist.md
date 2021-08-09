@@ -215,10 +215,10 @@ public void add(int index, Aluno aluno) {
     Node newNode = new Node(aluno);
         
     if (index == 0) {
-        this.addFirst(valor);
+        this.addFirst(aluno);
         
     } else if (index == size - 1) {
-        this.addLast(valor);
+        this.addLast(aluno);
         
     } else {
         Node aux = this.head;
