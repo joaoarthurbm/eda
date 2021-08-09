@@ -1153,13 +1153,13 @@ function showQuiz(quizId) {
 &lt;p&gt;Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;Se f(n) &amp;lt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = \Theta(n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;Se f(n) &amp;lt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = $\Theta$(n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Se f(n) = n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = \Theta(f(n) * log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;n&lt;/sup&gt;).&lt;/p&gt;
+&lt;p&gt;Se f(n) = n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = $\Theta$(f(n) * log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;n&lt;/sup&gt;).&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Se f(n) &amp;gt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = \Theta(f(n)).&lt;/p&gt;
+&lt;p&gt;Se f(n) &amp;gt; n ** log&lt;sub&gt;b&lt;/sub&gt;&lt;sup&gt;a&lt;/sup&gt;, então T(n) = $\Theta$(f(n)).&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Desse modo, se a relação de recorrência obedecer às restrições $a&amp;gt;=1$, $b&amp;gt;1$ e $f(n)$ não negativa, basta aplicarmos o teorema.&lt;/p&gt;
