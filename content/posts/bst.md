@@ -237,7 +237,7 @@ Em ambas as estratégias o novo elemento é adicionado como folha. Portanto, no 
 
 ### Busca
 
- A busca em uma árvore binária de pesquisa também usa as propriedades de ordenação dos nós para decidir que caminho percorrer. Compara-se o elemento com a raiz. Se for maior, a busca deve seguir pela sub-árvore à direita (`aux = aux.right`). Caso contrário, deve seguir pela sub-árvore à esquerda (`aux = aux.left`). Esse mesmo processo é feito com a raiz dessas sub-árvores. O algoritmo pára se o elemento for encontrado (`aux.value == element`) ou se alcançar uma folha e não encontrar o elemento (`aux == null`).
+ A busca em uma árvore binária de pesquisa também usa as propriedades de ordenação dos nós para decidir que caminho percorrer. Compara-se o elemento com a raiz. Se for maior, a busca deve seguir pela sub-árvore à direita (`aux = aux.right`). Caso contrário, deve seguir pela sub-árvore à esquerda (`aux = aux.left`). Esse mesmo processo é feito com a raiz dessas sub-árvores. O algoritmo para se o elemento for encontrado (`aux.value == element`) ou se alcançar uma folha e não encontrar o elemento (`aux == null`).
 
  Veja abaixo a versão iterativa da busca binária.
 
