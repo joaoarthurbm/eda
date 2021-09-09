@@ -158,7 +158,7 @@ A raiz está no índice 0 do array. Portanto, o nó à sua esquerda está no ín
 
 O nó 87 está no índice 1 do array. Portanto, o nó à sua esquerda está no índice 3, pois $2*1 + 1 = 3$.
 
-O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 3$.
+O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 5$.
 
 O nó 47 está no índice 3 do array. Portanto, o nó à sua esquerda está no índice 7, pois $2*3 + 1 = 7$.
 
