@@ -27,12 +27,12 @@ Sua primeira tarefa é colocar um avatar na sua conta @ccc. Me ajuda a saber que
 
 <b>Material?</b> Concentrado no classroom.
 
-<b>Comunicação?</b> Slack.
+<b>Comunicação?</b> Discord.
 
 <b>Encontros síncronos?</b> google meet.
 
 - Entre com o microfone desligado.
-- *Pode/deve* me interrromper enquanto falo.
+- *Pode/deve* me interromper enquanto falo.
 
 ---
 
@@ -137,7 +137,7 @@ Ao término deste curso, o aluno será capaz de:
 ---
 # Avaliação
 
-5 etapas. Cada etapa com 3 avaliações (uma por semana).
+Detalhes no classroom. Muda todo período :)
 
 Atividades avaliativas de vários tipos:
 

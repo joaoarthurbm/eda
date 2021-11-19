@@ -4493,7 +4493,7 @@ da esquerda para a direita.
 &lt;p align=&#34;center&#34;&gt;$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7&lt;/p&gt;
 &lt;p&gt;A raiz está no índice 0 do array. Portanto, o nó à sua esquerda está no índice 1, pois $2*0 + 1 = 1$.&lt;/p&gt;
 &lt;p&gt;O nó 87 está no índice 1 do array. Portanto, o nó à sua esquerda está no índice 3, pois $2*1 + 1 = 3$.&lt;/p&gt;
-&lt;p&gt;O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 3$.&lt;/p&gt;
+&lt;p&gt;O nó 73 está no índice 2 do array. Portanto, o nó à sua esquerda está no índice 5, pois $2*2 + 1 = 5$.&lt;/p&gt;
 &lt;p&gt;O nó 47 está no índice 3 do array. Portanto, o nó à sua esquerda está no índice 7, pois $2*3 + 1 = 7$.&lt;/p&gt;
 &lt;p&gt;Os nós 54 (índice 4), 6 (índice 5), 0 (índice 6) e 43 (índice 7) não possuem esquerda, pois se aplicarmos a fórmula $2*index+1$ os valores gerados são índices maiores do que &lt;em&gt;&lt;strong&gt;tail&lt;/strong&gt;&lt;/em&gt; e, portanto, não fazem parte do Heap.&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;&lt;strong&gt;right&lt;/strong&gt;&lt;/em&gt;. A direita de um nó no índice &lt;em&gt;&lt;strong&gt;index&lt;/strong&gt;&lt;/em&gt; sempre segue a fórmula $2*(index + 1)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão.&lt;/p&gt;
