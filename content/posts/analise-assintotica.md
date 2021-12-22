@@ -232,7 +232,11 @@ Por outro lado, $\omega$ é muito semelhante à $\Omega$, removendo apenas o sin
 <p align="center"> $0 \leq c*g(n) < f(n), n \geq n_0$ </p>
 
 Ou seja, **não** podemos dizer, por exemplo, que $f(n) = n^3 + 2$ é $\omega(n^3)$. $f(n) = n^3 + 2$ é $\omega(n^2)$, $\omega(n)$, $\omega(\log n)$ etc.   
+***
 
+{{% quiz test_quiz%}}
+{{< item question="Em relação às notações apresentadas, é correto afirmar que:" answers="3" choices="int a = A notação $\Omega$ retira o limite inferior da inequação e estabelecer apenas o limite superior.,Todas as funções pertencentes à $\Omega$(n²) também pertencem à $\Theta$(n²).,As funções pertencentes à $\Omega$(n²) não podem pertencer à $\Theta$(n²) porque $\Omega$(n²) estabelece apenas o limite inferior.,Nem todas as funções pertencentes à $\Theta$(n²) pertencem à $\Omega$(n²) porque $\Theta$ não estabelece o limite inferior." >}}
+{{% /quiz %}}  
 ***
 
 # Resumo
