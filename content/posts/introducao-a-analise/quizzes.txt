@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por amandazeved
+{{% quiz test_quiz%}}
+{{< item question="Qual é uma característica de uma abordagem empírica para análise de algoritmo?" answers="3" choices="Baixo custo relacionado à implementação,Independente de hardware,Fornece valores precisos,Oferece um espectro maior de entradas" >}}
+{{% /quiz %}}
