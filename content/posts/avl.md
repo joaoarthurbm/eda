@@ -45,7 +45,7 @@ Ou seja, as alturas das duas sub-árvores a partir de cada nó diferem no máxim
 
 **Exemplos de árvores AVL e não-AVL**
 
-> TODO: imagem com AVL e não-AVL
+![avlnot](avl/avl-not-avl.png)
 
 Provando que $h = O(log(n))$
 
@@ -123,7 +123,7 @@ Note que há diferença entre desbalanceado e "pendendo" para a direita ou "pend
 
 Veja os exemplos a seguir. Cada nó tem um balance. As setas indicam se o nó está pendendo para a direita ou para a esquerda. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL. No entanto, eles estão na iminência de quebrar a restrição do balanceamento. 
 
-> TODO: Imagens de nós pendendo/não-balanceados
+![avlbalanced](avl/balanced-not-balanced.png)
 
 Portanto, as regras para saber se um nó está pendendo para a direita, esquerda, se está nivelado ou desbalanceado são:
 
@@ -168,7 +168,7 @@ Neste caso, basta aplicarmos uma rotação à direita no avô do nó inserido. N
 
 Material extra: [esse vídeo](https://www.youtube.com/watch?v=3zmjQlJhBLM) e [esse](https://www.youtube.com/watch?v=JAeQuNsKQWk) são bem interessantes.
 
-> TODO: Imagem rotação à direita
+![RR](avl/rotate-right.png)
 
 **Caso 2. Rotação à esquerda:** O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para a direita.
 
@@ -183,12 +183,12 @@ if (x.isRightPending() && y.right == z)
 ```
 Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. Veja:
 
-> TODO: Imagem rotação à esquerda
+![LL](avl/rotate-left.png)
 
 **Caso 3. Rotação à direita seguida de rotação à esquerda:** O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para algum dos lados (cenário em Z).
 
-> TODO: Imagem rotação Right-Left
+![RL](avl/right-left.png)
 
 **Caso 4. Rotação à esquerda seguida de rotação à direita:** O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para algum dos lados.
 
-> TODO: Imagem rotação Left-Right
+![LR](avl/left-right.png)
