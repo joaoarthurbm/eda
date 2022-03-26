@@ -1,10 +1,10 @@
 +++
-title: "Árvores Balanceadas (AVL)"
-date: 2022-03-24
+title = "Árvores Balanceadas (AVL)"
+date = 2022-03-24
 tags = []
 categories = []
 github = "LINK PARA IMPLEMENTACAO"
-draft: true
+draft = true
 +++
 
 # Contextualização
@@ -14,8 +14,12 @@ draft: true
 - $A$ é uma árvore nula
 - $A = (E, raiz, D)$ onde E e D são árvores binárias de pesquisa. $E$ contém apenas valores menores do que o armazenado na raiz, enquanto $D$ contém apenas valores maiores do que o armazenado na raiz
 
-![abp1](avl/exemplo-simples.png)
-> Exemplo de Árvore Binária de Pesquisa
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="exemplo-simples.png">
+    <figcaption align="center">
+        Exemplo de Árvore Binária de Pesquisa
+    </figcaption>
+</figure>
 
 Um conceito bastante importante em ABP **é a altura**. Altura de uma ABP é definida pelo maior caminho entre a raiz e todas as folhas.  No exemplo acima, a altura da raiz é 3. Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma ABP são, do ponto de vista assintótico $O(h)$. Portanto, idealmente, é preciso manter h com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada.
 
@@ -23,7 +27,9 @@ Um conceito bastante importante em ABP **é a altura**. Altura de uma ABP é def
 
 A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma ABP.
 
-![abp2](avl/abp-linear.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="abp-linear.png">
+</figure>
 
 Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma ABP com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.
 
@@ -45,17 +51,18 @@ Ou seja, as alturas das duas sub-árvores a partir de cada nó diferem no máxim
 
 **Exemplos de árvores AVL e não-AVL**
 
-![avlnot](avl/avl-not-avl.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="avl-not-avl.png">
+</figure>
 
 Provando que $h = O(log(n))$
 
 Número mínimo de nós que em uma AVL de altura h. O pior caso é quando, para cada nó, a sub-árvore à direita tem altura uma unidade maior ou menor do que a sub-árvore à esquerda.
-
-> Mudar as palavras (não entendi exatamente o que quer dizer)
+<!-- Mudar as palavras (não entendi exatamente o que quer dizer) -->
 
 - Relação de recorrência: $N(h) = N(h-1) + N(h-2) + 1$
 
-Essa relação é **muito** semelhante à relação de recorrência da função de Fibonacci. Sua resolução revela uma função exponencial. Como queremos saber o inverso (a altura), temos que $H = O (log(n))$. Mais especificamente, $H = 1.44 log(N)$.
+Essa relação é **muito** semelhante à relação de recorrência da função de Fibonacci. Sua resolução revela uma função exponencial. Como queremos saber o inverso (a altura), temos que $H = O (log(n))$. Mais especificamente, $H = 1.44 \log(N)$.
 
 # Como manter a árvore balanceada?
 
@@ -123,7 +130,9 @@ Note que há diferença entre desbalanceado e "pendendo" para a direita ou "pend
 
 Veja os exemplos a seguir. Cada nó tem um balance. As setas indicam se o nó está pendendo para a direita ou para a esquerda. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL. No entanto, eles estão na iminência de quebrar a restrição do balanceamento. 
 
-![avlbalanced](avl/balanced-not-balanced.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="balanced-not-balanced.png">
+</figure>
 
 Portanto, as regras para saber se um nó está pendendo para a direita, esquerda, se está nivelado ou desbalanceado são:
 
@@ -132,7 +141,7 @@ Portanto, as regras para saber se um nó está pendendo para a direita, esquerda
 - se height(node.left) - height(node.right) == 0 -> nivelado
 - se |height(node.left) - height(node.right)| == 2 -> desbalanceado
 
-> Escreva os métodos a seguir:
+> **Desafio.** Implemente os métodos a seguir:
 ```java
 public boolean isLeftPending()
 public boolean isRightPending()
@@ -168,7 +177,9 @@ Neste caso, basta aplicarmos uma rotação à direita no avô do nó inserido. N
 
 Material extra: [esse vídeo](https://www.youtube.com/watch?v=3zmjQlJhBLM) e [esse](https://www.youtube.com/watch?v=JAeQuNsKQWk) são bem interessantes.
 
-![RR](avl/rotate-right.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="rotate-right.png">
+</figure>
 
 **Caso 2. Rotação à esquerda:** O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para a direita.
 
@@ -183,12 +194,18 @@ if (x.isRightPending() && y.right == z)
 ```
 Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. Veja:
 
-![LL](avl/rotate-left.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="rotate-left.png">
+</figure>
 
 **Caso 3. Rotação à direita seguida de rotação à esquerda:** O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para algum dos lados (cenário em Z).
 
-![RL](avl/right-left.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="right-left.png">
+</figure>
 
 **Caso 4. Rotação à esquerda seguida de rotação à direita:** O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para algum dos lados.
 
-![LR](avl/left-right.png)
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="left-right.png">
+</figure>
