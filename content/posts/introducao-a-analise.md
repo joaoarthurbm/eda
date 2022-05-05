@@ -156,20 +156,20 @@ double precisaNaFinal(double nota1, double nota2, double nota3) {
 
 9. atribuição (precisa = ) -> $c_9$
 
-10. operação aritmética (pesoMedia * media) -> $c_10$
+10. operação aritmética (pesoMedia * media) -> $c_{10}$
 
-11. operação aritmética (mediaFinal -  ...) -> $c_11$
+11. operação aritmética (mediaFinal -  ...) -> $c_{11}$
 
-12. operação aritmética (... / pesoFinal) -> $c_12$
+12. operação aritmética (... / pesoFinal) -> $c_{12}$
 
-13. retorno de método (return precisa) -> $c_13$
+13. retorno de método (return precisa) -> $c_{13}$
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.** Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c_5$, pois, no pior caso, o bloco do `else` será executado, uma vez que é mais custoso que o bloco do `if`. As outras primitivas são executadas apenas uma vez.
 
 **Passo 3: Somar o custo total.**
 
 
-<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_10+c_11+c_12+c_13$ </p>
+<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_{10}+c_{11}+c_{12}+c_{13}$ </p>
 
 Note que $c_5$ é desconsiderada.
 
