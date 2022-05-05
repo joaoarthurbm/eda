@@ -292,21 +292,21 @@ Operações Primitivas
 <p>atribuição (precisa = ) -&gt; $c_9$</p>
 </li>
 <li>
-<p>operação aritmética (pesoMedia * media) -&gt; $c_10$</p>
+<p>operação aritmética (pesoMedia * media) -&gt; $c_{10}$</p>
 </li>
 <li>
-<p>operação aritmética (mediaFinal -  &hellip;) -&gt; $c_11$</p>
+<p>operação aritmética (mediaFinal -  &hellip;) -&gt; $c_{11}$</p>
 </li>
 <li>
-<p>operação aritmética (&hellip; / pesoFinal) -&gt; $c_12$</p>
+<p>operação aritmética (&hellip; / pesoFinal) -&gt; $c_{12}$</p>
 </li>
 <li>
-<p>retorno de método (return precisa) -&gt; $c_13$</p>
+<p>retorno de método (return precisa) -&gt; $c_{13}$</p>
 </li>
 </ol>
 <p><strong>Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.</strong> Aqui vem a grande diferença. Como estamos interessados no pior caso, nós vamos descartar a constante $c_5$, pois, no pior caso, o bloco do <code>else</code> será executado, uma vez que é mais custoso que o bloco do <code>if</code>. As outras primitivas são executadas apenas uma vez.</p>
 <p><strong>Passo 3: Somar o custo total.</strong></p>
-<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_10+c_11+c_12+c_13$ </p>
+<p align="center"> $f(n) = c_1+c_2+c_3+c_4+c_6+c_7+c_8+c_9+c_{10}+c_{11}+c_{12}+c_{13}$ </p>
 <p>Note que $c_5$ é desconsiderada.</p>
 <hr>
 <h3 id="e-quando-houver-iteração">E quando houver iteração?</h3>
