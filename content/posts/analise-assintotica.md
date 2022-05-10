@@ -30,7 +30,7 @@ f(n) = ~~1.1~~ * n ** 2 ~~+ (10 + sin(n+15)*n**1.5) + 9000~~
 
 Ou seja, do ponto de vista da ordem de crescimento, para grandes valores de $n$, as constantes e os expoentes de menor magnitude são insignificantes, nos permitindo simplificar a expressão do tempo de execução para $\Theta(n^2)$. A notação theta será discutida com mais detalhes na próxima seção. 
 
-Agora sim, é muito mais direto olhar para $n^2$ ter uma ideia clara do crescimento do tempo de execução do algoritmo, porque $n^2$ é uma função que já conhecemos bastante.
+Agora sim, é muito mais direto olhar para $n^2$ e ter uma ideia clara do crescimento do tempo de execução do algoritmo, porque $n^2$ é uma função que já conhecemos bastante.
 
 O interesse está na ordem de crescimento das funções, que facilita a análise e comparação de diferentes soluções. Por exemplo, na escolha entre uma solução $\Theta(\log n)$ e uma solução $\Theta(n)$, é preferível a primeira, pois à medida que o tamanho da entrada cresce, o tempo de execução cresce mais lentamente que $\Theta(n)$.
 
