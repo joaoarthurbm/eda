@@ -10,17 +10,18 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 # Definições e Propriedades
 
-Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (BST)^[Outras denominações utilizadas são: Árvore de Pesquisa Binária, Árvore Binária de Busca (ABB) e Binary Search Tree (BST). Neste material vou usar a sigla BST devido à sua popularidade.] é uma estrutura de dados de árvore binária baseada em nós, onde a subárvore à esquerda de cada nó possui valores numéricos inferiores ao nó e a subárvore à direita de cada nó possui valores numéricos superiores ao nó. Formalmente, uma 
-BST é definida recursivamente da seguinte forma:
+Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca, inserção e remoção. Informalmente, uma Árvore Binária de Pesquisa (BST)[^1] é uma estrutura de dados de árvore binária baseada em nós, onde a subárvore à esquerda de cada nó possui valores numéricos inferiores ao nó e a subárvore à direita de cada nó possui valores numéricos superiores ao nó. Formalmente, uma BST é definida recursivamente da seguinte forma:
 
 1. $A$ é uma árvore nula;
 
 1. $A$ é uma tripla $(Esq, raiz, Dir)$, onde ***Esq*** e ***Dir*** são árvores binárias de pesquisa e ***Esq*** contém apenas valores menores do que o armazenado na raiz, enquanto ***Dir*** contém apenas valores maiores do que o armazenado na raiz.
 
-A Figura abaixo^[ As figuras desse material foram feitas no visualgo.net
-] ilustra uma árvore com raiz 63.
+A Figura abaixo[^2] ilustra uma árvore com raiz 63.
+[^2]: As figuras desse material foram feitas no visualgo.net.
 
 ![bst1](bst1.png)
+
+[^1]: Outras denominações utilizadas são: Árvore de Pesquisa Binária, Árvore Binária de Busca (ABB) e Binary Search Tree (BST). Neste material vou usar a sigla BST devido à sua popularidade.
 
 ## O nó
 
@@ -41,19 +42,19 @@ class Node {
 }
 ```
 
-Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar. 
+Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar.
 
-Depois, as referências ***left*** e ***right*** são muito parecidas com as referências de um ***Node*** em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência ***left*** aponta é ***null*** ou  armazena um **valor menor** do que ***value***, enquanto o nó para o qual a referência ***right*** aponta é ***null*** ou armazena um **valor maior** do que ***value***. Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.
+Depois, as referências ***left*** e ***right*** são muito parecidas com as referências de um ***Node*** em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência ***left*** aponta é ***null*** ou  armazena um **valor menor** do que ***value***, enquanto o nó para o qual a referência ***right*** aponta é ***null*** ou armazena um **valor maior** do que ***value***. **Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.**
 
-Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência ***parent*** que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos.
+Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência ***parent*** que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos, como sucessor e predecessor, que são utilizados na remoção de um elemento da árvore.
 
 ## Raiz
 
-Raiz é um nó especial da árvore. Por meio dele conseguimos acessar qualquer nó. Assim como mantemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
+Raiz é um nó especial da árvore. A partir dela conseguimos acessar qualquer nó da árvore. Assim como mantivemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.
 
 ## Grau de um nó
 
-O grau de um nó é a quantidade de filhos que ele possui. Naturalmente, só temos três graus possíveis em uma árvore binária de pesquisa: 0, 1 e 2. Os nós com grau zero são chamados de folhas. Na figura acima, as folhas são os nós 2, 52, 60, 65 e 83. Os nós com graus 1 e 2 são chamados de nós internos.
+O grau de um nó é a quantidade de filhos que ele possui. Naturalmente, só temos três graus possíveis em uma árvore binária de pesquisa: 0, 1 e 2. Os nós com grau zero são chamados de folhas. Na figura acima, as folhas são os nós 2, 52, 60, 65 e 83. Apenas o nó 90 tem grau 1, enquanto os nós 63, 7, 69 e 59 possuem grau 2. Os nós com graus 1 e 2 são chamados de nós internos.
 
 ## Altura
 
@@ -74,6 +75,33 @@ Como dito anteriormente, a altura da árvore é o maior caminho, ou seja, h=3.
 A altura de uma árvore com apenas um nó é 0, enquanto a altura de uma árvore nula é -1.
 
 Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma BST são, do ponto de vista assintótico, $O(h)$. Portanto, idealmente, é preciso manter $h$ com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada. De maneira geral, uma árvore balanceada é aquela que a altura é $O(\log n)$.
+
+A altura da árvore é a altura de sua raiz. Contudo, o conceito de altura pode ser atribuído a qualquer nó. Basta considerá-lo como sendo a raiz das sub-árvores que estão abaixo dele. Por exemplo, vamos determinar a altura do nó 69.
+
+* 69 -> 65. Tamanho do caminho = 1.
+* 69 -> 90 -> 83. Tamanho do caminho = 2.
+
+Portanto, a altura do nó 69 é 2, pois o maior caminho entre ele e as folhas de suas subárvores é 2.
+
+***
+
+Vale a pena fazermos um quiz para ver se você de fato entendeu o conceito de altura.
+
+{{% quiz altura_no %}}
+
+{{< item question="Assinale a alternativa correta sobre a altura (entre parênteses) de cada nó na árvore acima." answers="1" choices= "63(3) - 7(2) - 69(2) - 2(0) - 59(1) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(1) - 69(1) - 2(0) - 59(1) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(2) - 69(2) - 2(0) - 59(0) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(2) - 69(2) - 2(0) - 59(1) - 65(0) - 90(0) - 52(0) - 60(0) - 83(0)">}}
+
+![bst1](bst1.png)
+
+{{% /quiz %}}  
+
+***
+
+## Nível
+
+Há também o conceito de níveis em uma BST. O nível da raiz é o 0, o nível dos filhos diretos da raiz é o nível 1, e assim por diante. A Figura abaixo ilustra esse conceito. É muito importante não confundir nível com altura. A altura da raiz nessa árvore, por exemplo, é 3 e ela está no nível 0. A altura do nó 58 é 2, e ele está no nível 1. Os nós que estão no mesmo nível não necessariamente possuem alturas iguais. 
+
+![bst-completa](bst-niveis.png)
 
 ## Árvore Completa
 
@@ -393,9 +421,16 @@ de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da su
 
 ### Remoção
 
-A remoção em uma árvore binária de pesquisa possui três casos a serem analisados. 
+Talvez a operação básica mais complexa de se implementar em BST seja a remoção. Mas nada que a gente não consiga decompor o problema em problemas menores e implementar :)
 
-**Caso 1: O nó a ser removido é uma folha.** Nesse caso, basta fazermos com que o pai do nó, se existir, passe a apontar a sua direita ou a esquerda para ***null***. Precisamos também verificar se o nó removido é raiz. Se for, simplesmente fazemos a raiz apontar para ***null***.
+Vamos lá. A remoção em uma árvore binária de pesquisa possui três casos a serem analisados.
+
+#### Caso 1
+
+**O nó a ser removido é uma folha.** Nesse caso, basta fazermos com que o pai do nó, se existir, passe a apontar a sua direita ou a esquerda para ***null***. Note que você precisa saber se a folha a ser removida é filha à direita ou à esquerda do nó pai. Essa verificação é feita através da comparação dos valores entre a folha e o nó pai. Se a folha for menor, ela está à esquerda do nó pai. Então você terá que fazer `toRemove.parent.left = null`. Do contrário, ela está à direita do nó pai. Nesse caso, você teria que fazer `toRemove.parent.right = null`.
+
+
+Precisamos também verificar se o nó removido é raiz. Se for, simplesmente fazemos a raiz apontar para ***null***.
 
 ```java
 ...
@@ -410,7 +445,10 @@ if (toRemove.isLeaf()) {
     }
 ...
 ```
-**Caso 2: O nó a ser removido possui apenas um filho.** Se o nó possuir apenas um filho, precisamos ligar esse filho ao pai do nó a ser removido. Naturalmente, precisamos diferenciar se o único filho é à esquerda ou à direita. Além disso, precisamos verificar se o nó removido é a raiz da árvore.
+
+#### Caso 2
+
+**O nó a ser removido possui apenas um filho.** Ou seja, tem grau 1. Se o nó possuir apenas um filho, precisamos ligar esse filho ao pai do nó a ser removido (avô). Naturalmente, precisamos diferenciar se o único filho é à esquerda ou à direita. Além disso, precisamos verificar se o nó removido é a raiz da árvore.
 
 ```java
 ...
@@ -440,7 +478,15 @@ if (toRemove.isLeaf()) {
 ...
 ```
 
-**Caso 3: O nó a ser removido possui dois filhos.** Nesse caso, trocamos o nó com o seu sucessor e chamamos recursivamente o método remove passando o nó sucessor. 
+#### Caso 3
+
+**O nó a ser removido possui dois filhos.** Ou seja, grau 2. Nesse caso, trocamos o valor do nó a ser removido com o valor do seu sucessor e chamamos recursivamente o método `remove` passando o nó sucessor. Veja a ilustração abaixo, copiada <a class="external" href="https://www.codeguru.co.in/2021/06/delete-node-in-binary-search-tree-c.html">deste post</a> do site CodeGuru.
+
+<img src="delete_bst.gif" alt="caso3" width="1px" height="300"/>
+
+E por que trocamos pelo sucessor? Para garantirmos que a restrição de "ordenação" entre os nós se mantenha. Se eu trocar um valor pelo seu sucessor, eu garanto que toda a sub-árvore à esquerda continua menor do que o valor e toda a sub-árvore à direita continua maior do que o valor. Isso acontece porque o sucessor é o mínimo valor à direita. 
+
+Outro fator importante é o fato de que o sucessor certamente será uma folha ou terá apenas um filho, uma vez que ele é o mínimo da sub-árvore à direita. Isso garante que na chamada recursiva, a remoção caia no Caso 1 ou Caso 2 sempre, encerrando o algoritmo.
 
 ```java
 ...
@@ -451,6 +497,15 @@ if (toRemove.isLeaf()) {
     }
 ...
 ```
+
+Algumas perguntas recorrentes que surgem em sala de aula são:
+
+> O algoritmo é recursivo e não há condição de parada? Há sim. A gente garante que o algoritmo vai parar porque o sucessor de um nó tem no máximo 1 filho. Ou seja, depois da chamada recursiva, o algoritmo vai cair no caso 1 ou 2, que são "terminais".
+
+> E se não tiver sucessor? Bom, se não tiver sucessor, ele certamente é o máximo da árvore. Ou seja, cai no Caso 1 ou 2, nunca no 3.
+
+> Posso usar o predecessor ao invés do sucessor? Pode sim. Só é importante deixar isso explícito no contrato, porque a ávore que usa o sucessor na remoção fica diferente da árvore que usa o predecessor.
+
 
 ## Percorrendo Árvores Binárias
 
@@ -658,3 +713,5 @@ public void printBFS() {
 }
 ...
 ```
+
+# Notas de Rodapé
