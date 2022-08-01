@@ -1,11 +1,13 @@
 +++
 title = "Árvores Balanceadas (AVL)"
-date = 2022-03-24
+date = 2017-03-24
 tags = []
 categories = []
 github = "LINK PARA IMPLEMENTACAO"
 draft = true
 +++
+
+Ainda em construção.
 
 # Contextualização
 
@@ -209,3 +211,9 @@ Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. 
 <figure style="align: center; margin-left:5%; width: 90%">
     <img src="left-right.png">
 </figure>
+
+---
+
+# Créditos
+
+Este material foi concebido em colaboração com [Pedro Serey](https://github.com/pserey) .
