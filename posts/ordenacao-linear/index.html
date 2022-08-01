@@ -1,0 +1,400 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/laboratorio/">
+                <i class="fa-li fa  fa-lg"></i><span>Laboratório</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Ordenação Linear: Counting sort</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-27T00:00:00-03:00">Oct 27, 2019</time>
+        </li>
+        
+
+        
+
+        <li>10 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/CountingSort.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <hr>
+<p>Os algoritmos de ordenação que vimos até então utilizam comparação para estabelecer a ordem entre os elementos de uma sequência. Primeiro vimos três algoritmos $\Theta(n^2)$: Selection Sort, Insertion Sort e Bubble Sort. Depois vimos dois algoritmos $\Theta(n * \log n)$: Merge Sort e Quick Sort<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<p>Neste material vamos abordar algoritmos que não utilizam comparação, mas que são muito eficientes do ponto de vista de tempo de execução, embora demandem substancialmente mais memória do que o Selection Sort, Insertion Sort, Quick Sort etc.</p>
+<h1 id="ordenação-por-contagem">Ordenação por Contagem</h1>
+<p>Algo que chama a atenção em um primeiro momento é:</p>
+<p align="center"><b>Como é possível ordenar elementos sem utilizar comparação?</b></p>
+<p>Em geral, a ideia é valer-se do fato de que estamos ordenando números inteiros e que os índices dos arrays também são inteiros. Dessa maneira, podemos mapear o valor presente em uma sequência para a posição de mesmo valor em um array auxiliar (<code>array[i] = i</code>). Essa é a estratégia geral dos algoritmos de ordenação linear que se baseiam na contagem dos elementos da sequência a ser ordenada.</p>
+<p>Antes de analisarmos os algoritmos de contagem em detalhes, vamos abordar um exemplo bem simples para entender esse conceito. Para isso, vamos entrar em um mundo em que:</p>
+<ul>
+<li>todos os elementos do array que vamos ordenar são inteiros positivos (1, 2, 3…k);</li>
+<li>não há repetição de elementos no array que vamos ordenar;</li>
+<li>sabemos o maior valor desse array, o qual chamamos de k.</li>
+</ul>
+<p>Desse modo, se quisermos ordenar o array $A = [7, 2, 1, 4]$<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, basta criarmos um array auxiliar $C$ cujo tamanho é $k$, onde $k$ é o maior elemento do array original (7), e iterarmos sobre $A$ registrando a presença de seus elementos em $C$ através da seguinte instrução <code>C[A[i] - 1] = true</code>. O índice é subtraído de 1, pois as posições de um array em Java iniciam-se de 0.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>k<span style="color:#f92672">];</span>
+
+<span style="color:#75715e">// registrando a presença de A[i] na sequência
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+    C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Se $A = [7, 2, 1, 4]$, com $k = 7$, temos $C$ preenchido da seguinte maneira:</p>
+<ul>
+<li>C = [<span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>, false, false, <span style="color:blue">true</span>]</li>
+</ul>
+<p>Agora, se criarmos um array $B$ do tamanho de $A$ e iterarmos sobre o array $C$ preenchendo $B$ com o valor do índice $i + 1$ em que <code>C[i] == true</code>, temos que $B$ é a versão ordenada de $A$.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+<span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> B <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+
+<span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> C<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>C<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        B<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+        j <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Assim, para $A = [7, 2, 1, 4]$, temos:</p>
+<ul>
+<li>C = [<span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>, false, false, <span style="color:blue">true</span>]</li>
+<li>B = [1, 2, 4, 7], representando a sequência de valores de $A$, porém ordenada.</li>
+</ul>
+<p>Viu como foi fácil? Note que $B$ foi preenchido com os valores de $i+1$ em que C[i] ==  true. Ou seja, $B[0] = 1$, pois C[0] ==  true. $B[1] = 2$, pois C[1] ==  true. $B[2] = 4$, pois C[3] ==  true. Por fim, $B[3] = 7$, pois C[6] ==  true.</p>
+<p>Vamos unir os trechos de código mostrados acima em um método que recebe $A$ e $k$ e retorna um array $B$ que representa a ordenação dos elementos de $A$.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">sort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> A<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    
+    <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">boolean</span><span style="color:#f92672">[</span>k<span style="color:#f92672">];</span>
+
+    <span style="color:#75715e">// registrando a presença de A[i] na sequência
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+   
+    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> B <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> C<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>C<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">true</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            B<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+            j <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+
+    <span style="color:#66d9ef">return</span> B<span style="color:#f92672">;</span>   
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="mais-um-exemplo-a--9-1-3-4-6-7">Mais um exemplo: A = [9, 1, 3, 4, 6, 7]</h3>
+<p>Sempre lembrando que sabemos o valor de $k$ e que não há repetição dos elementos a serem ordenados.</p>
+<p>Para $A = [9, 1, 3, 4, 6, 7]$, temos:</p>
+<ul>
+<li>
+<p>C = [<span style="color:blue">true</span>, false, <span style="color:blue">true</span>, <span style="color:blue">true</span>, false, <span style="color:blue">true</span>,  <span style="color:blue">true</span>, false,  <span style="color:blue">true</span>]</p>
+</li>
+<li>
+<p>B = [1, 3, 4, 6, 7, 9], representando a sequência de valores de $A$, porém ordenada.</p>
+</li>
+</ul>
+<h2 id="counting-sort-e-se-houver-repetição-no-array">Counting Sort: E se houver repetição no array?</h2>
+<p>Repetição de valores em um array a ser ordenado não é um cenário incomum, certo? O fato de não haver repetição nos permitiu criar um array C de booleanos e registrar a presença ou não de um elemento.</p>
+<p align="center">O que faríamos se houvesse repetição?</p>
+<p>Daí surge ordenação por contagem (<em>Counting Sort</em>). A ideia geral é registrar a frequência dos elementos ao invés da simples presença. Isso faz com que o array $C$ passe a ser um array de inteiros, não de booleanos. O algoritmo do <em>Counting Sort</em> é baseado na ideia que vimos, mas possui algumas modificações substanciais para permitir elementos repetidos e para manter a estabilidade. Em linhas gerais, o <em>Counting Sort</em> possui os seguintes passos:</p>
+<ol>
+<li>
+<p>registrar a frequência dos elementos de $A$ no array $C$;</p>
+</li>
+<li>
+<p>Calcular a soma cumulativa de $C$. Esse passo registra, para cada elemento $x$ da entrada, o número de elementos menores ou iguais a $x$;</p>
+</li>
+<li>
+<p>iterar sobre $A$ do fim ao início registrando em $B$ o valor de $A$ com a seguinte instrução <code>B[C[A[i] - 1] -1] = A[i]</code>. Não se assuste. Essa sequência de decrementos em 1 é devido ao fato de começarmos os índices de um array a partir de zero em Java.</p>
+</li>
+</ol>
+<p>Antes de entrarmos nos detalhes de código do algoritmo, vamos simular a execução de um exemplo.</p>
+<h3 id="exemplo-a--1-9-1-3-4-7-6-7">Exemplo: A = [1, 9, 1, 3, 4, 7, 6, 7]</h3>
+<p><strong>Passo 1: Contagem de frequência em C.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>k<span style="color:#f92672">];</span>
+
+        <span style="color:#75715e">// frequência
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Para  $A = [1, 9, 1, 3, 4, 7, 6, 7]$ e $k = 9$, temos:</p>
+<ul>
+<li>C = [2, 0, 1, 1, 0, 1, 2, 0, 1], isto é, no array a ser ordenado há dois elementos de valor 1, nenhum elemento de valor 2, um elemento de valor 3 e assim por diante.</li>
+</ul>
+<p><strong>Passo 2: Soma cumulativa em C.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+        <span style="color:#75715e">// cumulativa
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> C<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            C<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> C<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">];</span>
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Para $C = [2, 0, 1, 1, 0, 1, 2, 0, 1]$, após a execução do cálculo da cumulativa, temos $C = [2, 2, 3, 4, 4, 5, 7, 7, 8]$, isto é, no array a ser ordenado há:</p>
+<ul>
+<li>2 elementos menores ou igual a 1</li>
+<li>2 elementos menores ou iguais a 2</li>
+<li>3 elementos menores ou iguais a 3</li>
+<li>4 elementos menores ou iguais a 4</li>
+<li>4 elementos menores ou iguais a 5</li>
+<li>5 elementos menores ou iguais a 6</li>
+<li>7 elementos menores ou iguais a 7</li>
+<li>7 elementos menores ou iguais a 8</li>
+<li>8 elementos menores ou iguais a 9.</li>
+</ul>
+<p><strong>Passo 3: Iterar do fim ao início de $A$ registrando em $B$ os elementos.</strong></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> B <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&gt;=</span> 0<span style="color:#f92672">;</span> i<span style="color:#f92672">--)</span> <span style="color:#f92672">{</span>
+            B<span style="color:#f92672">[</span>C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> A<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+            C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Essa parte pode ser confusa e acredito que para entendê-la precisamos de recursos visuais melhores do que o texto. Por isso, fiz o vídeo abaixo.</p>
+<center>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3bm7NgKJpj4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</center>
+<h2 id="implementação-do-counting-sort">Implementação do Counting Sort</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> <span style="color:#a6e22e">countingSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> A<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> k<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>k<span style="color:#f92672">];</span>
+
+        <span style="color:#75715e">// frequência
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        
+        <span style="color:#75715e">// cumulativa
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> C<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            C<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> C<span style="color:#f92672">[</span>i<span style="color:#f92672">-</span>1<span style="color:#f92672">];</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> B <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span> i <span style="color:#f92672">&gt;=</span> 0<span style="color:#f92672">;</span> i<span style="color:#f92672">--)</span> <span style="color:#f92672">{</span>
+            B<span style="color:#f92672">[</span>C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> A<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+            C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">]</span> <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+
+        <span style="color:#66d9ef">return</span> B<span style="color:#f92672">;</span>
+    
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="análise-do-counting-sort">Análise do Counting Sort</h2>
+<p>O Counting Sort tem em sua implementação 3 laços principais. O primeiro percorre o array $A$ (tamanho $n$), o segundo percorre o array $C$ (tamanho $k$) e o terceiro percorre novamente o array $A$. Assim, temos:</p>
+<p>$T(n) = 2n + k$. Aplicando as diretrizes para análise assintótica, temos:
+$T(n) = (n + k)$.</p>
+<p>O importante aqui é entender que o algoritmo tem seu tempo de execução linear em função do tamanho de $n$ e $k$, não somente do tamanho de $n$. Esse tempo de execução é substancialmente mais eficiente do que os outros algoritmos que vimos. Contudo, esse algoritmo também tem um custo associado ao uso de memória, pois precisa criar um array de contagem $C$ de tamanho igual a $k$ e o array $B$ a ser retornado de tamanho igual ao do array original. Ou seja, do ponto de vista de memória, também que o consumo é dado por $T(n) = (n + k)$.</p>
+<p><strong>O que acontece se k for muito maior que n?</strong> Vejamos um exemplo:</p>
+<p>$A = [1, 3, 2, 1, 9874392]$</p>
+<p>Veja que teríamos que criar o array de contagem $C$ de tamanho 9874392 mesmo tendo que ordenar apenas 5 elementos, o que seria muito ruim.</p>
+<p>Por outro lado, o que acontece se $k$ for muito menor que $n$? Vejamos um exemplo:</p>
+<p>A = [1, 3, 2, 1, 1, 5, 3, 2, 5, 4, 2, 1, 2, 1, 1, 2, 1, 4, 5, 2, 2, 3, 2]</p>
+<p>Veja que teríamos que criar o array de contagem C de tamanho 5 para ordenar um array com 23 elementos.  Isso pode ser ainda mais vantajoso se imaginarmos um cenário em que teremos, por exemplo, que ordenar todas as pessoas do mundo de acordo com sua idade. Nesse caso, temos um conjunto muito grande de dados (~7.7 bilhões), mas com um $k$ bem menor, pois a pessoa mais velha do mundo não ultrapassaria, nos dias de hoje, 125 anos. Isto é, $k$ é muito menor do que $n$.</p>
+<p><strong>E se eu quiser usar o Counting Sort para ordenar sequências contendo valores iguais a zero e valores negativos?</strong></p>
+<p>O Counting Sort baseia-se na ideia de que um valor inteiro pode ser mapeado para o índice de mesmo valor em um array auxiliar. Essa estratégia nos impede, em um primeiro momento, de ordenar uma sequência com números negativos, pois o menor índice em um array é 0. Além disso, na nossa implementação inicial excluímos também elementos iguais a zero. Contudo, é possível fazer algumas mudanças simples no Counting Sort para que o mesmo passe a também ordenar sequências com esses valores.</p>
+<p>A ideia é simples: basta identificarmos o menor elemento do array (menor) e usar esse valor como um &ldquo;salto&rdquo; para adicionar os elementos. É uma ideia similar a fazer um shift para a direita em todos os elementos. O menor elemento array tem sua frequência registrada na posição zero. Vamos ver um exemplo:</p>
+<p>$A = [1,-3, 2, 1, 7]$, com k = 7 e menor = -3.</p>
+<p>Em primeiro lugar, o array de contagem $C$ já não varia de 0 a $k$, mas sim de 0 a $k - menor + 1$, porque temos que considerar que a frequência do elemento de valor -3 será registrada na posição 0, a do valor -2, na posição 1, a do valor -1 na posição 2 e assim por diante. Por isso, quando for preciso mapear os elementos de A em C e B, temos que usar o salto de |menor| (3, no nosso exemplo). O cálculo da frequência seria dado pelo seguinte código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> C <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>maior <span style="color:#f92672">-</span> menor <span style="color:#f92672">+</span> 1<span style="color:#f92672">];</span>
+
+    <span style="color:#75715e">// frequência
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> A<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        C<span style="color:#f92672">[</span>A<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">-</span> menor<span style="color:#f92672">]</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Para A = [1,-3, 2, 1, 7], temos C = [1, 0, 0, 0, 2, 1, 0, 0, 0, 0, 1]. Note que o primeiro índice é reservado para a frequência do menor elemento (-3) e não mais para 1. Além disso, como estamos também contando com a presença de elementos de valor 0 no array, trocamos a instrução <code>C[A[i] - 1] += 1</code> por <code>C[A[i] - menor] += 1</code>.</p>
+<p>A mesma mudança é considerada no restante da implementação, sempre aplicando <code>array[i]- menor</code> para considerar o salto.</p>
+<hr>
+<h1 id="notas">Notas</h1>
+<p>Este material não é tão completo quanto o livro texto da disciplina. Sugiro também a leitura do Capítulo 8 do livro &ldquo;Algoritmos: Teoria e Prática&rdquo; de Cormen et. al.</p>
+<p>No curso de Estrutura de Dados da UFCG há ainda a discussão de outros algoritmos de ordenação linear, como o Radix Sort e o Bucket Sort.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Importante lembrar que o Quick Sort no pior caso tem seu tempo de execução descrito por uma função quadrática. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>O ideal é nomear variável com letra minúscula em Java. Contudo, para fins didáticos, utilizaremos letras maiúsculas. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/arraylist/"><i class="fa fa-chevron-circle-left"></i> Listas Baseadas em Arrays (ArrayList)</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/quick-sort/">Ordenação por Comparação: Quick Sort <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,928 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/laboratorio/">
+                <i class="fa-li fa  fa-lg"></i><span>Laboratório</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Árvores Binárias de Pesquisa</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-23T00:00:00-03:00">Oct 23, 2019</time>
+        </li>
+        
+
+        
+
+        <li>28 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/bst"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <hr>
+<h1 id="definições-e-propriedades">Definições e Propriedades</h1>
+<p>Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca, inserção e remoção. Informalmente, uma Árvore Binária de Pesquisa (BST)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> é uma estrutura de dados de árvore binária baseada em nós, onde a subárvore à esquerda de cada nó possui valores numéricos inferiores ao nó e a subárvore à direita de cada nó possui valores numéricos superiores ao nó. Formalmente, uma BST é definida recursivamente da seguinte forma:</p>
+<ol>
+<li>
+<p>$A$ é uma árvore nula;</p>
+</li>
+<li>
+<p>$A$ é uma tripla $(Esq, raiz, Dir)$, onde <em><strong>Esq</strong></em> e <em><strong>Dir</strong></em> são árvores binárias de pesquisa e <em><strong>Esq</strong></em> contém apenas valores menores do que o armazenado na raiz, enquanto <em><strong>Dir</strong></em> contém apenas valores maiores do que o armazenado na raiz.</p>
+</li>
+</ol>
+<p>A Figura abaixo<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> ilustra uma árvore com raiz 63.</p>
+<p><img src="bst1.png" alt="bst1"></p>
+<h2 id="o-nó">O nó</h2>
+<p>Árvores são baseadas em nós. Do ponto de vista de código, temos:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">{</span>
+    
+    <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+    Node left<span style="color:#f92672">;</span>
+    Node right<span style="color:#f92672">;</span>
+    Node parent<span style="color:#f92672">;</span>
+    
+    Node<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> v<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> v<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Em primeiro lugar, um nó pode armazenar qualquer objeto como valor. Neste material estamos utilizando um valor inteiro para simplificar.</p>
+<p>Depois, as referências <em><strong>left</strong></em> e <em><strong>right</strong></em> são muito parecidas com as referências de um <em><strong>Node</strong></em> em <a class="external" href="https://joaoarthurbm.github.io/eda/posts/linkedlist/">Listas Duplamente Encadeadas</a>, lembra? A única diferença aqui é que garantimos por construção que o nó para o qual a referência <em><strong>left</strong></em> aponta é <em><strong>null</strong></em> ou  armazena um <strong>valor menor</strong> do que <em><strong>value</strong></em>, enquanto o nó para o qual a referência <em><strong>right</strong></em> aponta é <em><strong>null</strong></em> ou armazena um <strong>valor maior</strong> do que <em><strong>value</strong></em>. <strong>Essa restrição deve ser verdadeira para todo e qualquer nó da árvore.</strong></p>
+<p>Formalmente uma árvore é um grafo que não contém ciclos. Todavia, na prática, nós acrescentamos a referência <em><strong>parent</strong></em> que liga um nó ao seu pai. Ou seja, na prática não estamos falando de árvore, pois há um ciclo entre cada nó e seu pai. Nós vamos conviver com esse conflito porque essa referência facilita muito caminhar árvore acima, o que é preciso em alguns algoritmos, como sucessor e predecessor, que são utilizados na remoção de um elemento da árvore.</p>
+<h2 id="raiz">Raiz</h2>
+<p>Raiz é um nó especial da árvore. A partir dela conseguimos acessar qualquer nó da árvore. Assim como mantivemos uma referência para a o início de uma lista encadeada para poder acessar o restante dos elementos, na BST mantemos a referência para a raiz da árvore. A raiz da árvore ilustrada pela figura acima é 63.</p>
+<h2 id="grau-de-um-nó">Grau de um nó</h2>
+<p>O grau de um nó é a quantidade de filhos que ele possui. Naturalmente, só temos três graus possíveis em uma árvore binária de pesquisa: 0, 1 e 2. Os nós com grau zero são chamados de folhas. Na figura acima, as folhas são os nós 2, 52, 60, 65 e 83. Apenas o nó 90 tem grau 1, enquanto os nós 63, 7, 69 e 59 possuem grau 2. Os nós com graus 1 e 2 são chamados de nós internos.</p>
+<h2 id="altura">Altura</h2>
+<p>A altura de uma árvore binária de pesquisa é o maior caminho entre a raiz e todas as folhas. Vamos analisar novamente a nossa árvore exemplo:</p>
+<p><img src="bst1.png" alt="bst1"></p>
+<p>Para determinarmos a altura, precisamos calcular o tamanho dos caminhos entre a raiz e todas as folhas. Vamos lá:</p>
+<ul>
+<li>63 -&gt; 7 -&gt; 2. Tamanho do caminho = 2.</li>
+<li>63 -&gt; 7 -&gt; 59 -&gt; 52. Tamanho do caminho = 3.</li>
+<li>63 -&gt; 7 -&gt; 59 -&gt; 60. Tamanho do caminho = 3.</li>
+<li>63 -&gt; 69 -&gt; 65. Tamanho do caminho = 2.</li>
+<li>63 -&gt; 69 -&gt; 90 -&gt; 83. Tamanho do caminho = 3.</li>
+</ul>
+<p>Como dito anteriormente, a altura da árvore é o maior caminho, ou seja, h=3.</p>
+<p>A altura de uma árvore com apenas um nó é 0, enquanto a altura de uma árvore nula é -1.</p>
+<p>Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma BST são, do ponto de vista assintótico, $O(h)$. Portanto, idealmente, é preciso manter $h$ com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada. De maneira geral, uma árvore balanceada é aquela que a altura é $O(\log n)$.</p>
+<p>A altura da árvore é a altura de sua raiz. Contudo, o conceito de altura pode ser atribuído a qualquer nó. Basta considerá-lo como sendo a raiz das sub-árvores que estão abaixo dele. Por exemplo, vamos determinar a altura do nó 69.</p>
+<ul>
+<li>69 -&gt; 65. Tamanho do caminho = 1.</li>
+<li>69 -&gt; 90 -&gt; 83. Tamanho do caminho = 2.</li>
+</ul>
+<p>Portanto, a altura do nó 69 é 2, pois o maior caminho entre ele e as folhas de suas subárvores é 2.</p>
+<hr>
+<p>Vale a pena fazermos um quiz para ver se você de fato entendeu o conceito de altura.</p>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;altura_no&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="altura_no">
+  <script>
+    var choices = "63(3) - 7(2) - 69(2) - 2(0) - 59(1) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(1) - 69(1) - 2(0) - 59(1) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(2) - 69(2) - 2(0) - 59(0) - 65(0) - 90(1) - 52(0) - 60(0) - 83(0), 63(3) - 7(2) - 69(2) - 2(0) - 59(1) - 65(0) - 90(0) - 52(0) - 60(0) - 83(0)".split(",");
+    var id = "altura_no";
+    var question = "Assinale a alternativa correta sobre a altura (entre parênteses) de cada nó na árvore acima.";
+    var answers = "1".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<p><img src="bst1.png" alt="bst1"></p>
+
+  <script>
+    var quiz = new Quiz("altura_no", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
+<h2 id="nível">Nível</h2>
+<p>Há também o conceito de níveis em uma BST. O nível da raiz é o 0, o nível dos filhos diretos da raiz é o nível 1, e assim por diante. A Figura abaixo ilustra esse conceito. É muito importante não confundir nível com altura. A altura da raiz nessa árvore, por exemplo, é 3 e ela está no nível 0. A altura do nó 58 é 2, e ele está no nível 1. Os nós que estão no mesmo nível não necessariamente possuem alturas iguais.</p>
+<p><img src="bst-niveis.png" alt="bst-completa"></p>
+<h2 id="árvore-completa">Árvore Completa</h2>
+<p>Uma árvore completa é aquela que todos os nós, exceto folhas, possuem grau 2 e as folhas estão no mesmo nível. Veja o exemplo abaixo:</p>
+<p><img src="bst-completa.png" alt="bst-completa"></p>
+<p>Importante aqui notar que a árvore contém 15 nós e altura 3. De maneira geral, não é difícil perceber que o número máximo de nós em uma árvore binária de altura $h$ é $2^{h+1} - 1$.</p>
+<p>Também é importante destacar que uma árvore completa possui a menor altura possível para a sua quantidade de nós. Essa altura é $h = \log (n+1)-1$, ou seja, $O(\log n)$. Isso faz com que os principais algoritmos sejam O(log n), pois são dependentes da altura.</p>
+<h2 id="sucessor">Sucessor</h2>
+<p>O sucessor de um elemento na árvore é o menor valor maior do que ele. Complicado? Imagine se pudéssemos imprimir a sequência dos valores presentes na árvore de forma ordenada. O sucessor de um elemento, seria o elemento imediatamente à frente. Por exemplo, o sucessor de 41 na árvore acima é 45. O sucessor de 15 é 20. O sucessor de 72 é 91. Naturalmente, o maior valor armazenado na árvore (99) não tem sucessor.</p>
+<h2 id="predecessor">Predecessor</h2>
+<p>O predecessor de um elemento na árvore é o maior valor menor do que ele. Complicado? Imagine se pudéssemos imprimir a sequência dos valores presentes na árvore de forma ordenada. O predecessor de um elemento, seria o elemento imediatamente antes na sequência. Por exemplo, o predecessor de 41 na árvore acima é 32. O predecessor de 15 é 11. O predecessor de 72 é 65. Naturalmente, o menor valor armazenado na árvore (1) não tem predecessor.</p>
+<hr>
+<h1 id="implementação">Implementação</h1>
+<p>Assim como <a class="external" href="http://joaoarthurbm.github.io/eda/posts/linkedlist">LinkedList</a>, a classe <em><strong>BST</strong></em> é nada mais do que um controlador das referências para os nós, mantendo apenas a referência para a raiz da árvore. Vamos ver como isso é feito em Java:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">BST</span> <span style="color:#f92672">{</span>
+
+    <span style="color:#66d9ef">private</span> Node root<span style="color:#f92672">;</span>
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#f92672">...</span>
+<span style="color:#f92672">}</span>
+
+
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">{</span>
+    
+    <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+    Node left<span style="color:#f92672">;</span>
+    Node right<span style="color:#f92672">;</span>
+    Node parent<span style="color:#f92672">;</span>
+    
+    Node<span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> v<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> v<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    
+<span style="color:#f92672">}</span>
+</code></pre></div><h2 id="operações-básicas-e-outros-algoritmos">Operações Básicas e outros algoritmos</h2>
+<h3 id="inserção">Inserção</h3>
+<p>Primeiro, vamos ilustrar como se adiciona elementos em uma árvore binária de pesquisa. Somente depois nos preocupamos com o código, ok?</p>
+<p>Suponha que os seguintes elementos devem ser adicionados em uma árvore binária de pesquisa nessa ordem: 41, 65, 20, 19 e 50. Inicialmente temos a árvore vazia. Nesse caso, 41 assume o papel da raiz.</p>
+<p><img src="insercao-bst.png" alt="insercao-bst"></p>
+<p>Depois disso, 65 é adicionado à direita de 41, pois é um valor maior. 20 é adicionado à esquerda de 41, por ser menor do que esse valor. Depois 19 é comparado com 41, por ser menor, a adição deve ser feita à esquerda. Contudo, já há o elemento 20 à esquerda. Então compara-se 19 com 20. Como 19 é menor e não há nenhum nó à esquerda de 20, 19 assume essa posição. A última adição é a do valor 50. Inicialmente é comparado com a raiz e a inserção deve ser feita à direita. Então compara-se 50 com 65. Por ser menor e não haver nó à esquerda de 65, 50 assume essa posição.</p>
+<p>Note que todo novo nó é adicionado como folha na árvore.</p>
+<p>Complicado? Eu gravei um vídeo para facilitar.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/9UXmJKg1mQw" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p><strong>Implementação.</strong> Podemos implementar a adição de maneira iterativa e recursiva. Vamos analisar primeiro a adição iterativa.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            
+        Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">;</span>
+            
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">&lt;</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>aux<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+                    Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+                    aux<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+                    newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                    
+                aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>aux<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span> 
+                    Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+                    aux<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+                    newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> aux<span style="color:#f92672">;</span>
+                    <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+                <span style="color:#f92672">}</span>
+                    
+                aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+            <span style="color:#f92672">}</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+        
+<span style="color:#f92672">}</span>
+</code></pre></div><p>A primeira verificação é feita para saber se a árvore é vazia. Se sim, basta fazermos a raiz apontar para o novo nó <code>this.root = new Node(element)</code>.</p>
+<p>Caso não seja a primeira adição precisamos seguir o passo a passo ilustrado anteriormente. Ou seja, caminhar árvore abaixo fazendo a comparação do elemento adicionado com os nós no caminho. Se o elemento for menor, caminhamos para a esquerda (<code>aux = aux.left</code>). Se for maior, caminhamos para a direita (<code>aux = aux.right</code>).</p>
+<p>A adição é feita quando <code>aux.left == null</code>, se o elemento for menor ou <code>aux.right == null</code>, se o elemento for maior. Note que o trecho liga não somente o pai ao novo nó, mas também liga o novo nó ao pai (<code>newNode.parent = aux</code>).</p>
+<p>Agora vamos nos debruçar sobre a implementação recursiva.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recursiveAdd</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        recursiveAdd<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+        
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">recursiveAdd</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">&lt;</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+            node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+            newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> node<span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        recursiveAdd<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            Node newNode <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node<span style="color:#f92672">(</span>element<span style="color:#f92672">);</span>
+            node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> newNode<span style="color:#f92672">;</span>
+            newNode<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> node<span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+        recursiveAdd<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+        
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Usamos dois métodos para implementar a recursão. O primeiro, público, tem a assinatura padrão que recebe o valor a ser adicionado. Esse método verifica se a árvore é nula e, se for, faz com que a referência <em><strong>root</strong></em> aponte para o novo nó (<code>this.root = new Node(element)</code>).</p>
+<p>O outro método também recebe como parâmetro o elemento adicionado, além de receber o nó atualmente sendo analisado. Inicialmente o primeiro nó passado é a raiz.</p>
+<p>As verificações e condições de parada são as mesmas da versão iterativa:</p>
+<ul>
+<li>
+<p>se o elemento é menor e a esquerda é nula, adiciona-se o elemento à esquerda do nó atual e faz-se a ligação para o nó pai. Se o elemento é menor e a esquerda não é nula, chama-se recursivamente o método add passando como parâmetro o nó à esquerda;</p>
+</li>
+<li>
+<p>se o elemento é maior e a direita é nula, adiciona-se o elemento à direita do nó atual e faz-se a ligação para o nó pai. Se o elemento é maior e a direita não é nula, chama-se recursivamente o método add passando como parâmetro o nó à direita.</p>
+</li>
+</ul>
+<p>Em ambas as estratégias o novo elemento é adicionado como folha. Portanto, no pior caso, a adição tem tempo de execução dado por $O(h)$, pois $h$ é o maior caminho entre a raiz e todas as folhas.</p>
+<h3 id="busca">Busca</h3>
+<p>A busca em uma árvore binária de pesquisa também usa as propriedades de ordenação dos nós para decidir que caminho percorrer. Compara-se o elemento com a raiz. Se for maior, a busca deve seguir pela sub-árvore à direita (<code>aux = aux.right</code>). Caso contrário, deve seguir pela sub-árvore à esquerda (<code>aux = aux.left</code>). Esse mesmo processo é feito com a raiz dessas sub-árvores. O algoritmo pára se o elemento for encontrado (<code>aux.value == element</code>) ou se alcançar uma folha e não encontrar o elemento (<code>aux == null</code>).</p>
+<p>Veja abaixo a versão iterativa da busca binária.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">search</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        
+    Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">;</span>
+        
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>   
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">==</span> element<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> aux<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">&lt;</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">&gt;</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+        
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>A versão recursiva da busca binária também utiliza dois métodos. O método público seguindo a assinatura padrão e um privado auxiliar para controlar a recursão.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">recursiveSearch</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">return</span> recursiveSearch<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+    
+<span style="color:#66d9ef">private</span> Node <span style="color:#a6e22e">recursiveSearch</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">==</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> node<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>element <span style="color:#f92672">&lt;</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> recursiveSearch<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> recursiveSearch<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">,</span> element<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>A ideia é a mesma. Compara-se o elemento com o nó atual. Se for menor, há uma chamada recursiva para a sub-árvore à esquerda (<em><strong>recursiveSearch(node.left, element)</strong></em>). Se for maior, há uma chamada recursiva para a direita (<em><strong>recursiveSearch(node.right, element)</strong></em>). O algoritmo pára o nó sob análise for nulo.</p>
+<p>A busca binária tem seu tempo de execução dependente da altura da árvore, pois no pior caso o algoritmo percorre um ramo da árvore até o final e esse ramo tem altura $h$. Assim, a busca binária é $O(h)$.</p>
+<h3 id="mínimo-e-máximo">Mínimo e Máximo</h3>
+<p>Mínimo é o menor valor presente na árvore, enquanto máximo é o maior. Para encontrar o mínimo, basta caminharmos na árvore para a esquerda até que não haja mais nós. O último nó visitado é o mínimo. De maneira análoga, o máximo é o último elemento mais à direita na árvore. Abaixo estão as implementações desses métodos. O mínimo é implementado de maneira recursiva, enquanto o máximo de maneira iterativa.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">min</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">return</span> min<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+    
+<span style="color:#66d9ef">private</span> Node <span style="color:#a6e22e">min</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> node<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> min<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">max</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        
+    Node node <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+        node <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>      
+
+    <span style="color:#66d9ef">return</span> node<span style="color:#f92672">;</span>
+
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h3 id="sucessor-1">Sucessor</h3>
+<p>Se um nó possui sub-árvore à direita, o seu sucessor é o mínimo dessa sub-árvore. Vamos a um exemplo:</p>
+<p><img src="bst-completa.png" alt="bst-completa"></p>
+<p>Qual é o sucessor de 20? Se há sub-árvore à direita, basta retornamos o mínimo dessa sub-árvore. Ou seja, 27.</p>
+<p>E se não houver sub-árvore à direita? Por exemplo, qual é o sucessor de 55? Como não há sub-árvore à direita, precisamos subir na árvore até encontrar um elemento maior do que 55. Primeiro comparamos com 50. Como 50 é menor, subimos para 65, sendo 65 maior que 55, a busca é finalizada. Encontramos o sucessor de 55, pois é o primeiro elemento árvore acima maior do que ele.</p>
+<p>Você não precisa decorar isso, certo? Faz todo sentido procurar pelo mínimo da sub-árvore à direita, pois é lá que estão os valores maiores que o nó. O mínimo deles é o sucessor. E se não houver sub-árvore à direita, é natural que o sucessor esteja árvore acima, pois à esquerda todos os valores são menores. Então o algoritmo verifica árvore acima o primeiro elemento maior que o nó sob análise.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">sucessor</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">return</span> min<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        Node aux <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+            
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">&lt;</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span>
+            aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+            
+        <span style="color:#66d9ef">return</span> aux<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>O método recebe o nó para o qual deseja se encontrar o sucessor. Se esse nó for nulo, o método retorna nulo. Caso contrário, verifica-se se há sub-árvore à direita (<code>node.right != null</code>). Se houver, retorna-se o mínimo dessa sub-árvore.</p>
+<p>Caso não haja sub-árvore à direita, caminhamos árvore acima (<code>aux = aux.parent</code>) até encontrarmos um elemento maior ou subirmos toda a árvore e não encontrarmos (<code>aux == null</code>).</p>
+<h3 id="predecessor-1">Predecessor</h3>
+<p>A identificação do predecessor é muito semelhante ao sucessor. 
+Se um nó possui sub-árvore à esquerda, o seu predecessor é o máximo dessa sub-árvore. Vamos a um exemplo:</p>
+<p><img src="bst-completa.png" alt="bst-completa"></p>
+<p>Qual é o predecessor de 20? Se há sub-árvore à esquerda, basta retornamos o máximo dessa sub-árvore. Ou seja, 15.</p>
+<p>E se não houver sub-árvore à esquerda? Por exemplo, qual é o predecessor de 27? Como não há sub-árvore à esquerda, precisamos subir na árvore até encontrar um elemento menor do que 27. Primeiro comparamos com 29. Como 29 é maior, subimos para 20, sendo 20 menor que 27, a busca é finalizada. Encontramos o predecessor de 27, pois é o primeiro elemento árvore acima menor do que ele.</p>
+<p>Você não precisa decorar isso, certo? Faz todo sentido procurar pelo máximo da sub-árvore à esquerda, pois é lá que estão os valores menores que o nó. O máximo deles é o predecessor. E se não houver sub-árvore à esquerda, é natural que o predecessor esteja árvore acima, pois à direita todos os valores são maiores. Então o algoritmo verifica árvore acima o primeiro elemento menor que o nó sob análise.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> Node <span style="color:#a6e22e">predecessor</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">return</span> max<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        Node aux <span style="color:#f92672">=</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+        
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>aux <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">&gt;</span> node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span>
+            aux <span style="color:#f92672">=</span> aux<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+        
+        <span style="color:#66d9ef">return</span> aux<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="altura-1">Altura</h3>
+<p>Como dito anteriormente, a altura é o maior caminho entre a raiz e todas as folhas.
+A implementação é bem simples. Basta somar 1 cada vez que um novo nó é visitado e calcular
+de maneira recursiva o máximo entre a altura da sub-árvore à esquerda e da sub-árvore à direita. Lembrando que a altura de uma árvore cuja raiz é nula é -1.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> height<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+    
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> Math<span style="color:#f92672">.</span><span style="color:#a6e22e">max</span><span style="color:#f92672">(</span>height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">),</span> height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">));</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h3 id="remoção">Remoção</h3>
+<p>Talvez a operação básica mais complexa de se implementar em BST seja a remoção. Mas nada que a gente não consiga decompor o problema em problemas menores e implementar :)</p>
+<p>Vamos lá. A remoção em uma árvore binária de pesquisa possui três casos a serem analisados.</p>
+<h4 id="caso-1">Caso 1</h4>
+<p><strong>O nó a ser removido é uma folha.</strong> Nesse caso, basta fazermos com que o pai do nó, se existir, passe a apontar a sua direita ou a esquerda para <em><strong>null</strong></em>. Note que você precisa saber se a folha a ser removida é filha à direita ou à esquerda do nó pai. Essa verificação é feita através da comparação dos valores entre a folha e o nó pai. Se a folha for menor, ela está à esquerda do nó pai. Então você terá que fazer <code>toRemove.parent.left = null</code>. Do contrário, ela está à direita do nó pai. Nesse caso, você teria que fazer <code>toRemove.parent.right = null</code>.</p>
+<p>Precisamos também verificar se o nó removido é raiz. Se for, simplesmente fazemos a raiz apontar para <em><strong>null</strong></em>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">isLeaf</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">&lt;</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span>
+            toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">else</span>
+            toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h4 id="caso-2">Caso 2</h4>
+<p><strong>O nó a ser removido possui apenas um filho.</strong> Ou seja, tem grau 1. Se o nó possuir apenas um filho, precisamos ligar esse filho ao pai do nó a ser removido (avô). Naturalmente, precisamos diferenciar se o único filho é à esquerda ou à direita. Além disso, precisamos verificar se o nó removido é a raiz da árvore.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">hasOnlyLeftChild</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">)</span>  <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">&lt;</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span>
+                toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">else</span>
+                toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">hasOnlyRightChild</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">&lt;</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">)</span>
+                toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">else</span>
+                toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">=</span> toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
+            
+<span style="color:#f92672">...</span>
+</code></pre></div><h4 id="caso-3">Caso 3</h4>
+<p><strong>O nó a ser removido possui dois filhos.</strong> Ou seja, grau 2. Nesse caso, trocamos o valor do nó a ser removido com o valor do seu sucessor e chamamos recursivamente o método <code>remove</code> passando o nó sucessor. Veja a ilustração abaixo, copiada <a class="external" href="https://www.codeguru.co.in/2021/06/delete-node-in-binary-search-tree-c.html">deste post</a> do site CodeGuru.</p>
+<img src="delete_bst.gif" alt="caso3" width="1px" height="300"/>
+<p>E por que trocamos pelo sucessor? Para garantirmos que a restrição de &ldquo;ordenação&rdquo; entre os nós se mantenha. Se eu trocar um valor pelo seu sucessor, eu garanto que toda a sub-árvore à esquerda continua menor do que o valor e toda a sub-árvore à direita continua maior do que o valor. Isso acontece porque o sucessor é o mínimo valor à direita.</p>
+<p>Outro fator importante é o fato de que o sucessor certamente será uma folha ou terá apenas um filho, uma vez que ele é o mínimo da sub-árvore à direita. Isso garante que na chamada recursiva, a remoção caia no Caso 1 ou Caso 2 sempre, encerrando o algoritmo.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        Node sucessor <span style="color:#f92672">=</span> sucessor<span style="color:#f92672">(</span>toRemove<span style="color:#f92672">);</span>
+        toRemove<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> sucessor<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">;</span>
+        remove<span style="color:#f92672">(</span>sucessor<span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Algumas perguntas recorrentes que surgem em sala de aula são:</p>
+<blockquote>
+<p>O algoritmo é recursivo e não há condição de parada? Há sim. A gente garante que o algoritmo vai parar porque o sucessor de um nó tem no máximo 1 filho. Ou seja, depois da chamada recursiva, o algoritmo vai cair no caso 1 ou 2, que são &ldquo;terminais&rdquo;.</p>
+</blockquote>
+<blockquote>
+<p>E se não tiver sucessor? Bom, se não tiver sucessor, ele certamente é o máximo da árvore. Ou seja, cai no Caso 1 ou 2, nunca no 3.</p>
+</blockquote>
+<blockquote>
+<p>Posso usar o predecessor ao invés do sucessor? Pode sim. Só é importante deixar isso explícito no contrato, porque a ávore que usa o sucessor na remoção fica diferente da árvore que usa o predecessor.</p>
+</blockquote>
+<h2 id="percorrendo-árvores-binárias">Percorrendo Árvores Binárias</h2>
+<p>De maneira geral, há duas estratégias para percorrer um grafo: em profundidade (<em>depth-first search</em>) e em largura (<em>breadth-first search</em>). Essas estratégias são utilizadas em diversos algoritmos fundamentais em Ciência da Computação. Por exemplo, o algoritmo de Dijkstra, que calcula o menor caminho entre qualquer par de vértices em um grafo, segue a estratégia em profundidade. A busca em largura também é um algoritmo bastante utilizado em redes sociais. Dado um grafo onde os vértices são pessoas e as arestas representam uma conexão entre elas, é possível utilizar busca em largura para identificar as pessoas a uma distância <em><strong>k</strong></em> de uma determinada pessoa.</p>
+<p>Ambas as estratégias têm como objetivo percorrer o grafo. O que as difere é a decisão de qual nó visitar primeiro quando houver mais de uma possibilidade. Trocando em miúdos, a diferença é a ordem de visitação dos nós.</p>
+<h3 id="em-profundidade">Em Profundidade</h3>
+<p>A ideia é escolher um nó de partida e explorar todo o ramo da árvore antes de voltar e visitar os outros ramos. Vamos adotar essa estratégia para percorrer a árvore abaixo:</p>
+<p><img src="percorrendo.png" alt="percorrendo"></p>
+<p>O mantra é: para cada nó visitado explore o máximo à esquerda deste nó e depois o máximo à direita.</p>
+<p>Inicialmente escolhemos como ponto de partida a raiz. No nosso caso, visitar significa que vamos imprimir o nó, ok? Então o primeiro nó impresso é 52.</p>
+<p>Depois disso, vamos explorar o ramo o máximo à esquerda. Então decidimos ir para 22. Novamente, explorando o máximo à esquerda, o próximo nó a ser visitado é o 8. Até aqui temos a seguinte impressão: 52 -&gt; 22 -&gt; 8.</p>
+<p>Neste ponto já exploramos o máximo da esquerda de 8, agora vamos para a direita. Então imprimimos o valor 11. Até aqui temos: 52 -&gt; 22 -&gt; 8 -&gt; 11.</p>
+<p>Como não há mais direita nem esquerda a ser explorada de 8, subimos para 22. A esquerda de 22 já foi toda explorada, então vamos para a direita. Visitamos 43. Lembre-se, <strong>para cada nó</strong> eu tenho que visitar toda a esquerda e depois a direita. Então vamos para a esquerda de 43, que é 26. O resultado parcial até aqui é: 52 -&gt; 22 -&gt; 8 -&gt; 11 -&gt; 43 -&gt; 26.</p>
+<p>Voltamos para 52 e exploramos a direita, isto é 85. Imprimimos 85 e vamos o máximo para a esquerda.  O resultado parcial é então: 52 -&gt; 22 -&gt; 8 -&gt; 11 -&gt; 43 -&gt; 26 -&gt; 85 -&gt; 81 -&gt; 69.</p>
+<p>Exploramos toda a esquerda de 69. Agora vamos para a direita. 74. Depois subimos e vamos para a direita de 81, que não existe e, por isso, não imprimimos nada. Por fim subimos até 85 e visitamos a sua direita (96).</p>
+<p>O resultado final desse percurso em profundidade é: 52 -&gt; 22 -&gt; 8 -&gt; 11 -&gt; 43 -&gt; 26 -&gt; 85 -&gt; 81 -&gt; 69 -&gt; 74 -&gt; 96.</p>
+<p>Essa é uma das estratégias de percorrer uma árvore em profundidade. Lembra que escolhemos explorar o nó, sua esquerda e depois a sua direita? Essa escolha tem um nome particular <strong>percurso em pré-ordem</strong>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preOrder</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    preOrder<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">preOrder</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">);</span>
+        preOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+        preOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Há outras duas escolhas clássicas: em-ordem e pós-ordem.</p>
+<p><strong>Em-ordem: esquerda, nó, direita.</strong> Neste tipo de percurso em profundidade, primeiro visitamos toda a esquerda de um nó, depois visitamos o nó e só depois a sua direita. Retomando nosso exemplo:</p>
+<p><img src="percorrendo.png" alt="percorrendo"></p>
+<p>Para a árvore acima, temos como resultado o seguinte percurso: 8 -&gt; 11 -&gt; 22 -&gt; 26 -&gt; 43 -&gt; 52 -&gt; 69 -&gt; 74 -&gt; 81 -&gt; 85 -&gt; 96. Note que o resultado do caminho em-ordem em uma árvore binária de pesquisa é sempre uma sequência ordenada.</p>
+<p>Como isso foi feito? Aplicando o mantra &ldquo;esquerda, nó, direita&rdquo; para cada nó visitado. Inicialmente escolhemos a raíz. Note que só vamos imprimir a raiz depois de visitar todos os nós à sua esquerda. Isso é verdade para cada nó visitado. Por isso, caminhamos o máximo à esquerda e o primeiro elemento a ser impresso é 8. Depois disso 11, 22, 26, 43&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inOrder</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    inOrder<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">inOrder</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        inOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">);</span>
+        inOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p><strong>Pós-ordem: esquerda, direita, nó.</strong> Neste tipo de percurso em profundidade, primeiro visitamos toda a esquerda de um nó, depois visitamos toda a direita e só depois visitamos o nó. Retomando nosso exemplo:</p>
+<p><img src="percorrendo.png" alt="percorrendo"></p>
+<p>Para a árvore acima, temos como resultado o seguinte percurso: 11 -&gt; 8 -&gt; 26 -&gt; 43 -&gt; 22 -&gt; 74 -&gt; 69 -&gt; 81 -&gt; 96 -&gt; 85 -&gt; 52. Note que o resultado do caminho pós-ordem em uma árvore binária de pesquisa sempre tem a raíz como último elemento.</p>
+<p>Como isso foi feito? Aplicando o mantra &ldquo;esquerda, direita, nó&rdquo; para cada nó visitado. Inicialmente escolhemos a raíz. Note que só vamos imprimir a raiz depois de visitar todos os nós à sua esquerda e todos os nós à sua direita. Isso é verdade para cada nó visitado. Por isso, caminhamos o máximo à esquerda e depois o máximo à direita. O primeiro elemento a ser impresso é 11. Depois disso 8, 26, 43, 22&hellip;</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">posOrder</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    posOrder<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">posOrder</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        posOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+        posOrder<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>
+        System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">value</span><span style="color:#f92672">);</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h3 id="em-largura">Em Largura</h3>
+<p>O percurso em largura explora inicialmente todos os filhos de um nó primeiro antes de  descer na árvore. Profundidade desce e depois volta. Largura vai descendo &ldquo;varrendo&rdquo; todos os nós no caminho.</p>
+<p><img src="percorrendo.png" alt="percorrendo"></p>
+<p>Para essa árvore, o resultado do percurso é 52 -&gt; 22 -&gt; 85 -&gt; 8 -&gt; 43 -&gt; 81 -&gt; 96 -&gt; 11 -&gt; 26 -&gt; 69 -&gt; 74.</p>
+<p>Como isso é feito? Para cada nó visitado, exploramos todos os seus filhos antes de seguir adiante. Começamos em 52 e, portanto visitamos 22 e 85. Depois vamos para 22, visitando 8 e 43. Depois 85, visitando 81 e 96 e assim por diante. Veja que esse percurso visita todo o primeiro nível da árvore, depois todos o segundo nível, depois todo o terceiro e assim por diante.</p>
+<p>E como isso é feito? Usamos uma fila para nos auxiliar. O algoritmo é o seguinte.</p>
+<p>Inicia-se a fila com a raiz: <pre>Q = {52}</pre></p>
+<p>Enquanto a fila não estiver vazia, retira-se o primeiro elemento da fila e coloca o seu filho à esquerda e o seu filho à direita na fila. Então retiramos (e imprimimos) 52 da fila e colocamos 22 e 85.</p>
+<pre>Impresso: 52
+Q = {<strike>52</strike>, 22, 85}</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 22 e colocamos 8 e 43.</p>
+<pre>Impresso: 52, 22
+Q = {<strike>52, 22</strike>, 85, 8, 43}</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 85 e colocamos 81 e 96.</p>
+<pre>Impresso: 52, 22, 85
+Q = {<strike>52, 22, 85</strike>, 8, 43, 81, 96}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 8 e colocamos apenas 11, pois 8 não possui sub-árvore à esquerda.</p>
+<pre>Impresso: 52, 22, 85, 8
+Q = {<strike>52, 22, 85, 8</strike>, 43, 81, 96, 11}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Isto é, tiramos 43 e colocamos apenas 26, pois 43 não possui sub-árvore à direita.</p>
+<pre>Impresso: 52, 22, 85, 8, 43
+Q = {<strike>52, 22, 85, 8, 43</strike>, 81, 96, 11, 26}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 81 e colocamos apenas a sua esquerda (69), pois a direita é nula.</p>
+<pre>Impresso: 52, 22, 85, 8, 43, 81
+Q = {<strike>52, 22, 85, 8, 43, 81</strike>, 96, 11, 26, 69}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 96, mas não colocamos elemento algum porque 96 é folha.</p>
+<pre>Impresso: 52, 22, 85, 8, 43, 81
+Q = {<strike>52, 22, 85, 8, 43, 81, 96</strike>, 11, 26, 69}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 11, mas não colocamos elemento algum porque 11 é folha.</p>
+<pre>Impresso: 52, 22, 85, 8, 43, 81, 96, 11
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11</strike>, 26, 69}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 26, mas não colocamos elemento algum porque 26 é folha.</p>
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26</strike>, 69}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 69 e colocamos apenas o 74, pois 69 não tem sub-árvore à esquerda.</p>
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26, 69</strike>, 74}
+</pre>
+<p>A fila está vazia? Não, então retira o primeiro elemento dela e coloca sua esquerda e sua direita na fila. Tiramos 74 e não colocamos elemento algum porque 74 é folha.</p>
+<pre>
+Impresso: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74
+Q = {<strike>52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74</strike>}
+</pre>
+<p>A fila está vazia? Está! Finalmente :). Veja que a sequência impressa representa o caminho por níveis na árvore da esquerda para a direita.</p>
+<p><img src="percorrendo.png" alt="percorrendo"></p>
+<p align="center">Percurso em largura: 52, 22, 85, 8, 43, 81, 96, 11, 26, 69, 74.</p>
+<p>Implementação em Java.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">printBFS</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    Deque<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">&gt;</span> queue <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> LinkedList<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">&gt;();</span>
+        
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+        queue<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">root</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(!</span>queue<span style="color:#f92672">.</span><span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
+            Node current <span style="color:#f92672">=</span> queue<span style="color:#f92672">.</span><span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">();</span>
+                
+            System<span style="color:#f92672">.</span><span style="color:#a6e22e">out</span><span style="color:#f92672">.</span><span style="color:#a6e22e">println</span><span style="color:#f92672">(</span>current<span style="color:#f92672">);</span>
+                
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>current<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> 
+                queue<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>current<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">);</span>
+            <span style="color:#66d9ef">if</span><span style="color:#f92672">(</span>current<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> 
+                queue<span style="color:#f92672">.</span><span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>current<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>   
+        <span style="color:#f92672">}</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><h1 id="notas-de-rodapé">Notas de Rodapé</h1>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Outras denominações utilizadas são: Árvore de Pesquisa Binária, Árvore Binária de Busca (ABB) e Binary Search Tree (BST). Neste material vou usar a sigla BST devido à sua popularidade. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>As figuras desse material foram feitas no visualgo.net. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/heap/"><i class="fa fa-chevron-circle-left"></i> Heap</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/enderecamento-aberto-so-perguntas/">Uma aula só com perguntas: Endereçamento Aberto <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+
