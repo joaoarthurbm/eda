@@ -509,7 +509,7 @@ Algumas perguntas recorrentes que surgem em sala de aula são:
 
 ## Percorrendo Árvores Binárias
 
-De maneira geral, há duas estratégias para percorrer um grafo: em profundidade (*depth-first search*) e em largura (*breadth-first search*). Essas estratégias são utilizadas em diversos algoritmos fundamentais em Ciência da Computação. Por exemplo, o algoritmo de Dijkstra, que calcula o menor caminho entre qualquer par de vértices em um grafo, segue a estratégia em profundidade. A busca em largura é também bastante utilizada para análise de mapas. Por exemplo, se um grafo representa o mapa onde os vértices são as cidades e as arestas o caminho entre elas, podemos utilizar busca em largura para determinar o número de cidades no caminho entre duas delas.
+De maneira geral, há duas estratégias para percorrer um grafo: em profundidade (*depth-first search*) e em largura (*breadth-first search*). Essas estratégias são utilizadas em diversos algoritmos fundamentais em Ciência da Computação. Por exemplo, o algoritmo de Dijkstra, que calcula o menor caminho entre qualquer par de vértices em um grafo, segue a estratégia em profundidade. A busca em largura também é um algoritmo bastante utilizado em redes sociais. Dado um grafo onde os vértices são pessoas e as arestas representam uma conexão entre elas, é possível utilizar busca em largura para identificar as pessoas a uma distância ***k*** de uma determinada pessoa. 
 
 Ambas as estratégias têm como objetivo percorrer o grafo. O que as difere é a decisão de qual nó visitar primeiro quando houver mais de uma possibilidade. Trocando em miúdos, a diferença é a ordem de visitação dos nós. 
 
