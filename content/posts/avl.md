@@ -1,6 +1,6 @@
 +++
 title = "Árvores Balanceadas (AVL)"
-date = 2022-03-24
+date = 2019-10-21
 tags = []
 categories = []
 github = "LINK PARA IMPLEMENTACAO"
@@ -9,7 +9,7 @@ draft = true
 
 # Contextualização
 
-Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (ABP) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma ABP é definida recursivamente da seguinte forma:
+Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (ABP/BST) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma ABP é definida recursivamente da seguinte forma:
 
 - $A$ é uma árvore nula
 - $A = (E, raiz, D)$ onde E e D são árvores binárias de pesquisa. $E$ contém apenas valores menores do que o armazenado na raiz, enquanto $D$ contém apenas valores maiores do que o armazenado na raiz
@@ -33,7 +33,7 @@ A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma ABP.
 
 Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma ABP com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.
 
-Com a altura árvore $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar um esquema que mantenha a árvore com a menor altura possível. Esse esquema é discutido na seção seguinte.
+Uma árvore com altura $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar uma estratégia que mantenha a árvore com a menor altura possível. Uma dessas estratégias é discutida na seção seguinte.
 
 # A Solução: Árvores Balanceadas (AVL)
 
