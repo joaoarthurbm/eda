@@ -5011,5 +5011,163 @@ Suponha que inicialmente nós criamos um array de 10 posições e o Heap armazen
 </description>
        </item>
        
+       <item>
+         <title>Árvores Balanceadas (AVL)</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/avl/</link>
+         <pubDate>Mon, 21 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/avl/</guid>
+         <description>&lt;h1 id=&#34;contextualização&#34;&gt;Contextualização&lt;/h1&gt;
+&lt;p&gt;Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (ABP/BST) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma ABP é definida recursivamente da seguinte forma:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$A$ é uma árvore nula&lt;/li&gt;
+&lt;li&gt;$A = (E, raiz, D)$ onde E e D são árvores binárias de pesquisa. $E$ contém apenas valores menores do que o armazenado na raiz, enquanto $D$ contém apenas valores maiores do que o armazenado na raiz&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;exemplo-simples.png&#34;&gt;
+    &lt;figcaption align=&#34;center&#34;&gt;
+        Exemplo de Árvore Binária de Pesquisa
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Um conceito bastante importante em ABP &lt;strong&gt;é a altura&lt;/strong&gt;. Altura de uma ABP é definida pelo maior caminho entre a raiz e todas as folhas.  No exemplo acima, a altura da raiz é 3. Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma ABP são, do ponto de vista assintótico $O(h)$. Portanto, idealmente, é preciso manter h com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada.&lt;/p&gt;
+&lt;h1 id=&#34;o-problema&#34;&gt;O Problema&lt;/h1&gt;
+&lt;p&gt;A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma ABP.&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;abp-linear.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma ABP com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.&lt;/p&gt;
+&lt;p&gt;Uma árvore com altura $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar uma estratégia que mantenha a árvore com a menor altura possível. Uma dessas estratégias é discutida na seção seguinte.&lt;/p&gt;
+&lt;h1 id=&#34;a-solução-árvores-balanceadas-avl&#34;&gt;A Solução: Árvores Balanceadas (AVL)&lt;/h1&gt;
+&lt;p&gt;A solução para resolver o problema apresentado anteriormente é mantermos a árvore balanceada.  Uma árvore pode ser considerada balanceada se a sua altura é $O(log(n))$.&lt;/p&gt;
+&lt;p&gt;A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada.&lt;/p&gt;
+&lt;p&gt;Neste documento iremos abordar árvores AVL – árvores que utilizam técnicas de balanceamento para manter a altura $O(log(n))$.&lt;/p&gt;
+&lt;p&gt;O conceito de árvores balanceadas e algoritmos de balanceamento foram introduzidos por &lt;strong&gt;A&lt;/strong&gt;delson &lt;strong&gt;V&lt;/strong&gt;elskii e &lt;strong&gt;L&lt;/strong&gt;andis. Esses dois autores conceberam as árvores AVL, uma árvore &lt;strong&gt;ABP&lt;/strong&gt; balanceada. O conceito de árvore balanceada pode ser definido da seguinte maneira:&lt;/p&gt;
+&lt;p&gt;Uma árvore $&amp;lt;E,raiz,D&amp;gt;$ é balanceada se $|h(E) - h(D)| \le 1$ e se E e D são balanceadas.&lt;/p&gt;
+&lt;p&gt;Ou seja, as alturas das duas sub-árvores a partir de cada nó diferem no máximo em uma unidade. Dessa maneira, é possível garantir que as operações básicas sejam efetuadas em $O(log(n))$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exemplos de árvores AVL e não-AVL&lt;/strong&gt;&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;avl-not-avl.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;Provando que $h = O(log(n))$&lt;/p&gt;
+&lt;p&gt;Número mínimo de nós que em uma AVL de altura h. O pior caso é quando, para cada nó, a sub-árvore à direita tem altura uma unidade maior ou menor do que a sub-árvore à esquerda.&lt;/p&gt;
+&lt;!-- Mudar as palavras (não entendi exatamente o que quer dizer) --&gt;
+&lt;ul&gt;
+&lt;li&gt;Relação de recorrência: $N(h) = N(h-1) + N(h-2) + 1$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Essa relação é &lt;strong&gt;muito&lt;/strong&gt; semelhante à relação de recorrência da função de Fibonacci. Sua resolução revela uma função exponencial. Como queremos saber o inverso (a altura), temos que $H = O (log(n))$. Mais especificamente, $H = 1.44 \log(N)$.&lt;/p&gt;
+&lt;h1 id=&#34;como-manter-a-árvore-balanceada&#34;&gt;Como manter a árvore balanceada?&lt;/h1&gt;
+&lt;h2 id=&#34;rotações&#34;&gt;Rotações&lt;/h2&gt;
+&lt;p&gt;Rotações são operações estruturais que executam em tempo constante para ABPs que, através da manipulação de ponteiros, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.&lt;/p&gt;
+&lt;h3 id=&#34;conceito-de-altura-de-um-nó&#34;&gt;&lt;strong&gt;Conceito de altura de um nó&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Até aqui, estávamos trabalhando com o conceito de altura de uma árvore que, por sinal, é a altura do nó raiz. Como precisamos manter o balanceamento para todos os nós, precisamos também adicionar ao nó a informação relativa a sua altura. Portanto, há uma modificação na implementação de um No, que passa agora a registrar também a sua altura. Vejamos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Node&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; value&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; height&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; Node left&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; Node right&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; Node parent&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;...}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;O cálculo da altura de um nó pode ser feito de maneira recursiva:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Node node&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; max&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;height&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;),&lt;/span&gt; height&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;))&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Uma alternativa é não passar o nó como parâmetro na recursão. Note que os algoritmos ficam um pouco mais verborrágicos, pois precisamos checar referências nulas antes de chamar recursivamente.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; max&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(),&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;());&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;balance-de-um-nó&#34;&gt;&lt;strong&gt;&lt;em&gt;Balance&lt;/em&gt; de um nó&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Sabendo que podemos calcular a altura da sub-árvore a esquerda e da sub-árvore à direita, podemos saber o balance de um nó. Balance é a diferença entre a altura da sub-árvore à esquerda e a altura da sub-árvore à direita.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;balance&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;Node node&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node &lt;span style=&#34;color:#f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; height&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; height&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;node&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color:#75715e&#34;&gt;// alternativa sem passar o nó como parâmetro para recursão
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;balance&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1 &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; right &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;null&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1 &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;height&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Essa informação é importante por dois motivos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Para sabermos se o nó respeita a restrição de AVL&lt;/li&gt;
+&lt;li&gt;Para sabermos se o nó está &amp;ldquo;pendendo&amp;rdquo; para a esquerda ou se está &amp;ldquo;pendendo&amp;rdquo; para a direita&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Note que há diferença entre desbalanceado e &amp;ldquo;pendendo&amp;rdquo; para a direita ou &amp;ldquo;pendendo&amp;rdquo; para a esquerda. Desbalanceado significa que o nó não é raiz de uma árvore AVL e, por isso, demanda o uso de rotações para tornar a árvore AVL normalmente. Os outros casos (pendendo para a direita e pendendo para a esquerda) não demandam rotações, pois ainda estão respeitando a invariante $|He - Hd| \le 1$.&lt;/p&gt;
+&lt;p&gt;Veja os exemplos a seguir. Cada nó tem um balance. As setas indicam se o nó está pendendo para a direita ou para a esquerda. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL. No entanto, eles estão na iminência de quebrar a restrição do balanceamento.&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;balanced-not-balanced.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;Portanto, as regras para saber se um nó está pendendo para a direita, esquerda, se está nivelado ou desbalanceado são:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;se height(node.left) - height(node.right) == 1 -&amp;gt; Pendendo para a esquerda&lt;/li&gt;
+&lt;li&gt;se height(node.left) - height(node.right) == -1 -&amp;gt; Pendendo para a direita&lt;/li&gt;
+&lt;li&gt;se height(node.left) - height(node.right) == 0 -&amp;gt; nivelado&lt;/li&gt;
+&lt;li&gt;se |height(node.left) - height(node.right)| == 2 -&amp;gt; desbalanceado&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Desafio.&lt;/strong&gt; Implemente os métodos a seguir:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isLeftPending&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isRightPending&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isBalanced&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;por-que-precisamos-saber-se-o-nó-está-pendendo-para-a-direita-esquerda-nivelado-ou-desbalanceado&#34;&gt;Por que precisamos saber se o nó está pendendo para a direita, esquerda, nivelado ou desbalanceado?&lt;/h3&gt;
+&lt;p&gt;Porque, após inserir ou remover um elemento em uma árvore AVL, nossos algoritmos baseiam-se nessa informação para decidir se haverá rotação ou não e para onde será feita essa rotação.&lt;/p&gt;
+&lt;h2 id=&#34;inserção-em-árvores-avl&#34;&gt;Inserção em árvores AVL&lt;/h2&gt;
+&lt;p&gt;A inserção em árvores AVL reutiliza a inserção de ABP. No entanto, após a inserção do novo nó, precisamos atualizar as alturas de cada nó e checar se a árvore ainda é AVL. Caso não seja, precisamos aplicar as rotações necessárias.&lt;/p&gt;
+&lt;p&gt;A partir de agora, vamos abordar cada caso da inserção. Vamos adotar a seguinte nomenclatura:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;z: nó que acabou de ser adicionado&lt;/li&gt;
+&lt;li&gt;y: pai do nó adicionado&lt;/li&gt;
+&lt;li&gt;x: pai do pai (avô) do nó adicionado&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Para fins de simplificação dos algoritmos, também vamos assumir que y e x não são nós nulos.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Caso 1. Rotação à direita:&lt;/strong&gt; O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para a esquerda. O código para detectar esse cenário é o seguinte:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;Node y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; z&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;
+Node x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;isLeftPending&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;left&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; z&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    rotateRight&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Neste caso, basta aplicarmos uma rotação à direita no avô do nó inserido. Note que deve-atualizar a esquerda de x para que receba os valores à direita de y. Veja:&lt;/p&gt;
+&lt;p&gt;Material extra: &lt;a href=&#34;https://www.youtube.com/watch?v=3zmjQlJhBLM&#34;&gt;esse vídeo&lt;/a&gt; e &lt;a href=&#34;https://www.youtube.com/watch?v=JAeQuNsKQWk&#34;&gt;esse&lt;/a&gt; são bem interessantes.&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;rotate-right.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Caso 2. Rotação à esquerda:&lt;/strong&gt; O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para a direita.&lt;/p&gt;
+&lt;p&gt;O código para detectar esse cenário é o seguinte. Note que deve-atualizar a direita de x para que receba os valores à esquerda de y. Veja:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;Node y &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; z&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;
+Node x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;parent&lt;/span&gt;
+
+&lt;span style=&#34;color:#a6e22e&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;isRightPending&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; y&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;right&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; z&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+    rotateLeft&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;x&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. Veja:&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;rotate-left.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Caso 3. Rotação à direita seguida de rotação à esquerda:&lt;/strong&gt; O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para algum dos lados (cenário em Z).&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;right-left.png&#34;&gt;
+&lt;/figure&gt;
+&lt;p&gt;&lt;strong&gt;Caso 4. Rotação à esquerda seguida de rotação à direita:&lt;/strong&gt; O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para algum dos lados.&lt;/p&gt;
+&lt;figure style=&#34;align: center; margin-left:5%; width: 90%&#34;&gt;
+    &lt;img src=&#34;left-right.png&#34;&gt;
+&lt;/figure&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;contribuições&#34;&gt;Contribuições&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/pserey&#34;&gt;Pedro Serey&lt;/a&gt; contribuiu para a escrita deste post.&lt;/p&gt;
+</description>
+       </item>
+       
      </channel>
    </rss>
