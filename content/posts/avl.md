@@ -38,9 +38,7 @@ Uma árvore com altura $\Theta(n)$ passa a ter a eficiência similar a de uma li
 
 A solução para resolver o problema apresentado anteriormente é mantermos a árvore balanceada.  Uma árvore pode ser considerada balanceada se a sua altura é $O(log(n))$.
 
-A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada.
-
-Neste documento iremos abordar árvores AVL – árvores que utilizam técnicas de balanceamento para manter a altura $O(log(n))$.
+A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada. Contudo, o denominador comum entre as várias estratégias para manter o balanceamento são as rotações nos nós desbalanceados. Neste documento iremos abordar árvores AVL – árvores que utilizam rotações para manter a altura $O(log(n))$.
 
 O conceito de árvores balanceadas e algoritmos de balanceamento foram introduzidos por **A**delson **V**elskii e **L**andis. Esses dois autores conceberam as árvores AVL, uma árvore **BST** balanceada. O conceito de árvore balanceada pode ser definido da seguinte maneira:
 
@@ -67,7 +65,7 @@ Essa relação é **muito** semelhante à relação de recorrência da função 
 
 ## Rotações
 
-Rotações são operações estruturais que executam em tempo constante para BSTs que, através da manipulação de ponteiros, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.
+Rotações são operações estruturais que executam em tempo constante para BSTs que, através da manipulação de referências, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.
 
 ### **Conceito de altura de um nó**
 
@@ -127,7 +125,7 @@ Essa informação é importante por dois motivos:
 
 Note que há diferença entre desbalanceado e "pendendo" para a direita ou "pendendo" para a esquerda. Desbalanceado significa que o nó não é raiz de uma árvore AVL e, por isso, demanda o uso de rotações para tornar a árvore AVL normalmente. Os outros casos (pendendo para a direita e pendendo para a esquerda) não demandam rotações, pois ainda estão respeitando a invariante $|He - Hd| \le 1$.
 
-Veja os exemplos a seguir. Cada nó tem um balance. As setas indicam se o nó está pendendo para a direita ou para a esquerda. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL. No entanto, eles estão na iminência de quebrar a restrição do balanceamento. 
+Veja os exemplos a seguir. Cada nó tem um balance. Para os nós de balance -1 e 1, o sinal indica se o nó está pendendo para a direita ou para a esquerda. Se o sinal for positivo (+1), está pendendo para a esquerda. Se for negativo (-1), está pendendo para a direita. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL ($|balance| <= 1$). No entanto, eles estão na iminência de quebrar a restrição do balanceamento. Nós com balance 2 ou -2 estão desbalanceados. 
 
 <figure style="align: center; margin-left:5%; width: 90%">
     <img src="balanced-not-balanced.png">
