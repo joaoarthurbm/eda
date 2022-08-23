@@ -1,17 +1,14 @@
 +++
 title = "Árvores Balanceadas (AVL)"
-date = 2017-03-24
+date = 2019-10-21
 tags = []
 categories = []
 github = "LINK PARA IMPLEMENTACAO"
-draft = true
 +++
-
-Ainda em construção.
 
 # Contextualização
 
-Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (ABP) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma ABP é definida recursivamente da seguinte forma:
+Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (BST) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma BST é definida recursivamente da seguinte forma:
 
 - $A$ é uma árvore nula
 - $A = (E, raiz, D)$ onde E e D são árvores binárias de pesquisa. $E$ contém apenas valores menores do que o armazenado na raiz, enquanto $D$ contém apenas valores maiores do que o armazenado na raiz
@@ -23,29 +20,27 @@ Ainda em construção.
     </figcaption>
 </figure>
 
-Um conceito bastante importante em ABP **é a altura**. Altura de uma ABP é definida pelo maior caminho entre a raiz e todas as folhas.  No exemplo acima, a altura da raiz é 3. Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma ABP são, do ponto de vista assintótico $O(h)$. Portanto, idealmente, é preciso manter h com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada.
+Um conceito bastante importante em BST **é a altura**. Altura de uma BST é definida pelo maior caminho entre a raiz e todas as folhas.  No exemplo acima, a altura da raiz é 3. Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma BST são, do ponto de vista assintótico $O(h)$. Portanto, idealmente, é preciso manter h com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada.
 
 # O Problema
 
-A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma ABP.
+A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma BST.
 
 <figure style="align: center; margin-left:5%; width: 90%">
     <img src="abp-linear.png">
 </figure>
 
-Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma ABP com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.
+Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma BST com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.
 
-Com a altura árvore $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar um esquema que mantenha a árvore com a menor altura possível. Esse esquema é discutido na seção seguinte.
+Uma árvore com altura $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar uma estratégia que mantenha a árvore com a menor altura possível. Uma dessas estratégias é discutida na seção seguinte.
 
 # A Solução: Árvores Balanceadas (AVL)
 
 A solução para resolver o problema apresentado anteriormente é mantermos a árvore balanceada.  Uma árvore pode ser considerada balanceada se a sua altura é $O(log(n))$.
 
-A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada.
+A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada. Contudo, o denominador comum entre as várias estratégias para manter o balanceamento são as rotações nos nós desbalanceados. Neste documento iremos abordar árvores AVL – árvores que utilizam rotações para manter a altura $O(log(n))$.
 
-Neste documento iremos abordar árvores AVL – árvores que utilizam técnicas de balanceamento para manter a altura $O(log(n))$.
-
-O conceito de árvores balanceadas e algoritmos de balanceamento foram introduzidos por **A**delson **V**elskii e **L**andis. Esses dois autores conceberam as árvores AVL, uma árvore **ABP** balanceada. O conceito de árvore balanceada pode ser definido da seguinte maneira:
+O conceito de árvores balanceadas e algoritmos de balanceamento foram introduzidos por **A**delson **V**elskii e **L**andis. Esses dois autores conceberam as árvores AVL, uma árvore **BST** balanceada. O conceito de árvore balanceada pode ser definido da seguinte maneira:
 
 Uma árvore $<E,raiz,D>$ é balanceada se $|h(E) - h(D)| \le 1$ e se E e D são balanceadas.
 
@@ -70,7 +65,7 @@ Essa relação é **muito** semelhante à relação de recorrência da função 
 
 ## Rotações
 
-Rotações são operações estruturais que executam em tempo constante para ABPs que, através da manipulação de ponteiros, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.
+Rotações são operações estruturais que executam em tempo constante para BSTs que, através da manipulação de referências, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.
 
 ### **Conceito de altura de um nó**
 
@@ -130,7 +125,7 @@ Essa informação é importante por dois motivos:
 
 Note que há diferença entre desbalanceado e "pendendo" para a direita ou "pendendo" para a esquerda. Desbalanceado significa que o nó não é raiz de uma árvore AVL e, por isso, demanda o uso de rotações para tornar a árvore AVL normalmente. Os outros casos (pendendo para a direita e pendendo para a esquerda) não demandam rotações, pois ainda estão respeitando a invariante $|He - Hd| \le 1$.
 
-Veja os exemplos a seguir. Cada nó tem um balance. As setas indicam se o nó está pendendo para a direita ou para a esquerda. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL. No entanto, eles estão na iminência de quebrar a restrição do balanceamento. 
+Veja os exemplos a seguir. Cada nó tem um balance. Para os nós de balance -1 e 1, o sinal indica se o nó está pendendo para a direita ou para a esquerda. Se o sinal for positivo (+1), está pendendo para a esquerda. Se for negativo (-1), está pendendo para a direita. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL ($|balance| <= 1$). No entanto, eles estão na iminência de quebrar a restrição do balanceamento. Nós com balance 2 ou -2 estão desbalanceados. 
 
 <figure style="align: center; margin-left:5%; width: 90%">
     <img src="balanced-not-balanced.png">
@@ -155,7 +150,7 @@ public boolean isBalanced()
 Porque, após inserir ou remover um elemento em uma árvore AVL, nossos algoritmos baseiam-se nessa informação para decidir se haverá rotação ou não e para onde será feita essa rotação.
 
 ## Inserção em árvores AVL
-A inserção em árvores AVL reutiliza a inserção de ABP. No entanto, após a inserção do novo nó, precisamos atualizar as alturas de cada nó e checar se a árvore ainda é AVL. Caso não seja, precisamos aplicar as rotações necessárias.
+A inserção em árvores AVL reutiliza a inserção de BST. No entanto, após a inserção do novo nó, precisamos atualizar as alturas de cada nó e checar se a árvore ainda é AVL. Caso não seja, precisamos aplicar as rotações necessárias.
 
 A partir de agora, vamos abordar cada caso da inserção. Vamos adotar a seguinte nomenclatura:
 
@@ -214,6 +209,6 @@ Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. 
 
 ---
 
-# Créditos
+# Contribuições
 
-Este material foi concebido em colaboração com [Pedro Serey](https://github.com/pserey) .
+[Pedro Serey](https://github.com/pserey) contribuiu para a escrita deste post.
