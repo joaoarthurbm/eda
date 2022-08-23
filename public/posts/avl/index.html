@@ -1,0 +1,333 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.68.3" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Árvores Balanceadas (AVL)</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-21T00:00:00-03:00">Oct 21, 2019</time>
+        </li>
+        
+
+        
+
+        <li>9 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="LINK%20PARA%20IMPLEMENTACAO"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <h1 id="contextualização">Contextualização</h1>
+<p>Árvores binárias são estruturas de dados fundamentais no contexto de Ciência da Computação. Em particular, Árvores Binárias de Pesquisa são aplicadas na solução de diversos problemas que demandam eficiência em operações básicas, como busca. Informalmente, uma Árvore Binária de Pesquisa (BST) é uma estrutura de dados de árvore binária baseada em nós, onde todos os nós da subárvore esquerda possuem um valor numérico inferior ao nó raiz e todos os nós da subárvore direita possuem um valor superior ao nó raiz. Formalmente, uma BST é definida recursivamente da seguinte forma:</p>
+<ul>
+<li>$A$ é uma árvore nula</li>
+<li>$A = (E, raiz, D)$ onde E e D são árvores binárias de pesquisa. $E$ contém apenas valores menores do que o armazenado na raiz, enquanto $D$ contém apenas valores maiores do que o armazenado na raiz</li>
+</ul>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="exemplo-simples.png">
+    <figcaption align="center">
+        Exemplo de Árvore Binária de Pesquisa
+    </figcaption>
+</figure>
+<p>Um conceito bastante importante em BST <strong>é a altura</strong>. Altura de uma BST é definida pelo maior caminho entre a raiz e todas as folhas.  No exemplo acima, a altura da raiz é 3. Esse conceito é importante pois várias operações básicas, como inserção, busca e remoção em uma BST são, do ponto de vista assintótico $O(h)$. Portanto, idealmente, é preciso manter h com o menor valor possível para que as operações sejam eficientes. No entanto, isso nem sempre é possível. Uma combinação de inserções e remoções pode levar a árvore a um estado em que a altura da sub-árvore à direita pode ser muito maior que a altura da sub-árvore à esquerda (e vice-versa). Quando a árvore atinge esse estado, dizemos que ela está desbalanceada.</p>
+<h1 id="o-problema">O Problema</h1>
+<p>A figura abaixo mostra a adição dos elementos [1, 2, 3, 4, 5] em uma BST.</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="abp-linear.png">
+</figure>
+<p>Note que a altura da árvore é 4. Se fossem adicionados $n$ elementos ordenados, a altura seria $n - 1$. Do ponto de vista assintótico, para uma BST com $n$ nós, a menor altura que uma árvore binária pode ter é $\Theta(log(n))$, enquanto que a maior altura seria $\Theta(n)$. Claramente, quando adicionamos elementos ordenados (de forma crescente ou decrescente) estamos falando do pior caso.</p>
+<p>Uma árvore com altura $\Theta(n)$ passa a ter a eficiência similar a de uma lista. Por exemplo, a busca em uma árvore com essa altura é $\Theta(n)$. Contudo, sabemos que a árvore binária de pesquisa pode nos fornecer operações $\Theta(log(n))$ se a altura dessa árvore for controlada. Portanto, para garantir a eficiência dos algoritmos é preciso encontrar uma estratégia que mantenha a árvore com a menor altura possível. Uma dessas estratégias é discutida na seção seguinte.</p>
+<h1 id="a-solução-árvores-balanceadas-avl">A Solução: Árvores Balanceadas (AVL)</h1>
+<p>A solução para resolver o problema apresentado anteriormente é mantermos a árvore balanceada.  Uma árvore pode ser considerada balanceada se a sua altura é $O(log(n))$.</p>
+<p>A forma como o balanceamento é feito muda de acordo com o tipo da árvore. Por exemplo, as árvores AVL usam a altura de cada nó para realizar as operações de balanceamento. Já as árvores rubro-negras adicionam propriedades (cores) aos nós e alguns requisitos para mantê-la balanceada. Contudo, o denominador comum entre as várias estratégias para manter o balanceamento são as rotações nos nós desbalanceados. Neste documento iremos abordar árvores AVL – árvores que utilizam rotações para manter a altura $O(log(n))$.</p>
+<p>O conceito de árvores balanceadas e algoritmos de balanceamento foram introduzidos por <strong>A</strong>delson <strong>V</strong>elskii e <strong>L</strong>andis. Esses dois autores conceberam as árvores AVL, uma árvore <strong>BST</strong> balanceada. O conceito de árvore balanceada pode ser definido da seguinte maneira:</p>
+<p>Uma árvore $&lt;E,raiz,D&gt;$ é balanceada se $|h(E) - h(D)| \le 1$ e se E e D são balanceadas.</p>
+<p>Ou seja, as alturas das duas sub-árvores a partir de cada nó diferem no máximo em uma unidade. Dessa maneira, é possível garantir que as operações básicas sejam efetuadas em $O(log(n))$.</p>
+<p><strong>Exemplos de árvores AVL e não-AVL</strong></p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="avl-not-avl.png">
+</figure>
+<p>Provando que $h = O(log(n))$</p>
+<p>Número mínimo de nós que em uma AVL de altura h. O pior caso é quando, para cada nó, a sub-árvore à direita tem altura uma unidade maior ou menor do que a sub-árvore à esquerda.</p>
+<!-- Mudar as palavras (não entendi exatamente o que quer dizer) -->
+<ul>
+<li>Relação de recorrência: $N(h) = N(h-1) + N(h-2) + 1$</li>
+</ul>
+<p>Essa relação é <strong>muito</strong> semelhante à relação de recorrência da função de Fibonacci. Sua resolução revela uma função exponencial. Como queremos saber o inverso (a altura), temos que $H = O (log(n))$. Mais especificamente, $H = 1.44 \log(N)$.</p>
+<h1 id="como-manter-a-árvore-balanceada">Como manter a árvore balanceada?</h1>
+<h2 id="rotações">Rotações</h2>
+<p>Rotações são operações estruturais que executam em tempo constante para BSTs que, através da manipulação de referências, visam balancear uma árvore, mantendo sua propriedade de pesquisa. Rotações são realizadas após operações que quebrem a propriedade de balanceamento. Existem 4 cenários em árvores AVL que demandam rotações. Iremos explorar esses cenários após introduzir os conceitos de altura e balance de um nó.</p>
+<h3 id="conceito-de-altura-de-um-nó"><strong>Conceito de altura de um nó</strong></h3>
+<p>Até aqui, estávamos trabalhando com o conceito de altura de uma árvore que, por sinal, é a altura do nó raiz. Como precisamos manter o balanceamento para todos os nós, precisamos também adicionar ao nó a informação relativa a sua altura. Portanto, há uma modificação na implementação de um No, que passa agora a registrar também a sua altura. Vejamos:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> value<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> height<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">private</span> Node left<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Node right<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Node parent<span style="color:#f92672">;</span>
+<span style="color:#f92672">...}</span>
+</code></pre></div><p>O cálculo da altura de um nó pode ser feito de maneira recursiva:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> max<span style="color:#f92672">(</span>height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">),</span> height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">))</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Uma alternativa é não passar o nó como parâmetro na recursão. Note que os algoritmos ficam um pouco mais verborrágicos, pois precisamos checar referências nulas antes de chamar recursivamente.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">height</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> 0<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">();</span>
+    <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> 1 <span style="color:#f92672">+</span> max<span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">(),</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">());</span>
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><h3 id="balance-de-um-nó"><strong><em>Balance</em> de um nó</strong></h3>
+<p>Sabendo que podemos calcular a altura da sub-árvore a esquerda e da sub-árvore à direita, podemos saber o balance de um nó. Balance é a diferença entre a altura da sub-árvore à esquerda e a altura da sub-árvore à direita.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">balance</span><span style="color:#f92672">(</span>Node node<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>node <span style="color:#f92672">!=</span> <span style="color:#66d9ef">null</span><span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">)</span> <span style="color:#f92672">-</span> height<span style="color:#f92672">(</span>node<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">);</span>
+    <span style="color:#66d9ef">return</span> 0<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#75715e">// alternativa sem passar o nó como parâmetro para recursão
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">balance</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">left</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">null</span> <span style="color:#f92672">?</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">:</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">right</span><span style="color:#f92672">.</span><span style="color:#a6e22e">height</span><span style="color:#f92672">();</span>
+    <span style="color:#66d9ef">return</span> left <span style="color:#f92672">-</span> right<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Essa informação é importante por dois motivos:</p>
+<ul>
+<li>Para sabermos se o nó respeita a restrição de AVL</li>
+<li>Para sabermos se o nó está &ldquo;pendendo&rdquo; para a esquerda ou se está &ldquo;pendendo&rdquo; para a direita</li>
+</ul>
+<p>Note que há diferença entre desbalanceado e &ldquo;pendendo&rdquo; para a direita ou &ldquo;pendendo&rdquo; para a esquerda. Desbalanceado significa que o nó não é raiz de uma árvore AVL e, por isso, demanda o uso de rotações para tornar a árvore AVL normalmente. Os outros casos (pendendo para a direita e pendendo para a esquerda) não demandam rotações, pois ainda estão respeitando a invariante $|He - Hd| \le 1$.</p>
+<p>Veja os exemplos a seguir. Cada nó tem um balance. Para os nós de balance -1 e 1, o sinal indica se o nó está pendendo para a direita ou para a esquerda. Se o sinal for positivo (+1), está pendendo para a esquerda. Se for negativo (-1), está pendendo para a direita. É importante reforçar que nós pendendo para a direita e para a esquerda são considerados balanceados, pois respeitam a restrição do balanceamento de uma AVL ($|balance| &lt;= 1$). No entanto, eles estão na iminência de quebrar a restrição do balanceamento. Nós com balance 2 ou -2 estão desbalanceados.</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="balanced-not-balanced.png">
+</figure>
+<p>Portanto, as regras para saber se um nó está pendendo para a direita, esquerda, se está nivelado ou desbalanceado são:</p>
+<ul>
+<li>se height(node.left) - height(node.right) == 1 -&gt; Pendendo para a esquerda</li>
+<li>se height(node.left) - height(node.right) == -1 -&gt; Pendendo para a direita</li>
+<li>se height(node.left) - height(node.right) == 0 -&gt; nivelado</li>
+<li>se |height(node.left) - height(node.right)| == 2 -&gt; desbalanceado</li>
+</ul>
+<blockquote>
+<p><strong>Desafio.</strong> Implemente os métodos a seguir:</p>
+</blockquote>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isLeftPending</span><span style="color:#f92672">()</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isRightPending</span><span style="color:#f92672">()</span>
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isBalanced</span><span style="color:#f92672">()</span>
+</code></pre></div><h3 id="por-que-precisamos-saber-se-o-nó-está-pendendo-para-a-direita-esquerda-nivelado-ou-desbalanceado">Por que precisamos saber se o nó está pendendo para a direita, esquerda, nivelado ou desbalanceado?</h3>
+<p>Porque, após inserir ou remover um elemento em uma árvore AVL, nossos algoritmos baseiam-se nessa informação para decidir se haverá rotação ou não e para onde será feita essa rotação.</p>
+<h2 id="inserção-em-árvores-avl">Inserção em árvores AVL</h2>
+<p>A inserção em árvores AVL reutiliza a inserção de BST. No entanto, após a inserção do novo nó, precisamos atualizar as alturas de cada nó e checar se a árvore ainda é AVL. Caso não seja, precisamos aplicar as rotações necessárias.</p>
+<p>A partir de agora, vamos abordar cada caso da inserção. Vamos adotar a seguinte nomenclatura:</p>
+<ul>
+<li>z: nó que acabou de ser adicionado</li>
+<li>y: pai do nó adicionado</li>
+<li>x: pai do pai (avô) do nó adicionado</li>
+</ul>
+<p>Para fins de simplificação dos algoritmos, também vamos assumir que y e x não são nós nulos.</p>
+<p><strong>Caso 1. Rotação à direita:</strong> O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para a esquerda. O código para detectar esse cenário é o seguinte:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Node y <span style="color:#f92672">=</span> z<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span>
+Node x <span style="color:#f92672">=</span> y<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span>
+
+<span style="color:#a6e22e">if</span> <span style="color:#f92672">(</span>x<span style="color:#f92672">.</span><span style="color:#a6e22e">isLeftPending</span><span style="color:#f92672">()</span> <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">.</span><span style="color:#a6e22e">left</span> <span style="color:#f92672">==</span> z<span style="color:#f92672">)</span>
+    rotateRight<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>
+</code></pre></div><p>Neste caso, basta aplicarmos uma rotação à direita no avô do nó inserido. Note que deve-atualizar a esquerda de x para que receba os valores à direita de y. Veja:</p>
+<p>Material extra: <a href="https://www.youtube.com/watch?v=3zmjQlJhBLM">esse vídeo</a> e <a href="https://www.youtube.com/watch?v=JAeQuNsKQWk">esse</a> são bem interessantes.</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="rotate-right.png">
+</figure>
+<p><strong>Caso 2. Rotação à esquerda:</strong> O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para a direita.</p>
+<p>O código para detectar esse cenário é o seguinte. Note que deve-atualizar a direita de x para que receba os valores à esquerda de y. Veja:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">Node y <span style="color:#f92672">=</span> z<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span>
+Node x <span style="color:#f92672">=</span> y<span style="color:#f92672">.</span><span style="color:#a6e22e">parent</span>
+
+<span style="color:#a6e22e">if</span> <span style="color:#f92672">(</span>x<span style="color:#f92672">.</span><span style="color:#a6e22e">isRightPending</span><span style="color:#f92672">()</span> <span style="color:#f92672">&amp;&amp;</span> y<span style="color:#f92672">.</span><span style="color:#a6e22e">right</span> <span style="color:#f92672">==</span> z<span style="color:#f92672">)</span>
+    rotateLeft<span style="color:#f92672">(</span>x<span style="color:#f92672">)</span>
+</code></pre></div><p>Neste caso, basta aplicarmos uma rotação à esquerda no avô do nó inserido. Veja:</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="rotate-left.png">
+</figure>
+<p><strong>Caso 3. Rotação à direita seguida de rotação à esquerda:</strong> O nó foi inserido à esquerda do pai. Além disso, o pai do nó inserido é filho à direita de um nó pendendo para algum dos lados (cenário em Z).</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="right-left.png">
+</figure>
+<p><strong>Caso 4. Rotação à esquerda seguida de rotação à direita:</strong> O nó foi inserido à direita do pai. Além disso, o pai do nó inserido é filho à esquerda de um nó pendendo para algum dos lados.</p>
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="left-right.png">
+</figure>
+<hr>
+<h1 id="contribuições">Contribuições</h1>
+<p><a href="https://github.com/pserey">Pedro Serey</a> contribuiu para a escrita deste post.</p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/heap/">Heap <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+

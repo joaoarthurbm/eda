@@ -1,0 +1,922 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.68.3" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Análise de Algoritmos Recursivos</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-28T00:00:00-03:00">Oct 28, 2019</time>
+        </li>
+        
+
+        
+
+        <li>18 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <hr>
+<p>Até aqui vimos como <a href="http://joaoarthurbm.github.io/eda/posts/introducao-a-analise" class="external"> analisar algoritmos iterativos</a>, lembra? Esse processo pode ser resumido pelos seguintes passos:</p>
+<ol>
+<li>identificar operações primitivas;</li>
+<li>identificar a quantidade de vezes que cada uma dessas primitivas é executada;</li>
+<li>Somar essas execuções.</li>
+</ol>
+<pre>
+Você lembra quais são as operações primitivas?
+    
+    - Avaliação de expressões booleanas;
+    - Operações matemáticas;
+    - Retorno de métodos;
+    - Atribuição;
+    - Acesso à variáveis e posições arbitrárias de um array
+</pre>
+<p>Seguindo esses passos sempre chegamos a uma função que descreve o tempo de execução do algoritmo. Vimos também que estamos interessados na ordem de crescimento dessa função, mais do que nos seus termos detalhados. Isto é, como se comporta a função para grandes valores de $n$. Assim, podemos aplicar as seguintes diretrizes para identificar a classe de complexidade das funções:</p>
+<ol>
+<li>Eliminar constantes;</li>
+<li>Eliminar expoentes de menor magnitude.</li>
+</ol>
+<p>Desse modo, a função $f(n) = 70n + 32n + 231$ tem ordem de crescimento linear. Isto é, $f(n) \in \Theta(n)$. Lembrando sempre que a maneira formal de demonstrar que $f(n) \in \Theta(n)$ é encontrar $c1$, $c2$ e $n0$, tal que:</p>
+<p align="center"> $0 <= c1*n  <= 70n + 32n + 231 <= c2*n, \forall n >=n0 $ </p>
+<hr>
+<h1 id="o-problema">O Problema</h1>
+<p>Acontece que, para algoritmos recursivos, a aplicação dos passos acima não é direta, pois um algoritmo recursivo é definido em termos dele mesmo. Vamos começar com uma função bem simples: fatorial.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">fatorial</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> n<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n<span style="color:#f92672">==</span>0 <span style="color:#f92672">||</span> n <span style="color:#f92672">==</span> 1<span style="color:#f92672">)</span>
+        <span style="color:#66d9ef">return</span> 1<span style="color:#f92672">;</span>
+   <span style="color:#66d9ef">else</span>
+       <span style="color:#66d9ef">return</span> n <span style="color:#f92672">*</span> fatorial<span style="color:#f92672">(</span>n<span style="color:#f92672">-</span>1<span style="color:#f92672">);</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Vamos tentar aplicar os passos que aprendemos para a análise de algoritmos.</p>
+<p><strong>Identificando as primitivas.</strong></p>
+<p><code>if (n==0 || n == 1)</code> -&gt; avaliação de expressão booleana.</p>
+<p><code>return 1</code> -&gt; retorno de método.</p>
+<p><code>return n</code> -&gt; retorno de método.</p>
+<p><code>*</code> -&gt; operação aritmética.</p>
+<p><code>fatorial(n-1)</code> -&gt; ?</p>
+<p>Como vimos, para o caso em que as execuções não são em função de $n$ (caso acima) podemos simplificar as operações primitivas e suas execuções para (1).</p>
+<p align="center">O problema aqui é calcular o custo de fatorial(n-1).</p>
+<p>Qual o custo dessa operação e quantas vezes ela será executada? Não conseguimos responder essa questão de maneira direta como fizemos para os algoritmos iterativos porque trata-se de uma função definida em termos dela mesma. No nosso contexto, funções dessa natureza são chamadas de <strong>relações de recorrência</strong>.</p>
+<hr>
+<h1 id="relação-de-recorrência">Relação de Recorrência</h1>
+<blockquote>
+<p>Relação de recorrência é uma equação ou inequação que descreve uma função em termos dela mesma considerando entradas menores.</p>
+</blockquote>
+<p>A função que descreve o tempo de execução de um algoritmo recursivo é dada por sua relação de recorrência. Vejamos a relação de recorrência que descreve o algoritmo de cálculo do fatorial:</p>
+<p>$T(n) = T(n-1) + \Theta(1)$,</p>
+<p>simplificando temos: $T(n) = T(n-1) + 1$</p>
+<p>Ou seja, o custo de calcular fatorial(n) é o custo de calcular fatorial(n-1) somado às primitivas que são executadas a cada passo da recursão que, nesse caso, representam 1.</p>
+<p>Nosso desafio então é resolver essa relação de recorrência para determinarmos o tempo de execução do algoritmo para cálculo do fatorial. Para isso, vamos utilizar o método da árvore de recursão.</p>
+<hr>
+<h1 id="método-da-árvore-de-recursão">Método da árvore de recursão</h1>
+<p>A ideia para resolver uma relação de recorrência é simular a sua execução através de uma árvore, onde os nós representam a entrada e as arestas representam a chamada recursiva.</p>
+<h2 id="exemplo-fatorial">Exemplo: Fatorial</h2>
+<p>Vamos entender como funciona esse recurso através de exemplos. Veja a árvore de recursão para o cálculo do fatorial de 5.</p>
+<p><img src="fatorial.png" alt="fatorial"></p>
+<p>Note que a raiz da árvore inicia com o valor 5, que é o tamanho da entrada. Note também que o custo do nível da entrada 5 é 1 (as primitivas). Este custo deve ser somado ao custo para a entrada 4 (chamada recursiva) que, por sua vez é 1. O cálculo da entrada 4 deve ser somado ao custo para a entrada 3 (chamada recursiva) e assim por diante. Veja que isso nada mais é do que a reprodução da relação de recorrência $T(n) = T(n-1) + 1$.</p>
+<p>Por fim, não é difícil compreender que o custo total é a soma dos custos de cada nível, ou seja, a soma dos custos de cada passo da recursão.</p>
+<p>Contudo, nosso trabalho aqui é definir o tempo de execução do algoritmo em função de uma entrada de tamanho n qualquer. Vamos, novamente, ilustrar a árvore de recursão para esse cenário:</p>
+<p><img src="fatorialn.png" alt="fatorialn"></p>
+<p>Novamente, para calcular a função que define o tempo de execução desse algoritmo, precisamos somar os custos de cada nível. Isto é, somaremos o valor 1 uma quantidade de vezes representada por $h + 1$, onde $h$ é a altura da árvore e o +1 é o custo da última execução (<code>if n == 0 || n == 1</code>).</p>
+<p>Portanto, precisamos definir $h$. Analisando a árvore, não é difícil notar que $h = n - 1$. Assim, temos que $f(n) = 1 * (n-1) + 1$, isto é, $f(n) = n$. Portanto, podemos dizer que $f(n) \in \Theta(n)$.</p>
+<p>Veja em detalhes como isso é feito no vídeo abaixo.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/iOZMQHW30VA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Em resumo, podemos estabelecer os seguintes passos para analisar um algoritmo recursivo:</p>
+<ol>
+<li>Estabelecer a relação de recorrência</li>
+<li>Expandir a árvore de execução baseado na relação de recorrência</li>
+<li>Determinar a altura h máxima da árvore</li>
+<li>Somar o custo de cada nível de execução</li>
+<li>Somar o custo total (soma do custo de todos os níveis)</li>
+</ol>
+<h2 id="exemplo-mergesort">Exemplo: MergeSort</h2>
+<p>Vamos analisar um exemplo um pouco mais complexo. O Merge Sort é um algoritmo de ordenação que, a cada execução parcial, efetua duas chamadas recursivas diminuindo pela metade o tamanho da entrada e um rotina (merge) cujo tempo de execução é dado por $\Theta(n)$.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mergeSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+	If <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+		<span style="color:#66d9ef">int</span> meio <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">+</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+		mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> ini<span style="color:#f92672">,</span> meio<span style="color:#f92672">);</span>
+		mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> meio <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> fim<span style="color:#f92672">);</span>
+		merge<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> ini<span style="color:#f92672">,</span> meio<span style="color:#f92672">,</span> fim<span style="color:#f92672">);</span>
+	<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>Relação de recorrência.</strong> A primeira etapa para identificar a classe de complexidade do <em>Merge Sort</em> é identificar a sua relação de recorrência:</p>
+<p>$T(n) = T(n/2) + T(n/2) + (n)$, simplificando</p>
+<p>$T(n) = 2 * T(n/2) + n$, onde n = v.length</p>
+<ul>
+<li>
+<p>$2 * T(n/2)$ representa as duas chamadas recursivas em que a entrada é divida pela metade em cada uma delas.</p>
+</li>
+<li>
+<p>$+ n$ representa o custo da função que une duas sequências já ordenadas em uma sequência ordenada. Não precisamos saber como isso é feito nesse momento, apenas precisamos saber que essa parte do algoritmo tem custo linear.</p>
+</li>
+</ul>
+<p>Gravei um vídeo para deixar mais claro. Talvez te ajude a entender como, a partir do algoritmo, extraímos a relação de recorrência do Merge Sort.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mCzer4M_uBE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<pre>
+Para fixar! Muitas relações de recorrência podem ser descritas 
+na seguinte forma:
+
+T(n) = a * T(n/b) + f(n), com a >= 1, b > 1 e f(n) não negativa. 
+
+É importante que a gente saiba em português o que significa essa 
+equação acima. Você lembra que ela é referente a um algoritmo 
+recursivo, certo? Em português, dizemos que há <b>a</b> chamadas 
+recursivas e que cada chamada recursiva divide a entrada em <b>b</b> 
+partes. Além disso, a cada chamada recursiva, um custo <b>f(n)</b> é 
+adicionado.
+</pre>
+<p>Precisa de mais um exemplo sobre como extrair a relação de recorrência a partir de um algoritmo recursivo? Veja o vídeo abaixo para fixar bem.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/L0GMkFOsQ1A" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Acho que agora é um bom momento para você testar o que aprendeu até aqui.</p>
+<hr>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;relacao_de_recorrencia&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="relacao_de_recorrencia">
+  <script>
+    var choices = " $T(n) = 3 * T(n\/2) \x2b n$, $T(n) = 2 * T(n\/2) \x2b n^2$, $T(n) = T(n\/4) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b n$, $T(n) = 2 * T(n\/2) \x2b 2 * n$".split(",");
+    var id = "relacao_de_recorrencia";
+    var question = "Qual a relação de recorrência do algoritmo acima?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<pre><code>int metodo(int[] v)
+    if (n == 1)
+        return v[1];
+    
+    metodo(v[1...v.length/2]);
+    metodo(v[v.length/2 + 1...v.length]);
+
+    for i = 0 to v.length
+        for j = i + 1 to v.length
+            // do something
+</code></pre>
+  <script>
+    var quiz = new Quiz("relacao_de_recorrencia", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
+<p><strong>Árvore de Recursão.</strong> Voltando para o Merge Sort, vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = 2 T(n/2) + n$.</p>
+<p><img src="merge.png" alt="merge"></p>
+<p>Podemos notar que a árvore é um pouco diferente da que ilustramos para o fatorial. Em primeiro lugar, a árvore é binária. Sendo assim, o custo de um nível agora é calculado somando-se os custos de cada nó desse nível. Novamente, as arestas representam as duas chamadas recursivas de cada passo. Outra mudança é que cada nó filho diminui na metade o tamanho da entrada do nó pai. Essas duas últimas sentenças são resumidas por $2 * T (n/2)$. Por fim, cada nó tem o seu tempo de execução definido em função linear do tamanho da entrada. Essa última sentença é resumida pela parte final da relação de recorrência &hellip;. $+n$.</p>
+<p><strong>Função do tempo de execução.</strong> Agora precisamos somar os custos de todos os níveis. Para isso, assim como no caso do fatorial, precisamos determinar a altura dessa árvore.</p>
+<p>Para o cálculo da altura podemos notar que a árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada ini &gt;= fim.</p>
+<p>Assim, temos que $2^h = n$. Aplicando $\log$ nos dois lados da equação, temos:</p>
+<p>$h * \log_{2}2 = \log n$</p>
+<p>Simplificando, temos: $h = \log_{2}n$</p>
+<p>Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo $n$ (ex: $2 * n/2$, $4 * n/4$, $8 * n/8$&hellip;). Se somarmos $n$ por 10 vezes, teremos $10 * n$. Se somarmos $n$ por 100 vezes, teremos $100*n$. Como vamos somar $n$ por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = n * \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo n.</p>
+<p>Então, temos que $T(n) =(n * \log n)$.</p>
+<p>O vídeo abaixo explica detalhadamente como é feita a análise de eficiência do Merge Sort utilizando a árvore de recursão.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/JuXZz-B8dJM" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="exemplo-busca-binária">Exemplo: Busca Binária</h2>
+<p>O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &ldquo;palpitar&rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>    
+        <span style="color:#66d9ef">int</span> meio <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">+</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>v<span style="color:#f92672">[</span>meio<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> n<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> meio<span style="color:#f92672">;</span>
+
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>n <span style="color:#f92672">&lt;</span> v<span style="color:#f92672">[</span>meio<span style="color:#f92672">])</span>
+            <span style="color:#66d9ef">return</span> indexOf<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> n<span style="color:#f92672">,</span> ini<span style="color:#f92672">,</span> meio <span style="color:#f92672">-</span> 1<span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">else</span>
+            <span style="color:#66d9ef">return</span> indexOf<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> n<span style="color:#f92672">,</span> meio <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> fim<span style="color:#f92672">);</span>
+	<span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+		<span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+	<span style="color:#f92672">}</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p><strong>Relação de recorrência.</strong> Como aprendemos anteriormente, a primeira etapa para identificar o custo de execução do algoritimo de Busca Binária é identificar a sua relação de recorrência:</p>
+<p>$T(n) = T(n/2) + \Theta(1)$.</p>
+<p>Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length</p>
+<ul>
+<li>
+<p>$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>
+</li>
+<li>
+<p>$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.</p>
+</li>
+</ul>
+<p>Caso você não tenha entendido como chegamos a essa relação de recorrência, eu gravei um vídeo explicando. Veja abaixo.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/TmUhmKlIxAE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Árvore de Recursão. Vamos ilustrar a árvore de recursão gerada pela recorrência $T(n) = T(n/2) + 1$.</p>
+<p><img src="binaria.png" alt="binaria"></p>
+<p>Cada nó da árvore possui apenas uma aresta, porque há apenas uma chamada recursiva. Cada nível tem o seu custo constante (1), uma vez que a cada passo da recursão apenas algumas primitivas são executadas, como as avaliações das expressões booleanas e o cálculo da variável <code>meio</code>.</p>
+<p><strong>Função do tempo de execução.</strong> Agora precisamos somar os custos de todos os níveis. Para isso, assim como nos casos anteriores, precisamos determinar a altura dessa árvore.</p>
+<p>O cálculo da altura é exatamente o mesmo do realizado para o exemplo do Merge Sort. A árvore irá parar de crescer quando $n / 2^h = 1$, pois o algoritmo atinge a condição de parada <code>ini &gt;= fim</code>. Aplicando os mesmos passos do exemplo anterior, temos que a $h = \log n$</p>
+<p>Agora que já definimos a altura da árvore, precisamos somar os custos parciais (de cada nível) uma quantidade de vezes representada pela altura da árvore. Cada nível tem custo 1. Se somarmos 1 por 10 vezes, teremos $10 * 1$. Se somarmos 1 por 100 vezes, teremos $100*1$. Como vamos somar 1 por $\log n$ vezes, temos que o tempo de execução desse algoritmo é dado por $f(n) = 1 * \log n$, ou seja, $f(n) = \log n$. Naturalmente, só podemos fazer essa multiplicação porque cada nível tem o mesmo custo 1.</p>
+<p>Eu fiz um vídeo que segue esse protocolo descrito acima para ilustrar a árvore, calcular sua altura e definir o custo total. Vale a pena você conferir para fixar bem o modo como utilizamos o método da árvore de recursão.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/N4FDi0pLWAc" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<hr>
+<h1 id="método-mestre">Método Mestre</h1>
+<p>O método iterativo utilizando a árvore de recursão é, de fato, uma boa alternativa para identificar a classe de complexidade de algoritmos recursivos. Além de ser um método analítico, ele tem propriedades didáticas importantes. Isto é, o exercício de ilustrar a árvore de recursão (execução) e, a partir dela, identificar o custo total do algoritmo é importante não somente para esse fim, mas para exercitar a capacidade de abstração e raciocínio do aluno. Contudo, muitas vezes, trata-se de um mecanismo laborioso. Nesse contexto, surge o <strong>Teorema Mestre</strong> que nos permite identificar a classe de complexidade de um algoritmo aplicando apenas algumas operações matemáticas e comparando ordem de complexidade de funções.</p>
+<p><strong>E como o teorema funciona?</strong> Primeiramente, é preciso que a relação de recorrência tenha determinadas propriedades. Vamos analisar concretamente essas propriedades:</p>
+<p align="center">$T(n) = a*T(n/b) + f(n)$</p>
+<p>Sendo $a&gt;=1$, $b&gt;1$ e $f(n)$ não negativa.</p>
+<p>Como vimos anteriormente, $a$ representa a quantidade de chamadas recursivas (quantidade de subproblemas), $b$ representa em quanto a entrada é diminuída a cada chamada recursiva e $f(n)$ representa o custo parcial de cada etapa da recursão. Para aplicar o Teorema Mestre, sua relação de recorrência deve ser na forma acima com $a &gt;= 1$, $b &gt; 1$ e $f(n)$ não negativa.</p>
+<p>Para esses casos, o Teorema Mestre é uma maneira direta de resolvermos a relação de recorrência. O Teorema Mestre estabelece que:</p>
+<ul>
+<li>
+<p>Se f(n) &lt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(n ** log<sub>b</sub><sup>a</sup>).</p>
+</li>
+<li>
+<p>Se f(n) = n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(f(n) * log<sub>b</sub><sup>n</sup>).</p>
+</li>
+<li>
+<p>Se f(n) &gt; n ** log<sub>b</sub><sup>a</sup>, então T(n) = $\Theta$(f(n)).</p>
+</li>
+</ul>
+<p>Desse modo, se a relação de recorrência obedecer às restrições $a&gt;=1$, $b&gt;1$ e $f(n)$ não negativa, basta aplicarmos o teorema.</p>
+<h3 id="exemplo">Exemplo</h3>
+<p>Para a relação de recorrência $T(n) = 8 * T(n/2) + 1000 * n^2$, temos:</p>
+<ul>
+<li>$a = 8$</li>
+<li>$b = 2$</li>
+<li>$f(n) = 1000 * n^2$</li>
+</ul>
+<p>Comparando $1000 * n^2$  com  n ** log<sub>b</sub><sup>a</sup>, temos que $1000 * n^2$ &lt; $n^3$. Portanto, aplicando a primeira regra do Teorema Mestre, podemos afirmar que T(n) = \Theta(n ** log<sub>b</sub><sup>a</sup>) e, portanto, $T(n) = \Theta(n^3)$.</p>
+<h3 id="exemplo-1">Exemplo</h3>
+<p>$T(n) = 2 * T(n/2) + 10*n$</p>
+<p>Para a relação acima, temos:</p>
+<ul>
+<li>$a = 2$</li>
+<li>$b = 2$</li>
+<li>$f(n) = 10 * n$</li>
+</ul>
+<p>Comparando $10 * n$ com n ** log<sub>b</sub><sup>a</sup> temos que $10 * n  =  n$, pois comparamos a ordem de grandeza das funções e, quando fazemos isso, as constantes não importam. Portanto, aplicando a segunda regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(n * \log_{2}n)$.</p>
+<h3 id="exemplo-2">Exemplo</h3>
+<p>Para $T(n) = 2 * T(n/2) + n^2$, temos:</p>
+<ul>
+<li>$a = 2$</li>
+<li>$b = 2$</li>
+<li>$f(n) = n^2$</li>
+</ul>
+<p>Comparando $n^2$  com n ** log<sub>b</sub><sup>a</sup> temos que $n^2 &gt; n$. Portanto, aplicando a terceira regra do Teorema Mestre, podemos afirmar que $T(n) = \Theta(f(n))$ e, portanto, $T(n) = \Theta(n^2)$.</p>
+<hr>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;resumo&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="resumo">
+  <script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(\\log{n})$".split(",");
+    var id = "resumo";
+    var question = "Qual é a altura da árvore de execução da busca binária?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "Qual é a altura da árvore de execução da busca linear?";
+    var answers = "2".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 8 * T(n\/2) \x2b 1001*n^2$?";
+    var answers = "1".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \x2b 15*n$?";
+    var answers = "3".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(2*n)$,$\\Theta(n^2)$".split(",");
+    var id = "resumo";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \x2b n^2$?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = "Há duas chamadas recursivas.,Cada uma das 3 chamadas recursivas diminui a entrada em duas unidades.,Cada execução parcial tem custo linear., Cada uma das 3 chamadas recursivas diminui a entrada na metade.,Trata-se da relação de recorrência do merge sort.".split(",");
+    var id = "resumo";
+    var question = "Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n\/2) \x2b n^2$";
+    var answers = "4".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+<script>
+    var choices = " $T(n) = 7 * T(n\/13) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b n^2$, $T(n) = 2^n * T(n\/2) \x2b n^n$, $T(n) = T(n\/2) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b 10n$".split(",");
+    var id = "resumo";
+    var question = "Qual função abaixo não se adequa ao teorema mestre?";
+    var answers = "3".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+
+  <script>
+    var quiz = new Quiz("resumo", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
+<h1 id="notas">Notas</h1>
+<p>Este material é um resumo superficial do Capítulo 4 do livro &ldquo;Algoritmos: Teoria e Prática&rdquo; de Cormen et. al.</p>
+<p>Há outras implementações de fatorial. Por exemplo, ao invés de checar se n == 0 ou n == 1, bastaria apenas checar se n == 0, 1 * 1 == 1. Dessa forma, a altura da árvore gerada teria uma unidade a mais. Contudo, isso não impacta na ordem de grandeza do algoritmo.</p>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/selection-sort/"><i class="fa fa-chevron-circle-left"></i> Ordenação por Comparação: Selection Sort</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/analise-assintotica/">Análise Assintótica <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+

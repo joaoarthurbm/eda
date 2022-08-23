@@ -1,0 +1,393 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.68.3" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Ordenação por Comparação: Merge Sort</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-27T00:01:01-03:00">Oct 27, 2019</time>
+        </li>
+        
+
+        
+
+        <li>9 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/MergeSort.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <hr>
+<p>Merge Sort é um algoritmo eficiente de ordenação por divisão e conquista. Se nossa missão é ordenar um array comparando seus elementos, do ponto de vista assintótico, $n * \log n$ é o nosso limite inferior. Ou seja, nenhum algoritmo de ordenação por comparação é mais veloz do que $n * \log n$. Formalmente, todos são $\Omega(n * \log n)$.</p>
+<p>No caso do Merge Sort, uma característica importante é que sua eficiência é $n * \log n$ para o melhor, pior e para o caso médio. Ou seja, ele não é somente $\Omega(n * \log n)$, mas é $\Theta(n * \log n)$. Isso nos dá uma garantia de que, independente da disposição dos dados em um array, a ordenação será eficiente.</p>
+<p>O funcionamento do Merge Sort baseia-se em uma rotina fundamental cujo nome é <em><strong>merge</strong></em>. Primeiro vamos entender como ele funciona e depois vamos ver como sucessivas execuções de merge ordena um array.</p>
+<h1 id="merge">Merge</h1>
+<p>Merge é a rotina que combina dois arrays ordenados em um outro também ordenado. Assim como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/quick-sort/">Quick Sort</a> aplica várias vezes o particionamento para ordenar um array, o Merge Sort também aplica o Merge várias para ordenar um array.</p>
+<p>A ideia é simples e é explicada visualmente no vídeo abaixo.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/7fb8H-MCQ7c" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Na prática, não queremos ficar criando arrays separados para uni-los. Isso custa memória e processamento, pois a cada array criado temos que transferir os elementos do array original para ele. O que fazemos então é organizar os dados no array a ser ordenado de forma que uma parte dele esteja ordenada e outra também. Assim, no Merge Sort não fazemos o merge de dois arrays, mas fazemos o merge de duas partes ordenadas de um mesmo array. Veja o vídeo abaixo com essa explicação bem detalhada.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/sXddmV3sfjA" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<h2 id="implementação-do-merge">Implementação do Merge</h2>
+<p>O código do método <em><strong>merge</strong></em> está descrito abaixo. Vamos analisar por partes cada detalhe da implementação.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">merge</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> left<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> middle<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        
+        <span style="color:#75715e">// transfere os elementos entre left e right para um array auxiliar.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> helper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+            helper<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> v<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+        <span style="color:#f92672">}</span>
+        
+        
+        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> middle <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span>
+        
+        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> middle <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            
+            <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>helper<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+                v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+                i<span style="color:#f92672">++;</span>
+            <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+                v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
+                j<span style="color:#f92672">++;</span>
+            <span style="color:#f92672">}</span>
+            k<span style="color:#f92672">++;</span>    
+            
+        <span style="color:#f92672">}</span>
+        
+        <span style="color:#75715e">// se a metade inicial não foi toda consumida, faz o append.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> middle<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+            i<span style="color:#f92672">++;</span>
+            k<span style="color:#f92672">++;</span>
+        <span style="color:#f92672">}</span>
+        
+        <span style="color:#75715e">// se a metade final não foi toda consumida, faz o append.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
+            j<span style="color:#f92672">++;</span>
+            k<span style="color:#f92672">++;</span>
+        <span style="color:#f92672">}</span>
+
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Em primeiro lugar, vamos entender a assinatura do método <em><strong>merge</strong></em>. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: <code>left</code> e <code>middle</code> e <code>right</code>, que determinam os limites em que o algoritmo deve agir.</p>
+<p>Se você prestou atenção no vídeo anterior, sabe que a parte do array que é delimitada por <code>left</code> e <code>middle</code> está ordenada e sabe que a parte do array delimitada por <code>middle + 1</code> e <code>right</code> também está ordenada. Veja a figura abaixo que ilustra essa situação. Nosso trabalho é fazer a junção (merge) dessas duas partes em uma sequência ordenada.</p>
+<p><img src="partes.png" alt="partes"></p>
+<p>Para isso, como fazer manipulações em nosso array original, precisamos de um array auxiliar (<code>helper</code>) para guardar o estado. Isso é feito nas três primeiras linhas do método.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#75715e">// transfere os elementos entre left e right para um array auxiliar.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> helper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>v<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">];</span>
+    <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
+        helper<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> v<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+    <span style="color:#f92672">}</span>     
+<span style="color:#f92672">...</span>
+</code></pre></div><p>As próximas linhas definem os valores de <code>i</code>, <code>j</code> e <code>k</code> que, como visto no vídeo, são os índices usados para controle da execução e comparação dos elementos. <code>i</code> marca o início da primeira parte do array, <code>j</code> marca o início da segunda parte do array e <code>k</code> marca a posição em que o menor elemento entre $helper[i]$ e $helper[j]$ deve ser adicionado.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+   <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span>
+   <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> middle <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+   <span style="color:#66d9ef">int</span> k <span style="color:#f92672">=</span> left<span style="color:#f92672">;</span>    
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]$ para adicionar o menor em $v[k]$. Lembre-se: se $helper[i]$ for menor ou igual, <code>v[k] = helper[i]</code> e <code>i</code> e <code>k</code> são incrementados. Caso contrário, <code>v[k] = helper[j]</code> e <code>j</code> e <code>k</code> são incrementados. Isso é feito até que uma das partes tenha sido completamente percorrida, isto é, se <code>i</code> atingir <code>middle</code> ou <code>j</code> atingir <code>right</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> middle <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+            
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>helper<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">])</span> <span style="color:#f92672">{</span>
+            v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+            i<span style="color:#f92672">++;</span>
+        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
+            j<span style="color:#f92672">++;</span>
+        <span style="color:#f92672">}</span>
+        k<span style="color:#f92672">++;</span>    
+            
+    <span style="color:#f92672">}</span>
+<span style="color:#f92672">...</span>
+</code></pre></div><p>Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o <em>append</em> de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">...</span>
+    <span style="color:#75715e">// se a metade inicial não foi toda consumida, faz o append.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> middle<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>i<span style="color:#f92672">];</span>
+        i<span style="color:#f92672">++;</span>
+        k<span style="color:#f92672">++;</span>
+    <span style="color:#f92672">}</span>
+        
+    <span style="color:#75715e">// se a metade final não foi toda consumida, faz o append.
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
+        j<span style="color:#f92672">++;</span>
+        k<span style="color:#f92672">++;</span>
+    <span style="color:#f92672">}</span>
+    <span style="color:#f92672">...</span>
+</code></pre></div><h2 id="o-merge-sort">O Merge Sort</h2>
+<p>Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &ldquo;quebras&rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/ekxvb3Q5hE4" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Como dito, o Merge Sort é um algoritmo de divisão-e-conquista. A parte da conquista nós já cobrimos bem detalhadamente, isto é, sabemos como combinar dois arrays ordenados em um array também ordenado.</p>
+<p>A parte da divisão, na verdade, é bem simples. Basta &ldquo;dividir&rdquo; o array recursivamente na metade até que sobre apenas um elemento. Note que usei aspas em dividir. Isso porque a gente não divide de fato. Não cria dois arrays e transfere todos os elementos. Seria muito custoso. O que a gente faz é usar os índices <code>left</code>, <code>middle</code> e <code>right</code> para controlar as partes do array que o algoritmo deve agir. Vamos ver o código:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">mergeSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> left<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>   
+        
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>left <span style="color:#f92672">&gt;=</span> right<span style="color:#f92672">)</span>
+            <span style="color:#66d9ef">return</span><span style="color:#f92672">;</span>
+        
+        <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
+            
+            <span style="color:#66d9ef">int</span> middle <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>left <span style="color:#f92672">+</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+            mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> middle<span style="color:#f92672">);</span>
+            mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> middle <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>
+    
+            merge<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> middle<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>
+        <span style="color:#f92672">}</span>
+        
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>Em primeiro lugar, vamos analisar a assinatura do método. Os parâmetros são o próprio array a ser ordenado, um índice <code>left</code> e um índice <code>right</code>, que delimita a porção do array que o algoritmo deve analisar. Na primeira chamada, naturalmente, temos que <code>left = 0</code> e <code>right = v.length - 1</code>.</p>
+<p>Seguindo. Na primeira linha do método, temos a condição de parada do algoritmo (left &gt;= right). Isto é, quando a porção do algoritmo a ser analisada possui apenas um elemento, não há mais a necessidade de &ldquo;quebrá-lo&rdquo;.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup></p>
+<p>Caso ainda seja necessário &ldquo;quebrar&rdquo; o array (<code>if left &lt; right</code>), temos essas quatro linhas bem importantes:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">int</span> middle <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>left <span style="color:#f92672">+</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
+    mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> middle<span style="color:#f92672">);</span>
+    mergeSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> middle <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>
+
+    merge<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> middle<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>
+    <span style="color:#f92672">...</span>
+</code></pre></div><p>A primeira define <code>middle</code> como sendo o valor central entre <code>left</code> e <code>right</code>. A segunda e a terceira são chamadas recursivas para a metade da esquerda (de <em><strong>left</strong></em> até <em><strong>middle</strong></em>) e para a metade da direita (de <em><strong>middle + 1</strong></em> até <em><strong>right</strong></em>).</p>
+<p>Por fim, após cada quebra há uma chamada ao método merge, passando os limites a serem considerados (<em><strong>left</strong></em>, <em><strong>middle</strong></em>, <em><strong>right</strong></em>).</p>
+<h2 id="análise-do-tempo-de-execução">Análise do Tempo de Execução</h2>
+<p>Lembra dos passos para determinar o tempo de execução de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">algoritmos recursivos?</a>. O primeiro passo é encontrar a relação de recorrência. O Merge Sort possui duas chamadas recursivas, cada uma reduzindo o problema (tamanho do array) na metade. Ou seja, $2 * T(n / 2)$. Além disso, há também uma chamada ao método Merge, que sabemos ser $O(n)$. Portanto, a relação de recorrência é:</p>
+<center>$T(n) = 2 * T(N / 2) + N$</center>
+<p>Se você ainda não entendeu como chegamos nessa relação de recorrência. Eu gravei um vídeo para ficar mais claro. Veja abaixo:</p>
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+  <iframe src="https://www.youtube.com/embed/mCzer4M_uBE" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" allowfullscreen title="YouTube Video"></iframe>
+</div>
+
+<p>Então precisamos apenas resolver essa relação de recorrência. Aprendemos a fazer isso na aula sobre <a class="external" href="https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/">análise de algoritmos recursivos.</a> Há, inclusive, uma seção exclusiva para o Merge Sort neste material. Leia com atenção e volte aqui sabendo que a relação de recorrência $T(n) = 2 * T(N / 2) + N$, quando resolvida, nos fornece um custo total $n * \log n$.</p>
+<p>Lembra que no início do material eu afirmei que, independente caso (melhor, pior ou médio), o Merge Sort nos garante eficiência $n * \log n$? Por que? Porque as &ldquo;quebras&rdquo; do array sempre ocorrem na metade. Ou seja, independente dos dados, estamos sempre dividindo o array na metade. Portanto, a relação de recorrência é única e, quando resolvida, sempre nos fornece um custo $n * \log n$.</p>
+<blockquote>
+<p>O Merge Sort nos garante eficiência $n * \log n$ para todos os casos.</p>
+</blockquote>
+<h2 id="análise-do-uso-de-memória">Análise do uso de memória</h2>
+<p>Como vimos, o Merge Sort usa um array auxiliar (<em><strong>helper</strong></em>) na ordenação. O tamanho de helper é o mesmo do array origina. Ou seja, do ponto de vista de uso de memória, o Merge Sort é $O(n)$.</p>
+<p>Isso é algo novo para a gente, certo? Este é o primeiro algoritmo de ordenação que estamos estudando que usa memória auxiliar proporcional ao tamanho do problema.</p>
+<blockquote>
+<p>O Merge Sort <em><strong>não</strong></em> é in-place.</p>
+</blockquote>
+<p>Importante lembrar também que a ordenação é estável, pois mantém a ordem dos elementos iguais. Isso porque decidimos que, se o elemento mais à esquerda for menor ou IGUAL ao mais à direita, ele deve ser colocado primeiro no array ordenado.</p>
+<blockquote>
+<p>O Merge Sort é estável.</p>
+</blockquote>
+<hr>
+<h1 id="resumo">Resumo</h1>
+<ul>
+<li>
+<p>Merge Sort é um algoritmo eficiente de ordenação.</p>
+</li>
+<li>
+<p>Independente do caso (melhor, pior ou médio) o Merge Sort sempre será $n * \log n$. Isso ocorre porque a divisão do problema sempre gera dois sub-problemas com a metade do tamanho do problema original ($2 * T (n /2)$).</p>
+</li>
+<li>
+<p>O algoritmo baseia a ordenação em sucessivas execuções de merge, uma rotina que une duas partes ordenadas de um array em uma outra também ordenada.</p>
+</li>
+<li>
+<p>O algoritmo de Merge é $O(n)$.</p>
+</li>
+<li>
+<p>Apesar de estar na mesma classe de complexidade do Quick Sort, o Merge Sorte tende a ser, na prática, um pouco menos eficiente do que o Quick Sort, pois suas constantes são maiores. Contudo, a seu favor, o Merge Sort garante $n * \log n$ para qualquer caso, enquanto o Quick Sort pode ter ordenação $n^2$ no pior caso, embora raro.</p>
+</li>
+<li>
+<p>O Merge Sort não é in-place.</p>
+</li>
+<li>
+<p>O Merge Sort é estável.</p>
+</li>
+</ul>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Certamente eu poderia ter feito <code>if (left &gt;= right)</code> e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/quick-sort/"><i class="fa fa-chevron-circle-left"></i> Ordenação por Comparação: Quick Sort</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/insertion-sort/">Ordenação por Comparação: Insertion Sort <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+

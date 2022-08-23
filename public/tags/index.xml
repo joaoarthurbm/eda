@@ -1,0 +1,14 @@
+
+   <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+     <channel>
+       <title>Tags on Estruturas de Dados e Algoritmos</title>
+       <link>https://joaoarthurbm.github.io/eda/tags/</link>
+       <description>Recent content in Tags on Estruturas de Dados e Algoritmos</description>
+       <generator>Hugo -- gohugo.io</generator>
+       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</copyright>
+       
+           <atom:link href="https://joaoarthurbm.github.io/eda/tags/index.xml" rel="self" type="application/rss+xml" />
+       
+       
+     </channel>
+   </rss>
