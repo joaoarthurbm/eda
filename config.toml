@@ -1,6 +1,6 @@
 baseurl = "https://joaoarthurbm.github.io/eda"
 title = "Estruturas de Dados e Algoritmos"
-copyright = "Copyright &copy; 2019 - João Arthur Brunet"
+copyright = "Copyright &copy; 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação."
 canonifyurls = true
 theme = "kiera"
 themesDir = "themes"
