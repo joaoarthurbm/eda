@@ -33,8 +33,8 @@ Depois de produzir o conteúdo, basta enviar o Pull Request com o arquivo md e o
 ### Set up inicial
 
 <pre>
-git clone https://github.com/joaoarthurbm/eda.git`
-echo "public" >> .gitignore`
+git clone https://github.com/joaoarthurbm/eda.git
+echo "public" >> .gitignore
 git checkout --orphan gh-pages
 git reset --hard
 git commit --allow-empty -m "Initializing gh-pages branch"
