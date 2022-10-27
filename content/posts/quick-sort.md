@@ -168,8 +168,8 @@ O Quick Sort, então, é a execução de consectivos particionamentos. Efetua-se
 public static void quickSort(int[] values, int left, int right) {
 	if (left < right) {
 		int index_pivot = partition(values, left, right);
-		quickSort(v, left, index_pivot - 1);
-		quickSort(v, index_pivot + 1, right);	
+		quickSort(values, left, index_pivot - 1);
+		quickSort(values, index_pivot + 1, right);	
 	}
 }
 ```
