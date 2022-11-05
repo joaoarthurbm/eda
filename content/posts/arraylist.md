@@ -57,7 +57,7 @@ public class ArrayList {
     }
     
     public ArrayList(int capacidade) {
-        this.lista = new int[capacidade];
+        this.lista = new Aluno[capacidade];
         this.tamanho = 0;
     }
 
