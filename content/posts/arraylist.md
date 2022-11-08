@@ -48,7 +48,7 @@ Vamos lá.  Em primeiro lugar, vamos dar uma olhada na definição da classe, se
 ```java
 public class ArrayList {
 
-    private int[] lista;
+    private Aluno[] lista;
     public static final int CAPACIDADE_DEFAULT = 20;
     private int tamanho;
     
@@ -57,7 +57,7 @@ public class ArrayList {
     }
     
     public ArrayList(int capacidade) {
-        this.lista = new int[capacidade];
+        this.lista = new Aluno[capacidade];
         this.tamanho = 0;
     }
 
@@ -161,8 +161,8 @@ Para a análise do método ***add(int index, Aluno aluno)*** temos que levar em 
 
 Há duas formas de se remover um elemento em uma ***ArrayList***: pelo índice e pelo valor.
 
-1. remove(int index)
-2. remove(Aluno aluno)
+1. `Aluno remove(int index)`
+2. `boolean remove(Aluno aluno)`
 
 Ambos precisam rearranjar os elementos para não deixar "buracos" na lista. Chamamos essa rotina de ***shiftParaEsquerda***. A diferença é que o método 2 precisa procurar o elemento antes de realizar o *shift*. Veja o exemplo abaixo para entender o porquê de termos que afastar para a esquerda todos os elementos à frente do removido.
 
