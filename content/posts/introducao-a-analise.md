@@ -290,7 +290,7 @@ Agora, atenção, porque vamos tratar das primitivas do laço mais interno.
  
 * A quantidade de execuções de $c_6$ depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + ...1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a_1+a_n)$, onde $a_1$ e $a_n$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_6$ é executada $({n^2 + n})/{2}$ vezes.
 
-* Como $c_7$ é executada uma vez a menos que $c_6$, então temos que o primeiro termo da PA é $a1 = 1$, $an = n - 1$ e $n = n - 1$. Assim, temos que $c_7$ é executada ${n^2 - n}/{2}$.
+* Como $c_7$ é executada uma vez a menos que $c_6$, então temos que o primeiro termo da PA é $a1 = 1$, $an = n - 1$ e $n = n - 1$. Assim, temos que $c_7$ é executada ${(n^2 - n)}/{2}$.
 
 * $c_8$ é executada a mesma quantidade de vezes que $c_7$.
 
@@ -306,7 +306,7 @@ $f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + $
 
 $c_5 * n + c_6 * (n^2 + n)/{2} + $
 
-$c_7 * {n^2 - n}/{2} + c_8 * {n^2}/{2} + c_{10}$
+$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2}/{2} + c_{10}$
 
 Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
