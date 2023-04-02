@@ -126,7 +126,7 @@ Feito. Array ordenado.
 
 Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + ... (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.
 
-No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Deste maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$
+No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Desta maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$
 
 É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o <a class="external" href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/">Counting Sort</a>.
 
