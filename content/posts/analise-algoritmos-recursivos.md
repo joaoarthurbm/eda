@@ -221,7 +221,7 @@ O algoritmo de busca binária é um algoritmo clássico de identificação da po
 
 ```java
 public int indexOf(int[] v, int n, int ini, int fim) {
-    if (ini < fim) {    
+    if (ini <= fim) {    
         int meio = (ini + fim) / 2;
 
         if (v[meio] == n) return meio;
@@ -243,7 +243,7 @@ $T(n) = T(n/2) + \Theta(1)$.
 Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length
 
 
-* $T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.
+* $T(n/2)$ representa a chamada recursiva em que a entrada é dividida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.
 
 * $+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.
 
