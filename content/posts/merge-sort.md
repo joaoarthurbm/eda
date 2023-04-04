@@ -236,7 +236,7 @@ Importante lembrar também que a ordenação é estável, pois mantém a ordem d
 
 * O algoritmo de Merge é $O(n)$.
 
-* Apesar de estar na mesma classe de complexidade do Quick Sort, o Merge Sorte tende a ser, na prática, um pouco menos eficiente do que o Quick Sort, pois suas constantes são maiores. Contudo, a seu favor, o Merge Sort garante $n * \log n$ para qualquer caso, enquanto o Quick Sort pode ter ordenação $n^2$ no pior caso, embora raro.
+* Apesar de estar na mesma classe de complexidade do Quick Sort, o Merge Sort tende a ser, na prática, um pouco menos eficiente do que o Quick Sort, pois suas constantes são maiores. Contudo, a seu favor, o Merge Sort garante $n * \log n$ para qualquer caso, enquanto o Quick Sort pode ter ordenação $n^2$ no pior caso, embora raro.
 
 * O Merge Sort não é in-place.
 
