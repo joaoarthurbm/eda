@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por davialves02
+{{% quiz test_quiz%}}
+{{< item question="Levando em consideração um algoritmo que possui comandos condicionais, como deve ser calculado seu custo total tendo como base o pior caso?" answers="3" choices="Deve-se calcular a soma total do bloco condicional menos custoso,Deve-se calcular a soma total de todos os bloco condicionais,Deve-se calcular a soma total do bloco condicional mais custoso,Não realiza a soma total de nenhum bloco" >}}
+{{% /quiz %}}
