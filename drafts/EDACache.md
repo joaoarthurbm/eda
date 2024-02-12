@@ -169,9 +169,9 @@ public Pair get(String key) {
 Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast() da classe Fila. Ambos feitos em O(1) através da manipulação dos índices com o operador %, tratando a fila como circular.
 
 
+## Outra política de cache: Least Recently Used (LRU)
 
-
-
+Na seção passada exploramos 
 
 
 
