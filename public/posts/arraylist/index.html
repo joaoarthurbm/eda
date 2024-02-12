@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="The HTML5 Herald" />
-  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.68.3" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
   <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
@@ -178,7 +178,7 @@
 <p>Vamos lá.  Em primeiro lugar, vamos dar uma olhada na definição da classe, seus atributos e construtores:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ArrayList</span> <span style="color:#f92672">{</span>
 
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> lista<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> Aluno<span style="color:#f92672">[]</span> lista<span style="color:#f92672">;</span>
     <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">final</span> <span style="color:#66d9ef">int</span> CAPACIDADE_DEFAULT <span style="color:#f92672">=</span> 20<span style="color:#f92672">;</span>
     <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> tamanho<span style="color:#f92672">;</span>
     
@@ -187,7 +187,7 @@
     <span style="color:#f92672">}</span>
     
     <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">ArrayList</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> capacidade<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lista</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#66d9ef">int</span><span style="color:#f92672">[</span>capacidade<span style="color:#f92672">];</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lista</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Aluno<span style="color:#f92672">[</span>capacidade<span style="color:#f92672">];</span>
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tamanho</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 
@@ -268,8 +268,8 @@
 <h3 id="remoção">Remoção</h3>
 <p>Há duas formas de se remover um elemento em uma <em><strong>ArrayList</strong></em>: pelo índice e pelo valor.</p>
 <ol>
-<li>remove(int index)</li>
-<li>remove(Aluno aluno)</li>
+<li><code>Aluno remove(int index)</code></li>
+<li><code>boolean remove(Aluno aluno)</code></li>
 </ol>
 <p>Ambos precisam rearranjar os elementos para não deixar &ldquo;buracos&rdquo; na lista. Chamamos essa rotina de <em><strong>shiftParaEsquerda</strong></em>. A diferença é que o método 2 precisa procurar o elemento antes de realizar o <em>shift</em>. Veja o exemplo abaixo para entender o porquê de termos que afastar para a esquerda todos os elementos à frente do removido.</p>
 <p>$lista = [9, 2, 1, 8, 24, 3, -7]$, com tamanho = 7.</p>
@@ -350,7 +350,7 @@
     <ul>
         
         <li>
-            <a href="https://joaoarthurbm.github.io/eda/posts/linkedlist/"><i class="fa fa-chevron-circle-left"></i> Listas Ligadas (LinkedList)</a>
+            <a href="https://joaoarthurbm.github.io/eda/posts/fifoarray/"><i class="fa fa-chevron-circle-left"></i> Filas (FIFO) baseadas em Arrays</a>
         </li>
         
         

@@ -28,6 +28,11 @@
   </url>
   
   <url>
+    <loc>https://joaoarthurbm.github.io/eda/</loc>
+    <lastmod>2019-10-30T00:00:00-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/</loc>
     <lastmod>2019-10-30T00:00:00-03:00</lastmod>
   </url>
@@ -40,11 +45,6 @@
   <url>
     <loc>https://joaoarthurbm.github.io/eda/posts/analise-assintotica/</loc>
     <lastmod>2019-10-29T00:00:00-03:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://joaoarthurbm.github.io/eda/</loc>
-    <lastmod>2019-10-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -80,6 +80,11 @@
   <url>
     <loc>https://joaoarthurbm.github.io/eda/posts/arraylist/</loc>
     <lastmod>2019-10-26T00:00:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joaoarthurbm.github.io/eda/posts/fifoarray/</loc>
+    <lastmod>2019-10-25T00:00:00-03:00</lastmod>
   </url>
   
   <url>

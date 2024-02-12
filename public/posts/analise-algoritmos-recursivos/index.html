@@ -7,7 +7,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="The HTML5 Herald" />
-  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.68.3" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
   <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
@@ -458,7 +458,7 @@ button[class*="btn"] {border: 50;}
 <script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
 <div class="quiz" style="display:none" id="relacao_de_recorrencia">
   <script>
-    var choices = " $T(n) = 3 * T(n\/2) \x2b n$, $T(n) = 2 * T(n\/2) \x2b n^2$, $T(n) = T(n\/4) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b n$, $T(n) = 2 * T(n\/2) \x2b 2 * n$".split(",");
+    var choices = " $T(n) = 3 * T(n\/2) \u002b n$, $T(n) = 2 * T(n\/2) \u002b n^2$, $T(n) = T(n\/4) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b n$, $T(n) = 2 * T(n\/2) \u002b 2 * n$".split(",");
     var id = "relacao_de_recorrencia";
     var question = "Qual a relação de recorrência do algoritmo acima?";
     var answers = "2".split(",").map(Number);
@@ -515,7 +515,7 @@ function showQuiz(quizId) {
 <h2 id="exemplo-busca-binária">Exemplo: Busca Binária</h2>
 <p>O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &ldquo;palpitar&rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>    
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;=</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>    
         <span style="color:#66d9ef">int</span> meio <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">+</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
 
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>v<span style="color:#f92672">[</span>meio<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> n<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> meio<span style="color:#f92672">;</span>
@@ -533,7 +533,7 @@ function showQuiz(quizId) {
 <p>Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length</p>
 <ul>
 <li>
-<p>$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>
+<p>$T(n/2)$ representa a chamada recursiva em que a entrada é dividida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>
 </li>
 <li>
 <p>$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.</p>
@@ -811,7 +811,7 @@ button[class*="btn"] {border: 50;}
 <script>
     var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
     var id = "resumo";
-    var question = "A que theta pertence a função $T(n) = 8 * T(n\/2) \x2b 1001*n^2$?";
+    var question = "A que theta pertence a função $T(n) = 8 * T(n\/2) \u002b 1001*n^2$?";
     var answers = "1".split(",").map(Number);
     console.log(answers)
     if (! (id in questions)){
@@ -822,7 +822,7 @@ button[class*="btn"] {border: 50;}
 <script>
     var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(n^2)$,$\\Theta(2^n)$".split(",");
     var id = "resumo";
-    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \x2b 15*n$?";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \u002b 15*n$?";
     var answers = "3".split(",").map(Number);
     console.log(answers)
     if (! (id in questions)){
@@ -833,7 +833,7 @@ button[class*="btn"] {border: 50;}
 <script>
     var choices = "$\\Theta(n^3)$,$\\Theta(n)$,$\\Theta(n * \\log{n})$,$\\Theta(2*n)$,$\\Theta(n^2)$".split(",");
     var id = "resumo";
-    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \x2b n^2$?";
+    var question = "A que theta pertence a função $T(n) = 2 * T(n\/2) \u002b n^2$?";
     var answers = "5".split(",").map(Number);
     console.log(answers)
     if (! (id in questions)){
@@ -844,7 +844,7 @@ button[class*="btn"] {border: 50;}
 <script>
     var choices = "Há duas chamadas recursivas.,Cada uma das 3 chamadas recursivas diminui a entrada em duas unidades.,Cada execução parcial tem custo linear., Cada uma das 3 chamadas recursivas diminui a entrada na metade.,Trata-se da relação de recorrência do merge sort.".split(",");
     var id = "resumo";
-    var question = "Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n\/2) \x2b n^2$";
+    var question = "Marque a alternativa correta para a relação de recorrência $T(n) = 3 * T(n\/2) \u002b n^2$";
     var answers = "4".split(",").map(Number);
     console.log(answers)
     if (! (id in questions)){
@@ -853,7 +853,7 @@ button[class*="btn"] {border: 50;}
     questions[id].push(new Question(question, choices, answers));
 </script>
 <script>
-    var choices = " $T(n) = 7 * T(n\/13) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b n^2$, $T(n) = 2^n * T(n\/2) \x2b n^n$, $T(n) = T(n\/2) \x2b 1$, $T(n) = 2 * T(n\/2) \x2b 10n$".split(",");
+    var choices = " $T(n) = 7 * T(n\/13) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b n^2$, $T(n) = 2^n * T(n\/2) \u002b n^n$, $T(n) = T(n\/2) \u002b 1$, $T(n) = 2 * T(n\/2) \u002b 10n$".split(",");
     var id = "resumo";
     var question = "Qual função abaixo não se adequa ao teorema mestre?";
     var answers = "3".split(",").map(Number);
