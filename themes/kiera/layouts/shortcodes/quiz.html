@@ -1,0 +1,200 @@
+{{ $_hugo_config := `{ "version": 1 }` }}
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+/* botao do quiz bonito */
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+/* Here you can change the button sizes */
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+/* default button style */
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+/* color classes for .btn */
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+/* Gradient buttons */
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+/* Gradient - ugly css is ugly */
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz({{ .Get 0}})">Quiz</button>
+</div>
+
+<script src="{{"js/quiz.js"| relURL}}"></script>
+<div class="quiz" style="display:none" id="{{ .Get 0}}">
+  {{.Inner}}
+  <script>
+    var quiz = new Quiz("{{ .Get 0}}", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>

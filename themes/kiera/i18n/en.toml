@@ -1,0 +1,12 @@
+[categories]
+other = "Categories:"
+
+[readingTime]
+one = "Um minuto de leitura"
+other = "{{.Count}} minutos de leitura"
+
+[readMore]
+other = "Leia mais…"
+
+[draft]
+other = "DRAFT"

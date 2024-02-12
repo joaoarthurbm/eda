@@ -1,0 +1,12 @@
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">{{ .Site.Copyright | markdownify }}</a></h6>
+    </footer>
+</div>
+<script src="{{ "js/scripts.js" | relURL }}"></script>
+{{ if .Site.GoogleAnalytics }}
+{{ template "_internal/google_analytics_async.html" . }}
+{{ end }}
+</body>
+
+</html>

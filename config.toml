@@ -1,0 +1,29 @@
+baseurl = "https://joaoarthurbm.github.io/eda"
+title = "Estruturas de Dados e Algoritmos"
+copyright = "Copyright &copy; 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação."
+canonifyurls = true
+theme = "kiera"
+themesDir = "themes"
+
+paginate = 3
+
+summaryLength = 30
+enableEmoji = true
+pygmentsCodeFences = true
+
+[author]
+    name = "João Arthur Brunet"
+    github = "http://joaoarthurbm.github.io"
+    gitlab = ""
+    linkedin = ""
+    facebook = ""
+    twitter = "joaobrunet"
+    instagram = "joaoarthurbm"
+
+[params]
+    tagline = "João Arthur Brunet <br> Computação @ UFCG"
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
