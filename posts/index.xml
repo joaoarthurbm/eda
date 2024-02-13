@@ -3160,6 +3160,9 @@ $T(n) = (n + k)$.&lt;/p&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Importante&lt;/strong&gt;. Lembre-se que quando você remover o último elemento da fila, ou seja, quando &lt;code&gt;head == tail&lt;/code&gt;, após a remoção você deve atribuir ambos para -1, &lt;code&gt;head&lt;/code&gt; e &lt;code&gt;tail&lt;/code&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
+&lt;p&gt;Eu estou ciente que uso inglês e português misturados no código. Ainda vou resolver essa questão e revisar todo o material, mas há alguns termos que simplesmente não soam bem traduzidos e, muitas vezes, gosto de manter os jargões da área.&lt;/p&gt;
 </description>
        </item>
        
