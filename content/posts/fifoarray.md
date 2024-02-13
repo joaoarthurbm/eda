@@ -25,14 +25,14 @@ Mas se o tamanho original é mantido, como fazer quando novos elementos quiserem
 Para fins didáticos, neste material vamos construir uma fila baseada em arrays que armazena objetos do tipo String. Naturalmente, por ser de propósito geral, as implementações de Fila de Java permitem o armazenamento e manipulação de qualquer objeto.
 
 ```java
-public class Fila {
+public class FIFOArray {
 
     private String[] fila;
     private int head;
     private int tail;
     private int size;
     
-    public ArrayList(int capacidade) {
+    public FIFOArray(int capacidade) {
         this.lista = new String[capacidade];
         this.head = -1;
         this.tail = -1;
