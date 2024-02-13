@@ -209,7 +209,7 @@ Vamos analisar detalhadamente o código do método ***add(int index, int value)*
 ```java
 ...
 public void add(int index, Aluno aluno) {
-    if (index < 0 || index > size)
+    if (index < 0 || index >= size)
         throw new IndexOutOfBoundsException();
         
     Node newNode = new Node(aluno);
