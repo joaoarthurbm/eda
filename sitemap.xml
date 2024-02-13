@@ -8,11 +8,6 @@
   </url>
   
   <url>
-    <loc>https://joaoarthurbm.github.io/eda/laboratorio/</loc>
-    <lastmod>2019-10-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://joaoarthurbm.github.io/eda/objetivos/</loc>
     <lastmod>2019-10-29T00:00:00+00:00</lastmod>
   </url>
@@ -85,6 +80,11 @@
   <url>
     <loc>https://joaoarthurbm.github.io/eda/posts/arraylist/</loc>
     <lastmod>2019-10-26T00:00:00-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://joaoarthurbm.github.io/eda/posts/fifoarray/</loc>
+    <lastmod>2019-10-25T00:00:00-03:00</lastmod>
   </url>
   
   <url>

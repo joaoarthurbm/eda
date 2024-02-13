@@ -86,12 +86,6 @@
         </li>
         
         <li>
-            <a class="" href="https://joaoarthurbm.github.io/eda/laboratorio/">
-                <i class="fa-li fa  fa-lg"></i><span>Laboratório</span>
-            </a>
-        </li>
-        
-        <li>
             <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
                 <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
             </a>
@@ -461,8 +455,8 @@ function showQuiz(quizId) {
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">quickSort</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> values<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> left<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 	<span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>left <span style="color:#f92672">&lt;</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
 		<span style="color:#66d9ef">int</span> index_pivot <span style="color:#f92672">=</span> partition<span style="color:#f92672">(</span>values<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>
-		quickSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> index_pivot <span style="color:#f92672">-</span> 1<span style="color:#f92672">);</span>
-		quickSort<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> index_pivot <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>	
+		quickSort<span style="color:#f92672">(</span>values<span style="color:#f92672">,</span> left<span style="color:#f92672">,</span> index_pivot <span style="color:#f92672">-</span> 1<span style="color:#f92672">);</span>
+		quickSort<span style="color:#f92672">(</span>values<span style="color:#f92672">,</span> index_pivot <span style="color:#f92672">+</span> 1<span style="color:#f92672">,</span> right<span style="color:#f92672">);</span>	
 	<span style="color:#f92672">}</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Vamos analisar a figura abaixo para visualizar a execução do Quick Sort para o mesmo exemplo que estávamos abordando na seção anterior.</p>
@@ -854,7 +848,7 @@ Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o arra
 
 </main>
     <footer>
-    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet</a></h6>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
     </footer>
 </div>
 <script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>

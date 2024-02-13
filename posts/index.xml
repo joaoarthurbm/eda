@@ -5,7 +5,7 @@
        <link>https://joaoarthurbm.github.io/eda/posts/</link>
        <description>Recent content in Posts on Estruturas de Dados e Algoritmos</description>
        <generator>Hugo -- gohugo.io</generator>
-       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet</copyright>
+       <copyright>Copyright &amp;copy; 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</copyright>
        <lastBuildDate>Wed, 30 Oct 2019 00:00:00 -0300</lastBuildDate>
        
            <atom:link href="https://joaoarthurbm.github.io/eda/posts/index.xml" rel="self" type="application/rss+xml" />
@@ -290,7 +290,7 @@ Operações Primitivas
 &lt;p&gt;A quantidade de execuções de $c_6$ depende do laço mais externo, pois $j$ varia de acordo com $i$ ($j = i+1$). Como o laço externo executa $n$ vezes, a quantidade de vezes que $j$ varia é dada por: $n + (n - 1) + (n - 2) + (n - 3) + (n-4) + &amp;hellip;1$. Essa série representa uma Progressão Aritmética finita decrescente com razão 1. A soma de uma PA com essas características é dada por $S = n/2 * (a_1+a_n)$, onde $a_1$ e $a_n$ são o primeiro e o último elemento da sequência, respectivamente. Assim, para $a1=1$ e $an = n$, temos que $c_6$ é executada $({n^2 + n})/{2}$ vezes.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;Como $c_7$ é executada uma vez a menos que $c_6$, então temos que o primeiro termo da PA é $a1 = 1$ e $an = n - 1$. Assim, temos que $c_7$ é executada ${n^2}/{2}$.&lt;/p&gt;
+&lt;p&gt;Como $c_7$ é executada uma vez a menos que $c_6$, então temos que o primeiro termo da PA é $a1 = 1$, $an = n - 1$ e $n = n - 1$. Assim, temos que $c_7$ é executada ${(n^2 - n)}/{2}$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;$c_8$ é executada a mesma quantidade de vezes que $c_7$.&lt;/p&gt;
@@ -306,7 +306,7 @@ Operações Primitivas
 &lt;p&gt;O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:&lt;/p&gt;
 &lt;p&gt;$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + $&lt;/p&gt;
 &lt;p&gt;$c_5 * n + c_6 * (n^2 + n)/{2} + $&lt;/p&gt;
-&lt;p&gt;$c_7 * {n^2}/{2} + c_8 * {n^2}/{2} + c_{10}$&lt;/p&gt;
+&lt;p&gt;$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2}/{2} + c_{10}$&lt;/p&gt;
 &lt;p&gt;Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.&lt;/p&gt;
 &lt;p&gt;É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.&lt;/p&gt;
 &lt;p&gt;No material sobre &lt;a class=&#34;external&#34; href=&#34;http://joaoarthurbm.github.io/eda/posts/analise-assintotica&#34;&gt;Análise Assintótica&lt;/a&gt; vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.&lt;/p&gt;
@@ -1101,7 +1101,7 @@ function showQuiz(quizId) {
 &lt;h2 id=&#34;exemplo-busca-binária&#34;&gt;Exemplo: Busca Binária&lt;/h2&gt;
 &lt;p&gt;O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &amp;ldquo;palpitar&amp;rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;indexOf&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ini&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ini &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ini &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
         &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; meio &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;ini &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;/&lt;/span&gt; 2&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
 
         &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;meio&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; n&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; meio&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
@@ -1119,7 +1119,7 @@ function showQuiz(quizId) {
 &lt;p&gt;Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.&lt;/p&gt;
+&lt;p&gt;$T(n/2)$ representa a chamada recursiva em que a entrada é dividida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.&lt;/p&gt;
@@ -1678,7 +1678,7 @@ function showQuiz(quizId) {
 &lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 5, 15, 20, 90]&lt;/p&gt;
 &lt;p&gt;Feito. Array ordenado.&lt;/p&gt;
 &lt;p&gt;Note que o tempo de execução é dado pela soma dos passos de cada iteração. Essa soma pode ser representada por $1 + 2 + 3 + &amp;hellip; (n - 1)$, ou seja, uma Progressão Aritmética Finita (PA) com $a_1 = 1$ e $a_n = (n - 1)$ e razão $r=1$. A soma dos termos de uma PA é dada por: $(a_1+a_n)*n/2$. Então, temos que o tempo de execução do algoritmo é dado por $(1 + (n - 1)) * n/2 = (n^2)/2$. Aplicando as diretrizes de simplificação, o Insertion Sort é $\Theta(n^2)$.&lt;/p&gt;
-&lt;p&gt;No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Deste maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$&lt;/p&gt;
+&lt;p&gt;No melhor caso, este algoritmo é $O(n)$. Isto ocorre quando o array já está ordenado. Desta maneira, a inserção ordenada de cada elemento tem custo $O(1)$, pois todos já estão em suas devidas posições. Como a inserção ordenada é executada $n$ vezes, o custo total é $O(n)$&lt;/p&gt;
 &lt;p&gt;É importante destacar que o Insertion Sort não é considerado um algoritmo eficiente para grandes entradas. Há alternativas $O(n*\log n)$, como Quick Sort e Merge Sort, além de alternativas lineares como o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/&#34;&gt;Counting Sort&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;É também importante traçar o paralelo entre o &lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/selection-sort/&#34;&gt;Selection Sort&lt;/a&gt; e o Insertion Sort. O Selection efetua menos trocas do que o Insertion, pois há uma troca apenas por iteração, ou seja, no total o Selection Sort efetua $n$ trocas. Já o insertion sort efetua ao menos uma troca por iteração, pois deve efetuar trocas para afastar cada elemento avaliado.&lt;/p&gt;
 &lt;p&gt;Por outro lado, o Insertion Sort efetua menos comparações do que o Selection Sort, pois nem sempre o elemento a ser inserido de forma ordenada deve ir até o final. Na verdade, isso só acontece no pior dos casos, em que o array está ordenado em ordem reversa. Já o Selection Sort precisa comparar todos os elementos restante cada vez para determinar quem é o menor deles.&lt;/p&gt;
@@ -1914,7 +1914,7 @@ function showQuiz(quizId) {
 &lt;hr&gt;
 &lt;ol&gt;
 &lt;li id=&#34;fn:1&#34; role=&#34;doc-endnote&#34;&gt;
-&lt;p&gt;Certamente eu poderia ter feito &lt;code&gt;if (left &amp;gt;= right)&lt;/code&gt; e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Certamente eu poderia ter feito &lt;code&gt;if (left &amp;lt; right)&lt;/code&gt; e economizado algumas linhas de código descartando o else. Contudo, eu prefiro dessa maneira para fins didáticos. &lt;a href=&#34;#fnref:1&#34; class=&#34;footnote-backref&#34; role=&#34;doc-backlink&#34;&gt;&amp;#x21a9;&amp;#xfe0e;&lt;/a&gt;&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/section&gt;
@@ -2231,8 +2231,8 @@ function showQuiz(quizId) {
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;quickSort&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;left &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 		&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; partition&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
-		quickSort&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
-		quickSort&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;	
+		quickSort&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+		quickSort&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; index_pivot &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;	
 	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Vamos analisar a figura abaixo para visualizar a execução do Quick Sort para o mesmo exemplo que estávamos abordando na seção anterior.&lt;/p&gt;
@@ -2847,7 +2847,7 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;p&gt;Vamos lá.  Em primeiro lugar, vamos dar uma olhada na definição da classe, seus atributos e construtores:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ArrayList&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
 
-    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; lista&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; Aluno&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; lista&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;final&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; CAPACIDADE_DEFAULT &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 20&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
     &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; tamanho&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
     
@@ -2856,7 +2856,7 @@ $T(n) = (n + k)$.&lt;/p&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     
     &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ArrayList&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; capacidade&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lista&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;capacidade&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lista&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; Aluno&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;capacidade&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
         &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tamanho&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 
@@ -2937,8 +2937,8 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;h3 id=&#34;remoção&#34;&gt;Remoção&lt;/h3&gt;
 &lt;p&gt;Há duas formas de se remover um elemento em uma &lt;em&gt;&lt;strong&gt;ArrayList&lt;/strong&gt;&lt;/em&gt;: pelo índice e pelo valor.&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;remove(int index)&lt;/li&gt;
-&lt;li&gt;remove(Aluno aluno)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Aluno remove(int index)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;boolean remove(Aluno aluno)&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;p&gt;Ambos precisam rearranjar os elementos para não deixar &amp;ldquo;buracos&amp;rdquo; na lista. Chamamos essa rotina de &lt;em&gt;&lt;strong&gt;shiftParaEsquerda&lt;/strong&gt;&lt;/em&gt;. A diferença é que o método 2 precisa procurar o elemento antes de realizar o &lt;em&gt;shift&lt;/em&gt;. Veja o exemplo abaixo para entender o porquê de termos que afastar para a esquerda todos os elementos à frente do removido.&lt;/p&gt;
 &lt;p&gt;$lista = [9, 2, 1, 8, 24, 3, -7]$, com tamanho = 7.&lt;/p&gt;
@@ -3010,6 +3010,156 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;notas&#34;&gt;Notas&lt;/h1&gt;
 &lt;p&gt;Por motivos de simplificação, a classe &lt;em&gt;&lt;strong&gt;ArrayList&lt;/strong&gt;&lt;/em&gt; que implementamos neste material implementa uma lista baseada em arrays para manipular objetos do tipo &lt;em&gt;&lt;strong&gt;Aluno&lt;/strong&gt;&lt;/em&gt;. Naturalmente, por ser de propósito geral, a implementação de Java de &lt;em&gt;&lt;strong&gt;ArrayList&lt;/strong&gt;&lt;/em&gt; permite o armazenamento e manipulação de qualquer objeto.&lt;/p&gt;
+</description>
+       </item>
+       
+       <item>
+         <title>Filas (FIFO) baseadas em Arrays</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/fifoarray/</link>
+         <pubDate>Fri, 25 Oct 2019 00:00:00 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/fifoarray/</guid>
+         <description>&lt;hr&gt;
+&lt;p&gt;Neste material nós vamos estudar uma forma de implementar uma FILA utilizando arrays.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Disclaimer.&lt;/strong&gt; Este material tem muita interseção com o material de &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/arraylist/&#34;&gt;ArrayList&lt;/a&gt;, que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos &lt;em&gt;resize&lt;/em&gt; para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array e sobrescrever o elemento mais antigo (First In First Out) quando chegar um novo elemento. Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/arraylist/&#34;&gt;ArrayList&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Eu também tomei essa decisão de sobrescrever o mais antigo ao invés de aumentar a capacidade porque vou abordar o uso de filas em cache também. E lá o comportamento é esse. Manter o tamanho fixo e substituir os mais antigos à medida que novos objetos chegam.&lt;/p&gt;
+&lt;p&gt;Array é a primeira estrutura de dados que abordamos na disciplina. Há razões para essa escolha. Em primeiro lugar, arrays estão presentes na biblioteca padrão de grande parte das linguagens de programação. Além disso, também são estruturas simples e eficientes. Por último, outras estruturas mais complexas baseiam sua implementação em arrays, como Tabelas Hash, ArrayList, entre outras.&lt;/p&gt;
+&lt;p&gt;Mas se o tamanho original é mantido, como fazer quando novos elementos quiserem entrar na fila? Aí é que está! Há duas decisões a serem tomadas: só entra um novo elemento quando alguém sair da fila ou não entra mais (lança uma exceção, por exemplo). Nós vamos lidar com a primeira opção, isto é, precisamos ter uma política de remoção bem definida quando um novo elemento chegar. Essa política é bem clara em uma fila: o primeiro elemento a entrar é o primeiro a sair (FIFO &amp;ndash; First In First Out).&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Fisrt In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;organização-interna-atributos-e-construtores&#34;&gt;Organização interna: atributos e construtores&lt;/h2&gt;
+&lt;p&gt;Para fins didáticos, neste material vamos construir uma fila baseada em arrays que armazena objetos do tipo String. Naturalmente, por ser de propósito geral, as implementações de Fila de Java permitem o armazenamento e manipulação de qualquer objeto.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Fila&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; String&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; fila&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; head&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; tail&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;ArrayList&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; capacidade&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;lista&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; String&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;capacidade&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Em primeiro lugar, é importante destacar o uso de dois atributos: &lt;code&gt;head&lt;/code&gt; e &lt;code&gt;tail&lt;/code&gt;. Esses atributos representam os índices do array que delimitam os valores que estão na fila. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa fila. Nossa fila, ao ser criada, está entre head e tail, inclusos. Nesse caso, como eles estão em -1 na inicialização, nossa fila está vazia.&lt;/p&gt;
+&lt;h2 id=&#34;operações&#34;&gt;Operações&lt;/h2&gt;
+&lt;p&gt;Temos duas operaçõs principais em Fila: &lt;code&gt;addLast(String ele)&lt;/code&gt; e &lt;code&gt;removeFirst()&lt;/code&gt;. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso.&lt;/p&gt;
+&lt;p&gt;Direto ao ponto. Vamos entender o funcionamento de uma fila com 3 posições simulando várias operações de &lt;code&gt;addLast(String element)&lt;/code&gt; e &lt;code&gt;removeFirst()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Inicialmente temos a fila vazia:&lt;/p&gt;
+&lt;p&gt;$fila = [null, null, null]$; head = -1, tail = -1;&lt;/p&gt;
+&lt;p&gt;Adicionando &amp;ldquo;a&amp;rdquo; no fim da fila (addLast):&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;a&amp;rdquo;, null, null]$; head = 0, tail = 0;&lt;/p&gt;
+&lt;p&gt;Neste momento, o início (head) e o fim (tail) da fila estão apontando para o mesmo índice do array, isto é, 0.&lt;/p&gt;
+&lt;p&gt;Adicionando &amp;ldquo;b&amp;rdquo; no fim da fila (addLast):&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, null]$; head = 0, tail = 1;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;b&amp;rdquo; foi adicionado no fim da fila. Ou seja, head continua no índice 0, mas tail andou uma posição e agora está no índice 1. &amp;ldquo;a&amp;rdquo; está no início da fila e &amp;ldquo;b&amp;rdquo; está no fim da fila.&lt;/p&gt;
+&lt;p&gt;Adicionando &amp;ldquo;c&amp;rdquo; no fim da fila (addLast):&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$; head = 0, tail = 2;&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;c&amp;rdquo; foi adicionado no fim da fila. Ou seja, head continua no índice 0, mas tail andou uma posição e agora está no índice 2. &amp;ldquo;a&amp;rdquo; está no início da fila e &amp;ldquo;c&amp;rdquo; está no fim da fila.&lt;/p&gt;
+&lt;p&gt;Suponha que agora a gente queira remover alguém da lista. Como já estabelecemos, a política é bem clara: vamos remover o primeiro que entrou na fila, ou seja, o elemento &amp;ldquo;a&amp;rdquo;.&lt;/p&gt;
+&lt;h3 id=&#34;remoção-com-shift&#34;&gt;Remoção com shift&lt;/h3&gt;
+&lt;p&gt;Nossa primeira abordagem será fazer o &lt;strong&gt;shiftLeft&lt;/strong&gt; de todo mundo e diminuir o índice de tail, pois a fila diminuiu e liberou um espaço. Então, depois de um removeFirst, a fila fica nesse estado:&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$; head = 0, tail = 1;&lt;/p&gt;
+&lt;p&gt;Preste bem atenção! A fila não é &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;. A fila é &amp;ldquo;b&amp;rdquo; e &amp;ldquo;c&amp;rdquo;, pois quem define os limites da fila são head e tail e eles estão em 0 e 1 respectivamente. O último &amp;ldquo;c&amp;rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído &lt;code&gt;null&lt;/code&gt; para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.&lt;/p&gt;
+&lt;p&gt;Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/arraylist/&#34;&gt;ArrayList&lt;/a&gt;. Mas vou deixar o código aqui para consulta:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// importante lembrar de diminuir tail depois da chamada deste
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// método. Este controle é feito no método removeFirst()
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;shiftLeft&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; index&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; index&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;++)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;No caso da fila, sempre invocamos o método shiftLeft passando o índice 0, pois sempre removemos do início da fila.&lt;/p&gt;
+&lt;p&gt;Vamos fazer mais uma remoção da fila (removeFirst). A fila ficaria nesse estado:&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = 0, tail = 0;&lt;/p&gt;
+&lt;p&gt;Preste bem atenção! Na nossa fila agora há apenas um elemento, o &amp;ldquo;c&amp;rdquo;, pois head e tail estão apontando para o índice 0. Os &amp;ldquo;c&amp;quot;s adicionais no array estão fora dos limites de head e tail e, portanto, não fazem parte da fila.&lt;/p&gt;
+&lt;p&gt;Se invocarmos o método removeFirst mais uma vez, a fila fica vazia, isto é, head e tail assumem valor -1;&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = -1, tail = -1;&lt;/p&gt;
+&lt;h4 id=&#34;análise-de-eficência&#34;&gt;Análise de eficência&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;addLast&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Como vimos, addLast é simples. Basta aumentar tail (tail =+ 1). Isto é, trata-se de uma operação constante $O(1)$.&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;removeFirst&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Nossa estratégia de remoção foi fazer o shift de todo mundo para a esquerda. Esse algoritmo, naturalmente, é O(n), pois precisamos percorrer toda a fila atribuindo a v[i] o valor de v[i+1], com ir partindo de 0 até &lt;code&gt;tail - 1&lt;/code&gt;.&lt;/p&gt;
+&lt;h3 id=&#34;remoção-em-o1-mantendo-uma-fila-circular&#34;&gt;Remoção em O(1), mantendo uma fila circular&lt;/h3&gt;
+&lt;p&gt;E seu eu disser que dá para remover o início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende.&lt;/p&gt;
+&lt;p&gt;Em linhas gerais, remover o início da fila é apenas fazer &lt;code&gt;head = head + 1&lt;/code&gt;, certo? Ou seja, em O(1). Mas e porque é complicado? Porque fazendo isso, nós liberamos uma posição anterior a &lt;code&gt;head&lt;/code&gt; que pode ser usada para uma nova adição, mas &lt;code&gt;tail&lt;/code&gt; está no final do array. Como fazer para &lt;code&gt;tail&lt;/code&gt; assumir essa nova posição quando for adicionado um elemento? Utilizando a operação de resto da divisão pelo tamanho da fila (&lt;code&gt;%&lt;/code&gt;). Vamos montar um exemplo para ficar claro.&lt;/p&gt;
+&lt;p&gt;Vamos novamente agora encher a fila, adicionando 3 elementos, &amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo; e &amp;ldquo;c&amp;rdquo;. Então, vamos ter o seguinte estado:&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = 0, tail = 2;&lt;/p&gt;
+&lt;p&gt;Agora, suponha que eu queira remover o início da fila. Basta fazer &lt;code&gt;head = head + 1&lt;/code&gt;. Temos uma fila com esse estado após a execução de removeFirst():&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = 1, tail = 2;&lt;/p&gt;
+&lt;p&gt;Perceba que a fila vai do índice 1 até o índice 2, valores de &lt;code&gt;head&lt;/code&gt; e &lt;code&gt;tail&lt;/code&gt;. Ou seja, nossa fila é &amp;ldquo;b&amp;rdquo; e &amp;ldquo;c&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição &lt;code&gt;(tail + 1) % fila.length&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Ou seja, na posição à frente de tail. Se essa posição for acima do limite do array, que é o nosso caso, ela passa a ser contada do início do array por causa da operação &lt;code&gt;%&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;É importante que você entenda isso: &lt;code&gt;(tail+1) % capacidade&lt;/code&gt; sempre vai cair dentro dos limites do array por causa da operação de resto de divisão. No nosso caso, o novo elemento, &amp;ldquo;d&amp;rdquo;, seria adicionado na posição (2 + 1) % 3, que é 0. A fila ficaria:&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;d&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = 1, tail = 0;&lt;/p&gt;
+&lt;p&gt;Note que &lt;code&gt;head&lt;/code&gt; está no índice 1 (elemento &amp;ldquo;a&amp;rdquo;) e &lt;code&gt;tail&lt;/code&gt; está no índice 0 (elemento &amp;ldquo;d&amp;rdquo;). Nossa fila é &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo; e &amp;ldquo;d&amp;rdquo;, nessa ordem.&lt;/p&gt;
+&lt;p&gt;Vamos agora invocar o método removeFirst, nesse caso, &lt;code&gt;head&lt;/code&gt; iria para &lt;code&gt;(head + 1)%fila.length&lt;/code&gt;, ou seja, 2. A fila ficaria:&lt;/p&gt;
+&lt;p&gt;$fila = [&amp;ldquo;d&amp;rdquo;, &amp;ldquo;b&amp;rdquo;, &amp;ldquo;c&amp;rdquo;]$, head = 2, tail = 0;&lt;/p&gt;
+&lt;p&gt;Nossa fila seria &amp;ldquo;c&amp;rdquo; e &amp;ldquo;d&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Perceba que estamos tratando o array de forma circular. Dessa maneira, não precisamos fazer shift, apenas termos sempre cuidado de usar o &lt;code&gt;% fila.length&lt;/code&gt; nas operações.&lt;/p&gt;
+&lt;h3 id=&#34;implementação&#34;&gt;Implementação&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;addLast&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;String element&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;// toda adição deve aumentar o número de elementos, exceto
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// se já estiver cheio.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(!&lt;/span&gt;isFull&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    
+        &lt;span style=&#34;color:#75715e&#34;&gt;// na primeira adição, ambos vão para o índice 0.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;isEmpty&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; 0&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se já tiver cheio, precisamos andar com head para liberar o espaço;
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// e não acrescentamos em size porque não houve aumento de elementos.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;isFull&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1 &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// incrementa tail e adiciona o novo elemento
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;tail&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; element&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; String &lt;span style=&#34;color:#a6e22e&#34;&gt;removeFirst&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se estiver vazia, não há elemento
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;isEmpty&lt;span style=&#34;color:#f92672&#34;&gt;())&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; NoSuchElementException&lt;span style=&#34;color:#f92672&#34;&gt;();&lt;/span&gt;
+        
+        &lt;span style=&#34;color:#75715e&#34;&gt;// recupera o elemento no início da fila
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        String value &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se for o único elemento, atribui -1 para ambos
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;fila&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;size&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;   
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; value&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; 
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;análise-de-eficência-1&#34;&gt;Análise de eficência&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;addLast&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Como vimos, addLast é simples. Há algumas verificações O(1) e o principal é  tail (tail = (tail + 1) % fila.length). Isto é, trata-se de uma operação constante $O(1)$.&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;removeFirst&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Nossa estratégia de remoção também é O(1) porque envolve apenas algumas verificações O(1) e andar com head para frente, sem precisar fazer o shift: &lt;code&gt;head = (head + 1) % fila.length&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;algumas-verificações-importantes&#34;&gt;Algumas verificações importantes&lt;/h2&gt;
+&lt;p&gt;Como sei se uma fila está cheia? Se depois de &lt;code&gt;tail&lt;/code&gt; tem o &lt;code&gt;head&lt;/code&gt;, certo? Então isFull fica:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isFull&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;length&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Determinar se a fila está vazia é simples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;boolean&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;isEmpty&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;head&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1 &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;tail&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Importante&lt;/strong&gt;. Lembre-se que quando você remover o último elemento da fila, ou seja, quando &lt;code&gt;head == tail&lt;/code&gt;, após a remoção você deve atribuir ambos para -1, &lt;code&gt;head&lt;/code&gt; e &lt;code&gt;tail&lt;/code&gt;.&lt;/p&gt;
 </description>
        </item>
        

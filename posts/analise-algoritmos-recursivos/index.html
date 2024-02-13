@@ -86,12 +86,6 @@
         </li>
         
         <li>
-            <a class="" href="https://joaoarthurbm.github.io/eda/laboratorio/">
-                <i class="fa-li fa  fa-lg"></i><span>Laboratório</span>
-            </a>
-        </li>
-        
-        <li>
             <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
                 <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
             </a>
@@ -521,7 +515,7 @@ function showQuiz(quizId) {
 <h2 id="exemplo-busca-binária">Exemplo: Busca Binária</h2>
 <p>O algoritmo de busca binária é um algoritmo clássico de identificação da posição de um determinado elemento em uma sequência ordenada. A ideia é &ldquo;palpitar&rdquo; sempre a posição central. Caso o palpite seja maior do que o valor sendo procurado, o algoritmo descarta a metade à frente do palpite e passa a procurar na metade que contém os valores menores do que o palpite. Dessa maneira, a cada passo da recursão, são descartados metade dos elementos restantes. Esse procedimento torna a busca binária muito eficiente, quando comparada com a busca linear, que descarta apenas um elemento a cada iteração.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">indexOf</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> n<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>    
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">&lt;=</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>    
         <span style="color:#66d9ef">int</span> meio <span style="color:#f92672">=</span> <span style="color:#f92672">(</span>ini <span style="color:#f92672">+</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">/</span> 2<span style="color:#f92672">;</span>
 
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>v<span style="color:#f92672">[</span>meio<span style="color:#f92672">]</span> <span style="color:#f92672">==</span> n<span style="color:#f92672">)</span> <span style="color:#66d9ef">return</span> meio<span style="color:#f92672">;</span>
@@ -539,7 +533,7 @@ function showQuiz(quizId) {
 <p>Simplificando, $T(n) =  T(n/2) + 1$, onde n = v.length</p>
 <ul>
 <li>
-<p>$T(n/2)$ representa a chamada recursiva em que a entrada é divida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>
+<p>$T(n/2)$ representa a chamada recursiva em que a entrada é dividida pela metade. Importante notar aqui que, embora haja duas chamadas recursivas no código, apenas uma é executada a cada passo. Por isso temos $T(n/2)$ e não $2 * T(n/2)$.</p>
 </li>
 <li>
 <p>$+ 1$ representa o custo da operação de cálculo do meio e da avaliação das expressões booleanas.</p>
@@ -917,7 +911,7 @@ function showQuiz(quizId) {
 
 </main>
     <footer>
-    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet</a></h6>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
     </footer>
 </div>
 <script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
