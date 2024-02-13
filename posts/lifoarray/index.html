@@ -153,7 +153,7 @@
 
     <hr>
 <p>Neste material nós vamos estudar uma forma de implementar uma Pilha utilizando arrays.</p>
-<p>O que define uma pilha é a sua política de acesso. Toda adição (<em><strong>push/addFirst</strong></em>) é feita no topo da pilha e toda remoção é feita também no topo da pilha (<em><strong>pop/removeFirst</strong></em>).</p>
+<p>O que define uma pilha é a sua política de acesso. Toda adição (<em><strong>push/addLast</strong></em>) é feita no topo da pilha e toda remoção é feita também no topo da pilha (<em><strong>pop/removeLast</strong></em>).</p>
 <blockquote>
 <p>Last In First Out (LIFO): O último elemento a entrar na pilha é o primeiro a sair. Para implementar essa política usamos duas operações: <em><strong>push</strong></em>, que sempre adiciona no topo da pilha e <em><strong>pop</strong></em>, que sempre remove do topo.</p>
 </blockquote>
@@ -175,7 +175,7 @@
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Em primeiro lugar, é importante destacar o uso do atributo <code>topo</code>. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.</p>
 <h2 id="operações">Operações</h2>
-<p>Temos duas operaçõs principais em Pilha: <code>push(String ele)</code> e <code>pop()</code>. Essas operações também podem ser nomeadas de addFirst() e removeFirst(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.</p>
+<p>Temos duas operaçõs principais em Pilha: <code>push(String ele)</code> e <code>pop()</code>. Essas operações também podem ser nomeadas de addLast() e removeLast(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.</p>
 <p>Direto ao ponto. Vamos entender o funcionamento de uma pilha com 3 posições simulando várias operações de <code>push(String element)</code> e <code>pop()</code>.</p>
 <h3 id="push">push</h3>
 <p>Inicialmente temos a pilha vazia:</p>

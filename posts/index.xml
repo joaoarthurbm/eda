@@ -3557,7 +3557,7 @@ IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
          <guid>https://joaoarthurbm.github.io/eda/posts/lifoarray/</guid>
          <description>&lt;hr&gt;
 &lt;p&gt;Neste material nós vamos estudar uma forma de implementar uma Pilha utilizando arrays.&lt;/p&gt;
-&lt;p&gt;O que define uma pilha é a sua política de acesso. Toda adição (&lt;em&gt;&lt;strong&gt;push/addFirst&lt;/strong&gt;&lt;/em&gt;) é feita no topo da pilha e toda remoção é feita também no topo da pilha (&lt;em&gt;&lt;strong&gt;pop/removeFirst&lt;/strong&gt;&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;O que define uma pilha é a sua política de acesso. Toda adição (&lt;em&gt;&lt;strong&gt;push/addLast&lt;/strong&gt;&lt;/em&gt;) é feita no topo da pilha e toda remoção é feita também no topo da pilha (&lt;em&gt;&lt;strong&gt;pop/removeLast&lt;/strong&gt;&lt;/em&gt;).&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Last In First Out (LIFO): O último elemento a entrar na pilha é o primeiro a sair. Para implementar essa política usamos duas operações: &lt;em&gt;&lt;strong&gt;push&lt;/strong&gt;&lt;/em&gt;, que sempre adiciona no topo da pilha e &lt;em&gt;&lt;strong&gt;pop&lt;/strong&gt;&lt;/em&gt;, que sempre remove do topo.&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -3579,7 +3579,7 @@ IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Em primeiro lugar, é importante destacar o uso do atributo &lt;code&gt;topo&lt;/code&gt;. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.&lt;/p&gt;
 &lt;h2 id=&#34;operações&#34;&gt;Operações&lt;/h2&gt;
-&lt;p&gt;Temos duas operaçõs principais em Pilha: &lt;code&gt;push(String ele)&lt;/code&gt; e &lt;code&gt;pop()&lt;/code&gt;. Essas operações também podem ser nomeadas de addFirst() e removeFirst(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.&lt;/p&gt;
+&lt;p&gt;Temos duas operaçõs principais em Pilha: &lt;code&gt;push(String ele)&lt;/code&gt; e &lt;code&gt;pop()&lt;/code&gt;. Essas operações também podem ser nomeadas de addLast() e removeLast(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.&lt;/p&gt;
 &lt;p&gt;Direto ao ponto. Vamos entender o funcionamento de uma pilha com 3 posições simulando várias operações de &lt;code&gt;push(String element)&lt;/code&gt; e &lt;code&gt;pop()&lt;/code&gt;.&lt;/p&gt;
 &lt;h3 id=&#34;push&#34;&gt;push&lt;/h3&gt;
 &lt;p&gt;Inicialmente temos a pilha vazia:&lt;/p&gt;
