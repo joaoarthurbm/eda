@@ -130,7 +130,7 @@
 
         
 
-        <li>10 minutos de leitura</li>
+        <li>7 minutos de leitura</li>
 
 
         
@@ -162,165 +162,100 @@
 <p>Você já esteve programando e se deparou com o erro StackOverflow? Pois é, isso acontece muito, por exemplo, quando desenvolvemos algoritmos recursivos e não especificamos uma condição de parada. Java utiliza uma pilha para controlar a execução de algoritmos recursivos. Como não há condição de parada, essa pilha vai sendo preenchida indefinidamente. Quando atinge o limite que java estabeleceu, ou seja, quando a pilha está cheia e não cabe mais elementos, Java lança a exceção <em><strong>java.lang.StackOverflowError</strong></em>.</p>
 <h2 id="organização-interna-atributos-e-construtor">Organização interna: atributos e construtor</h2>
 <p>Para fins didáticos, neste material vamos construir uma pilha baseada em um array que armazena objetos do tipo String. Naturalmente, por ser de propósito geral, as implementações de Pilha de Java permitem o armazenamento e manipulação de qualquer objeto.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FIFOArray</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Pilha</span> <span style="color:#f92672">{</span>
 
-    <span style="color:#66d9ef">private</span> String<span style="color:#f92672">[]</span> fila<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> head<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> tail<span style="color:#f92672">;</span>
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> size<span style="color:#f92672">;</span>
-    
-    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">FIFOArray</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> capacidade<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">lista</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span>capacidade<span style="color:#f92672">];</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">int</span> topo<span style="color:#f92672">;</span>
+    <span style="color:#66d9ef">private</span> String<span style="color:#f92672">[]</span> pilha<span style="color:#f92672">;</span>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#a6e22e">Pilha</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> capacidade<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pilha</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> String<span style="color:#f92672">[</span>capacidade<span style="color:#f92672">];</span>
     <span style="color:#f92672">}</span>
     <span style="color:#f92672">...</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Em primeiro lugar, é importante destacar o uso de dois atributos: <code>head</code> e <code>tail</code>. Esses atributos representam os índices do array que delimitam os valores que estão na fila. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa fila. Nossa fila, ao ser criada, está entre <em><strong>head</strong></em> e <em><strong>tail</strong></em>, inclusos. Nesse caso, como eles estão em -1 na inicialização, nossa fila está vazia.</p>
+</code></pre></div><p>Em primeiro lugar, é importante destacar o uso do atributo <code>topo</code>. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.</p>
 <h2 id="operações">Operações</h2>
-<p>Temos duas operaçõs principais em Fila: <code>addLast(String ele)</code> e <code>removeFirst()</code>. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso.</p>
-<p>Direto ao ponto. Vamos entender o funcionamento de uma fila com 3 posições simulando várias operações de <code>addLast(String element)</code> e <code>removeFirst()</code>.</p>
-<p>Inicialmente temos a fila vazia:</p>
-<p>fila = [<font color="red">null, null, null</font>]; <code>head</code> = -1, <code>tail</code> = -1;</p>
-<p>Adicionando &ldquo;a&rdquo; no fim da fila (addLast):</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;</font>, <font color="red">null, null</font>]; <code>head</code> = 0, <code>tail</code> = 0;</p>
-<p>Neste momento, o início (<em><strong>head</strong></em>) e o fim (<em><strong>tail</strong></em>) da fila estão apontando para o mesmo índice do array, isto é, 0. Então, nossa fila está destacada em azul. Tem apenas o elemento &ldquo;a&rdquo;.</p>
-<p>Adicionando &ldquo;b&rdquo; no fim da fila (addLast):</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;</font>, <font color="red">null</font>]; <code>head</code> = 0, <code>tail</code> = 1;</p>
-<p>&ldquo;b&rdquo; foi adicionado no fim da fila. Ou seja, <em><strong>head</strong></em> continua no índice 0, mas <em><strong>tail</strong></em> andou uma posição e agora está no índice 1. &ldquo;a&rdquo; está no início da fila e &ldquo;b&rdquo; está no fim da fila.</p>
-<p>Adicionando &ldquo;c&rdquo; no fim da fila (addLast):</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 2;</p>
-<p>&ldquo;c&rdquo; foi adicionado no fim da fila. Ou seja, <em><strong>head</strong></em> continua no índice 0, mas <em><strong>tail</strong></em> andou uma posição e agora está no índice 2. &ldquo;a&rdquo; está no início da fila e &ldquo;c&rdquo; está no fim da fila.</p>
-<p>Já vimos como funciona a adição. Suponha que agora a gente queira remover alguém da fila. Como já estabelecemos, a política é bem clara: vamos remover o primeiro que entrou na fila, ou seja, o elemento &ldquo;a&rdquo;.</p>
-<h3 id="remoção-com-shift">Remoção com shift</h3>
-<p>Nossa primeira abordagem será fazer o <strong>shiftLeft</strong> de todo mundo e diminuir o índice de tail, pois a fila diminuiu e liberou um espaço no final. Então, depois de um removeFirst, a fila fica nesse estado:</p>
-<p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 1;</p>
-<p>Preste bem atenção! A fila não é &ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;c&rdquo;. A fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;. A posição que está em vermelhor está fora dos limites da fila, pois quem define os limites da fila são <em><strong>head</strong></em> e <em><strong>tail</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.</p>
-<p>Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre <em><strong>head</strong></em> e <em><strong>tail</strong></em>, incluindo os dois.</p>
-<p>Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de <a href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>. Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substiuido pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// importante lembrar de diminuir tail depois da chamada deste
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">// método. Este controle é feito no método removeFirst()
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shiftLeft</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#66d9ef">for</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> index<span style="color:#f92672">;</span> i <span style="color:#f92672">&lt;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span> i<span style="color:#f92672">++)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">[</span>i<span style="color:#f92672">+</span>1<span style="color:#f92672">];</span>
-        <span style="color:#f92672">}</span>
+<p>Temos duas operaçõs principais em Pilha: <code>push(String ele)</code> e <code>pop()</code>. Essas operações também podem ser nomeadas de addFirst() e removeFirst(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.</p>
+<p>Direto ao ponto. Vamos entender o funcionamento de uma pilha com 3 posições simulando várias operações de <code>push(String element)</code> e <code>pop()</code>.</p>
+<h3 id="push">push</h3>
+<p>Inicialmente temos a pilha vazia:</p>
+<p>pilha = [<font color="red">null, null, null</font>]; <code>topo</code> = -1;</p>
+<p>Adicionando &ldquo;a&rdquo; na pilha (push):</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;</font>, <font color="red">null, null</font>]; <code>topo</code> = 0;</p>
+<p>Neste momento, o topo da pilha está no índice 1. Então, nossa pilha está destacada em azul. Tem apenas o elemento &ldquo;a&rdquo;.</p>
+<p>Adicionando &ldquo;b&rdquo; na pilha (push):</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;</font>, <font color="red">null</font>]; <code>topo</code> = 1;</p>
+<p>&ldquo;b&rdquo; foi adicionado no topo da pilha. Ou seja, <em><strong>topo</strong></em> assumiu o valor 1. Abaixo de b, está o elemento &ldquo;a&rdquo;.</p>
+<p>Adicionando &ldquo;c&rdquo; na pilha (push):</p>
+<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>&ldquo;c&rdquo; foi adicionado no topo da pilha.</p>
+<h4 id="implementação">Implementação</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">...</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
-</code></pre></div><p>No caso da fila, sempre invocamos o método shiftLeft passando o índice 0, pois sempre removemos do início da fila.</p>
-<p>Vamos fazer mais uma remoção da fila (removeFirst). A fila ficaria nesse estado:</p>
-<p>fila = [<font color="blue">&ldquo;c&rdquo;</font>, <font color="red">&ldquo;c&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 0;</p>
-<p>Preste bem atenção! Na nossa fila agora há apenas um elemento, o &ldquo;c&rdquo;, pois head e tail estão apontando para o índice 0. Os &ldquo;c&quot;s adicionais no array estão fora dos limites de head e tail e, portanto, não fazem parte da fila.</p>
-<p>Se invocarmos o método removeFirst mais uma vez, a fila fica vazia, isto é, head e tail assumem valor -1;</p>
-<p>fila = [<font color="red">&ldquo;c&rdquo;, &ldquo;c&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = -1, <code>tail</code> = -1;</p>
+
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isFull</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span> <span style="color:#f92672">+</span> 1 <span style="color:#f92672">==</span>  <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pilha</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+    
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">push</span><span style="color:#f92672">(</span>String element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isFull<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;Pilha cheia!&#34;</span><span style="color:#f92672">);</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pilha</span><span style="color:#f92672">[++</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span><span style="color:#f92672">]</span> <span style="color:#f92672">=</span> element<span style="color:#f92672">;</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>Primeiro vamos falar um pouquinho dos métodos que vamos utilizar em ambos, <em><strong>push</strong></em> e <em><strong>pop</strong></em>. Esses métodos são: <em><strong>isEmpty</strong></em>, que verifica se a pilha está vazia e <em><strong>isFull</strong></em>, que verifica se a pilha está cheia.</p>
+<p>Ambos são simples. <em><strong>isEmpty</strong></em> verifica se o topo ainda está em -1, que é o valor inicial de quando a pilha está vazia. Por outro lado, <em><strong>isFull</strong></em> verifica se o topo está no limite do array, ou seja, não cabe mais nenhum elemento.</p>
+<p>Agora vamos ver o método <em><strong>push</strong></em>. Super simples, né? Ele apenas verifica se a pilha já não está cheia. Se estiver, lança uma exceção alertando.</p>
+<p>Importante destacar que essa é uma decisão de design nossa. Decidimos não aumentar o tamanho da pilha, nem sobrescrever ninguém. Se você lembrar bem, no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a> nós decidimos que aumentariamos a capacidade e absorveríamos o novo elemento. Já no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">Fila</a>, nós decidimos que iríamos sobrescrever o primeiro elemento sempre que um novo chegasse e a fila já estivesse cheia. Eu faço assim porque gosto de explorar diferentes decisões de design enquanto estamos aprendendo :)</p>
+<p><strong>Desafio.</strong> Que tal implementar a pilha das outras duas maneiras? Quando encher, faz o resize ao invés de lançar a exceção. A outra alternativa é sobrescrever o topo quando encher.</p>
+<h3 id="pop">pop</h3>
+<p>Já vimos como funciona a adição. Suponha que agora a gente queira remover alguém da pilha. Como já estabelecemos, a política é bem clara: vamos remover o último que entrou na pilha, ou seja, quem está no topo.</p>
+<p>Vamos relembrar novamente o estado da nossa pilha antes do pop.</p>
+<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>Então, depois de pop, a pilha fica nesse estado:</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>topo</code> = 1;</p>
+<p>Preste bem atenção! A pilha não é &ldquo;a&rdquo;, &ldquo;b&rdquo; e &ldquo;c&rdquo;. A pilha é &ldquo;a&rdquo; e &ldquo;b&rdquo;, com &ldquo;b&rdquo; no topo. A posição que está em vermelho está fora dos limites da pilha, pois quem define os limites da pilha são <em><strong>0</strong></em> e <em><strong>topo</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A pilha é uma coisa, o array que é usado para montar a pilha é outra. A pilha é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi topo para a posição anterior.</p>
+<p>Pense assim para fixar. Se eu tiver quem imprimir quem está na pilha, eu vou imprimir os elementos do array que estão entre <em><strong>0</strong></em> e <em><strong>topo</strong></em>, incluindo os dois.</p>
+<p>Vamos fazer mais uma remoção da pilha (pop). A pilha ficaria nesse estado:</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;</font>, <font color="red">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 0;</p>
+<p>Preste bem atenção! Na nossa fila agora há apenas um elemento, o &ldquo;a&rdquo;, pois topo está em 0. Os valores &ldquo;b&rdquo;  e &ldquo;c&rdquo; que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.</p>
+<p>Se invocarmos o método pop mais uma vez, a pilha fica vazia, isto é, topo assume o valor -1;</p>
+<p>fila = [<font color="red">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = -1;</p>
 <hr>
-<p><strong>Para fixar</strong>. Considere uma fila inicial vazia com capacidade 4. Ilustre o estado da fila, incluindo os valores de head e tail a cada operação abaixo:</p>
+<p><strong>Para fixar</strong>. Considere uma pilha inicial vazia com capacidade 4. Ilustre o estado da pilha, incluindo o valor de topo a cada operação abaixo:</p>
 <ul>
-<li>addLast(&ldquo;a&rdquo;)</li>
-<li>removeFirst()</li>
-<li>addLast(&ldquo;b&rdquo;)</li>
-<li>addLast(&ldquo;c&rdquo;)</li>
-<li>addLast(&ldquo;d&rdquo;)</li>
-<li>addLast(&ldquo;e&rdquo;)</li>
-<li>removeFirst()</li>
-<li>removeFirst()</li>
-<li>removeFirst()</li>
-<li>removeFirst()</li>
+<li>push(&ldquo;a&rdquo;)</li>
+<li>pop()</li>
+<li>push(&ldquo;b&rdquo;)</li>
+<li>push(&ldquo;c&rdquo;)</li>
+<li>push(&ldquo;d&rdquo;)</li>
+<li>pop()</li>
+<li>pop()</li>
+<li>pop()</li>
+<li>push(&ldquo;e&rdquo;)</li>
+<li>push(&ldquo;f&rdquo;)</li>
 </ul>
 <hr>
-<p><strong>Lidando com a fila cheia.</strong> Vamos analisar a fila abaixo:</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 2;</p>
-<p>Como você pode ver, a fila está cheia. Qual seria o resultado então de uma operação <em><strong>addLast(&ldquo;d&rdquo;)</strong></em>? Nós já decidimos que vamos sobrescrever o mais antigo da fila, ou seja, quem está no início (<em><strong>head</strong></em>) da fila.</p>
-<p>Nós já sabemos fazer isso. Basta fazer o shiftLeft e adicionar o novo elemento no final da fila. Vamos acompanhar o estado da fila durante a operação. Primeiro, fazemos o shiftLeft e ela fica assim:</p>
-<p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 1;</p>
-<p>Agora sim adicionamos o novo elemento:</p>
-<p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;d&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 2;</p>
+<p><strong>Lidando com a pilha cheia.</strong> Vamos analisar a pilha abaixo:</p>
+<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>Como você pode ver, a pilha está cheia. Qual seria o resultado então de uma operação <em><strong>push(&ldquo;d&rdquo;)</strong></em>? Nós já decidimos que não vamos aumentar o tamanho da pilha, nem sobrescrever o topo. É só analisar o código. Uma exceção será lançada alertando que a pilha está cheia.</p>
 <hr>
 <h4 id="análise-de-eficência">Análise de eficência</h4>
 <ol>
-<li>addLast</li>
+<li>push</li>
 </ol>
-<p>Como vimos, addLast é simples. Basta aumentar <em><strong>tail</strong></em> (tail =+ 1). Contudo, se a fila já estiver cheia, precisamos fazer o <em><strong>shiftLeft</strong></em>, que é O(n). Então, no pior caso, essa operação é O(n).</p>
+<p>Como vimos, push é simples. Basta aumentar <em><strong>topo</strong></em> (topo =+ 1) e adicionar o novo valor. Ou seja, O(1).</p>
 <ol start="2">
-<li>removeFirst</li>
+<li>pop</li>
 </ol>
-<p>Nossa estratégia de remoção foi fazer o shift de todo mundo para a esquerda. Esse algoritmo, naturalmente, é O(n), pois precisamos percorrer toda a fila atribuindo a v[i] o valor de v[i+1], com ir partindo de 0 até <code>tail - 1</code>.</p>
-<h3 id="remoção-em-o1-mantendo-uma-fila-circular">Remoção em O(1), mantendo uma fila circular</h3>
-<p>E seu eu disser que dá para adicionar no final e remover do início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende.</p>
-<p>Em linhas gerais, remover o início da fila deveria ser apenas fazer <code>head = head + 1</code>, certo? Ou seja, em O(1). Mas e porque é complicado? Porque fazendo isso, nós liberamos uma posição anterior a <code>head</code> que poderia ser usada para uma nova adição. Como fazer para <code>tail</code> assumir essa nova posição quando for adicionado um elemento? Utilizando a operação de resto da divisão pelo tamanho da fila (<code>%</code>). Vamos montar um exemplo para ficar claro.</p>
-<p>Vamos novamente agora encher a fila, adicionando 3 elementos, &ldquo;a&rdquo;, &ldquo;b&rdquo; e &ldquo;c&rdquo;. Então, vamos ter o seguinte estado:</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 2;</p>
-<p>Agora, suponha que eu queira remover o início da fila sem o <em><strong>shiftLeft</strong></em>. Basta fazer <code>head = head + 1</code>. Temos uma fila com esse estado após a execução de removeFirst():</p>
-<p>fila = [<font color="red">&ldquo;a&rdquo;</font>, <font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 1, <code>tail</code> = 2;</p>
-<p>Perceba que a fila vai do índice 1 até o índice 2, valores de <code>head</code> e <code>tail</code>. Ou seja, nossa fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;.</p>
-<p>Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição <code>(tail + 1) % fila.length</code>, isto é, (2 + 1) % 3 = 0.</p>
-<p>Ou seja, na posição à frente de tail. Se essa posição for acima do limite do array, que é o nosso caso, ela passa a ser contada do início do array por causa da operação <code>%</code>.</p>
-<p>É importante que você entenda isso: <code>(tail+1) % capacidade</code> sempre vai cair dentro dos limites do array por causa da operação de resto de divisão. No nosso caso, o novo elemento, &ldquo;d&rdquo;, seria adicionado na posição (2 + 1) % 3, que é 0. A fila ficaria:</p>
-<p>fila = [<font color="blue">&ldquo;d&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 1, <code>tail</code> = 0;</p>
-<p>Note que <code>head</code> está no índice 1 (elemento &ldquo;b&rdquo;) e <code>tail</code> está no índice 0 (elemento &ldquo;d&rdquo;). Nossa fila é &ldquo;b&rdquo;, &ldquo;c&rdquo; e &ldquo;d&rdquo;, nessa ordem.</p>
-<p>Vamos agora invocar o método removeFirst, nesse caso, <code>head</code> iria para <code>(head + 1)%fila.length</code>, ou seja, 2. A fila ficaria:</p>
-<p>fila = [<font color="blue">&ldquo;d&rdquo;</font>, <font color="red">&ldquo;b&rdquo;</font> <font color="blue">&ldquo;c&rdquo;</font>]; <code>head</code> = 2, <code>tail</code> = 0;</p>
-<p>Nossa fila seria &ldquo;c&rdquo; e &ldquo;d&rdquo;.</p>
-<p>Perceba que estamos tratando o array de forma circular. Dessa maneira, não precisamos fazer shift, apenas termos sempre cuidado de usar o <code>% fila.length</code> nas operações.</p>
-<h3 id="implementação">Implementação</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>String element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// toda adição deve aumentar o número de elementos, exceto
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// se já estiver cheio.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isFull<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
-    
-        <span style="color:#75715e">// na primeira adição, ambos vão para o índice 0.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-        
-        <span style="color:#75715e">// se já tiver cheio, precisamos andar com head para liberar o espaço;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// e não acrescentamos em size porque não houve aumento de elementos.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isFull<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">+=</span> 1 <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">;</span>
-        
-        <span style="color:#75715e">// incrementa tail e adiciona o novo elemento
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">[</span>tail<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> element<span style="color:#f92672">;</span>
-    <span style="color:#f92672">}</span>
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// se estiver vazia, não há elemento
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
-        
-        <span style="color:#75715e">// recupera o elemento no início da fila
-</span><span style="color:#75715e"></span>        String value <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">[</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">];</span>
-
-        <span style="color:#75715e">// se for o único elemento, atribui -1 para ambos
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span> <span style="color:#66d9ef">else</span> <span style="color:#f92672">{</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
-        <span style="color:#f92672">}</span>
-
-        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>   
-        <span style="color:#66d9ef">return</span> value<span style="color:#f92672">;</span> 
-    <span style="color:#f92672">}</span>
-</code></pre></div><h4 id="análise-de-eficência-1">Análise de eficência</h4>
-<ol>
-<li>addLast</li>
-</ol>
-<p>Como vimos, addLast é simples. Há algumas verificações O(1) e o principal é  tail (tail = (tail + 1) % fila.length). Isto é, trata-se de uma operação constante $O(1)$.</p>
-<ol start="2">
-<li>removeFirst</li>
-</ol>
-<p>Nossa estratégia de remoção também é O(1) porque envolve apenas algumas verificações O(1) e andar com head para frente, sem precisar fazer o shift: <code>head = (head + 1) % fila.length</code>.</p>
-<h2 id="algumas-verificações-importantes">Algumas verificações importantes</h2>
-<p>Como sei se uma fila está cheia? Se depois de <code>tail</code> tem o <code>head</code>, certo? Então isFull fica:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isFull</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Determinar se a fila está vazia é simples:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p><strong>Importante</strong>. Lembre-se que quando você remover o último elemento da fila, ou seja, quando <code>head == tail</code>, após a remoção você deve atribuir ambos para -1, <code>head</code> e <code>tail</code>.</p>
+<p>Nossa estratégia de remoção foi simplesmente diminuir o tamanho do topo, ou seja, também é uma operação O(1).</p>
 <hr>
-<h1 id="notas">Notas</h1>
-<p>Eu estou ciente que uso inglês e português misturados no código. Ainda vou resolver essa questão e revisar todo o material, mas há alguns termos que simplesmente não soam bem traduzidos e, muitas vezes, gosto de manter os jargões da área.</p>
+<h2 id="onde-encontro-isso-na-biblioteca-padrão">Onde encontro isso na biblioteca padrão?</h2>
+<blockquote>
+<p>Não use a classe Stack de Java.</p>
+</blockquote>
+<p>Em java, se você quiser usar uma implementação de Pilha que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.</p>
+<p>Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a pilha é <em>resizable</em>, ou seja, não lança exceção quando atinge o limite inicial da pilha, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma pilha, como fila. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma pilha ou uma fila.</p>
 
 
 </article>

@@ -130,7 +130,7 @@
 
         
 
-        <li>10 minutos de leitura</li>
+        <li>11 minutos de leitura</li>
 
 
         
@@ -195,7 +195,7 @@
 <h3 id="remoção-com-shift">Remoção com shift</h3>
 <p>Nossa primeira abordagem será fazer o <strong>shiftLeft</strong> de todo mundo e diminuir o índice de tail, pois a fila diminuiu e liberou um espaço no final. Então, depois de um removeFirst, a fila fica nesse estado:</p>
 <p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 1;</p>
-<p>Preste bem atenção! A fila não é &ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;c&rdquo;. A fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;. A posição que está em vermelhor está fora dos limites da fila, pois quem define os limites da fila são <em><strong>head</strong></em> e <em><strong>tail</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.</p>
+<p>Preste bem atenção! A fila não é &ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;c&rdquo;. A fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;. A posição que está em vermelho está fora dos limites da fila, pois quem define os limites da fila são <em><strong>head</strong></em> e <em><strong>tail</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.</p>
 <p>Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre <em><strong>head</strong></em> e <em><strong>tail</strong></em>, incluindo os dois.</p>
 <p>Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de <a href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>. Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substiuido pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// importante lembrar de diminuir tail depois da chamada deste
@@ -317,6 +317,9 @@
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
 </code></pre></div><p><strong>Importante</strong>. Lembre-se que quando você remover o último elemento da fila, ou seja, quando <code>head == tail</code>, após a remoção você deve atribuir ambos para -1, <code>head</code> e <code>tail</code>.</p>
+<h2 id="onde-encontro-isso-na-biblioteca-padrão">Onde encontro isso na biblioteca padrão?</h2>
+<p>Em java, se você quiser usar uma implementação de Fila que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.</p>
+<p>Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é <em>resizable</em>, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.</p>
 <hr>
 <h1 id="notas">Notas</h1>
 <p>Eu estou ciente que uso inglês e português misturados no código. Ainda vou resolver essa questão e revisar todo o material, mas há alguns termos que simplesmente não soam bem traduzidos e, muitas vezes, gosto de manter os jargões da área.</p>
