@@ -21,7 +21,7 @@ O que define a fila é sua política de acesso. Toda adição é feita no final 
 
 ## Organização interna: atributos e construtores
 
-Para fins didáticos, neste material vamos construir uma fila baseada em arrays que armazena objetos do tipo String. Naturalmente, por ser de propósito geral, as implementações de Fila de Java permitem o armazenamento e manipulação de qualquer objeto.
+Para fins didáticos, neste material vamos construir uma fila baseada em um array que armazena objetos do tipo String. Naturalmente, por ser de propósito geral, as implementações de Fila de Java permitem o armazenamento e manipulação de qualquer objeto.
 
 ```java
 public class FIFOArray {
