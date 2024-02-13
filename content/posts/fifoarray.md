@@ -8,9 +8,9 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 ***
 
-Neste material nós vamos estudar uma forma de implementar uma FILA utilizando arrays. 
+Neste material nós vamos estudar uma forma de implementar uma FILA utilizando arrays.
 
-**Disclaimer.** Este material tem muita interseção com o material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/), que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos *resize* para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array e sobrescrever o elemento mais antigo (First In First Out) quando chegar um novo elemento. Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/).
+**Disclaimer.** Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>, que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos *resize* para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array e sobrescrever o elemento mais antigo (First In First Out) quando chegar um novo elemento. Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.
 
 Eu também tomei essa decisão de sobrescrever o mais antigo ao invés de aumentar a capacidade porque vou abordar o uso de filas em cache também. E lá o comportamento é esse. Manter o tamanho fixo e substituir os mais antigos à medida que novos objetos chegam.
 
@@ -18,7 +18,7 @@ Array é a primeira estrutura de dados que abordamos na disciplina. Há razões 
 
 Mas se o tamanho original é mantido, como fazer quando novos elementos quiserem entrar na fila? Aí é que está! Há duas decisões a serem tomadas: só entra um novo elemento quando alguém sair da fila ou não entra mais (lança uma exceção, por exemplo). Nós vamos lidar com a primeira opção, isto é, precisamos ter uma política de remoção bem definida quando um novo elemento chegar. Essa política é bem clara em uma fila: o primeiro elemento a entrar é o primeiro a sair (FIFO -- First In First Out).
 
-> Fisrt In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair.
+> First In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair.
 
 ## Organização interna: atributos e construtores
 
@@ -222,3 +222,9 @@ public boolean isEmpty() {
 ```
 
 **Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
+
+***
+
+# Notas
+
+Eu estou ciente que uso inglês e português misturados no código. Ainda vou resolver essa questão e revisar todo o material, mas há alguns termos que simplesmente não soam bem traduzidos e, muitas vezes, gosto de manter os jargões da área.
