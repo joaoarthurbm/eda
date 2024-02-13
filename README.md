@@ -38,6 +38,8 @@ echo "public" >> .gitignore
 git checkout --orphan gh-pages
 git reset --hard
 git commit --allow-empty -m "Initializing gh-pages branch"
+git config pull.rebase true
+git pull
 git push origin gh-pages
 git checkout master
 </pre>
