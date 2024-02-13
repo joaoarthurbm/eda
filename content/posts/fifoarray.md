@@ -107,6 +107,7 @@ Se invocarmos o método removeFirst mais uma vez, a fila fica vazia, isto é, he
 
 fila = [<font color="red">"c", "c", "c"</font>]; `head` = -1, `tail` = -1;
 
+---
 **Para fixar**. Considere uma fila inicial vazia com capacidade 4. Ilustre o estado da fila, incluindo os valores de head e tail a cada operação abaixo:
 
 * addLast("a")
