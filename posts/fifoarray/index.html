@@ -155,7 +155,7 @@
 <p>Neste material nós vamos estudar uma forma de implementar uma FILA utilizando arrays.</p>
 <p><strong>Disclaimer.</strong> Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>, que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos <em>resize</em> para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array. Portanto, se um novo elemento tiver que ser adicionado e a fila estiver cheia, vamos sobrescrever o elemento mais antigo.</p>
 <p>Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.</p>
-<p>O que define a fila é sua política de acesso. Toda adição é feita no final da fila (<em><strong>addLast</strong></em>) e toda remoção é no início da fila (<em><strong>removeFirst</strong></em>). Essas são as duas operações que implementa a política First In First Out (FIFO).</p>
+<p>O que define a fila é sua política de acesso. Toda adição é feita no final da fila (<em><strong>addLast</strong></em>) e toda remoção é no início da fila (<em><strong>removeFirst</strong></em>). Essas são as duas operações que implementam a política First In First Out (FIFO).</p>
 <blockquote>
 <p>First In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair. Para implementar essa política usamos duas operações: <em><strong>addLast</strong></em>, que sempre adiciona no final (<em><strong>tail</strong></em>) da fila e <em><strong>removeFirst</strong></em>, que sempre remove do início (<em><strong>head</strong></em>) da fila.</p>
 </blockquote>
@@ -178,7 +178,7 @@
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Em primeiro lugar, é importante destacar o uso de dois atributos: <code>head</code> e <code>tail</code>. Esses atributos representam os índices do array que delimitam os valores que estão na fila. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa fila. Nossa fila, ao ser criada, está entre <em><strong>head</strong></em> e <em><strong>tail</strong></em>, inclusos. Nesse caso, como eles estão em -1 na inicialização, nossa fila está vazia.</p>
 <h2 id="operações">Operações</h2>
-<p>Temos duas operaçõs principais em Fila: <code>addLast(String ele)</code> e <code>removeFirst()</code>. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso.</p>
+<p>Temos duas operações principais em Fila: <code>addLast(String ele)</code> e <code>removeFirst()</code>. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso.</p>
 <p>Direto ao ponto. Vamos entender o funcionamento de uma fila com 3 posições simulando várias operações de <code>addLast(String element)</code> e <code>removeFirst()</code>.</p>
 <p>Inicialmente temos a fila vazia:</p>
 <p>fila = [<font color="red">null, null, null</font>]; <code>head</code> = -1, <code>tail</code> = -1;</p>
@@ -197,7 +197,7 @@
 <p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 1;</p>
 <p>Preste bem atenção! A fila não é &ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;c&rdquo;. A fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;. A posição que está em vermelho está fora dos limites da fila, pois quem define os limites da fila são <em><strong>head</strong></em> e <em><strong>tail</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.</p>
 <p>Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre <em><strong>head</strong></em> e <em><strong>tail</strong></em>, incluindo os dois.</p>
-<p>Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de <a href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>. Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substiuido pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:</p>
+<p>Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de <a href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>. Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substituído pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#75715e">// importante lembrar de diminuir tail depois da chamada deste
 </span><span style="color:#75715e"></span>    <span style="color:#75715e">// método. Este controle é feito no método removeFirst()
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">shiftLeft</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span> index<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -234,7 +234,7 @@
 <p>Agora sim adicionamos o novo elemento:</p>
 <p>fila = [<font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;, &ldquo;d&rdquo;</font>]; <code>head</code> = 0, <code>tail</code> = 2;</p>
 <hr>
-<h4 id="análise-de-eficência">Análise de eficência</h4>
+<h4 id="análise-de-eficiência">Análise de eficiência</h4>
 <ol>
 <li>addLast</li>
 </ol>
@@ -251,7 +251,7 @@
 <p>Agora, suponha que eu queira remover o início da fila sem o <em><strong>shiftLeft</strong></em>. Basta fazer <code>head = head + 1</code>. Temos uma fila com esse estado após a execução de removeFirst():</p>
 <p>fila = [<font color="red">&ldquo;a&rdquo;</font>, <font color="blue">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 1, <code>tail</code> = 2;</p>
 <p>Perceba que a fila vai do índice 1 até o índice 2, valores de <code>head</code> e <code>tail</code>. Ou seja, nossa fila é &ldquo;b&rdquo; e &ldquo;c&rdquo;.</p>
-<p>Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição <code>(tail + 1) % fila.length</code>, isto é, (2 + 1) % 3 = 0.</p>
+<p>Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço livre (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição <code>(tail + 1) % fila.length</code>, isto é, (2 + 1) % 3 = 0.</p>
 <p>Ou seja, na posição à frente de tail. Se essa posição for acima do limite do array, que é o nosso caso, ela passa a ser contada do início do array por causa da operação <code>%</code>.</p>
 <p>É importante que você entenda isso: <code>(tail+1) % capacidade</code> sempre vai cair dentro dos limites do array por causa da operação de resto de divisão. No nosso caso, o novo elemento, &ldquo;d&rdquo;, seria adicionado na posição (2 + 1) % 3, que é 0. A fila ficaria:</p>
 <p>fila = [<font color="blue">&ldquo;d&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>head</code> = 1, <code>tail</code> = 0;</p>
@@ -298,7 +298,7 @@
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>   
         <span style="color:#66d9ef">return</span> value<span style="color:#f92672">;</span> 
     <span style="color:#f92672">}</span>
-</code></pre></div><h4 id="análise-de-eficência-1">Análise de eficência</h4>
+</code></pre></div><h4 id="análise-de-eficência">Análise de eficência</h4>
 <ol>
 <li>addLast</li>
 </ol>
@@ -319,7 +319,7 @@
 </code></pre></div><p><strong>Importante</strong>. Lembre-se que quando você remover o último elemento da fila, ou seja, quando <code>head == tail</code>, após a remoção você deve atribuir ambos para -1, <code>head</code> e <code>tail</code>.</p>
 <h2 id="onde-encontro-isso-na-biblioteca-padrão">Onde encontro isso na biblioteca padrão?</h2>
 <p>Em java, se você quiser usar uma implementação de Fila que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.</p>
-<p>Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é <em>resizable</em>, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.</p>
+<p>Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é <em>resizable</em>, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como para pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.</p>
 <hr>
 <h1 id="notas">Notas</h1>
 <p>Eu estou ciente que uso inglês e português misturados no código. Ainda vou resolver essa questão e revisar todo o material, mas há alguns termos que simplesmente não soam bem traduzidos e, muitas vezes, gosto de manter os jargões da área.</p>
