@@ -3,7 +3,7 @@ title = "Pilhas (LIFO) baseadas em Arrays"
 date = 2019-10-25
 tags = []
 categories = []
-github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/fifoarray/LIFO.java"
+github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/lifoarray/Pilha.java"
 +++
 
 ***
@@ -124,6 +124,37 @@ Preste bem atenção! Na nossa fila agora há apenas um elemento, o "a", pois to
 Se invocarmos o método pop mais uma vez, a pilha fica vazia, isto é, topo assume o valor -1;
 
 fila = [<font color="red">"a", "b", "c"</font>]; `topo` = -1;
+
+#### Implementação
+
+```java
+    public String pop() {
+        if (isEmpty()) throw new NoSuchElementException();
+        return this.pilha[this.topo--];
+    }
+```
+
+Simples, né?
+
+
+### Outras operações
+
+Por vezes, queremos apenas saber quem está no topo da pilha sem removê-lo. Para isso, utilizamos o método ***peek***:
+
+```java
+    public String peek() {
+        if (isEmpty()) throw new NoSuchElementException();
+        return this.pilha[this.topo];
+    }
+```
+
+### Usando pilha como cliente: desempilha e empilha
+
+Se você não tem acesso à estrutura interna da pilha, algumas operações se tornam desafiadoras. Por exemplo, como verificar se um elemento está presente em uma pilha se eu não tenho acesso ao array interno dela? As únicas operações que tenho disponíveis são ***push***, ***pop*** e ***peek***.
+
+Perceba que se eu for removendo e comparando, quando achar, vou ter desmontado a pilha e preciso remontá-la. Ou seja, preciso desempilhar e depois empilhar de volta.
+
+Para tanto, eu preciso utilizar uma outra pilha para ir guardando os elementos que estou desempilhando.
 
 ---
 **Para fixar**. Considere uma pilha inicial vazia com capacidade 4. Ilustre o estado da pilha, incluindo o valor de topo a cada operação abaixo:
