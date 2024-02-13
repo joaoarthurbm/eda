@@ -3079,6 +3079,7 @@ $T(n) = (n + k)$.&lt;/p&gt;
 &lt;p&gt;Preste bem atenção! Na nossa fila agora há apenas um elemento, o &amp;ldquo;c&amp;rdquo;, pois head e tail estão apontando para o índice 0. Os &amp;ldquo;c&amp;quot;s adicionais no array estão fora dos limites de head e tail e, portanto, não fazem parte da fila.&lt;/p&gt;
 &lt;p&gt;Se invocarmos o método removeFirst mais uma vez, a fila fica vazia, isto é, head e tail assumem valor -1;&lt;/p&gt;
 &lt;p&gt;fila = [&lt;font color=&#34;red&#34;&gt;&amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;, &amp;ldquo;c&amp;rdquo;&lt;/font&gt;]; &lt;code&gt;head&lt;/code&gt; = -1, &lt;code&gt;tail&lt;/code&gt; = -1;&lt;/p&gt;
+&lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;Para fixar&lt;/strong&gt;. Considere uma fila inicial vazia com capacidade 4. Ilustre o estado da fila, incluindo os valores de head e tail a cada operação abaixo:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;addLast(&amp;ldquo;a&amp;rdquo;)&lt;/li&gt;
