@@ -79,7 +79,7 @@ Nossa primeira abordagem será fazer o **shiftLeft** de todo mundo e diminuir o 
 
 fila = [<font color="blue">"b", "c"</font>, <font color="red">"c"</font>]; `head` = 0, `tail` = 1;
 
-Preste bem atenção! A fila não é "b", "c", "c". A fila é "b" e "c". A posição que está em vermelhor está fora dos limites da fila, pois quem define os limites da fila são ***head*** e ***tail*** e eles estão em 0 e 1 respectivamente. O último "c" ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído `null` para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.
+Preste bem atenção! A fila não é "b", "c", "c". A fila é "b" e "c". A posição que está em vermelho está fora dos limites da fila, pois quem define os limites da fila são ***head*** e ***tail*** e eles estão em 0 e 1 respectivamente. O último "c" ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído `null` para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.
 
 Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre ***head*** e ***tail***, incluindo os dois.
 
@@ -258,6 +258,12 @@ public boolean isEmpty() {
 ```
 
 **Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
+
+## Onde encontro isso na biblioteca padrão?
+
+Em java, se você quiser usar uma implementação de Fila que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.
+
+Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é *resizable*, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.
 
 ***
 
