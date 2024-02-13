@@ -95,7 +95,7 @@ Ambos são simples. ***isEmpty*** verifica se o topo ainda está em -1, que é o
 
 Agora vamos ver o método ***push***. Super simples, né? Ele apenas verifica se a pilha já não está cheia. Se estiver, lança uma exceção alertando. 
 
-Importante destacar que essa é uma decisão de design nossa. Decidimos não aumentar o tamanho da pilha, nem sobrescrever ninguém. Se você lembrar bem, no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a> nós decidimos que aumentariamos a capacidade e absorveríamos o novo elemento. Já no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">Fila</a>, nós decidimos que iríamos sobrescrever o primeiro elemento sempre que um novo chegasse e a fila já estivesse cheia. Eu faço assim porque gosto de explorar diferentes decisões de design enquanto estamos aprendendo :)
+Importante destacar que essa é uma decisão de design nossa. Decidimos não aumentar o tamanho da pilha, nem sobrescrever ninguém. Se você lembrar bem, no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a> nós decidimos que aumentaríamos a capacidade e absorveríamos o novo elemento. Já no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">Fila</a>, nós decidimos que iríamos sobrescrever o primeiro elemento sempre que um novo chegasse e a fila já estivesse cheia. Eu faço assim porque gosto de explorar diferentes decisões de design enquanto estamos aprendendo :)
 
 **Desafio.** Que tal implementar a pilha das outras duas maneiras? Quando encher, faz o resize ao invés de lançar a exceção. A outra alternativa é sobrescrever o topo quando encher.
 
@@ -113,7 +113,7 @@ pilha = [<font color="blue">"a", "b"</font>, <font color="red">"c"</font>]; `top
 
 Preste bem atenção! A pilha não é "a", "b" e "c". A pilha é "a" e "b", com "b" no topo. A posição que está em vermelho está fora dos limites da pilha, pois quem define os limites da pilha são ***0*** e ***topo*** e eles estão em 0 e 1 respectivamente. O último "c" ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A pilha é uma coisa, o array que é usado para montar a pilha é outra. A pilha é uma abstração que criamos em cima do array. Poderíamos ter atribuído `null` para aquela posição. Mas, como não é preciso, apenas movi topo para a posição anterior.
 
-Pense assim para fixar. Se eu tiver quem imprimir quem está na pilha, eu vou imprimir os elementos do array que estão entre ***0*** e ***topo***, incluindo os dois.
+Pense assim para fixar. Se eu tiver que imprimir quem está na pilha, eu vou imprimir os elementos do array que estão entre ***0*** e ***topo***, incluindo os dois.
 
 Vamos fazer mais uma remoção da pilha (pop). A pilha ficaria nesse estado:
 

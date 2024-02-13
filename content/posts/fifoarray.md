@@ -14,7 +14,7 @@ Neste material nós vamos estudar uma forma de implementar uma FILA utilizando a
 
 Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.
 
-O que define a fila é sua política de acesso. Toda adição é feita no final da fila (***addLast***) e toda remoção é no início da fila (***removeFirst***). Essas são as duas operações que implementa a política First In First Out (FIFO).
+O que define a fila é sua política de acesso. Toda adição é feita no final da fila (***addLast***) e toda remoção é no início da fila (***removeFirst***). Essas são as duas operações que implementam a política First In First Out (FIFO).
 
 
 > First In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair. Para implementar essa política usamos duas operações: ***addLast***, que sempre adiciona no final (***tail***) da fila e ***removeFirst***, que sempre remove do início (***head***) da fila. 
@@ -45,7 +45,7 @@ Em primeiro lugar, é importante destacar o uso de dois atributos: `head` e `tai
 
 ## Operações
 
-Temos duas operaçõs principais em Fila: `addLast(String ele)` e `removeFirst()`. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso. 
+Temos duas operações principais em Fila: `addLast(String ele)` e `removeFirst()`. Faz sentido, né? Nós já decidimos que em uma fila as adições são no final e as remoções são no início. E apenas isso. 
 
 Direto ao ponto. Vamos entender o funcionamento de uma fila com 3 posições simulando várias operações de `addLast(String element)` e `removeFirst()`. 
  
@@ -83,7 +83,7 @@ Preste bem atenção! A fila não é "b", "c", "c". A fila é "b" e "c". A posi�
 
 Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre ***head*** e ***tail***, incluindo os dois.
 
-Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/). Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substiuido pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:
+Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/). Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substituído pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:
 
 ```java
     // importante lembrar de diminuir tail depois da chamada deste
@@ -138,7 +138,7 @@ Agora sim adicionamos o novo elemento:
 fila = [<font color="blue">"b", "c", "d"</font>]; `head` = 0, `tail` = 2;
 
 ---
-#### Análise de eficência
+#### Análise de eficiência
 
 1. addLast
 
@@ -165,7 +165,7 @@ fila = [<font color="red">"a"</font>, <font color="blue">"b", "c"</font>]; `head
 
 Perceba que a fila vai do índice 1 até o índice 2, valores de `head` e `tail`. Ou seja, nossa fila é "b" e "c".
 
-Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição `(tail + 1) % fila.length`, isto é, (2 + 1) % 3 = 0.
+Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço livre (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição `(tail + 1) % fila.length`, isto é, (2 + 1) % 3 = 0.
 
 Ou seja, na posição à frente de tail. Se essa posição for acima do limite do array, que é o nosso caso, ela passa a ser contada do início do array por causa da operação `%`.
 
@@ -263,7 +263,7 @@ public boolean isEmpty() {
 
 Em java, se você quiser usar uma implementação de Fila que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.
 
-Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é *resizable*, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.
+Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é *resizable*, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como para pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.
 
 ***
 
