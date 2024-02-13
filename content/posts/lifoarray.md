@@ -15,7 +15,7 @@ O que define uma pilha é a sua política de acesso. Toda adição (***push/addL
 > Last In First Out (LIFO): O último elemento a entrar na pilha é o primeiro a sair. Para implementar essa política usamos duas operações: ***push***, que sempre adiciona no topo da pilha e ***pop***, que sempre remove do topo.
 
 
-**Aplicações.** Esse tipo de estutura de dados é muito utilizado em vários contextos ... Por exemplo, o divino ctrl + z é uma aplicação de pilha. Ele desfaz a última caga que você fez, depois a penúltima e assim por diante.
+**Aplicações.** Esse tipo de estutura de dados é muito utilizado em vários contextos. Por exemplo, o divino ctrl + z é uma aplicação de pilha. Ele desfaz a última cagada que você fez, depois a penúltima e assim por diante.
 
 A mesma coisa acontece com o botão voltar do browser, ele vai voltando pelas páginas mais recentes que você visitou. 
 
