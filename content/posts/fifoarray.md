@@ -10,15 +10,14 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 Neste material nós vamos estudar uma forma de implementar uma FILA utilizando arrays.
 
-**Disclaimer.** Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>, que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos *resize* para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array e sobrescrever o elemento mais antigo (First In First Out) quando chegar um novo elemento. Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.
+**Disclaimer.** Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>, que eu sugiro que seja lido antes. Não poderia ser diferente, pois estamos falando de aplicações de arrays para resolver problemas de armazenamento e acesso a dados. Todavia, há uma diferença importante entre os dois materiais. Lá no material sobre ArrayList, quando a capacidade do array é atingida, nós fazemos *resize* para poder acomodar novos elementos. Aqui não. Nossa estratégia vai ser manter sempre o tamanho original do array. Portanto, se um novo elemento tiver que ser adicionado e a fila estiver cheia, vamos sobrescrever o elemento mais antigo. 
 
-Eu também tomei essa decisão de sobrescrever o mais antigo ao invés de aumentar a capacidade porque vou abordar o uso de filas em cache também. E lá o comportamento é esse. Manter o tamanho fixo e substituir os mais antigos à medida que novos objetos chegam.
+Essa não é uma característica particular de Fila. Eu só tomei essa decisão para poder explorar as duas formas: aumentando o tamanho e mantendo o tamanho fixo. Você pode, naturalmente, desenvolver sua fila aumentando a capacidade dela quando precisar. Consulte como isso é feito no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.
 
-Array é a primeira estrutura de dados que abordamos na disciplina. Há razões para essa escolha. Em primeiro lugar, arrays estão presentes na biblioteca padrão de grande parte das linguagens de programação. Além disso, também são estruturas simples e eficientes. Por último, outras estruturas mais complexas baseiam sua implementação em arrays, como Tabelas Hash, ArrayList, entre outras.
+O que define a fila é sua política de acesso. Toda adição é feita no final da fila (***addLast***) e toda remoção é no início da fila (***removeFirst***). Essas são as duas operações que implementa a política First In First Out (FIFO).
 
-Mas se o tamanho original é mantido, como fazer quando novos elementos quiserem entrar na fila? Aí é que está! Há duas decisões a serem tomadas: só entra um novo elemento quando alguém sair da fila ou não entra mais (lança uma exceção, por exemplo). Nós vamos lidar com a primeira opção, isto é, precisamos ter uma política de remoção bem definida quando um novo elemento chegar. Essa política é bem clara em uma fila: o primeiro elemento a entrar é o primeiro a sair (FIFO -- First In First Out).
 
-> First In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair.
+> First In First Out (FIFO): O primeiro elemento a entrar na fila é o primeiro a sair. Para implementar essa política usamos duas operações: ***addLast***, que sempre adiciona no final (***tail***) da fila e ***removeFirst***, que sempre remove do início (***head***) da fila. 
 
 ## Organização interna: atributos e construtores
 
@@ -36,12 +35,13 @@ public class FIFOArray {
         this.lista = new String[capacidade];
         this.head = -1;
         this.tail = -1;
+        this.size = 0;
     }
     ...
 }
 ```
 
-Em primeiro lugar, é importante destacar o uso de dois atributos: `head` e `tail`. Esses atributos representam os índices do array que delimitam os valores que estão na fila. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa fila. Nossa fila, ao ser criada, está entre head e tail, inclusos. Nesse caso, como eles estão em -1 na inicialização, nossa fila está vazia. 
+Em primeiro lugar, é importante destacar o uso de dois atributos: `head` e `tail`. Esses atributos representam os índices do array que delimitam os valores que estão na fila. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa fila. Nossa fila, ao ser criada, está entre ***head*** e ***tail***, inclusos. Nesse caso, como eles estão em -1 na inicialização, nossa fila está vazia. 
 
 ## Operações
 
@@ -51,37 +51,39 @@ Direto ao ponto. Vamos entender o funcionamento de uma fila com 3 posições sim
  
 Inicialmente temos a fila vazia:
 
-$fila = [null, null, null]$; head = -1, tail = -1;
+fila = [<font color="red">null, null, null</font>]; `head` = -1, `tail` = -1;
 
 Adicionando "a" no fim da fila (addLast):
 
-$fila = ["a", null, null]$; head = 0, tail = 0;
+fila = [<font color="blue">"a"</font>, <font color="red">null, null</font>]; `head` = 0, `tail` = 0;
 
-Neste momento, o início (head) e o fim (tail) da fila estão apontando para o mesmo índice do array, isto é, 0.
+Neste momento, o início (***head***) e o fim (***tail***) da fila estão apontando para o mesmo índice do array, isto é, 0. Então, nossa fila está destacada em azul. Tem apenas o elemento "a".
 
 Adicionando "b" no fim da fila (addLast):
 
-$fila = ["a", "b", null]$; head = 0, tail = 1;
+fila = [<font color="blue">"a", "b"</font>, <font color="red">null</font>]; `head` = 0, `tail` = 1;
 
-"b" foi adicionado no fim da fila. Ou seja, head continua no índice 0, mas tail andou uma posição e agora está no índice 1. "a" está no início da fila e "b" está no fim da fila.
+"b" foi adicionado no fim da fila. Ou seja, ***head*** continua no índice 0, mas ***tail*** andou uma posição e agora está no índice 1. "a" está no início da fila e "b" está no fim da fila.
 
 Adicionando "c" no fim da fila (addLast):
 
-$fila = ["a", "b", "c"]$; head = 0, tail = 2;
+fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2;
 
-"c" foi adicionado no fim da fila. Ou seja, head continua no índice 0, mas tail andou uma posição e agora está no índice 2. "a" está no início da fila e "c" está no fim da fila.
+"c" foi adicionado no fim da fila. Ou seja, ***head*** continua no índice 0, mas ***tail*** andou uma posição e agora está no índice 2. "a" está no início da fila e "c" está no fim da fila.
 
-Suponha que agora a gente queira remover alguém da lista. Como já estabelecemos, a política é bem clara: vamos remover o primeiro que entrou na fila, ou seja, o elemento "a". 
+Já vimos como funciona a adição. Suponha que agora a gente queira remover alguém da fila. Como já estabelecemos, a política é bem clara: vamos remover o primeiro que entrou na fila, ou seja, o elemento "a". 
 
 ### Remoção com shift
 
-Nossa primeira abordagem será fazer o **shiftLeft** de todo mundo e diminuir o índice de tail, pois a fila diminuiu e liberou um espaço. Então, depois de um removeFirst, a fila fica nesse estado: 
+Nossa primeira abordagem será fazer o **shiftLeft** de todo mundo e diminuir o índice de tail, pois a fila diminuiu e liberou um espaço no final. Então, depois de um removeFirst, a fila fica nesse estado: 
 
-$fila = ["b", "c", "c"]$; head = 0, tail = 1;
+fila = [<font color="blue">"b", "c"</font>, <font color="red">"c"</font>]; `head` = 0, `tail` = 1;
 
-Preste bem atenção! A fila não é "b", "c", "c". A fila é "b" e "c", pois quem define os limites da fila são head e tail e eles estão em 0 e 1 respectivamente. O último "c" ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído `null` para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.
+Preste bem atenção! A fila não é "b", "c", "c". A fila é "b" e "c". A posição que está em vermelhor está fora dos limites da fila, pois quem define os limites da fila são ***head*** e ***tail*** e eles estão em 0 e 1 respectivamente. O último "c" ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A fila é uma coisa, o array que é usado para montar a fila é outra. A fila é uma abstração que criamos em cima do array. Poderíamos ter atribuído `null` para aquela posição. Mas, como não é preciso, apenas movi tail para a posição anterior.
 
-Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/). Mas vou deixar o código aqui para consulta:
+Pense assim para fixar. Se eu tiver quem imprimir quem está na fila, eu vou imprimir os elementos do array que estão entre ***head*** e ***tail***, incluindo os dois.
+
+Importante aqui é você entender como shiftLeft é feito. Isso é visto em detalhes no material de [ArrayList](https://joaoarthurbm.github.io/eda/posts/arraylist/). Em linhas gerais, nós vamos afastando todo mundo para a esquerda. Dessa forma, removemos o início da fila, que é substiuido pelo valor à frente, que por sua vez é substituído pelo valor à frente e assim por diante. Vou deixar o código aqui para consulta:
 
 ```java
     // importante lembrar de diminuir tail depois da chamada deste
@@ -96,19 +98,50 @@ No caso da fila, sempre invocamos o método shiftLeft passando o índice 0, pois
 
 Vamos fazer mais uma remoção da fila (removeFirst). A fila ficaria nesse estado:
 
-$fila = ["c", "c", "c"]$, head = 0, tail = 0;
+fila = [<font color="blue">"c"</font>, <font color="red">"c", "c"</font>]; `head` = 0, `tail` = 0;
+
 
 Preste bem atenção! Na nossa fila agora há apenas um elemento, o "c", pois head e tail estão apontando para o índice 0. Os "c"s adicionais no array estão fora dos limites de head e tail e, portanto, não fazem parte da fila.
 
 Se invocarmos o método removeFirst mais uma vez, a fila fica vazia, isto é, head e tail assumem valor -1;
 
-$fila = ["c", "c", "c"]$, head = -1, tail = -1;
+fila = [<font color="red">"c", "c", "c"</font>]; `head` = -1, `tail` = -1;
 
+**Para fixar**. Considere uma fila inicial vazia com capacidade 4. Ilustre o estado da fila, incluindo os valores de head e tail a cada operação abaixo:
+
+* addLast("a")
+* removeFirst()
+* addLast("b")
+* addLast("c")
+* addLast("d")
+* addLast("e")
+* removeFirst()
+* removeFirst()
+* removeFirst()
+* removeFirst()
+
+
+---
+**Lidando com a fila cheia.** Vamos analisar a fila abaixo:
+
+fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2;
+
+Como você pode ver, a fila está cheia. Qual seria o resultado então de uma operação ***addLast("d")***? Nós já decidimos que vamos sobrescrever o mais antigo da fila, ou seja, quem está no início (***head***) da fila.
+
+Nós já sabemos fazer isso. Basta fazer o shiftLeft e adicionar o novo elemento no final da fila. Vamos acompanhar o estado da fila durante a operação. Primeiro, fazemos o shiftLeft e ela fica assim:
+
+fila = [<font color="blue">"b", "c"</font>, <font color="red">"c"</font>]; `head` = 0, `tail` = 1;
+
+Agora sim adicionamos o novo elemento:
+
+fila = [<font color="blue">"b", "c", "d"</font>]; `head` = 0, `tail` = 2;
+
+---
 #### Análise de eficência
 
 1. addLast
 
-Como vimos, addLast é simples. Basta aumentar tail (tail =+ 1). Isto é, trata-se de uma operação constante $O(1)$.
+Como vimos, addLast é simples. Basta aumentar ***tail*** (tail =+ 1). Contudo, se a fila já estiver cheia, precisamos fazer o ***shiftLeft***, que é O(n). Então, no pior caso, essa operação é O(n).
 
 2. removeFirst
 
@@ -117,33 +150,34 @@ Nossa estratégia de remoção foi fazer o shift de todo mundo para a esquerda. 
 
 ### Remoção em O(1), mantendo uma fila circular
 
-E seu eu disser que dá para remover o início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende. 
+E seu eu disser que dá para adicionar no final e remover do início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende. 
 
-Em linhas gerais, remover o início da fila é apenas fazer `head = head + 1`, certo? Ou seja, em O(1). Mas e porque é complicado? Porque fazendo isso, nós liberamos uma posição anterior a `head` que pode ser usada para uma nova adição, mas `tail` está no final do array. Como fazer para `tail` assumir essa nova posição quando for adicionado um elemento? Utilizando a operação de resto da divisão pelo tamanho da fila (`%`). Vamos montar um exemplo para ficar claro.
+Em linhas gerais, remover o início da fila deveria ser apenas fazer `head = head + 1`, certo? Ou seja, em O(1). Mas e porque é complicado? Porque fazendo isso, nós liberamos uma posição anterior a `head` que poderia ser usada para uma nova adição. Como fazer para `tail` assumir essa nova posição quando for adicionado um elemento? Utilizando a operação de resto da divisão pelo tamanho da fila (`%`). Vamos montar um exemplo para ficar claro.
 
 Vamos novamente agora encher a fila, adicionando 3 elementos, "a", "b" e "c". Então, vamos ter o seguinte estado:
 
-$fila = ["a", "b", "c"]$, head = 0, tail = 2;
+fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2;
 
-Agora, suponha que eu queira remover o início da fila. Basta fazer `head = head + 1`. Temos uma fila com esse estado após a execução de removeFirst():
+Agora, suponha que eu queira remover o início da fila sem o ***shiftLeft***. Basta fazer `head = head + 1`. Temos uma fila com esse estado após a execução de removeFirst():
 
-$fila = ["a", "b", "c"]$, head = 1, tail = 2;
+fila = [<font color="red">"a"</font>, <font color="blue">"b", "c"</font>]; `head` = 1, `tail` = 2;
 
 Perceba que a fila vai do índice 1 até o índice 2, valores de `head` e `tail`. Ou seja, nossa fila é "b" e "c".
 
-Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição `(tail + 1) % fila.length`
+Agora vem o pulo do gato. Se eu quiser adicionar um novo elemento, eu tenho espaço liver (índice 0), certo? Só que eu não quero fazer o shift de todo mundo para a esquerda porque é O(n). Eu vou adicionar esse novo elemento na posição `(tail + 1) % fila.length`, isto é, (2 + 1) % 3 = 0.
 
 Ou seja, na posição à frente de tail. Se essa posição for acima do limite do array, que é o nosso caso, ela passa a ser contada do início do array por causa da operação `%`.
 
 É importante que você entenda isso: `(tail+1) % capacidade` sempre vai cair dentro dos limites do array por causa da operação de resto de divisão. No nosso caso, o novo elemento, "d", seria adicionado na posição (2 + 1) % 3, que é 0. A fila ficaria:
 
-$fila = ["d", "b", "c"]$, head = 1, tail = 0;
+fila = [<font color="blue">"d", "b", "c"</font>]; `head` = 1, `tail` = 0;
 
-Note que `head` está no índice 1 (elemento "a") e `tail` está no índice 0 (elemento "d"). Nossa fila é "b", "c" e "d", nessa ordem.
+
+Note que `head` está no índice 1 (elemento "b") e `tail` está no índice 0 (elemento "d"). Nossa fila é "b", "c" e "d", nessa ordem.
 
 Vamos agora invocar o método removeFirst, nesse caso, `head` iria para `(head + 1)%fila.length`, ou seja, 2. A fila ficaria:
 
-$fila = ["d", "b", "c"]$, head = 2, tail = 0;
+fila = [<font color="blue">"d"</font>, <font color="red">"b"</font> <font color="blue">"c"</font>]; `head` = 2, `tail` = 0;
 
 Nossa fila seria "c" e "d".
 
