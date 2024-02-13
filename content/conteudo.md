@@ -32,6 +32,7 @@ meta = "false"
 ### Árvores
 * [Árvores Binárias de Pesquisa](http://joaoarthurbm.github.io/eda/posts/bst)
 * [Heap](//joaoarthurbm.github.io/eda/posts/heap)
+* [Árvores Balanceadas(AVL)](https://joaoarthurbm.github.io/eda/posts/avl/)
 
 ***
 
