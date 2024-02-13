@@ -10,7 +10,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/sr
 
 Neste material nós vamos estudar uma forma de implementar uma Pilha utilizando arrays.
 
-O que define uma pilha é a sua política de acesso. Toda adição (***push/addFirst***) é feita no topo da pilha e toda remoção é feita também no topo da pilha (***pop/removeFirst***).
+O que define uma pilha é a sua política de acesso. Toda adição (***push/addLast***) é feita no topo da pilha e toda remoção é feita também no topo da pilha (***pop/removeLast***).
 
 > Last In First Out (LIFO): O último elemento a entrar na pilha é o primeiro a sair. Para implementar essa política usamos duas operações: ***push***, que sempre adiciona no topo da pilha e ***pop***, que sempre remove do topo.
 
@@ -43,7 +43,7 @@ Em primeiro lugar, é importante destacar o uso do atributo `topo`. Ele vai deli
 
 ## Operações
 
-Temos duas operaçõs principais em Pilha: `push(String ele)` e `pop()`. Essas operações também podem ser nomeadas de addFirst() e removeFirst(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.
+Temos duas operaçõs principais em Pilha: `push(String ele)` e `pop()`. Essas operações também podem ser nomeadas de addLast() e removeLast(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.
 
 Direto ao ponto. Vamos entender o funcionamento de uma pilha com 3 posições simulando várias operações de `push(String element)` e `pop()`. 
  
@@ -167,9 +167,3 @@ Nossa estratégia de remoção foi simplesmente diminuir o tamanho do topo, ou s
 Em java, se você quiser usar uma implementação de Pilha que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>. 
 
 Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a pilha é *resizable*, ou seja, não lança exceção quando atinge o limite inicial da pilha, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma pilha, como fila. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma pilha ou uma fila.
-
-
-
-
-
-
