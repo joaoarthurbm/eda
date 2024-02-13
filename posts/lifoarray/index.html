@@ -142,7 +142,7 @@
 
         
 
-        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/fifoarray/LIFO.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/lifoarray/Pilha.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
         
 
 
@@ -221,6 +221,22 @@
 <p>Preste bem atenção! Na nossa fila agora há apenas um elemento, o &ldquo;a&rdquo;, pois topo está em 0. Os valores &ldquo;b&rdquo;  e &ldquo;c&rdquo; que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.</p>
 <p>Se invocarmos o método pop mais uma vez, a pilha fica vazia, isto é, topo assume o valor -1;</p>
 <p>fila = [<font color="red">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = -1;</p>
+<h4 id="implementação-1">Implementação</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">pop</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pilha</span><span style="color:#f92672">[</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span><span style="color:#f92672">--];</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><p>Simples, né?</p>
+<h3 id="outras-operações">Outras operações</h3>
+<p>Por vezes, queremos apenas saber quem está no topo da pilha sem removê-lo. Para isso, utilizamos o método <em><strong>peek</strong></em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">peek</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">pilha</span><span style="color:#f92672">[</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">topo</span><span style="color:#f92672">];</span>
+    <span style="color:#f92672">}</span>
+</code></pre></div><h3 id="usando-pilha-como-cliente-desempilha-e-empilha">Usando pilha como cliente: desempilha e empilha</h3>
+<p>Se você não tem acesso à estrutura interna da pilha, algumas operações se tornam desafiadoras. Por exemplo, como verificar se um elemento está presente em uma pilha se eu não tenho acesso ao array interno dela? As únicas operações que tenho disponíveis são <em><strong>push</strong></em>, <em><strong>pop</strong></em> e <em><strong>peek</strong></em>.</p>
+<p>Perceba que se eu for removendo e comparando, quando achar, vou ter desmontado a pilha e preciso remontá-la. Ou seja, preciso desempilhar e depois empilhar de volta.</p>
+<p>Para tanto, eu preciso utilizar uma outra pilha para ir guardando os elementos que estou desempilhando.</p>
 <hr>
 <p><strong>Para fixar</strong>. Considere uma pilha inicial vazia com capacidade 4. Ilustre o estado da pilha, incluindo o valor de topo a cada operação abaixo:</p>
 <ul>
