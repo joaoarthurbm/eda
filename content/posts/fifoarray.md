@@ -30,6 +30,7 @@ public class Fila {
     private String[] fila;
     private int head;
     private int tail;
+    private int size;
     
     public ArrayList(int capacidade) {
         this.lista = new String[capacidade];
