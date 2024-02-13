@@ -190,6 +190,7 @@ de ordenar dados.&lt;/li&gt;
 &lt;h3 id=&#34;estruturas-de-dados-lineares&#34;&gt;Estruturas de Dados Lineares&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/arraylist&#34;&gt;Listas baseadas em Arrays (ArrayList)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/fifoarray/&#34;&gt;Filas baseadas em Arrays&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/linkedlist&#34;&gt;Listas Ligadas (LinkedList)&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://joaoarthurbm.github.io/eda/posts/hashtable&#34;&gt;Tabelas Hash&lt;/a&gt;
 &lt;ul&gt;
