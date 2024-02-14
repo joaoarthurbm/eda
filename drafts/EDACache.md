@@ -6,7 +6,7 @@ usar as estruturas básicas (arrays, linkedlists e tabelas hash) para implementa
 
 O que é cache *eviction*? Bom, a tradução para *eviction* orbita entre remoção, expulsão, despejo e evicção. Trazendo para o nosso contexto, vamos dizer que é a remoção algo do cache.
 
-E porque eu tenho que remover algo do cache? Bom, a essa altura já sabemos que cache é uma memória limitada. Por ser uma memória de rápido acesso, a capacidade de armazenamento do cache é limitada por questões de custo. Então, quando ela está cheia e você quer colocar um objeto lá, precisa remover outro antes.
+E porque eu tenho que remover algo do cache? A essa altura já sabemos que cache é uma memória limitada. Por ser uma memória de rápido acesso, a capacidade de armazenamento do cache é limitada por questões de custo. Então, quando ela está cheia e você quer colocar um objeto lá, precisa remover outro antes.
 
 E o que é política de cache *eviction*? Tão importante quanto remover um objeto do cache é saber qual objeto remover. A política de cache *eviction* determina qual será o elemento a ser removido.
 
@@ -15,13 +15,13 @@ coleção de livros em uma biblioteca particular em casa. O cômodo que abriga e
 
 Nesse cenário, sempre que eu precisar de um livro e ele estiver na cabeceira, ou seja, no cache, essa operação é considerada um **hit**. Isto é, eu procurei algo no cache e ele estava lá. 
 
-Por outro lado, se eu procurar algo no cache e não encontrar, a operação é condiderada como "miss". Isto é, procurei algo no cache e não estava. No caso de um  *miss*, a operação deve continuar procurando o elemento na memória de acesso mais lento subsequente. Voltando para a nossa metáfora, eu procurei um livro na cabeceira e não encontrei (miss), então tive descer as escadas e ir na biblioteca pegar o livro.
+Por outro lado, se eu procurar algo no cache e não encontrar, a operação é condiderada como **miss**. Isto é, procurei algo no cache e não estava. No caso de um  **miss**, a operação deve continuar procurando o elemento na memória de acesso mais lento subsequente, por exemplo, o BD. Voltando para a nossa metáfora, eu procurei um livro na cabeceira e não encontrei (miss), então tive descer as escadas e ir na biblioteca pegar o livro.
 
 Em termos bem simplistas, nosso objetivo é criar políticas/algoritmos que maximizem *hits* e minimizem *miss*.
 
 > *Hit rate* e *Miss rate* são métricas para avaliar sistemas/políticas de cache. Ambas são taxas em relação ao total de operações.
 
-Se só cabem 3 livros na nossa cabeceira e ela está cheia, quando eu trouxer um livro da biblioteca, qual livro eu vou remover da cabeceira? Em outros termos, qual a minha política de eviction?
+Se só cabem 3 livros na nossa cabeceira e ela está cheia, quando eu trouxer um livro da biblioteca, qual livro eu vou remover da cabeceira? Em outros termos, qual a minha política de *eviction*?
 
 Bom, chega de usar minha metáfora. Daqui em diante eu estou considerando que você já entende o que é cache, que ele é limitado, que precisamos decidir o que remover dele quando ele estiver cheio etc.
 
@@ -35,7 +35,7 @@ Agora, vamos analisar uma primeira operação de busca por um determinado objeto
 
 `get("a")` -> miss!
 
-Nesse caso, o primeiro passo é procurar o objeto com chave "a" no cache. Como ele não está lá, procuramos na outra memória. Se encontrarmos, colocarmos no cache. Digamos que esse seja o caso. Então, o estado do cache depois dessa primeira operação é:
+Nesse caso, o primeiro passo é procurar o objeto com chave "a" no cache. Como ele não está lá, procuramos no BD. Se encontrarmos, colocarmos no cache. Digamos que esse seja o caso. Então, o estado do cache depois dessa primeira operação é:
 
 `fila = ["a", null, null]`
 
@@ -56,22 +56,15 @@ Nosso cache está cheio. Vamos ver outras operações:
 
 Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.
 
-Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de eviction baseado em FIFO.
+Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de *eviction* baseado em FIFO.
 
 `get("d")` -> miss! 
 
-Procuramos pela chave "d" e não encontramos. Então tivemos que ir na memória mais lenta e agora precisamos colocar "d" no cache. A pergunta é: quem sai?
+Procuramos pela chave "d" e não encontramos. Então tivemos que ir no BD e agora precisamos colocar "d" no cache. A pergunta é: quem sai?
 
 Na política FIFO, o primeiro que entrou no cache é escolhido para sair. Ou seja, vamos remover "a" do cache. O estado fica:
 
 `fila = ["b", "c", "d"]`
-
-Veja o código:
-
-```
-shiftLeft(0);
-fila[fila.length - 1] = newElement;
-```
 
 Vamos agora procurar por "a".
 
@@ -96,28 +89,11 @@ public Pair get(String chave) {
 
 **hit**. A busca por um elemento no cache é O(n), pois executamos busca linear em um array de tamanho `n`. Como encontramos, a operação total é O(n).
 
-**miss**. A busca por um elemento no cache é $O(n)$, pois executamos busca linear em um array de tamanho `n`. Como não encontramos no cache, somente na outra memória, e precisamos ajustar o array para ele ser inserido, essa segunda operação também é $O(n)$, pois temos que fazer o shiftLeft. Nós já vimos o shiftLeft no material de ArrayList [link](https://joaoarthurbm.github.io/eda/posts/arraylist/). A soma das duas operações seria $2n$, o que sabemos que do ponto de vista assintótico continua $O(n)$. Mas é importante que você saiba que há o shift a ser feito.
+**miss**. A busca por um elemento no cache é $O(n)$, pois executamos busca linear em um array de tamanho `n`. Como não encontramos no cache, somente na outra memória, precisamos também adicionar esse novo elemento na fila. Essa operação, se tratarmos a fila de maneira circular (veja como <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">neste material</a>), é O(1). Como sabemos, O(n) + O(1) é O(n). 
 
 Note que a operação miss tem uma agravante importante: ela inclui uma ida ao banco. Naturalmente, é mais lenta. Contudo, estamos analisando aqui os aspectos da nossa solução FIFO.
 
 ### Uma otimização
-
-Na prática, conseguimos melhorar?! Sim! Se considerarmos a fila como circular e usarmos a operação `%`, conseguimos manipular head e tail em O(1) e dispensamos a necessidade de fazer o shift. A adição de um novo elemento no cache seria apenas:
-
-```
-cache.tail = (cache.tail + 1) % capacidade;
-cache[tail] = newElement;
-cache.head = (cache.head + 1) % cache.length;
-```
-
-Contudo, a operação toda (o get) continua sendo O(n). Só reduzimos uma passada no array, o que não é suficiente para reduzir a classe de complexidade O(2n) = O(n). Por isso eu disse que há melhora na prática, mas a classe de complexidade é a mesma. Nosso limitante aqui é a busca linear no cache.
-
-
-E se eu maniver o array ordenado e executar busca binária? Como a busca linear é nosso limitante, você pode pensar que manter ordenado e executar busca binária (O(log(n))) pode ser uma otimização. Contudo, manter um array ordenado através de inserção ordenada também é O(n). Nesse caso, trocaríamos uma operação O(n) por uma O(n) + O(log(n)).
-
-E se eu ordenar o array e efetuar busca binária? Ordenar um array por comparação é, no melhor caso, O(nlog(n)). Também não compensaria.
-
-### Uma segunda otimização mais atraente
 
 Se usarmos a técnica da fila circular, a adição fica em O(1) sem termos que fazer shift. Portanto, o nosso fator limitante aqui é a busca O(n). E se eu melhorasse a busca usando outra estutura de dados que otimiza essa operação? Funciona, né? Essa solução implica em criar outra estrutura auxiliar, nesse caso um HashMap, para otimizar a operação de busca. 
 
@@ -166,8 +142,7 @@ public Pair get(String key) {
 }
 ```
 
-Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast() da classe Fila. Ambos feitos em O(1) através da manipulação dos índices com o operador %, tratando a fila como circular.
-
+Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast() da classe Fila. Ambos feitos em O(1) através da manipulação dos índices com o operador %, tratando a fila como circular. Veja isso bem detalhado no <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">material de fila</a> da disciplina.
 
 ## Outra política de cache: Least Recently Used (LRU)
 
