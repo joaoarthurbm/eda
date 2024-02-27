@@ -66,13 +66,10 @@ O código do método ***merge*** está descrito abaixo. Vamos analisar por parte
             i++;
             k++;
         }
-        
-        // se a metade final não foi toda consumida, faz o append.
-        while (j <= right) {
-            v[k] = helper[j];
-            j++;
-            k++;
-        }
+       
+        // Não precisamos nos preocupar se a metade final foi 
+        // toda consumida, já que, se esse foi o caso, ela já está
+        // no array final.
 
     }
 ...
@@ -125,7 +122,7 @@ Agora, o algoritmo passa a tratar da comparação entre $helper[i]$ e $helper[j]
 ...
 ```
 
-Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o *append* de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.
+Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Se for a metade inicial, basta então, fazermos o *append* de todos os elementos faltantes até o meio. Isso é feito pelo código abaixo.
 
 ```java
     ...
@@ -135,15 +132,10 @@ Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será con
         i++;
         k++;
     }
-        
-    // se a metade final não foi toda consumida, faz o append.
-    while (j <= right) {
-        v[k] = helper[j];
-        j++;
-        k++;
-    }
     ...
 ```
+
+Não precisamos nos preocupar caso os elementos que sobrarem for da metade final, uma vez que eles já estão, e em ordem, no array original. Em versões antigas desse material, eu incluia o while dessa parte também, mas, de fato, não é preciso. Importante destacar que essa foi uma contribuição de uma aluna da turma de disciplina em 2023.2 que, em sala de aula, levantou o questionamento e gerou o debate.
 
 ## O Merge Sort
 
