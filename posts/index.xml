@@ -1766,14 +1766,11 @@ function showQuiz(quizId) {
             i&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
             k&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
         &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-        
-        &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade final não foi toda consumida, faz o append.
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-            v&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;k&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;j&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
-            j&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
-            k&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
-        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-
+       
+        &lt;span style=&#34;color:#75715e&#34;&gt;// Não precisamos nos preocupar se a metade final foi 
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// toda consumida, já que, se esse foi o caso, ela já está
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#75715e&#34;&gt;// no array final.
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Em primeiro lugar, vamos entender a assinatura do método &lt;em&gt;&lt;strong&gt;merge&lt;/strong&gt;&lt;/em&gt;. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: &lt;code&gt;left&lt;/code&gt; e &lt;code&gt;middle&lt;/code&gt; e &lt;code&gt;right&lt;/code&gt;, que determinam os limites em que o algoritmo deve agir.&lt;/p&gt;
@@ -1808,7 +1805,7 @@ function showQuiz(quizId) {
             
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o &lt;em&gt;append&lt;/em&gt; de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Se for a metade inicial, basta então, fazermos o &lt;em&gt;append&lt;/em&gt; de todos os elementos faltantes até o meio. Isso é feito pelo código abaixo.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;    &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
     &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade inicial não foi toda consumida, faz o append.
 &lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; middle&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
@@ -1816,15 +1813,9 @@ function showQuiz(quizId) {
         i&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
         k&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
-        
-    &lt;span style=&#34;color:#75715e&#34;&gt;// se a metade final não foi toda consumida, faz o append.
-&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
-        v&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;k&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; helper&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;j&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
-        j&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
-        k&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
-    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
     &lt;span style=&#34;color:#f92672&#34;&gt;...&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;o-merge-sort&#34;&gt;O Merge Sort&lt;/h2&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Não precisamos nos preocupar caso os elementos que sobrarem for da metade final, uma vez que eles já estão, e em ordem, no array original. Em versões antigas desse material, eu incluia o while dessa parte também, mas, de fato, não é preciso. Importante destacar que essa foi uma contribuição de uma aluna da turma de disciplina em 2023.2 que, em sala de aula, levantou o questionamento e gerou o debate.&lt;/p&gt;
+&lt;h2 id=&#34;o-merge-sort&#34;&gt;O Merge Sort&lt;/h2&gt;
 &lt;p&gt;Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &amp;ldquo;quebras&amp;rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.&lt;/p&gt;
 
 &lt;div style=&#34;position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;&#34;&gt;

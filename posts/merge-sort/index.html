@@ -204,14 +204,11 @@
             i<span style="color:#f92672">++;</span>
             k<span style="color:#f92672">++;</span>
         <span style="color:#f92672">}</span>
-        
-        <span style="color:#75715e">// se a metade final não foi toda consumida, faz o append.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-            v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
-            j<span style="color:#f92672">++;</span>
-            k<span style="color:#f92672">++;</span>
-        <span style="color:#f92672">}</span>
-
+       
+        <span style="color:#75715e">// Não precisamos nos preocupar se a metade final foi 
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// toda consumida, já que, se esse foi o caso, ela já está
+</span><span style="color:#75715e"></span>        <span style="color:#75715e">// no array final.
+</span><span style="color:#75715e"></span>
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Em primeiro lugar, vamos entender a assinatura do método <em><strong>merge</strong></em>. Naturalmente, ele recebe como parâmetro o array a ser processado. Recebe também três índices: <code>left</code> e <code>middle</code> e <code>right</code>, que determinam os limites em que o algoritmo deve agir.</p>
@@ -246,7 +243,7 @@
             
     <span style="color:#f92672">}</span>
 <span style="color:#f92672">...</span>
-</code></pre></div><p>Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Basta então, fazermos o <em>append</em> de todos os elementos da parte que não foi completamente consumida. Isso é feito pelo código abaixo.</p>
+</code></pre></div><p>Por fim, como vimos em detalhe no vídeo. Uma das duas partes do array será consumida em sua totalidade antes da outra. Se for a metade inicial, basta então, fazermos o <em>append</em> de todos os elementos faltantes até o meio. Isso é feito pelo código abaixo.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">...</span>
     <span style="color:#75715e">// se a metade inicial não foi toda consumida, faz o append.
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> middle<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
@@ -254,15 +251,9 @@
         i<span style="color:#f92672">++;</span>
         k<span style="color:#f92672">++;</span>
     <span style="color:#f92672">}</span>
-        
-    <span style="color:#75715e">// se a metade final não foi toda consumida, faz o append.
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>j <span style="color:#f92672">&lt;=</span> right<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        v<span style="color:#f92672">[</span>k<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> helper<span style="color:#f92672">[</span>j<span style="color:#f92672">];</span>
-        j<span style="color:#f92672">++;</span>
-        k<span style="color:#f92672">++;</span>
-    <span style="color:#f92672">}</span>
     <span style="color:#f92672">...</span>
-</code></pre></div><h2 id="o-merge-sort">O Merge Sort</h2>
+</code></pre></div><p>Não precisamos nos preocupar caso os elementos que sobrarem for da metade final, uma vez que eles já estão, e em ordem, no array original. Em versões antigas desse material, eu incluia o while dessa parte também, mas, de fato, não é preciso. Importante destacar que essa foi uma contribuição de uma aluna da turma de disciplina em 2023.2 que, em sala de aula, levantou o questionamento e gerou o debate.</p>
+<h2 id="o-merge-sort">O Merge Sort</h2>
 <p>Vamos primeiro entender o conceito, a teoria. Vejamos nesse vídeo como o Merge Sort se vale de repetidas &ldquo;quebras&rdquo; do array para ser capaz de executar a rotina Merge diversas vezes e completar a ordenação.</p>
 
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
