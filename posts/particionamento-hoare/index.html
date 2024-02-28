@@ -1,0 +1,452 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1>Particionamento Hoare para o Quick Sort</h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="2019-10-27T00:01:01-03:00">Oct 27, 2019</time>
+        </li>
+        
+
+        
+
+        <li>6 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+        <aside><i class="fab fa-github fa-lg" aria-hidden="true"> </i> <a href="https://github.com/joaoarthurbm/eda-implementacoes/blob/master/java/src/sorting/QuickSort.java"> <font color="#1980e6"> <b>Código utilizado neste material</b></font></a></aside>
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <hr>
+<p><a class="external" href="https://joaoarthurbm.github.io/eda/posts/quick-sort">No material sobre o QuickSort</a> nós vimos o particionamento de Lomuto &ndash; um algoritmo simples para posicionar o pivot tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores. Dá uma olhada lá para revisar o que é particionamento, porque nesse material nós vamos direto ao ponto: mostrar como funciona a estratégia de Hoare, que é mais eficiente na prática do que o de Lomuto.</p>
+<h1 id="a-estratégia-de-hoare-pra-particionar">A estratégia de Hoare pra particionar</h1>
+<p>Vamos particionar o array $[3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$.</p>
+<p>Vamos aqui também trabalhar com o pivot na primeira posição, isto é, <code>pivot = v[ini]</code>. A ideia do particionamento de Hoare é usar dois índices para percorrer o array. O primeiro índice, <code>i</code>, parte da posição à frente do pivot, isto é, <code>ini + 1</code> e percorre o array do início para o fim. O segundo índice,  <code>j</code>, parte da última posição e percorre o array do fim para o início. Sempre que encontrar um elemento v[i] maior do que o pivot, o <code>i</code> pára. De forma análoga, sempre que encontrar um elemento v[j] menor do que o pivot, o <code>j</code> pára. Depois dessa primeira iteração, se i &lt; j, troca-se v[i] por v[j] e repete-se esse processo. Complicado? Assim escrito é um pouco, né? Vamos para o exemplo:</p>
+<p>Para o array $values = [3, 1, 2, 3, 10, 23, 2, 1, 77, 7]$, temos que $pivot = 3$, $i = 1$ e $j = 9$, porque pivot é o valor de v[ini], i sempre inicia com ini + 1 e j sempre inicia no índice fim.</p>
+<p><strong>Passo 1.</strong> Vamos iterar no array com i primeiro, identificando o primeiro valor maior do que o pivot. Enquanto for menor, apenas anda com i. No nosso caso então, i vai parar no índice 4, já que 10 é maior que o pivot 3.</p>
+<p><strong>Passo 2.</strong> Vamos iterar com j agora, identificando o primeiro valor menor do que o pivot. Enquanto for maior, apenas anda com j para trás. No nosso caso então, j vai parar no índice 7, já que 1 é menor que o pivot 3.</p>
+<p align="center">values = [<font color="blue">3</font>, 1, 2, 3, <font color="red">10</font>, 23, 2, <font color="red">1</font>, 77, 7]</p>
+<p>Agora perguntamos: i &lt; j? Sim, pois 4 é menor do que 7. Então trocamos v[i] por v[j], ou seja, trocamos 10 por 1. Note que estamos mantendo os menores valores imediatamente a frente do pivot e os maiores na parte final do array, por isso trocamos.</p>
+<p align="center">values = [<font color="blue">3</font>, 1, 2, 3, <font color="red">1</font>, 23, 2, <font color="red">10</font>, 77, 7]</p>
+<p>Acabou? Não, pois i ainda é menor ou igual a j, isto é, não ultrapassou j. Nesse caso, continuamos iterando com os dois. Vamos lá. i pararia no índice 5, pois 23 é maior do que 3. Já o j pararia no índice 6, já que 2 é menor do que 3.</p>
+<p align="center">values = [<font color="blue">3</font>, 1, 2, 3, 1, <font color="red">23</font>, <font color="red">2</font>, 77, 7]</p>
+<p>Agora perguntamos: i &lt; j? Sim, pois 5 é menor do que 6. Então trocamos v[i] por v[j], ou seja, trocamos 23 por 2.</p>
+<p align="center">values = [<font color="blue">3</font>, 1, 2, 3, 1, <font color="red">2</font>, <font color="red">23</font>, 77, 7]</p>
+<p>Acabou? Não, pois i ainda é menor ou igual a j, isto é, não ultrapassou j. Nesse caso, continuamos iterando com os dois. Vamos lá. i pararia no índice 6, pois encontrou o valor 23, que é maior que o pivot. Já o j pararia no índice 5, já que 2 é menor do que 3.</p>
+<p>Agora perguntamos: i &lt; j? Não, pois 6 é maior do que 5. Nesse caso paramos a computação e apenas trocamos o pivot pelo elemento na posição j:</p>
+<p align="center">values = [<font color="blue">2</font>, 1, 2, 3, 1, <font color="blue">3</font>, 23, 77, 7]</p>
+<p>Particionou? Sim, né? Todos os valores à esquerda do pivot são menores ou iguais a ele e todos os valores à direita do pivot são maiores que ele.</p>
+<p>Agora é só fazer como sempre, chamar o particionamento de forma recursiva para a esquerda e para a direita.</p>
+<hr>
+<p>Acho que agora é um bom momento para você responder o quiz abaixo e verificar se você entendeu de fato a rotina de particionamento que acabamos de ver.</p>
+
+
+<style type="text/css" scoped>
+
+.quiz {
+    font-family: "Roboto Slab", serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type="radio"] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type="submit"] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*="btn"] {text-decoration: none;}
+input[class*="btn"], 
+button[class*="btn"] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#1bbcc2', endColorstr='#18a3a8', GradientType=0);
+}
+
+</style>
+
+<div class="row">
+<button class="btn-gradient cyan center" onclick="showQuiz(&#34;a&#34;)">Quiz</button>
+</div>
+
+<script src="https://joaoarthurbm.github.io/eda/js/quiz.js"></script>
+<div class="quiz" style="display:none" id="a">
+  <script>
+    var choices = " [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2, 1, 4, 7, 90, 8, 65, 32], [2, 4, 1, 7, 90, 8, 65, 32]".split(",");
+    var id = "a";
+    var question = "Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento hoare escolhendo 7 como pivot?";
+    var answers = "5".split(",").map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+</script>
+
+  <script>
+    var quiz = new Quiz("a", questions);
+  </script>
+</div>
+
+<script>
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === "none"){
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+</script>
+<hr>
+<h1 id="e-o-código">E o código?</h1>
+<p>De certa forma, simples. Veja:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">
+<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">particiona</span><span style="color:#f92672">(</span><span style="color:#66d9ef">int</span><span style="color:#f92672">[]</span> v<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> ini<span style="color:#f92672">,</span> <span style="color:#66d9ef">int</span> fim<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+	<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ini <span style="color:#f92672">+</span> 1<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> fim<span style="color:#f92672">;</span>
+	<span style="color:#66d9ef">int</span> pivot <span style="color:#f92672">=</span> v<span style="color:#f92672">[</span>ini<span style="color:#f92672">];</span>
+
+	<span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> j<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+
+		<span style="color:#75715e">// andando com i para frente. pára quando encontrar um valor maior que o pivot
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">while</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> j <span style="color:#f92672">&amp;&amp;</span> v<span style="color:#f92672">[</span>i<span style="color:#f92672">]</span> <span style="color:#f92672">&lt;=</span> pivot<span style="color:#f92672">)</span>
+			i<span style="color:#f92672">++;</span>
+
+		<span style="color:#75715e">// andando com j para trás. pára quando encontrar um valor menor ou igual ao pivot
+</span><span style="color:#75715e"></span>		<span style="color:#66d9ef">while</span><span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;=</span> j <span style="color:#f92672">&amp;&amp;</span> A<span style="color:#f92672">[</span>j<span style="color:#f92672">]</span> <span style="color:#f92672">&gt;</span> pivot<span style="color:#f92672">)</span>
+                j <span style="color:#f92672">=</span> j <span style="color:#f92672">-</span> 1<span style="color:#f92672">;</span>
+         
+        <span style="color:#75715e">// se i não encontrou j, troca
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>i <span style="color:#f92672">&lt;</span> j<span style="color:#f92672">)</span>
+        	swap<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> i<span style="color:#f92672">,</span> j<span style="color:#f92672">);</span>
+
+	<span style="color:#f92672">}</span>
+
+	swap<span style="color:#f92672">(</span>v<span style="color:#f92672">,</span> ini<span style="color:#f92672">,</span> j<span style="color:#f92672">);</span>
+	<span style="color:#66d9ef">return</span> j<span style="color:#f92672">;</span>
+<span style="color:#f92672">}</span>
+
+</code></pre></div>
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/"><i class="fa fa-chevron-circle-left"></i> Ordenação Linear: Counting sort</a>
+        </li>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/quick-sort/">Ordenação por Comparação: Quick Sort <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+

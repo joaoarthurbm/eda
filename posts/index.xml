@@ -2591,6 +2591,278 @@ Então a mediana de um array seria o nosso pivot perfeito, pois dividiria o arra
        </item>
        
        <item>
+         <title>Particionamento Hoare para o Quick Sort</title>
+         <link>https://joaoarthurbm.github.io/eda/posts/particionamento-hoare/</link>
+         <pubDate>Sun, 27 Oct 2019 00:01:01 -0300</pubDate>
+         
+         <guid>https://joaoarthurbm.github.io/eda/posts/particionamento-hoare/</guid>
+         <description>&lt;hr&gt;
+&lt;p&gt;&lt;a class=&#34;external&#34; href=&#34;https://joaoarthurbm.github.io/eda/posts/quick-sort&#34;&gt;No material sobre o QuickSort&lt;/a&gt; nós vimos o particionamento de Lomuto &amp;ndash; um algoritmo simples para posicionar o pivot tal que todos os elementos à esquerda são menores ou iguais e todos os elementos à direita são maiores. Dá uma olhada lá para revisar o que é particionamento, porque nesse material nós vamos direto ao ponto: mostrar como funciona a estratégia de Hoare, que é mais eficiente na prática do que o de Lomuto.&lt;/p&gt;
+&lt;h1 id=&#34;a-estratégia-de-hoare-pra-particionar&#34;&gt;A estratégia de Hoare pra particionar&lt;/h1&gt;
+&lt;p&gt;Vamos particionar o array $[3, 8, 7, 10, 0, 23, 2, 1, 77, 7]$.&lt;/p&gt;
+&lt;p&gt;Vamos aqui também trabalhar com o pivot na primeira posição, isto é, &lt;code&gt;pivot = v[ini]&lt;/code&gt;. A ideia do particionamento de Hoare é usar dois índices para percorrer o array. O primeiro índice, &lt;code&gt;i&lt;/code&gt;, parte da posição à frente do pivot, isto é, &lt;code&gt;ini + 1&lt;/code&gt; e percorre o array do início para o fim. O segundo índice,  &lt;code&gt;j&lt;/code&gt;, parte da última posição e percorre o array do fim para o início. Sempre que encontrar um elemento v[i] maior do que o pivot, o &lt;code&gt;i&lt;/code&gt; pára. De forma análoga, sempre que encontrar um elemento v[j] menor do que o pivot, o &lt;code&gt;j&lt;/code&gt; pára. Depois dessa primeira iteração, se i &amp;lt; j, troca-se v[i] por v[j] e repete-se esse processo. Complicado? Assim escrito é um pouco, né? Vamos para o exemplo:&lt;/p&gt;
+&lt;p&gt;Para o array $values = [3, 1, 2, 3, 10, 23, 2, 1, 77, 7]$, temos que $pivot = 3$, $i = 1$ e $j = 9$, porque pivot é o valor de v[ini], i sempre inicia com ini + 1 e j sempre inicia no índice fim.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Passo 1.&lt;/strong&gt; Vamos iterar no array com i primeiro, identificando o primeiro valor maior do que o pivot. Enquanto for menor, apenas anda com i. No nosso caso então, i vai parar no índice 4, já que 10 é maior que o pivot 3.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Passo 2.&lt;/strong&gt; Vamos iterar com j agora, identificando o primeiro valor menor do que o pivot. Enquanto for maior, apenas anda com j para trás. No nosso caso então, j vai parar no índice 7, já que 1 é menor que o pivot 3.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;3&lt;/font&gt;, 1, 2, 3, &lt;font color=&#34;red&#34;&gt;10&lt;/font&gt;, 23, 2, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 77, 7]&lt;/p&gt;
+&lt;p&gt;Agora perguntamos: i &amp;lt; j? Sim, pois 4 é menor do que 7. Então trocamos v[i] por v[j], ou seja, trocamos 10 por 1. Note que estamos mantendo os menores valores imediatamente a frente do pivot e os maiores na parte final do array, por isso trocamos.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;3&lt;/font&gt;, 1, 2, 3, &lt;font color=&#34;red&#34;&gt;1&lt;/font&gt;, 23, 2, &lt;font color=&#34;red&#34;&gt;10&lt;/font&gt;, 77, 7]&lt;/p&gt;
+&lt;p&gt;Acabou? Não, pois i ainda é menor ou igual a j, isto é, não ultrapassou j. Nesse caso, continuamos iterando com os dois. Vamos lá. i pararia no índice 5, pois 23 é maior do que 3. Já o j pararia no índice 6, já que 2 é menor do que 3.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;3&lt;/font&gt;, 1, 2, 3, 1, &lt;font color=&#34;red&#34;&gt;23&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;2&lt;/font&gt;, 77, 7]&lt;/p&gt;
+&lt;p&gt;Agora perguntamos: i &amp;lt; j? Sim, pois 5 é menor do que 6. Então trocamos v[i] por v[j], ou seja, trocamos 23 por 2.&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;3&lt;/font&gt;, 1, 2, 3, 1, &lt;font color=&#34;red&#34;&gt;2&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;23&lt;/font&gt;, 77, 7]&lt;/p&gt;
+&lt;p&gt;Acabou? Não, pois i ainda é menor ou igual a j, isto é, não ultrapassou j. Nesse caso, continuamos iterando com os dois. Vamos lá. i pararia no índice 6, pois encontrou o valor 23, que é maior que o pivot. Já o j pararia no índice 5, já que 2 é menor do que 3.&lt;/p&gt;
+&lt;p&gt;Agora perguntamos: i &amp;lt; j? Não, pois 6 é maior do que 5. Nesse caso paramos a computação e apenas trocamos o pivot pelo elemento na posição j:&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;values = [&lt;font color=&#34;blue&#34;&gt;2&lt;/font&gt;, 1, 2, 3, 1, &lt;font color=&#34;blue&#34;&gt;3&lt;/font&gt;, 23, 77, 7]&lt;/p&gt;
+&lt;p&gt;Particionou? Sim, né? Todos os valores à esquerda do pivot são menores ou iguais a ele e todos os valores à direita do pivot são maiores que ele.&lt;/p&gt;
+&lt;p&gt;Agora é só fazer como sempre, chamar o particionamento de forma recursiva para a esquerda e para a direita.&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;Acho que agora é um bom momento para você responder o quiz abaixo e verificar se você entendeu de fato a rotina de particionamento que acabamos de ver.&lt;/p&gt;
+
+
+&lt;style type=&#34;text/css&#34; scoped&gt;
+
+.quiz {
+    font-family: &#34;Roboto Slab&#34;, serif;
+    color: #333333;
+}
+.quiz fieldset {
+    border-color: #cecece;
+    border-width: 5px;
+    margin-bottom: 1em;
+}
+
+.quiz legend {
+    font-size: 105%;
+    font-weight: 600;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+
+.quiz label {
+    display: block;
+    line-height: 1.75em;
+}
+
+.quiz input[type=&#34;radio&#34;] {
+    margin-right: 15px;
+    page-break-after: avoid;
+    page-break-before: avoid;
+}
+
+.quiz input[type=&#34;submit&#34;] {
+    background: #7fccde;
+    font-weight: bold;
+    color: white;
+    display: block;
+    font-size: 120%;
+    font-weight: 600;
+    height: 2.5em;
+    margin-top: 1em;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.quiz table {
+    color: white;
+    font-weight: bold;
+    margin: 1em auto 2em auto;
+    width: 100%;
+}
+
+.quiz td {
+    padding: 5px 15px;
+    text-align: left;
+    width: 60px;
+}
+
+.quiz td.missing-label,
+.quiz td.missing-score {
+    background: #CECBC2;
+}
+
+.quiz td.right-label,
+.quiz td.right-score {
+    background: #74b559;
+}
+
+.quiz td.wrong-label,
+.quiz td.wrong-score {
+    background: #D01F3C;
+}
+
+ 
+.color .cyan {background: #7fccde;}
+
+.btn-container, .container {
+    background-color: white;
+    border-radius: 4px;
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+
+.btn {
+    margin: 9px;
+}
+
+.btn-gradient {
+    margin: 5px;
+}
+a[class*=&#34;btn&#34;] {text-decoration: none;}
+input[class*=&#34;btn&#34;], 
+button[class*=&#34;btn&#34;] {border: 50;}
+
+ 
+.btn.large, 
+.btn-effect.large {
+  padding: 20px 40px; 
+  font-size: 22px;
+}
+.btn.small, 
+.btn-two.small, 
+.btn-gradient.small, 
+.btn-effect.small {
+  padding: 8px 18px;  
+  font-size: 14px;
+}
+.btn.mini, 
+.btn-two.mini, 
+.btn-gradient.mini, 
+.btn-effect.mini {
+  padding: 4px 12px;  
+  font-size: 12px;
+}
+.btn.block, 
+.btn-two.block, 
+.btn-gradient.block, 
+.btn-effect.block {
+  display: block;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.btn-gradient.large {
+  padding: 15px 45px; 
+  font-size: 22px;
+}
+
+.btn.cyan, .btn-two.cyan     {background-color: #7fccde;}
+
+ 
+.btn {
+    position: relative;
+    border: 0;
+    padding: 15px 25px;
+    display: inline-block;
+    text-align: center;
+    color: white;
+}
+.btn:active {
+    top: 4px;   
+}
+
+ 
+.btn.cyan {box-shadow:0px 4px 0px #73B9C9;}
+.btn.cyan:active {box-shadow: 0 0 #73B9C9; background-color: #70B4C4;}
+
+
+ 
+.btn-gradient {
+    text-decoration: none;
+    color: white;
+    padding: 10px 30px;
+    display: inline-block;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.21);
+    border-bottom: 4px solid rgba(0,0,0,0.21);
+    border-radius: 4px;
+    text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+}
+
+ 
+.btn-gradient.cyan {
+    background: rgba(27,188,194,1);
+    background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(27,188,194,1)), to(rgba(24,163,168,1)));
+    background: -webkit-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -moz-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: -o-linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    background: linear-gradient(rgba(27,188,194,1) 0%, rgba(24,163,168,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=&#39;#1bbcc2&#39;, endColorstr=&#39;#18a3a8&#39;, GradientType=0);
+}
+
+&lt;/style&gt;
+
+&lt;div class=&#34;row&#34;&gt;
+&lt;button class=&#34;btn-gradient cyan center&#34; onclick=&#34;showQuiz(&amp;#34;a&amp;#34;)&#34;&gt;Quiz&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script src=&#34;https://joaoarthurbm.github.io/eda/js/quiz.js&#34;&gt;&lt;/script&gt;
+&lt;div class=&#34;quiz&#34; style=&#34;display:none&#34; id=&#34;a&#34;&gt;
+  &lt;script&gt;
+    var choices = &#34; [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2, 1, 4, 7, 90, 8, 65, 32], [2, 4, 1, 7, 90, 8, 65, 32]&#34;.split(&#34;,&#34;);
+    var id = &#34;a&#34;;
+    var question = &#34;Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento hoare escolhendo 7 como pivot?&#34;;
+    var answers = &#34;5&#34;.split(&#34;,&#34;).map(Number);
+    console.log(answers)
+    if (! (id in questions)){
+      questions[id] = [];
+    }
+    questions[id].push(new Question(question, choices, answers));
+&lt;/script&gt;
+
+  &lt;script&gt;
+    var quiz = new Quiz(&#34;a&#34;, questions);
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+function showQuiz(quizId) {
+  
+  var x = document.getElementById(quizId);
+  if (x.style.display === &#34;none&#34;){
+    x.style.display = &#34;block&#34;;
+  } else {
+    x.style.display = &#34;none&#34;;
+  }
+}
+&lt;/script&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;e-o-código&#34;&gt;E o código?&lt;/h1&gt;
+&lt;p&gt;De certa forma, simples. Veja:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;
+&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;particiona&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; ini&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ini &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; fim&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;ini&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+
+		&lt;span style=&#34;color:#75715e&#34;&gt;// andando com i para frente. pára quando encontrar um valor maior que o pivot
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; v&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;i&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+			i&lt;span style=&#34;color:#f92672&#34;&gt;++;&lt;/span&gt;
+
+		&lt;span style=&#34;color:#75715e&#34;&gt;// andando com j para trás. pára quando encontrar um valor menor ou igual ao pivot
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;while&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; A&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;j&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; pivot&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+                j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+         
+        &lt;span style=&#34;color:#75715e&#34;&gt;// se i não encontrou j, troca
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;i &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt;
+        	swap&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+
+	&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+	swap&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;v&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; ini&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+       </item>
+       
+       <item>
          <title>Ordenação Linear: Counting sort</title>
          <link>https://joaoarthurbm.github.io/eda/posts/ordenacao-linear/</link>
          <pubDate>Sun, 27 Oct 2019 00:00:00 -0300</pubDate>
