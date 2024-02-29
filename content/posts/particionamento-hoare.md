@@ -56,7 +56,7 @@ Acho que agora é um bom momento para você responder o quiz abaixo e verificar 
 
 {{% quiz a%}}
 
-{{< item question="Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento hoare escolhendo 7 como pivot?" answers="5" choices=" [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2, 1, 4, 7, 90, 8, 65, 32], [2, 4, 1, 7, 90, 8, 65, 32]">}}
+{{< item question="Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento hoare escolhendo 7 como pivot?" answers="5" choices=" [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2 - 1 - 4 - 7 - 90 - 8 - 65 - 32], [2 - 4 - 1 - 7 - 90 - 8 - 65 - 32]">}}
 
 
 {{% /quiz %}}
