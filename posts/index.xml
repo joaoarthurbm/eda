@@ -2802,7 +2802,7 @@ button[class*=&#34;btn&#34;] {border: 50;}
 &lt;script src=&#34;https://joaoarthurbm.github.io/eda/js/quiz.js&#34;&gt;&lt;/script&gt;
 &lt;div class=&#34;quiz&#34; style=&#34;display:none&#34; id=&#34;a&#34;&gt;
   &lt;script&gt;
-    var choices = &#34; [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2, 1, 4, 7, 90, 8, 65, 32], [2, 4, 1, 7, 90, 8, 65, 32]&#34;.split(&#34;,&#34;);
+    var choices = &#34; [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [4 - 1 - 2 - 7 - 8 - 90 - 65 - 32] , [4 - 2 - 1 - 7 - 90 - 8 - 65 - 32], [2 - 1 - 4 - 7 - 90 - 8 - 65 - 32], [2 - 4 - 1 - 7 - 90 - 8 - 65 - 32]&#34;.split(&#34;,&#34;);
     var id = &#34;a&#34;;
     var question = &#34;Qual o estado final do array [7, 8, 1, 2, 90, 4, 65, 32] após o particionamento hoare escolhendo 7 como pivot?&#34;;
     var answers = &#34;5&#34;.split(&#34;,&#34;).map(Number);
