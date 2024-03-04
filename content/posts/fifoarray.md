@@ -127,7 +127,14 @@ fila = [<font color="red">"c", "c", "c"</font>]; `head` = -1, `tail` = -1;
 
 fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2;
 
-Como você pode ver, a fila está cheia. Qual seria o resultado então de uma operação ***addLast("d")***? Nós já decidimos que vamos sobrescrever o mais antigo da fila, ou seja, quem está no início (***head***) da fila.
+Como você pode ver, a fila está cheia. Qual seria o resultado então de uma operação ***addLast("d")***? Há 3 soluções aquiL
+
+1. Uma solução é simplesmente lançar uma exceção indicando que a fila está cheia. 
+2. Outra alternativa é crescer dinamicamente a fila, isto é, aumentar o array, transcrever todo mundo para o novo array e operar nele. Essa é a decisão que tomamos para implementar uma ArrayList, por exemplo. Veja no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/arraylist/">ArrayList</a>.
+3. Uma outra solução é sobrescrever algum elemento da fila. Como trata-se de uma fila, escolhemos o primeiro que entrou (mais antigo) para ser sobrescrito.
+
+
+Vamos trabalhar com a solução 3 nesse momento, isto é, sobrescrever o mais antigo da fila (***head***). Essa solução é muito utilizada quando temos o tamanho limitado e fixo para a estrutura, que é o caso de cenários de memória cache.
 
 Nós já sabemos fazer isso. Basta fazer o shiftLeft e adicionar o novo elemento no final da fila. Vamos acompanhar o estado da fila durante a operação. Primeiro, fazemos o shiftLeft e ela fica assim:
 
@@ -188,17 +195,23 @@ Perceba que estamos tratando o array de forma circular. Dessa maneira, não prec
 
 ```java
     public void addLast(String element) {
-        if (isFull()) throw new RuntimeException("fila cheia!");
-
-        // na primeira adição, head também é alterada.
-        if (isEmpty()) {
+        // toda adição deve aumentar o número de elementos, exceto
+        // se já estiver cheio.
+        if (!isFull())
+            this.size += 1;
+    
+        // na primeira adição, ambos vão para o índice 0.
+        if (isEmpty())
             this.head = 0;
-        }
+        
+        // se já tiver cheio, precisamos andar com head para liberar o espaço;
+        // e não acrescentamos em size porque não houve aumento de elementos.
+        if (isFull())
+            this.head += 1 % this.tail;
         
         // incrementa tail e adiciona o novo elemento
         this.tail = (this.tail + 1) % this.fila.length;
         this.fila[tail] = element;
-        this.size += 1;
     }
 ```
 
