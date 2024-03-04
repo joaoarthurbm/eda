@@ -262,23 +262,17 @@
 <p>Perceba que estamos tratando o array de forma circular. Dessa maneira, não precisamos fazer shift, apenas termos sempre cuidado de usar o <code>% fila.length</code> nas operações.</p>
 <h3 id="implementação">Implementação</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">addLast</span><span style="color:#f92672">(</span>String element<span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
-        <span style="color:#75715e">// toda adição deve aumentar o número de elementos, exceto
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// se já estiver cheio.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(!</span>isFull<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
-    
-        <span style="color:#75715e">// na primeira adição, ambos vão para o índice 0.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span>
+        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isFull<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> RuntimeException<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;fila cheia!&#34;</span><span style="color:#f92672">);</span>
+
+        <span style="color:#75715e">// na primeira adição, head também é alterada.
+</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#f92672">{</span>
             <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
-        
-        <span style="color:#75715e">// se já tiver cheio, precisamos andar com head para liberar o espaço;
-</span><span style="color:#75715e"></span>        <span style="color:#75715e">// e não acrescentamos em size porque não houve aumento de elementos.
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isFull<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">+=</span> 1 <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">;</span>
+        <span style="color:#f92672">}</span>
         
         <span style="color:#75715e">// incrementa tail e adiciona o novo elemento
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">[</span>tail<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> element<span style="color:#f92672">;</span>
+        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">+=</span> 1<span style="color:#f92672">;</span>
     <span style="color:#f92672">}</span>
 </code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">removeFirst</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#75715e">// se estiver vazia, não há elemento
