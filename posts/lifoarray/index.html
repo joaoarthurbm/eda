@@ -173,7 +173,7 @@
     <span style="color:#f92672">}</span>
     <span style="color:#f92672">...</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Em primeiro lugar, é importante destacar o uso do atributo <code>topo</code>. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.</p>
+</code></pre></div><p>Em primeiro lugar, é importante destacar o uso do atributo <code>topo</code>. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe pilha é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.</p>
 <h2 id="operações">Operações</h2>
 <p>Temos duas operaçõs principais em Pilha: <code>push(String ele)</code> e <code>pop()</code>. Essas operações também podem ser nomeadas de addLast() e removeLast(). Faz sentido, né? Nós já decidimos que em uma pilha as adições e remoções são sempre no topo.</p>
 <p>Direto ao ponto. Vamos entender o funcionamento de uma pilha com 3 posições simulando várias operações de <code>push(String element)</code> e <code>pop()</code>.</p>
@@ -187,7 +187,7 @@
 <p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;</font>, <font color="red">null</font>]; <code>topo</code> = 1;</p>
 <p>&ldquo;b&rdquo; foi adicionado no topo da pilha. Ou seja, <em><strong>topo</strong></em> assumiu o valor 1. Abaixo de b, está o elemento &ldquo;a&rdquo;.</p>
 <p>Adicionando &ldquo;c&rdquo; na pilha (push):</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
 <p>&ldquo;c&rdquo; foi adicionado no topo da pilha.</p>
 <h4 id="implementação">Implementação</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#f92672">...</span>
@@ -211,16 +211,16 @@
 <h3 id="pop">pop</h3>
 <p>Já vimos como funciona a adição. Suponha que agora a gente queira remover alguém da pilha. Como já estabelecemos, a política é bem clara: vamos remover o último que entrou na pilha, ou seja, quem está no topo.</p>
 <p>Vamos relembrar novamente o estado da nossa pilha antes do pop.</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
 <p>Então, depois de pop, a pilha fica nesse estado:</p>
 <p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;</font>, <font color="red">&ldquo;c&rdquo;</font>]; <code>topo</code> = 1;</p>
 <p>Preste bem atenção! A pilha não é &ldquo;a&rdquo;, &ldquo;b&rdquo; e &ldquo;c&rdquo;. A pilha é &ldquo;a&rdquo; e &ldquo;b&rdquo;, com &ldquo;b&rdquo; no topo. A posição que está em vermelho está fora dos limites da pilha, pois quem define os limites da pilha são <em><strong>0</strong></em> e <em><strong>topo</strong></em> e eles estão em 0 e 1 respectivamente. O último &ldquo;c&rdquo; ficou lá por motivos de simplicidade. Isso é muito importante de ser entendido. A pilha é uma coisa, o array que é usado para montar a pilha é outra. A pilha é uma abstração que criamos em cima do array. Poderíamos ter atribuído <code>null</code> para aquela posição. Mas, como não é preciso, apenas movi topo para a posição anterior.</p>
 <p>Pense assim para fixar. Se eu tiver que imprimir quem está na pilha, eu vou imprimir os elementos do array que estão entre <em><strong>0</strong></em> e <em><strong>topo</strong></em>, incluindo os dois.</p>
 <p>Vamos fazer mais uma remoção da pilha (pop). A pilha ficaria nesse estado:</p>
 <p>pilha = [<font color="blue">&ldquo;a&rdquo;</font>, <font color="red">&ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 0;</p>
-<p>Preste bem atenção! Na nossa fila agora há apenas um elemento, o &ldquo;a&rdquo;, pois topo está em 0. Os valores &ldquo;b&rdquo;  e &ldquo;c&rdquo; que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.</p>
+<p>Preste bem atenção! Na nossa pilha agora há apenas um elemento, o &ldquo;a&rdquo;, pois topo está em 0. Os valores &ldquo;b&rdquo;  e &ldquo;c&rdquo; que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.</p>
 <p>Se invocarmos o método pop mais uma vez, a pilha fica vazia, isto é, topo assume o valor -1;</p>
-<p>fila = [<font color="red">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = -1;</p>
+<p>pilha = [<font color="red">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = -1;</p>
 <h4 id="implementação-1">Implementação</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java">    <span style="color:#66d9ef">public</span> String <span style="color:#a6e22e">pop</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span> <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> NoSuchElementException<span style="color:#f92672">();</span>
@@ -253,7 +253,7 @@
 </ul>
 <hr>
 <p><strong>Lidando com a pilha cheia.</strong> Vamos analisar a pilha abaixo:</p>
-<p>fila = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
+<p>pilha = [<font color="blue">&ldquo;a&rdquo;, &ldquo;b&rdquo;, &ldquo;c&rdquo;</font>]; <code>topo</code> = 2;</p>
 <p>Como você pode ver, a pilha está cheia. Qual seria o resultado então de uma operação <em><strong>push(&ldquo;d&rdquo;)</strong></em>? Nós já decidimos que não vamos aumentar o tamanho da pilha, nem sobrescrever o topo. É só analisar o código. Uma exceção será lançada alertando que a pilha está cheia.</p>
 <hr>
 <h4 id="análise-de-eficência">Análise de eficência</h4>
