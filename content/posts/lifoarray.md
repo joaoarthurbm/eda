@@ -39,7 +39,7 @@ public class Pilha {
 }
 ```
 
-Em primeiro lugar, é importante destacar o uso do atributo `topo`. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe fila é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.
+Em primeiro lugar, é importante destacar o uso do atributo `topo`. Ele vai delimitar quem está no topo da pilha. Nossa pilha está entre os índices 0 e topo. Nossa classe pilha é uma abstração em cima do array. Quando criamos um array de String, por exemplo, todos os elementos são null. Ele não representa nossa pilha. Nossa pilha por enquanto é vazia porque o topo é -1, uma posição inexistente no array.
 
 ## Operações
 
@@ -67,7 +67,7 @@ pilha = [<font color="blue">"a", "b"</font>, <font color="red">null</font>]; `to
 
 Adicionando "c" na pilha (push):
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
+pilha = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
 
 "c" foi adicionado no topo da pilha.
 
@@ -105,7 +105,7 @@ Já vimos como funciona a adição. Suponha que agora a gente queira remover alg
 
 Vamos relembrar novamente o estado da nossa pilha antes do pop.
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
+pilha = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
 
 Então, depois de pop, a pilha fica nesse estado: 
 
@@ -119,11 +119,11 @@ Vamos fazer mais uma remoção da pilha (pop). A pilha ficaria nesse estado:
 
 pilha = [<font color="blue">"a"</font>, <font color="red">"b", "c"</font>]; `topo` = 0;
 
-Preste bem atenção! Na nossa fila agora há apenas um elemento, o "a", pois topo está em 0. Os valores "b"  e "c" que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.
+Preste bem atenção! Na nossa pilha agora há apenas um elemento, o "a", pois topo está em 0. Os valores "b"  e "c" que estão no array estão fora dos limites de 0 e topo e, portanto, não fazem parte da pilha.
 
 Se invocarmos o método pop mais uma vez, a pilha fica vazia, isto é, topo assume o valor -1;
 
-fila = [<font color="red">"a", "b", "c"</font>]; `topo` = -1;
+pilha = [<font color="red">"a", "b", "c"</font>]; `topo` = -1;
 
 #### Implementação
 
@@ -174,7 +174,7 @@ Para tanto, eu preciso utilizar uma outra pilha para ir guardando os elementos q
 ---
 **Lidando com a pilha cheia.** Vamos analisar a pilha abaixo:
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
+pilha = [<font color="blue">"a", "b", "c"</font>]; `topo` = 2;
 
 Como você pode ver, a pilha está cheia. Qual seria o resultado então de uma operação ***push("d")***? Nós já decidimos que não vamos aumentar o tamanho da pilha, nem sobrescrever o topo. É só analisar o código. Uma exceção será lançada alertando que a pilha está cheia.
 
