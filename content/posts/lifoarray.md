@@ -57,7 +57,7 @@ Adicionando "a" na pilha (push):
 
 pilha = [<font color="blue">"a"</font>, <font color="red">null, null</font>]; `topo` = 0;
 
-Neste momento, o topo da pilha está no índice 1. Então, nossa pilha está destacada em azul. Tem apenas o elemento "a".
+Neste momento, o topo da pilha está no índice 0. Então, nossa pilha está destacada em azul. Tem apenas o elemento "a".
 
 Adicionando "b" na pilha (push):
 
