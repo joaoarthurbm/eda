@@ -3854,7 +3854,7 @@ IndexOutOfBounds&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;pilha = [&lt;font color=&#34;red&#34;&gt;null, null, null&lt;/font&gt;]; &lt;code&gt;topo&lt;/code&gt; = -1;&lt;/p&gt;
 &lt;p&gt;Adicionando &amp;ldquo;a&amp;rdquo; na pilha (push):&lt;/p&gt;
 &lt;p&gt;pilha = [&lt;font color=&#34;blue&#34;&gt;&amp;ldquo;a&amp;rdquo;&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;null, null&lt;/font&gt;]; &lt;code&gt;topo&lt;/code&gt; = 0;&lt;/p&gt;
-&lt;p&gt;Neste momento, o topo da pilha está no índice 1. Então, nossa pilha está destacada em azul. Tem apenas o elemento &amp;ldquo;a&amp;rdquo;.&lt;/p&gt;
+&lt;p&gt;Neste momento, o topo da pilha está no índice 0. Então, nossa pilha está destacada em azul. Tem apenas o elemento &amp;ldquo;a&amp;rdquo;.&lt;/p&gt;
 &lt;p&gt;Adicionando &amp;ldquo;b&amp;rdquo; na pilha (push):&lt;/p&gt;
 &lt;p&gt;pilha = [&lt;font color=&#34;blue&#34;&gt;&amp;ldquo;a&amp;rdquo;, &amp;ldquo;b&amp;rdquo;&lt;/font&gt;, &lt;font color=&#34;red&#34;&gt;null&lt;/font&gt;]; &lt;code&gt;topo&lt;/code&gt; = 1;&lt;/p&gt;
 &lt;p&gt;&amp;ldquo;b&amp;rdquo; foi adicionado no topo da pilha. Ou seja, &lt;em&gt;&lt;strong&gt;topo&lt;/strong&gt;&lt;/em&gt; assumiu o valor 1. Abaixo de b, está o elemento &amp;ldquo;a&amp;rdquo;.&lt;/p&gt;
