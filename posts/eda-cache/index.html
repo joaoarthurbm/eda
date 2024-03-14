@@ -173,14 +173,14 @@ coleção de livros em uma biblioteca particular em casa. O cômodo que abriga e
 <p><code>fila = [&quot;a&quot;, null, null]</code></p>
 <p>Minha política é trazer o livro que comecei a ler para a cabeceira para que ele seja facilmente acessado nas próximas vezes que eu for ler.</p>
 <p>Agora, outra duas operações com comportamento similar:</p>
-<p><code>get(&quot;b&quot;)</code> -&gt; miss!
-<code>get(&quot;c&quot;)</code> -&gt; miss!</p>
+<p><code>get(&quot;b&quot;)</code> -&gt; miss!</p>
+<p><code>get(&quot;c&quot;)</code> -&gt; miss!</p>
 <p>O estado do nosso cache atualmente é:</p>
 <p><code>fila = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code></p>
 <p>Nosso cache está cheio. Vamos ver outras operações:</p>
-<p><code>get(&quot;a&quot;)</code> -&gt; hit!
-<code>get(&quot;b&quot;)</code> -&gt; hit!
-<code>get(&quot;c&quot;)</code> -&gt; hit!</p>
+<p><code>get(&quot;a&quot;)</code> -&gt; hit!</p>
+<p><code>get(&quot;b&quot;)</code> -&gt; hit!</p>
+<p><code>get(&quot;c&quot;)</code> -&gt; hit!</p>
 <p>Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. No nosso caso, procuramos livros que estão na cabeceira. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.</p>
 <p>Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de <em>eviction</em> baseado em FIFO.</p>
 <p><code>get(&quot;d&quot;)</code> -&gt; miss!</p>
