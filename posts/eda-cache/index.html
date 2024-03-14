@@ -1,0 +1,280 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+  <title>Estruturas de Dados e Algoritmos</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="The HTML5 Herald" />
+  <meta name="author" content="João Arthur Brunet" /><meta name="generator" content="Hugo 0.75.1" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
+  <script src="https://kit.fontawesome.com/b76b73e8e8.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Slab|Ruda" />
+  <link rel="stylesheet" type="text/css" href="https://joaoarthurbm.github.io/eda/css/styles.css" /><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+  });
+  MathJax.Hub.Queue(function() {
+    
+    
+    
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+
+  MathJax.Hub.Config({
+  
+  TeX: { equationNumbers: { autoNumber: "AMS" } }
+  });
+</script>
+  
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-151903059-1"></script>
+<script>
+      window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+            gtag('config', 'UA-151903059-1');
+        </script>
+
+
+</head>
+
+<body>
+  <div id="container">
+    <header>
+      <h1>
+                <a href="https://joaoarthurbm.github.io/eda/">Estruturas de Dados e Algoritmos</a>
+            </h1>
+
+      <ul id="social-media">
+        
+        
+        
+        <li><a href="https://twitter.com/joaobrunet"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+          
+        <li><a href="http://joaoarthurbm.github.io"><i class="fab fa-github fa-lg" aria-hidden="true"></i></a></li>
+           
+        <li><a href="https://instagram.com/joaoarthurbm"><i class="fab fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+        
+      </ul>
+      
+      <p><em>João Arthur Brunet <br> Computação @ UFCG</em></p>
+      
+    </header>
+
+    
+<nav>
+    <ul>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/curso/">
+                <i class="fa-li fa  fa-lg"></i><span>Curso</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/objetivos/">
+                <i class="fa-li fa  fa-lg"></i><span>Objetivos</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/conteudo/">
+                <i class="fa-li fa  fa-lg"></i><span>Conteúdo</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/contribua/">
+                <i class="fa-li fa  fa-lg"></i><span>Contribua</span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="" href="https://joaoarthurbm.github.io/eda/bibliografia/">
+                <i class="fa-li fa  fa-lg"></i><span>Bibliografia</span>
+            </a>
+        </li>
+        
+    </ul>
+</nav>
+    <main>
+
+
+
+
+<article>
+
+    <h1></h1>    
+
+    
+        <aside>
+    <ul>
+        <li>
+            <time class="post-date" datetime="0001-01-01T00:00:00Z">Jan 1, 0001</time>
+        </li>
+        
+
+        
+
+        <li>8 minutos de leitura</li>
+
+
+        
+
+
+        
+
+
+
+        
+
+
+    </ul>
+</aside>
+
+    
+
+    <h1 id="estruturas-de-dados-básicas-e-cache">Estruturas de Dados Básicas e Cache</h1>
+<p>Este não é o material para você aprender cache. Há excelentes livros para isso.
+Este material é usado na disciplina de estruturas de dados e serve para discutir como
+usar as estruturas básicas (arrays, linkedlists e tabelas hash) para implementar algumas políticas de cache <em>eviction</em>. Portanto, o objetivo principal é mostrar a aplicação de EDAs no contexto de cache. Assim, vamos falar de alguns conceitos da área de maneira superficial.</p>
+<p>O que é cache <em>eviction</em>? Bom, a tradução para <em>eviction</em> orbita entre remoção, expulsão, despejo e evicção. Trazendo para o nosso contexto, vamos dizer que é a remoção algo do cache.</p>
+<p>E porque eu tenho que remover algo do cache? A essa altura já sabemos que cache é uma memória limitada. Por ser uma memória de rápido acesso, a capacidade de armazenamento do cache é limitada por questões de custo. Então, quando ela está cheia e você quer colocar um objeto lá, precisa remover outro antes.</p>
+<p>E o que é política de cache <em>eviction</em>? Tão importante quanto remover um objeto do cache é saber qual objeto remover. A política de cache <em>eviction</em> determina qual será o elemento a ser removido.</p>
+<p>Vamos discutir exemplos de políticas. Imagine que você é um leitor ávido e tem uma grande
+coleção de livros em uma biblioteca particular em casa. O cômodo que abriga essa biblioteca é longe do seu quarto, onde você lê os livros. Por isso, você tem que escolher alguns para colocar no móvel ao lado da sua cama para poder acessar mais rápido quando você for ler. Isto é, no nosso cenário, a biblioteca pode representar o banco de dados ou o sistema de arquivos, ou seja, uma memória de alta capacidade de armazenamento, porém de acesso mais lento. Por outro lado, nossa cabeceira representa o cache. É muito mais fácil/rápido acessar o livro, mas ela tem uma capacidade reduzida.</p>
+<p>Nesse cenário, sempre que eu precisar de um livro e ele estiver na cabeceira, ou seja, no cache, essa operação é considerada um <strong>hit</strong>. Isto é, eu procurei algo no cache e ele estava lá.</p>
+<p>Por outro lado, se eu procurar algo no cache e não encontrar, a operação é condiderada como <strong>miss</strong>. Isto é, procurei algo no cache e não estava. No caso de um  <strong>miss</strong>, a operação deve continuar procurando o elemento na memória de acesso mais lento subsequente, por exemplo, o BD. Voltando para a nossa metáfora, eu procurei um livro na cabeceira e não encontrei (miss), então tive descer as escadas e ir na biblioteca pegar o livro. Ruim, né?</p>
+<p>Em termos bem simplistas, nosso objetivo é criar políticas/algoritmos que maximizem <em>hits</em> e minimizem <em>miss</em>.</p>
+<blockquote>
+<p><em>Hit rate</em> e <em>Miss rate</em> são métricas para avaliar sistemas/políticas de cache. Ambas são taxas em relação ao total de operações.</p>
+</blockquote>
+<p>Se só cabem 3 livros na nossa cabeceira e ela está cheia, quando eu trouxer um livro da biblioteca, qual livro eu vou remover da cabeceira? Em outros termos, qual a minha política de <em>eviction</em>?</p>
+<h2 id="nosso-primeiro-cenário-fifo-first-in-first-out">Nosso Primeiro Cenário: FIFO (First In First Out)</h2>
+<p>Nosso cache é um array de tamanho 3, manipulado como uma fila. Ele está vazio, por enquanto.</p>
+<p><code>fila = [null, null, null]</code></p>
+<p>Agora, vamos analisar uma primeira operação de busca por um determinado objeto no nosso sistema:</p>
+<p><code>get(&quot;a&quot;)</code> -&gt; miss!</p>
+<p>Nesse caso, o primeiro passo é procurar o objeto com chave &ldquo;a&rdquo; no cache. Como ele não está lá, procuramos no BD. Se encontrarmos, colocarmos no cache. Digamos que esse seja o caso. Então, o estado do cache depois dessa primeira operação é:</p>
+<p><code>fila = [&quot;a&quot;, null, null]</code></p>
+<p>Minha política é trazer o livro que comecei a ler para a cabeceira para que ele seja facilmente acessado nas próximas vezes que eu for ler.</p>
+<p>Agora, outra duas operações com comportamento similar:</p>
+<p><code>get(&quot;b&quot;)</code> -&gt; miss!
+<code>get(&quot;c&quot;)</code> -&gt; miss!</p>
+<p>O estado do nosso cache atualmente é:</p>
+<p><code>fila = [&quot;a&quot;, &quot;b&quot;, &quot;c&quot;]</code></p>
+<p>Nosso cache está cheio. Vamos ver outras operações:</p>
+<p><code>get(&quot;a&quot;)</code> -&gt; hit!
+<code>get(&quot;b&quot;)</code> -&gt; hit!
+<code>get(&quot;c&quot;)</code> -&gt; hit!</p>
+<p>Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. No nosso caso, procuramos livros que estão na cabeceira. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.</p>
+<p>Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de <em>eviction</em> baseado em FIFO.</p>
+<p><code>get(&quot;d&quot;)</code> -&gt; miss!</p>
+<p>Procuramos pela chave &ldquo;d&rdquo; e não encontramos. Então tivemos que ir no BD e agora precisamos colocar &ldquo;d&rdquo; no cache. A pergunta é: quem sai?</p>
+<p>Na política FIFO, o primeiro que entrou no cache é escolhido para sair. O raciocínio por trás é &ldquo;este livro está a mais tempo na cabeceira, então ele deve sair para dar espaço para as minhas novas leituras&rdquo;. Ou seja, vamos remover &ldquo;a&rdquo; do cache. O estado fica:</p>
+<p><code>fila = [&quot;b&quot;, &quot;c&quot;, &quot;d&quot;]</code></p>
+<p>Vamos agora procurar por &ldquo;a&rdquo;.</p>
+<p><code>get(&quot;a&quot;)</code> -&gt; miss!</p>
+<p>&ldquo;a&rdquo; foi o primeiro a entrar no cache e, por isso, teve que sair para dar lugar para &ldquo;d&rdquo;, por isso o <em>miss</em>. Mas agora, a operação vai na memória mais lenta, encontra &ldquo;a&rdquo; e precisa colocar no cache novamente. Quem sai? O mais antigo dos presentes (FIFO), ou seja, &ldquo;b&rdquo;. O estado do cache fica:</p>
+<p><code>fila = [&quot;c&quot;, &quot;d&quot;, &quot;a&quot;]</code></p>
+<p>Entendeu? A partir de agora, se eu procurar por um objeto e ele não estiver no cache (miss), vamos inclui-lo. Para isso, precisamos remover alguém do cache. Nossa escolha é por ordem de chegada. O que está há mais tempo, ou seja, na cabeça da fila, sai (FIFO).</p>
+<p>Note que isso é um pouco diferente da nossa outra implementação de FIFO, em que lançamos exceção quando a fila está cheia. No cache isso não acontece, nós sobrescrevemos o elemento que está no início da fila toda vez que ela estiver cheia e precisarmos fazer uma adição.</p>
+<h2 id="discutindo-a-eficiência-das-operações">Discutindo a eficiência das operações</h2>
+<p>Vamos analisar o código da operação get:</p>
+<pre><code>public Pair get(String chave) {
+	TODO: implementar
+}
+</code></pre><p><strong>hit</strong>. A busca por um elemento no cache é O(n), pois executamos busca linear em um array de tamanho <code>n</code>. Como encontramos, a operação total é O(n).</p>
+<p><strong>miss</strong>. A busca por um elemento no cache é $O(n)$, pois executamos busca linear em um array de tamanho <code>n</code>. Como não encontramos no cache, somente na outra memória, precisamos também adicionar esse novo elemento na fila. Essa operação, se tratarmos a fila de maneira circular (veja como <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">neste material</a>), é O(1). Como sabemos, O(n) + O(1) é O(n).</p>
+<p>Note que a operação <strong>miss</strong> tem uma agravante importante: ela inclui uma ida ao banco. Naturalmente, é mais lenta. Contudo, estamos analisando aqui os aspectos isolados da nossa solução FIFO.</p>
+<h3 id="uma-otimização">Uma otimização</h3>
+<p>Se usarmos a técnica da fila circular, a adição fica em O(1) sem termos que fazer shift. Portanto, o nosso fator limitante aqui é a busca O(n). E se eu melhorasse a busca usando outra estutura de dados que otimiza essa operação? Funciona, né? Essa solução implica em criar outra estrutura auxiliar, nesse caso um HashMap, para otimizar a operação de busca.</p>
+<p>Nosso cache seria então composto de uma fila, que organiza a ordem de chegada e saída, e de uma tabela, que nos permite busca em O(1).</p>
+<p>Funciona assim, quando um get é feito, nós não vamos mais iterar na fila para procurar o elemento, vamos direto na tabela hash, que nos dá busca em tempo constante. Se o elemento estiver na tabela, ótimo, retornamos. Caso não esteja, incluímos na tabela e na fila para futuras consultas.</p>
+<p>Note que essa solução introduz um problema: ocupamos mais memória, pois temos que manter os objetos na fila e na tabela. Além disso, remover algo do cache significa remover da fila e da tabela, mas esse não é um problema tão grande porque ambos são O(1).</p>
+<p>Mesmo com essa complexidade de código adicional, vale a pena em termos de tempo de execução, pois a operação toda é executada em tempo constante:</p>
+<ul>
+<li>procurar, adicionar e remover na tabela é tempo constante; e</li>
+<li>adicionar e remover da fila é tempo constante.</li>
+</ul>
+<p>Como ficaria o código?</p>
+<pre><code>public Pair get(String key) {
+
+	// O(1)
+	Pair p = tabela.get(key);
+	
+	// não está no cache
+	if (p == null) {
+		// busca no banco
+		// Pair p = bd.get(&quot;key&quot;)
+
+		//adiciona na tabela
+		tabela.put(p.key, p);
+		
+		// adicionando na fila.
+		
+		// se a fila está cheia, precimos tirar o mais antigo do cache. Isso
+		// significa remover da fila o elemento que está em head e remover esse mesmo
+		// elemento da tabela.
+		if (fila.isFull()) {
+			Pair pToRemove = fila.removeFirst();
+			tabela.remove(pToRemove.key);
+		}
+
+		fila.addLast(p);
+	}
+
+	return p; 
+ 
+}
+</code></pre><p>Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast() da classe Fila. Ambos feitos em O(1) através da manipulação dos índices com o operador %, tratando a fila como circular. Veja isso bem detalhado no <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">material de fila</a> da disciplina.</p>
+<h2 id="discussão-sobre-fifo-como-política-de-cache">Discussão sobre FIFO como política de cache</h2>
+<p>FIFO sempre vai ser uma boa política? Não muito. Veja que o livro mais antigo na cabeceira não é necessariamente o que menos consulto. Imagine que eu seja um ser bem religioso e traga a bíblia para a minha cabeceira. Eu leio todos os dias um versículo, ou seja, a bíblia tem uma popularidade muito alta e recente para mim e, portanto, quero mante-la no cache. Contudo, se eu passar a ler mais 3 livros, ela vai sair do cache mesmo sendo muito popular e eu lendo ela diariamente, entende?</p>
+<p>FIFO pode não ser interessante em cenários que temos objetos muito populares (que são usados bastante) e muito quentes (usados recentemente). Por isso, há outras políticas de cache que tentam levar em consideração essas variáveis. Por exemplo, Least Frequently Used remove do cache o objeto de menor frequência de acesso, enquanto Least Recently Used remove o objeto que não é acessado há mais tempo. Em breve vamos tratar dessas políticas em uma evolução deste material.</p>
+<hr>
+
+
+</article>
+
+
+<section class="post-nav">
+    <ul>
+        
+        
+        <li>
+            <a href="https://joaoarthurbm.github.io/eda/posts/avl/">Árvores Balanceadas (AVL) <i class="fa fa-chevron-circle-right"></i> </a>
+        </li>
+        
+    </ul>
+</section>
+    
+
+
+
+
+
+</main>
+    <footer>
+    <h6><a href="http://joaoarthurbm.github.io">Copyright © 2019 - João Arthur Brunet. Licença de uso: versão para uso pessoal, sendo proibida sua redistribuição ou modificação.</a></h6>
+    </footer>
+</div>
+<script src="https://joaoarthurbm.github.io/eda/js/scripts.js"></script>
+
+</body>
+
+</html>
+
