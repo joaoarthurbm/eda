@@ -13,17 +13,15 @@ E o que é política de cache *eviction*? Tão importante quanto remover um obje
 Vamos discutir exemplos de políticas. Imagine que você é um leitor ávido e tem uma grande
 coleção de livros em uma biblioteca particular em casa. O cômodo que abriga essa biblioteca é longe do seu quarto, onde você lê os livros. Por isso, você tem que escolher alguns para colocar no móvel ao lado da sua cama para poder acessar mais rápido quando você for ler. Isto é, no nosso cenário, a biblioteca pode representar o banco de dados ou o sistema de arquivos, ou seja, uma memória de alta capacidade de armazenamento, porém de acesso mais lento. Por outro lado, nossa cabeceira representa o cache. É muito mais fácil/rápido acessar o livro, mas ela tem uma capacidade reduzida.
 
-Nesse cenário, sempre que eu precisar de um livro e ele estiver na cabeceira, ou seja, no cache, essa operação é considerada um **hit**. Isto é, eu procurei algo no cache e ele estava lá. 
+Nesse cenário, sempre que eu precisar de um livro e ele estiver na cabeceira, ou seja, no cache, essa operação é considerada um **hit**. Isto é, eu procurei algo no cache e ele estava lá.
 
-Por outro lado, se eu procurar algo no cache e não encontrar, a operação é condiderada como **miss**. Isto é, procurei algo no cache e não estava. No caso de um  **miss**, a operação deve continuar procurando o elemento na memória de acesso mais lento subsequente, por exemplo, o BD. Voltando para a nossa metáfora, eu procurei um livro na cabeceira e não encontrei (miss), então tive descer as escadas e ir na biblioteca pegar o livro.
+Por outro lado, se eu procurar algo no cache e não encontrar, a operação é condiderada como **miss**. Isto é, procurei algo no cache e não estava. No caso de um  **miss**, a operação deve continuar procurando o elemento na memória de acesso mais lento subsequente, por exemplo, o BD. Voltando para a nossa metáfora, eu procurei um livro na cabeceira e não encontrei (miss), então tive descer as escadas e ir na biblioteca pegar o livro. Ruim, né?
 
 Em termos bem simplistas, nosso objetivo é criar políticas/algoritmos que maximizem *hits* e minimizem *miss*.
 
 > *Hit rate* e *Miss rate* são métricas para avaliar sistemas/políticas de cache. Ambas são taxas em relação ao total de operações.
 
 Se só cabem 3 livros na nossa cabeceira e ela está cheia, quando eu trouxer um livro da biblioteca, qual livro eu vou remover da cabeceira? Em outros termos, qual a minha política de *eviction*?
-
-Bom, chega de usar minha metáfora. Daqui em diante eu estou considerando que você já entende o que é cache, que ele é limitado, que precisamos decidir o que remover dele quando ele estiver cheio etc.
 
 ## Nosso Primeiro Cenário: FIFO (First In First Out)
 
@@ -38,6 +36,8 @@ Agora, vamos analisar uma primeira operação de busca por um determinado objeto
 Nesse caso, o primeiro passo é procurar o objeto com chave "a" no cache. Como ele não está lá, procuramos no BD. Se encontrarmos, colocarmos no cache. Digamos que esse seja o caso. Então, o estado do cache depois dessa primeira operação é:
 
 `fila = ["a", null, null]`
+
+Minha política é trazer o livro que comecei a ler para a cabeceira para que ele seja facilmente acessado nas próximas vezes que eu for ler.
 
 Agora, outra duas operações com comportamento similar:
 
@@ -54,7 +54,7 @@ Nosso cache está cheio. Vamos ver outras operações:
 `get("b")` -> hit!
 `get("c")` -> hit!
 
-Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.
+Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. No nosso caso, procuramos livros que estão na cabeceira. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.
 
 Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de *eviction* baseado em FIFO.
 
@@ -62,7 +62,7 @@ Veja que nosso cache continua cheio. Vamos agora ver, na prática, um caso de *e
 
 Procuramos pela chave "d" e não encontramos. Então tivemos que ir no BD e agora precisamos colocar "d" no cache. A pergunta é: quem sai?
 
-Na política FIFO, o primeiro que entrou no cache é escolhido para sair. Ou seja, vamos remover "a" do cache. O estado fica:
+Na política FIFO, o primeiro que entrou no cache é escolhido para sair. O raciocínio por trás é "este livro está a mais tempo na cabeceira, então ele deve sair para dar espaço para as minhas novas leituras". Ou seja, vamos remover "a" do cache. O estado fica:
 
 `fila = ["b", "c", "d"]`
 
@@ -75,6 +75,8 @@ Vamos agora procurar por "a".
 `fila = ["c", "d", "a"]`
 
 Entendeu? A partir de agora, se eu procurar por um objeto e ele não estiver no cache (miss), vamos inclui-lo. Para isso, precisamos remover alguém do cache. Nossa escolha é por ordem de chegada. O que está há mais tempo, ou seja, na cabeça da fila, sai (FIFO).
+
+Note que isso é um pouco diferente da nossa outra implementação de FIFO, em que lançamos exceção quando a fila está cheia. No cache isso não acontece, nós sobrescrevemos o elemento que está no início da fila toda vez que ela estiver cheia e precisarmos fazer uma adição.
 
 ## Discutindo a eficiência das operações
 
@@ -91,7 +93,7 @@ public Pair get(String chave) {
 
 **miss**. A busca por um elemento no cache é $O(n)$, pois executamos busca linear em um array de tamanho `n`. Como não encontramos no cache, somente na outra memória, precisamos também adicionar esse novo elemento na fila. Essa operação, se tratarmos a fila de maneira circular (veja como <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">neste material</a>), é O(1). Como sabemos, O(n) + O(1) é O(n). 
 
-Note que a operação miss tem uma agravante importante: ela inclui uma ida ao banco. Naturalmente, é mais lenta. Contudo, estamos analisando aqui os aspectos da nossa solução FIFO.
+Note que a operação **miss** tem uma agravante importante: ela inclui uma ida ao banco. Naturalmente, é mais lenta. Contudo, estamos analisando aqui os aspectos isolados da nossa solução FIFO.
 
 ### Uma otimização
 
@@ -144,16 +146,10 @@ public Pair get(String key) {
 
 Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast() da classe Fila. Ambos feitos em O(1) através da manipulação dos índices com o operador %, tratando a fila como circular. Veja isso bem detalhado no <a class="external" href="https://joaoarthurbm.github.io/eda/posts/fifoarray/">material de fila</a> da disciplina.
 
-## Outra política de cache: Least Recently Used (LRU)
+## Discussão sobre FIFO como política de cache
 
-Na seção passada exploramos 
+FIFO sempre vai ser uma boa política? Não muito. Veja que o livro mais antigo na cabeceira não é necessariamente o que menos consulto. Imagine que eu seja um ser bem religioso e traga a bíblia para a minha cabeceira. Eu leio todos os dias um versículo, ou seja, a bíblia tem uma popularidade muito alta e recente para mim e, portanto, quero mante-la no cache. Contudo, se eu passar a ler mais 3 livros, ela vai sair do cache mesmo sendo muito popular e eu lendo ela diariamente, entende? 
 
+FIFO pode não ser interessante em cenários que temos objetos muito populares (que são usados bastante) e muito quentes (usados recentemente). Por isso, há outras políticas de cache que tentam levar em consideração essas variáveis. Por exemplo, Least Frequently Used remove do cache o objeto de menor frequência de acesso, enquanto Least Recently Used remove o objeto que não é acessado há mais tempo. Em breve vamos tratar dessas políticas em uma evolução deste material.
 
-
-
-
-
-
-
-
-
+---
