@@ -42,6 +42,7 @@ Minha política é trazer o livro que comecei a ler para a cabeceira para que el
 Agora, outra duas operações com comportamento similar:
 
 `get("b")` -> miss!
+
 `get("c")` -> miss!
 
 O estado do nosso cache atualmente é:
@@ -51,7 +52,9 @@ O estado do nosso cache atualmente é:
 Nosso cache está cheio. Vamos ver outras operações:
 
 `get("a")` -> hit!
+
 `get("b")` -> hit!
+
 `get("c")` -> hit!
 
 Essas últimas 3 operações foram excelentes porque procuramos elementos que estavam no cache, ou seja, hit. No nosso caso, procuramos livros que estão na cabeceira. Isso faz com que a operação não tenha que ir até a memória mais lenta para buscar o dado.
