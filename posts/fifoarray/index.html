@@ -277,10 +277,10 @@
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isEmpty<span style="color:#f92672">())</span>
             <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">=</span> 0<span style="color:#f92672">;</span>
         
-        <span style="color:#75715e">// se já tiver cheio, precisamos andar com head para liberar o espaço;
+        <span style="color:#75715e">// se já estiver cheio, precisamos andar com head para liberar o espaço;
 </span><span style="color:#75715e"></span>        <span style="color:#75715e">// e não acrescentamos em size porque não houve aumento de elementos.
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> <span style="color:#f92672">(</span>isFull<span style="color:#f92672">())</span>
-            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">+=</span> 1 <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span><span style="color:#f92672">;</span>
+            <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">+=</span> 1 <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
         
         <span style="color:#75715e">// incrementa tail e adiciona o novo elemento
 </span><span style="color:#75715e"></span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">=</span> <span style="color:#f92672">(</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">fila</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
