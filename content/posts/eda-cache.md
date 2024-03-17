@@ -153,6 +153,6 @@ Nota. É importante você lembrar o funcionamento do removeFirst() e do addLast(
 
 FIFO sempre vai ser uma boa política? Não muito. Veja que o livro mais antigo na cabeceira não é necessariamente o que menos consulto. Imagine que eu seja um ser bem religioso e traga a bíblia para a minha cabeceira. Eu leio todos os dias um versículo, ou seja, a bíblia tem uma popularidade muito alta e recente para mim e, portanto, quero mante-la no cache. Contudo, se eu passar a ler mais 3 livros, ela vai sair do cache mesmo sendo muito popular e eu lendo ela diariamente, entende? 
 
-FIFO pode não ser interessante em cenários que temos objetos muito populares (que são usados bastante) e muito quentes (usados recentemente). Por isso, há outras políticas de cache que tentam levar em consideração essas variáveis. Por exemplo, Least Frequently Used remove do cache o objeto de menor frequência de acesso, enquanto Least Recently Used remove o objeto que não é acessado há mais tempo. Em breve vamos tratar dessas políticas em uma evolução deste material.
+FIFO pode não ser interessante em cenários que temos objetos muito populares (que são usados bastante) e muito quentes (usados recentemente). Por isso, há outras políticas de cache que tentam levar em consideração essas variáveis. Por exemplo, **Least Frequently Used (LFU)** remove do cache o objeto de menor frequência de acesso, enquanto **Least Recently Used (LRU)** remove o objeto que não é acessado há mais tempo. Em breve vamos tratar dessas políticas em uma evolução deste material.
 
 ---
