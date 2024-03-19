@@ -5748,12 +5748,12 @@ Node x &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; y&lt;span style=
        </item>
        
        <item>
-         <title></title>
+         <title>Estruturas de Dados Básicas e Cache</title>
          <link>https://joaoarthurbm.github.io/eda/posts/eda-cache/</link>
-         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+         <pubDate>Tue, 15 Oct 2019 00:00:00 -0300</pubDate>
          
          <guid>https://joaoarthurbm.github.io/eda/posts/eda-cache/</guid>
-         <description>&lt;h1 id=&#34;estruturas-de-dados-básicas-e-cache&#34;&gt;Estruturas de Dados Básicas e Cache&lt;/h1&gt;
+         <description>&lt;hr&gt;
 &lt;p&gt;Este não é o material para você aprender cache. Há excelentes livros para isso.
 Este material é usado na disciplina de estruturas de dados e serve para discutir como
 usar as estruturas básicas (arrays, linkedlists e tabelas hash) para implementar algumas políticas de cache &lt;em&gt;eviction&lt;/em&gt;. Portanto, o objetivo principal é mostrar a aplicação de EDAs no contexto de cache. Assim, vamos falar de alguns conceitos da área de maneira superficial.&lt;/p&gt;
