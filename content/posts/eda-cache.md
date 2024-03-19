@@ -1,4 +1,12 @@
-# Estruturas de Dados Básicas e Cache
++++
+title = "Estruturas de Dados Básicas e Cache"
+date = 2019-10-15
+tags = []
+categories = []
+github = ""
++++
+
+***
 
 Este não é o material para você aprender cache. Há excelentes livros para isso.
 Este material é usado na disciplina de estruturas de dados e serve para discutir como
