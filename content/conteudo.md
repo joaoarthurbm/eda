@@ -26,6 +26,7 @@ meta = "false"
 * [Listas baseadas em Arrays (ArrayList)](http://joaoarthurbm.github.io/eda/posts/arraylist)
 * [Pilhas baseadas em Arrays](https://joaoarthurbm.github.io/eda/posts/lifoarray/)
 * [Filas baseadas em Arrays](https://joaoarthurbm.github.io/eda/posts/fifoarray/)
+* [Cache](https://joaoarthurbm.github.io/eda/posts/eda-cache/)
 * [Listas Ligadas (LinkedList)](http://joaoarthurbm.github.io/eda/posts/linkedlist)
 * [Tabelas Hash](http://joaoarthurbm.github.io/eda/posts/hashtable)
     * [Uma aula só com perguntas: endereçamento aberto](http://joaoarthurbm.github.io/eda/posts/enderecamento-aberto-so-perguntas)
