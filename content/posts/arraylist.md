@@ -99,7 +99,7 @@ Vamos ao código.
     
 
     public void add(int index, Aluno aluno) {
-        if (index < 0 || index >= this.tamanho)
+        if (index < 0 || index > this.tamanho)
             throw new IndexOutOfBoundsException();
         
         assegureCapacidade(this.tamanho + 1);
