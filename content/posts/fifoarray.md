@@ -207,7 +207,7 @@ Perceba que estamos tratando o array de forma circular. Dessa maneira, não prec
         // se já estiver cheio, precisamos andar com head para liberar o espaço;
         // e não acrescentamos em size porque não houve aumento de elementos.
         if (isFull())
-            this.head += 1 % this.fila.length;
+            this.head = (this.head + 1) % this.fila.length;
         
         // incrementa tail e adiciona o novo elemento
         this.tail = (this.tail + 1) % this.fila.length;
