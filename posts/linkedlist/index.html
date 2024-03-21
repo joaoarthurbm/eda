@@ -330,7 +330,7 @@ b<span style="color:#f92672">.</span><span style="color:#a6e22e">prev</span> <sp
             
 <span style="color:#f92672">}</span>
 </code></pre></div><p>Em primeiro lugar, verificamos se o índice passado como parâmetro é válido. Caso não seja, lançamos uma exceção.</p>
-<p>Caso <em><strong>index</strong></em> seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o <code>index == 0</code>, basta invocarmos o método <em><strong>addFirst</strong></em>, que já implementamos. Se <code>index == size</code>,  basta invocarmos o método <em><strong>addLast</strong></em>, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências.</p>
+<p>Caso <em><strong>index</strong></em> seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o <code>index == 0</code>, basta invocarmos o método <em><strong>addFirst</strong></em>, que já implementamos. Se <code>index == size - 1</code>,  basta invocarmos o método <em><strong>addLast</strong></em>, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências.</p>
 <h3 id="como-iterar-em-uma-lista-encadeada">Como iterar em uma lista encadeada?</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#f92672">...</span>
 Node aux <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>           
