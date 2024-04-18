@@ -5340,7 +5340,7 @@ da esquerda para a direita.
 &lt;p&gt;A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $int((0-1)/2)) = -1$, que é um índice inexistente.&lt;/p&gt;
 &lt;p&gt;Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $int((1-1)/2)) = 0$ e $int((2-1)/2)) = 0$.&lt;/p&gt;
 &lt;p&gt;Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 1$ e $int((4-1)/2)) = 1$.&lt;/p&gt;
-&lt;p&gt;Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $int((5-1)/2)) = 2$ e $int((5-1)/2)) = 2$.&lt;/p&gt;
+&lt;p&gt;Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $int((5-1)/2)) = 2$ e $int((6-1)/2)) = 2$.&lt;/p&gt;
 &lt;p&gt;Por fim, o nó 43 no índice 7 do array. O nó pai está no índice 2, pois $int((7-1)/2)) = 3$.&lt;/p&gt;
 &lt;p&gt;Abaixo estão os métodos left, right e parent da classe Heap.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-java&#34; data-lang=&#34;java&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;Heap&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;    
