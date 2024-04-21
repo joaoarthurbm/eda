@@ -179,7 +179,7 @@ O nó 73 está no índice 2 do array. Portanto, o nó à sua direita está no í
 
 O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.
 
-***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
+***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $Math.floorDiv(index-1, 2)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
 
 ![heap-exemplo](heap-exemplo.png)
 
@@ -209,7 +209,7 @@ public class Heap {
     }
 
     public int parent(int index) {
-        return (index-1)/2;
+        return Math.floorDiv(index-1, 2);
     }
 ...
 }
