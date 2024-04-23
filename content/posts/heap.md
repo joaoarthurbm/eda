@@ -179,21 +179,21 @@ O nó 73 está no índice 2 do array. Portanto, o nó à sua direita está no í
 
 O restante dos nós, índices 3, 4, 5, 6 e 7, não possuem direita, pois se aplicarmos a fórmula $2*(index+1)$ os valores gerados são índices maiores do que ***tail*** e, portanto, não fazem parte do Heap.
 
-***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $int((index-1)/2))$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
+***parent***. O pai de um nó no índice ***index*** sempre segue a fórmula $Math.floorDiv(index-1, 2)$. Basta analisarmos o nosso exemplo para chegar a essa conclusão. 
 
 ![heap-exemplo](heap-exemplo.png)
 
 <p align="center">$heap = [88, 87, 73, 47, 54, 6, 0, 43]$ e tail = 7</p>
 
-A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $int((0-1)/2)) = -1$, que é um índice inexistente.
+A raiz está no índice 0 do array. Portanto, não possui nó pai, pois $Math.floorDiv(0-1, 2) = -1$, que é um índice inexistente.
 
-Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $int((1-1)/2)) = 0$ e $int((2-1)/2)) = 0$.
+Os nós 87 e 73 estão nos índices 1 e 2, respectivamente.Portanto, o nó pai está no índice 0, pois $Math.floorDiv(1-1, 2) = 0$ e $Math.floorDiv(2-1, 2) = 0$.
 
-Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $int((3-1)/2)) = 1$ e $int((4-1)/2)) = 1$.
+Os nós 47 e 54 estão nos índices 3 e 4, respectivamente. Portanto, o nó pai está no índice 1, pois $Math.floorDiv(3-1, 2) = 1$ e $Math.floorDiv(4-1, 2) = 1$.
 
-Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $int((5-1)/2)) = 2$ e $int((6-1)/2)) = 2$.
+Os nós 6 e 0 estão nos índices 5 e 6, respectivamente. Portanto, o nó pai está no índice 2, pois $Math.floorDiv(5-1, 2) = 2$ e $Math.floorDiv(6-1, 2) = 2$.
 
-Por fim, o nó 43 no índice 7 do array. O nó pai está no índice 2, pois $int((7-1)/2)) = 3$.
+Por fim, o nó 43 no índice 7 do array. O nó pai está no índice 2, pois $Math.floorDiv(7-1, 2) = 3$.
 
 Abaixo estão os métodos left, right e parent da classe Heap.
 
@@ -209,7 +209,7 @@ public class Heap {
     }
 
     public int parent(int index) {
-        return (index-1)/2;
+        return Math.floorDiv(index-1, 2);
     }
 ...
 }
