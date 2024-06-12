@@ -7,3 +7,9 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por carolmfreitas
+{{% quiz test_quiz%}}
+{{< item question="Qual caso deve ser analisado na análise do tempo de execução de um algoritmo?" answers="3"
+choices="Caso médio,Primeiro caso,Pior caso,Melhor caso" >}}
+{{% /quiz %}}
