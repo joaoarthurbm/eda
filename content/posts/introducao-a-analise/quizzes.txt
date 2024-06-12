@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por Davvi-Duarte
+{{% quiz test_quiz%}}
+{{< item question="Sobre a análise empírica de algoritmos, selecione a alternativa CORRETA:" answers="4" choices="Independe de Hardware,Permite analisar os algoritmos em um espectro maior de entradas,Não existe um alto custo de implementação de todos os algoritmos,Nenhuma das alternativas" >}}
+{{% /quiz %}}
