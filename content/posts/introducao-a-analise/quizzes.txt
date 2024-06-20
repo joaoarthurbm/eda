@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por sonalynunes
+{{% quiz test_quiz%}}
+{{< item question="Qual vantagem de se utilizar o método análitico para estudo de desempenho de um algoritmo?" answers="4" choices="Possui alta precisão,Depende de hardware,Possui alta complexidade, Analisa sem a necessidade de execução" >}}
+{{% /quiz %}}
