@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por viniciussousaazevedo
+{{% quiz test_quiz%}}
+{{< item question="Marque o caso que NÃO está necessariamente relacionado a operações primitivas" answers="4" choices="Inicializar variáveis no construtor de uma classe, o método padrão toString(), Incrementar variáveis com ++, o método padrão main()" >}}
+{{% /quiz %}}
