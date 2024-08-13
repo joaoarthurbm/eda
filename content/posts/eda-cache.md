@@ -108,7 +108,7 @@ Note que a operação **miss** tem uma agravante importante: ela inclui uma ida 
 
 ### Uma otimização
 
-Se usarmos a técnica da fila circular, a adição fica em O(1) sem termos que fazer shift. Portanto, o nosso fator limitante aqui é a busca O(n). E se eu melhorasse a busca usando outra estutura de dados que otimiza essa operação? Funciona, né? Essa solução implica em criar outra estrutura auxiliar, nesse caso um HashMap, para otimizar a operação de busca. 
+Se usarmos a técnica da fila circular, a adição fica em O(1) sem termos que fazer shift. Portanto, o nosso fator limitante aqui é a busca O(n). E se eu melhorasse a busca usando outra estrutura de dados que otimiza essa operação? Funciona, né? Essa solução implica em criar outra estrutura auxiliar, nesse caso um HashMap, para otimizar a operação de busca. 
 
 Nosso cache seria então composto de uma fila, que organiza a ordem de chegada e saída, e de uma tabela, que nos permite busca em O(1).
 
