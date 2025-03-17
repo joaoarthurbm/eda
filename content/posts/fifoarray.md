@@ -246,25 +246,25 @@ Como vimos, addLast é simples. Há algumas verificações O(1) e o principal é
 
 Nossa estratégia de remoção também é O(1) porque envolve apenas algumas verificações O(1) e andar com head para frente, sem precisar fazer o shift: `head = (head + 1) % fila.length`.
 
+**Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
+
 ## Algumas verificações importantes
 
-Como sei se uma fila está cheia? Se depois de `tail` tem o `head`, certo? Então isFull fica:
+Como sei se uma fila está cheia? Se o `size` da fila não ultrapassa o limite do array base, certo? Então isFull fica:
 
 ```java
 public boolean isFull() {
-    return ((this.tail + 1) % this.length) == this.head;
+   return this.size == fila.length;
 }
 ```
 
-Determinar se a fila está vazia é simples:
+Determinar se a fila está vazia é igualmente simples:
 
 ```java
 public boolean isEmpty() {
-    return this.head == -1 && this.tail == -1;
+     return this.size == 0;
 }
 ```
-
-**Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
 
 ## Onde encontro isso na biblioteca padrão?
 
