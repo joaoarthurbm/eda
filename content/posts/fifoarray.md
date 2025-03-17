@@ -236,6 +236,8 @@ Perceba que estamos tratando o array de forma circular. Dessa maneira, não prec
     }
 ```
 
+**Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
+
 #### Análise de eficência
 
 1. addLast
@@ -245,8 +247,6 @@ Como vimos, addLast é simples. Há algumas verificações O(1) e o principal é
 2. removeFirst
 
 Nossa estratégia de remoção também é O(1) porque envolve apenas algumas verificações O(1) e andar com head para frente, sem precisar fazer o shift: `head = (head + 1) % fila.length`.
-
-**Importante**. Lembre-se que quando você remover o último elemento da fila, ou seja, quando `head == tail`, após a remoção você deve atribuir ambos para -1, `head` e `tail`.
 
 ## Algumas verificações importantes
 
