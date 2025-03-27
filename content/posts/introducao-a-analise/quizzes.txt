@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por Vinicius-Sousa1
+{{% quiz test_quiz%}}
+{{< item question="Quantas operações primitivas estão envolvidas na seguinte linha de código: return arr[i++] % arr[i]; ?" answers="5" choices="1,2,3,4,5" >}}
+{{% /quiz %}}
