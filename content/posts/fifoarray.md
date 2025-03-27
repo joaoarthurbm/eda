@@ -254,7 +254,7 @@ Como sei se uma fila está cheia? Se o `size` da fila não ultrapassa o limite d
 
 ```java
 public boolean isFull() {
-   return this.size == fila.length;
+   return this.size >= fila.length;
 }
 ```
 
