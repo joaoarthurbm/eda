@@ -3,7 +3,7 @@
 {{< item question="Qual operação abaixo não pode ser considerada primitiva?" answers="2" choices="int a = 7,Arrays.sort(v),v[7], return saldo" >}}
 {{% /quiz %}}
 
-# Quiz elaborado por juniorjse
+# Quiz elaborado por httpcarlxs
 {{% quiz test_quiz%}}
-{{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
+{{< item question="Seja n a variável que representa o tamanho da entrada. O que significa dizer que a soma de custo está em função de n?" answers="3" choices="Que se trata de um custo constante,Que é preciso fazer uma análise empírica para ter mais precisão,Que o custo final depende do tamanho da entrada,Que deve-se avaliar outra variável para ter uma soma livre de n" >}}
 {{% /quiz %}}
