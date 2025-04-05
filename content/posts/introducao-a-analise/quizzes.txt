@@ -7,3 +7,9 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por juniorjse
+{{% quiz test_quiz%}}
+{{< item question="Tendo como base os conhecimentos a respeito das análises assintótica e empírica, pode-se afirmar que:" answers="1" choices="O método de análise assintótica cria um visão geral de desempenho dos algoritimos,A análise empírica possuí muito menos precisão do que a análise assintótica,A análise empírica permite uma rápida análise dos algoritimos em relação ao seu desempenho,A análise assintótica está sujeitaa diversos fatores externos sendo por isso menos rápida do que a análise empírica" >}}
+{{% /quiz %}}
+
