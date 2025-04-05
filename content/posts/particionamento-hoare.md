@@ -83,7 +83,7 @@ public int particiona(int[] v, int ini, int fim) {
 			i++;
 
 		// andando com j para trás. pára quando encontrar um valor menor ou igual ao pivot
-		while(i <= j && A[j] > pivot)
+		while(i <= j && v[j] > pivot)
                 j = j - 1;
          
         // se i não encontrou j, troca
