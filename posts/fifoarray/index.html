@@ -304,7 +304,8 @@
         <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">-=</span> 1<span style="color:#f92672">;</span>   
         <span style="color:#66d9ef">return</span> value<span style="color:#f92672">;</span> 
     <span style="color:#f92672">}</span>
-</code></pre></div><h4 id="análise-de-eficência">Análise de eficência</h4>
+</code></pre></div><p><strong>Importante</strong>. Lembre-se que quando você remover o último elemento da fila, ou seja, quando <code>head == tail</code>, após a remoção você deve atribuir ambos para -1, <code>head</code> e <code>tail</code>.</p>
+<h4 id="análise-de-eficência">Análise de eficência</h4>
 <ol>
 <li>addLast</li>
 </ol>
@@ -314,16 +315,15 @@
 </ol>
 <p>Nossa estratégia de remoção também é O(1) porque envolve apenas algumas verificações O(1) e andar com head para frente, sem precisar fazer o shift: <code>head = (head + 1) % fila.length</code>.</p>
 <h2 id="algumas-verificações-importantes">Algumas verificações importantes</h2>
-<p>Como sei se uma fila está cheia? Se depois de <code>tail</code> tem o <code>head</code>, certo? Então isFull fica:</p>
+<p>Como sei se uma fila está cheia? Se o <code>size</code> da fila não ultrapassa o limite do array base, certo? Então isFull fica:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isFull</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#f92672">((</span><span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">+</span> 1<span style="color:#f92672">)</span> <span style="color:#f92672">%</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span><span style="color:#f92672">;</span>
+   <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">&gt;=</span> fila<span style="color:#f92672">.</span><span style="color:#a6e22e">length</span><span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p>Determinar se a fila está vazia é simples:</p>
+</code></pre></div><p>Determinar se a fila está vazia é igualmente simples:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-java" data-lang="java"><span style="color:#66d9ef">public</span> <span style="color:#66d9ef">boolean</span> <span style="color:#a6e22e">isEmpty</span><span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">head</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">tail</span> <span style="color:#f92672">==</span> <span style="color:#f92672">-</span>1<span style="color:#f92672">;</span>
+     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">this</span><span style="color:#f92672">.</span><span style="color:#a6e22e">size</span> <span style="color:#f92672">==</span> 0<span style="color:#f92672">;</span>
 <span style="color:#f92672">}</span>
-</code></pre></div><p><strong>Importante</strong>. Lembre-se que quando você remover o último elemento da fila, ou seja, quando <code>head == tail</code>, após a remoção você deve atribuir ambos para -1, <code>head</code> e <code>tail</code>.</p>
-<h2 id="onde-encontro-isso-na-biblioteca-padrão">Onde encontro isso na biblioteca padrão?</h2>
+</code></pre></div><h2 id="onde-encontro-isso-na-biblioteca-padrão">Onde encontro isso na biblioteca padrão?</h2>
 <p>Em java, se você quiser usar uma implementação de Fila que seja baseada em arrays, deve usar a class <a class="external" href="https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html">ArrayDeque</a>.</p>
 <p>Tem dois detalhes a serem discutidos. O primeiro é que na implementação de Java a fila é <em>resizable</em>, ou seja, não lança exceção quando atinge o limite inicial da fila, mas aumenta sua capacidade. A outra é que essa classe pode ser usada tanto para servir como uma fila, como para pilha. Se você analisar bem a api, vai ver que todos os métodos para isso estão lá: addFirst, addLast, removeFirst, removeLast etc. A depender de como você usar esses métodos, você tem uma fila ou uma pilha.</p>
 <hr>
