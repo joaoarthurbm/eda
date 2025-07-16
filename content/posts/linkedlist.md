@@ -217,9 +217,6 @@ public void add(int index, Aluno aluno) {
     if (index == 0) {
         this.addFirst(aluno);
         
-    } else if (index == size - 1) {
-        this.addLast(aluno);
-        
     } else {
         Node aux = this.head;
             
@@ -239,7 +236,7 @@ public void add(int index, Aluno aluno) {
 
 Em primeiro lugar, verificamos se o índice passado como parâmetro é válido. Caso não seja, lançamos uma exceção.
 
-Caso ***index*** seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o `index == 0`, basta invocarmos o método ***addFirst***, que já implementamos. Se `index == size - 1`,  basta invocarmos o método ***addLast***, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências. 
+Caso ***index*** seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o `index == 0`, basta invocarmos o método ***addFirst***, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências. 
 
 ### Como iterar em uma lista encadeada?
 
