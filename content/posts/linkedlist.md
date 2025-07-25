@@ -111,7 +111,15 @@ Primeiro, vamos às definições de atributos e do construtor. A classe ***Linke
 
 ### isEmpty() 
 
-Este método verifica se a lista está vazia ou não. A verificação é feita comparando ***head*** com ***null***. Se essa comparação for verdadeira, significa que não elemento algum na lista, pois ***head*** é a referência que controla o início e a partir da qual conseguimos acessar os outros elementos.
+Este método verifica se a lista está vazia ou não. A verificação é feita comparando ***head*** com ***null***. Se essa comparação for verdadeira, significa que não há elemento algum na lista, pois ***head*** é a referência que controla o início e a partir da qual conseguimos acessar os outros elementos.
+
+```java
+...
+public boolean isEmpty() {
+    return this.head == null;
+}
+...
+```
 
 ## Operações básicas: inserção, busca e remoção.
 
@@ -209,7 +217,7 @@ Vamos analisar detalhadamente o código do método ***add(int index, int value)*
 ```java
 ...
 public void add(int index, Aluno aluno) {
-    if (index < 0 || index >= size)
+    if (index < 0 || index > size)
         throw new IndexOutOfBoundsException();
         
     Node newNode = new Node(aluno);
@@ -217,7 +225,7 @@ public void add(int index, Aluno aluno) {
     if (index == 0) {
         this.addFirst(aluno);
         
-    } else if (index == size - 1) {
+    } else if (index == size) {
         this.addLast(aluno);
         
     } else {
@@ -239,7 +247,7 @@ public void add(int index, Aluno aluno) {
 
 Em primeiro lugar, verificamos se o índice passado como parâmetro é válido. Caso não seja, lançamos uma exceção.
 
-Caso ***index*** seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o `index == 0`, basta invocarmos o método ***addFirst***, que já implementamos. Se `index == size - 1`,  basta invocarmos o método ***addLast***, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências. 
+Caso ***index*** seja válido, criamos o novo nó e precisamos agora identificar 3 casos. Se o `index == 0`, basta invocarmos o método ***addFirst***, que já implementamos. Se `index == size`,  basta invocarmos o método ***addLast***, que já implementamos. Caso contrário, caímos no cenário da Figura acima. Então, precisamos iterar até a posição index - 1 e manipular as referências. 
 
 ### Como iterar em uma lista encadeada?
 
@@ -300,7 +308,7 @@ public int indexOf(Aluno aluno) {
     Node aux = this.head;
     int index = 0;
     while (aux != null) { 
-        if(aux.aluno.getMatricula().equals(aluno.getMatricula()))
+        if(aux.aluno.equals(aluno))
             return index;
         aux = aux.next;
         index += 1;
@@ -413,7 +421,7 @@ public Aluno remove(int index) {
     
     aux.prev.next = aux.next;
     aux.next.prev = aux.prev;
-                   size -= 1;       
+    size -= 1;       
     return aux.aluno;
 }
     
