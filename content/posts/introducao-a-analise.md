@@ -272,7 +272,7 @@ public boolean contemDuplicacao(int[] v) {
 
 **Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.**
 
-O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c_8$, porque no pior caso essa primitiva nunca será executada.
+O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c_9$, porque no pior caso essa primitiva nunca será executada.
 
 Dado que o tamanho do vetor (v.length) é $n$, temos:
 
