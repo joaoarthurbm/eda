@@ -304,7 +304,7 @@ $f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + $
 
 $c_5 * n + c_6 * (n^2 + n)/{2} + $
 
-$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2}/{2} + c_{10}$
+$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2 - n}/{2} + c_{10}$
 
 Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.
 
