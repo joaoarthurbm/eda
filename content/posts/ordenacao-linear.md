@@ -235,7 +235,7 @@ Veja que teríamos que criar o array de contagem C de tamanho 5 para ordenar um 
 
 **E se eu quiser usar o Counting Sort para ordenar sequências contendo valores iguais a zero e valores negativos?**
 
-O Counting Sort baseia-se na ideia de que um valor inteiro pode ser mapeado para o índice de mesmo valor em um array auxiliar. Essa estratégia nos impede, em um primeiro momento, de ordenar uma sequência com números negativos, pois o menor índice em um array é 0. Além disso, na nossa implementação inicial excluímos também elementos iguais a zero. Contudo, é possível fazer algumas mudanças simples no Counting Sort para que o mesmo passe a também ordenar sequências com esses valores. 
+O Counting Sort baseia-se na ideia de que um valor inteiro $n$ pode ser mapeado para o índice $n - 1$ em um array auxiliar. Essa estratégia nos impede, em um primeiro momento, de ordenar uma sequência com números negativos, pois o menor índice em um array é 0. Além disso, na nossa implementação inicial excluímos também elementos iguais a zero. Contudo, é possível fazer algumas mudanças simples no Counting Sort para que o mesmo passe a também ordenar sequências com esses valores. 
 
 A ideia é simples: basta identificarmos o menor elemento do array (menor) e usar esse valor como um "salto" para adicionar os elementos. É uma ideia similar a fazer um shift para a direita em todos os elementos. O menor elemento array tem sua frequência registrada na posição zero. Vamos ver um exemplo:
 
