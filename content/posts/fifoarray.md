@@ -153,12 +153,12 @@ Como vimos, addLast é simples. Basta aumentar ***tail*** (tail =+ 1). Contudo, 
 
 2. removeFirst
 
-Nossa estratégia de remoção foi fazer o shift de todo mundo para a esquerda. Esse algoritmo, naturalmente, é O(n), pois precisamos percorrer toda a fila atribuindo a v[i] o valor de v[i+1], com ir partindo de 0 até `tail - 1`.
+Nossa estratégia de remoção foi fazer o shift de todo mundo para a esquerda. Esse algoritmo, naturalmente, é O(n), pois precisamos percorrer toda a fila atribuindo a v[i] o valor de v[i+1], com i partindo de 0 até `tail - 1`.
 
 
 ### Remoção em O(1), mantendo uma fila circular
 
-E seu eu disser que dá para adicionar no final e remover do início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende. 
+E se eu disser que dá para adicionar no final e remover do início da fila sem necessariamente precisar fazer o shift? É um pouquinho mais complicado, mas a gente entende. 
 
 Em linhas gerais, remover o início da fila deveria ser apenas fazer `head = head + 1`, certo? Ou seja, em O(1). Mas e porque é complicado? Porque fazendo isso, nós liberamos uma posição anterior a `head` que poderia ser usada para uma nova adição. Como fazer para `tail` assumir essa nova posição quando for adicionado um elemento? Utilizando a operação de resto da divisão pelo tamanho da fila (`%`). Vamos montar um exemplo para ficar claro.
 
