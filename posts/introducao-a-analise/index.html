@@ -404,7 +404,7 @@ Operações Primitivas
 </li>
 </ol>
 <p><strong>Passo 2: Identificar a quantidade de vezes que cada uma das primitivas é executada.</strong></p>
-<p>O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c_8$, porque no pior caso essa primitiva nunca será executada.</p>
+<p>O pior caso de execução desse algoritmo é quando não há repetição de valores no array. Ou seja, os loops são executados até o final. Então, como estamos falando do pior caso, descartamos $c_9$, porque no pior caso essa primitiva nunca será executada.</p>
 <p>Dado que o tamanho do vetor (v.length) é $n$, temos:</p>
 <ul>
 <li>
@@ -442,7 +442,7 @@ Operações Primitivas
 <p>O tempo de execução do algoritmo é a soma das execuções das operações primitivas. Nesse caso temos que a função que descreve o tempo de execução é:</p>
 <p>$f(n) = c_1 + c_2*(n+1) + c_3 * n + c_4 * n + $</p>
 <p>$c_5 * n + c_6 * (n^2 + n)/{2} + $</p>
-<p>$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2}/{2} + c_{10}$</p>
+<p>$c_7 * {(n^2 - n)}/{2} + c_8 * {n^2 - n}/{2} + c_{10}$</p>
 <p>Veja que essa função é diretamente relacionada ao tamanho do array (n). À medida que cresce o tamanho de $n$, cresce também o tempo de execução do pior caso. O tempo de execução do algoritmo cresce de forma quadrática em relação ao tamanho da entrada, pois a função é quadrática. Faz sentido, certo? Comparar cada elemento de um array com todos os outros é da ordem de $n^2$.</p>
 <p>É importante que você entenda que esse algoritmo é bem mais lento do que o anterior, pois uma função quadrática cresce mais rapidamente que uma função linear.</p>
 <p>No material sobre <a class="external" href="http://joaoarthurbm.github.io/eda/posts/analise-assintotica">Análise Assintótica</a> vamos aprender que essa função complicada pode ser simplificada para $n^2$ quando tratamos de grandes entradas, pois as constantes e os expoentes de menor magnitude não impactam muito nesse cenário.</p>
