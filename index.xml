@@ -256,7 +256,170 @@ Computação @ UFCG, &amp;lt;http://joaoarthurbm.github.io/eda&amp;gt;.
   year      = 2019,
   howpublished = &amp;quot;\url{http://joaoarthurbm.github.io/eda}&amp;quot;,
 }
-&lt;/code&gt;&lt;/pre&gt;</description>
+&lt;/code&gt;&lt;/pre&gt;&lt;hr&gt;
+&lt;h2 id=&#34;guia-de-contribuição&#34;&gt;Guia de Contribuição&lt;/h2&gt;
+&lt;p&gt;Este guia explica como produzir e submeter um novo material para o site da disciplina:
+&lt;strong&gt;&lt;a href=&#34;https://joaoarthurbm.github.io/eda/&#34;&gt;https://joaoarthurbm.github.io/eda/&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;O conteúdo do site vem do repositório &lt;strong&gt;&lt;a href=&#34;https://github.com/joaoarthurbm/eda&#34;&gt;https://github.com/joaoarthurbm/eda&lt;/a&gt;&lt;/strong&gt; (branch &lt;code&gt;master&lt;/code&gt;), especificamente da pasta &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt;&lt;code&gt;content/posts/&lt;/code&gt;&lt;/a&gt;. Tudo que você produzir deve ser enviado como &lt;strong&gt;Pull Request (PR)&lt;/strong&gt; para lá.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;1-visão-geral-do-que-você-vai-produzir&#34;&gt;1. Visão geral do que você vai produzir&lt;/h3&gt;
+&lt;p&gt;Para cada material novo, você cria &lt;strong&gt;dois itens&lt;/strong&gt; dentro de &lt;code&gt;content/posts/&lt;/code&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Um arquivo &lt;strong&gt;Markdown&lt;/strong&gt;, ex: &lt;code&gt;arvore-avl.md&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Se o material usar imagens, um &lt;strong&gt;diretório com o mesmo nome do arquivo&lt;/strong&gt; (sem a extensão &lt;code&gt;.md&lt;/code&gt;), ex: &lt;code&gt;arvore-avl/&lt;/code&gt;, contendo as imagens usadas.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;content/posts/
+├── arvore-avl.md         &amp;lt;- o texto do material
+└── arvore-avl/           &amp;lt;- só existe se você usar imagens
+    ├── fig1.png
+    └── fig2.png
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Isso é tudo que o professor precisa: o &lt;code&gt;.md&lt;/code&gt; e, se houver, o diretório de imagens.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-pré-requisitos&#34;&gt;2. Pré-requisitos&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Conta no GitHub e um &lt;strong&gt;fork&lt;/strong&gt; do repositório &lt;a href=&#34;https://github.com/joaoarthurbm/eda&#34;&gt;https://github.com/joaoarthurbm/eda&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;git&lt;/code&gt; instalado&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://gohugo.io/getting-started/installing/&#34;&gt;Hugo&lt;/a&gt; instalado — de preferência a versão &lt;strong&gt;v0.75.1&lt;/strong&gt; (é a que o site usa), para o preview local ficar fiel ao resultado final&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-passo-a-passo&#34;&gt;3. Passo a passo&lt;/h3&gt;
+&lt;h4 id=&#34;31-fork-e-clone&#34;&gt;3.1 Fork e clone&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# faça o fork pelo GitHub, depois clone o SEU fork&lt;/span&gt;
+git clone https://github.com/SEU-USUARIO/eda.git
+cd eda
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;32-crie-uma-branch-para-o-seu-material&#34;&gt;3.2 Crie uma branch para o seu material&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git checkout -b nome-do-seu-material
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;33-crie-o-arquivo-markdown&#34;&gt;3.3 Crie o arquivo Markdown&lt;/h4&gt;
+&lt;p&gt;Você pode criar o arquivo manualmente em &lt;code&gt;content/posts/&lt;/code&gt;, ou deixar o próprio Hugo gerar o cabeçalho (front matter) correto para você:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo new posts/arvore-avl.md
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Isso cria &lt;code&gt;content/posts/arvore-avl.md&lt;/code&gt; já com o front matter no formato que o tema do site espera. Se preferir criar à mão, use este modelo, baseado no que já é usado no site:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;+++&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;title&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Árvores Balanceadas (AVL)&amp;#34;&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;date&lt;/span&gt; = &lt;span style=&#34;color:#ae81ff&#34;&gt;2024-05-10&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;tags&lt;/span&gt; = []
+&lt;span style=&#34;color:#a6e22e&#34;&gt;categories&lt;/span&gt; = []
+&lt;span style=&#34;color:#960050;background-color:#1e0010&#34;&gt;+++&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;title&lt;/code&gt;: título que vai aparecer na página e na listagem de posts.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;date&lt;/code&gt;: data de publicação (formato &lt;code&gt;AAAA-MM-DD&lt;/code&gt;).&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tags&lt;/code&gt;/&lt;code&gt;categories&lt;/code&gt;: pode deixar vazio.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Campos opcionais que aparecem em alguns posts, use se fizerem sentido para o seu material:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span style=&#34;color:#a6e22e&#34;&gt;github&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://github.com/usuario/repositorio&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#75715e&#34;&gt;# link para o código usado no material&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;youtube&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://youtu.be/xxxxxxxxx&amp;#34;&lt;/span&gt;               &lt;span style=&#34;color:#75715e&#34;&gt;# vídeo relacionado&lt;/span&gt;
+&lt;span style=&#34;color:#a6e22e&#34;&gt;ppt&lt;/span&gt; = &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;https://.../slides.html&amp;#34;&lt;/span&gt;                      &lt;span style=&#34;color:#75715e&#34;&gt;# slides relacionados&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;34-escreva-o-conteúdo&#34;&gt;3.4 Escreva o conteúdo&lt;/h4&gt;
+&lt;p&gt;Depois do bloco &lt;code&gt;+++ ... +++&lt;/code&gt;, escreva o material em Markdown (veja a seção 4).&lt;/p&gt;
+&lt;h4 id=&#34;35-adicione-imagens-se-precisar&#34;&gt;3.5 Adicione imagens (se precisar)&lt;/h4&gt;
+&lt;p&gt;Crie um diretório com o &lt;strong&gt;mesmo nome do arquivo &lt;code&gt;.md&lt;/code&gt;&lt;/strong&gt; (sem a extensão) dentro de &lt;code&gt;content/posts/&lt;/code&gt; e coloque lá as imagens. Veja a seção 5.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;4-escrevendo-em-markdown--convenções-usadas-no-site&#34;&gt;4. Escrevendo em Markdown — convenções usadas no site&lt;/h3&gt;
+&lt;p&gt;Se quiser ver exemplos reais, o jeito mais confiável é abrir o &lt;strong&gt;código-fonte&lt;/strong&gt; de um post já publicado: entre em qualquer arquivo dentro de &lt;a href=&#34;https://github.com/joaoarthurbm/eda/tree/master/content/posts&#34;&gt;&lt;code&gt;content/posts/&lt;/code&gt;&lt;/a&gt; no GitHub e clique em &lt;strong&gt;Raw&lt;/strong&gt; para ver o &lt;code&gt;.md&lt;/code&gt; puro. Materiais bons para se inspirar: &lt;code&gt;quick-sort.md&lt;/code&gt;, &lt;code&gt;bst.md&lt;/code&gt;, &lt;code&gt;analise-algoritmos-recursivos.md&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Abaixo, um resumo com base no estilo que já é usado no material da disciplina:&lt;/p&gt;
+&lt;h4 id=&#34;títulos-e-seções&#34;&gt;Títulos e seções&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;# Seção principal
+&lt;span style=&#34;color:#75715e&#34;&gt;## Subseção
+&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;### Sub-subseção
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;negrito-itálico-e-termos-chave&#34;&gt;Negrito, itálico e termos-chave&lt;/h4&gt;
+&lt;p&gt;O material costuma destacar termos importantes em &lt;strong&gt;negrito + itálico&lt;/strong&gt; juntos:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;O &lt;span style=&#34;font-weight:bold&#34;&gt;***pivot**&lt;/span&gt;* é o elemento escolhido para o particionamento.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Negrito simples: &lt;code&gt;**palavra**&lt;/code&gt;. Itálico simples: &lt;code&gt;*palavra*&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;código&#34;&gt;Código&lt;/h4&gt;
+&lt;p&gt;Trecho de código no meio do texto, use crases simples:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;Note que &lt;span style=&#34;color:#e6db74&#34;&gt;`left = 0`&lt;/span&gt; e &lt;span style=&#34;color:#e6db74&#34;&gt;`right = values.length - 1`&lt;/span&gt;.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Bloco de código, com blocos de três crases e o nome da linguagem (isso ativa o highlight de sintaxe):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;```java
+&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;partition&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;[]&lt;/span&gt; values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; pivot &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; values&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;left&lt;span style=&#34;color:#f92672&#34;&gt;];&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; i &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;int&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; left &lt;span style=&#34;color:#f92672&#34;&gt;+&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; j &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; right&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;++)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;[&lt;/span&gt;j&lt;span style=&#34;color:#f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; pivot&lt;span style=&#34;color:#f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;{&lt;/span&gt;
+            i &lt;span style=&#34;color:#f92672&#34;&gt;+=&lt;/span&gt; 1&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+            swap&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; j&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+    swap&lt;span style=&#34;color:#f92672&#34;&gt;(&lt;/span&gt;values&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; left&lt;span style=&#34;color:#f92672&#34;&gt;,&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; i&lt;span style=&#34;color:#f92672&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color:#f92672&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color:#e6db74&#34;&gt;```&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;fórmulas-matemáticas&#34;&gt;Fórmulas matemáticas&lt;/h4&gt;
+&lt;p&gt;O site renderiza LaTeX. Para fórmulas no meio do texto, use &lt;code&gt;$...$&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;No pior caso, o algoritmo é $O(n^2)$, enquanto no melhor caso é $O(n \log n)$.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Para uma recorrência: &lt;code&gt;$T(n) = 2T(n/2) + \Theta(n)$&lt;/code&gt;.&lt;/p&gt;
+&lt;h4 id=&#34;destaques-blockquote&#34;&gt;Destaques (blockquote)&lt;/h4&gt;
+&lt;p&gt;Use &lt;code&gt;&amp;gt;&lt;/code&gt; para destacar conclusões importantes — o material usa bastante isso ao final de cada análise:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;&amp;gt; &lt;/span&gt;&lt;span style=&#34;font-style:italic&#34;&gt;No pior caso o Quick Sort é $O(n^2)$. Isso acontece quando o pivot sempre divide o array de forma muito desigual.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;notas-de-rodapé&#34;&gt;Notas de rodapé&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;A mediana de um conjunto de dados é o valor central[^1].
+
+[^1]: Se o número de elementos for par, a mediana é a média dos dois valores centrais.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;links&#34;&gt;Links&lt;/h4&gt;
+&lt;p&gt;Link externo:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;Veja mais em [&lt;span style=&#34;color:#f92672&#34;&gt;documentação do Hugo&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;https://gohugo.io&lt;/span&gt;).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Link para outro post do site (use o caminho absoluto do site):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;Isso já foi discutido em [&lt;span style=&#34;color:#f92672&#34;&gt;Análise de Algoritmos Recursivos&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&lt;/span&gt;).
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;separadores-de-seção&#34;&gt;Separadores de seção&lt;/h4&gt;
+&lt;p&gt;Uma linha só com três traços cria uma linha horizontal, útil para separar blocos grandes (por exemplo, antes/depois de um quiz):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;---
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;5-como-incluir-figuras&#34;&gt;5. Como incluir figuras&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Crie o diretório com o mesmo nome do &lt;code&gt;.md&lt;/code&gt; (sem extensão) dentro de &lt;code&gt;content/posts/&lt;/code&gt;, por exemplo &lt;code&gt;content/posts/arvore-avl/&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Coloque as imagens lá dentro (&lt;code&gt;.png&lt;/code&gt;, &lt;code&gt;.jpg&lt;/code&gt; etc.).&lt;/li&gt;
+&lt;li&gt;No Markdown, referencie apenas o &lt;strong&gt;nome do arquivo&lt;/strong&gt;, sem caminho — o Hugo resolve isso automaticamente porque o post e o diretório de imagens têm o mesmo nome:&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-markdown&#34; data-lang=&#34;markdown&#34;&gt;![&lt;span style=&#34;color:#f92672&#34;&gt;rotação simples à esquerda&lt;/span&gt;](&lt;span style=&#34;color:#a6e22e&#34;&gt;rotacao-esquerda.png&lt;/span&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Se quiser controlar o tamanho da imagem, você também pode usar HTML puro (o site permite HTML embutido no Markdown):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&amp;lt;&lt;span style=&#34;color:#f92672&#34;&gt;img&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;rotacao-esquerda.png&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;style&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;width:60%&amp;#34;&lt;/span&gt;&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;6-como-fazer-quizzes&#34;&gt;6. Como fazer quizzes&lt;/h3&gt;
+&lt;p&gt;O site usa um shortcode próprio do Hugo para quizzes: &lt;code&gt;quiz&lt;/code&gt; (o bloco) e &lt;code&gt;item&lt;/code&gt; (cada pergunta). É exatamente o que já é usado em &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/introducao-a-analise/&#34;&gt;Introdução à Análise de Algoritmos&lt;/a&gt;, &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/quick-sort/&#34;&gt;Quick Sort&lt;/a&gt;, &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/bst/&#34;&gt;BST&lt;/a&gt; e &lt;a href=&#34;https://joaoarthurbm.github.io/eda/posts/analise-algoritmos-recursivos/&#34;&gt;Análise de Algoritmos Recursivos&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id=&#34;veja-o-markdown-desses-materiais-no-repositório-para-entender-como-fazer&#34;&gt;Veja o markdown desses materiais no repositório para entender como fazer.&lt;/h2&gt;
+&lt;h3 id=&#34;7-testando-localmente-preview-com-hugo&#34;&gt;7. Testando localmente (preview com Hugo)&lt;/h3&gt;
+&lt;p&gt;Antes de abrir o PR, &lt;strong&gt;sempre&lt;/strong&gt; confira como o material fica renderizado:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Na raiz do repositório clonado, rode:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;hugo server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Abra o link que aparece no terminal — normalmente:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;http://localhost:1313/eda/
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navegue até o seu post e confira: formatação, imagens, código, fórmulas e o quiz (se houver).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;O &lt;code&gt;hugo server&lt;/code&gt; fica rodando e observando os arquivos: qualquer alteração que você salvar no &lt;code&gt;.md&lt;/code&gt; atualiza a página automaticamente, sem precisar reiniciar nada.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;8-como-submeter-sua-contribuição-pull-request&#34;&gt;8. Como submeter sua contribuição (Pull Request)&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Adicione e commite os arquivos (o &lt;code&gt;.md&lt;/code&gt; e o diretório de imagens, se houver):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;git add content/posts/arvore-avl.md content/posts/arvore-avl/
+git commit -m &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Adiciona material sobre Árvores AVL&amp;#34;&lt;/span&gt;
+git push origin nome-do-seu-material
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;No GitHub, abra um &lt;strong&gt;Pull Request&lt;/strong&gt; do seu fork/branch para &lt;code&gt;master&lt;/code&gt; em &lt;a href=&#34;https://github.com/joaoarthurbm/eda&#34;&gt;https://github.com/joaoarthurbm/eda&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Envie apenas um Pull Request por material&lt;/strong&gt;, contendo só o &lt;code&gt;.md&lt;/code&gt; e o diretório de imagens correspondente.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;O professor vai revisar o conteúdo e a formatação; quando aprovado e mesclado (merge), o material é publicado automaticamente em &lt;a href=&#34;https://joaoarthurbm.github.io/eda/&#34;&gt;https://joaoarthurbm.github.io/eda/&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;checklist-antes-de-abrir-o-pr&#34;&gt;Checklist antes de abrir o PR&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Arquivo &lt;code&gt;.md&lt;/code&gt; dentro de &lt;code&gt;content/posts/&lt;/code&gt;, com front matter (&lt;code&gt;title&lt;/code&gt;, &lt;code&gt;date&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Diretório de imagens com o mesmo nome do &lt;code&gt;.md&lt;/code&gt; (se aplicável)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Rodei &lt;code&gt;hugo server&lt;/code&gt; e conferi a página em &lt;code&gt;http://localhost:1313/eda/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Código, fórmulas e imagens aparecem corretamente&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Um único Pull Request, só com o conteúdo deste material&lt;/li&gt;
+&lt;/ul&gt;
+</description>
        </item>
        
        <item>
