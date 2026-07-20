@@ -8,7 +8,7 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 ***
 
-A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que a memória estiver cheia. E, também sabemos, que boas políticas de cache *eviction* ***minimizam a as taxas de erro e maximizam as taxas de acerto. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
+A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que a memória estiver cheia. E, também sabemos, que boas políticas de cache *eviction* **minimizam as taxas de erro** e **maximizam as taxas de acerto**. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
 
 LFU é uma sigla para **Least Frequently Used**, que significa, em inglês, ***"utilizado com menor frequência"***. Isso diz respeito à maneira como os elementos são removidos, isto é, o elemento removido é aquele que foi utilizado ***menos frequentemente***. Fazemos esssa decisão, pois imaginamos que, ao adicionar um novo elemento, o elemento utilizado menos frequentemente do cache tem menores chances de ser utilizado novamente.
 
@@ -104,19 +104,39 @@ Além disso, em casos de ***miss***, a operação possui outro agravante, pois t
 
 Conforme discutido nos materiais sobre as outras políticas de cache, o nosso fator limitante no custo das operações é a busca, porque sua complexidade é sempre $O(n)$. Portanto, podemos utilizar a mesma estratégia realizada nas outras políticas de cache, ou seja, utilizar outra estrutura para realizar as operações de busca, nesse caso, tabelas hash.
 
-Com essas otimizações, o cache funciona assim: A operação get fará a busca na tabela chave-nó. Caso exista nó com essa chave, removemos o nó da tabela frequência-nó, atualizamos a frequência desse nó, e reinserimos o nó na tabela, conforme a ilustração abaixo.
+Com essas mudanças, nosso cache será composto por duas tabelas hash, uma responsável por vincular uma chave a um nó, permitindo a busca em tempo **$O(1)$**, e a outra mapeia as frequências de cada nó a um conjunto de nós existentes no cache.
 
-//inserir ilustração...
+Para os exemplos seguintes, assumimos o cache de tamanho 4, representado nesta imagem.
 
-Isso é feito, pois, ao mudar a frequência do nó, o cálculo do hash a partir da nova frequência pode causar erros de colisão.
+<figure style="align: center; margin-left:5%; width: 90%"> 
+    <img src="cache-inicial.png">
+</figure>
 
-Se o nó não está no cache, verificamos a capacidade do cache. Se o cache estiver cheio, removemos o nó com a menor frequência, e então, fazemos a adição do novo nó. Tome como exemplo, a imagem abaixo.
+Em outras palavras, o cache funciona assim: Ao realizar a operação get, faremos a busca na tabela chave-nó. Caso o elemento exista no cache, devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
 
-//inserir imagem...
+<figure style="align: center; margin-left:5%; width: 90%"> 
+    <img src="elemento-existente.png">
+    <figcaption align="center">
+        A imagem mostra o resultado do cache após realizar get("d"). Note que removemos o nó da lista em que estava antes, e atualizamos sua frequência antes de adicionarmos o nó na tabela novamente.
+    </figcaption>
+</figure>
+
+Note que o exemplo não cobre o caso em que aumentamos a frequência do elemento mais acessado no cache. Nesta situação, devemos verificar se a frequência existe como chave, antes de adicionar o nó à tabela.
+
+Se o nó não está no cache, verificamos a capacidade do cache. Se o cache estiver cheio, devemos recuperar a lista que possui os nós com a menor frequência, para remover estes elementos do cache. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo, a imagem abaixo.
+
+<figure style="align: center; margin-left:5%; width: 90%"> 
+    <img src="elemento-naoexistente.png">
+    <figcaption align="center">
+        A imagem mostra o resultado do cache após realizar get("e"). Note que removemos os nós com menor frequência do cache, antes de adicionar o elemento que procuramos.
+    </figcaption>
+</figure>
+
+Observe também, que este modelo trata a situação em que existe mais de um nó com a menor frequência. Neste caso, os conteúdos da lista são completamente apagados.
 
 Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida a $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade das operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque estamos utilizando outras estruturas além da lista encadeada.
 
-Em termos de código, temos as seguintes alterações:
+Em termos de código, nosso cache será representado dessa maneia:
 
 ```java
 //TODO
