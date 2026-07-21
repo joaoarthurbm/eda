@@ -8,12 +8,11 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 ***
 
-A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que a memória estiver cheia. E, também sabemos, que boas políticas de cache *eviction* **minimizam as taxas de erro** e **maximizam as taxas de acerto**. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
+A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que a memória estiver cheia. E, sabemos que boas políticas de cache *eviction* **minimizam as taxas de erro** e **maximizam as taxas de acerto**. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
 
-LFU é uma sigla para **Least Frequently Used**, que significa, em inglês, ***"utilizado com menor frequência"***. Isso diz respeito à maneira como os elementos são removidos, isto é, o elemento removido é aquele que foi utilizado ***menos frequentemente***. Fazemos esssa decisão, pois imaginamos que, ao adicionar um novo elemento, o elemento utilizado menos frequentemente do cache tem menores chances de ser utilizado novamente.
+LFU é uma sigla para **Least Frequently Used**, que significa, em inglês, ***"utilizado com menor frequência"***. Isso diz respeito à maneira como os elementos são removidos, isto é, o elemento removido é aquele que foi utilizado ***menos frequentemente***. Fazemos esssa decisão, pois imaginamos que, ao adicionar um novo elemento, os utilizados com menor frequência no cache provavelmente não será utilizado novamente.
 
-Vamos discutir melhor como funciona essa estratégia. Imagine que você é um gerente de uma empresa, e mantém uma lista de contatos para acesso rápido. O nosso desafio, é organizar essa lista de modo que seja possível ***acessar os contatos frequentementes utilizados de modo rápido***, e, quando precisarmos adicionar outro contato nessa lista, ***excluir o elemento menos frequente***.
-
+Vamos discutir melhor como funciona essa estratégia. Você certamente já usou um browser para acessar conteúdos na internet. Provavelmente, você acessa alguns sites várias vezes ao longo do dia, e seria desejável manter um conjunto de páginas ***frequentemente utilizadas***, por exemplo, alguns materiais dessa disciplina. Além disso, quando alguma outra página que não estiver nessa lista for acessada repetidamente, esta deveria substituir o site ***menos frequentemente acessado*** na lista.
 ***
 
 ## A política LFU
@@ -90,7 +89,20 @@ Vamos analisar o código da operação "get" em casos:
 
 ```java
 public void get(n) {
-    //TODO
+    Node node = cache.getNode(value);
+                
+    if (node != null) {
+        node.frequency++;
+        cache.sortByFrequency(node);
+        return node.value;
+
+    } else if (this.isFull()) {
+        cache.removeFirst();
+
+    }
+    
+    this.addFirst(value);
+    return null;
 }
 ```
 
@@ -139,7 +151,6 @@ Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, po
 Em termos de código, nosso cache será representado dessa maneia:
 
 ```java
-//TODO
 ```
 
 ***
