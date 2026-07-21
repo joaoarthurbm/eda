@@ -1,0 +1,63 @@
++++
+title = "Árvore Preto-Vermelha (PV)"
+date = 2026-07-16T19:47:17-03:00
+draft = true
+tags = []
+categories = []
++++
+
+Neste material nós vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada de **árvore PV**.
+
+**Disclaimer.** Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvore Binária de Pesquisa</a> devido a sua estrutura e com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/avl/">Árvore Balanceada (AVL)</a> devido as rotações, por isso eu sugiro que sejam lidos antes.
+
+# Contextualização
+
+No material de BST vimos o conceito de **altura**, definida pelo maior caminho entre a raiz e todas as folhas. A partir dela, observamos que operações, como inserção, busca e remoção possuem custo assintótico $O(h)$. Portanto, é desejado manter o valro de $h$ o menor possível, garantindo que essas operações sejam eficientes.
+
+Entretanto, isso não é garantido em uma BST comum. Dependendo da sequência das operações realizadas, a árvore pode se tornar desbalanceada, aumentando sua altura e, consequentemente, piorando o desempenho dessas operações, que pode se tornar linear.
+
+Uma forma de resolver esse problema é utilizando **árvores auto-balanceadas**, isto é, estruturas que realizam ajustes automaticamente após inserções e remoções para manter sua altura proporcional a $log(n)$.
+
+No material de AVL estudamos uma estrutura que mantém um balanceamento mais rígido por meio de rotações. Neste material veremos uma abordagem diferente: a **Árvore Preto-Vermelha**. Em vez de impor um balanceamento estrito, ela utiliza um conjunto de propriedades baseadas em cores que, por construção, garantem que a árvore permaneça **aproximadamente balanceada**, preservando a eficiência das operações de busca, inserção e remoção.
+
+# Definições e Propriedades
+
+De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** que utiliza um mecanismo de **balenceamento** baseado em cores. Além das informações armazenadas em cada nó, na árvore pv cada elemento possui um atributo adicional: uma cor, que pode ser **preta** ou **vermelha**. Por construção, essas cores obedecem a um conjunto de propriedades que mantêm a árvore aproximadamente balanceada, garantindo operações eficientes de busca, inserção e remoção.
+
+Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar um tipo básico, como uma $String$, armazenando valores como "RED" e "BLACK". Entretanto, neste material utilizaremos um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Como a cor de um nó só pode assumir dois valores, **RED** ou **BLACK**, preferimos o uso do $enum$.
+
+```java
+private enum Color {
+    RED, BLACK
+}
+```
+
+Outro conceito importante em uma árvore PV é o **nó sentinela NIL**. Em vez de utilizar $null$ para representar a ausência de filhos, todo filho inexistente é representado por um único nó $NIL$.
+
+O uso desse nó padroniza a estrutura da árvore, fazendo com que todo nó possua sempre dois filhos (que podem ser nós comuns ou o próprio $NIL$). Isso simplifica a implementação dos métodos básicos da árvore e é essencial para a manuntenção das propriedades da árvore preto-vermelha.
+
+o NIL é utilizado como um atributo privado e imutável da árvore, instanciado na criação da árvore. Inicialmente, a árvore está vazia, por isso, sua raiz aponta para o próprio $NIL$. Além disso, o nó $NIL$ é sempre **Preto**, e uma das propriedades da árvore pv garante que a **a raiz também seja sempre preta**. A figura abaixo ilustra uma árvore preto-vermelha com raiz igual a 10. Observe que como ela não tem filhos, eles são preenchidos por $NIL$, sempre de cor preta.
+
+<figure style="align: center; margin-left:5%; width: 90%">
+    <img src="pv-raiz.png">
+</figure>
+
+```java
+public class PV {
+
+    private final Node NIL;
+    private Node root;
+    private int size;
+
+    public PV() {
+        this.NIL = new Node();
+        this.NIL.color = Color.BLACK;
+        this.NIL.left = NIL;
+        this.NIL.right = NIL;
+        this.NIL.parent = NIL;
+
+        this.root = NIL;
+        this.size = 0;
+    }
+...}
+```
