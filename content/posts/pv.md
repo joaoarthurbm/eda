@@ -4,11 +4,12 @@ date = 2026-07-16T19:47:17-03:00
 draft = true
 tags = []
 categories = []
+github = "LINK PARA IMPLEMENTACAO"
 +++
 
 Neste material nós vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada de **árvore PV**.
 
-**Disclaimer.** Este material tem muita interseção com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvore Binária de Pesquisa</a> devido a sua estrutura e com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/avl/">Árvore Balanceada (AVL)</a> devido as rotações, por isso eu sugiro que sejam lidos antes.
+**Disclaimer.** Este material utiliza diversos conceitos apresentados anteriormente no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvore Binária de Pesquisa</a>, pois uma árvore PV é uma extensão de uma BST. Além disso, as operações de balanceamento possuem relação com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/avl/">Árvore Balanceada (AVL)</a>, devido ao uso de rotações. Por isso, recomenda-se a leitura desses materiais antes de iniciar este.
 
 # Contextualização
 
@@ -22,9 +23,9 @@ No material de AVL estudamos uma estrutura que mantém um balanceamento mais rí
 
 # Definições e Propriedades
 
-De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** que utiliza um mecanismo de **balenceamento** baseado em cores. Além das informações armazenadas em cada nó, na árvore pv cada elemento possui um atributo adicional: uma cor, que pode ser **preta** ou **vermelha**. Por construção, essas cores obedecem a um conjunto de propriedades que mantêm a árvore aproximadamente balanceada, garantindo operações eficientes de busca, inserção e remoção.
+De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** que utiliza um mecanismo de **balanceamento** baseado em cores. Além das informações armazenadas em cada nó, na árvore PV cada elemento possui um atributo adicional: uma cor, que pode ser **preta** ou **vermelha**. Por construção, essas cores obedecem a um conjunto de propriedades que mantêm a árvore aproximadamente balanceada.
 
-Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar um tipo básico, como uma $String$, armazenando valores como "RED" e "BLACK". Entretanto, neste material utilizaremos um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Como a cor de um nó só pode assumir dois valores, **RED** ou **BLACK**, preferimos o uso do $enum$.
+Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar um tipo básico, como uma $String$, armazenando valores como **"RED"** e **"BLACK"**. Outra alternativa é utilizar um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Como a cor de um nó só pode assumir dois valores, **RED** ou **BLACK**, neste material utilizaremos um $enum$.
 
 ```java
 private enum Color {
@@ -34,13 +35,11 @@ private enum Color {
 
 Outro conceito importante em uma árvore PV é o **nó sentinela NIL**. Em vez de utilizar $null$ para representar a ausência de filhos, todo filho inexistente é representado por um único nó $NIL$.
 
-O uso desse nó padroniza a estrutura da árvore, fazendo com que todo nó possua sempre dois filhos (que podem ser nós comuns ou o próprio $NIL$). Isso simplifica a implementação dos métodos básicos da árvore e é essencial para a manuntenção das propriedades da árvore preto-vermelha.
+O uso desse nó padroniza a estrutura da árvore, fazendo com que todo nó possua sempre dois filhos (que podem ser nós comuns ou o próprio $NIL$). Isso simplifica a implementação dos métodos básicos da árvore e é essencial para a manutenção das propriedades da árvore preto-vermelha.
 
-o NIL é utilizado como um atributo privado e imutável da árvore, instanciado na criação da árvore. Inicialmente, a árvore está vazia, por isso, sua raiz aponta para o próprio $NIL$. Além disso, o nó $NIL$ é sempre **Preto**, e uma das propriedades da árvore pv garante que a **a raiz também seja sempre preta**. A figura abaixo ilustra uma árvore preto-vermelha com raiz igual a 10. Observe que como ela não tem filhos, eles são preenchidos por $NIL$, sempre de cor preta.
+o $NIL$ é utilizado como um atributo privado e imutável da árvore, instanciado na criação da árvore. Inicialmente, a árvore está vazia, por isso, sua raiz aponta para o próprio $NIL$. Além disso, o nó $NIL$ é sempre **preto**, e uma das propriedades da árvore PV garante que a **raiz também seja sempre preta**.
 
-<figure style="align: center; margin-left:5%; width: 90%">
-    <img src="pv-raiz.png">
-</figure>
+A implementação abaixo mostra como a árvore PV é inicializada. Repare que os ponteiros $left$, $right$ e $parent$ do próprio $NIL$ apontam para ele mesmo. Essa é apenas uma escolha de implementação. Em outras implementações, esses ponteiros podem ser definidos como $null$, desde que os algoritmos tratem corretamente o nó sentinela.
 
 ```java
 public class PV {
@@ -61,3 +60,9 @@ public class PV {
     }
 ...}
 ```
+
+A figura abaixo ilustra uma árvore preto-vermelha com raiz igual a 10. Observe que como ela não tem filhos, eles são representados por $NIL$, sempre de cor preta.
+
+<figure style="width: 36%; margin: 0 auto;">
+    <img src="pv-raiz.png" style="width: 100%;">
+</figure>
