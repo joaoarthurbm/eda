@@ -13,7 +13,7 @@ Neste material nós vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada 
 
 # Contextualização
 
-No material de BST vimos o conceito de **altura**, definida pelo maior caminho entre a raiz e todas as folhas. A partir dela, observamos que operações, como inserção, busca e remoção possuem custo assintótico $O(h)$. Portanto, é desejado manter o valro de $h$ o menor possível, garantindo que essas operações sejam eficientes.
+No material de BST vimos o conceito de **altura**, definida pelo maior caminho entre a raiz e todas as folhas. A partir dela, observamos que operações, como inserção, busca e remoção possuem custo assintótico $O(h)$. Portanto, é desejado manter o valor de $h$ o menor possível, garantindo que essas operações sejam eficientes.
 
 Entretanto, isso não é garantido em uma BST comum. Dependendo da sequência das operações realizadas, a árvore pode se tornar desbalanceada, aumentando sua altura e, consequentemente, piorando o desempenho dessas operações, que pode se tornar linear.
 
@@ -25,7 +25,7 @@ No material de AVL estudamos uma estrutura que mantém um balanceamento mais rí
 
 De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** que utiliza um mecanismo de **balanceamento** baseado em cores. Além das informações armazenadas em cada nó, na árvore PV cada elemento possui um atributo adicional: uma cor, que pode ser **preta** ou **vermelha**. Por construção, essas cores obedecem a um conjunto de propriedades que mantêm a árvore aproximadamente balanceada.
 
-Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar um tipo básico, como uma $String$, armazenando valores como **"RED"** e **"BLACK"**. Outra alternativa é utilizar um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Como a cor de um nó só pode assumir dois valores, **RED** ou **BLACK**, neste material utilizaremos um $enum$.
+Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar uma variável do tipo $String$, armazenando valores como **"RED"** e **"BLACK"**. Outra alternativa é utilizar um $boolean$, associando cada valor a uma das cores possíveis, por exemplo, $true$ para vermelho e $false$ para preto. Neste material, utilizaremos um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Nesse caso, a cor de um nó pode assumir apenas dois valores: **RED** ou **BLACK**.
 
 ```java
 private enum Color {
