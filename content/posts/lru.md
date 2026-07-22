@@ -33,6 +33,8 @@ Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e a FIFO?
 # Métodos
 # Curiosidade
 Por fim, vale citar que o algoritmo que estudamos hoje é normalmente o critério de desempate implementado na próxima política de ***cache eviction*** que estudaremos: **Least Frequently Used (LFU)**.
+# Contribuições
+[Luis Netto](https://github.com/nettoluis/) e [Gustavo Paulino](https://github.com/gustavop-fausto/) contribuíram para esse material
 
 
 
