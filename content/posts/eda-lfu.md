@@ -25,11 +25,11 @@ Do mesmo modo que fizemos com as outras políticas de cache, vamos analisar a pr
 
 `get("a")` -> miss!
 
-Como esperado, buscamos um elemento **"a"** no cache. Como não o encontramos, faremos a busca no BD, e adicionamos este elemento ao cache após encontrá-lo. Se este foi o caso, o resultado final do cache após essa primeira operação seria.
+Como esperado, buscamos um nó cujo valor é o elemento **"a"** no cache. Como não o encontramos, faremos a busca no BD, e adicionamos um nó que representa esse elemento ao cache, após encontrá-lo. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
 
 `[("a", 1)]`
 
-Note que tivemos que realizar uma alteração na estrutura do nó, pois precisamos manter o registro da frequência desse elemento, além do conteúdo que existe nesse nó.
+Note que tivemos que realizar uma alteração na estrutura do nó, comparado à política LRU, pois precisamos manter o registro da frequência desse elemento, além do conteúdo que existe nesse nó.
 
 Vamos agora analisar outras operações de busca com resultados semelhantes:
 
@@ -37,7 +37,7 @@ Vamos agora analisar outras operações de busca com resultados semelhantes:
 
 `get("c")` -> miss!
 
-Novamente, faremos a busca pelos elementos no cache, como **"b"** e **"c"** não estão lá, faremos a busca no BD. Se os elementos estiverem no sistema, após concluir a busca, realizamos a adição no cache.
+Novamente, faremos a busca pelos elementos no cache, como não há nós que contém **"b"** e **"c"**, buscamos estes elementos no banco de dados. Se os elementos estiverem no BD, após concluir a busca, realizamos a adição no cache.
 
 `[("a", 1), ("b", 1), ("c", 1)]`
 
@@ -49,19 +49,19 @@ Agora, faremos a busca por elementos que existem no cache:
 
 `get("c")` -> hit!
 
-Isso é ótimo, pois não precisaremos consultar a lista de todos os contatos da empresa, pois encontramos os contatos desejados na lista de contatos frequentes. Note que, quando encontramos um elemento no cache, devemos aumentar a ***frequência*** desse elemento. Dessa forma, após essas operações, o cache terá a seguinte forma:
+Isso é ótimo, pois não precisaremos utilizar uma ferramenta de busca para encontrar o site desejado, pois o encontramos na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
 
-`[("a", 3), ("b", 1), ("c", 2)]`
+`[("a", 3), ("c", 2), ("b", 1)]`
 
 Tentaremos agora procurar por um elemento distinto dos que já procuramos:
 
 `get("d")` -> miss!
 
-Estamos na mesma situação de anteriormente, porém, não podemos simplesmente adicionar outro elemento ao cache, pois atingimos a capacidade máxima. Portanto, devemos efetuar uma remoção conforme a nossa política de cache. Nesse sentido, o elemento removido é o que possui a ***menor frequência***, e, nesse caso, seria o nó com valor **"b"**. Em seu lugar, inserimos o novo elemento procurado.
+Estamos na mesma situação de busca por um elemento, cujo nó não existe no cache. Porém, não podemos simplesmente adicionar outro elemento ao cache, pois atingimos a capacidade máxima. Portanto, devemos efetuar uma remoção conforme a nossa política de cache. Nesse sentido, o nó removido é o que possui a ***menor frequência***, e, nesse caso, seria o nó com valor **"b"**. Em seu lugar, inserimos o novo elemento procurado.
 
-`[("a", 3), ("d", 1), ("c", 2)]`
+`[("a", 3), ("c", 2), ("d", 1)]`
 
-É importante lembrar, que o nó ainda existe no banco de dados, portanto, sempre que removemos um nó do cache, devemos mudar sua frequência para 0, afinal, o elemento não existe no cache após a remoção.
+É importante lembrar, que o elemento ainda existe no banco de dados, portanto, sempre que removemos um nó do cache, devemos mudar sua frequência para 0, afinal, o elemento não existe no cache após a remoção.
 
 Agora é um bom momento para testar seu aprendizado até este momento.
 
@@ -88,7 +88,7 @@ get("e");
 Vamos analisar o código da operação "get" em casos:
 
 ```java
-public void get(n) {
+public String get(n) {
     Node node = cache.getNode(value);
                 
     if (node != null) {
