@@ -83,28 +83,81 @@ get("e");
 
 ***
 
-## Sobre a eficiência das operações
+## Implementação dos métodos básicos
 
-Vamos analisar o código da operação "get" em casos:
+Como discutimos na seção anterior, a estrutura do nó sofrerá algumas alterações por conta do funcionamento da nossa política. Em particular, o nó armazena a frequência de acessos durante seu tempo de vida no cache, além do valor que representa este elemento. Assim, temos
 
 ```java
-public String get(n) {
-    Node node = cache.getNode(value);
-                
-    if (node != null) {
-        node.frequency++;
-        cache.sortByFrequency(node);
-        return node.value;
+class Node {
+    private Node prev;
+    private Node next;
+    String value;
+    int frequency;
 
-    } else if (this.isFull()) {
-        cache.removeFirst();
-
+    public Node(String value) {
+        this.prev = null;
+        this.next = null;
+        this.value = value;
+        this.frequency = 1;
     }
-    
-    this.addFirst(value);
-    return null;
 }
 ```
+
+Quanto ao método básico `get("String value")`, o processo é simples. Fazemos uma busca linear na lista encadeada, procurando o nó que contém o elemento:
+
+```java
+//busca iterativa em linkedlist
+public class LinkedList { 
+    ...
+    public Node getNode(String value) {
+        Node aux = this.head;
+        while (aux != null) {
+            if (aux.value == value)
+                return aux;
+            aux = aux.next;
+        }
+    }
+}
+```
+
+Após essa busca, devemos verificar se o nó foi encontrado, e, se será necessário remover o elemento menos frequente:
+
+```java
+public class LFUCache {
+    private LinkedList cache;
+    private int capacidade;
+
+    public LFUCache(int capacidade) {
+        this.cache = new LinkedList();
+        this.capacidade = capacidade;
+    }
+
+    public String get(String value) {
+        Node toSearch = cache.getNode(value);
+
+        if (toSearch != null) {
+            toSearch.frequency += 1;
+            cache.sortByFrequency();
+            return toSearch.value;
+
+        } else if (this.isFull()) {
+            cache.removeLast();
+        }
+
+        cache.addLast(value);
+        return null;
+    }
+
+    public boolean isFull() {
+        return cache.size() == capacidade;
+    }
+}
+
+```
+
+## Sobre a eficiência das operações
+
+Utilizando o método ```get(String value)``` apresentado anteriormente, faremos a análise sob a perspectiva da complexidade de tempo em casos.
 
 **hit:** A operação custa $O(n)$, pois temos que iterar pela lista até encontrar o elemento. Após incrementar a frequência do elemento, devemos ordenar a lista, em um processo análogo à inserção ordenada. Como a lista possui tamanho $n$, e fazemos uma busca linear, seguida de uma inserção ordenada, teremos custo total $O(n)$.
 
