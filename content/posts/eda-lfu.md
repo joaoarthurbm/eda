@@ -197,13 +197,117 @@ Se o nó não está no cache, verificamos a capacidade do cache. Se o cache esti
     </figcaption>
 </figure>
 
-Observe também, que este modelo trata a situação em que existe mais de um nó com a menor frequência. Neste caso, os conteúdos da lista são completamente apagados.
+Observe também, que este modelo trata a situação em que existe mais de um nó com a menor frequência. Neste caso, apagaremos apenas o último elemento da lista. Se a lista esteja completamente vazia após remover o último nó
 
 Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida a $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade das operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque estamos utilizando outras estruturas além da lista encadeada.
 
-Em termos de código, nosso cache será representado dessa maneia:
+
+## Implementação otimizada do cache
+
+Como nossos nós serão acessados por chaves, temos que realizar uma alteração na sua estrutura. Em específico, o nó possui um atributo **chave**, que será imutável após a inicialização do objeto.
 
 ```java
+class Node {
+    Node prev;
+    Node next;
+    String value;
+    int frequency;
+    int key;
+
+    public Node(String value, int key) {
+        this.prev = null;
+        this.next = null;
+        this.value = value;
+        this.frequency = 1;
+        this.key = key;
+    }
+}
+```
+
+Quanto aos atributos do cache, sabemos que ele não é representado apenas por uma lista encadeada. Em vez disso, temos duas tabelas hash, uma que realiza a ligação chave-nó, e a outra frequência-lista. Além disso, adicionaremos também um atributo que registra a menor frequência do cache, para evitar buscas lineares que fariam esse mesmo papel.
+ 
+```java
+public class LFUCache {
+    private int capacity;
+    private Map<Integer, Node> keyToNode;
+    private Map<Integer, DoublyLinkedList> freqToList;
+    private int minFreq;
+
+    public LFUCache(int capacity) {
+        this.capacity = capacity;
+        this.keyToNode = new HashMap<>();
+        this.freqToList = new HashMap<>();
+        this.minFreq = 0;
+    }
+}
+```
+
+Por conta das novas estruturas utilizadas para representar o cache, criamos os métodos públicos `put(int key, String value)`, para inserir elementos no cache, e `get(int key)`, para acessá-los.
+
+```java
+public void put(int key, String value) {
+    Node node = keyToNode.get(key);
+
+    if (node != null) {
+        node.value = value;
+        updateFreq(node);
+        return;
+
+    }
+
+    if (keyToNode.size() >= this.capacity) {
+        DoublyLinkedList list = freqToList.get(minFreq);
+        Node evicted list.removeLast();
+
+        if (evicted != null) keyToNode.remove(evicted.key);
+    }
+
+    node = new Node(key, value);
+
+    keyToNode.put(key, node);
+    getOrCreateList(1).add(node);
+    minFreq = 1;
+}
+
+public String get(int key) {
+    Node node = keyToNode.get(key);
+
+    if (node == null) return null;
+
+    updateFreq(node);
+
+    return node.value;
+
+}
+```
+
+Note que precisamos alguns métodos privados para atualizar a frequência do nó, e, para facilitar a adição de novos elementos, caso não haja outros nós registrados com a sua nova frequência. Portanto, temos os métodos `updateFreq(Node node)` e `getOrCreateList(int freq)`, definidos da seguinte forma:
+
+```java
+    private DoublyLinkedList getOrCreateList(int freq) {
+        DoublyLinkedList list = freqToList.get(freq);
+
+        if (list == null) {
+            list = new DoublyLinkedList();
+            freqToList.put(freq, list);
+        }
+
+        return list;
+    }
+
+    private void updateFreq(Node node) {
+        DoublyLinkedList oldList = freqToList.get(node.freq);
+        oldList.remove(node);
+
+        if (oldList.size == 0) {
+            if (node.freq == minFreq) minFreq++;
+
+            freqToList.remove(node.freq);
+        }
+
+        node.freq++;
+        getOrCreateList(node.freq).add(node);
+    }
 ```
 
 ***
