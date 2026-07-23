@@ -12,19 +12,29 @@ Neste material vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada de **
 
 # Contextualização
 
-No material de BST vimos o conceito de **altura**, definida pelo maior caminho entre a raiz e todas as folhas. A partir dela, observamos que operações, como inserção, busca e remoção possuem custo assintótico $O(h)$. Portanto, é desejado manter o valor de $h$ o menor possível, garantindo que essas operações sejam eficientes.
+No material de BST vimos que métodos como busca, remoção e inserção tem um custo assintótico $O(h)$, onde $h$ representa a altura da árvore. Portanto, é desejável manter a altura da árvore limitada, para que essas operações continuem eficientes.
 
-Entretanto, isso não é garantido em uma BST comum. Dependendo da sequência das operações realizadas, a árvore pode se tornar desbalanceada, aumentando sua altura e, consequentemente, piorando o desempenho dessas operações, que pode se tornar linear.
+Entretanto, uma BST comum não garante uma altura pequena. Dependendo da ordem em que os elementos são inseridos e removidos, a árvore pode ficar desbalanceada. Nesses casos, sua altura pode chegar até $n$, fazendo com que operações que antes eram eficientes tenham custo linear.
 
-Uma forma de resolver esse problema é utilizar **árvores auto-balanceadas**, isto é, estruturas que realizam ajustes automaticamente após inserções e remoções para manter sua altura proporcional a $log(n)$.
+Para resolver esse problema, utilizamos estruturas que realizam ajustes automaticamente após algumas operações, mantendo a árvore balanceada e garantindo que sua altura permaneça limitada.
 
-No material de AVL estudamos uma estrutura que mantém um balanceamento mais rígido por meio de rotações. Neste material veremos uma abordagem diferente: a **Árvore Preto-Vermelha**. Em vez de impor um balanceamento estrito, ela utiliza um conjunto de propriedades baseadas em cores que, por construção, garantem que a árvore permaneça **aproximadamente balanceada**, preservando a eficiência das operações de busca, inserção e remoção.
+No material de AVL vimos uma forma de fazer isso. A AVL mantém um balanceamento bastante rígido, garantindo que a diferença entre as alturas das subárvores de um nó seja pequena. Para isso, ela utiliza rotações após inserções e remoções.
+
+Agora veremos uma abordagem diferente: a **Árvore Preto-Vermelha**. Diferente da árvore AVL, ela não controla diretamente a diferença entre as alturas das subárvores. Em vez disso, utiliza um conjunto de propriedades relacionadas às cores dos nós.
+
+Essas propriedades não garantem uma árvore perfeitamente balanceada, mas garantem que ela permaneça **aproximadamente balanceada**. Como consequência, operações como busca, inserção e remoção continuam possuindo custo logarítmico.
 
 # Definições e Propriedades
 
-De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** que utiliza um mecanismo de **balanceamento** baseado em cores. Além das informações armazenadas em cada nó, na árvore PV cada elemento possui um atributo adicional: uma cor, que pode ser **preta** ou **vermelha**. Por construção, essas cores obedecem a um conjunto de propriedades que mantêm a árvore aproximadamente balanceada.
+De forma simplificada, uma árvore preto-vermelha é uma **Árvore Binária de Pesquisa (BST)** com uma informação extra em cada nó: sua cor.
 
-Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar uma variável do tipo $String$, armazenando valores como **"RED"** e **"BLACK"**. Outra alternativa é utilizar um $boolean$, associando cada valor a uma das cores possíveis, por exemplo, $true$ para vermelho e $false$ para preto. Neste material, utilizaremos um $enum$, um tipo especial da linguagem que representa um conjunto fixo de constantes. Nesse caso, a cor de um nó pode assumir apenas dois valores: **RED** ou **BLACK**.
+Além dos atributos usuais de um nó, cada nó possui uma cor, que pode ser **vermelha** ou **preta**. Essa informação parece simples, mas é justamente ela que permite manter a árvore aproximadamente balanceada.
+
+A ideia é que as cores dos nós devem respeitar algumas propriedades. Ao longo desta seção veremos quais são essas propriedades e como elas evitam que a árvore fique desbalanceada.
+
+Para representar a cor de um nó em Java, existem algumas possibilidades. Poderíamos utilizar uma variável do tipo $String$, armazenando valores como **"RED"** e **"BLACK"**, ou até mesmo um $boolean$, associando cada valor a uma cor.
+
+Neste material, utilizaremos um $enum$. Um $enum$ representa um conjunto fixo de valores possíveis e, nesse caso, garante que um nó só possa possuir uma das duas cores válidas: **RED** ou **BLACK**.
 
 ```java
 private enum Color {
@@ -76,14 +86,36 @@ A próxima propriedade diz que **todos os filhos de um nó vermelho são pretos*
 
 Em sequência, temos que todo caminho de um nó até uma folha ($NIL$) descendente contém a mesma quantidade de nós pretos. Essa quantidade é chamada de **altura preta** (black-height) do nó.
 
-Note que, ao calcular a altura preta, apenas os nós pretos são contabilizados. Os nós vermelhos podem aparecer em alguns caminhos e não em outros, desde que o caminho do nó até um nó $NIL$ tenha a mesma quantidade de nós pretos.
+Note que, ao calcular a altura preta, apenas os nós pretos do caminho são contabilizados. O próprio nó não é incluído na contagem, enquanto o nó $NIL$ é contabilizado. Por convenção, a altura preta de uma árvore vazia é 0. Os nós vermelhos podem aparecer em alguns caminhos e não em outros, desde que o caminho do nó até um nó $NIL$ tenha a mesma quantidade de nós pretos.
+
+Em termos de código, como todos os caminhos até um nó $NIL$ possuem a mesma quantidade de nós pretos, basta percorrer qualquer um deles.
+
+```java
+public int blackHeight() {
+    //A altura de uma árvore vazia é 0.
+    if (root == NIL) return 0;
+    return blackHeight(root);
+}
+
+private int blackHeight(Node node) {
+    //O nó NIL encerra a recursão e é contabilizado.
+    if (node == NIL) return 1;
+
+    int bh = blackHeight(node.left);
+
+    //O próprio nó não é contabilizado.
+    return bh + (node.left.color == Color.BLACK ? 1 : 0);
+}
+```
+
+Como todos os caminhos possuem a mesma altura preta, basta percorrer um único caminho da árvore. Nesse modelo, foi escolhido o caminho pela subárvore esquerda.
 
 A restrição sobre nós vermelhos, por si só, não é suficiente para garantir o balanceamento da árvore. Em conjunto com a restrição da altura preta, ela impede que existam caminhos muito maiores do que outros. Como consequência, o caminho mais longo da raiz até uma folha ($NIL$) nunca é maior que o dobro do menor caminho, mantendo a árvore aproximadamente balanceada.
 
-A figura abaixo demonstra um exemplo de árvore PV. Observe que todas as propriedades foram respeitadas.
+A figura abaixo demonstra um exemplo de árvore PV e as alturas pretas de cada nó. Observe que a altura preta da raiz é 2. Como a altura preta não considera o próprio nó, analisamos o caminho que parte de um de seus filhos, por exemplo, $5 -> 2 -> NIL$. Já que o nó 5 é vermelho, ele não contribui para a altura preta. Assim, apenas o nó 2 e o nó $NIL$ são contabilizados, resultando em altura preta igual a 2.
 
 <figure style="width: 80%; margin: 0 auto;">
-    <img src="pv-exemplo.png" style="width: 100%;">
+    <img src="pv-exemplo-altura-preta.png" style="width: 100%;">
 </figure>
 
 Antes de prosseguir para a implementação, vale a pena revisar as propriedades que caracterizam uma árvore preto-vermelha. Elas serão utilizadas constantemente durante as operações de inserção e remoção.
@@ -108,13 +140,13 @@ Vale a pena fazermos um quiz para ver se você de fato entendeu as propriedades 
 
 ## Complexidade das operações
 
-Com essas propriedades garantidas, é possível demonstrar que uma árvore preto-vermelha com $n$ nós possui altura de no máximo $h \leq 2\log(n + 1)$. Como consequência, todas as operações cujo custo depende da altura da árvore podem ser executadas em $O(\log n)$.
+Com essas propriedades garantidas, é possível demonstrar que uma árvore preto-vermelha com $n$ nós possui altura de no máximo $h \leq 2\log(n + 1)$. Como consequência, todas as operações cujo custo depende da altura da árvore podem ser executadas em $O(\log n)$. Em uma BST comum, essas mesmas operações possuem custo $O(h)$ e, no pior caso, $O(n)$, pois a árvore pode se tornar desbalanceada.
 
 # Implementação
 
 Com as propriedades já definidas, podemos estudar a implementação de uma árvore PV.
 
-A principal diferença em relação aos metódos de uma BST está nas operações de inserção e remoção. Após cada uma delas, pode ser necessário realizar ajustes, utilizando mudanças de cor e rotações, para restaurar o balanceamento da árvore e garantir que todas as propriedades continuem sendo satisfeitas.
+A principal diferença em relação aos métodos de uma BST está nas operações de inserção e remoção. Após cada uma delas, pode ser necessário realizar ajustes, utilizando mudanças de cor e rotações, para restaurar o balanceamento da árvore e garantir que todas as propriedades continuem sendo satisfeitas.
 
 Já os métodos de busca, mínimo, máximo, predecessor e sucessor permanecem essencialmente os mesmos de uma BST. A principal diferença é que as verificações envolvendo $null$ passam a utilizar o nó sentinela $NIL$. Da mesma forma, as rotações para esquerda e para a direita são idênticas às estudadas na AVL, exigindo apenas essa mesma adaptação para o uso do nó sentinela.
 
