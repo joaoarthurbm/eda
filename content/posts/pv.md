@@ -78,7 +78,7 @@ A figura abaixo ilustra uma árvore preto-vermelha com raiz igual a 10. Observe 
 
 ## Filhos
 
-A próxima propriedade diz que **todos os filhos de um nó vermelho são pretos**. Isso implica que não podem existir dois nós vermelhos consecutivos em um mesmo caminho da árvore. Assim, o número de nós vermelhos em qualquer caminho nunca pode superar o número de nós pretos, impedindo que a árvore fique excessivamente alta.
+A próxima propriedade diz que **todos os filhos de um nó vermelho são pretos**. Isso implica que não podem existir dois nós vermelhos consecutivos em um mesmo caminho da árvore. Assim, o número de nós vermelhos em qualquer caminho nunca pode superar o número de nós pretos.
 
 ## Altura Preta
 
@@ -117,7 +117,7 @@ A figura abaixo demonstra um exemplo de árvore PV e as alturas pretas de cada n
 Como o o nó 5 é vermelho, ele não contribui para a altura preta. Assim, apenas o nó 2 e o nó $NIL$ são contabilizados, resultando em altura preta igual a 2.
 
 <figure style="width: 80%; margin: 0 auto;">
-    <img src="pv-exemplo-altura-preta.png" style="width: 100%;">
+    <img src="pv-altura-preta.png" style="width: 100%;">
 </figure>
 
 Antes de prosseguir para a implementação, vale a pena revisar as propriedades que caracterizam uma árvore preto-vermelha. Elas serão utilizadas constantemente durante as operações de inserção e remoção.
@@ -155,3 +155,220 @@ Já os métodos de busca, mínimo, máximo, predecessor e sucessor podem ser rea
 A principal mudança em relação às implementações anteriores está na forma como representamos os filhos inexistentes. Enquanto em uma BST comum ou AVL utilizamos $null$, na árvore PV utilizamos o nó $NIL$.
 
 ## Inserção
+
+A inserção em uma árvore PV acontece em duas etapas.
+
+Primeiro, fazemos a mesma inserção de uma **BST**. Afinal, uma árvore PV continua sendo uma árvore binária de pesquisa, então a ordenação dos nós deve ser mantida.
+
+Feito isso, é bem provável que alguma propriedade da árvore tenha sido violada. Nesse caso, precisamos realizar os ajustes necessários por meio de mudanças de cor e, quando necessário, rotações. Para isso, utilizamos o método $fixUpInsert$.
+
+O código abaixo mostra como essa ideia é organizada.
+
+```java
+public void add(int element) {
+    this.size++;
+
+    Node newNode = new Node(element);
+
+    //Se a árvore está vazia, não é necessário conserto.
+    if (this.isEmpty()) {
+        this.root = newNode;
+        this.root.color = Color.BLACK;
+    } else {
+        Node aux = this.root;
+
+        //Procura a posição do nó e adiciona na árvore.
+        while (aux != NIL) {
+            if (element < aux.value) {
+                if (aux.left == NIL) {
+                    newNode.parent = aux;
+                    aux.left = newNode;
+
+                    break;
+                }
+
+                aux = aux.left;
+            } else {
+                if (aux.right == NIL) {
+                    newNode.parent = aux;
+                    aux.right = newNode;
+
+                    break;
+                }
+
+                aux = aux.right;
+            }
+        }
+
+        //Realiza os ajustes das propriedades da árvore PV.
+        fixUpInsert(newNode);
+    }
+}
+```
+
+É importante destacar um detalhe da inserção: todo novo nó é inserido inicialmente com a cor **vermelha**.
+
+O motivo é simples. Caso o nó fosse inserido como **preto**, alguns caminhos da árvore teriam um nó preto a mais que outros, violando a propriedade da altura preta. Além disso, esse tipo de violação seria mais complexo de corrigir.
+
+Ao inserir o nó como **vermelho**, a altura preta permanece inalterada. O único problema seria a existência de dois nós vermelhos consecutivos, que ocorre quando o pai do novo nó inserido também é vermelho. No entanto, essa situação é mais fácil de corrigir.
+
+Por esse motivo, o novo nó já é criado com a cor $RED$ durante a inserção.
+
+```java
+class Node {
+
+    int value;
+    Node left;
+    Node right;
+    Node parent;
+    Color color;
+
+    Node () {}
+
+    Node(int v) {
+        this.value = v;
+        this.color = Color.RED;
+        this.left = NIL;
+        this.right = NIL;
+        this.parent = NIL;
+    }
+...}
+```
+
+### Caso base
+
+Antes de analisar os casos de ajuste, vale observar um detalhe do algoritmo.
+
+Como o método fixUpInsert pode ser chamado recursivamente, a raiz da árvore pode mudar durante esses ajustes. Por isso, o primeiro teste do método é um caso base: se o nó chegou à raiz, basta pintá-la de preto.
+
+```java
+private void fixUpInsert(Node node) {
+    //Caso base.
+    if (node == this.root) {
+        node.color = Color.BLACK;
+        return;
+    }
+
+    ...
+}
+```
+
+### Primeiro caso - O pai é preto
+
+Agora sim começamos os casos de ajuste.
+
+Vamos considerar uma árvore cuja raiz é o nó **10** e inserir o valor **5**.
+
+<figure style="width: 30%; margin: 0 auto;">
+    <img src="pv-insercao-caso-1.png" style="width: 100%;">
+</figure>
+
+Observe que o pai do novo nó é **preto**. Como a única violação possível após uma inserção é existir um pai vermelho com um filho vermelho, nenhuma propriedade da árvore foi quebrada. Portanto, não precisamos fazer nenhum ajuste.
+
+Em termos de código, podemos simplesmente encerrar a execução do método.
+
+```java
+private void fixUpInsert(Node node) {
+    ...
+
+    // Se o pai é preto, nenhuma propriedade foi violada.
+    if (node.parent.color == Color.BLACK) return;
+
+    ...
+}
+```
+
+### Segundo caso - Tio vermelho
+
+Se chegamos até aqui, então o pai do nó é **vermelho**. Isso significa que existe uma violação, pois um nó vermelho não pode ter um filho vermelho.
+
+Vamos continuar o exemplo anterior. Primeiro inserimos o **15**. Como seu pai é preto, nada precisa ser feito. Agora inserimos o **20**.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-2-1.png" style="width: 100%;">
+</figure>
+
+Agora surgiu um problema: **20** e seu pai (**15**) são vermelhos.
+
+Nesse momento, precisamos descobrir qual é a cor do tio, ou seja, o irmão do pai. Como ele também é **vermelho**, esse caso pode ser resolvido apenas com mudanças de cor.
+
+Mas por que olhar para o tio? É evidente que devemos pintar de preto um dos dois nós vermelhos consecutivos para eliminar a violação, então pintamos o pai de preto. Ao fazer isso, um dos lados da árvore passa a ter um nó preto a mais que o outro. Para manter a altura preta igual nos dois lados, também precisamos pintar o tio de preto.
+
+Como agora as duas subárvores ganharam um nó preto, compensamos essa mudança pintando o avô de vermelho.
+
+Quando o tio for vermelho, fazemos as seguintes mudanças de cores:
+
+- o pai passa de **vermelho** a **preto**
+- o tio passa de **vermelho** a **preto**
+- o avô passa de **preto** a **vermelho**
+
+Após essas alterações, temos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-2-2.png" style="width: 100%;">
+</figure>
+
+A violação entre o novo nó e seu pai foi eliminada. Entretanto, ao pintar o avô de vermelho, uma nova violação pode surgiu acima dele. No nosso caso, o avô é a **raiz** e acabou ficando **vermelho**.
+
+Por isso chamamos $fixUpInsert$ para o avô, a fim de verificar se ainda existe alguma violação acima dele.
+
+Após essa nova chamada, obtemos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-2-3.png" style="width: 100%;">
+</figure>
+
+Como o avô é a raiz, pintamos de preto e encerramos a execução.
+
+Em código, esse caso corresponde ao trecho abaixo:
+
+```java
+private void fixUpInsert(Node node) {
+    ...
+
+    //Variáveis úteis.
+    Node parent = node.parent;
+    Node grandfather = parent.parent;
+    Node uncle = parent.isLeftChild() ? grandfather.right : grandfather.left;
+
+    //Tio é vermelho.
+    if (uncle.color == Color.RED) {
+        parent.color = Color.BLACK;
+        uncle.color = Color.BLACK;
+        grandfather.color = Color.RED;
+
+        fixUpInsert(grandfather);
+    }
+
+    ...
+}
+```
+
+### Terceiro caso - Pai é o filho a esquerda e o nó o filho a direita
+
+```java
+private void fixUpInsert(Node node) {
+    ...
+
+    //Tio é preto.
+    else {
+        if (node.isRightChild() && parent.isLeftChild()) {
+            rotateLeft(parent);
+            node = parent;
+            parent = node.parent;
+
+        } else if (node.isLeftChild() && parent.isRightChild()) {
+            rotateRight(parent);
+            node = parent;
+            parent = node.parent;
+        }
+
+        parent.color = Color.BLACK;
+        grandfather.color = Color.RED;
+
+        if (node.isLeftChild()) rotateRight(grandfather);
+        else rotateLeft(grandfather);
+    }
+    ...
+}
+```
