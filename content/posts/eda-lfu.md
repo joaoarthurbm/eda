@@ -61,7 +61,7 @@ Estamos na mesma situação de busca por um elemento, cujo nó não existe no ca
 
 `[("a", 3), ("c", 2), ("d", 1)]`
 
-É importante lembrar, que o elemento ainda existe no banco de dados, portanto, sempre que removemos um nó do cache, devemos mudar sua frequência para 0, afinal, o elemento não existe no cache após a remoção.
+É importante lembrar, que ao remover o nó, esse elemento permanece no sistema. Logo, é irrelevante alterar a frequência de um nó removido para 0, pois este objeto será apagado, e, consequentemente, não possui frequência.
 
 Agora é um bom momento para testar seu aprendizado até este momento.
 
