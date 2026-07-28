@@ -21,11 +21,11 @@ Nosso cache é um conjunto de nós que possuem um contador, que registra a quant
 
 `[null]`
 
-Do mesmo modo que fizemos com as outras políticas de cache, vamos analisar a primeira operação de busca por um objeto no nosso sistema
+Do mesmo modo que fizemos com as outras políticas de cache, vamos analisar a primeira operação de busca por um objeto no nosso sistema.
 
 `get("a")` -> miss!
 
-Como esperado, buscamos um nó cujo valor é o elemento **"a"** no cache. Como não o encontramos, faremos a busca no BD, e adicionamos um nó que representa esse elemento ao cache, após encontrá-lo. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
+Como esperado, buscamos um nó cujo valor é o elemento **"a"** no cache, e não o encontramos, pois o cache está vazio. Como não encontramos um nó com este elemento, faremos a busca no BD, e adicionamos um nó que representa esse elemento ao cache, após encontrá-lo. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
 
 `[("a", 1)]`
 
@@ -49,7 +49,7 @@ Agora, faremos a busca por elementos que existem no cache:
 
 `get("c")` -> hit!
 
-Isso é ótimo, pois não precisaremos utilizar uma ferramenta de busca para encontrar o site desejado, pois o encontramos na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
+Isso é ótimo, pois não precisaremos utilizar uma ferramenta de busca para encontrar o site desejado, porque podemos encontrá-los na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
 
 `[("a", 3), ("c", 2), ("b", 1)]`
 
@@ -85,7 +85,7 @@ get("e");
 
 ## Implementação dos métodos básicos
 
-Como discutimos na seção anterior, a estrutura do nó sofrerá algumas alterações por conta do funcionamento da nossa política. Em particular, o nó armazena a frequência de acessos durante seu tempo de vida no cache, além do valor que representa este elemento. Assim, temos
+Como discutimos na seção anterior, a estrutura do nó sofrerá algumas alterações por conta do funcionamento da nossa política. Em particular, o nó armazena a frequência de acessos durante seu tempo de vida, no cache, além do valor que representa este elemento.
 
 ```java
 class Node {
@@ -103,7 +103,7 @@ class Node {
 }
 ```
 
-Quanto ao método básico `get("String value")`, o processo é simples. Fazemos uma busca linear na lista encadeada, procurando o nó que contém o elemento:
+Quanto ao método básico `get("String value")`, o processo é simples. Fazemos uma busca linear na lista encadeada, procurando o nó que contém o elemento.
 
 ```java
 //busca iterativa em linkedlist
@@ -120,7 +120,7 @@ public class LinkedList {
 }
 ```
 
-Após essa busca, devemos verificar se o nó foi encontrado, e, se será necessário remover o elemento menos frequente:
+Após essa busca, devemos verificar se o nó foi encontrado, e, se será necessário remover o elemento menos frequente.
 
 ```java
 public class LFUCache {
@@ -165,7 +165,7 @@ Utilizando o método ```get(String value)``` apresentado anteriormente, faremos 
 
 Além disso, em casos de ***miss***, a operação possui outro agravante, pois temos que ir ao banco de dados para realizar a busca pelo elemento, que é um ***processo lento***. Entretanto, este material não leva esses fatores em conta, pois estamos discutindo aspectos isolados da política LFU.
 
-### Possíveis otimizações
+## Otimização com EDAs auxiliares 
 
 Conforme discutido nos materiais sobre as outras políticas de cache, o nosso fator limitante no custo das operações é a busca, porque sua complexidade é sempre $O(n)$. Portanto, podemos utilizar a mesma estratégia realizada nas outras políticas de cache, ou seja, utilizar outra estrutura para realizar as operações de busca, nesse caso, tabelas hash.
 
@@ -179,7 +179,7 @@ Para os exemplos seguintes, assumimos o cache de tamanho 4, representado nesta i
 
 O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação get, a busca por um nó que contém o elemento desejado é feita na tabela chave-nó. A partir do resultado dessa busca, o algoritmo divide-se em casos, que dependem do tamanho atual do cache.
 
-Caso o elemento não possui nó existente no cache, verificamos a capacidade do cache. Se o cache possui espaço livre, adicionamos um novo nó que contém este elemento na tabela chave-nó, e na lista de frequência 1 na tabela frequência-lista. 
+**Caso o elemento não possui nó existente no cache:** Verificamos a capacidade do cache. **Se o cache possui espaço livre**, adicionamos um novo nó que contém este elemento na tabela chave-nó, e na lista de frequência 1 na tabela frequência-lista.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-novo-elemento.png">
@@ -187,7 +187,7 @@ Caso o elemento não possui nó existente no cache, verificamos a capacidade do 
     </figcaption>
 </figure>
 
-Se a busca encontrou um nó que contém o elemento, devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
+**Se a busca encontrou um nó que contém o elemento:** Devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-encontrou.png">
@@ -195,7 +195,7 @@ Se a busca encontrou um nó que contém o elemento, devemos remover o nó da lis
     </figcaption>
 </figure>
 
-Caso o nó encontrado pela busca seja o mais frequente do cache, criamos uma nova lista para armazenar os nós que possuem a frequência máxima, e repetimos o procedimento feito quando um nó é encontrado. Isto é, após criar a nova lista, removemos o nó, atualizamos sua frequência e inserimos este nó na lista correspondente. A imagem abaixo exemplifica essa situação.
+**Caso o nó encontrado pela busca seja o mais frequente do cache:** Criamos uma nova lista para armazenar os nós que possuem a frequência máxima, e repetimos o procedimento feito quando um nó é encontrado. Isto é, após criar a nova lista, removemos o nó, atualizamos sua frequência e inserimos este nó na lista correspondente. A imagem abaixo exemplifica essa situação.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-frequencia-maxima.png">
@@ -203,7 +203,7 @@ Caso o nó encontrado pela busca seja o mais frequente do cache, criamos uma nov
     </figcaption>
 </figure>
 
-Se o nó não foi encontrado, e a capacidade do cache foi atingida, devemos remover, conforme a nossa implementação, o último nó da lista de menor frequência. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo a imagem abaixo.
+**Se o nó não foi encontrado e o cache está cheio:** Devemos remover, conforme a nossa implementação, o último nó da lista de menor frequência. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo a imagem abaixo.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-evicted.png">
@@ -213,7 +213,7 @@ Se o nó não foi encontrado, e a capacidade do cache foi atingida, devemos remo
 
 Além disso, se uma lista estiver vazia após atualizar a frequência de algum nó, ou, após alguma expulsão do cache, a frequência (chave) que aponta para essa lista deve ser removida da tabela. Isto é, se uma lista estiver vazia, ela será apagada. 
 
-Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida a $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade das operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque estamos utilizando outras estruturas além da lista encadeada.
+Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida para $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade de todas as operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque utilizamos outras estruturas além da lista encadeada.
 
 
 ## Implementação otimizada do cache
@@ -256,7 +256,7 @@ public class LFUCache {
 }
 ```
 
-Por conta das novas estruturas utilizadas para representar o cache, criamos os métodos públicos `put(int key, String value)`, para inserir elementos no cache, e `get(int key)`, para acessá-los.
+Por conta das novas estruturas utilizadas para representar o cache, criamos os métodos públicos `put(int key, String value)` para inserir elementos no cache, e `get(int key)` para acessá-los.
 
 ```java
 public void put(int key, String value) {
@@ -295,7 +295,7 @@ public String get(int key) {
 }
 ```
 
-Note que precisamos alguns métodos privados para atualizar a frequência do nó, e, para facilitar a adição de novos elementos, caso não haja outros nós registrados com a sua nova frequência. Portanto, temos os métodos `updateFreq(Node node)` e `getOrCreateList(int freq)`, definidos da seguinte forma:
+Note que precisamos alguns métodos privados para atualizar a frequência do nó, e, para facilitar a adição de novos elementos, caso não haja outros nós registrados com a sua nova frequência. Portanto, criamos os métodos `updateFreq(Node node)` e `getOrCreateList(int freq)`.
 
 ```java
     private DoublyLinkedList getOrCreateList(int freq) {
