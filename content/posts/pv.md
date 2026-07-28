@@ -91,21 +91,21 @@ Os nós vermelhos podem aparecer em alguns caminhos e não em outros, desde que 
 Em termos de código, como todos os caminhos possuem a mesma altura preta, basta percorrer apenas um deles. Na implementação a seguir, utilizaremos o caminho pela subárvore esquerda.
 
 ```java
-public int blackHeight() {
-    //A altura de uma árvore vazia é 0.
-    if (root == NIL) return 0;
-    return blackHeight(root);
-}
+    public int blackHeight(Node node) {
+        // Caso a árvore esteja vazia ou o nó passado seja NIL.
+        if (node == NIL) return 0;
 
-private int blackHeight(Node node) {
-    //O nó NIL encerra a recursão e é contabilizado.
-    if (node == NIL) return 1;
+        // Começamos a partir do filho a esquerda, para não incluir o nó.
+        return blackHeightIncluding(node.left);
+    }
 
-    int bh = blackHeight(node.left);
+    // Metodo auxiliar que inclui o nó atual e conta o NIL.
+    private int blackHeightIncluding(Node node) {
+        if (node == NIL) return 1;
 
-    //O próprio nó não é contabilizado.
-    return bh + (node.left.color == Color.BLACK ? 1 : 0);
-}
+        return (node.color == Color.BLACK ? 1 : 0) +
+            blackHeightIncluding(node.left);
+    }
 ```
 
 Apenas a restrição sobre nós vermelhos não seria suficiente para manter a árvore balanceada. É a combinação dessa regra com a altura preta que impede que existam caminhos muito maiores que outros.
@@ -344,7 +344,42 @@ private void fixUpInsert(Node node) {
 }
 ```
 
-### Terceiro caso - Pai é o filho a esquerda e o nó o filho a direita
+### Terceiro caso - Zig-Zag
+
+Se passamos do segundo caso, então sabemos que o **tio é preto**. Com isso, o terceiro caso ocorre quando a inserção forma um zig-zag, ou seja:
+
+- o pai é **filho à esquerda** e o nó é **filho à direita** ou
+- o pai é **filho à direta** e o nó é **filho à esquerda**
+
+Nesse caso, não basta apenas trocar cores. Primeiro precisamos transformar essa organização em uma forma linear, que será tratada no quarto caso.
+
+Vamos continuar nosso exemplo adicionando agora o elemento **18**. Observe que seu tio é $NIL$, que é preto.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-3-1.png" style="width: 100%;">
+</figure>
+
+Nossa solução para isso é **rotacionar o pai**, fazendo com que o nó e o pai fiquem alinhados com o avô.
+
+No nosso exemplo, o pai é filho à direita e o nó é filho à esquerda. Portanto, realizamos uma **rotação à direita** no pai.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-3-2.png" style="width: 100%;">
+</figure>
+
+Caso a formação fosse a inversa (pai à esquerda e nó à direita), fariamos uma **rotação à esquerda** no pai.
+
+Após a rotação, temos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-3-3.png" style="width: 100%;">
+</figure>
+
+Note que a violação ainda não foi resolvida. A única finalidade dessa rotação foi transformar uma configuração em **zig-zag** em uma formação **linear**, permitindo que o quarto caso seja aplicado.
+
+Lembre-se de atualizar as variáveis $node$ e $parent$, pois, após a rotação, o antigo pai passa a ocupar a posição do nó, enquanto o antigo nó se torna o pai.
+
+Em código, esse caso corresponde ao trecho abaixo:
 
 ```java
 private void fixUpInsert(Node node) {
@@ -352,23 +387,84 @@ private void fixUpInsert(Node node) {
 
     //Tio é preto.
     else {
-        if (node.isRightChild() && parent.isLeftChild()) {
+        //Pai é filho a esquerda e nó filho a direita
+        if (parent.isLeftChild() && node.isRightChild()) {
             rotateLeft(parent);
             node = parent;
             parent = node.parent;
 
-        } else if (node.isLeftChild() && parent.isRightChild()) {
+        //Pai é filho a direito e nó filho a esquerda
+        } else if (parent.isRightChild() && node.isLeftChild()) {
             rotateRight(parent);
             node = parent;
             parent = node.parent;
         }
 
+        ...
+        //Código do caso 4
+    }
+}
+```
+
+### Quarto caso - Linear
+
+Agora temos que a adição é uma formação linear, ou seja:
+
+- O pai e o nó são filhos à esquerda ou
+- O pai e o nó são filhos à direita
+
+No teceiro caso, transformamos ele no quarto caso, a fim de eliminar a violação, porém, é importante destacar que a violação já pode estar em uma formação linear antes do terceiro caso.
+
+Continuando o exemplo anterior, temos a seguinte árvore após a rotação realizada no terceiro caso:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-3-3.png" style="width: 100%;">
+</figure>
+
+Para eliminarmos a violação, devemos fazer as seguintes trocas de cores:
+
+- o pai passa de **vermelho** para **preto**
+- o avô passa de **preto** para **vermelho**
+
+Após essas mudanças, obtemos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-4-1.png" style="width: 100%;">
+</figure>
+
+Note que nenhum nó vermelho tem filho vermelho. Porém, a altura preta no caminho em destaque não bate com as demais alturas pretas dos outros caminhos. Com isso, outra violação foi gerada.
+
+Com isso, devemos realizar uma rotação no avô para consertar essa violação, com o objetivo de trazer o pai (que é um nó preto) para o seu lugar. No nosso exemplo, o nó é filho à esquerda, e como estão todos alinhados, a formação linear está pendendo para o lado esquerdo, então fazemos uma **rotação à direita** no avô.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-4-2.png" style="width: 100%;">
+</figure>
+
+Caso a formação estivesse pendendo para o lado direito, fariamos uma **rotação à esquerda** no avô.
+
+Após a rotação, temos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-insercao-caso-4-3.png" style="width: 100%;">
+</figure>
+
+```java
+private void fixUpInsert(Node node) {
+    ...
+
+    //Tio é preto.
+    else {
+        //Código do caso 3
+        ...
+
         parent.color = Color.BLACK;
         grandfather.color = Color.RED;
 
+        //Nó é filho a esquerda
         if (node.isLeftChild()) rotateRight(grandfather);
+
+        //Nó é filho a direita
         else rotateLeft(grandfather);
     }
-    ...
 }
 ```
