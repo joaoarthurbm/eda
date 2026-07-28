@@ -61,7 +61,7 @@ Estamos na mesma situação de busca por um elemento, cujo nó não existe no ca
 
 `[("a", 3), ("c", 2), ("d", 1)]`
 
-É importante lembrar, que ao remover o nó, esse elemento permanece no sistema. Logo, é irrelevante alterar a frequência de um nó removido para 0, pois este objeto será apagado, e, consequentemente, não possui frequência.
+É importante lembrar que, ao remover o nó, apagamos apenas o objeto que representa o elemento no cache. Se esse elemento for adicionado ao cache novamente, um novo objeto será criado, e possuirá frequência 1.
 
 Agora é um bom momento para testar seu aprendizado até este momento.
 
@@ -161,7 +161,7 @@ Utilizando o método ```get(String value)``` apresentado anteriormente, faremos 
 
 **hit:** A operação custa $O(n)$, pois temos que iterar pela lista até encontrar o elemento. Após incrementar a frequência do elemento, devemos ordenar a lista, em um processo análogo à inserção ordenada. Como a lista possui tamanho $n$, e fazemos uma busca linear, seguida de uma inserção ordenada, teremos custo total $O(n)$.
 
-**miss:** A opeação custa $O(n)$. Em nossa abordagem, escolhemos implementar o cache LFU como uma lista encadeada. Essa escolha foi intecional, porque a complexidade da adição em uma linkedlist é $O(1)$ (tempo constante). Porém, como ainda realizamos uma busca linear para procurar pelo elemento, que não estará na lista, e a lista tem tamanho n, a complexidade da busca será $O(n)$. Como sabemos, $O(n) + O(1)$ é $O(n)$.
+**miss:** A operação custa $O(n)$. Em nossa abordagem, escolhemos implementar o cache LFU como uma lista encadeada. Essa escolha foi intencional, porque a complexidade da adição em uma linkedlist é $O(1)$ (tempo constante). Porém, como ainda realizamos uma busca linear para procurar pelo elemento, que não estará na lista, e a lista tem tamanho n, a complexidade da busca será $O(n)$. Como sabemos, $O(n) + O(1)$ é $O(n)$.
 
 Além disso, em casos de ***miss***, a operação possui outro agravante, pois temos que ir ao banco de dados para realizar a busca pelo elemento, que é um ***processo lento***. Entretanto, este material não leva esses fatores em conta, pois estamos discutindo aspectos isolados da política LFU.
 
@@ -173,31 +173,45 @@ Com essas mudanças, nosso cache será composto por duas tabelas hash, uma respo
 
 Para os exemplos seguintes, assumimos o cache de tamanho 4, representado nesta imagem.
 
-<figure style="align: center; margin-left:5%; width: 90%"> 
+<figure style="align: center; width: 90%"> 
     <img src="cache-inicial.png">
 </figure>
 
-Em outras palavras, o cache funciona assim: Ao realizar a operação get, faremos a busca na tabela chave-nó. Caso o elemento exista no cache, devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
+O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação get, a busca por um nó que contém o elemento desejado é feita na tabela chave-nó. A partir do resultado dessa busca, o algoritmo divide-se em casos, que dependem do tamanho atual do cache.
 
-<figure style="align: center; margin-left:5%; width: 90%"> 
-    <img src="elemento-existente.png">
+Caso o elemento não possui nó existente no cache, verificamos a capacidade do cache. Se o cache possui espaço livre, adicionamos um novo nó que contém este elemento na tabela chave-nó, e na lista de frequência 1 na tabela frequência-lista. 
+
+<figure style="align: center; width: 90%"> 
+    <img src="cache-novo-elemento.png">
     <figcaption align="center">
-        A imagem mostra o resultado do cache após realizar get("d"). Note que removemos o nó da lista em que estava antes, e atualizamos sua frequência antes de adicionarmos o nó na tabela novamente.
     </figcaption>
 </figure>
 
-Note que o exemplo não cobre o caso em que aumentamos a frequência do elemento mais acessado no cache. Nesta situação, devemos verificar se a frequência existe como chave, antes de adicionar o nó à tabela.
+Se a busca encontrou um nó que contém o elemento, devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
 
-Se o nó não está no cache, verificamos a capacidade do cache. Se o cache estiver cheio, devemos recuperar a lista que possui os nós com a menor frequência, para remover estes elementos do cache. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo, a imagem abaixo.
-
-<figure style="align: center; margin-left:5%; width: 90%"> 
-    <img src="elemento-naoexistente.png">
+<figure style="align: center; width: 90%"> 
+    <img src="cache-encontrou.png">
     <figcaption align="center">
-        A imagem mostra o resultado do cache após realizar get("e"). Note que removemos os nós com menor frequência do cache, antes de adicionar o elemento que procuramos.
     </figcaption>
 </figure>
 
-Observe também, que este modelo trata a situação em que existe mais de um nó com a menor frequência. Neste caso, apagaremos apenas o último elemento da lista. Se a lista esteja completamente vazia após remover o último nó
+Caso o nó encontrado pela busca seja o mais frequente do cache, criamos uma nova lista para armazenar os nós que possuem a frequência máxima, e repetimos o procedimento feito quando um nó é encontrado. Isto é, após criar a nova lista, removemos o nó, atualizamos sua frequência e inserimos este nó na lista correspondente. A imagem abaixo exemplifica essa situação.
+
+<figure style="align: center; width: 90%"> 
+    <img src="cache-frequencia-maxima.png">
+    <figcaption align="center">
+    </figcaption>
+</figure>
+
+Se o nó não foi encontrado, e a capacidade do cache foi atingida, devemos remover, conforme a nossa implementação, o último nó da lista de menor frequência. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo a imagem abaixo.
+
+<figure style="align: center; width: 90%"> 
+    <img src="cache-evicted.png">
+    <figcaption align="center">
+    </figcaption>
+</figure>
+
+Além disso, se uma lista estiver vazia após atualizar a frequência de algum nó, ou, após alguma expulsão do cache, a frequência (chave) que aponta para essa lista deve ser removida da tabela. Isto é, se uma lista estiver vazia, ela será apagada. 
 
 Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida a $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade das operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque estamos utilizando outras estruturas além da lista encadeada.
 
