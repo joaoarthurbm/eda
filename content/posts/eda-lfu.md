@@ -184,6 +184,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
 <figure style="align: center; width: 90%"> 
     <img src="cache-novo-elemento.png">
     <figcaption align="center">
+        Nesse caso, o nó adicionado contém o elemento "d". Para facilitar a visualização, ele foi pintado de amarelo.
     </figcaption>
 </figure>
 
@@ -192,6 +193,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
 <figure style="align: center; width: 90%"> 
     <img src="cache-encontrou.png">
     <figcaption align="center">
+        Nesse caso, o nó encontrado contém o elemento "c". Para facilitar o entendimento, ele foi pintado de verde.
     </figcaption>
 </figure>
 
@@ -200,6 +202,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
 <figure style="align: center; width: 90%"> 
     <img src="cache-frequencia-maxima.png">
     <figcaption align="center">
+        Para este caso, suponha que fizemos uma busca pelo elemento "b" no cache, anteriormente. Nessa situação, o hit corresponde ao nó com elemento "a". Para facilitar a compreensão, o nó "b" foi pintado de azul e o nó "a", de verde.
     </figcaption>
 </figure>
 
@@ -208,6 +211,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
 <figure style="align: center; width: 90%"> 
     <img src="cache-evicted.png">
     <figcaption align="center">
+        Para este caso, o novo nó contém o elemento "e", e foi pintado de amarelo, e o nó removido contém o elemento "d", simbolizado por vermelho.
     </figcaption>
 </figure>
 
