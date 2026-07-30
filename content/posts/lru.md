@@ -5,10 +5,12 @@ github = "https://github.com/nettoluis/eda-implementacoes"
 tags = []
 categories = []
 +++
+---
+
 # Introdução
 Continuando a nossa discussão sobre as políticas de *cache eviction*, vimos que a política FIFO nem sempre é a mais adequada (como tudo na vida), por isso surgiram outras políticas como a que vamos discutir hoje: **Least Recently Used (LRU)**.
 
-# Contextualização
+## Contextualização
 Lembre do período de vestibular em que você tinha que otimizar seu tempo de estudos. Imagine que sua mesa comporta apenas três livros por vez, mas é mais rápida de acessar, e você tem uma estante que comporta todos os seus livros, mas você tem preguiça de ir até ela buscar seus livros. Agora, analisemos a seguinte sequência de fatos:
 
 A tabela a seguir está organizada do livro mais recentemente utilizado (à direita) para o menos recentemente utilizado (à esquerda).
@@ -28,8 +30,11 @@ Agora, se você fosse pegar, por exemplo, o livro de Filosofia, qual deveria sai
 {{% /quiz %}} 
 
 Seguindo o algoritmo LRU, o livro que deveria deixar a mesa seria o de História, pois ele foi o **Menos Recentemente Acessado**, ou, para tornar a compreensão mais clara, o mais antigo a ser acessado e, a partir disso, surge a questão: Por que não o de Matemática? Porque, apesar de ser o mais antigo a ser colocado na mesa, ele é o segundo *mais recentemente acessado*.
-# LRU vs FIFO
-Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e a FIFO? E o pequeno detalhe é que na FIFO o elemento que sai é o mais antigo a ser **adicionado** enquanto no LRU é o mais antigo a ser **acessado**. Para fixar a diferença, basta relembrarmos dos exemplos dos livros na mesa, caso a política de cache fosse FIFO, o de Matemática deveria sair, já se fosse LRU, o de História deveria sair.
+
+## LRU vs FIFO
+Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e FIFO? E o pequeno detalhe é que na FIFO o elemento que sai é o mais antigo a ser **adicionado** enquanto no LRU é o mais antigo a ser **acessado**. Para fixar a diferença, basta relembrarmos dos exemplos dos livros na mesa, caso a política de cache fosse FIFO, o de Matemática deveria sair, já se fosse LRU, o de História deveria sair.
+
+---
 # Estruturas de dados necessárias
 Saindo do mundo das ideias e partindo para a implementação, precisamos nos perguntar duas coisas importantes: Como atualizar rapidamente a ordem de acesso? Como localizar rapidamente um elemento?
 
@@ -41,8 +46,77 @@ E por que a implementação mais comum utiliza essas duas? Bem, uma das caracter
 >Com a **Lista Duplamente Ligada** nós podemos mover um nó em uma posição arbitrária para o *tail* em tempo constante através de trocas de referências e com o **HashMap** nós podemos tanto verificar se ele está em cache quanto acessá-lo diretamente, ambos em tempo constante.
 
 # Métodos
+
+Descendo mais uma camada de abstração, partiremos para o código de fato. Assim, vamos entender, na prática, o porquê precisamos de mais de uma estrutura de dados para mantermos as operações o mais eficiente possível.
+
+Para facilitar nossa vida, vamos trabalhar com inteiros positivos, mas o cache poderia armazenar qualquer tipo de objeto, lembrem-se disso.
+
+## Implementação mais simples (sem HashMap)
+Nessa implementação, teremos apenas uma **Lista Duplamente Ligada** para realizar nossas operações.
+
+### Atributos e construtor
+```java
+class LRU {
+    private LinkedList cache;
+    private int capacity;
+    private static final CAPACITY_DEFAULT = 10;
+
+    public LRU() {
+        this.capacity = CAPACITY_DEFAULT;
+    }
+    public LRU(int capacity) {
+        this.capacity = capacity;
+    }
+    ...
+}
+```
+
+Como já dito em outros momentos, não há uma regra ou nada do tipo que defina rigorosamente qual deva ser a capacidade padrão de um cache, mas para facilitar nossa vida, escolheremos 10 como a convenção para nossa implementação.
+
+### Get
+Como faremos para buscar os elementos? Como não temos nenhuma outra estrutura auxiliar e a nossa lista estará ordenada pela ordem de acesso, a nossa melhor solução seria percorrer toda a lista buscando o elemento.
+
+```java
+public int get(int key) {
+    Node node = get(key);
+
+    if (node == null) return -1;
+    else return node.value;
+}
+
+private Node get(int key) throws {
+    if (this.cache.isEmpty()) return null;
+
+    Node aux = this.cache.root;
+
+    while (aux != null && aux.key != key) {
+        aux = aux.next;
+    }
+
+    return aux;
+}
+```
+Agora, vocês, como cientistas da computação, devem bater o olho e perceber que esse método tem um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos mais na frente.
+
+
+### Put
+
+## Implementação otimizada (com HashMap)
+
+### Get
+
+### Put
+
+
+---
+# Resumo
+
+- A política de *cache eviction* do LRU é baseado na ordem de acesso.
+- A implementação mais comum utiliza **Lista Duplamente Encadeada** juntamente com **HashMap** para manter as operações com desempenho $O(1)$.
+
 # Curiosidade
 Por fim, vale citar que o algoritmo que estudamos hoje é normalmente o critério de desempate implementado na próxima política de ***cache eviction*** que estudaremos: **Least Frequently Used (LFU)**.
+
 # Contribuições
 [Luis Netto](https://github.com/nettoluis/) e [Gustavo Paulino](https://github.com/gustavop-fausto/) contribuíram para esse material.
 
