@@ -49,23 +49,27 @@ E por que a implementação mais comum utiliza essas duas? Bem, uma das caracter
 
 Descendo mais uma camada de abstração, partiremos para o código de fato. Assim, vamos entender, na prática, o porquê precisamos de mais de uma estrutura de dados para mantermos as operações o mais eficiente possível.
 
-Para facilitar nossa vida, vamos trabalhar com inteiros positivos, mas o cache poderia armazenar qualquer tipo de objeto, lembrem-se disso.
+Para facilitar nossa vida, vamos trabalhar com Strings, mas o cache poderia armazenar qualquer tipo de objeto, lembrem-se disso.
 
 ## Implementação mais simples (sem HashMap)
 Nessa implementação, teremos apenas uma **Lista Duplamente Ligada** para realizar nossas operações.
 
 ### Atributos e construtor
+
 ```java
 class LRU {
+    private static final CAPACITY_DEFAULT = 10;
     private LinkedList cache;
     private int capacity;
-    private static final CAPACITY_DEFAULT = 10;
 
     public LRU() {
         this.capacity = CAPACITY_DEFAULT;
+        this.cache = new LinkedList();
     }
+
     public LRU(int capacity) {
         this.capacity = capacity;
+        this.cache = new LinkedList();
     }
     ...
 }
@@ -74,28 +78,52 @@ class LRU {
 Como já dito em outros momentos, não há uma regra ou nada do tipo que defina rigorosamente qual deva ser a capacidade padrão de um cache, mas para facilitar nossa vida, escolheremos 10 como a convenção para nossa implementação.
 
 ### Get
-Como faremos para buscar os elementos? Como não temos nenhuma outra estrutura auxiliar e a nossa lista estará ordenada pela ordem de acesso, a nossa melhor solução seria percorrer toda a lista buscando o elemento.
+Como faremos para buscar os elementos? Como não temos nenhuma outra estrutura auxiliar e a nossa lista estará ordenada pela ordem de acesso, a nossa melhor solução seria percorrer toda a lista buscando o elemento. Além disso, temos de lembrar de mover o elemento, caso ele exista, para o *tail* da lista. 
+
+Assim, dentro da nossa classe **LinkedList** teremos de ter dois métodos para nos auxiliar: o **search()** e o **moveToTail()**, os quais estão descritos abaixo.
 
 ```java
-public int get(int key) {
-    Node node = get(key);
+public Node search(String value) {
+    if (isEmpty()) return null;
 
-    if (node == null) return -1;
-    else return node.value;
-}
-
-private Node get(int key) throws {
-    if (this.cache.isEmpty()) return null;
-
-    Node aux = this.cache.root;
-
-    while (aux != null && aux.key != key) {
+    Node aux = this.root;
+    while (aux != null && !aux.value.equals(value))
         aux = aux.next;
-    }
 
     return aux;
 }
+
+public void moveToTail(Node node) {
+    if (node == this.tail || node == null) return;
+
+    if (node == this.head) {
+        this.head = node.next;
+        this.head.prev = null;
+    } else {
+        node.next.prev = node.prev;
+        node.prev.next = node.next;
+    }
+
+    this.tail.next = node;
+    node.prev = this.tail;
+    this.tail = node;
+    node.next = null;
+}
 ```
+
+Por outro lado, dentro da classe **LRU**, o método **get(String value)** será quem vai realizar essa tarefa de buscar o elemento na lista e movê-lo, caso exista, para o *tail*. Caso ele não encontre o valor procurado, será retornado null. 
+
+```java
+public String get(String value) {
+    Node node = this.cache.search(value);
+
+    if (node == null) return null;
+
+    this.cache.moveToTail(node);
+    return node.value;
+}
+```
+
 Agora, vocês, como cientistas da computação, devem bater o olho e perceber que esse método tem um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos mais na frente.
 
 
