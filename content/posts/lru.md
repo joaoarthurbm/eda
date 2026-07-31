@@ -124,10 +124,35 @@ public String get(String value) {
 }
 ```
 
-Agora, vocês, como cientistas da computação, devem bater o olho e perceber que esse método tem um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos mais na frente.
-
 
 ### Put
+Agora, como faremos para colocar um elemento no cache? Teremos que tomar cuidado com 3 cenários possíveis que poderão acontecer ao tentar fazer isso:
+
+1. O elemento já existe dentro do cache. Para isso, teremos que fazer uma busca dentro da lista procurando esse valor. Caso seja encontrado, o nó será movido para o final da lista.
+
+2. O cache está com capacidade máxima. Para garantir que mesmo sem espaço o novo elemento seja adicionado teremos que remover o elemento **menos recentemente utilizado**, ou seja, o *head* da nossa lista. Assim, basta adicionarmos ao final dela.
+
+3. O elemento não existe dentro do cache. Esse é o caso mais simples, porque basta eu adicionar um novo elemento ao final da lista. Perceba que, ao fazer isso, ele já estará respeitando a política que estamos implementando.
+
+```java
+    public void put(String value) {
+        Node node = this.cache.search(value);
+
+        if (node != null) {
+            this.cache.moveToTail(node);
+
+        } else if (isFull()) {
+            this.cache.removeFirst();
+            this.cache.addLast(value);
+
+        } else {
+            this.cache.addLast(value);
+        }
+    }
+```
+
+Como cientistas da computação, devemos bater o olho e perceber que esses métodos tem um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos no próximo bloco.
+
 
 ## Implementação otimizada (com HashMap)
 
