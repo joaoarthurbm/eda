@@ -346,10 +346,10 @@ private void fixUpInsert(Node node) {
 
 ### Terceiro caso - Zig-Zag
 
-Se passamos do segundo caso, então sabemos que o **tio é preto**. Com isso, o terceiro caso ocorre quando a inserção forma um zig-zag, ou seja:
+Se passamos do segundo caso, então sabemos que o **tio é preto**. Com isso, o terceiro caso ocorre quando a inserção forma um **zig-zag**, ou seja:
 
 - o pai é **filho à esquerda** e o nó é **filho à direita** ou
-- o pai é **filho à direta** e o nó é **filho à esquerda**
+- o pai é **filho à direita** e o nó é **filho à esquerda**
 
 Nesse caso, não basta apenas trocar cores. Primeiro precisamos transformar essa organização em uma forma linear, que será tratada no quarto caso.
 
@@ -367,7 +367,7 @@ No nosso exemplo, o pai é filho à direita e o nó é filho à esquerda. Portan
     <img src="pv-insercao-caso-3-2.png" style="width: 100%;">
 </figure>
 
-Caso a formação fosse a inversa (pai à esquerda e nó à direita), fariamos uma **rotação à esquerda** no pai.
+Caso a formação fosse a inversa (pai à esquerda e nó à direita), faríamos uma **rotação à esquerda** no pai.
 
 Após a rotação, temos:
 
@@ -376,8 +376,6 @@ Após a rotação, temos:
 </figure>
 
 Note que a violação ainda não foi resolvida. A única finalidade dessa rotação foi transformar uma configuração em **zig-zag** em uma formação **linear**, permitindo que o quarto caso seja aplicado.
-
-Lembre-se de atualizar as variáveis $node$ e $parent$, pois, após a rotação, o antigo pai passa a ocupar a posição do nó, enquanto o antigo nó se torna o pai.
 
 Em código, esse caso corresponde ao trecho abaixo:
 
@@ -408,12 +406,12 @@ private void fixUpInsert(Node node) {
 
 ### Quarto caso - Linear
 
-Agora temos que a adição é uma formação linear, ou seja:
+Agora temos que a adição é uma formação **linear**, ou seja:
 
 - O pai e o nó são filhos à esquerda ou
 - O pai e o nó são filhos à direita
 
-No teceiro caso, transformamos ele no quarto caso, a fim de eliminar a violação, porém, é importante destacar que a violação já pode estar em uma formação linear antes do terceiro caso.
+No terceiro caso, transformamos a formação em zig-zag em uma formação linear, a fim de eliminar a violação. Entretanto, é importante destacar que após a inserção, o nó já pode estar em uma formação linear, sem passar pelo terceiro caso.
 
 Continuando o exemplo anterior, temos a seguinte árvore após a rotação realizada no terceiro caso:
 
@@ -426,27 +424,33 @@ Para eliminarmos a violação, devemos fazer as seguintes trocas de cores:
 - o pai passa de **vermelho** para **preto**
 - o avô passa de **preto** para **vermelho**
 
-Após essas mudanças, obtemos:
+Após essas alterações, obtemos:
 
 <figure style="width: 70%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-1.png" style="width: 100%;">
 </figure>
 
-Note que nenhum nó vermelho tem filho vermelho. Porém, a altura preta no caminho em destaque não bate com as demais alturas pretas dos outros caminhos. Com isso, outra violação foi gerada.
+Note que agora nenhum nó vermelho possui um filho vermelho. Entretanto, outra violação foi gerada. Observe que, no caminho em destaque, a altura preta difere da dos demais caminhos da árvore. Para restaurar esse equilíbrio, realizamos uma rotação no avô.
 
-Com isso, devemos realizar uma rotação no avô para consertar essa violação, com o objetivo de trazer o pai (que é um nó preto) para o seu lugar. No nosso exemplo, o nó é filho à esquerda, e como estão todos alinhados, a formação linear está pendendo para o lado esquerdo, então fazemos uma **rotação à direita** no avô.
+O objetivo dessa rotação é fazer com que o pai, que agora é um nó **preto**, ocupe a raiz da subárvore. No nosso exemplo, a formação linear está inclinada para a esquerda, então realizamos uma **rotação à direita** no avô.
 
 <figure style="width: 70%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-2.png" style="width: 100%;">
 </figure>
 
-Caso a formação estivesse pendendo para o lado direito, fariamos uma **rotação à esquerda** no avô.
+Caso a formação estivesse inclinada para o lado direito, faríamos uma **rotação à esquerda** no avô.
 
 Após a rotação, temos:
 
 <figure style="width: 70%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-3.png" style="width: 100%;">
 </figure>
+
+A troca de cores foi feita justamente para que, após a rotação do avô, o pai, que se tornaria a raiz da subárvore, ficasse preto, enquanto seus filhos ficassem vermelhos.
+
+Com isso, todas as violações foram eliminadas e nenhuma nova foi gerada.
+
+Em termos de código, esse caso é representado abaixo:
 
 ```java
 private void fixUpInsert(Node node) {
@@ -468,3 +472,79 @@ private void fixUpInsert(Node node) {
     }
 }
 ```
+
+## Remoção
+
+Assim como na inserção, a remoção é dividida em duas etapas: primeiro fazemos a remoção normal de uma BST e, em seguida, chamamos o método auxiliar $fixUpDelete$ para restaurar as propriedades da árvore.
+
+Além disso, o conserto só é necessário quando o nó removido é **preto**, pois sua remoção reduz a altura preta de um dos caminhos da árvore. Em alguns casos, a remoção também pode gerar dois nós vermelhos consecutivos ou fazer com que a raiz fique vermelha, propriedades que precisam ser restauradas durante a correção.
+
+O código de remoção segue abaixo:
+
+```java
+public void remove(int value) {
+    Node toRemove = search(value);
+    if (toRemove != NIL) {
+        remove(toRemove);
+        this.size -= 1;
+    }
+}
+
+private void remove(Node toRemove) {
+    //Se tiver dois filhos, trocamos o valor com o sucessor
+    if (toRemove.left != NIL && toRemove.right != NIL) {
+        Node sucessor = min(toRemove.right);
+        toRemove.value = sucessor.value;
+        toRemove = sucessor;
+    }
+
+    //O filho que substituirá o nó removido
+    Node child = (toRemove.left != NIL) ? toRemove.left : toRemove.right;
+    Node parent = toRemove.parent;
+    Color originalColor = toRemove.color;
+
+    if (toRemove == this.root) {
+        this.root = child;
+    } else if (toRemove.isLeftChild()) {
+        parent.left = child;
+    } else {
+        parent.right = child;
+    }
+
+    //Atualiza o pai do filho
+    if (child != NIL) {
+        child.parent = parent;
+    }
+
+    //Caso a cor original do nó seja preta
+    if (originalColor == Color.BLACK) {
+        fixUpDelete(child, parent);
+    }
+}
+```
+
+Observe que passamos $child$ e $parent$ para $fixUpDelete$. Isso é necessário porque $child$ pode ser o nó $NIL$, que por sua vez não mantém referência para seu pai (o pai do nó $NIL$ é o próprio $NIL$). Como alguns casos de ajustes dependem do pai e do irmão de $child$, precisamos passar essa informação para o método.
+
+A seguir, explicaremos o método $fixUpDelete$.
+
+### Caso Base
+
+Como o método pode ser chamado de forma recursiva, existem duas situações em que não é necessário continuar a correção:
+
+- o nó é **vermelho**
+- o nó é a **raiz**
+
+Se o nó for vermelho, basta pintá-lo de **preto**, restaurando a altura preta do caminho. Já se ele for a raiz, apenas garantimos que sua cor seja preta e encerramos a execução.
+
+Em código, isso é representado pelo trecho abaixo:
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    if (node.color == Color.RED || node == this.root) {
+        node.color = Color.BLACK;
+        return;
+    }
+}
+```
+
+### Primeiro caso - Irmão vermelho
