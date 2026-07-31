@@ -26,7 +26,7 @@ No material de AVL estudamos uma estrutura que mantém um balanceamento mais rí
 
 De forma simplificada, uma árvore preto-vermelha é uma **BST** que utiliza cores para auxiliar no balanceamento da árvore.
 
-Além das informações já presentes em uma BST, cada nó possui uma cor, que pode ser **preta** ou **vermelha**. Essas cores seguem algumas propriedades que, por construção, garantem que a árvore permaneça aproximadamente balanceada.
+Além das informações já presentes em uma BST, cada nó possui uma cor, que pode ser **preta** ou **vermelha**. A partir dessas cores, definimos um conjunto de propriedades que garantem o balanceamento da árvore.
 
 Para representar a cor de cada nó, existem diferentes alternativas em Java. Uma delas é utilizar uma variável do tipo $String$, armazenando valores como **"RED"** e **"BLACK"**. Outra alternativa é utilizar um $boolean$, associando cada valor a uma das cores possíveis.
 
@@ -40,7 +40,7 @@ private enum Color {
 
 ## NIL e Raiz
 
-Outro conceito importante em uma árvore PV é o **NIL**. Diferente de uma BST comum, onde utilizamos $null$ para indicar que um filho não existe, em uma árvore preto-vermelha utilizamos um nó especial chamado $NIL$.
+Outro conceito importante em uma árvore PV é o $NIL$. Diferente de uma BST comum, onde utilizamos $null$ para indicar que um filho não existe, em uma árvore preto-vermelha utilizamos um nó especial chamado $NIL$.
 
 Esse nó também é conhecido como **nó sentinela**, pois funciona como uma folha da árvore, indicando o final de um caminho.
 
@@ -152,7 +152,7 @@ As operações de inserção e remoção são as principais diferenças em rela�
 
 Já os métodos de busca, mínimo, máximo, predecessor e sucessor podem ser reaproveitados da implementação de uma BST, pois a forma de percorrer a árvore continua sendo a mesma. Da mesma forma, as rotações para esquerda e para direita utilizadas na AVL também podem ser reaproveitadas, já que seu funcionamento permanece igual e elas serão utilizadas durante os ajustes da árvore PV.
 
-A principal mudança em relação às implementações anteriores está na forma como representamos os filhos inexistentes. Enquanto em uma BST comum ou AVL utilizamos $null$, na árvore PV utilizamos o nó $NIL$.
+A principal mudança em relação às implementações anteriores está na forma como representamos os filhos inexistentes. Enquanto em uma BST comum ou AVL utilizamos $null$, na árvore PV utilizamos o nó $NIL$ como condição de parada.
 
 ## Inserção
 
