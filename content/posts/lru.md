@@ -80,9 +80,10 @@ Como já dito em outros momentos, não há uma regra ou nada do tipo que defina 
 ### Get
 Como faremos para buscar os elementos? Como não temos nenhuma outra estrutura auxiliar e a nossa lista estará ordenada pela ordem de acesso, a nossa melhor solução seria percorrer toda a lista buscando o elemento. Além disso, temos de lembrar de mover o elemento, caso ele exista, para o *tail* da lista. 
 
-Assim, dentro da nossa classe **LinkedList** teremos de ter dois métodos para nos auxiliar: o **search()** e o **moveToTail()**, os quais estão descritos abaixo.
+Assim, dentro da nossa classe **LinkedList** teremos dois métodos para nos auxiliar: o **search()** e o **moveToTail()**, os quais estão descritos abaixo.
 
 ```java
+...
 public Node search(String value) {
     if (isEmpty()) return null;
 
@@ -109,11 +110,13 @@ public void moveToTail(Node node) {
     this.tail = node;
     node.next = null;
 }
+...
 ```
 
 Por outro lado, dentro da classe **LRU**, o método **get(String value)** será quem vai realizar essa tarefa de buscar o elemento na lista e movê-lo, caso exista, para o *tail*. Caso ele não encontre o valor procurado, será retornado null. 
 
 ```java
+...
 public String get(String value) {
     Node node = this.cache.search(value);
 
@@ -122,6 +125,7 @@ public String get(String value) {
     this.cache.moveToTail(node);
     return node.value;
 }
+...
 ```
 
 
@@ -135,23 +139,23 @@ Agora, como faremos para colocar um elemento no cache? Teremos que tomar cuidado
 3. O elemento não existe dentro do cache. Esse é o caso mais simples, porque basta eu adicionar um novo elemento ao final da lista. Perceba que, ao fazer isso, ele já estará respeitando a política que estamos implementando.
 
 ```java
-    public void put(String value) {
-        Node node = this.cache.search(value);
+public void put(String value) {
+    Node node = this.cache.search(value);
 
-        if (node != null) {
-            this.cache.moveToTail(node);
+    if (node != null) {
+        this.cache.moveToTail(node);
 
-        } else if (isFull()) {
-            this.cache.removeFirst();
-            this.cache.addLast(value);
+    } else if (isFull()) {
+        this.cache.removeFirst();
+        this.cache.addLast(value);
 
-        } else {
-            this.cache.addLast(value);
-        }
+    } else {
+        this.cache.addLast(value);
     }
+}
 ```
 
-Como cientistas da computação, devemos bater o olho e perceber que esses métodos tem um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos no próximo bloco.
+Como cientistas da computação, devemos bater o olho e perceber que esses métodos têm um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos mais a seguir.
 
 
 ## Implementação otimizada (com HashMap)
