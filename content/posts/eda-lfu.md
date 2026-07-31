@@ -25,7 +25,7 @@ Do mesmo modo que fizemos com as outras políticas de cache, vamos analisar a pr
 
 `get("a")` -> miss!
 
-Como esperado, buscamos um nó cujo valor é o elemento **"a"**, no cache, e não o encontramos, pois o cache está vazio. Como não encontramos um nó com este elemento, fazemos a busca no BD, e adicionamos um nó que representa esse elemento ao cache, após encontrá-lo. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
+Como esperado, buscamos um nó cujo valor é o elemento **"a"**, no cache, e não o encontramos, pois o cache está vazio. Como não encontramos um nó com este elemento, fazemos a busca no banco de dados (BD), e adicionamos um nó que representa esse elemento ao cache, após encontrá-lo. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
 
 `[("a", 1)]`
 
@@ -68,7 +68,7 @@ Tentar resolver o quiz abaixo pode auxiliar no seu entendimento sobre o assunto.
 ***
 
 {{%quiz operacoes_em_cache%}}
-{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente?" answers="3" choices="[(a : 3) | (b : 2) | (c : 1)], [(a : 3) | (b : 2) | (d : 1)], [(a : 3) | (b : 2) | (e : 1)], [(b : 2) | (c : 1) | (d : 1)], [(c : 1) | (d : 1) | (e : 1)]">}}
+{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente?" answers="3" choices=" [(a : 3) | (b : 2) | (c : 1)], [(a : 3) | (b : 2) | (d : 1)], [(a : 3) | (b : 2) | (e : 1)], [(b : 2) | (c : 1) | (d : 1)], [(c : 1) | (d : 1) | (e : 1)]">}}
 ```
 get("a");
 get("a");
@@ -79,8 +79,10 @@ get("b");
 get("d");
 get("e");
 ```
-{{% /quiz %}}
 
+{{< item question="Considere o cache de capacidade máxima igual a 5: [(a : 80) | (b : 59) | (c : 10) | (d : 1)]. Qual é o próximo nó que será removido do cache?" answers="5" choices="(a : 80),(b : 59),(c : 10),(d : 1),Nenhum; pois o cache não está cheio">}}
+
+{{% /quiz %}}
 ***
 
 ## Implementação dos métodos básicos
@@ -175,20 +177,23 @@ Para os exemplos seguintes, assumimos o cache de tamanho 4, representado nesta i
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-inicial.png">
+    <figcaption align="center">
+    </figcaption>
 </figure>
 
 O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação get, a busca por um nó que contém o elemento desejado é feita na tabela chave-nó. A partir do resultado dessa busca, o algoritmo divide-se em casos, que dependem do tamanho atual do cache.
 
-**Caso o elemento não possui nó existente no cache:** Verificamos a capacidade do cache. **Se o cache possui espaço livre**, adicionamos um novo nó que contém este elemento na tabela chave-nó, e na lista de frequência 1 na tabela frequência-lista.
+### Caso o elemento não possui nó existente no cache
+Verificamos a capacidade do cache. **Se o cache possui espaço livre**, adicionamos um novo nó que contém este elemento na tabela chave-nó, e na lista de frequência 1 na tabela frequência-lista. Nesse caso, adicionamos o nó com valor "d".
 
-<figure style="align: center; width: 90%"> 
-    <img src="cache-novo-elemento.png">
-    <figcaption align="center">
-        Nesse caso, o nó adicionado contém o elemento "d". Para facilitar a visualização, ele foi pintado de amarelo.
-    </figcaption>
-</figure>
+| Frequência | Lista |
+| :---: | :---: |
+| 1 | [("a")] |
+| 2 | [("b")] |
+| 3 | [("c"), ("d")] |
 
-**Se a busca encontrou um nó que contém o elemento:** Devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
+### Se a busca encontrou um nó que contém o elemento
+Devemos remover o nó da lista em que está contido. Em seguida, atualizamos sua frequência, e faremos sua inserção na nova lista de frequências. Abaixo, segue ilustração de como funciona o processo.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-encontrou.png">
@@ -206,7 +211,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
     </figcaption>
 </figure>
 
-**Se o nó não foi encontrado e o cache está cheio:** Devemos remover, conforme a nossa implementação, o último nó da lista de menor frequência. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo a imagem abaixo.
+**Se o nó não foi encontrado e o cache está cheio:** Devemos remover, conforme a nossa implementação, o nó da lista de menor frequência. Após isso, adicionamos o novo nó às tabelas. Tome como exemplo a imagem abaixo.
 
 <figure style="align: center; width: 90%"> 
     <img src="cache-evicted.png">
@@ -217,7 +222,7 @@ O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação ge
 
 Além disso, se uma lista estiver vazia após atualizar a frequência de algum nó, ou, após alguma expulsão do cache, a frequência (chave) que aponta para essa lista deve ser removida da tabela. Isto é, se uma lista estiver vazia, ela será apagada. 
 
-Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, como a complexidade da busca é reduzida para $O(1)$, pois fazemos o acesso em uma tabela hash. Portanto, a complexidade de todas as operações do cache são $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque utilizamos outras estruturas além da lista encadeada.
+Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, a complexidade de todas as operações de cache são $O(1)$, pois o tempo de complexidade da busca, que era o fator mais custoso do nosso cache, foi reduzido para $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque utilizamos outras estruturas além da lista encadeada.
 
 
 ## Implementação otimizada do cache
