@@ -544,7 +544,168 @@ private void fixUpDelete(Node node, Node parent) {
         node.color = Color.BLACK;
         return;
     }
+
+    ...
+}
+```
+
+Antes de iniciar os próximos casos, é importante destacar que todos eles possuem uma versão **simétrica**. Ou seja, dependendo se o nó é filho à esquerda ou à direita, faremos rotações e ajustes em lados opostos da árvore. Para identificar em qual situação estamos, utilizaremos a variável $isLeft$.
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    ...
+
+    boolean isLeft = (node == parent.left);
+    Node brother = isLeft ? parent.right : parent.left;
+
+    ...
 }
 ```
 
 ### Primeiro caso - Irmão vermelho
+
+Consideremos a seguinte árvore, onde a remoção foi feita no nó com valor **10**. Como ele era **preto**, a altura preta desse caminho foi reduzida em 1, quebrando uma das propriedades da árvore.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-remocao-caso-1-1.png" style="width: 100%;">
+</figure>
+
+Para corrigir essa situação, observamos o **irmão** do nó. Como ele é **vermelho**, sabemos que seu pai é obrigatoriamente **preto**, caso contrário existiriam dois nós vermelhos consecutivos.
+
+Nossa solução será trocar as cores do **pai** e do **irmão** e, em seguida, rotacionar o **pai**.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-remocao-caso-1-2.png" style="width: 100%;">
+</figure>
+
+Como o irmão será promovido para a raiz da subárvore, queremos que ele ocupe essa posição como um nó **preto** e, para compensar essa mudança, pintamos o pai de **vermelho**. Por esse motivo, a troca de cores deve ser feita antes da rotação.
+
+No nosso exemplo, como o nó está à esquerda, realizamos uma \***\*rotação à esquerda** do pai.
+
+Após a rotação, obtemos:
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-remocao-caso-1-3.png" style="width: 100%;">
+</figure>
+
+Caso o nó estivesse à direita, fariamos uma rotação à direita do pai.
+
+Note que a violação **ainda não foi resolvida**. A única finalidade desse caso foi transformar a árvore em uma configuração em que o **irmão é preto**, permitindo que um dos próximos casos seja aplicado. Por isso chamamos novamente $fixUpDelete$ para o mesmo nó e seu pai.
+
+Em termos de código, temos:
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    ...
+
+    //Irmão vermelho
+    if (brother.color == Color.RED) {
+
+        //Troca cores
+        brother.color = Color.BLACK;
+        parent.color = Color.RED;
+
+        //Rotaciona o pai
+        if (isLeft) rotateLeft(parent);
+        else rotateRight(parent);
+
+        fixUpDelete(node, parent);
+        return;
+    }
+
+    ...
+}
+```
+
+### Segundo caso - Sobrinhos pretos
+
+Como passamos do primeiro caso, temos que o **irmão é preto**. Assim, antes de decidir se devemos rotacionar a árvore, precisamos verificar seus filhos.
+
+Se existir um sobrinho vermelho, será possível utilizá-lo em uma rotação para restaurar a altura preta da árvore. Entretanto, neste caso, **os dois sobrinhos são pretos**.
+
+No exemplo do caso anterior, caímos justamente nessa configuração. Lembrando que o nó passado é $NIL$ e seu pai é o nó com valor **20**.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-remocao-caso-1-3.png" style="width: 100%;">
+</figure>
+
+Como não há nenhum sobrinho vermelho, uma rotação não resolveria o problema da altura preta. Nossa solução, então, é pintar o **irmão** de **vermelho**.
+
+<figure style="width: 70%; margin: 0 auto;">
+    <img src="pv-remocao-caso-2-1.png" style="width: 100%;">
+</figure>
+
+Ao fazer isso, o irmão deixa de contribuir para a altura preta daquele lado da árvore. Com isso, a diferença de altura preta deixa de existir entre os dois filhos do pai e passa a existir entre o **pai** e o restante da árvore. Em outras palavras, a violação sobe para o pai.
+
+Por esse motivo, chamamos $fixUpDelete$ para o pai, continuando a correção nos níveis superiores da árvore.
+
+Nesse exemplo, o pai é \***\*vermelho**, então caímos no caso base. Com isso, alteramos sua cor para **preto**, restaurando a altura preta do caminho e encerrando a correção.
+
+Em código, esse caso corresponde ao trecho abaixo:
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    ...
+
+    //Sobinhos pretos
+    if (brother.left.color == Color.BLACK && brother.right.color == Color.BLACK) {
+        brother.color = Color.RED;
+
+        fixUpDelete(parent, parent.parent);
+        return;
+    }
+
+    ...
+}
+```
+
+### Terceiro caso - Sobrinho próximo vermelho
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    ...
+
+    //Sobinho próximo vermelho
+    //Nó no lado esquerdo e sobrinho no direito
+    if (isLeft && brother.right.color == Color.BLACK) {
+        brother.left.color = Color.BLACK;
+        brother.color = Color.RED;
+        rotateRight(brother);
+
+        brother = parent.right;
+
+    //Nó no lado direito e sobrinho no esquerdo
+    } else if (!isLeft && brother.left.color == Color.BLACK) {
+        brother.right.color = Color.BLACK;
+        brother.color = Color.RED;
+        rotateLeft(brother);
+
+        brother = parent.left;
+    }
+
+    ...
+}
+```
+
+### Quarto caso - Sobrinho distante vermelho
+
+```java
+private void fixUpDelete(Node node, Node parent) {
+    ...
+
+    //Sobinho distante vermelho
+    brother.color = parent.color;
+    parent.color = Color.BLACK;
+
+    //Nó no lado esquerdo
+    if (isLeft) {
+        brother.right.color = Color.BLACK;
+        rotateLeft(parent);
+
+    //Nó no lado direito
+    } else {
+        brother.left.color = Color.BLACK;
+        rotateRight(parent);
+    }
+}
+```
