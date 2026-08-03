@@ -436,7 +436,7 @@ Note que agora nenhum nó vermelho possui um filho vermelho. Entretanto, outra v
 
 Observe que, no caminho em destaque, a altura preta difere da dos demais caminhos da árvore. Para restaurar esse equilíbrio, realizamos uma rotação no avô.
 
-O objetivo dessa rotação é fazer com que o pai, que agora é um nó **preto**, ocupe a raiz da subárvore. No nosso exemplo, a formação linear está inclinada para a esquerda, então realizamos uma **rotação à direita** no avô.
+O objetivo dessa rotação é fazer com que o pai, que agora é um nó **preto**, ocupe a raiz da subárvore. No nosso exemplo, a formação linear está inclinada para a direita, então realizamos uma **rotação à esquerda** no avô.
 
 Com a rotação, temos:
 
@@ -446,7 +446,7 @@ Com a rotação, temos:
 
 A troca de cores foi feita justamente para que, após a rotação do avô, o pai, que se tornaria a raiz da subárvore, ficasse preto, enquanto seus filhos ficassem vermelhos.
 
-Caso a formação estivesse inclinada para o lado direito, faríamos uma **rotação à esquerda** no avô.
+Caso a formação estivesse inclinada para o lado esquerdo, faríamos uma **rotação à direita** no avô.
 
 Com isso, todas as violações foram eliminadas e nenhuma nova foi gerada.
 
@@ -659,11 +659,13 @@ private void fixUpDelete(Node node, Node parent) {
 }
 ```
 
-### Terceiro caso - Sobrinho próximo vermelho
+### Terceiro caso - Sobrinho distante preto
 
-Se passamos do segundo caso, então sabemos que o **irmão é preto** e existe pelo menos um **sobrinho vermelho**.
+Se passamos do segundo caso, então sabemos que o **irmão é preto** e que os **os dois sobrinhos não são pretos**.
 
-Esse caso ocorre quando o **sobrinho próximo** é vermelho e o **sobrinho distante é preto**. Dizemos que o sobrinho próximo é o filho do irmão que está orientado na mesma direção do nó. Por exemplo, se o nó está à esquerda, o sobrinho próximo é o filho à esquerda do irmão, enquanto o sobrinho distante é o outro filho.
+Esse caso ocorre quando o **sobrinho distante é preto**. Como o segundo caso já foi descartado, o **sobrinho próximo** é necessariamente **vermelho**.
+
+Dizemos que o sobrinho próximo é o filho do irmão que está orientado na mesma direção do nó. Por exemplo, se o nó está à esquerda, o sobrinho próximo é o filho à esquerda do irmão, enquanto o sobrinho distante é o outro filho.
 
 Vamos considerar a seguinte árvore onde foi feita a remoção do nó com valor **90**.
 
@@ -687,9 +689,9 @@ Após a rotação, obtemos:
     <img src="pv-remocao-caso-3-3.png" style="width: 100%;">
 </figure>
 
-Note que a violação **ainda não foi resolvida**. A única finalidade desse caso é transformar a árvore em uma configuração onde o **sobrinho distante é vermelho**, permitindo que o quarto caso seja aplicado.
+Note que a violação **ainda não foi resolvida**. A única finalidade desse caso é transformar a árvore em uma configuração em que o **sobrinho distante seja vermelho**, permitindo que o quarto caso seja aplicado.
 
-Em código, esse caso corresponde ao trecho abaixo. Repare que o código não verifica diretamente se o sobrinho próximo é vermelho, e sim se o sobrinho distante é preto. Isso funciona porque, se os dois sobrinhos fossem vermelhos, já poderíamos aplicar diretamente o quarto caso, sem passar por este.
+Em código, esse caso corresponde ao trecho abaixo:
 
 ```java
 private void fixUpDelete(Node node, Node parent) {
@@ -774,6 +776,10 @@ private void fixUpDelete(Node node, Node parent) {
 ```
 
 # Considerações finais
+
+Em comparação com a árvore AVL, a árvore preto-vermelha realiza menos rotações durante inserções e remoções, tornando essas operações, em geral, mais eficientes. Em contrapartida, por possuir um balanceamento menos rígido, sua altura pode ser ligeiramente maior que a de uma AVL.
+
+Na prática, esse equilíbrio faz com que a árvore preto-vermelha seja amplamente utilizada em bibliotecas e sistemas reais. Em Java, por exemplo, ela é a estrutura utilizada na implementação da classe $TreeMap$.
 
 ---
 
