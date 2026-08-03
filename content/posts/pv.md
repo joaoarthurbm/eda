@@ -3,14 +3,14 @@ title = "Árvore Preto-Vermelha (PV)"
 date = 2026-07-16T19:47:17-03:00
 tags = []
 categories = []
-github = "LINK PARA IMPLEMENTACAO"
+github = "[LINK PARA IMPLEMENTACAO](https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/pv)"
 +++
 
 Neste material vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada de **árvore PV**.
 
-A árvore também pode ser chamada de **Árvore Rubro-Negro**, mas recomendo não chama-lá assim, pois pode remeter ao flamengo e não queremos que vejam a árvore desta forma, já que ela é uma estrutura de dados muito boa, diferente de certos times brasileiros. (Após o professor ver isso, eu retiro essa parte)
-
 **Disclaimer.** Este material utiliza diversos conceitos apresentados anteriormente no material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvore Binária de Pesquisa (BST)</a>, pois uma árvore PV é uma extensão de uma BST. Além disso, as operações de balanceamento possuem relação com o material de <a class="external" href="https://joaoarthurbm.github.io/eda/posts/avl/">Árvore Balanceada (AVL)</a>, devido ao uso de rotações. Por isso, recomenda-se a leitura desses materiais antes de iniciar este.
+
+---
 
 # Contextualização
 
@@ -143,6 +143,8 @@ Vale a pena fazermos um quiz para ver se você de fato entendeu as propriedades 
 ## Complexidade das operações
 
 Com essas propriedades garantidas, é possível demonstrar que uma árvore preto-vermelha com $n$ nós possui altura de no máximo $h \leq 2\log(n + 1)$. Como consequência, todas as operações cujo custo depende da altura da árvore podem ser executadas em $O(\log n)$.
+
+---
 
 # Implementação
 
@@ -430,23 +432,21 @@ Após essas alterações, obtemos:
     <img src="pv-insercao-caso-4-1.png" style="width: 100%;">
 </figure>
 
-Note que agora nenhum nó vermelho possui um filho vermelho. Entretanto, outra violação foi gerada. Observe que, no caminho em destaque, a altura preta difere da dos demais caminhos da árvore. Para restaurar esse equilíbrio, realizamos uma rotação no avô.
+Note que agora nenhum nó vermelho possui um filho vermelho. Entretanto, outra violação foi gerada.
+
+Observe que, no caminho em destaque, a altura preta difere da dos demais caminhos da árvore. Para restaurar esse equilíbrio, realizamos uma rotação no avô.
 
 O objetivo dessa rotação é fazer com que o pai, que agora é um nó **preto**, ocupe a raiz da subárvore. No nosso exemplo, a formação linear está inclinada para a esquerda, então realizamos uma **rotação à direita** no avô.
+
+Com a rotação, temos:
 
 <figure style="width: 70%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-2.png" style="width: 100%;">
 </figure>
 
-Caso a formação estivesse inclinada para o lado direito, faríamos uma **rotação à esquerda** no avô.
-
-Após a rotação, temos:
-
-<figure style="width: 70%; margin: 0 auto;">
-    <img src="pv-insercao-caso-4-3.png" style="width: 100%;">
-</figure>
-
 A troca de cores foi feita justamente para que, após a rotação do avô, o pai, que se tornaria a raiz da subárvore, ficasse preto, enquanto seus filhos ficassem vermelhos.
+
+Caso a formação estivesse inclinada para o lado direito, faríamos uma **rotação à esquerda** no avô.
 
 Com isso, todas as violações foram eliminadas e nenhuma nova foi gerada.
 
@@ -639,7 +639,7 @@ Ao fazer isso, o irmão deixa de contribuir para a altura preta daquele lado da 
 
 Por esse motivo, chamamos $fixUpDelete$ para o pai, continuando a correção nos níveis superiores da árvore.
 
-Nesse exemplo, o pai é \***\*vermelho**, então caímos no caso base. Com isso, alteramos sua cor para **preto**, restaurando a altura preta do caminho e encerrando a correção.
+Nesse exemplo, o pai é **vermelho**, então caímos no caso base. Com isso, alteramos sua cor para **preto**, restaurando a altura preta do caminho e encerrando a correção.
 
 Em código, esse caso corresponde ao trecho abaixo:
 
@@ -647,7 +647,7 @@ Em código, esse caso corresponde ao trecho abaixo:
 private void fixUpDelete(Node node, Node parent) {
     ...
 
-    //Sobinhos pretos
+    //Sobrinhos pretos
     if (brother.left.color == Color.BLACK && brother.right.color == Color.BLACK) {
         brother.color = Color.RED;
 
