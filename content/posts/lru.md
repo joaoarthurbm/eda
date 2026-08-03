@@ -13,7 +13,7 @@ Continuando a nossa discussão sobre as políticas de *cache eviction*, vimos qu
 ## Contextualização
 Lembre do período de vestibular em que você tinha que otimizar seu tempo de estudos. Imagine que sua mesa comporta apenas três livros por vez, mas é mais rápida de acessar, e você tem uma estante que comporta todos os seus livros, mas você tem preguiça de ir até ela buscar seus livros. Agora, analisemos a seguinte sequência de fatos:
 
-A tabela a seguir está organizada do livro mais recentemente utilizado (à direita) para o menos recentemente utilizado (à esquerda).
+A tabela a seguir está organizada do livro mais recentemente utilizado (à direita) para o menos recentemente utilizado (à esquerda).[^1]
 
 | Passo | Livro Utilizado | Livros na Mesa |
 | :---: | :---: | :---: |
@@ -30,6 +30,8 @@ Agora, se você fosse pegar, por exemplo, o livro de Filosofia, qual deveria sai
 {{% /quiz %}} 
 
 Seguindo o algoritmo LRU, o livro que deveria deixar a mesa seria o de História, pois ele foi o **Menos Recentemente Acessado**, ou, para tornar a compreensão mais clara, o mais antigo a ser acessado e, a partir disso, surge a questão: Por que não o de Matemática? Porque, apesar de ser o mais antigo a ser colocado na mesa, ele é o segundo *mais recentemente acessado*.
+
+[^1]: A escolha de mover o nó para o *tail* é totalmente arbitrária. Na literatura, é extremamente comum que o nó seja movido para o head, mas, por questões de didática, escolhemos mover para o *tail*
 
 ## LRU vs FIFO
 Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e FIFO? E o pequeno detalhe é que na FIFO o elemento que sai é o mais antigo a ser **adicionado** enquanto no LRU é o mais antigo a ser **acessado**. Para fixar a diferença, basta relembrarmos dos exemplos dos livros na mesa, caso a política de cache fosse FIFO, o de Matemática deveria sair, já se fosse LRU, o de História deveria sair.
@@ -128,6 +130,7 @@ public String get(String value) {
 ...
 ```
 
+Note que, por conta de termos apenas uma LinkedList, precisamos sempre percorrer a lista para poder tomar alguma decisão dentro do cache e isso, num cenário em que queremos velocidade, é extremamente ruim. Se toda vez que quisermos acessar algum elemento do cache o custo for $O(n)$, em muitos cenários, isso seria tão ruim quanto não ter cache nenhum.
 
 ### Put
 Agora, como faremos para colocar um elemento no cache? Teremos que tomar cuidado com 3 cenários possíveis que poderão acontecer ao tentar fazer isso:
@@ -155,7 +158,9 @@ public void put(String value) {
 }
 ```
 
-Como cientistas da computação, devemos bater o olho e perceber que esses métodos têm um desempenho $O(n)$, certo? O que não chega a ser o fim do mundo, já que o tamanho do cache normalmente é reduzido. Entretanto, nós podemos subir o sarrafo e tornar o desempenho muito melhor, como veremos mais a seguir.
+Caímos novamente no impasse do custo. Tanto o método **get()** quanto o **put()** tem custo $O(n)$ quando chamados. Como estamos trabalhando apenas com um cache que armazena 10 elementos, isso não chega a ser um problema muito grande. Mas e se estivermos trabalhando com um cache que armazena centenas a milhares de elementos? Talvez até milhões. O que faríamos?
+
+Vejamos como podemos subir o sarrafo e tornar o desempenho muito melhor no bloco a seguir.
 
 
 ## Implementação otimizada (com HashMap)
@@ -178,4 +183,4 @@ Por fim, vale citar que o algoritmo que estudamos hoje é normalmente o critéri
 [Luis Netto](https://github.com/nettoluis/) e [Gustavo Paulino](https://github.com/gustavop-fausto/) contribuíram para esse material.
 
 
-
+# Notas de Rodapé
