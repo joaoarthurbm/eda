@@ -779,4 +779,5 @@ private void fixUpDelete(Node node, Node parent) {
 
 # Contribuições
 
-[Francisco Wêdson](https://github.com/francisco-wedson) contribuiu para a escrita deste post.
+[Francisco Wêdson](https://github.com/francisco-wedson) contribuiu para a escrita deste material.
+[Bruno Santos](https://github.com/Bruno-PSantos) contribuiu para a implementação deste material.
