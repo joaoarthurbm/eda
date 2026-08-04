@@ -1,9 +1,9 @@
 +++
 title = "Árvore Preto-Vermelha (PV)"
-date = 2026-07-16
+date = 2026-08-04
 tags = []
 categories = []
-github = "[LINK PARA IMPLEMENTACAO](https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/pv)"
+github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/pv"
 +++
 
 Neste material vamos estudar sobre a **Árvore Preto-Vermelha**, apelidada de **árvore PV**.
@@ -159,6 +159,8 @@ Vale a pena fazermos um quiz para ver se você de fato entendeu as propriedades 
 <figure style="width: 90%; margin: 0 auto;">
     <img src="pv-quiz-2.png" style="width: 100%;">
 </figure>
+
+{{< item question="Quais das seguintes propriedades não se aplicam a árvores preto-vermelhas?" answers="3" choices= "Todo nó é vermelho ou preto,Todo nó folha é preto,Se um nó é preto ambos seus filhos são vermelhos,Se um nó é vermelho ambos seus filhos são pretos,Todos os caminhos simples entre um nó e suas folhas descendentes contêm o mesmo número de nós pretos">}}
 
 {{% /quiz %}}
 
