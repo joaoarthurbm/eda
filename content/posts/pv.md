@@ -1,6 +1,6 @@
 +++
 title = "Árvore Preto-Vermelha (PV)"
-date = 2026-07-16T19:47:17-03:00
+date = 2026-07-16
 tags = []
 categories = []
 github = "[LINK PARA IMPLEMENTACAO](https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/pv)"
@@ -120,6 +120,22 @@ Como o o nó 5 é vermelho, ele não contribui para a altura preta. Assim, apena
     <img src="pv-altura-preta.png" style="width: 100%;">
 </figure>
 
+---
+
+Vale a pena fazermos um quiz para ver se você de fato entendeu o cálculo da altura preta.
+
+{{% quiz altura_preta %}}
+
+{{< item question="Qual é a altura preta de cada nó da árvore?" answers="3" choices= "50(1) - 30(1) - 20(0) - 40(0) - 32(0) - 47(0) - 60(0) - 80(0),50(2) - 30(1) - 20(1) - 40(1) - 32(0) - 47(0) - 60(1) - 80(0),50(2) - 30(2) - 20(1) - 40(1) - 32(1) - 47(1) - 60(1) - 80(1),50(3) - 30(2) - 20(2) - 40(2) - 32(1) - 47(1) - 60(2) - 80(1),50(3) - 30(2) - 20(1) - 40(2) - 32(0) - 47(0) - 60(1) - 80(0)">}}
+
+<figure style="width: 60%; margin: 0 auto;">
+    <img src="pv-quiz-1.png" style="width: 100%;">
+</figure>
+
+{{% /quiz %}}
+
+---
+
 Antes de prosseguir para a implementação, vale a pena revisar as propriedades que caracterizam uma árvore preto-vermelha. Elas serão utilizadas constantemente durante as operações de inserção e remoção.
 
 ## Resumo das propriedades
@@ -136,7 +152,15 @@ Ao longo desta seção vimos que uma árvore preto-vermelha deve obedecer às se
 
 Vale a pena fazermos um quiz para ver se você de fato entendeu as propriedades de uma árvore preto-vermelha.
 
-(Quiz, 3 perguntas, 1 - Quais árvores são PV, 2 - Qual a altura preta, 3 - Qual propriedades foi violada)
+{{% quiz propriedades_pv %}}
+
+{{< item question="Quais das árvores acima seguem as propriedades de uma árvore pv?" answers="5" choices= "C e D,A e C e D,A e B,B e C,A e D">}}
+
+<figure style="width: 90%; margin: 0 auto;">
+    <img src="pv-quiz-2.png" style="width: 100%;">
+</figure>
+
+{{% /quiz %}}
 
 ---
 
@@ -286,7 +310,7 @@ Se chegamos até aqui, então o pai do nó é **vermelho**. Isso significa que e
 
 Vamos continuar o exemplo anterior. Primeiro inserimos o **15**. Como seu pai é preto, nada precisa ser feito. Agora inserimos o **20**.
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-2-1.png" style="width: 100%;">
 </figure>
 
@@ -306,17 +330,17 @@ Quando o tio for vermelho, fazemos as seguintes mudanças de cores:
 
 Após essas alterações, temos:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-2-2.png" style="width: 100%;">
 </figure>
 
-A violação entre o novo nó e seu pai foi eliminada. Entretanto, ao pintar o avô de vermelho, uma nova violação pode surgiu acima dele. No nosso caso, o avô é a **raiz** e acabou ficando **vermelho**.
+A violação entre o novo nó e seu pai foi eliminada. Entretanto, ao pintar o avô de vermelho, uma nova violação surgiu a partir dele. No nosso caso, o avô é a **raiz** e acabou ficando **vermelho**.
 
 Por isso chamamos $fixUpInsert$ para o avô, a fim de verificar se ainda existe alguma violação acima dele.
 
 Após essa nova chamada, obtemos:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-2-3.png" style="width: 100%;">
 </figure>
 
@@ -357,7 +381,7 @@ Nesse caso, não basta apenas trocar cores. Primeiro precisamos transformar essa
 
 Vamos continuar nosso exemplo adicionando agora o elemento **18**. Observe que seu tio é $NIL$, que é preto.
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-3-1.png" style="width: 100%;">
 </figure>
 
@@ -365,7 +389,7 @@ Nossa solução para isso é **rotacionar o pai**, fazendo com que o nó e o pai
 
 No nosso exemplo, o pai é filho à direita e o nó é filho à esquerda. Portanto, realizamos uma **rotação à direita** no pai.
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-3-2.png" style="width: 100%;">
 </figure>
 
@@ -373,7 +397,7 @@ Caso a formação fosse a inversa (pai à esquerda e nó à direita), faríamos 
 
 Após a rotação, temos:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-3-3.png" style="width: 100%;">
 </figure>
 
@@ -417,7 +441,7 @@ No terceiro caso, transformamos a formação em zig-zag em uma formação linear
 
 Continuando o exemplo anterior, temos a seguinte árvore após a rotação realizada no terceiro caso:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-3-3.png" style="width: 100%;">
 </figure>
 
@@ -428,7 +452,7 @@ Para eliminarmos a violação, devemos fazer as seguintes trocas de cores:
 
 Após essas alterações, obtemos:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 60%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-1.png" style="width: 100%;">
 </figure>
 
@@ -440,7 +464,7 @@ O objetivo dessa rotação é fazer com que o pai, que agora é um nó **preto**
 
 Com a rotação, temos:
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 100%; margin: 0 auto;">
     <img src="pv-insercao-caso-4-2.png" style="width: 100%;">
 </figure>
 
@@ -534,7 +558,7 @@ Como a remoção pode propagar a violação até a raiz, o método pode ser cham
 - o nó é **vermelho**
 - o nó é a **raiz**
 
-Se o nó for vermelho, basta pintá-lo de **preto**, restaurando a altura preta do caminho. Já se ele for a raiz, apenas garantimos que sua cor seja preta e encerramos a execução.
+Nesses casos, basta pintar o nó de preto e encerrar a execução. Quando o nó é vermelho, essa alteração restaura a altura preta do caminho. Se ele já é a raiz, apenas garantimos que a propriedade de a raiz ser preta continue sendo satisfeita.
 
 Em código, isso é representado pelo trecho abaixo:
 
@@ -667,9 +691,9 @@ Esse caso ocorre quando o **sobrinho distante é preto**. Como o segundo caso j�
 
 Dizemos que o sobrinho próximo é o filho do irmão que está orientado na mesma direção do nó. Por exemplo, se o nó está à esquerda, o sobrinho próximo é o filho à esquerda do irmão, enquanto o sobrinho distante é o outro filho.
 
-Vamos considerar a seguinte árvore onde foi feita a remoção do nó com valor **90**.
+Vamos considerar a seguinte árvore após a remoção do nó com valor **90**.
 
-<figure style="width: 70%; margin: 0 auto;">
+<figure style="width: 80%; margin: 0 auto;">
     <img src="pv-remocao-caso-3-1.png" style="width: 100%;">
 </figure>
 
@@ -697,8 +721,7 @@ Em código, esse caso corresponde ao trecho abaixo:
 private void fixUpDelete(Node node, Node parent) {
     ...
 
-    //Sobrinho próximo vermelho
-    //Nó no lado esquerdo e sobrinho vermelho na esquerda
+    //Nó no lado esquerdo e sobrinho distante preto na direita
     if (isLeft && brother.right.color == Color.BLACK) {
         brother.left.color = Color.BLACK;
         brother.color = Color.RED;
@@ -706,7 +729,7 @@ private void fixUpDelete(Node node, Node parent) {
 
         brother = parent.right;
 
-    //Nó no lado direito e sobrinho vermelho na direita
+    //Nó no lado direito e sobrinho distante preto na esquerda
     } else if (!isLeft && brother.left.color == Color.BLACK) {
         brother.right.color = Color.BLACK;
         brother.color = Color.RED;
@@ -741,7 +764,7 @@ Por fim, fazemos uma **rotação no pai**. No nosso exemplo, o nó está no lado
     <img src="pv-remocao-caso-4-1.png" style="width: 100%;">
 </figure>
 
-Como o irmão será promovido para a raiz da subárvore, ele deve herdar a cor original do pai. Em seguida, pintamos o sobrinho distante de preto para preservar a altura preta dos caminhos que passam por ele.
+Como o irmão será promovido para a raiz da subárvore, ele deve herdar a cor original do pai. Em seguida, pintamos o pai de preto para garantir que não existam dois nós vermelhos consecutivos após a rotação. Por fim, pintamos o sobrinho distante de preto para preservar a altura preta dos caminhos que passam por ele.
 
 Após a rotação, obtemos:
 
@@ -786,4 +809,5 @@ Na prática, esse equilíbrio faz com que a árvore preto-vermelha seja amplamen
 # Contribuições
 
 [Francisco Wêdson](https://github.com/francisco-wedson) contribuiu para a escrita deste material.
+
 [Bruno Santos](https://github.com/Bruno-PSantos) contribuiu para a implementação deste material.
