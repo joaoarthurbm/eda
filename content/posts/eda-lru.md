@@ -158,17 +158,122 @@ public void put(String value) {
 }
 ```
 
-Caímos novamente no impasse do custo. Tanto o método **get()** quanto o **put()** tem custo $O(n)$ quando chamados. Como estamos trabalhando apenas com um cache que armazena 10 elementos, isso não chega a ser um problema muito grande. Mas e se estivermos trabalhando com um cache que armazena centenas a milhares de elementos? Talvez até milhões. O que faríamos?
+Caímos novamente no impasse do custo. Tanto o método **get()** quanto o **put()** tem custo $O(n)$ quando chamados por conta da busca do elemento na lista. Como estamos trabalhando apenas com um cache que armazena 10 elementos, isso não chega a ser um problema muito grande. Mas e se estivermos trabalhando com um cache que armazena centenas a milhares de elementos? Talvez até milhões. O que faríamos?
 
 Vejamos como podemos subir o sarrafo e tornar o desempenho muito melhor no bloco a seguir.
 
 
 ## Implementação otimizada (com HashMap)
 
+Nessa versão, utilizaremos uma **Lista Duplamente Encadeada** para poder manter a ordem dos elementos que serão inseridos e removidos, e um **HashMap** para poder fazer a busca dos elementos em tempo constante.
+
+Para podermos implementar essa versão otimizada, vamos fazer mudanças estruturais no nó armazenado. Nessa versão, a mesma chave que guarda o nó que está no cache será usada como atributo do nosso nó.
+
+```java
+class Node {
+    String value;
+    String key;
+    Node prev;
+    Node next;
+
+    Node(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+}
+```
+
+Mas, por que dessa mudança? Olhando para o método **put()** que tínhamos dentro do nosso cache não otimizado, existe um caso em que é necessário remover o primeiro nó da lista, ou seja, o *head*, para dar espaço para um novo elemento. Sendo que, esse mesmo nó que foi removido da lista precisará ser removido do HashMap, mas lembrem-se que o mapeamento dele não é **<valor, valor>**, e sim **<chave, valor>**.
+
+Por conta disso, para sermos capazes de, com o nó em mãos, acessar o mesmo nó dentro do HashMap, teremos que guardar a chave do nó do HashMap como atributo do nó.
+
+Essa mudança do nó implicará também em mudanças nos métodos da nossa **Lista Duplamente Encadeada**. Vamos dar uma olhada.
+
+```java
+public Node addLast(String key, String value) {
+    Node node = new Node(key, value);
+
+    if (isEmpty()) {
+        this.head = node;
+        this.tail = head;
+    } else {
+        this.tail.next = node;
+        node.prev = tail;
+        this.tail = node;
+    }
+
+    this.size += 1;
+    return node;
+}
+
+public Node removeFirst() {
+    if (isEmpty()) throw new NoSuchElementException();
+
+    Node aux = this.head;
+    if (this.head.next == null) {
+        this.head = null;
+        this.tail = null;
+    } else {
+        this.head = this.head.next;
+        this.head.prev = null;
+    }
+
+    size -= 1;
+    return aux;
+}
+```
+
+Como podemos perceber, agora instanciamos o objeto Node com um novo atributo **key**, que será justamente a nossa chave para acessar o nó do HashMap. Além disso, percebam que agora estamos retornando o próprio nó na hora da inserção e da remoção dele na nossa lista.
+
 ### Get
+
+O método **get()** ficará muito parecido com o que tínhamos na versão não otimizada. A diferença é que a busca do nó é verificada em tempo constante.
+
+```java
+public String get(String key) {
+    Node node = this.map.get(key);
+
+    if (node == null) 
+        return null;
+
+    this.linkedlist.moveToTail(node);
+    return node.value;
+}
+```
+
+Se o elemento estiver no cache, ele será movido para o final da lista e seu valor será retornado.
 
 ### Put
 
+O put também ficará de forma semelhante ao que tínhamos, mas agora temos que nos atentar em adicionar e remover tanto na **Lista Duplamente Encadeada** quanto no **HashMap**. Uma outra mudança que essa abordagem nos traz é de sermos capazes de atualizar o valor de um nó caso ele exista. Vejamos:
+
+1. Se o elemento já existir dentro do cache, atualizamos o valor dele e o movemos para o final da lista. Lembrem-se que, nunca podemos armazenar dois objetos diferentes na mesma chave. Então se a chave passada for a mesma, mas o valor for diferente, atualizamos o valor do nó.
+
+2. O cache está com capacidade máxima. Aqui, vemos como a mudança estrutural do nó nos auxilia: como o nó removido é retornado da lista, usamos esse mesmo nó para remover o elemento que está no HashMap a partir da chave dele. Após isso, temos que adicionar o novo elemento ao final da lista, e depois no cache.
+
+3. O elemento não existe dentro do cache. Novamente, esse caso é o mais simples, porque basta eu adicionar o novo elemento na lista e no HashMap.
+
+```java
+public void put(String key, String value) {
+    Node node = this.map.get(key);
+
+    if (node != null) {
+        node.value = value;
+        this.linkedlist.moveToTail(node);
+
+    } else if (isFull()) {
+        Node toRemove = this.linkedlist.removeFirst();
+        this.map.remove(toRemove.key);
+
+        Node toAdd = this.linkedlist.addLast(key, value);
+        this.map.put(key, toAdd);
+
+    } else {
+        Node toAdd = this.linkedlist.addLast(key, value);
+        this.map.put(key, toAdd);
+    }
+}
+```
 
 ---
 # Resumo
@@ -181,6 +286,5 @@ Por fim, vale citar que o algoritmo que estudamos hoje é normalmente o critéri
 
 # Contribuições
 [Luis Netto](https://github.com/nettoluis/) e [Gustavo Paulino](https://github.com/gustavop-fausto/) contribuíram para esse material.
-
 
 # Notas de Rodapé
