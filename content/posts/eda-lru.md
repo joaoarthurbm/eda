@@ -40,12 +40,12 @@ Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e FIFO? E
 # Estruturas de dados necessárias
 Saindo do mundo das ideias e partindo para a implementação, precisamos nos perguntar duas coisas importantes: Como atualizar rapidamente a ordem de acesso? Como localizar rapidamente um elemento?
 
-1. A estrutura para manter a ordem de acesso dos dados, geralmente, é uma **Lista Duplamente Ligada** com o *tail* armazenando o nó **mais recentemente acessado** e o *head* o **menos recentemente acessado**.
+1. A estrutura para manter a ordem de acesso dos dados, geralmente, é uma **Lista Duplamente Encadeada** com o *tail* armazenando o nó **mais recentemente acessado** e o *head* o **menos recentemente acessado**.
 2. A estrutura não só para verificarmos a existência desse dado em cache, como também para acessar uma referêcia para seu nó, geralmente, é um **HashMap** em que a chave é o valor do nó e o valor é o próprio nó.
 
 E por que a implementação mais comum utiliza essas duas? Bem, uma das características fundamentais do cache é que ele seja uma memória de acesso rápido, de preferência constante, certo? 
 
->Com a **Lista Duplamente Ligada** nós podemos mover um nó em uma posição arbitrária para o *tail* em tempo constante através de trocas de referências e com o **HashMap** nós podemos tanto verificar se ele está em cache quanto acessá-lo diretamente, ambos em tempo constante.
+>Com a **Lista Duplamente Encadeada** nós podemos mover um nó em uma posição arbitrária para o *tail* em tempo constante através de trocas de referências e com o **HashMap** nós podemos tanto verificar se ele está em cache quanto acessá-lo diretamente, ambos em tempo constante.
 
 # Métodos
 
@@ -54,7 +54,7 @@ Descendo mais uma camada de abstração, partiremos para o código de fato. Assi
 Para facilitar nossa vida, vamos trabalhar com Strings, mas o cache poderia armazenar qualquer tipo de objeto, lembrem-se disso.
 
 ## Implementação mais simples (sem HashMap)
-Nessa implementação, teremos apenas uma **Lista Duplamente Ligada** para realizar nossas operações.
+Nessa implementação, teremos apenas uma **Lista Duplamente Encadeada** para realizar nossas operações.
 
 ### Atributos e construtor
 
