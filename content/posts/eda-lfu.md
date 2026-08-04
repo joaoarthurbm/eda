@@ -68,7 +68,7 @@ Tentar resolver o quiz abaixo pode auxiliar no seu entendimento sobre o assunto.
 ***
 
 {{%quiz operacoes_em_cache%}}
-{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente?" answers="3" choices=" [(a : 3) | (b : 2) | (c : 1)], [(a : 3) | (b : 2) | (d : 1)], [(a : 3) | (b : 2) | (e : 1)], [(b : 2) | (c : 1) | (d : 1)], [(c : 1) | (d : 1) | (e : 1)]">}}
+{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente? Considere que a capacidade do cache é 3" answers="3" choices=" [(a : 3) | (b : 2) | (c : 1)], [(a : 3) | (b : 2) | (d : 1)], [(a : 3) | (b : 2) | (e : 1)], [(b : 2) | (c : 1) | (d : 1)], [(c : 1) | (d : 1) | (e : 1)]">}}
 ```
 get("a");
 get("a");
@@ -83,6 +83,7 @@ get("e");
 {{< item question="Considere o cache de capacidade máxima igual a 5: [(a : 80) | (b : 59) | (c : 10) | (d : 1)]. Qual é o próximo nó que será removido do cache?" answers="5" choices="(a : 80),(b : 59),(c : 10),(d : 1),Nenhum; pois o cache não está cheio">}}
 
 {{% /quiz %}}
+
 ***
 
 ## Implementação dos métodos básicos
@@ -138,7 +139,7 @@ public class LFUCache {
 
         if (toSearch != null) {
             toSearch.frequency += 1;
-            cache.sortByFrequency();
+            cache.sortByFrequency(toSearch);
             return toSearch.value;
 
         } else if (this.isFull()) {
@@ -153,8 +154,48 @@ public class LFUCache {
         return cache.size() == capacidade;
     }
 }
-
 ```
+
+Observe que, quando um elemento é adicionado, devemos ordenar a lista por frequência. Um modo eficiente de realizar esse processo, é utilizando uma inserção ordenada.
+
+```java
+public class LFUCache {
+    public void sortByFrequency(Node node) {
+        Node aux = node.next;
+
+        while (aux != null && node.frequency > aux.frequency) {
+            node.next = aux.next;
+            aux.prev = node.prev;
+
+            aux.next = node;
+            node.prev = aux;
+
+            if (node == this.head && aux == this.tail) {
+                this.head = aux;
+                this.tail = node;
+
+            } else if (node == this.head) {
+                node.next.prev = node;
+                this.head = aux;
+
+            } else if (aux == this.tail) {
+                aux.prev.next = aux;
+                this.tail = node;
+
+            } else {
+                node.next.prev = node;
+                aux.prev.next = aux;
+            }
+
+            aux = aux.next;
+        }
+    }
+}
+```
+
+Nas seções seguintes, discutiremos a eficiência do cache, conforme este modelo, e apresentaremos uma otimização possível para o cache.
+
+***
 
 ## Sobre a eficiência das operações
 
@@ -348,7 +389,7 @@ Note que precisamos de alguns métodos privados para atualizar a frequência do 
 ```
 ***
 
-## Observações
+## Considerações Finais
 
 É raro encontrar o uso isolado da política de cache LFU, pois um objeto na memória pode ser utilizado repetidamente em um curto período de tempo, e permanecer inativo por um longo intervalo. Isso provoca a expulsão indesejada de novos itens do cache, pois foram acessados muito menos frequentemente que outros.
 
