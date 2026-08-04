@@ -31,7 +31,7 @@ Agora, se você fosse pegar, por exemplo, o livro de Filosofia, qual deveria sai
 
 Seguindo o algoritmo LRU, o livro que deveria deixar a mesa seria o de História, pois ele foi o **Menos Recentemente Acessado**, ou, para tornar a compreensão mais clara, o mais antigo a ser acessado e, a partir disso, surge a questão: Por que não o de Matemática? Porque, apesar de ser o mais antigo a ser colocado na mesa, ele é o segundo *mais recentemente acessado*.
 
-[^1]: A escolha de mover o nó para o *tail* é totalmente arbitrária. Na literatura, é extremamente comum que o nó seja movido para o head, mas, por questões de didática, escolhemos mover para o *tail*
+[^1]: A escolha de armazenar o objeto **mais recentemente acessado** mais à direita (*tail*) é totalmente arbitrária. Na literatura, é extremamente comum que ele seja armazenado mais à esquerda (*head*), mas, por questões de didática, escolhemos o *tail*.
 
 ## LRU vs FIFO
 Uma dúvida que pode surgir é: Professor, qual a diferença entre LRU e FIFO? E o pequeno detalhe é que na FIFO o elemento que sai é o mais antigo a ser **adicionado** enquanto no LRU é o mais antigo a ser **acessado**. Para fixar a diferença, basta relembrarmos dos exemplos dos livros na mesa, caso a política de cache fosse FIFO, o de Matemática deveria sair, já se fosse LRU, o de História deveria sair.
