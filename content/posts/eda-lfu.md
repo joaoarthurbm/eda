@@ -92,8 +92,8 @@ Como discutimos na seção anterior, a estrutura do nó sofrerá algumas altera�
 
 ```java
 class Node {
-    private Node prev;
-    private Node next;
+    Node prev;
+    Node next;
     String value;
     int frequency;
 
@@ -118,6 +118,8 @@ public class LinkedList {
                 return aux;
             aux = aux.next;
         }
+
+        return null;
     }
 }
 ```
@@ -126,19 +128,19 @@ Após essa busca, devemos verificar se o nó foi encontrado e, se é necessário
 
 ```java
 public class LFUCache {
+    private int capacity;
     private LinkedList cache;
-    private int capacidade;
 
     public LFUCache(int capacidade) {
-        this.cache = new LinkedList();
-        this.capacidade = capacidade;
+        this.capacity = capacity;
+        this.cache = new DoublyLinkedList;
     }
 
     public String get(String value) {
         Node toSearch = cache.getNode(value);
 
         if (toSearch != null) {
-            toSearch.frequency += 1;
+            updateFrequency(toSearch);
             cache.sortByFrequency(toSearch);
             return toSearch.value;
 
@@ -307,7 +309,7 @@ Quanto aos atributos do cache, sabemos que ele não é representado apenas por u
 public class LFUCache {
     private int capacity;
     private Map<Integer, Node> keyToNode;
-    private Map<Integer, DoublyLinkedList> freqToList;
+    private Map<Integer, LinkedList> freqToList;
     private int minFreq;
 
     public LFUCache(int capacity) {
@@ -333,7 +335,7 @@ public void put(int key, String value) {
     }
 
     if (keyToNode.size() >= this.capacity) {
-        DoublyLinkedList list = freqToList.get(minFreq);
+        LinkedList list = freqToList.get(minFreq);
         Node evicted = list.removeLast();
 
         if (evicted != null) 
@@ -362,8 +364,8 @@ public String get(int key) {
 Note que precisamos de alguns métodos privados para atualizar a frequência do nó, e, para facilitar a adição de novos elementos, caso não haja outros nós registrados com a sua nova frequência. Portanto, criamos os métodos `updateFreq(Node node)` e `getOrCreateList(int freq)`.
 
 ```java
-    private DoublyLinkedList getOrCreateList(int freq) {
-        DoublyLinkedList list = freqToList.get(freq);
+    private LinkedList getOrCreateList(int freq) {
+        LinkedList list = freqToList.get(freq);
 
         if (list == null) {
             list = new DoublyLinkedList();
@@ -374,17 +376,17 @@ Note que precisamos de alguns métodos privados para atualizar a frequência do 
     }
 
     private void updateFreq(Node node) {
-        DoublyLinkedList oldList = freqToList.get(node.freq);
+        LinkedList oldList = freqToList.get(node.frequency);
         oldList.remove(node);
 
         if (oldList.size == 0) {
             if (node.freq == minFreq) minFreq++;
 
-            freqToList.remove(node.freq);
+            freqToList.remove(node.frequency);
         }
 
-        node.freq++;
-        getOrCreateList(node.freq).add(node);
+        node.frequency++;
+        getOrCreateList(node.frequency).add(node);
     }
 ```
 ***
