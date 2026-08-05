@@ -208,7 +208,7 @@ Vamos por partes. Suponha um nó cheio com as chaves $[10, 20, 30, 40, 50]$ (ord
 
 Para fixar bem essa ideia, imagine uma Árvore B de ordem 4 (no máximo 3 chaves por nó) com a raiz $[10, 20, 30]$, já cheia. Ao inserirmos um novo valor, o `split` é chamado antes de prosseguirmos:
 
-<p align="center">Antes do split: raiz = [10, 20, 30] (cheia)</p>
+<p align="center">Antes do split: raiz = [10, 20, 30] (cheia)</p>>
 
 <p align="center">Depois do split: raiz = [20], filhos = [10] e [30]</p>
 
@@ -297,9 +297,92 @@ Note que a estrutura é idêntica à versão recursiva: garantimos que a raiz n�
 
 ### Busca
 
+A busca em uma Árvore B segue a mesma ideia de uma BST: descemos pela árvore até encontrar a chave desejada, mas agora cada nó pode conter várias chaves e, por isso, a decisão de qual filho seguir é feita comparando o valor com as chaves do nó atual.
+
+O algoritmo funciona assim:
+
+![Exemplo da busca do elemento 5](btree-search.gif)
+
+1. Começamos na raiz.
+
+1. No nó atual, procuramos em qual posição a chave deve estar, como as chaves sempres estão ordenadas, podemos achá-la facilmente.
+
+1. Se a chave for encontrada no nó atual, devolvemos a posição `(nó, índice)`.
+
+1. Caso contrário, seguimos para o filho cujo o índice seria o mesmo do valor caso ele estivesse entre as chaves.
+
+1. Se chegarmos a uma folha e a chave não estiver ali, a busca termina sem encontrar o valor.
+
+Sua implementação recursiva:
+
+```java
+public BNodePosition recursiveSearch(int value) {
+    return recursiveSearch(root, value);
+}
+
+private BNodePosition recursiveSearch(BNode node, int value) {
+    int idx = buscaBinaria(node, value);
+
+    //Encontramos
+    if (idx < node.size && value == node.keys.get(idx)) {
+        return new BNodePosition(node, idx);
+    }
+    //Não encontramos
+    if (!node.isLeaf()) {
+        return recursiveSearch(node.children.get(idx), value);
+    }
+    //É uma folha
+    return new BNodePosition();
+}
+```
+
+A classe `BNodePosition` serve justamente para representar o resultado da busca: ela guarda em qual nó a chave pertence e em qual índice dentro do array `keys` ela foi encontrada. Quando o valor não existe, a posição é vazia.
+
 ***
 
 ### Mínimo e Máximo
+
+Por ser uma estrutura ordenada, assim como em uma BST, o menor valor de uma Árvore B está sempre no primeiro nó da esquerda, e o maior valor está sempre no último nó da direita. Porém, por conta da estrutura de vários filhos por nó, quando chegamos na folha, devemos indicar qual o índice da chave.
+
+Por ser uma estrutura ordenada, o menor elemento é encontrado seguindo sempre o primeiro filho:
+
+![Exemplo de busca do mínimo](btree-min.gif)
+
+Implementação iterativa:
+```java
+public BNodePosition min() {
+    if (isEmpty()) {
+        return new BNodePosition();
+    }
+
+    BNode node = root;
+    while (!node.isLeaf()) {
+        node = node.children.get(0);
+    }
+    return new BNodePosition(node, 0);
+}
+```
+
+Da mesma forma, o máximo é encontrado descendo sempre pelo último filho:
+
+![Exemplo de busca do máximo](btree-max.gif)
+
+Implementação iterativa:
+```java
+public BNodePosition max() {
+    if (isEmpty()) {
+        return new BNodePosition();
+    }
+
+    BNode node = root;
+    while (!node.isLeaf()) {
+        node = node.children.get(node.children.size() - 1);
+    }
+    return new BNodePosition(node, node.size - 1);
+}
+```
+
+Em ambos os casos, a ideia é a mesma: o menor valor está na folha mais à esquerda e o maior valor, na folha mais à direita. Por isso, essas operações têm custo proporcional à altura da árvore, que, em uma Árvore B, é pequena em comparação com uma BST tradicional.
 
 ***
 
