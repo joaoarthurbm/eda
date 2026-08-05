@@ -195,14 +195,15 @@ Perceba que estamos tratando o array de forma circular. Dessa maneira, não prec
 
 ```java
     public void addLast(String element) {
-        // toda adição deve aumentar o número de elementos, exceto
-        // se já estiver cheio.
-        if (!isFull())
-            this.size += 1;
     
         // na primeira adição, ambos vão para o índice 0.
         if (isEmpty())
             this.head = 0;
+
+        // toda adição deve aumentar o número de elementos, exceto
+        // se já estiver cheio.
+        if (!isFull())
+            this.size += 1;
         
         // se já estiver cheio, precisamos andar com head para liberar o espaço;
         // e não acrescentamos em size porque não houve aumento de elementos.
