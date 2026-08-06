@@ -1,6 +1,6 @@
 +++
 title = "Política de Cache LFU"
-date = 2026-07-14
+date = 2026-08-06
 tags = []
 categories = []
 github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/src/cache"
@@ -8,16 +8,16 @@ github = "https://github.com/joaoarthurbm/eda-implementacoes/tree/master/java/sr
 
 ***
 
-A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que a memória estiver cheia. Além disso, sabemos que boas políticas de cache *eviction* **minimizam as taxas de erro** e **maximizam as taxas de acerto**. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
+A essa altura, já compreendemos que o cache é uma ***memória rápida, com capacidade limitada***. Por isso, devemos remover elementos sempre que o cache estiver cheio. Além disso, sabemos que boas políticas de cache *eviction* **minimizam as taxas de erro** e **maximizam as taxas de acerto**. Nesse contexto, iremos abordar a política de remoção de elementos LFU.
 
-LFU é uma sigla para **Least Frequently Used**, que significa, em inglês, ***"utilizado com menor frequência"***. Isso diz respeito à maneira como os elementos são removidos, isto é, o elemento removido é aquele que foi utilizado ***menos frequentemente***. Fazemos essa decisão, pois imaginamos que, ao adicionar um novo elemento, os elementos utilizados com menor frequência no cache, provavelmente, não serão utilizados novamente.
+***LFU*** é uma sigla para **Least Frequently Used**, que significa, em inglês, ***"utilizado com menor frequência"***. Isso diz respeito à maneira como os elementos são removidos. Neste caso, o elemento removido é aquele que foi utilizado ***menos frequentemente***. Fazemos essa decisão, pois imaginamos que, ao adicionar um novo elemento, os elementos utilizados com menor frequência no cache, provavelmente, não serão utilizados novamente.
 
-Vamos discutir melhor como funciona essa estratégia. Você certamente já usou um browser para acessar conteúdos na internet. Certamente, você acessa alguns sites várias vezes ao longo do dia, e seria desejável manter um conjunto de páginas ***frequentemente utilizadas***, por exemplo, alguns materiais dessa disciplina. Além disso, quando alguma página que não está nessa lista for acessada repetidamente, esta deve substituir o site ***menos frequentemente acessado*** da lista.
+Vamos discutir melhor como funciona essa estratégia. Você certamente já usou um browser para acessar conteúdos na internet e, provavelmente, acessa alguns sites várias vezes ao longo do dia. Nessa situação, seria desejável manter um conjunto de páginas **frequentemente utilizadas**, por exemplo, alguns materiais dessa disciplina. Além disso, quando alguma página que não está nessa lista for acessada repetidamente, esta deve substituir o site ***menos frequentemente acessado*** da lista.
 ***
 
 ## A política LFU
 
-Nosso cache é um conjunto de nós, que possuem um contador, responsável por registrar a quantidade de vezes que esse elemento foi acessado. Para isso, podemos utilizar uma lista encadeada, que começa vazia. Para simplicidade, neste exemplo, o cache possui, no máximo, três nós.
+Nossa política de cache é representada por um conjunto de nós, que possuem um contador, responsável por registrar a quantidade de vezes que esse elemento foi acessado. Para isso, podemos utilizar uma lista encadeada, que começa vazia. Para simplicidade, neste exemplo, o cache possui, no máximo, três nós.
 
 `[null]`
 
@@ -27,7 +27,7 @@ Do mesmo modo que fizemos com as outras políticas de cache, vamos analisar a pr
 
 Como esperado, buscamos um nó cujo valor é o elemento **"a"**, no cache, e não o encontramos, pois o cache está vazio. Como não encontramos um nó com este elemento, fazemos a busca no banco de dados (BD), e, após encontrá-lo, adicionamos um nó, que representa esse elemento, ao cache. Se este foi o caso, o cache, depois dessa operação, possui a seguinte forma.
 
-`[("a", 1)]`
+`[("a" : 1)]`
 
 Note que tivemos que realizar uma alteração na estrutura do nó, comparado à política LRU, pois precisamos manter o registro da frequência desse elemento, além do conteúdo que existe nesse nó.
 
@@ -39,7 +39,7 @@ Agora, vamos analisar outras operações de busca com resultados semelhantes:
 
 Novamente, fazemos a busca pelos elementos no cache. Como não existem nós que contêm os elementos **"b"** e **"c"**, buscamos estes elementos no banco de dados. Se os elementos estiverem no BD, após concluir a busca, realizamos a adição no cache.
 
-`[("a", 1), ("b", 1), ("c", 1)]`
+`[("a" : 1) | ("b" : 1) | ("c" : 1)]`
 
 Agora, buscamos elementos que existem no cache:
 
@@ -49,17 +49,17 @@ Agora, buscamos elementos que existem no cache:
 
 `get("c")` -> hit!
 
-Isso é ótimo, pois não precisamos utilizar ferramentas de busca para encontrar o site desejado, porque podemos encontrá-lo na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
+Isso é ótimo, pois não precisamos utilizar ferramentas de busca lentas para procurar o site desejado, porque podemos encontrá-lo na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
 
-`[("a", 3), ("c", 2), ("b", 1)]`
+`[("a" : 3) | ("c" : 2) | ("b" : 1)]`
 
 Dessa vez, procuramos um elemento distinto daqueles utilizados nos casos anteriores:
 
 `get("d")` -> miss!
 
-Estamos na mesma situação de busca por um elemento cujo nó não existe no cache. Porém, não podemos simplesmente adicionar outro elemento ao cache, pois atingimos a capacidade máxima. Portanto, devemos efetuar uma remoção conforme a nossa política de cache. Nesse sentido, o nó removido é o que possui a ***menor frequência*** e, nesse caso, seria o nó com valor **"b"**. Em seu lugar, inserimos o novo elemento procurado.
+Estamos na mesma situação de busca por um elemento cujo nó não existe no cache. Porém, não podemos simplesmente adicionar outro elemento ao cache, pois atingimos a capacidade máxima. Portanto, devemos efetuar uma remoção conforme a nossa política de cache. Dessa forma, o nó removido é o que possui a ***menor frequência*** e, nesse caso, seria o nó com valor **"b"**. Em seu lugar, inserimos o novo elemento procurado.
 
-`[("a", 3), ("c", 2), ("d", 1)]`
+`[("a" : 3) | ("c" : 2) | ("d" : 1)]`
 
 É importante lembrar que, ao remover o nó, apagamos apenas o objeto que representa o elemento no cache. Se esse elemento fosse adicionado ao cache novamente, um novo nó, que possui frequência igual a 1, será criado.
 
@@ -88,7 +88,7 @@ get("e");
 
 ## Implementação dos métodos básicos
 
-Como discutimos na seção anterior, a estrutura do nó sofrerá algumas alterações por conta do funcionamento da nossa política. Em particular, o nó armazena a frequência de acessos durante seu tempo de vida, no cache, além do valor que representa este elemento.
+Como discutimos na seção anterior, a estrutura do nó sofrerá algumas alterações por conta do funcionamento da nossa política. Em particular, o nó armazena a frequência de acessos durante seu tempo de vida no cache, além do valor que representa este elemento.
 
 ```java
 class Node {
@@ -106,7 +106,7 @@ class Node {
 }
 ```
 
-Quanto ao método básico `get("String value")`, o processo é simples. Fazemos uma busca linear na lista encadeada, procurando o nó que contém o elemento.
+Quanto ao método básico `get("String value")`, o processo não é complicado. Fazemos uma busca linear na lista encadeada, procurando o nó que contém o elemento.
 
 ```java
 public class LinkedList { 
@@ -221,7 +221,7 @@ Para os exemplos seguintes, assumimos o cache de tamanho 4, representado nesta i
     <img src="cache-inicial.png">
 </figure>
 
-O funcionamento do cache ocorre da seguinte forma: Ao realizar uma operação get, a busca por um nó que contém o elemento desejado é feita na tabela chave-nó. A partir do resultado dessa busca, o algoritmo divide-se em casos, que dependem do tamanho atual do cache.
+O funcionamento do cache ocorre da seguinte maneira: Ao realizar uma operação get, a busca por um nó que contém o elemento desejado é feita na tabela chave-nó. A partir do resultado dessa busca, o algoritmo divide-se em casos, que dependem do tamanho atual do cache.
 
 ---
 
@@ -278,7 +278,7 @@ Além disso, se uma lista estiver vazia após atualizar a frequência de algum n
 
 ---
 
-Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, a complexidade de todas as operações de cache são $O(1)$, pois o tempo de complexidade da busca, que era o fator mais custoso do nosso cache, foi reduzido para $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque utilizamos outras estruturas além da lista encadeada.
+Com essas otimizações, eliminamos a necessidade de manter a lista ordenada, pois conseguimos acessar um nó a partir da sua frequência. Além disso, a complexidade de todas as operações no cache são $O(1)$, pois o tempo de complexidade da busca, que era o fator mais custoso do nosso cache, foi reduzido para $O(1)$. Note que, com essas otimizações, há ***maior consumo de memória***, porque utilizamos outras estruturas além da lista encadeada.
 
 
 ## Implementação otimizada do cache
@@ -398,3 +398,9 @@ Note que precisamos de alguns métodos privados para atualizar a frequência do 
 Existem muitas variações da política LFU, pois, conforme mencionado anteriormente, essa política não leva em conta o intervalo entre acessos a um item do cache. De uma maneira geral, essas variações buscam solucionar esse problema.
 
 A implementação otimizada que usamos neste material é, mais precisamente, a polítca ***LFRU***, ou ***Least Frequently Recently Use***. Esta política é, na verdade, uma combinação dos algoritmos LRU e LFU, que soluciona o problema causado por acessos repetidos a um item, que é geralmente inativo, em curtos intervalos de tempo.
+
+***
+
+## Contribuições
+
+[Guilherme Arruda](https://github.com/G1gg1l3ws) contribuiu para a escrita deste material.
