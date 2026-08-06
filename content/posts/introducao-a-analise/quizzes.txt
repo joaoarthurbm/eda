@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por LucasBSousa04
+{{% quiz test_quiz%}}
+{{< item question="Qual das operações abaixo possui tempo de execução em função de n incorreto?" answers="3" choices="if (n == 2) { return true; } -> f(n) = 2c,(n * 2) + 5 -> f(n) = 2c,int a = 4; a += 5 -> f(n) = 2,v[n] -> 1c" >}}
+{{% /quiz %}}
