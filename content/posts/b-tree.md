@@ -367,18 +367,22 @@ Da mesma forma, o máximo é encontrado descendo sempre pelo último filho:
 
 ![Exemplo de busca do máximo](btree-max.gif)
 
-Implementação iterativa:
+Implementação recursiva:
 ```java
-public BNodePosition max() {
-    if (isEmpty()) {
+public BNodePosition recursiveMax() {
+    if(isEmpty()) {
         return new BNodePosition();
     }
 
-    BNode node = root;
-    while (!node.isLeaf()) {
-        node = node.children.get(node.children.size() - 1);
+    return recursiveMax(root);
+}
+
+private BNodePosition recursiveMax(BNode node) {
+    if(node.isLeaf()) {
+        return new BNodePosition(node, node.size-1);
     }
-    return new BNodePosition(node, node.size - 1);
+
+    return recursiveMax(node.children.get(node.children.size()-1));
 }
 ```
 
@@ -392,9 +396,72 @@ Em ambos os casos, a ideia é a mesma: o menor valor está na folha mais à esqu
 
 ### Caminhamento na B-tree
 
-***
+Assim como em outras estruturas de dados, percorrer uma Árvore B significa visitar todos os seus nós em uma ordem específica. Na implementação apresentada, existem duas formas principais de fazer isso: em profundidade (DFS) e em largura (BFS). Cada uma delas é útil em situações diferentes.
 
-### Comparações entre Árvores Balanceadas
+#### DFS: visita em profundidade
+
+Na visita em profundidade, seguimos o caminho de um nó até chegar a uma folha e só depois voltamos para explorar o próximo ramo. A ideia é visitar a raiz, seguir por um filho, explorar todo esse caminho até o fim e, quando chegar ao final, retornar para tentar o próximo ramo. Em outras palavras, a busca vai "em profundidade" antes de voltar para explorar as opções laterais.
+
+Veja, abaixo, como funciona esse comportamento. A visita avança de um nó para outro até completar um caminho e depois partir para o próximo.
+
+[gif]
+
+Na implementação, o método `depthFS()` faz exatamente isso:
+
+```java
+public ArrayList<BNode> depthFS() {
+    ArrayList<BNode> nodes = new ArrayList<>();
+    depthFS(root, nodes);
+    return nodes;
+}
+
+private void depthFS(BNode node, ArrayList<BNode> nodes) {
+    if (node == null) return;
+
+    nodes.add(node);
+
+    for (BNode child : node.children) {
+        depthFS(child, nodes);
+    }
+}
+```
+
+Esse tipo de travessia é interessante quando queremos explorar uma subárvore inteira antes de passar para a próxima.
+
+#### BFS: percurso em largura
+
+Já no percurso em largura, visitamos todos os nós de um nível antes de descer para o próximo. A ideia é começar pela raiz, depois visitar os filhos dessa raiz, em seguida os filhos dos filhos, e assim sucessivamente. Em vez de seguir um caminho até o fim, como acontece no DFS, o BFS explora a árvore camada por camada, o que deixa bem clara a estrutura horizontal da árvore.
+
+Abaixo, o GIF ilustra esse comportamento, mostrando como a visita passa de um nível para o próximo.
+
+[gif]
+
+Na implementação, o método `breadthFS()` usa uma fila para garantir essa ordem:
+
+```java
+public ArrayList<BNode> breadthFS() {
+    ArrayList<BNode> result = new ArrayList<>();
+
+    if (isEmpty()) return result;
+
+    Queue<BNode> queue = new LinkedList<>();
+    queue.add(root);
+
+    while (!queue.isEmpty()) {
+        BNode current = queue.poll();
+        result.add(current);
+
+        if (!current.isLeaf()) {
+            for (BNode child : current.children) {
+                queue.add(child);
+            }
+        }
+    }
+    return result;
+}
+```
+
+Esse tipo de travessia é útil quando queremos analisar a árvore por níveis, por exemplo, para entender melhor a estrutura da árvore ou a distribuição das chaves.
 
 ***
 
