@@ -7,3 +7,13 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por magao02
+{{% quiz test_quiz%}}
+{{< item question="Qual caso ultilizar se o algoritmo tiver condicionais?" answers="1" choices = "pior caso,caso intermediário, melhor caso" >}}
+{{% /quiz %}}
+
+# Quiz elaborado por magao02
+{{% quiz test_quiz%}}
+{{< item question="O que quer dizer análise de algoritmos?" answers="1" choices="procurar erros no algoritmo,prever a quantidade de recursos que tal algoritmo consome ao ser executado, procurar formas de deixar o código limpo" >}}
+{{% /quiz %}}
