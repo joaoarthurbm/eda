@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por biancacpacheco
+{{% quiz test_quiz%}}
+{{< item question="A operação Arrays.sort(v) não é considerada primitiva, por quê?" answers="2" choices="Porque ela possui uma array,Porque o processo de ordenação(sort) envolve várias operações primitivas internas,Arrays.sort(v) *é* uma operação primitiva, Porque não é uma operação booleana" >}}
+{{% /quiz %}}
