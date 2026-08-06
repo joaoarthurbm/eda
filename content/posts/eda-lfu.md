@@ -51,7 +51,7 @@ Agora, buscamos elementos que existem no cache:
 
 Isso é ótimo, pois não precisamos utilizar ferramentas de busca lentas para procurar o site desejado, porque podemos encontrá-lo na lista de acessos frequentes. Note que, quando encontramos um elemento em algum nó do cache, devemos aumentar a ***frequência*** do nó. Dessa forma, após essas operações, o cache terá a seguinte forma:
 
-`[("a" : 3) | ("c" : 2) | ("b" : 1)]`
+`[("b" : 1) | ("c" : 2) | ("a" : 3)]`
 
 Dessa vez, procuramos um elemento distinto daqueles utilizados nos casos anteriores:
 
@@ -59,7 +59,7 @@ Dessa vez, procuramos um elemento distinto daqueles utilizados nos casos anterio
 
 Estamos na mesma situação de busca por um elemento cujo nó não existe no cache. Porém, não podemos simplesmente adicionar outro elemento ao cache, pois atingimos a capacidade máxima. Portanto, devemos efetuar uma remoção conforme a nossa política de cache. Dessa forma, o nó removido é o que possui a ***menor frequência*** e, nesse caso, seria o nó com valor **"b"**. Em seu lugar, inserimos o novo elemento procurado.
 
-`[("a" : 3) | ("c" : 2) | ("d" : 1)]`
+`[("d" : 1) | ("c" : 2) | ("a" : 3)]`
 
 É importante lembrar que, ao remover o nó, apagamos apenas o objeto que representa o elemento no cache. Se esse elemento fosse adicionado ao cache novamente, um novo nó, que possui frequência igual a 1, será criado.
 
@@ -68,7 +68,7 @@ Tentar resolver o quiz abaixo pode auxiliar no seu entendimento sobre o assunto.
 ***
 
 {{%quiz operacoes_em_cache%}}
-{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente? Considere que a capacidade do cache é 3" answers="3" choices=" [(a : 3) | (b : 2) | (c : 1)], [(a : 3) | (b : 2) | (d : 1)], [(a : 3) | (b : 2) | (e : 1)], [(b : 2) | (c : 1) | (d : 1)], [(c : 1) | (d : 1) | (e : 1)]">}}
+{{< item question="Qual é o estado final do cache após realizar as operações expostas acima, respectivamente? Considere que a capacidade do cache é 3" answers="3" choices=" [(c : 1) | (b : 2) | (a : 3)], [(d : 1) | (b : 2) | (a : 3)], [(e : 1) | (b : 2) | (a : 3)], [(d : 1) | (c : 1) | (b : 2)], [(c : 1) | (d : 1) | (e : 1)]">}}
 ```
 get("a");
 get("a");
@@ -80,7 +80,7 @@ get("d");
 get("e");
 ```
 
-{{< item question="Considere o cache de capacidade máxima igual a 5: [(a : 80) | (b : 59) | (c : 10) | (d : 1)]. Qual é o próximo nó que será removido do cache?" answers="5" choices="(a : 80),(b : 59),(c : 10),(d : 1),Nenhum; pois o cache não está cheio">}}
+{{< item question="Considere o cache de capacidade máxima igual a 5: [(d : 1) | (c : 10) | (b : 59) | (a : 80)]. Qual é o próximo nó que será removido do cache?" answers="5" choices="(a : 80),(b : 59),(c : 10),(d : 1),Nenhum; pois o cache não está cheio">}}
 
 {{% /quiz %}}
 
@@ -131,7 +131,7 @@ public class LFUCache {
     private int capacity;
     private LinkedList cache;
 
-    public LFUCache(int capacidade) {
+    public LFUCache(int capacity) {
         this.capacity = capacity;
         this.cache = new DoublyLinkedList;
     }
@@ -153,7 +153,7 @@ public class LFUCache {
     }
 
     public boolean isFull() {
-        return cache.size() == capacidade;
+        return cache.size() == this.capacity;
     }
 }
 ```
@@ -209,7 +209,7 @@ Utilizando o método ```get(String value)``` apresentado anteriormente, analisar
 
 Além disso, em casos de ***miss***, a operação possui outro agravante, pois fazemos uma busca pelo elemento no banco de dados, que é um ***processo lento***. Entretanto, este material não leva esses fatores em conta, pois estamos discutindo aspectos isolados da política LFU.
 
-## Otimização com EDAs auxiliares 
+## Otimização com EDs auxiliares 
 
 Conforme discutido nos materiais sobre as outras políticas de cache, o nosso fator limitante no custo das operações é a busca, porque sua complexidade é sempre $O(n)$. Portanto, podemos empregar a mesma estratégia realizada nas outras políticas de cache, ou seja, usar outras estruturas para realizar as operações de busca, nesse caso, as tabelas hash.
 
@@ -397,7 +397,7 @@ Note que precisamos de alguns métodos privados para atualizar a frequência do 
 
 Existem muitas variações da política LFU, pois, conforme mencionado anteriormente, essa política não leva em conta o intervalo entre acessos a um item do cache. De uma maneira geral, essas variações buscam solucionar esse problema.
 
-A implementação otimizada que usamos neste material é, mais precisamente, a polítca ***LFRU***, ou ***Least Frequently Recently Use***. Esta política é, na verdade, uma combinação dos algoritmos LRU e LFU, que soluciona o problema causado por acessos repetidos a um item, que é geralmente inativo, em curtos intervalos de tempo.
+A implementação otimizada que usamos neste material é, mais precisamente, a polítca ***LFRU***, ou ***Least Frequently Recently Used***. Esta política é, na verdade, uma combinação dos algoritmos LRU e LFU, que soluciona o problema causado por acessos repetidos a um item, que é geralmente inativo, em curtos intervalos de tempo.
 
 ***
 
