@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por JuanGDias
+{{% quiz test_quiz%}}
+{{< item question="Sobre o método analítico, qual afirmação está incorreta?" answers="3" choices="É um método simples, Resulta em uma função que determina o custo de execução de um algoritmo, Fornece valores precisos sobre o tempo de execução de um algoritmo, É um método que precisa identificar as operações primitivas" >}}
+{{% /quiz %}}
