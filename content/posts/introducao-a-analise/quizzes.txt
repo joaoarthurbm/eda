@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por caio-galvao
+{{% quiz test_quiz%}}
+{{< item question="Qual dessas não é uma característica do método empírico de análise de algoritmos?" answers="3" choices="É um método que tem uma alta precisão se feito corretamente.,Se baseia na execução do algoritmo diversas vezes, com a medição do tempo gasto.,Tem um custo mais baixo, quando comparado com outros métodos de análise.,Seus resultados são aplicáveis somente para as circunstâncias do teste (ex: para um tipo específico de hardware)." >}}
+{{% /quiz %}}
