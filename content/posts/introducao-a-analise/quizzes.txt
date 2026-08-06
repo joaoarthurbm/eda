@@ -7,3 +7,8 @@
 {{% quiz test_quiz%}}
 {{< item question="Tendo como referência o gráfico acima, qual algoritmo possui o melhor desempenho para as entradas maiores?" answers="1" choices="MergeSort,InsertionSort,QuickSort,SelectionSort" >}}
 {{% /quiz %}}
+
+# Quiz elaborado por adnanmb42
+{{% quiz test_quiz%}}
+{{< item question="Acerca das funções primitivas, assinale a alternativa correta" answers="3" choices="A função 'insert()' é uma delas, Elas têm altíssimo custo de execução, São as funções mais básicas do sistema, São chamadas 'primitivas' pois são usadas desde a idade da pedra" >}}
+{{% /quiz %}}
