@@ -200,6 +200,8 @@ private void split(BNode node) {
 
 Vamos por partes. Suponha um nó cheio com as chaves $[10, 20, 30, 40, 50]$ (ordem 6, ou seja, no máximo 5 chaves por nó). O `split` faz o seguinte:
 
+![Funcionamento do Split](split.gif)
+
 1. Cria um nó ***left*** com a primeira metade das chaves: $[10, 20]$;
 1. Cria um nó ***right*** com a segunda metade das chaves, ignorando a chave do meio: $[40, 50]$;
 1. A chave do meio (30) **não fica em nenhum dos dois nós**. Ela sobe para o pai, funcionando como um "separador" entre ***left*** e ***right***;
@@ -510,13 +512,13 @@ private void redistribuirEsquerda(BNode node, BNode leftSibling, BNode parent, i
     }
 }
 ```
-Imagine uma Árvore B de ordem 5 (`minKeys() = 2`), com a raiz $[20, 39]$, um filho $[9, 11, 12]$ (com sobra: 3 chaves), e um filho deficiente $[25]$ (com apenas 1 chave, depois de uma remoção).
+Imagine uma Árvore B de ordem 5 (`minKeys() = 2`), com a raiz $[20, 39]$ e filhos $[9, 11, 12]$ (com sobra: 3 chaves), $[25]$ (com apenas 1 chave, depois de uma remoção) e $[55, 90]$ (no limite mínimo).
 
-(imagem)
+![Redistribuição](redistribuicao.png)
 
 Aplicando ao nosso exemplo: a chave `20` (do pai) desce para o início do nó deficiente, que vira $[20, 25]$. A maior chave do irmão esquerdo, `12`, sobe para o lugar do `20` no pai, que vira $[12, 39]$. O irmão esquerdo, por sua vez, perde o `12` e fica com $[9, 11]$. No final, todo mundo tem pelo menos duas chaves, e a altura da árvore nem foi alterada.
 
-(gif)
+![Redistribuição](redistribuicao.gif)
 
 `redistribuirDireita` é o espelho exato dessa lógica, só que emprestando do irmão da direita:
 
@@ -584,17 +586,20 @@ private void concatenar(BNode left, BNode right, BNode parent, int parentKeyInde
 
 Voltando ao nosso exemplo, agora com um nó em UnderFlow:
 
-(imagem)
+![Concatenação](concatenacao.png)
 
-Realizando a concatenação: a chave `39` desce do pai para o final do nó esquerdo, que vira $[20, 29, 39]$; depois, todas as chaves do nó direito ($[90]$) são anexadas, resultando em $[20, 29, 39, 90]$ — um único nó com tudo o que antes estava espalhado em três lugares (os dois irmãos e a chave do pai). O nó direito deixa de existir, e o pai, que perdeu uma chave e um filho, vira $[12]$. Como o pai só perdeu uma chave (e continua com pelo menos uma). Vamos a representação:
+Suponhamos que removemos o elemento 55. Agora devemos realizar a concatenação: a chave `39` desce do pai e se uni com seus dois filhos $[20, 25]$ e $[90]$, respectivamente, resultando em $[20, 25, 39, 90]$. O nó direito deixa de existir, e o pai, que perdeu uma chave e um filho, vira $[12]$. Como o pai é raiz, não há problema dele possuir apenas uma chave. Vamos a representação:
 
-(gif)
+![Concatenação](concatenacao.gif)
 
 > Assim como no algoritmo de inserção, onde o crescimento da árvore sempre acontece pela raiz (nunca pelas folhas), aqui o encolhimento da árvore também só acontece pela raiz: é somente quando a correção chega até a raiz e a deixa vazia que a altura da árvore diminui.
 
 Esse último ponto é interessante e vale um quiz :)
 
 {{% quiz remocao_concatenacao %}}
+<p align="center">
+  <img src="quiz.png" style="width:60%">
+</p>
 {{< item question="Dada a B-tree de ordem 5 com raiz [33], filho esquerdo [10 - 15] e filho direito [50]. Qual o estado final da árvore após a correção do UnderFlow?" answers="3" choices=" A árvore mantém 3 níveis: raiz [33]; filho esquerdo [10 - 15 - 50] e filho direito vazio é removido, A raiz vira [10 - 15 - 33 - 50] mas continua com dois filhos vazios abaixo dela, A árvore perde um nível e a raiz passa a ser um único nó [10- 15 - 33 - 50]; sem filhos, A raiz vira [33 - 50] e o filho esquerdo [10 - 15] permanece como único filho">}}
 {{% /quiz %}}
 
