@@ -21,6 +21,8 @@ Imagine um banco de dados onde **99%** das requisições de busca concentram-se 
 
 Pior ainda: se a árvore for uma BST comum e esses elementos populares estiverem localizados nas folhas mais profundas, as buscas repetidas custarão um tempo próximo de $O(n)$, degradando o desempenho do sistema.
 
+Esse tipo de situação pode, a primeira vista, parecer raro, mas reflete o [Princípio da Localidade de Referência](https://en.wikipedia.org/wiki/Locality_of_reference) (em especial a localidade temporal), um padrão fundamental na computação que dita que dados acessados recentemente têm alta probabilidade de serem acessados novamente em um futuro próximo, sendo relativamente comum em aplicações reais.
+
 # A Solução: Splay Trees e a Operação Splay
 
 Uma **Splay Tree** é uma árvore binária de pesquisa auto-ajustável. A sua principal característica é que, **sempre** que um nó é acessado (seja por busca, inserção ou remoção), uma operação chamada **Splay** é realizada nesse nó.
