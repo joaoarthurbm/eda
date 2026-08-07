@@ -1,6 +1,6 @@
 +++
 title = "Árvores Balanceadas: B Tree"
-date = 2026-07-29
+date = 2026-08-07
 tags = []
 categories = []
 github = "https://github.com/antonynunesy/eda/tree/b-tree"
