@@ -3,27 +3,28 @@ title = "Árvores Balanceadas: B Tree"
 date = 2026-07-29
 tags = []
 categories = []
+github = "https://github.com/antonynunesy/eda/tree/b-tree"
 +++
 
 ***
 
-# Definições e Propriedades
-
-Até aqui, vimos árvores em que cada nó armazena **uma única chave** e possui, no máximo, **dois filhos**, como as <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvores Binárias de Pesquisa (BST)</a>. Essa restrição é simples e elegante, mas tem uma consequência prática importante: em cenários com grandes volumes de dados, principalmente quando a árvore não cabe inteira no Cache e parte dela precisa ser armazenada em disco, uma árvore binária de pesquisa pode crescer muito em altura. E, como já vimos, a altura é o que determina o custo das operações básicas de uma árvore. Quanto maior a altura, mais acessos a disco são necessários — e acesso a banco de dados são muito mais lentas do que acessos à cache, como visto nos materiais anteriores.
+Até aqui, vimos árvores em que cada nó armazena **uma única chave** e possui, no máximo, **dois filhos**, como as <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvores Binárias de Pesquisa (BST)</a>. Essa restrição é simples e elegante, mas tem uma consequência prática importante: em cenários com grandes volumes de dados, principalmente quando a árvore não cabe inteira no Cache e parte dela precisa ser armazenada em um banco de dados, uma árvore binária de pesquisa pode crescer muito em altura. E, como já vimos, a altura é o que determina o custo das operações básicas de uma árvore. Quanto maior a altura, mais acessos a disco são necessários, e acesso a banco de dados são muito mais custosos do que acessos à cache, como visto nos materiais anteriores.
 
 ### A solução
 
-Então como escapar dessas idas e voltas custosas ao banco da dados? A **Árvore B** (ou *B-Tree*) resolve esse problema generalizando a ideia de árvore de pesquisa: em vez de permitir apenas uma chave e dois filhos por nó, uma Árvore B permite que **cada nó armazene várias chaves e tenha vários filhos**. Isso faz com que a árvore cresça mais "para os lados" do que "para baixo", resultando em uma altura muito menor para a mesma quantidade de elementos. Na prática, isso significa menos acessos a disco e, consequentemente, operações mais rápidas.
+Então como escapar dessas idas e voltas ao banco da dados? A **Árvore B** (ou *B-Tree*) resolve esse problema alterando a ideia de árvore de pesquisa: em vez de permitir apenas uma chave e dois filhos por nó, uma Árvore B permite que **cada nó armazene várias chaves e tenha vários filhos**. Isso faz com que a árvore cresça mais "para os lados" do que "para baixo", resultando em uma altura muito menor para a mesma quantidade de elementos. Na prática, isso significa menos acessos a disco e, consequentemente, operações mais rápidas.
+
+# Definições e Propriedades
 
 Formalmente, uma Árvore B é definida por um parâmetro chamado ***ordem*** (representado aqui pela variável `order`), que determina quantos filhos um nó pode ter. Dada uma ordem $t$, uma Árvore B respeita as seguintes invariantes:
 
 1. Cada nó possui, no máximo, $t - 1$ chaves;
 
-1. Cada nó interno possui, no máximo, $t$ filhos;
+1. Cada nó possui, no máximo, $t$ filhos;
 
-1. Cada nó, exceto a raiz, possui, no mínimo, $\lceil t/2 \rceil - 1$ chaves;
+1. Cada nó, exceto a raiz, possui, no mínimo, $(t-1)/2$ chaves;
 
-1. Um nó interno com $k$ chaves possui exatamente $k + 1$ filhos;
+1. Um nó com $k$ chaves possui exatamente $k + 1$ filhos;
 
 1. As chaves de um nó estão sempre ordenadas. 
 
@@ -37,7 +38,7 @@ Essa última propriedade é a mais importante de todas: **uma Árvore B é sempr
 
 ## Ordem da árvore
 
-A ordem determina o quão "larga" a árvore pode ser. Como visto nas inváriantes,, em uma Árvore B de ordem t (`order = t`), cada nó pode ter, no máximo, t-1 chaves e t filhos. Em uma Árvore B de ordem 5, cada nó pode ter, no máximo, 4 chaves e 5 filhos. Quanto maior a ordem, mais "larga" e mais "baixa" a árvore se torna.
+A ordem determina o quão larga a árvore pode ser. Como visto nas inváriantes, em uma Árvore B de ordem t (`order = t`), cada nó pode ter, no máximo, t-1 chaves e t filhos. Em uma Árvore B de ordem 5, cada nó pode ter, no máximo, 4 chaves e 5 filhos. Quanto maior a ordem, mais larga e mais baixa a árvore se torna.
 
 Na implementação que vamos estudar, a ordem é definida no construtor da classe `BTree`:
 
@@ -111,7 +112,7 @@ public int addKey(int key) {
 }
 ```
 
-Esse método é responsável por inserir uma chave em um nó **mantendo a ordem crescente**. Ele percorre a lista de chaves procurando a primeira posição cujo valor é maior do que a chave a ser inserida, e insere a nova chave imediatamente antes dessa posição. Perceba que, se o nó tiver, por exemplo, as chaves $[10, 20, 30]$ e quisermos inserir 25, o método vai parar no índice 2 (posição do valor 30) e inserir 25 ali, resultando em $[10, 20, 25, 30]$. O método também retorna o índice em que a chave foi inserida, informação que será usada bastante durante o processo de divisão de nós (***split***), que veremos já já.
+Esse método é responsável por inserir uma chave em um nó **mantendo a ordem crescente**. Ele percorre a lista de chaves procurando a primeira posição cujo valor é maior do que a chave a ser inserida, e a insere imediatamente antes dessa posição[^1]. O método também retorna o índice em que a chave foi inserida, informação que será usada bastante durante o processo de divisão de nós (***split***), que veremos já já.
 
 ***
 
@@ -202,11 +203,11 @@ Vamos por partes. Suponha um nó cheio com as chaves $[10, 20, 30, 40, 50]$ (ord
 1. Cria um nó ***left*** com a primeira metade das chaves: $[10, 20]$;
 1. Cria um nó ***right*** com a segunda metade das chaves, ignorando a chave do meio: $[40, 50]$;
 1. A chave do meio (30) **não fica em nenhum dos dois nós**. Ela sobe para o pai, funcionando como um "separador" entre ***left*** e ***right***;
-1. Se o nó dividido não for folha, seus filhos também são divididos entre ***left*** e ***right***, seguindo exatamente o mesmo corte usado nas chaves: os filhos que ficavam "à esquerda" da chave do meio (isto é, os que estavam associados às chaves que foram para ***left***, mais um) vão para ***left***, e os demais vão para ***right***. No nosso exemplo, um nó com 5 chaves teria 6 filhos: os 3 primeiros (índices 0, 1 e 2) acompanham as chaves $[10, 20]$ e vão para ***left***, e os 3 últimos (índices 3, 4 e 5) acompanham as chaves $[40, 50]$ e vão para ***right***. Repare que o número de filhos de cada lado é sempre igual ao número de chaves daquele lado mais um — exatamente como pede a invariante 4;
+1. Se o nó dividido não for folha, seus filhos também são divididos entre ***left*** e ***right***, seguindo exatamente o mesmo corte usado nas chaves. No nosso exemplo, um nó com 5 chaves teria 6 filhos: os 3 primeiros (índices 0, 1 e 2) acompanham as chaves $[10, 20]$ e vão para ***left***, e os 3 últimos (índices 3, 4 e 5) acompanham as chaves $[40, 50]$ e vão para ***right***.
 1. Se o nó dividido for a raiz (não possui pai), uma nova raiz vazia é criada. É assim que a árvore cresce em altura: sempre pela raiz, nunca pelas folhas;
 1. Por fim, a chave do meio é inserida no pai (`parent.addKey(...)`), e o nó original é substituído, na lista de filhos do pai, pelos dois novos nós ***left*** e ***right***.
 
-> É importante destacar: diferente de uma BST, onde a árvore cresce inserindo folhas mais fundo, na Árvore B a árvore cresce "de baixo para cima, mas pela raiz". Quando a raiz é dividida, uma nova raiz é criada acima dela, aumentando a altura da árvore em exatamente um nível — e isso acontece **igualmente para todos os caminhos**, o que preserva a propriedade de que todas as folhas estão no mesmo nível.
+> É importante destacar: diferente de uma BST, onde a árvore cresce inserindo folhas mais fundo, na Árvore B a árvore cresce "de baixo para cima, mas pela raiz". Quando a raiz é dividida, uma nova raiz é criada acima dela, aumentando a altura da árvore em exatamente um nível, e isso acontece **igualmente para todos os caminhos**, o que preserva a propriedade de que todas as folhas estão no mesmo nível.
 
 Para fixar bem essa ideia, imagine uma Árvore B de ordem 4 (no máximo 3 chaves por nó) com a raiz $[10, 20, 30]$, já cheia. Ao inserirmos um novo valor, o `split` é chamado antes de prosseguirmos:
 
@@ -216,51 +217,9 @@ Para fixar bem essa ideia, imagine uma Árvore B de ordem 4 (no máximo 3 chaves
 
 Note que 20 (a chave do meio) subiu, formando uma nova raiz, enquanto 10 e 30 se tornaram os dois filhos dessa nova raiz.
 
-### Inserção recursiva
+### Inserção
 
-Com o `split` entendido, a inserção recursiva fica bem mais simples:
-
-```java
-public void recursiveInsert(int value) {
-    if (isEmpty()) {
-        root = new BNode(this.order);
-        root.addKey(value);
-        size++;
-    } else {
-        if (root.isFull()) {
-            split(root);
-        }
-        recursiveInsert(root, value);
-    }
-}
-
-private void recursiveInsert(BNode node, int value) {
-    if (node.isLeaf()) {
-        node.addKey(value);
-        size++;
-    } else {
-        int idx = buscaBinaria(node, value);
-        BNode child = node.children.get(idx);
-        if (child.isFull()) {
-            split(child);
-            if (value > node.keys.get(idx)) {
-                idx++;
-            }
-        }
-        recursiveInsert(node.children.get(idx), value);
-    }
-}
-```
-
-A lógica é a seguinte: se a árvore estiver vazia, criamos a raiz com a primeira chave. Caso contrário, verificamos, **antes de qualquer coisa**, se a raiz está cheia. Se estiver, dividimos ela logo de cara, garantindo que nunca desceremos para um nó cheio.
-
-Depois, o método privado `recursiveInsert(node, value)` faz o trabalho de percorrer a árvore. Se o nó atual for folha, é ali que a chave deve ser inserida. Caso contrário, precisamos decidir qual filho seguir. Essa decisão é feita pelo método `buscaBinaria`, que retorna o índice do filho que devemos "descer" na árvore.
-
-Aqui está a sacada da abordagem Top-Down: antes de descer recursivamente para o filho escolhido, verificamos se ele está cheio. Se estiver, nós o dividimos **antes** de descer. Como o `split` cria uma chave para o nó atual (`node`), é possível que o índice do filho que devemos seguir mude — por isso o `if (value > node.keys.get(idx)) idx++`. Se o valor que estamos inserindo for maior do que a chave recém-criada, significa que devemos seguir para o novo filho da direita, e não mais para o da esquerda.
-
-### Inserção iterativa
-
-A versão iterativa segue exatamente a mesma lógica, mas usando um laço `while` em vez de recursão:
+Com o `split` entendido, a inserção fica bem mais simples de entender:
 
 ```java
 public void insert(int value) {
@@ -272,32 +231,34 @@ public void insert(int value) {
         if (root.isFull()) {
             split(root);
         }
+        insert(root, value);
+    }
+}
 
-        BNode node = root;
-        while (!node.isLeaf()) {
-            int idx = buscaLinear(node, value);
-            BNode child = node.children.get(idx);
-
-            if (child.isFull()) {
-                split(child);
-                if (value > node.keys.get(idx)) {
-                    idx++;
-                }
-            }
-            node = node.children.get(idx);
-        }
-
-        size++;
+private void insert(BNode node, int value) {
+    if (node.isLeaf()) {
         node.addKey(value);
+        size++;
+    } else {
+        int idx = buscaLinear(node, value);
+        BNode child = node.children.get(idx);
+        if (child.isFull()) {
+            split(child);
+            if (value > node.keys.get(idx)) {
+                idx++;
+            }
+        }
+        insert(node.children.get(idx), value);
     }
 }
 ```
 
-Note que a estrutura é idêntica à versão recursiva: garantimos que a raiz não está cheia, descemos pela árvore dividindo qualquer filho cheio que encontrarmos pelo caminho, até chegar a uma folha, onde finalmente inserimos a chave.
+A lógica é a seguinte: se a árvore estiver vazia, criamos a raiz com a primeira chave. Caso contrário, verificamos se a raiz está cheia. Se estiver, dividimos ela logo de cara, garantindo que nunca desceremos para um nó cheio.
 
-Nessa implementação, a versão recursiva usa busca binária (`buscaBinaria`) e a versão iterativa usa busca linear (`buscaLinear`) para decidir qual filho seguir, mas essa associação **não é uma regra**: é apenas a escolha feita aqui para cada uma. Nada impede que a versão iterativa use busca binária, ou que a recursiva use busca linear — o tipo de busca usado para localizar o filho correto é uma decisão de implementação independente de a inserção ser feita de forma recursiva ou iterativa.
+Depois, o método privado `insert(node, value)` faz o trabalho de percorrer a árvore. Se o nó atual for folha, é ali que a chave deve ser inserida. Caso contrário, precisamos decidir qual filho seguir. Essa decisão é feita pelo método `buscaLinear`, que retorna o índice do filho que devemos descer na árvore.
 
-***
+Aqui está a sacada da abordagem Top-Down: antes de descer recursivamente para o filho escolhido, verificamos se ele está cheio. Se estiver, nós o dividimos **antes** de descer. Como o `split` cria uma chave para o nó atual (`node`), é possível que o índice do filho que devemos seguir mude — por isso o `if (value > node.keys.get(idx)) idx++`. Se o valor que estamos inserindo for maior do que a chave recém-criada, significa que devemos seguir para o novo filho da direita, e não mais para o da esquerda.
+
 
 ### Busca
 
@@ -317,18 +278,18 @@ O algoritmo funciona assim:
 
 1. Se chegarmos a uma folha e a chave não estiver ali, a busca termina sem encontrar o valor.
 
-Sua implementação recursiva:
+Sua implementação:
 
 ```java
-public BNodePosition recursiveSearch(int value) {
+public BNodePosition search(int value) {
     if (isEmpty()) {
         return new BNodePosition();
     }
-    return recursiveSearch(root, value);
+    return search(root, value);
 }
 
-private BNodePosition recursiveSearch(BNode node, int value) {
-    int idx = buscaBinaria(node, value);
+private BNodePosition search(BNode node, int value) {
+    int idx = buscaLinear(node, value);
 
     //Encontramos
     if (idx < node.size && value == node.keys.get(idx)) {
@@ -336,14 +297,14 @@ private BNodePosition recursiveSearch(BNode node, int value) {
     }
     //Não encontramos
     if (!node.isLeaf()) {
-        return recursiveSearch(node.children.get(idx), value);
+        return search(node.children.get(idx), value);
     }
     //É uma folha
     return new BNodePosition();
 }
 ```
 
-A classe `BNodePosition` serve justamente para representar o resultado da busca: ela guarda em qual nó a chave pertence e em qual índice dentro do array `keys` ela foi encontrada. Quando o valor não existe, a posição é vazia.
+A classe `BNodePosition` serve justamente para representar o resultado da busca: ela guarda em qual nó a chave pertence e em qual índice dentro do array `keys` ela foi encontrada, como uma tupla. Quando o valor não existe, a posição é vazia.
 
 ***
 
@@ -376,47 +337,42 @@ Da mesma forma, o máximo é encontrado descendo sempre pelo último filho:
 
 Implementação recursiva:
 ```java
-public BNodePosition recursiveMax() {
+public BNodePosition max() {
     if(isEmpty()) {
         return new BNodePosition();
     }
-
-    return recursiveMax(root);
+    return max(root);
 }
 
-private BNodePosition recursiveMax(BNode node) {
+private BNodePosition max(BNode node) {
     if(node.isLeaf()) {
         return new BNodePosition(node, node.size-1);
     }
-
-    return recursiveMax(node.children.get(node.children.size()-1));
+    return max(node.children.get(node.children.size()-1));
 }
 ```
 
-Em ambos os casos, a ideia é a mesma: o menor valor está na folha mais à esquerda e o maior valor, na folha mais à direita. Por isso, essas operações têm custo proporcional à altura da árvore, que, em uma Árvore B, é pequena em comparação com uma BST tradicional.
+Em ambos os casos, a ideia é a mesma: o menor valor está na folha mais à esquerda e o maior valor, na folha mais à direita.
+
 
 ***
 
 ### Remoção
 
-Assim como na BST, remover um elemento é, de longe, a operação mais delicada de se implementar em umaÁrvore B. E aqui o motivo é ainda mais evidente: toda vez que removemos uma chave, corremos o risco de quebrar duas das invariantes que vimos lá no início — a de que **todo nó, exceto a raiz, precisa ter no mínimo $\lceil t/2 \rceil - 1$ chaves**, e a de que **todas as folhas precisam estar no mesmo nível**. Remover uma chave pode facilmente deixar algum nó com o número de chaves abaixo do mínimo, e corrigir isso, por sua vez, pode exigir alterar a altura da árvore inteira.
+Assim como na BST, remover um elemento é, de longe, a operação mais delicada de se implementar em uma Árvore B. E aqui o motivo é ainda mais evidente: toda vez que removemos uma chave, corremos o risco de quebrar uma das invariantes que vimos lá no início: **todo nó, exceto a raiz, precisa ter no mínimo $(t-1)/2$ chaves**.
 
-Por causa disso, o algoritmo de remoção é dividido em duas fases bem distintas:
+Por causa disso, o algoritmo de remoção é dividido em duas fases:
 
-1. **Encontrar e apagar a chave**, garantindo que a remoção sempre aconteça em uma folha — nunca em um nó interno;
+1. **Encontrar e apagar a chave**, garantindo que a remoção sempre aconteça em uma folha, nunca em um nó interno;
 2. **Corrigir a estrutura**, caso o nó de onde a chave foi removida (ou algum de seus ancestrais) tenha ficado com menos chaves do que o permitido.
 
 #### Por que remover sempre em uma folha?
 
 Se a chave a ser removida está em um nó interno, não podemos simplesmente tirá-la da lista de chaves: ela funciona como um separador entre dois filhos daquele nó, e removê-la quebraria a estrutura da árvore.
 
-A solução, assim como na BST, é **substituir** a chave por outra que possa ocupar seu lugar sem quebrar a ordenação: o ***predecessor*** (a maior chave da subárvore imediatamente à esquerda) ou o ***sucessor*** (a menor chave da subárvore imediatamente à direita). Qualquer um dos dois serve, o predecessor é, por definição, menor do que tudo à direita dele e maior do que tudo à esquerda, e o sucessor cumpre da mesma forma.
+A solução, assim como na BST, é **substituir** a chave por outra que possa ocupar seu lugar sem quebrar a ordenação: o ***predecessor*** (a maior chave da subárvore imediatamente à esquerda) ou o ***sucessor*** (a menor chave da subárvore imediatamente à direita). Qualquer um dos dois serve, o predecessor é, por definição, menor do que tudo à direita dele e maior do que tudo à esquerda, e o sucessor cumpre a propriedade da mesma forma.
 
-Nesta implementação, optamos por usar sempre o **predecessor**. Diferente da BST, aqui não precisamos nos preocupar com para qual caso a remoção recai depois da substituição. Na Árvore B, o predecessor de uma chave em um nó interno é encontrado descendo sempre pelo último filho de cada nó — e esse caminho **sempre termina em uma folha**, porque é assim que a busca por máximo (`recursiveMax`) funciona. Recapitulando, a remoção do predecessor cai sempre no caso "remover de uma folha", garantindo que a primeira fase do algoritmo termine, ótimo.
-
-> Assim como destacado no material de BST: você pode perfeitamente usar o sucessor em vez do predecessor. O importante é deixar isso explícito, porque a sequência de nós visitados (e, consequentemente, o formato final da árvore) muda dependendo de qual dos dois você escolhe — mas ambos resultam em uma Árvore B igualmente válida.
-
-Vamos ao método `remove`, com calma:
+Nesta implementação, optamos por usar sempre o **predecessor**[^2]. Vejamos:
 
 ```java
 public void remove(int value){
@@ -424,7 +380,7 @@ public void remove(int value){
     if(isEmpty()) return;
 
     //Fase 1a: localizar a chave
-    BNodePosition pos = recursiveSearch(value);
+    BNodePosition pos = search(value);
     if(pos.node == null) return; //Valor nao existe na arvore, return
 
     BNode node = pos.node;
@@ -435,7 +391,7 @@ public void remove(int value){
     if(!node.isLeaf()){
         //O predecessor esta sempre na folha mais a direita da subarvore
         //a direita da chave.
-        BNodePosition pred = recursiveMax(node.children.get(index));
+        BNodePosition pred = max(node.children.get(index));
 
         //Faz o swap do predecessor e a chave a ser removida
         node.keys.set(index, pred.getValue());
@@ -451,29 +407,32 @@ public void remove(int value){
 
     //Fase 2: verifica se a remocao deixou algum no abaixo do minimo de 
     //chaves, corrigindo (e propagando a correcao para cima, se preciso)
-    corrigirUnderflow(node);
+    corrigeUnderflow(node);
 }
 ```
 
 #### O número mínimo de chaves
 
-Antes de entrarmos na fase de correção, vale relembrar a invariante 3: todo nó, exceto a raiz, precisa ter no mínimo $\lceil t/2 \rceil - 1$ chaves. Se algum nó não possuir esse número mínimo, dizemos então que ele está em **UnderFlow**. O valor mínimo de chaves é calculado pelo método auxiliar `minKeys`:
+Antes de entrarmos na fase de correção, vale relembrar a invariante 3: todo nó, exceto a raiz, precisa ter no mínimo $(t-1)/2$ chaves. Se algum nó não possuir esse número mínimo, dizemos então que ele está em **UnderFlow**. O valor mínimo de chaves é calculado pelo método auxiliar `minKeys`:
 
 ```java
 private int minKeys(){
-    return (int) Math.ceil(order / 2.0) - 1;
+    return (this.order - 1) / 2;
 }
 ```
 
-Por exemplo, para `order = 5`, temos `minKeys() = ceil(2.5) - 1 = 3 - 1 = 2`. Ou seja, nessa árvore, todo nó (com exceção da raiz) precisa ter pelo menos duas chaves a qualquer momento.
+Por exemplo, para `order = 5`, temos `minKeys() = (5 - 1) / 2 = 2`. Ou seja, nessa árvore, todo nó (com exceção da raiz) precisa ter pelo menos duas chaves em qualquer estado da árvore.
 
 #### Corrigindo um nó abaixo do mínimo
 
 Depois que a chave é removida de uma folha, é possível que esse nó tenha ficado abaixo do mínimo de chaves permitido. Quando isso acontece, existem duas ferramentas para corrigir a situação, sempre nessa ordem de prioridade:
 
-1. **Redistribuição**: se algum irmão adjacente (esquerdo ou direito) tiver chaves "de sobra" (mais do que o mínimo), uma chave é emprestada dele, passando pelo pai. Essa operação é mais barata, porque **não altera a altura da árvore**.
+1. **Redistribuição**: se algum irmão adjacente (esquerdo ou direito) tiver chaves acima do mínimo, uma chave é emprestada dele, passando pelo pai. Essa operação é mais barata, porque **não altera a altura da árvore**.
 
-2. **Concatenação**: se nenhum irmão tiver sobra, o nó deficiente é fundido com um irmão, absorvendo também a chave do pai que os separava. Essa operação pode, em cascata, deixar o próprio pai com poucas chaves — por isso a correção é chamada recursivamente para cima, o que caracteriza essa fase como uma correção ***bottom-up*** (de baixo para cima), em contraste com a inserção, que resolve os seus problemas ***top-down*** (de cima para baixo).
+2. **Concatenação**: se nenhum irmão tiver sobra, o nó deficiente é fundido com um irmão, absorvendo também a chave do pai que os separava. Essa operação pode, em cascata, deixar o próprio pai com poucas chaves, por isso a correção é chamada recursivamente para cima. 
+
+> A concatenação segue a política ***bottom-up*** (de baixo para cima), em contraste com a inserção, que resolve os seus problemas ***top-down*** (de cima para baixo).
+
 
 ```java
 private void corrigirUnderflow(BNode node){
@@ -529,9 +488,7 @@ private void corrigirUnderflow(BNode node){
 
 #### Redistribuição
 
-A redistribuição funciona como uma espécie de rotação: uma chave é emprestada de um irmão que tem sobra, mas ela nunca pula diretamente de um nó para o outro — ela sempre passa pelo pai no meio do caminho, porque é a chave do pai que funciona como separador entre os dois nós.
-
-Imagine uma Árvore B de ordem 5 (`minKeys() = 2`), com a raiz $[20, 39]$, um filho $[9, 11, 12]$ (com sobra: 3 chaves), e um filho deficiente $[25]$ (com apenas 1 chave, depois de uma remoção). A redistribuição com o irmão esquerdo funciona assim:
+A redistribuição funciona como uma espécie de rotação: uma chave é emprestada de um irmão as tem sobrando, mas ela nunca pula diretamente de um nó para o outro, ela sempre passa pelo pai no meio do caminho, porque é a chave do pai que funciona como separador entre os dois nós.
 
 ```java
 private void redistribuirEsquerda(BNode node, BNode leftSibling, BNode parent, int index){
@@ -553,8 +510,13 @@ private void redistribuirEsquerda(BNode node, BNode leftSibling, BNode parent, i
     }
 }
 ```
+Imagine uma Árvore B de ordem 5 (`minKeys() = 2`), com a raiz $[20, 39]$, um filho $[9, 11, 12]$ (com sobra: 3 chaves), e um filho deficiente $[25]$ (com apenas 1 chave, depois de uma remoção).
+
+(imagem)
 
 Aplicando ao nosso exemplo: a chave `20` (do pai) desce para o início do nó deficiente, que vira $[20, 25]$. A maior chave do irmão esquerdo, `12`, sobe para o lugar do `20` no pai, que vira $[12, 39]$. O irmão esquerdo, por sua vez, perde o `12` e fica com $[9, 11]$. No final, todo mundo tem pelo menos duas chaves, e a altura da árvore nem foi alterada.
+
+(gif)
 
 `redistribuirDireita` é o espelho exato dessa lógica, só que emprestando do irmão da direita:
 
@@ -578,12 +540,16 @@ private void redistribuirDireita(BNode node, BNode rightSibling, BNode parent, i
     }
 }
 ```
+Note que a chave do pai desce, a chave do irmão sobe, e o nó que estava em UnderFlow ganha exatamente uma chave. Vamos fixar essa ideia:
+
+{{% quiz remocao_redistribuicao %}}
+{{< item question="Considere uma árvore de ordem 5, com raiz [33 - 70], o filho esquerdo [3 - 6 - 9 - 12] e o filho direito [35], qual o estado da árvore após a redistribuição?" answers="2" choices=" raiz [9 - 70]; filho esquerdo [3 - 6 - 12]; filho direito [33 - 35], raiz [12 - 70]; filho esquerdo [3 - 6 - 9]; filho direito [33 - 35], raiz [33 - 70]; filho esquerdo [3 - 6 - 9]; filho direito [12 - 35], raiz [12 - 70]; filho esquerdo [3 - 6 - 9] - filho direito [35 - 33]">}}
+{{% /quiz %}}
+***
 
 #### Concatenação
 
 Quando **nenhum irmão** tem chaves de sobra, isto é, os dois estão exatamente no mínimo de chaves, não é possível redistribuir sem deixar o doador também em UnderFlow. A solução é fundir os dois nós em um só, absorvendo também a chave do pai que os separava.
-
-Continuando o exemplo: suponha que, depois de mais uma remoção, o pai fique $[12, 39]$, o filho esquerdo $[20, 29]$ (exatamente no mínimo) e o filho direito $[90]$ (deficiente, com apenas uma chave). Nenhum dos dois tem sobra, então a correção usa a concatenação:
 
 ```java
 private void concatenar(BNode left, BNode right, BNode parent, int parentKeyIndex){
@@ -616,9 +582,21 @@ private void concatenar(BNode left, BNode right, BNode parent, int parentKeyInde
 ```
 >   Nota-se que é necessário propagar a correção para os ancestrais do nó, uma vez que o pai pode ter perdido uma chave e um filho, ficando ele mesmo deficiente (ou, se for a raiz, pode ter ficado vazia)
 
-No nosso exemplo: a chave `39` desce do pai para o final do nó esquerdo, que vira $[20, 29, 39]$; depois, todas as chaves do nó direito ($[90]$) são anexadas, resultando em $[20, 29, 39, 90]$ — um único nó com tudo o que antes estava espalhado em três lugares (os dois irmãos e a chave do pai). O nó direito deixa de existir, e o pai, que perdeu uma chave e um filho, vira $[12]$. Como o pai só perdeu uma chave (e continua com pelo menos uma), nesse caso a correção para por aí — mas se o pai fosse a raiz e tivesse ficado com zero chaves, seria exatamente o caso especial tratado no início de `corrigirUnderflow`, e a árvore perderia um nível de altura.
+Voltando ao nosso exemplo, agora com um nó em UnderFlow:
+
+(imagem)
+
+Realizando a concatenação: a chave `39` desce do pai para o final do nó esquerdo, que vira $[20, 29, 39]$; depois, todas as chaves do nó direito ($[90]$) são anexadas, resultando em $[20, 29, 39, 90]$ — um único nó com tudo o que antes estava espalhado em três lugares (os dois irmãos e a chave do pai). O nó direito deixa de existir, e o pai, que perdeu uma chave e um filho, vira $[12]$. Como o pai só perdeu uma chave (e continua com pelo menos uma). Vamos a representação:
+
+(gif)
 
 > Assim como no algoritmo de inserção, onde o crescimento da árvore sempre acontece pela raiz (nunca pelas folhas), aqui o encolhimento da árvore também só acontece pela raiz: é somente quando a correção chega até a raiz e a deixa vazia que a altura da árvore diminui.
+
+Esse último ponto é interessante e vale um quiz :)
+
+{{% quiz remocao_concatenacao %}}
+{{< item question="Dada a B-tree de ordem 5 com raiz [33], filho esquerdo [10 - 15] e filho direito [50]. Qual o estado final da árvore após a correção do UnderFlow?" answers="3" choices=" A árvore mantém 3 níveis: raiz [33]; filho esquerdo [10 - 15 - 50] e filho direito vazio é removido, A raiz vira [10 - 15 - 33 - 50] mas continua com dois filhos vazios abaixo dela, A árvore perde um nível e a raiz passa a ser um único nó [10- 15 - 33 - 50]; sem filhos, A raiz vira [33 - 50] e o filho esquerdo [10 - 15] permanece como único filho">}}
+{{% /quiz %}}
 
 ***
 
@@ -628,13 +606,9 @@ Assim como em outras estruturas de dados, percorrer uma Árvore B significa visi
 
 #### DFS: visita em profundidade
 
-Na visita em profundidade, seguimos o caminho de um nó até chegar a uma folha e só depois voltamos para explorar o próximo ramo. A ideia é visitar a raiz, seguir por um filho, explorar todo esse caminho até o fim e, quando chegar ao final, retornar para tentar o próximo ramo. Em outras palavras, a busca vai "em profundidade" antes de voltar para explorar as opções laterais.
+Na visita em profundidade, seguimos o caminho de um nó até chegar a uma folha e só depois voltamos para explorar o próximo ramo. A ideia é visitar a raiz, seguir por um filho, explorar todo esse caminho até o fim e, quando chegar ao final, retornar para tentar o próximo ramo. Em outras palavras, a busca vai em profundidade antes de voltar para explorar as opções laterais. 
 
-Veja, abaixo, como funciona esse comportamento. A visita avança de um nó para outro até completar um caminho e depois partir para o próximo.
-
-[gif]
-
-Na implementação, o método `depthFS()` faz exatamente isso:
+Na implementação, o método `depthFS()` faz exatamente isso, seguindo a política de pre-ordem:
 
 ```java
 public ArrayList<BNode> depthFS() {
@@ -654,15 +628,11 @@ private void depthFS(BNode node, ArrayList<BNode> nodes) {
 }
 ```
 
-Esse tipo de travessia é interessante quando queremos explorar uma subárvore inteira antes de passar para a próxima.
+Esse modelo é interessante quando queremos explorar uma subárvore inteira antes de passar para a próxima.
 
 #### BFS: percurso em largura
 
 Já no percurso em largura, visitamos todos os nós de um nível antes de descer para o próximo. A ideia é começar pela raiz, depois visitar os filhos dessa raiz, em seguida os filhos dos filhos, e assim sucessivamente. Em vez de seguir um caminho até o fim, como acontece no DFS, o BFS explora a árvore camada por camada, o que deixa bem clara a estrutura horizontal da árvore.
-
-Abaixo, o GIF ilustra esse comportamento, mostrando como a visita passa de um nível para o próximo.
-
-[gif]
 
 Na implementação, o método `breadthFS()` usa uma fila para garantir essa ordem:
 
@@ -689,7 +659,7 @@ public ArrayList<BNode> breadthFS() {
 }
 ```
 
-Esse tipo de travessia é útil quando queremos analisar a árvore por níveis, por exemplo, para entender melhor a estrutura da árvore ou a distribuição das chaves.
+Esse tipo de caminhamento é útil quando queremos analisar a árvore por níveis, por exemplo, para entender melhor a estrutura da árvore ou a distribuição das chaves.
 
 ***
 
@@ -699,9 +669,11 @@ Esse tipo de travessia é útil quando queremos analisar a árvore por níveis, 
 
 * A quantidade máxima de chaves e filhos de um nó é determinada pela ***ordem*** $t$ da árvore: no máximo $t - 1$ chaves e $t$ filhos por nó.
 
+* A quantidade mínima de chaves de um nó é dada pela fórmula $(t - 1) / 2$. A raiz é o único nó que não possui mínimo de chaves obrigatório.
+
 * Toda Árvore B é perfeitamente balanceada por construção: todas as folhas estão sempre no mesmo nível.
 
-* A inserção usa a abordagem Top-Down: nós cheios são divididos **antes** de descermos por eles, o que evita ter que propagar divisões de baixo para cima depois.
+* A inserção ocorre sempre nas folhas e utiliza a abordagem Top-Down: nós cheios são divididos **antes** de descermos por eles, o que evita ter que propagar divisões de baixo para cima depois.
 
 * Ao dividir um nó cheio, a chave do meio é promovida para o pai. Quando a raiz é dividida, uma nova raiz é criada, e é assim que a árvore cresce em altura.
 
@@ -711,13 +683,9 @@ Esse tipo de travessia é útil quando queremos analisar a árvore por níveis, 
 
 * Assim como o crescimento da árvore acontece pela raiz na inserção, o encolhimento também acontece pela raiz na remoção: a altura só diminui quando a correção bottom-up chega até a raiz e a esvazia.
 
-***
 
-### Notas de Rodapé
+# Notas de Rodapé
 
-* Por questões de simplicidade, foram utilizadas ordens ímpares nas árvores. Entretanto, o mesmo é possível para ordens pares.
+[^1]:Durante as aulas e em outros materiais será provável que os métodos que precisem percorrer as chaves utilizem busca lineares. No entanto, para cenários com grande números de chaves por nó, fica evidente que buscas binárias vão se provar melhores.
 
-* Durante as aulas e em outros materiais será provável que os métodos que precisem percorres as chaves utilizem busca lineares. No entanto, para cenários com grande números de chaves por nó, fica evidente que buscas binárias vão se evidenciar melhores.
-
-* Assim como na remoção de uma BST, a escolha entre substituir uma chave interna pelo predecessor ou pelo sucessor é livre — nenhuma das duas está "mais certa" do que a outra, e ambas mantêm a Árvore B válida. A única exigência é manter essa escolha consistente na implementação, já que ela afeta o formato final da árvore após sucessivas remoções.
-***
+[^2]:Assim como na remoção de uma BST, a escolha entre substituir uma chave interna pelo predecessor ou pelo sucessor é livre, ambas mantêm a Árvore B válida. A única exigência é manter essa escolha consistente na implementação, já que ela afeta o formato final da árvore após sucessivas remoções.
