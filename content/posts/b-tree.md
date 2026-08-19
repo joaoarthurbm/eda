@@ -6,6 +6,8 @@ categories = []
 github = "https://github.com/antonynunesy/eda/tree/b-tree"
 +++
 
+Este material foi escrito por [Antony Nunes](https://github.com/antonynunesy) e por [Victor Rafael](https://github.com/VictorRafael-26/).
+
 ***
 
 Até aqui, vimos árvores em que cada nó armazena **uma única chave** e possui, no máximo, **dois filhos**, como as <a class="external" href="https://joaoarthurbm.github.io/eda/posts/bst/">Árvores Binárias de Pesquisa (BST)</a>. Essa restrição é simples e elegante, mas tem uma consequência prática importante: em cenários com grandes volumes de dados, principalmente quando a árvore não cabe inteira no Cache e parte dela precisa ser armazenada em um banco de dados, uma árvore binária de pesquisa pode crescer muito em altura. E, como já vimos, a altura é o que determina o custo das operações básicas de uma árvore. Quanto maior a altura, mais acessos a disco são necessários, e acesso a banco de dados são muito mais custosos do que acessos à cache, como visto nos materiais anteriores.
@@ -38,7 +40,7 @@ Essa última propriedade é a mais importante de todas: **uma Árvore B é sempr
 
 ## Ordem da árvore
 
-A ordem determina o quão larga a árvore pode ser. Como visto nas inváriantes, em uma Árvore B de ordem t (`order = t`), cada nó pode ter, no máximo, t-1 chaves e t filhos. Em uma Árvore B de ordem 5, cada nó pode ter, no máximo, 4 chaves e 5 filhos. Quanto maior a ordem, mais larga e mais baixa a árvore se torna.
+A ordem determina o quão larga a árvore pode ser. Como visto nas invariantes, em uma Árvore B de ordem t (`order = t`), cada nó pode ter, no máximo, t-1 chaves e t filhos. Em uma Árvore B de ordem 5, cada nó pode ter, no máximo, 4 chaves e 5 filhos. Quanto maior a ordem, mais larga e mais baixa a árvore se torna.
 
 Na implementação que vamos estudar, a ordem é definida no construtor da classe `BTree`:
 
@@ -242,7 +244,7 @@ private void insert(BNode node, int value) {
         node.addKey(value);
         size++;
     } else {
-        int idx = buscaLinear(node, value);
+        int idx = linearSearch(node, value);
         BNode child = node.children.get(idx);
         if (child.isFull()) {
             split(child);
@@ -257,7 +259,7 @@ private void insert(BNode node, int value) {
 
 A lógica é a seguinte: se a árvore estiver vazia, criamos a raiz com a primeira chave. Caso contrário, verificamos se a raiz está cheia. Se estiver, dividimos ela logo de cara, garantindo que nunca desceremos para um nó cheio.
 
-Depois, o método privado `insert(node, value)` faz o trabalho de percorrer a árvore. Se o nó atual for folha, é ali que a chave deve ser inserida. Caso contrário, precisamos decidir qual filho seguir. Essa decisão é feita pelo método `buscaLinear`, que retorna o índice do filho que devemos descer na árvore.
+Depois, o método privado `insert(node, value)` faz o trabalho de percorrer a árvore. Se o nó atual for folha, é ali que a chave deve ser inserida. Caso contrário, precisamos decidir qual filho seguir. Essa decisão é feita pelo método `linearSearch`, que retorna o índice do filho que devemos descer na árvore.
 
 Aqui está a sacada da abordagem Top-Down: antes de descer recursivamente para o filho escolhido, verificamos se ele está cheio. Se estiver, nós o dividimos **antes** de descer. Como o `split` cria uma chave para o nó atual (`node`), é possível que o índice do filho que devemos seguir mude — por isso o `if (value > node.keys.get(idx)) idx++`. Se o valor que estamos inserindo for maior do que a chave recém-criada, significa que devemos seguir para o novo filho da direita, e não mais para o da esquerda.
 
@@ -291,7 +293,7 @@ public BNodePosition search(int value) {
 }
 
 private BNodePosition search(BNode node, int value) {
-    int idx = buscaLinear(node, value);
+    int idx = linearSearch(node, value);
 
     //Encontramos
     if (idx < node.size && value == node.keys.get(idx)) {
@@ -409,7 +411,7 @@ public void remove(int value){
 
     //Fase 2: verifica se a remocao deixou algum no abaixo do minimo de 
     //chaves, corrigindo (e propagando a correcao para cima, se preciso)
-    corrigeUnderflow(node);
+    fixUnderflow(node);
 }
 ```
 
@@ -437,7 +439,7 @@ Depois que a chave é removida de uma folha, é possível que esse nó tenha fic
 
 
 ```java
-private void corrigirUnderflow(BNode node){
+private void fixUnderflow(BNode node){
     //Caso especial: raiz nao tem numero minimo de chaves obrigatorio
     if(node == root){
         if(node.size == 0){
@@ -475,15 +477,15 @@ private void corrigirUnderflow(BNode node){
 
     //Prioridade 1: redistribuir com o irmao esquerdo, se ele tiver sobra
     if(leftSibling != null && leftSibling.size > minKeys()){
-        redistribuirEsquerda(node, leftSibling, parent, index);
+        redistributeLeft(node, leftSibling, parent, index);
     //Prioridade 2: redistribuir com o irmao direito, se ele tiver sobra
     } else if(rightSibling != null && rightSibling.size > minKeys()){
-        redistribuirDireita(node, rightSibling, parent, index);
+        redistributeRight(node, rightSibling, parent, index);
     //Prioridade 3: nenhum irmao tem sobra, então concatena com um deles
     } else if(leftSibling != null){
-        concatenar(leftSibling, node, parent, index - 1);
+        concatenate(leftSibling, node, parent, index - 1);
     } else {
-        concatenar(node, rightSibling, parent, index);
+        concatenate(node, rightSibling, parent, index);
     }
 }
 ```
@@ -493,7 +495,7 @@ private void corrigirUnderflow(BNode node){
 A redistribuição funciona como uma espécie de rotação: uma chave é emprestada de um irmão as tem sobrando, mas ela nunca pula diretamente de um nó para o outro, ela sempre passa pelo pai no meio do caminho, porque é a chave do pai que funciona como separador entre os dois nós.
 
 ```java
-private void redistribuirEsquerda(BNode node, BNode leftSibling, BNode parent, int index){
+private void redistributeLeft(BNode node, BNode leftSibling, BNode parent, int index){
     //A chave do pai que separa leftSibling de node desce 
     //e entra no INICIO do node
     node.keys.add(0, parent.keys.get(index - 1));
@@ -520,10 +522,10 @@ Aplicando ao nosso exemplo: a chave `20` (do pai) desce para o início do nó de
 
 ![Redistribuição](redistribuicao.gif)
 
-`redistribuirDireita` é o espelho exato dessa lógica, só que emprestando do irmão da direita:
+`redistributeRight` é o espelho exato dessa lógica, só que emprestando do irmão da direita:
 
 ```java
-private void redistribuirDireita(BNode node, BNode rightSibling, BNode parent, int index){
+private void redistributeRight(BNode node, BNode rightSibling, BNode parent, int index){
     //A chave do pai que separa node de rightSibling desce 
     //e entra no FINAL do node
     node.keys.add(parent.keys.get(index));
@@ -545,7 +547,7 @@ private void redistribuirDireita(BNode node, BNode rightSibling, BNode parent, i
 Note que a chave do pai desce, a chave do irmão sobe, e o nó que estava em UnderFlow ganha exatamente uma chave. Vamos fixar essa ideia:
 
 {{% quiz remocao_redistribuicao %}}
-{{< item question="Considere uma árvore de ordem 5, com raiz [33 - 70], e filhos [3 - 6 - 9 - 12], [35] e [80, 88]. Qual o estado da árvore após a redistribuição?" answers="2" choices=" raiz [9 - 70]; filhos [3 - 6 - 12] | [33 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [33 - 35] | [80 - 88], raiz [33 - 70]; filhos [3 - 6 - 9] | [12 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [35 - 33] | [80 - 88]">}}
+{{< item question="Considere uma árvore de ordem 5, com raiz [33 - 70], e filhos [3 - 6 - 9 - 12], [35] e [80 - 88]. Qual o estado da árvore após a redistribuição?" answers="2" choices=" raiz [9 - 70]; filhos [3 - 6 - 12] | [33 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [33 - 35] | [80 - 88], raiz [33 - 70]; filhos [3 - 6 - 9] | [12 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [35 - 33] | [80 - 88]">}}
 {{% /quiz %}}
 ***
 
@@ -554,7 +556,7 @@ Note que a chave do pai desce, a chave do irmão sobe, e o nó que estava em Und
 Quando **nenhum irmão** tem chaves de sobra, isto é, os dois estão exatamente no mínimo de chaves, não é possível redistribuir sem deixar o doador também em UnderFlow. A solução é fundir os dois nós em um só, absorvendo também a chave do pai que os separava.
 
 ```java
-private void concatenar(BNode left, BNode right, BNode parent, int parentKeyIndex){
+private void concatenate(BNode left, BNode right, BNode parent, int parentKeyIndex){
     //A chave do pai que separava os dois nos desce e entra no 
     //final do left
     left.keys.add(parent.keys.remove(parentKeyIndex));
@@ -579,7 +581,7 @@ private void concatenar(BNode left, BNode right, BNode parent, int parentKeyInde
     parent.children.remove(right);
 
     //Propaga correção para cima
-    corrigirUnderflow(parent);
+    fixUnderflow(parent);
 }
 ```
 >   Nota-se que é necessário propagar a correção para os ancestrais do nó, uma vez que o pai pode ter perdido uma chave e um filho, ficando ele mesmo deficiente (ou, se for a raiz, pode ter ficado vazia)
