@@ -545,7 +545,7 @@ private void redistribuirDireita(BNode node, BNode rightSibling, BNode parent, i
 Note que a chave do pai desce, a chave do irmão sobe, e o nó que estava em UnderFlow ganha exatamente uma chave. Vamos fixar essa ideia:
 
 {{% quiz remocao_redistribuicao %}}
-{{< item question="Considere uma árvore de ordem 5, com raiz [33 - 70], o filho esquerdo [3 - 6 - 9 - 12] e o filho direito [35], qual o estado da árvore após a redistribuição?" answers="2" choices=" raiz [9 - 70]; filho esquerdo [3 - 6 - 12]; filho direito [33 - 35], raiz [12 - 70]; filho esquerdo [3 - 6 - 9]; filho direito [33 - 35], raiz [33 - 70]; filho esquerdo [3 - 6 - 9]; filho direito [12 - 35], raiz [12 - 70]; filho esquerdo [3 - 6 - 9] - filho direito [35 - 33]">}}
+{{< item question="Considere uma árvore de ordem 5, com raiz [33 - 70], e filhos [3 - 6 - 9 - 12], [35] e [80, 88]. Qual o estado da árvore após a redistribuição?" answers="2" choices=" raiz [9 - 70]; filhos [3 - 6 - 12] | [33 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [33 - 35] | [80 - 88], raiz [33 - 70]; filhos [3 - 6 - 9] | [12 - 35] | [80 - 88], raiz [12 - 70]; filhos [3 - 6 - 9] | [35 - 33] | [80 - 88]">}}
 {{% /quiz %}}
 ***
 
