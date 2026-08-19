@@ -6,7 +6,7 @@ categories = []
 github = "https://github.com/antonynunesy/eda/tree/b-tree"
 +++
 
-Este material foi escrito por [Antony Nunes](https://github.com/antonynunesy) e por [Victor Rafael](https://github.com/VictorRafael-26/).
+Este material foi escrito por [Antony Nunes](https://github.com/antonynunesy) e [Victor Rafael](https://github.com/VictorRafael-26/), alunos da disciplina.
 
 ***
 
