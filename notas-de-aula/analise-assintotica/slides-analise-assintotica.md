@@ -242,7 +242,7 @@ Não. Queremos também ser capazes de dizer:
 
 - <b>Big O</b>: g(n) é um limite superior para f(n). 
 
-- <b>&Omega;</b>: g(n) é um limite inferior para g(n).
+- <b>&Omega;</b>: g(n) é um limite inferior para f(n).
 
 --
 
@@ -252,7 +252,7 @@ E ainda tem mais...
 
 - <b>o</b>: g(n) é um limite superior (não incluso) para f(n). 
 
-- <b>&omega;</b>: g(n) é um limite inferior (não incluso) para g(n).
+- <b>&omega;</b>: g(n) é um limite inferior (não incluso) para f(n).
 
 
 ---
