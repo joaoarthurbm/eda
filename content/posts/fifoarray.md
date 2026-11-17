@@ -32,7 +32,7 @@ public class FIFOArray {
     private int size;
     
     public FIFOArray(int capacidade) {
-        this.lista = new String[capacidade];
+        this.fila = new String[capacidade];
         this.head = -1;
         this.tail = -1;
         this.size = 0;
